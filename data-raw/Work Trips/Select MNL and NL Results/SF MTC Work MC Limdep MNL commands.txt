@@ -1,0 +1,360 @@
+read ; Nobs=22033; nvar=30; names = 3; file= c:\aa_lgman\sflimdep\SFLmWkNM.txt $
+
+
+
+? Create alternative specific constants
+sample ; all $
+
+create ; if (altnum = 2) Sh2Cnst = 1 $
+create ; if (altnum = 3) Sh3Cnst = 1 $
+create ; if (altnum = 4) TrnCnst = 1 $
+create ; if (altnum = 5) BikCnst = 1 $
+create ; if (altnum = 6) WlkCnst = 1 $
+
+
+? Income as an alternative sepcific variable.
+
+create ; if (altnum = 2) IncSh2 = HHInc $
+create ; if (altnum = 3) IncSh3 = HHInc $
+create ; if (altnum = 4) IncTrn = HHInc $
+create ; if (altnum = 5) IncBik = HHInc $
+create ; if (altnum = 6) IncWlk = HHInc $
+
+create ; if (altnum = 2 | altnum = 3) IncShr = HHInc $
+create ; if (altnum = 2 | altnum = 3 | altnum = 4) IncShTrn = HHInc $
+
+
+? Create Alternative Variables for Travel Time
+
+create ; if (altnum < 5) MOvtbyDs = Ovtt/Dist $
+create ; if (altnum > 4) NM_Tvtt = Tvtt $
+
+create ; if (altnum < 5) Mot_Tvtt = Tvtt $
+create ; if (altnum < 5) Mot_Ivtt = Ivtt $
+create ; if (altnum < 5) Mot_Ovtt = Ovtt $
+create ; if (altnum < 5) CsMotTT1 = Ivtt + 2.5*Ovtt $
+create ; if (altnum < 5) CsMotTT2 = Ivtt + 4.0*Ovtt $
+
+
+? Create Alternative Specific Automobile Ownership Variables
+
+create ; if (altnum = 2) NmVehSh2 = NumVeh $
+create ; if (altnum = 3) NmVehSh3 = NumVeh $
+create ; if (altnum = 4) NmVehTrn = NumVeh $
+create ; if (altnum = 5) NmVehBik = NumVeh $
+create ; if (altnum = 6) NmVehWlk = NumVeh $
+
+
+create ; if (altnum = 2) VehWkSh2 = VehbyWrk $
+create ; if (altnum = 3) VehWkSh3 = VehbyWrk $
+create ; if (altnum = 4) VehWkTrn = VehbyWrk $
+create ; if (altnum = 5) VehWkBik = VehbyWrk $
+create ; if (altnum = 6) VehWkWlk = VehbyWrk $
+
+create ; if (altnum = 2 | altnum = 3) VehWkShr = VehbyWrk $
+
+
+create ; if (altnum = 2) VehAdSh2 = NumVeh/NumAdlt $
+create ; if (altnum = 3) VehAdSh3 = NumVeh/NumAdlt $
+create ; if (altnum = 4) VehAdTrn = NumVeh/NumAdlt $
+create ; if (altnum = 5) VehAdBik = NumVeh/NumAdlt $
+create ; if (altnum = 6) VehAdWlk = NumVeh/NumAdlt $
+
+
+
+? Alternative Specific CBD Dummy Variables
+
+create ; if ((WkCCBD = 1 | WkNCCBD = 1) & altnum = 2) CBDDmSh2 = 1 $
+create ; if ((WkCCBD = 1 | WkNCCBD = 1) & altnum = 3) CBDDmSh3 = 1 $
+create ; if ((WkCCBD = 1 | WkNCCBD = 1) & altnum = 4) CBDDmTrn = 1 $
+create ; if ((WkCCBD = 1 | WkNCCBD = 1) & altnum = 5) CBDDmBik = 1 $
+create ; if ((WkCCBD = 1 | WkNCCBD = 1) & altnum = 6) CBDDmWlk = 1 $
+
+
+? Alternative Specific Employment Density Variable
+
+create ; if (altnum = 2) EmDenSh2 = WkEmpDen $
+create ; if (altnum = 3) EmDenSh3 = WkEmpDen $
+create ; if (altnum = 4) EmDenTrn = WkEmpDen $
+create ; if (altnum = 5) EmDenBik = WkEmpDen $
+create ; if (altnum = 6) EmDenWlk = WkEmpDen $
+
+
+? Travel Cost by Income
+create ; CstbyInc = Cost/HHInc $
+
+
+ 
+? **************** Model Estimation ***************
+ 
+? Compute log-likelihood at zero model
+ 
+title ; *** Model 0:  No coefficient model *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum; maxit = 0
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+? Compute log likelihood at market share
+ 
+title; *** Model C: Constants only model--DA reference *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+? MNL
+title ; *** Base Model *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Tvtt, Cost, IncSh2, IncSh3, IncTrn,
+               IncBik, IncWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+ 
+? MNL
+title ; *** Model 1 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Tvtt, Cost, IncShr, IncTrn,
+               IncBik, IncWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+ 
+ 
+? MNL
+title ; *** Model 2 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Tvtt, Cost, IncShTrn,
+               IncBik, IncWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+ 
+ 
+? MNL
+title ; *** Model 3 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Tvtt, Cost, IncTrn,IncBik, IncWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+
+ 
+? MNL
+title ; *** Model 4 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               NM_Tvtt, Mot_Tvtt, Cost, IncShr, IncTrn,
+               IncBik, IncWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+
+ 
+? MNL
+title ; *** Model 5 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               NM_Tvtt, Mot_Ivtt, Mot_Ovtt, Cost, IncShr, IncTrn,
+               IncBik, IncWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+ 
+ 
+? MNL
+title ; *** Model 6 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, Cost, IncShr, IncTrn,
+               IncBik, IncWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+ 
+? MNL
+title ; *** Model 7 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               NM_Tvtt, CsMotTT1, Cost, IncShr, IncTrn,
+               IncBik, IncWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+ 
+ 
+? MNL
+title ; *** Model 8 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               NM_Tvtt, CsMotTT2, Cost, IncShr, IncTrn,
+               IncBik, IncWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+ 
+ 
+ 
+? MNL
+title ; *** Model 9 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, Cost, IncShr, IncTrn,
+               IncBik, IncWlk, NmVehSh2, NmVehSh3, NmVehTrn,
+               NmVehBik, NmVehWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+ 
+ 
+? MNL
+title ; *** Model 10 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, Cost, IncShr, IncTrn,
+               IncBik, IncWlk, VehWkSh2, VehWkSh3, VehWkTrn,
+               VehWkBik, VehWkWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+ 
+ 
+? MNL
+title ; *** Model 11 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, Cost, IncShr, IncTrn,
+               IncBik, IncWlk, VehAdSh2, VehAdSh3, VehAdTrn,
+               VehAdBik, VehAdWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+
+
+? MNL
+title ; *** Model 12 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, Cost, IncShr, IncTrn,
+               IncBik, IncWlk, VehWkSh2, VehWkSh3, VehWkTrn,
+               VehWkBik, VehWkWlk, CBDDmSh2, CBDDmSh3, CBDDmTrn,
+               CBDDmBik, CBDDmWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+
+
+? MNL
+title ; *** Model 13 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, Cost, IncShr, IncTrn,
+               IncBik, IncWlk, VehWkSh2, VehWkSh3, VehWkTrn,
+               VehWkBik, VehWkWlk, EmDenSh2, EmDenSh3, EmDenTrn,
+               EmDenBik, EmDenWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+
+
+
+? MNL
+title ; *** Model 14*** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, Cost, IncShr, IncTrn,
+               IncBik, IncWlk, VehWkSh2, VehWkSh3, VehWkTrn,
+               VehWkBik, VehWkWlk,CBDDmSh2, CBDDmSh3, CBDDmTrn,
+               CBDDmBik, CBDDmWlk, EmDenSh2, EmDenSh3, EmDenTrn,
+               EmDenBik, EmDenWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+
+? MNL
+title ; *** Model 15 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, CstbyInc, IncShr, IncTrn,
+               IncBik, IncWlk, VehWkSh2, VehWkSh3, VehWkTrn,
+               VehWkBik, VehWkWlk,CBDDmSh2, CBDDmSh3, CBDDmTrn,
+               CBDDmBik, CBDDmWlk, EmDenSh2, EmDenSh3, EmDenTrn,
+               EmDenBik, EmDenWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+
+
+? MNL
+title ; *** Model 16 *** $
+sample ; all $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, CstbyInc, IncTrn,
+               IncBik, IncWlk, VehWkShr, VehWkTrn,
+               VehWkBik, VehWkWlk,CBDDmSh2, CBDDmSh3, CBDDmTrn,
+               CBDDmBik, CBDDmWlk, EmDenSh2, EmDenSh3, EmDenTrn,
+               EmDenBik, EmDenWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+
+? MNL Automobile Ownership Market Segmentation
+title ; *** Model 16a: 0-1 Car HH Segment *** $
+sample ; all $
+reject ; (NumVeh > 1) $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, CstbyInc, IncTrn,
+               IncBik, IncWlk, VehWkShr, VehWkTrn,
+               VehWkBik, VehWkWlk,CBDDmSh2, CBDDmSh3, CBDDmTrn,
+               CBDDmBik, CBDDmWlk, EmDenSh2, EmDenSh3, EmDenTrn,
+               EmDenBik, EmDenWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+
+? MNL Automobile Ownership Market Segmentation
+title ; *** Model 16b: 2+ Car HH Segment *** $
+sample ; all $
+reject ; (NumVeh < 2)  $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, CstbyInc, IncTrn,
+               IncBik, IncWlk, VehWkShr, VehWkTrn,
+               VehWkBik, VehWkWlk,CBDDmSh2, CBDDmSh3, CBDDmTrn,
+               CBDDmBik, CBDDmWlk, EmDenSh2, EmDenSh3, EmDenTrn,
+               EmDenBik, EmDenWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+ 
+
+
+? MNL Gender Market Segmentation
+title ; *** Model 16c: Male Segment *** $
+sample ; all $
+reject ; (FemDum = 1) $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, CstbyInc, IncTrn,
+               IncBik, IncWlk, VehWkShr, VehWkTrn,
+               VehWkBik, VehWkWlk,CBDDmSh2, CBDDmSh3, CBDDmTrn,
+               CBDDmBik, CBDDmWlk, EmDenSh2, EmDenSh3, EmDenTrn,
+               EmDenBik, EmDenWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $
+
+ 
+? MNL Gender Market Segmentation
+title ; *** Model 16d: Female Segment *** $
+sample ; all $
+reject ; (FemDum = 0)  $
+nlogit ; LHS = Chosen, NumAlts, AltNum
+       ; RHS = Sh2Cnst, Sh3Cnst, TrnCnst, BikCnst, WlkCnst,
+               Mot_Tvtt, NM_Tvtt, MOvtbyDs, CstbyInc, IncTrn,
+               IncBik, IncWlk, VehWkShr, VehWkTrn,
+               VehWkBik, VehWkWlk,CBDDmSh2, CBDDmSh3, CBDDmTrn,
+               CBDDmBik, CBDDmWlk, EmDenSh2, EmDenSh3, EmDenTrn,
+               EmDenBik, EmDenWlk
+       ; choices = DrAlone, ShRide2, ShRide3, Transit, Bike, Walk $

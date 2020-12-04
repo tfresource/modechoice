@@ -1,0 +1,81 @@
+
+--> Read ; Nobs = 6535
+    ; Nvar = 28
+    ; Names = id, chosen, ethnic, lifecyc, tenure,
+    yrshome, building, lnown, lnrent,
+    sanfran, oak, rent, owncost, ctm, ctf,
+    ret0005, crimrate, sattotal, experstu,
+    stupert, xwhite, xasian, xhispani, xblack,
+    avghhsz9, resden, x1famdwl, medhhi90
+    ; Format = (15F8.2,F12.2,11F8.2,F8.0)
+    ; File = sfrl_d80.dat $
+--> Create ; nij=5 $
+--> Reject ;tenure=2 $
+--> nlogit ; LHS = chosen, nij
+    ; RHS = lnown, sanfran, oak,
+    owncost, ctm, ctf, ret0005 $
+Normal exit from iterations. Exit status=0.
+
+              +---------------------------------------------+
+              | Discrete choice (multinomial logit) model   |
+              | Maximum Likelihood Estimates                |
+              | Dependent variable               Choice     |
+              | Weighting variable                  ONE     |
+              | Number of observations              742     |
+              | Iterations completed                  8     |
+              | Log likelihood function       -450.7994     |
+              | Log-L for Choice   model =    -450.7994     |
+              | R2=1-LogL/LogL*  Log-L fncn  R-sqrd  RsqAdj |
+              | No coefficients  -1194.2029  .62251  .62162 |
+              | Constants only.  Must be computed directly. |
+              |                  Use NLOGIT ;...; RHS=ONE $ |
+              | Response data are given as ind. choice.     |
+              | Number of obs.=   742, skipped   0 bad obs. |
+              +---------------------------------------------+
++---------+--------------+----------------+--------+---------+----------+
+|Variable | Coefficient  | Standard Error |b/St.Er.|P[|Z|>z] | Mean of X|
++---------+--------------+----------------+--------+---------+----------+
+ LNOWN     1.264606538      .12021512       10.520   .0000
+ SANFRAN  -1.673951738      .28861984       -5.800   .0000
+ OAK       .1986065389      .29233009         .679   .4969
+ OWNCOST  -.1540493475E-03  .19770667E-03    -.779   .4359
+ CTM      -.4945924900E-01  .49508431E-02   -9.990   .0000
+ CTF      -.7632318167E-01  .55348330E-02  -13.790   .0000
+ RET0005   .8855634440E-05  .10076904E-05    8.788   .0000
+
+ 
+--> Sample ; All $
+--> Reject ;tenure=1 $
+--> nlogit ; LHS = chosen, nij
+    ; RHS = lnrent, sanfran, oak,
+    rent, ctm, ctf, ret0005 $
+Normal exit from iterations. Exit status=0.
+
+              +---------------------------------------------+
+              | Discrete choice (multinomial logit) model   |
+              | Maximum Likelihood Estimates                |
+              | Dependent variable               Choice     |
+              | Weighting variable                  ONE     |
+              | Number of observations              565     |
+              | Iterations completed                  8     |
+              | Log likelihood function       -283.4321     |
+              | Log-L for Choice   model =    -283.4321     |
+              | R2=1-LogL/LogL*  Log-L fncn  R-sqrd  RsqAdj |
+              | No coefficients   -909.3324  .68831  .68734 |
+              | Constants only.  Must be computed directly. |
+              |                  Use NLOGIT ;...; RHS=ONE $ |
+              | Response data are given as ind. choice.     |
+              | Number of obs.=   565, skipped   0 bad obs. |
+              +---------------------------------------------+
++---------+--------------+----------------+--------+---------+----------+
+|Variable | Coefficient  | Standard Error |b/St.Er.|P[|Z|>z] | Mean of X|
++---------+--------------+----------------+--------+---------+----------+
+ LNRENT    .5730923384      .10466571        5.475   .0000
+ SANFRAN  -.9507731167      .29043195       -3.274   .0011
+ OAK      -.2637253069      .37973354        -.695   .4874
+ RENT      .2377867275E-02  .59517997E-03    3.995   .0001
+ CTM      -.5739392662E-01  .67626433E-02   -8.487   .0000
+ CTF      -.1005185216      .77934362E-02  -12.898   .0000
+ RET0005   .6664450619E-05  .13802664E-05    4.828   .0000
+
+ 

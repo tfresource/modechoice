@@ -1,0 +1,24 @@
+Read ; Nobs = 6535
+     ; Nvar = 28
+     ; Names = id, chosen, ethnic, lifecyc, tenure,
+               yrshome, building, lnown, lnrent,
+               sanfran, oak, rent, owncost, ctm, ctf,
+               ret0005, crimrate, sattotal, experstu,
+               stupert, xwhite, xasian, xhispani, xblack,
+               avghhsz9, resden, x1famdwl, medhhi90
+     ; Format = (15F8.2,F12.2,11F8.2,F8.0)
+     ; File = d:\Resear~1\SFResi~1\sfrl_d80.dat $
+ 
+Create ; nij=5 $
+
+Reject ;tenure=2 $
+nlogit ; LHS = chosen, nij
+       ; RHS = lnown, sanfran, oak,
+               owncost, ctm, ctf, ret0005 $
+
+Sample ; All $
+Reject ;tenure=1 $
+nlogit ; LHS = chosen, nij
+       ; RHS = lnrent, sanfran, oak,
+               rent, ctm, ctf, ret0005 $
+
