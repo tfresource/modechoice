@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 Aggregate Forecasting Assessment, and Application | A Self-Instructing Course in Mode Choice Modeling</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 Aggregate Forecasting Assessment, and Application | A Self-Instructing Course in Mode Choice Modeling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Aggregate Forecasting Assessment, and Application | A Self-Instructing Course in Mode Choice Modeling" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+
+
+<meta name="date" content="2020-12-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="multiple-maxima-in-nested-logit-estimation.html"/>
+<link rel="next" href="recent-advances-in-discrete-choice-modeling.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Self-Instructing Course in Mode Choice Modeling</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#original-acknowledgements"><i class="fa fa-check"></i>Original Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#r-packages"><i class="fa fa-check"></i>R Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#background"><i class="fa fa-check"></i><b>1.1</b> Background</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#use-of-disaggregate-discrete-choice-models"><i class="fa fa-check"></i><b>1.2</b> Use of Disaggregate Discrete Choice Models</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#application-context-in-current-course"><i class="fa fa-check"></i><b>1.3</b> Application Context in Current Course</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#urban-and-intercity-travel-mode-choice-modeling"><i class="fa fa-check"></i><b>1.4</b> Urban and Intercity Travel Mode Choice Modeling</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="introduction.html"><a href="introduction.html#urban-travel-mode-choice-modeling"><i class="fa fa-check"></i><b>1.4.1</b> Urban Travel Mode Choice Modeling</a></li>
+<li class="chapter" data-level="1.4.2" data-path="introduction.html"><a href="introduction.html#intercity-mode-choice-models"><i class="fa fa-check"></i><b>1.4.2</b> Intercity Mode Choice Models</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#description-of-the-course"><i class="fa fa-check"></i><b>1.5</b> Description of the Course</a></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#organization-of-the-course-structure"><i class="fa fa-check"></i><b>1.6</b> Organization of the Course Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html"><i class="fa fa-check"></i><b>2</b> Elements of the Choice Decision Process</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#the-decision-maker"><i class="fa fa-check"></i><b>2.2</b> The Decision Maker</a></li>
+<li class="chapter" data-level="2.3" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#the-alternatives"><i class="fa fa-check"></i><b>2.3</b> The Alternatives</a></li>
+<li class="chapter" data-level="2.4" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#attributes-of-alternatives"><i class="fa fa-check"></i><b>2.4</b> Attributes of Alternatives</a></li>
+<li class="chapter" data-level="2.5" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#the-decision-rule"><i class="fa fa-check"></i><b>2.5</b> The Decision Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html"><i class="fa fa-check"></i><b>3</b> Utility-based Choice Theory</a><ul>
+<li class="chapter" data-level="3.1" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#basic-construct-of-utility-theory"><i class="fa fa-check"></i><b>3.1</b> Basic Construct of Utility Theory</a></li>
+<li class="chapter" data-level="3.2" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#deterministic-choice-concepts"><i class="fa fa-check"></i><b>3.2</b> Deterministic Choice Concepts</a></li>
+<li class="chapter" data-level="3.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#probabilistic-choice-theory"><i class="fa fa-check"></i><b>3.3</b> Probabilistic Choice Theory</a></li>
+<li class="chapter" data-level="3.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#components-of-the-deterministic-portion-of-the-utility-function"><i class="fa fa-check"></i><b>3.4</b> Components of the Deterministic Portion of the Utility Function</a></li>
+<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#specification-of-the-additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a><ul>
+<li class="chapter" data-level="4.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#overview-description-and-functional-form"><i class="fa fa-check"></i><b>4.1</b> Overview Description and Functional Form</a></li>
+<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a></li>
+<li class="chapter" data-level="4.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-prediction-with-multinomial-logit-model"><i class="fa fa-check"></i><b>4.3</b> Example: Prediction with Multinomial Logit Model</a></li>
+<li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a></li>
+<li class="chapter" data-level="4.5" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-responses-to-changes-in-decision-maker-characteristics"><i class="fa fa-check"></i><b>4.5</b> Measures of Responses to Changes in Decision Maker Characteristics</a></li>
+<li class="chapter" data-level="4.6" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#model-estimation-concept-and-method"><i class="fa fa-check"></i><b>4.6</b> Model Estimation: Concept and Method</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-assembly-and-estimation-of-simple-multinomial-logit-models.html"><a href="data-assembly-and-estimation-of-simple-multinomial-logit-models.html"><i class="fa fa-check"></i><b>5</b> Data Assembly and Estimation of Simple Multinomial Logit Models</a><ul>
+<li class="chapter" data-level="5.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="data-assembly-and-estimation-of-simple-multinomial-logit-models.html"><a href="data-assembly-and-estimation-of-simple-multinomial-logit-models.html#data-requirements-overview"><i class="fa fa-check"></i><b>5.2</b> Data Requirements Overview</a></li>
+<li class="chapter" data-level="5.3" data-path="data-assembly-and-estimation-of-simple-multinomial-logit-models.html"><a href="data-assembly-and-estimation-of-simple-multinomial-logit-models.html#sources-and-methods-for-traveler-and-trip-related-data-collection"><i class="fa fa-check"></i><b>5.3</b> Sources and Methods for Traveler and Trip Related Data Collection</a></li>
+<li class="chapter" data-level="5.4" data-path="data-assembly-and-estimation-of-simple-multinomial-logit-models.html"><a href="data-assembly-and-estimation-of-simple-multinomial-logit-models.html#methods-for-collecting-mode-related-data"><i class="fa fa-check"></i><b>5.4</b> Methods for Collecting Mode Related Data</a></li>
+<li class="chapter" data-level="5.5" data-path="data-assembly-and-estimation-of-simple-multinomial-logit-models.html"><a href="data-assembly-and-estimation-of-simple-multinomial-logit-models.html#data-structure-for-estimation"><i class="fa fa-check"></i><b>5.5</b> Data STructure for Estimation</a></li>
+<li class="chapter" data-level="5.6" data-path="data-assembly-and-estimation-of-simple-multinomial-logit-models.html"><a href="data-assembly-and-estimation-of-simple-multinomial-logit-models.html#application-data-for-work-mode-choice-in-the-san-francisco-bay-area"><i class="fa fa-check"></i><b>5.6</b> Application Data for Work Mode Choice in the San Francisco Bay Area</a></li>
+<li class="chapter" data-level="5.7" data-path="data-assembly-and-estimation-of-simple-multinomial-logit-models.html"><a href="data-assembly-and-estimation-of-simple-multinomial-logit-models.html#estimation-of-mnl-model-with-basic-specification"><i class="fa fa-check"></i><b>5.7</b> Estimation of MNL Model with Basic Specification</a></li>
+<li class="chapter" data-level="5.8" data-path="data-assembly-and-estimation-of-simple-multinomial-logit-models.html"><a href="data-assembly-and-estimation-of-simple-multinomial-logit-models.html#value-of-time"><i class="fa fa-check"></i><b>5.8</b> Value of Time</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="model-specification-refinement.html"><a href="model-specification-refinement.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement</a><ul>
+<li class="chapter" data-level="6.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="model-specification-refinement.html"><a href="model-specification-refinement.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a></li>
+<li class="chapter" data-level="6.3" data-path="model-specification-refinement.html"><a href="model-specification-refinement.html#market-segmentation"><i class="fa fa-check"></i><b>6.3</b> Market Segmentation</a></li>
+<li class="chapter" data-level="6.4" data-path="model-specification-refinement.html"><a href="model-specification-refinement.html#summary"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="san-francisco-bay-area-shop-other-mode-choice.html"><a href="san-francisco-bay-area-shop-other-mode-choice.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a><ul>
+<li class="chapter" data-level="7.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="san-francisco-bay-area-shop-other-mode-choice.html"><a href="san-francisco-bay-area-shop-other-mode-choice.html#specification-for-shopother-mode-choice-model"><i class="fa fa-check"></i><b>7.2</b> Specification for Shop/Other Mode Choice Model</a></li>
+<li class="chapter" data-level="7.3" data-path="san-francisco-bay-area-shop-other-mode-choice.html"><a href="san-francisco-bay-area-shop-other-mode-choice.html#initial-model-specification"><i class="fa fa-check"></i><b>7.3</b> Initial Model Specification</a></li>
+<li class="chapter" data-level="7.4" data-path="san-francisco-bay-area-shop-other-mode-choice.html"><a href="san-francisco-bay-area-shop-other-mode-choice.html#exploring-alternative-specifications"><i class="fa fa-check"></i><b>7.4</b> Exploring Alternative Specifications</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a><ul>
+<li class="chapter" data-level="8.1" data-path="nested-logit-model.html"><a href="nested-logit-model.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="nested-logit-model.html"><a href="nested-logit-model.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a></li>
+<li class="chapter" data-level="8.3" data-path="nested-logit-model.html"><a href="nested-logit-model.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="selecting-a-preferred-nesting-structure.html"><a href="selecting-a-preferred-nesting-structure.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a><ul>
+<li class="chapter" data-level="9.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="selecting-a-preferred-nesting-structure.html"><a href="selecting-a-preferred-nesting-structure.html#nested-models-for-work-trips"><i class="fa fa-check"></i><b>9.2</b> Nested Models for Work Trips</a></li>
+<li class="chapter" data-level="9.3" data-path="selecting-a-preferred-nesting-structure.html"><a href="selecting-a-preferred-nesting-structure.html#nested-models-for-shop-other-trips"><i class="fa fa-check"></i><b>9.3</b> Nested Models for Shop / Other Trips</a></li>
+<li class="chapter" data-level="9.4" data-path="selecting-a-preferred-nesting-structure.html"><a href="selecting-a-preferred-nesting-structure.html#practical-issues-and-implications"><i class="fa fa-check"></i><b>9.4</b> Practical Issues and Implications</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation.html"><a href="multiple-maxima-in-nested-logit-estimation.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation</a></li>
+<li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a><ul>
+<li class="chapter" data-level="11.1" data-path="introduction.html"><a href="introduction.html#background"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
+<li class="chapter" data-level="11.2" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-forecasting"><i class="fa fa-check"></i><b>11.2</b> Aggregate Forecasting</a></li>
+<li class="chapter" data-level="11.3" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-assessment-of-travel-mode-choice-models"><i class="fa fa-check"></i><b>11.3</b> Aggregate Assessment of Travel Mode Choice Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html"><i class="fa fa-check"></i><b>12</b> Recent Advances in Discrete Choice Modeling</a><ul>
+<li class="chapter" data-level="12.1" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-gev-class-of-models"><i class="fa fa-check"></i><b>12.1</b> The GEV Class of Models</a></li>
+<li class="chapter" data-level="12.2" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mmnl-class-of-models"><i class="fa fa-check"></i><b>12.2</b> The MMNL Class of Models</a></li>
+<li class="chapter" data-level="12.3" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mixed-gev-class-of-models"><i class="fa fa-check"></i><b>12.3</b> The Mixed GEV Class of Models</a></li>
+<li class="chapter" data-level="12.4" data-path="model-specification-refinement.html"><a href="model-specification-refinement.html#summary"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Self-Instructing Course in Mode Choice Modeling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="aggregate-forecasting-assessment-and-application" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Aggregate Forecasting Assessment, and Application</h1>
+<div id="background" class="section level2">
+<h2><span class="header-section-number">11.1</span> Background</h2>
+</div>
+<div id="aggregate-forecasting" class="section level2">
+<h2><span class="header-section-number">11.2</span> Aggregate Forecasting</h2>
+</div>
+<div id="aggregate-assessment-of-travel-mode-choice-models" class="section level2">
+<h2><span class="header-section-number">11.3</span> Aggregate Assessment of Travel Mode Choice Models</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="multiple-maxima-in-nested-logit-estimation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="recent-advances-in-discrete-choice-modeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["modechoice.pdf", "modechoice.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
