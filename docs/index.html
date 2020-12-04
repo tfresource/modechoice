@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 San Francisco Bay Area Shop / Other Mode Choice | A Self-Instructing Course in Mode Choice Modeling</title>
+  <title>A Self-Instructing Course in Mode Choice Modeling</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 San Francisco Bay Area Shop / Other Mode Choice | A Self-Instructing Course in Mode Choice Modeling" />
+  <meta property="og:title" content="A Self-Instructing Course in Mode Choice Modeling" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 San Francisco Bay Area Shop / Other Mode Choice | A Self-Instructing Course in Mode Choice Modeling" />
+  <meta name="twitter:title" content="A Self-Instructing Course in Mode Choice Modeling" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="model-specification-refinement.html"/>
-<link rel="next" href="nested-logit-model.html"/>
+
+<link rel="next" href="introduction.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -237,19 +237,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="san-francisco-bay-area-shop-other-mode-choice" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> San Francisco Bay Area Shop / Other Mode Choice</h1>
-<div id="introduction" class="section level2">
-<h2><span class="header-section-number">7.1</span> Introduction</h2>
+<div id="header">
+<h1 class="title">A Self-Instructing Course in Mode Choice Modeling</h1>
+<p class="author"><em>Frank Koppelman</em></p>
+<address class="author_afil">
+Northwestern University (Emeritus)<br><p class="author"><em>Chandra Bhat</em></p>
+<address class="author_afil">
+University of Texas as Austin<br><p class="date"><em>2020-12-04</em></p>
 </div>
-<div id="specification-for-shopother-mode-choice-model" class="section level2">
-<h2><span class="header-section-number">7.2</span> Specification for Shop/Other Mode Choice Model</h2>
+<div id="foreword" class="section level1 unnumbered">
+<h1>Foreword</h1>
+<p>This is a re-publication of <a href="https://trid.trb.org/view/793000">A Self-Instructing Course in Mode Choice Modeling</a>,
+originally prepared by Frank Koppelman and Chandra Bhat for the Federal Transit
+Administration.
+The mathematics and instruction provided by this course have been extraordinarily
+helpful to a generation of choice modelers and other transportation
+professionals in academic and practical settings.</p>
+<p>The explosion of open-source packages for logit modeling and literate
+programming more generally warrants this re-publication in a programming-first
+context. The R code to compute the choice models in this book is embedded within
+the text and exposed to the viewer. In this way, the book serves not only as a
+primer on choice modeling, but on how to estimate and interpret choice modelers
+in R. This conversion project was undertaken by members of the AEP50(5)
+subcommittee on Travel Forecasting Resources on behalf of the transportation
+modeling community. The committee was aided in this conversion by the following
+students at Brigham Young University:</p>
+<div id="original-acknowledgements" class="section level2 unnumbered">
+<h2>Original Acknowledgements</h2>
+<p>This manual was prepared under funding of the United States Department of Transportation
+through the Federal Transit Administration (Agmt. 8-17-04-A1/DTFT60-99-D-4013/0012) to
+AECOMConsult and Northwestern University.</p>
+<p>Valuable reviews and comments were
+provided by students in travel demand modeling classes at Northwestern
+University and the Georgia Institute of Technology. In addition, valuable
+comments, suggestions and questions were given by Rick Donnelly, Laurie Garrow,
+Joel Freedman, Chuck Purvis, Kimon Proussaloglou, Bruce Williams, Bill Woodford
+and others. The authors are indebted to all who commented on any version of this
+report but retain responsibility for any errors or omissions.</p>
 </div>
-<div id="initial-model-specification" class="section level2">
-<h2><span class="header-section-number">7.3</span> Initial Model Specification</h2>
-</div>
-<div id="exploring-alternative-specifications" class="section level2">
-<h2><span class="header-section-number">7.4</span> Exploring Alternative Specifications</h2>
+<div id="r-packages" class="section level2 unnumbered">
+<h2>R Packages</h2>
+<p>In order to run the examples in this book, you will need the following packages:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>) <span class="co"># data munging and plots</span></span>
+<span id="cb1-2"><a href="index.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;mlogit&quot;</span>) <span class="co"># choice model estimation</span></span></code></pre></div>
+<p>In order to build the book for yourself, you will need the following additional
+packages that help build the tables and document:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
+<span id="cb2-2"><a href="index.html#cb2-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;distill&quot;</span>)</span>
+<span id="cb2-3"><a href="index.html#cb2-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;modelsummary&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
@@ -258,8 +293,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="model-specification-refinement.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="nested-logit-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -301,7 +336,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["modechoice.pdf", "modechoice.epub"],
+"download": null,
 "toc": {
 "collapse": "section"
 }
