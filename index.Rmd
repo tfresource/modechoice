@@ -15,6 +15,12 @@ description: "This is a minimal example of using the bookdown package to write a
 ---
 
 # Foreword {-}
+
+```{r fig.align='center', out.width="50%", echo=FALSE, include=identical(knitr:::pandoc_to(), 'html')}
+knitr::include_graphics('img/cover.jpg')
+```
+
+
 This is a re-publication of [A Self-Instructing Course in Mode Choice Modeling](https://trid.trb.org/view/793000),
 originally prepared by Frank Koppelman and Chandra Bhat for the Federal Transit
 Administration.
@@ -32,7 +38,8 @@ subcommittee on Travel Forecasting Resources on behalf of the transportation
 modeling community. The committee was aided in this conversion by the following
 students at Brigham Young University:
 
-
+Cover Photo: King's Cross Station, London by [Michał Parzuchowski](https://unsplash.com/@mparzuchowski) 
+on [Unsplash](https://unsplash.com/collections/8484088/)
 
 ## Original Acknowledgements {-}
 This manual was prepared under funding of the United States Department of Transportation
