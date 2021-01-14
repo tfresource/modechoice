@@ -1,5 +1,71 @@
 # Introduction
 
+```{r setup, include = FALSE}
+library(tidyverse)
+library(modelsummary)
+
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+Choice models are an important part of transportation modeling and forecasting. 
+One early application was by @train1978goods.
+
+```
+this is a block of code
+```
+
+
+We can also make lists
+
+  - unnumbered lists
+  - for things that don't need to be numbered
+  
+
+  
+  
+Or, we can have
+  
+  1. Ordered lists 
+  2. For things that come in order.
+  
+
+We can [link](https://byu.edu) to webpages in a pretty simple way.
+
+
+There are good ways to do equations, like the probability equation from an 
+multinomial logit model.
+
+\begin{equation}
+  P_i = \frac{e^{V_i}}{\sum_{j \in J} e^{V_j}}
+  (\#eq:mnl-probs)
+\end{equation}
+
+If you recall the choice probabilities in \@ref(eq:mnl-probs), you see.
+
+Figure \@ref(fig:normplot) shows a normal cumulative probability distribution.
+
+```{r normplot, fig.cap="Normal (Gaussian) cumulative probability distribution."}
+tibble(
+  x = seq(-3, 3, by = 0.01),
+  y = pnorm(x)
+) %>%
+  ggplot(aes(x = x, y = y)) + geom_line()
+```
+
+We can also put in tables. I've really gotten to like the `modelsummary` package
+and its functions. See an example in Table \@ref(tab:datasummary)
+
+
+```{r datasummary}
+data(trees)
+models <- list()
+models[['Bivariate']] <- lm(Girth ~ Height, data = trees)
+models[['Multivariate']] <- lm(Girth ~ Height + Volume, data = trees)
+
+# simple table
+modelsummary(models, stars = TRUE, title = "Estimates of Tree Girth")
+```
 ## Background
 
 ## Use of Disaggregate Discrete Choice Models
