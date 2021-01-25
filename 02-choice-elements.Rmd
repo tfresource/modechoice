@@ -6,7 +6,7 @@ contexts. However, we generally do not have information about the process indivi
 arrive at their observed choice. A proposed framework for the choice process is that an
 individual first determines the available alternatives; next, evaluates the attributes of each
 alternative relevant to the choice under consideration; and then, uses a decision rule to select an
-alternative from among the available alternatives (Ben-Akiva and Lerman, 1985, Chapter 3).
+alternative from among the available alternatives (@ben1985discrete, Chapter 3).
 Some individuals might select a particular alternative without going through the structured
 process presented above. For example, an individual might decide to buy a car of the same make
 and model as a friend because the friend is happy with the car or is a car expert. Or an individual
@@ -24,7 +24,8 @@ choice, travel mode choice, etc.; the household in residential location choice, 
 destination choice, number of cars owned, etc.; the firm in office or warehouse location, carrier
 choice, employee hiring, etc. or the State (in the selection of roadway alignments). A common
 characteristic in the study of choice is that different decision makers face different choice
-situations and can have different tastes (that is, they value attributes differently). For example, in travel mode choice modeling, two individuals with different income levels and different
+situations and can have different tastes (that is, they value attributes differently). For example, 
+in travel mode choice modeling, two individuals with different income levels and different
 residential locations are likely to have different sets of modes to choose from and may place
 different importance weights on travel time, travel cost and other attributes. These differences
 among decision makers should be explicitly considered in choice modeling; consequently, it is
@@ -50,12 +51,13 @@ as the consideration choice set. This is the choice set which should be consider
 modeling choice decisions.
  The choice set may also be determined by the decision context of the individual or the
 focus of the policy makers supporting the study. For example, a study of university choice may
-focus on choice of school type (private vs. public, small vs. large, urban vs. suburban or rural location, etc.), if the perspective is national, or a choice of specific schools, if the perspective is
+focus on choice of school type (private vs. public, small vs. large, urban vs. suburban or rural 
+location, etc.), if the perspective is national, or a choice of specific schools, if the perspective is
 regional. 
 
 ## Attributes of Alternatives
 The alternatives in a choice process are characterized by a set of attribute values. Following
-Lancaster (1971), one can postulate that the attractiveness of an alternative is determined by the
+@lancaster1971, one can postulate that the attractiveness of an alternative is determined by the
 value of its attributes. The measure of uncertainty about an attribute can also be included as part
 of the attribute vector in addition to the attribute itself. For example, if travel time by transit is
 not fixed, the expected value of transit travel time and a measure of uncertainty of the transit
@@ -68,7 +70,8 @@ be very onerous due to over-crowding, bus in-vehicle-time may be defined as a di
 with a distinct parameter; differences between this parameter and the in-vehicle-time parameter
 for other motorized modes will measure the degree to which bus time is considered onerous to
 the traveler relative to other in-vehicle time. Other times, such as wait time at a transit stop or
-transfer time at a transit transfer point are relevant only to the transit modes, not for the nontransit modes. It is also common to consider the travel times for non-motorized modes (bike and
+transfer time at a transit transfer point are relevant only to the transit modes, not for the 
+nontransit modes. It is also common to consider the travel times for non-motorized modes (bike and
 walk) as specific to only these alternatives.
  An important reason for developing discrete choice models is to evaluate the effect of
 policy actions. To provide this capability, it is important to identify and include attributes whose
@@ -92,7 +95,8 @@ constructs: consistency and transitivity. Consistency implies the same choice se
 repeated choices under identical circumstances. Transitivity implies an unique ordering of
 alternatives on a preference scale. Therefore, if alternative A is preferred to alternative B and
 alternative B is preferred to alternative C, then alternative A is preferred to alternative C.
- A number of possible rules fall under the purview of rational decision processes (BenAkiva and Lerman, 1985; Chapter 3). In this course, the focus will be on one such decision rule
+ A number of possible rules fall under the purview of rational decision processes (@ben1985discrete, 
+ Chapter 3). In this course, the focus will be on one such decision rule
 referred to as utility maximization. The utility maximization rule is based on two fundamental
 concepts. The first is that the attribute vector characterizing each alternative can be reduced to a
 scalar utility value for that alternative. This concept implies a compensatory decision process;
@@ -102,7 +106,8 @@ the travel time reduction offered by that mode compensates for the increased cos
 concept is that the individual selects the alternative with the highest utility value.
  The focus on utility maximization in this course is based on its strong theoretical
 background, extensive use in the development of human decision making concepts, and
-amenability to statistical testing of the effects of attributes on choice. The utility maximization rule is also robust; that is, it provides a good description of the choice behavior even in cases
+amenability to statistical testing of the effects of attributes on choice. The utility maximization 
+rule is also robust; that is, it provides a good description of the choice behavior even in cases
 where individuals use somewhat different decision rules.
  In the next chapter, we discuss the concepts and underlying principles of utility based
 choice theory in more detail. 
