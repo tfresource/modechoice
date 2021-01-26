@@ -4,3 +4,5 @@
 .Ruserdata
 packages.bib
 img/cover.ai
+_bookdown_files/*
+modechoice.rds
