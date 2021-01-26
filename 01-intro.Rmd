@@ -181,14 +181,13 @@ discrete choice modeling may want to work first with the earlier SIC).  Second,
 this SIC emphasizes "hands-on" estimation experience using data sets obtained
 from planning and decision-oriented surveys.  Consequently, there is more
 emphasis on data structure and more extensive examination of model specification
-issues.  Various software packages available for discrete choice modeling
-estimation are described briefly with the intent of providing a broad overview
-of their capabilities.  The descriptions and examples of the command structure
-and output for selected models are included in Appendix A to illustrate key
-differences among them.  Further, example command and output files for models
-using a module developed for Matlab (an engineering software package), as well
-as the module’s code, are included on the accompanying CD and documented in
-Appendix B.  Third, this SIC extends the range of travel modes to include
+issues.  
+
+> Update: this manual uses the same models and data as the 2006 Bhat / Koppelman
+SIC, but the models are executed in R, with the data available for download and 
+the estimation code exposed to the reader.
+
+Third, this SIC extends the range of travel modes to include
 non-motorized modes and discusses issues involved in including such modes in the
 analysis.  Fourth, this SIC includes detailed coverage of the nested logit model
 which is being used more commonly in many metropolitan planning organizations
