@@ -1,6 +1,38 @@
 # The Multinomial Logit Model
 
+```{r setup, include = FALSE}
+library(tidyverse)
+```
+
+
 ## Overview Description and Functional Form
+
+```{r gumbelpdf, fig.cap="Probability density function for normal and Gumbel distributions."}
+pdf <- tibble(
+  x = seq(-5, 5, by = 0.01),
+  Normal = dnorm(x, sd = sqrt(pi^2/6)),
+  Gumbel = exp(-x) * exp(-exp(-x))
+) 
+
+ggplot(pdf %>% gather(key = "Distribution", value = "Probability", -x),
+       aes(x = x, y = Probability, color = Distribution)) +
+  geom_line() + 
+  theme_bw()
+```
+
+```{r gumbelcdf, fig.cap = "Cumulative density function for normal and Gumbel distributions."}
+cdf <- tibble(
+  x = seq(-4, 5, by = 0.01),
+  Normal = pnorm(x, sd = sqrt(pi^2 / 6)),
+  Gumbel = exp(-exp(-x))
+) 
+
+ggplot(cdf %>% gather(key = "Distribution", value = "Probability", -x),
+       aes(x = x, y = Probability, color = Distribution)) +
+  geom_line() + 
+  theme_bw()
+
+```
 
 
 ## Independence of Irrelevant Alternatives Property
