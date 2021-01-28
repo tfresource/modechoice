@@ -34,6 +34,37 @@ ggplot(cdf %>% gather(key = "Distribution", value = "Probability", -x),
 
 ```
 
+```{r mnl_prob}
+#' Function to compute mnl probabilities
+#' @param vi utility of target alternative
+#' @param ... utilities of other alternatives
+mnl_prob <- function(vi, ...){
+  vj <- c(...)
+  exp(vi) / sum(exp(vj))
+}
+```
+
+
+```{r choiceprob, fig.cap = "Probability of choosing alternatives while holding other utilities constant, $V_{transit} = 0, V_{walk} = -0.5$"}
+u <- tibble(
+  v_da = seq(-3, 3, by = 0.01),
+  v_tr = 0, v_walk = -0.5
+) %>% 
+  rowwise() %>%
+  mutate(
+    drive   = mnl_prob(v_da,   v_da, v_tr, v_walk),
+    transit = mnl_prob(v_tr,   v_da, v_tr, v_walk),
+    walk    = mnl_prob(v_walk, v_da, v_tr, v_walk)
+  )
+
+ggplot(u %>% gather(Mode, Probability, drive, transit, walk), 
+       aes(x = v_da, y = Probability, color = Mode)) + 
+  geom_line() +
+  xlab("Utility of Drive") + 
+  theme_bw()
+
+```
+
 
 ## Independence of Irrelevant Alternatives Property
 
