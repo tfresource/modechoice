@@ -64,6 +64,15 @@ The differences in ‘bias’ across individuals can be represented by incorpora
 In some cases, these variables are combined.  For example, the number of automobiles may be divided by the number of workers to indicate the availability of automobiles to each household member.  This approach results in modification of the bias portion of the utility function to look like: 
 
 For the case of three alternatives, (Drive Alone, Shared Ride and Transit), the decision maker components of the utility functions are:
+$$V(S_{TR})=\beta_{SR,0}\times1+\beta_{TR,1}\times Inc_{t}+\beta_{TR,2}\times NCar_{t}$$
+
+|   where   $\beta_{i0}$  is the modal bias constant for mode $i$ ($i$=DA,SR,TR),
+
+|       $Inc_{t}$ is the household income of the traveler,
+        
+|       $NCar_{t}$  is the number of cars in the traveler's household, and
+        
+|       $\beta_{i1}$,$\beta_{i2}$  are mode specific parameters on income and cars, respectively, for mode $i$ ($i$=DA,SR,TR)
 
 It is important to recognize that the parameters that describe the effect of traveler characteristics differ across alternatives while the variables are identical across alternatives for each individual.
 
@@ -71,10 +80,29 @@ It is important to recognize that the parameters that describe the effect of tra
 
 The final component of utility takes into account differences in how attributes are evaluated by different decision makers.  One effect of income, described earlier, is to increase the preference for travel by private automobile.  This representation implies that the preference for DA and SR increase with income, independent of the attributes of travel by each alternative.  Another way to represent the influence of income is that increasing income reduces the importance of monetary cost in the evaluation of modal alternatives.  The idea that high income travelers place less importance on cost can be represented by dividing the cost of travel of an alternative by annual income or some function of annual income of the traveler or his/her household.  Another interaction effect might be that different travelers evaluate travel time differently.  For example, one might argue that because women commonly take increased responsibility for home maintenance and child care, they are likely to evaluate increased travel time to work more negatively than men.  This could be represented by adding a variable to the model which represents the product of a dummy variable for female (one if the traveler is a woman and zero otherwise) times travel time, as illustrated below in the utility equations for a three alternative mode choice example (Drive Alone, Shared Ride, and Transit) using the same notation described previously.
 
-In this example,   represents the utility value of one minute of travel time to men and   represents the additional utility value of one minute of travel time to women.  Thus, the total utility value of one minute of travel time to women is  .  In this case,  , is expected to be negative indicating that increased travel time reduces the utility of an alternative.    may be negative or positive, indicating that women are more or less sensitive to increases in travel time.
+\begin{equation}
+V(X_{DA},S_{i})=\gamma_{1}\times TT_{DA}+\gamma_{2}\times TT_{DA}\times Fem+\gamma_{3}\times TC_{DA}
+\end{equation}
+
+$$V(X_{SR},S_{i})=\gamma_{1}\times TT_{SR}+\gamma_{2}\times TT_{SR}\times Fem+\gamma_{3}\times TC_{SR}$$
+
+$$V(X_{TR},S_{i})=\gamma_{1}\times TT_{TR}+\gamma_{2}\times TT_{TR}\times Fem+\gamma_{3}\times TC_{TR}+\gamma_{4}\times FREQ_{TR}$$
+
+
+In this example, $\gamma_1$ represents the utility value of one minute of travel time to men and $\gamma_2$ represents the additional utility value of one minute of travel time to women.  Thus, the total utility value of one minute of travel time to women is $\gamma_1+\gamma_2$.  In this case, $\gamma_1$, is expected to be negative indicating that increased travel time reduces the utility of an alternative.  $\gamma_2$ may be negative or positive, indicating that women are more or less sensitive to increases in travel time.
 
 ## Specification of the Additive Error Term
 
 As described in section 3.3, the utility of each alternative is represented by a deterministic component,  which is represented in the utility function by observed and measured variables,  and an additive error term,    which represents those components of the utility function which are not included in the model.  In the three alternative examples used above, the total utility of each alternative can be represented by:
+
+$$U_{DA}=V(S_t)+V(X_{DA})+V(S_t,X_{DA})+\epsilon_{DA}$$
+
+$$U_{SR}=V(S_t)+V(X_{SR})+V(S_t,X_{SR})+\epsilon_{SR}$$
+
+$$U_{TR}=V(S_t)+V(X_{TR})+V(S_t,X_{TR})+\epsilon_{T}$$
+
+where $V()$ represents the deterministics components of the utility for the alternatives, and 
+
+$\epsilon_i$  represents the random components of the utility, also called the error term.
 
 The error term is included in the utility function to account for the fact that the analyst is not able to completely and correctly measure or specify all attributes that determine travelers’ mode utility assessment.  By definition, error terms are unobserved and unmeasured.  A wide range of distributions could be used to represent the distribution of error terms over individuals and alternatives.  If we assume that the error term for each alternative represents many missing components, each of which has relatively little impact on the value of each alternative, the central limit theorem suggests that the sum of these small errors will be distributed normally.  This assumption leads to the formulation of the Multinomial Probit (MNP) probabilistic choice model.  However, the mathematical complexity of the MNP model; which makes it difficult to estimate, interpret and predict; has limited its use in practice.  An alternative distribution assumption, described in the next chapter, leads to the formulation of the multinomial logit (MNL) model. 
