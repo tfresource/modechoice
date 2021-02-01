@@ -128,6 +128,7 @@ Travel time and travel cost are generic; that is, they apply to all alternatives
 V(X_{DA}) = \gamma_{11} \times TT_{DA} + \gamma_{12} \times 0 + \gamma_2 \times TC_{DA}
 (\#eq:threeeight)
 \end{equation}
+That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR, $\gamma_{11}$, and the other for travel time by TR, $\gamma_{12}$.  These parameters could be compared to determine if the differences are statistically significant or large enough to be important.
 
 \begin{equation}
 V(X_{SR}) = \gamma_{11} \times TT_{SR} + \gamma_{12} \times 0 + \gamma_2 \times TC_{SR}
