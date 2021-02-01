@@ -88,7 +88,7 @@ The utility component associated exclusively with alternatives includes variable
 These measures differ across alternatives for the same individual and also among individuals due to differences in the origin and destination locations of each person’s travel.  For example, this portion of the utility function could look like:
 
 \begin{equation}
-V(X_i) = g_i ~ ' ~ X_{i1} + g_2 ~ ' ~ X_{i2} + L + g_k ~ ' ~ X_{ik}
+V(X_i) = g_1 ~ ' ~ X_{i1} + g_2 ~ ' ~ X_{i2} + L + g_k ~ ' ~ X_{ik}
 (\#eq:threefour)
 \end{equation}
 
