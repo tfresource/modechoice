@@ -64,7 +64,11 @@ The differences in ‘bias’ across individuals can be represented by incorpora
 In some cases, these variables are combined.  For example, the number of automobiles may be divided by the number of workers to indicate the availability of automobiles to each household member.  This approach results in modification of the bias portion of the utility function to look like: 
 
 For the case of three alternatives, (Drive Alone, Shared Ride and Transit), the decision maker components of the utility functions are:
-$$V(S_{TR})=\beta_{SR,0}\times1+\beta_{TR,1}\times Inc_{t}+\beta_{TR,2}\times NCar_{t}$$
+
+\begin{equation}
+V(S_{TR})=\beta_{SR,0}\times1+\beta_{TR,1}\times Inc_{t}+\beta_{TR,2}\times NCar_{t}
+(\#eq:threefifteen)
+\end{equation}
 
 |   where   $\beta_{i0}$  is the modal bias constant for mode $i$ ($i$=DA,SR,TR),
 
@@ -82,11 +86,18 @@ The final component of utility takes into account differences in how attributes 
 
 \begin{equation}
 V(X_{DA},S_{i})=\gamma_{1}\times TT_{DA}+\gamma_{2}\times TT_{DA}\times Fem+\gamma_{3}\times TC_{DA}
+(\#eq:threesixteen)
 \end{equation}
 
-$$V(X_{SR},S_{i})=\gamma_{1}\times TT_{SR}+\gamma_{2}\times TT_{SR}\times Fem+\gamma_{3}\times TC_{SR}$$
+\begin{equation}
+V(X_{SR},S_{i})=\gamma_{1}\times TT_{SR}+\gamma_{2}\times TT_{SR}\times Fem+\gamma_{3}\times TC_{SR}
+(\#eq:threeseventeen)
+\end{equation}
 
-$$V(X_{TR},S_{i})=\gamma_{1}\times TT_{TR}+\gamma_{2}\times TT_{TR}\times Fem+\gamma_{3}\times TC_{TR}+\gamma_{4}\times FREQ_{TR}$$
+\begin{equation}
+V(X_{TR},S_{i})=\gamma_{1}\times TT_{TR}+\gamma_{2}\times TT_{TR}\times Fem+\gamma_{3}\times TC_{TR}+\gamma_{4}\times FREQ_{TR}
+(\#eq:threeeighteen)
+\end{equation}
 
 
 In this example, $\gamma_1$ represents the utility value of one minute of travel time to men and $\gamma_2$ represents the additional utility value of one minute of travel time to women.  Thus, the total utility value of one minute of travel time to women is $\gamma_1+\gamma_2$.  In this case, $\gamma_1$, is expected to be negative indicating that increased travel time reduces the utility of an alternative.  $\gamma_2$ may be negative or positive, indicating that women are more or less sensitive to increases in travel time.
@@ -95,11 +106,20 @@ In this example, $\gamma_1$ represents the utility value of one minute of travel
 
 As described in section 3.3, the utility of each alternative is represented by a deterministic component,  which is represented in the utility function by observed and measured variables,  and an additive error term,    which represents those components of the utility function which are not included in the model.  In the three alternative examples used above, the total utility of each alternative can be represented by:
 
-$$U_{DA}=V(S_t)+V(X_{DA})+V(S_t,X_{DA})+\epsilon_{DA}$$
+\begin{equation}
+U_{DA}=V(S_t)+V(X_{DA})+V(S_t,X_{DA})+\epsilon_{DA}
+(\#eq:threenineteen)
+\end{equation}
 
-$$U_{SR}=V(S_t)+V(X_{SR})+V(S_t,X_{SR})+\epsilon_{SR}$$
+\begin{equation}
+U_{SR}=V(S_t)+V(X_{SR})+V(S_t,X_{SR})+\epsilon_{SR}
+(\#eq:threetwenty)
+\end{equation}
 
-$$U_{TR}=V(S_t)+V(X_{TR})+V(S_t,X_{TR})+\epsilon_{T}$$
+\begin{equation}
+U_{TR}=V(S_t)+V(X_{TR})+V(S_t,X_{TR})+\epsilon_{T}
+(\#eq:threetwentyone)
+\end{equation}
 
 where $V()$ represents the deterministics components of the utility for the alternatives, and 
 
