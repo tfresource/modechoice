@@ -7,13 +7,16 @@ library(tidyverse)
 
 ## Overview Description and Functional Form
 
+The mathematical form of a discrete choice model is determined by the assumptions made regarding the error components of the utility function for each alternative as described in section 3.5.  The specific assumptions that lead to the Multinomial Logit Model are (1) the error components are extreme-value (or Gumbel) distributed, (2) the error components are identically and independently distributed across alternatives, and (3) the error components are identically and independently distributed across observations/individuals.  We discuss each of these assumptions below.
+
+The most common assumption for error distributions in the statistical and modeling literature is that errors are distributed normally.  There are good theoretical and practical reasons for using the normal distribution for many modeling applications.  However, in the case of choice models the normal distribution assumption for error terms leads to the Multinomial Probit Model (MNP) which has some properties that make it difficult to use in choice analysis .  The Gumbel distribution is selected because it has computational advantages in a context where maximization is important, closely approximates the normal distribution (see Figure 4.1 and Figure 4.2) and produces a closed-form  probabilistic choice model.
+
 ```{r gumbelpdf, fig.cap="Probability density function for normal and Gumbel distributions."}
 pdf <- tibble(
   x = seq(-5, 5, by = 0.01),
   Normal = dnorm(x, sd = sqrt(pi^2/6)),
   Gumbel = exp(-x) * exp(-exp(-x))
 ) 
-The mathematical form of a discrete choice model is determined by the assumptions made regarding the error components of the utility function for each alternative as described in section 3.5.  The specific assumptions that lead to the Multinomial Logit Model are (1) the error components are extreme-value (or Gumbel) distributed, (2) the error components are identically and independently distributed across alternatives, and (3) the error components are identically and independently distributed across observations/individuals.  We discuss each of these assumptions below.
 
 ggplot(pdf %>% gather(key = "Distribution", value = "Probability", -x),
        aes(x = x, y = Probability, color = Distribution)) +
@@ -35,42 +38,9 @@ ggplot(cdf %>% gather(key = "Distribution", value = "Probability", -x),
 
 ```
 
-```{r mnl_prob}
-#' Function to compute mnl probabilities
-#' @param vi utility of target alternative
-#' @param ... utilities of other alternatives
-mnl_prob <- function(vi, ...){
-  vj <- c(...)
-  exp(vi) / sum(exp(vj))
-}
-```
-
-
-```{r choiceprob, fig.cap = "Probability of choosing alternatives while holding other utilities constant, $V_{transit} = 0, V_{walk} = -0.5$"}
-u <- tibble(
-  v_da = seq(-3, 3, by = 0.01),
-  v_tr = 0, v_walk = -0.5
-) %>% 
-  rowwise() %>%
-  mutate(
-    drive   = mnl_prob(v_da,   v_da, v_tr, v_walk),
-    transit = mnl_prob(v_tr,   v_da, v_tr, v_walk),
-    walk    = mnl_prob(v_walk, v_da, v_tr, v_walk)
-  )
-
-ggplot(u %>% gather(Mode, Probability, drive, transit, walk), 
-       aes(x = v_da, y = Probability, color = Mode)) + 
-  geom_line() +
-  xlab("Utility of Drive") + 
-  theme_bw()
-
-```
-
-
-The most common assumption for error distributions in the statistical and modeling literature is that errors are distributed normally.  There are good theoretical and practical reasons for using the normal distribution for many modeling applications.  However, in the case of choice models the normal distribution assumption for error terms leads to the Multinomial Probit Model (MNP) which has some properties that make it difficult to use in choice analysis .  The Gumbel distribution is selected because it has computational advantages in a context where maximization is important, closely approximates the normal distribution (see Figure 4.1 and Figure 4.2) and produces a closed-form  probabilistic choice model.
 	
 The Gumbel has the following cumulative distribution and probability density functions:
-	
+
 	
 	
 Where
@@ -92,8 +62,8 @@ Where
 	
 	
 The exponential function is described in Figure 4.3 which shows the relationship between   and  .  Note that   is always positive and increases monotonically with  .
-	
-	
+
+
 	
 The multinomial logit (MNL) model has several important properties.  We illustrate these for a case in which the decision maker has three available alternatives:  Drive Alone (DA), Shared Ride (SR), and TRansit (TR).  The probabilities of each alternative are given by modifying equation 4.5 for each alternative to obtain:
 
@@ -118,6 +88,36 @@ We use this three-alternative example to illustrate three important properties o
 ### The Sigmoid or S shape of Multinomial Logit Probabilities
 
 The S shape of the MNL probabilities is illustrated in Figure 4.4 where the probability of choosing Drive Alone is shown as a function of its own utility, with the utilities of the other alternatives held constant.  The S-shape limits the probability range between zero when the utility of DA is very low, relative to other alternatives, and one when the utility of DA is very high, relative to other alternatives.  This function has very gradual slope at extreme values of DA utility, relative to the other alternatives, and is much steeper when its utility reaches a value such that its choice probability is close to one-half.  This implies that if the representative utility of one alternative is very low or very high, compared with the others, a small increase in the utility of this alternative will not substantially affect its probability of being chosen.  The point at which an increase in the representative utility of an alternative has the greatest effect on its probability of being chosen (i.e., the point of maximum slope along the curve) is when its representative utility is equivalent to the combined utility of the other alternatives.  When this is true, a small increase in the utility of one alternative can ‘tip the balance’ and induce a large increase in the probability of the alternative being chosen (Train, 1993).
+
+```{r mnl_prob}
+#' Function to compute mnl probabilities
+#' @param vi utility of target alternative
+#' @param ... utilities of other alternatives
+mnl_prob <- function(vi, ...){
+  vj <- c(...)
+  exp(vi) / sum(exp(vj))
+}
+```
+
+```{r choiceprob, fig.cap = "Probability of choosing alternatives while holding other utilities constant, $V_{transit} = 0, V_{walk} = -0.5$"}
+u <- tibble(
+  v_da = seq(-3, 3, by = 0.01),
+  v_tr = 0, v_walk = -0.5
+) %>% 
+  rowwise() %>%
+  mutate(
+    drive   = mnl_prob(v_da,   v_da, v_tr, v_walk),
+    transit = mnl_prob(v_tr,   v_da, v_tr, v_walk),
+    walk    = mnl_prob(v_walk, v_da, v_tr, v_walk)
+  )
+
+ggplot(u %>% gather(Mode, Probability, drive, transit, walk), 
+       aes(x = v_da, y = Probability, color = Mode)) + 
+  geom_line() +
+  xlab("Utility of Drive") + 
+  theme_bw()
+
+```
 
 ### The Equivalent Differences Property
 
