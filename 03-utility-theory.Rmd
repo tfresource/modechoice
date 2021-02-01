@@ -157,13 +157,12 @@ V(S_{TR})=\beta_{SR,0}\times1+\beta_{TR,1}\times Inc_{t}+\beta_{TR,2}\times NCar
 (\#eq:threefifteen)
 \end{equation}
 
-|   where   $\beta_{i0}$  is the modal bias constant for mode $i$ ($i$=DA,SR,TR),
+where   
 
-|       $Inc_{t}$ is the household income of the traveler,
-        
-|       $NCar_{t}$  is the number of cars in the traveler's household, and
-        
-|       $\beta_{i1}$,$\beta_{i2}$  are mode specific parameters on income and cars, respectively, for mode $i$ ($i$=DA,SR,TR)
+  - $\beta_{i0}$  is the modal bias constant for mode $i$ ($i$=DA,SR,TR),
+  - $Inc_{t}$ is the household income of the traveler,
+  - $NCar_{t}$ is the number of cars in the traveler's household, and
+  - $\beta_{i1}$,$\beta_{i2}$ are mode specific parameters on income and cars, respectively, for mode $i$ ($i$=DA,SR,TR)
 
 It is important to recognize that the parameters that describe the effect of traveler characteristics differ across alternatives while the variables are identical across alternatives for each individual.
 
@@ -208,8 +207,9 @@ U_{TR}=V(S_t)+V(X_{TR})+V(S_t,X_{TR})+\epsilon_{T}
 (\#eq:threetwentyone)
 \end{equation}
 
-where $V()$ represents the deterministics components of the utility for the alternatives, and 
+where 
 
-$\epsilon_i$  represents the random components of the utility, also called the error term.
+  - $V()$ represents the deterministics components of the utility for the alternatives, and 
+  - $\epsilon_i$  represents the random components of the utility, also called the error term.
 
 The error term is included in the utility function to account for the fact that the analyst is not able to completely and correctly measure or specify all attributes that determine travelers’ mode utility assessment.  By definition, error terms are unobserved and unmeasured.  A wide range of distributions could be used to represent the distribution of error terms over individuals and alternatives.  If we assume that the error term for each alternative represents many missing components, each of which has relatively little impact on the value of each alternative, the central limit theorem suggests that the sum of these small errors will be distributed normally.  This assumption leads to the formulation of the Multinomial Probit (MNP) probabilistic choice model.  However, the mathematical complexity of the MNP model; which makes it difficult to estimate, interpret and predict; has limited its use in practice.  An alternative distribution assumption, described in the next chapter, leads to the formulation of the multinomial logit (MNL) model. 
