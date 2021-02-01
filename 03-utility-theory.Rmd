@@ -2,28 +2,25 @@
 
 ## Basic Construct of Utility Theory
 
-Utility is an indicator of value to an individual.  Generally, we think about utility as being derived from the attributes of alternatives or sets of alternatives; e.g., the total set of groceries purchased in a week. The utility maximization rule states that an individual will select the alternative from his/her set of available alternatives that maximizes his or her utility.  Further, the rule implies that there is a function containing attributes of alternatives and characteristics of individuals that describes an individual’s utility valuation for each alternative.  The utility function,  , has the property that an alternative is chosen if its utility is greater than the utility of all other alternatives in the individual’s choice set.  Alternatively, this can be stated as alternative, ‘i’, is chosen among a set of alternatives, if and only if the utility of alternative, ‘i’, is greater than or equal to the utility of all alternatives , ‘j’, in the choice set, C.  This can be expressed mathematically as:
+Utility is an indicator of value to an individual.  Generally, we think about utility as being derived from the attributes of alternatives or sets of alternatives; e.g., the total set of groceries purchased in a week. The utility maximization rule states that an individual will select the alternative from his/her set of available alternatives that maximizes his or her utility.  Further, the rule implies that there is a function containing attributes of alternatives and characteristics of individuals that describes an individual’s utility valuation for each alternative.  The utility function,  , has the property that an alternative is chosen if its utility is greater than the utility of all other alternatives in the individual’s choice set.  Alternatively, this can be stated as alternative, $i$, is chosen among a set of alternatives, if and only if the utility of alternative, $i$, is greater than or equal to the utility of all alternatives , $j$, in the choice set, $C$.  This can be expressed mathematically as:
 
 \begin{equation}
-If ~~ U(X_i,S_t) ~~ U(X_j,S_t) ~"j ~~~ P ~~~ i ~ \text{f} ~ j ~ "j ~ \hat{I} C
-(\#eq:threeone)
+  U(X_i,S_t) \geq U(X_j,S_t) \forall j \Rightarrow i \succ j \forall j \in C
+  (\#eq:decisionrule)
 \end{equation}
 
 where
 
-$U(~~~)$              is the mathematical utility function,
-            
-$X_i,X_j$             are vectors of attributes describing alternatives i and j, respectively
-                      (e.g., travel time, travel cost, and other relevant attributes of the available modes),  
- 	                              
-$S_t$                 is a vector of characteristics describing individual t, that influence  
-                      his/her preferences among alternatives (e.g., household income and  
-                      number of automobiles owned for travel mode choice),  
- 	                              
-$i$ f $j$             means the alternative to the left is preferred to the alternative to the  
-                      right, and  
- 	                              
-$"j$                  means all the cases, j, in the choice set.
+  - $U(~~~)$ is the mathematical utility function,
+  - $X_i,X_j$ are vectors of attributes describing alternatives i and j,
+  respectively (e.g., travel time, travel cost, and other relevant attributes of
+  the available modes),
+  - $S_t$ is a vector of characteristics describing individual
+  $t$, that influence his/her preferences among alternatives (e.g., household
+  income and number of automobiles owned for travel mode choice),
+  - $i \succ j$ means the alternative to the left is preferred to the
+  alternative to the right, and
+ 	- $\forall j$ means all the cases, j, in the choice set.
 
 
 That is, if the utility of alternative i is greater than or equal to the utility of all alternatives, j; alternative i will be preferred and chosen from the set of alternatives, C.
