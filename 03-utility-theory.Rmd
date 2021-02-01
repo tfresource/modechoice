@@ -40,7 +40,7 @@ If analysts thoroughly understood all aspects of the internal decision making pr
 As with deterministic choice theory, the individual is assumed to choose an alternative if its utility is greater than that of any other alternative.  The probability prediction of the analyst results from differences between the estimated utility values and the utility values used by the traveler.  We represent this difference by decomposing the utility of the alternative, from the perspective of the decision maker, into two components.  One component of the utility function represents the portion of the utility observed by the analyst, often called the deterministic (or observable) portion of the utility.  The other component is the difference between the unknown utility used by the individual and the utility estimated by the analyst.  Since the utility used by the decision maker is unknown, we represent this difference as a random error.  Formally, we represent this by:
 
 \begin{equation}
-U_{it} = V_{it} + e_{it}
+U_{it} = V_{it} + \epsilon_{it}
 (\#eq:threetwo)
 \end{equation}
 
@@ -50,7 +50,7 @@ where
     is equivalent to $U(X_i,S_t)$ but provides a simpler notation),
   - $V_{it}$ is the deterministic or observable portion of the utility estimated by
     the analyst, and
-  - $e_{it}$ is the error or the portion of the utility unkown to the analyst.
+  - $\epsilon_{it}$ is the error or the portion of the utility unkown to the analyst.
 
 The analyst does not have any information about the error term.  However, the total error which is the sum of errors from many sources (imperfect information, measurement errors, omission of modal attributes, omission of the characteristics of the individual that influence his/her choice decision and/or errors in the utility function) is represented by a random variable.  Different assumptions about the distribution of the random variables associated with the utility of each alternative result in different representations of the model used to describe and predict choice probabilities.  The assumptions used in the development of logit type models are discussed in the next Chapter.
 
@@ -88,30 +88,30 @@ The utility component associated exclusively with alternatives includes variable
 These measures differ across alternatives for the same individual and also among individuals due to differences in the origin and destination locations of each person’s travel.  For example, this portion of the utility function could look like:
 
 \begin{equation}
-V(X_i) = g_1 ~ ' ~ X_{i1} + g_2 ~ ' ~ X_{i2} + L + g_k ~ ' ~ X_{ik}
+V(X_i) = \gamma_1 ~ ' ~ X_{i1} + \gamma_2 ~ ' ~ X_{i2} + L + \gamma_k ~ ' ~ X_{ik}
 (\#eq:threefour)
 \end{equation}
 
 where
 
-  - $g_k$ is the parameter which defines the direction and importance of the  
+  - $\gamma_k$ is the parameter which defines the direction and importance of the  
     effect of attribute $k$ on the utility of an alternative and
   - $X_{ik}$ is the value of attribute $k$ for alternative $i$.
 
 Thus, this portion of the utility of each alternative, $i$, is the weighted sum of the attributes of alternative $i$.  A specific example for the Drive Alone (DA), Shared Ride (SR), and Transit (TR) alternatives is:
 
 \begin{equation}
-V(X_{DA}) = g_1 ~ ' ~ TT_{DA} + g_2 ~ ' ~ TC_{DA}
+V(X_{DA}) = \gamma_1 ~ ' ~ TT_{DA} + \gamma_2 ~ ' ~ TC_{DA}
 (\#eq:threefive)
 \end{equation}
 
 \begin{equation}
-V(X_{SR}) = g_1 ~ ' ~ TT_{SR} + g_2 ~ ' ~ TC_{SR}
+V(X_{SR}) = \gamma_1 ~ ' ~ TT_{SR} + \gamma_2 ~ ' ~ TC_{SR}
 (\#eq:threesix)
 \end{equation}
 
 \begin{equation}
-V(X_{TR}) = g_1 ~ ' ~ TT_{TR} + g_2 ~ ' ~ TC_{TR} + g_3 ~ ' ~ FREQ_{TR}
+V(X_{TR}) = \gamma_1 ~ ' ~ TT_{TR} + \gamma_2 ~ ' ~ TC_{TR} + \gamma_3 ~ ' ~ FREQ_{TR}
 (\#eq:threeseven)
 \end{equation}
 
@@ -121,9 +121,9 @@ where
   - $TC_i$ is the travel cost for mode $i$, and
   - $FREQ_{TR}$ is the frequency for transit services.
 
-Travel time and travel cost are generic; that is, they apply to all alternatives; frequency is specific to transit only. The parameters, $g_k$ , are identical for all the alternatives to which they apply.  This implies that the utility value of travel time and travel cost are identical across alternatives.  The possibility that travel time may be more onerous on Transit than by Drive Alone or Shared Ride could be tested by reformulating the above models to:
+Travel time and travel cost are generic; that is, they apply to all alternatives; frequency is specific to transit only. The parameters, $\gamma_k$ , are identical for all the alternatives to which they apply.  This implies that the utility value of travel time and travel cost are identical across alternatives.  The possibility that travel time may be more onerous on Transit than by Drive Alone or Shared Ride could be tested by reformulating the above models to:
 
-That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR,  , and the other for travel time by TR,  .  These parameters could be compared to determine if the differences are statistically significant or large enough to be important.
+That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR, $\gamma_{11}$, and the other for travel time by TR, $\gamma_{12}$.  These parameters could be compared to determine if the differences are statistically significant or large enough to be important.
 
 ### Utility 'Biases' Due to Excluded Variables
 
@@ -195,7 +195,7 @@ U_{SR}=V(S_t)+V(X_{SR})+V(S_t,X_{SR})+\epsilon_{SR}
 \end{equation}
 
 \begin{equation}
-U_{TR}=V(S_t)+V(X_{TR})+V(S_t,X_{TR})+\epsilon_{T}
+U_{TR}=V(S_t)+V(X_{TR})+V(S_t,X_{TR})+\epsilon_{TR}
 (\#eq:threetwentyone)
 \end{equation}
 
