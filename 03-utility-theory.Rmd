@@ -20,7 +20,7 @@ where
   income and number of automobiles owned for travel mode choice),
   - $i \succ j$ means the alternative to the left is preferred to the
   alternative to the right, and
- 	- $\forall j$ means all the cases, j, in the choice set.
+  - $\forall j$ means all the cases, j, in the choice set.
 
 
 That is, if the utility of alternative i is greater than or equal to the utility of all alternatives, j; alternative i will be preferred and chosen from the set of alternatives, C.
