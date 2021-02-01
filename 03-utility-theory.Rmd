@@ -42,14 +42,20 @@ The utility maximization rule, which states that an individual chooses the alter
 
 ```{r detchoice, fig.cap="Illustration of Deterministic Choice"} 
 
-tibble(U1 = c(2.5, 2, 3, 4, 5, 5), 
-       U2 = c(1,4,5,6,5,4),
+tibble(U1 = c(2.5, 2, 3, 5, 6, 6), 
+       U2 = c(1, 4, 5, 7, 4, 5),
        label = c("A", "B", "C", "D", "E", "F")) %>%
-  ggplot(aes(x=U1, y=U2, label = label)) + 
+  ggplot(aes(x = U1, y = U2, label = label)) + 
   geom_point() + 
   xlab("Utility for Alternative 1") + 
   ylab("Utility for Alternative 2") +
-  geom_abline(slope = 1, intercept = 0, lty = "dotted")
+  geom_abline(slope = 1, intercept = 0, lty = "dotted") + 
+  geom_label() + 
+  geom_text(data = 
+              tibble(U1 = c(2,5), U2 = c(6.5, 1.5), 
+                     label= c("Alt. 2 Preferred", "Alt. 1 Preferred"))) + 
+  scale_x_continuous(limits = c(0,8)) + 
+  scale_y_continuous(limits = c(0,8))
 
 
 ```
