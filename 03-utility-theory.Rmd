@@ -123,12 +123,10 @@ where
 
 Travel time and travel cost are generic; that is, they apply to all alternatives; frequency is specific to transit only. The parameters, $\gamma_k$ , are identical for all the alternatives to which they apply.  This implies that the utility value of travel time and travel cost are identical across alternatives.  The possibility that travel time may be more onerous on Transit than by Drive Alone or Shared Ride could be tested by reformulating the above models to:
 
-<<<<<<< HEAD
 \begin{equation}
 V(X_{DA}) = \gamma_{11} \times TT_{DA} + \gamma_{12} \times 0 + \gamma_2 \times TC_{DA}
 (\#eq:threeeight)
 \end{equation}
-That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR, $\gamma_{11}$, and the other for travel time by TR, $\gamma_{12}$.  These parameters could be compared to determine if the differences are statistically significant or large enough to be important.
 
 \begin{equation}
 V(X_{SR}) = \gamma_{11} \times TT_{SR} + \gamma_{12} \times 0 + \gamma_2 \times TC_{SR}
@@ -140,10 +138,7 @@ V(X_{TR}) = \gamma_{11} \times 0 + \gamma_{12} \times TT_{TR} + \gamma_2 \times 
 (\#eq:threeten)
 \end{equation}
 
-That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR, $\gamma_{11}$ , and the other for travel time by TR, $\gamma_{12}$ .  These parameters could be compared to determine if the differences are statistically significant or large enough to be important.
-=======
 That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR, $\gamma_{11}$, and the other for travel time by TR, $\gamma_{12}$.  These parameters could be compared to determine if the differences are statistically significant or large enough to be important.
->>>>>>> transcribe3
 
 ### Utility 'Biases' Due to Excluded Variables
 
