@@ -4,6 +4,28 @@
 
 Utility is an indicator of value to an individual.  Generally, we think about utility as being derived from the attributes of alternatives or sets of alternatives; e.g., the total set of groceries purchased in a week. The utility maximization rule states that an individual will select the alternative from his/her set of available alternatives that maximizes his or her utility.  Further, the rule implies that there is a function containing attributes of alternatives and characteristics of individuals that describes an individual’s utility valuation for each alternative.  The utility function,  , has the property that an alternative is chosen if its utility is greater than the utility of all other alternatives in the individual’s choice set.  Alternatively, this can be stated as alternative, ‘i’, is chosen among a set of alternatives, if and only if the utility of alternative, ‘i’, is greater than or equal to the utility of all alternatives , ‘j’, in the choice set, C.  This can be expressed mathematically as:
 
+\begin{equation}
+If ~~ U(X_i,S_t) ~~ U(X_j,S_t) ~"j ~~~ P ~~~ i ~ \text{f} ~ j ~ "j ~ \hat{I} C
+(\#eq:threeone)
+\end{equation}
+
+where
+
+$U(~~~)$              is the mathematical utility function,
+            
+$X_i,X_j$             are vectors of attributes describing alternatives i and j, respectively
+                      (e.g., travel time, travel cost, and other relevant attributes of the available modes),  
+ 	                              
+$S_t$                 is a vector of characteristics describing individual t, that influence  
+                      his/her preferences among alternatives (e.g., household income and  
+                      number of automobiles owned for travel mode choice),  
+ 	                              
+$i$ f $j$             means the alternative to the left is preferred to the alternative to the  
+                      right, and  
+ 	                              
+$"j$                  means all the cases, j, in the choice set.
+
+
 That is, if the utility of alternative i is greater than or equal to the utility of all alternatives, j; alternative i will be preferred and chosen from the set of alternatives, C.
 
 The underlying concept of utility allows us to rank a series of alternatives and identify the single alternative that has highest utility. The primary implication of this ranking or ordering of alternatives is that there is no absolute reference or zero point, for utility values.  Thus, the only valuation that is important is the difference in utility between pairs of alternatives; particularly whether that difference is positive or negative.  Any function that produces the same preference orderings can serve as a utility function and will give the same predictions of choice, regardless of the numerical values of the utilities assigned to individual alternatives.  It also follows that utility functions, which result in the same order among alternatives, are equivalent.
@@ -20,11 +42,44 @@ If analysts thoroughly understood all aspects of the internal decision making pr
 
 As with deterministic choice theory, the individual is assumed to choose an alternative if its utility is greater than that of any other alternative.  The probability prediction of the analyst results from differences between the estimated utility values and the utility values used by the traveler.  We represent this difference by decomposing the utility of the alternative, from the perspective of the decision maker, into two components.  One component of the utility function represents the portion of the utility observed by the analyst, often called the deterministic (or observable) portion of the utility.  The other component is the difference between the unknown utility used by the individual and the utility estimated by the analyst.  Since the utility used by the decision maker is unknown, we represent this difference as a random error.  Formally, we represent this by:
 
+\begin{equation}
+U_{it} = V_{it} + e_{it}
+(\#eq:threetwo)
+\end{equation}
+
+where
+
+$U_{it}$              is the true utility of the alternative $i$ to the decision maker $t$, ($U_{it}$  
+                      is equivalent to $U(X_i,S_t)$ but provides a simpler notation),
+            
+$V_{it}$              is the deterministic or observable portion of the utility estimated by
+                      the analyst, and
+ 	                              
+$e_{it}$              is the error or the portion of the utility unkown to the analyst.
+
 The analyst does not have any information about the error term.  However, the total error which is the sum of errors from many sources (imperfect information, measurement errors, omission of modal attributes, omission of the characteristics of the individual that influence his/her choice decision and/or errors in the utility function) is represented by a random variable.  Different assumptions about the distribution of the random variables associated with the utility of each alternative result in different representations of the model used to describe and predict choice probabilities.  The assumptions used in the development of logit type models are discussed in the next Chapter.
 
 ## Components of the Deterministic Portion of the Utility Function
 
 The deterministic or observable portion (often called the systematic portion) of the utility of an alternative is a mathematical function of the attributes of the alternative and the characteristics of the decision maker.  The systematic portion of utility can have any mathematical form but the function is most generally formulated as additive to simplify the estimation process.  This function includes unknown parameters which are estimated in the modeling process.  The systematic portion of the utility function can be broken into components that are (1) exclusively related to the attributes of alternatives, (2) exclusively related to the characteristics of the decision maker and (3) represent interactions between the attributes of alternatives and the characteristics of the decision maker.  Thus, the systematic portion of utility can be represented by:
+
+\begin{equation}
+V_{t,i} = V(S_t) + V(X_i) + V(S_t,X_i)
+(\#eq:threethree)
+\end{equation}
+
+where
+
+$V_{it}$              is the systematic portion of utility of alternative i for inidivual t,
+            
+$V(S_t)$              is the portion of utility associated with characteristics of individual  
+                      $t$,
+                      
+$V(X_i)$              is the portion of utility of alternative $i$ associated with the attributes
+                      of alternative $i$, and
+ 	                              
+$V(S_t,X_i)$          is the portion of the utility which results from interactions between  
+                      the attributes of alternative $i$ and the characteristics of individual $t$.
 
 Each of these utility components is discussed separately
 
@@ -40,9 +95,44 @@ The utility component associated exclusively with alternatives includes variable
 * Reliability of on time arrival.
 These measures differ across alternatives for the same individual and also among individuals due to differences in the origin and destination locations of each person’s travel.  For example, this portion of the utility function could look like:
 
+\begin{equation}
+V(X_i) = g_i ~ ' ~ X_{i1} + g_2 ~ ' ~ X_{i2} + L + g_k ~ ' ~ X_{ik}
+(\#eq:threefour)
+\end{equation}
+
+where
+
+$g_k$                 is the parameter which defines the direction and importance of the  
+                      effect of attribute $k$ on the utility of an alternative and
+            
+$X_{ik}$              is the value of attribute $k$ for alternative $i$.
+
 Thus, this portion of the utility of each alternative, i, is the weighted sum of the attributes of alternative i.  A specific example for the Drive Alone (DA), Shared Ride (SR), and Transit (TR) alternatives is:
 
-Travel time and travel cost are generic; that is, they apply to all alternatives; frequency is specific to transit only. The parameters,  , are identical for all the alternatives to which they apply.  This implies that the utility value of travel time and travel cost are identical across alternatives.  The possibility that travel time may be more onerous on Transit than by Drive Alone or Shared Ride could be tested by reformulating the above models to:
+\begin{equation}
+V(X_{DA}) = g_1 ~ ' ~ TT_{DA} + g_2 ~ ' ~ TC_{DA}
+(\#eq:threefive)
+\end{equation}
+
+\begin{equation}
+V(X_{SR}) = g_1 ~ ' ~ TT_{SR} + g_2 ~ ' ~ TC_{SR}
+(\#eq:threesix)
+\end{equation}
+
+\begin{equation}
+V(X_{TR}) = g_1 ~ ' ~ TT_{TR} + g_2 ~ ' ~ TC_{TR} + g_3 ~ ' ~ FREQ_{TR}
+(\#eq:threeseven)
+\end{equation}
+
+where
+
+$TT_i$                is the travel time for mode $i$ ($i$ = $DA, SR, TR$) and
+            
+$TC_i$                is the travel cost for mode $i$, and
+
+$FREQ_{TR}$           is the frequency for transit services.
+
+Travel time and travel cost are generic; that is, they apply to all alternatives; frequency is specific to transit only. The parameters, $g_k$ , are identical for all the alternatives to which they apply.  This implies that the utility value of travel time and travel cost are identical across alternatives.  The possibility that travel time may be more onerous on Transit than by Drive Alone or Shared Ride could be tested by reformulating the above models to:
 
 That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR,  , and the other for travel time by TR,  .  These parameters could be compared to determine if the differences are statistically significant or large enough to be important.
 
