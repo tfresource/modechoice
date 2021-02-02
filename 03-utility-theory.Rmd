@@ -252,7 +252,7 @@ In this example, $\gamma_1$ represents the utility value of one minute of travel
 
 ## Specification of the Additive Error Term
 
-As described in section 3.3, the utility of each alternative is represented by a deterministic component,  which is represented in the utility function by observed and measured variables,  and an additive error term,    which represents those components of the utility function which are not included in the model.  In the three alternative examples used above, the total utility of each alternative can be represented by:
+As described in section 3.3, the utility of each alternative is represented by a deterministic component,  which is represented in the utility function by observed and measured variables, and an additive error term, $\epsilon_i$ which represents those components of the utility function which are not included in the model.  In the three alternative examples used above, the total utility of each alternative can be represented by:
 
 \begin{equation}
 U_{DA}=V(S_t)+V(X_{DA})+V(S_t,X_{DA})+\epsilon_{DA}
