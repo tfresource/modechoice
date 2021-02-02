@@ -9,7 +9,7 @@ library(tidyverse)
 
 ## Basic Construct of Utility Theory
 
-Utility is an indicator of value to an individual.  Generally, we think about utility as being derived from the attributes of alternatives or sets of alternatives; e.g., the total set of groceries purchased in a week. The utility maximization rule states that an individual will select the alternative from his/her set of available alternatives that maximizes his or her utility.  Further, the rule implies that there is a function containing attributes of alternatives and characteristics of individuals that describes an individual’s utility valuation for each alternative.  The utility function, $U$, has the property that an alternative is chosen if its utility is greater than the utility of all other alternatives in the individual’s choice set.  Alternatively, this can be stated as alternative, $i$, is chosen among a set of alternatives, if and only if the utility of alternative, $i$, is greater than or equal to the utility of all alternatives , $j$, in the choice set, $C$.  This can be expressed mathematically as:
+Utility is an indicator of value to an individual.  Generally, we think about utility as being derived from the attributes of alternatives or sets of alternatives; e.g., the total set of groceries purchased in a week. The utility maximization rule states that an individual will select the alternative from his/her set of available alternatives that maximizes his or her utility.  Further, the rule implies that there is a function containing attributes of alternatives and characteristics of individuals that describes an individual’s utility valuation for each alternative.  The utility function, $U$, has the property that an alternative is chosen if its utility is greater than the utility of all other alternatives in the individual’s choice set.  Alternatively, this can be stated as alternative, $'i'$, is chosen among a set of alternatives, if and only if the utility of alternative, $'i'$, is greater than or equal to the utility of all alternatives , $'j'$, in the choice set, $C$.  This can be expressed mathematically as:
 
 \begin{equation}
   U(X_i,S_t) \geq U(X_j,S_t) \forall j \Rightarrow i \succ j \forall j \in C
@@ -18,7 +18,7 @@ Utility is an indicator of value to an individual.  Generally, we think about ut
 
 where
 
-  - $U(~~~)$ is the mathematical utility function,
+  - $U(~~~)$ is the mathematical utility function, 
   - $X_i,X_j$ are vectors of attributes describing alternatives i and j,
   respectively (e.g., travel time, travel cost, and other relevant attributes of
   the available modes),
@@ -36,7 +36,7 @@ The underlying concept of utility allows us to rank a series of alternatives and
 
 ## Deterministic Choice Concepts
 
-The utility maximization rule, which states that an individual chooses the alternative with the highest utility, implies no uncertainty in the individual’s decision process; that is, the individual is certain to choose the highest ranked alternative under the observed choice conditions. Utility models that yield certain predictions of choice are called deterministic utility models.  The application of deterministic utility to the case of a decision between two alternatives is illustrated in Figure 3.1 that portrays a utility space in which the utilities of alternatives 1 and 2 are plotted along the horizontal and vertical axes, respectively, for each individual.  The 45° line represents those points for which the utilities of the two alternatives are equal. Individuals B, C and D (above the equal-utility line) have higher utility for alternative 2 than for alternative 1 and are certain to choose alternative 2.  Similarly, individuals A, E, and F (below the line) have higher utility for alternative 1 and are certain to choose that alternative.  If deterministic utility models described behavior correctly, we would expect that an individual would make the same choice over time and that similar individuals (individuals having the same individual and household characteristics), would make the same choices when faced with the same set of alternatives.  In practice, however, we observe variations in an individual’s choice and different choices among apparently similar individuals when faced with similar or even identical alternatives.  For example, in studies of work trip mode choice, it is commonly observed that individuals, who are represented as having identical personal characteristics and who face the same sets of travel alternatives, choose different modes of travel to work.  Further, some of these individuals vary their choices from day to day for no observable reason resulting in observed choices which appear to contradict the utility evaluations; that is, person A may choose Alternative 2 even though $U_1 > U_2$  or person C may choose Alternative 2 even though $U_2 > U_1$ .  These observations raise questions about the appropriateness of deterministic utility models for modeling travel or other human behavior. The challenge is to develop a model structure that provides a reasonable representation of these unexplained variations in travel behavior.
+The utility maximization rule, which states that an individual chooses the alternative with the highest utility, implies no uncertainty in the individual’s decision process; that is, the individual is certain to choose the highest ranked alternative under the observed choice conditions. Utility models that yield certain predictions of choice are called deterministic utility models.  The application of deterministic utility to the case of a decision between two alternatives is illustrated in Figure \@ref(fig:detchoice) that portrays a utility space in which the utilities of alternatives 1 and 2 are plotted along the horizontal and vertical axes, respectively, for each individual.  The 45° line represents those points for which the utilities of the two alternatives are equal. Individuals B, C and D (above the equal-utility line) have higher utility for alternative 2 than for alternative 1 and are certain to choose alternative 2.  Similarly, individuals A, E, and F (below the line) have higher utility for alternative 1 and are certain to choose that alternative.  If deterministic utility models described behavior correctly, we would expect that an individual would make the same choice over time and that similar individuals (individuals having the same individual and household characteristics), would make the same choices when faced with the same set of alternatives.  In practice, however, we observe variations in an individual’s choice and different choices among apparently similar individuals when faced with similar or even identical alternatives.  For example, in studies of work trip mode choice, it is commonly observed that individuals, who are represented as having identical personal characteristics and who face the same sets of travel alternatives, choose different modes of travel to work.  Further, some of these individuals vary their choices from day to day for no observable reason resulting in observed choices which appear to contradict the utility evaluations; that is, person A may choose Alternative 2 even though $U_1 > U_2$  or person C may choose Alternative 2 even though $U_2 > U_1$ .  These observations raise questions about the appropriateness of deterministic utility models for modeling travel or other human behavior. The challenge is to develop a model structure that provides a reasonable representation of these unexplained variations in travel behavior.
 
 
 
@@ -119,13 +119,13 @@ The utility component associated exclusively with alternatives includes variable
 These measures differ across alternatives for the same individual and also among individuals due to differences in the origin and destination locations of each person’s travel.  For example, this portion of the utility function could look like:
 
 \begin{equation}
-V(X_i) = g_1 ~ ' ~ X_{i1} + g_2 ~ ' ~ X_{i2} + L + g_k ~ ' ~ X_{ik}
+V(X_i) = γ_1 ~ ' ~ X_{i1} + γ_2 ~ ' ~ X_{i2} + L + γ_k ~ ' ~ X_{ik}
 (\#eq:threefour)
 \end{equation}
 
 where
 
-  - $g_k$ is the parameter which defines the direction and importance of the  
+  - $γ_k$ is the parameter which defines the direction and importance of the  
     effect of attribute $k$ on the utility of an alternative and
   - $X_{ik}$ is the value of attribute $k$ for alternative $i$.
 
@@ -154,7 +154,7 @@ where
 
 Travel time and travel cost are generic; that is, they apply to all alternatives; frequency is specific to transit only. The parameters, $g_k$ , are identical for all the alternatives to which they apply.  This implies that the utility value of travel time and travel cost are identical across alternatives.  The possibility that travel time may be more onerous on Transit than by Drive Alone or Shared Ride could be tested by reformulating the above models to:
 
-That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR,  , and the other for travel time by TR,  .  These parameters could be compared to determine if the differences are statistically significant or large enough to be important.
+That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR,  , and the other for travel time by TR, $g_{11}$ .  These parameters could be compared to determine if the differences are statistically significant or large enough to be important.
 
 ### Utility 'Biases' Due to Excluded Variables
 
