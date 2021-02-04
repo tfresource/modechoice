@@ -1,4 +1,10 @@
 # Data Assembly and Estimation of Simple Multinomial Logit Models
+```{r setup}
+library(tidyverse)
+library(haven)
+library(mlogit)
+```
+
 
 ## Introduction
 
@@ -7,10 +13,36 @@
 
 ## Sources and Methods for Traveler and Trip Related Data Collection
 
+```{r llcll0}
+data("Fishing", package = "mlogit")
+Fish <- dfidx(Fishing, varying = 2:9, shape = "wide", choice = "mode")
+
+mnl <- mlogit(mode ~ price + catch, data = Fish)
+
+ll0 <- nrow(Fish) * log(1 / 4)
+llC <- sum(mnl$freq * log(mnl$freq / sum(mnl$freq)))
+
+rhoc <- 1 - logLik(mnl) / llC
+rho0 <- 1 - logLik(mnl) / ll0
+```
+
 
 ## Methods for Collecting Mode Related Data
 
 ## Data STructure for Estimation
+
+```{r loaddata}
+# Read in raw SPSS file from Laurie Garrow's Dropbox
+sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.sav")
+
+# Convert into mlogit dfidx data frame
+#   mlogit 
+sf_mlogit <- dfidx(sfwork_mode)
+
+# write to data/ folder for future use
+write_rds("data/sfwork_logit.rds")
+```
+
 
 
 ## Application Data for Work Mode Choice in the San Francisco Bay Area
