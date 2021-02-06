@@ -246,13 +246,25 @@ The inclusion of travel time and travel cost variables induces a change in the a
 
 To illustrate the application of the multinomial logit model for the above utility equation, we assume travel time and travel cost values as follows:
 
-
+| Mode        | Travel Time | Travel Cost |
+|:------------|:------------|:------------|
+| Drive Alone | 25 minutes  | $1.75       |
+| Shared Ride | 28 minutes  | $0.75       |
+| TRansit     | 55 minutes  | $1.25       |
 
 The utilities and probabilities are calculated as shown in Table 4.9.
 
 
 
 This specification can be refined further by decomposing travel time into its two major components: (1) in-vehicle travel time, and (2) out-of-vehicle travel time.  In-vehicle time (IVT) is defined as the time spent inside the vehicle, and out-of-vehicle time (OVT) is the time not spent inside the vehicle (including access time, waiting time, and egress time).  There is an abundance of empirical evidence that travelers are much more sensitive to out-of-vehicle time than to in-vehicle time and therefore a minute of out-of-vehicle time will generate a higher disutility than a minute of in-vehicle time.  This will be reflected in the modal utilities by a larger negative coefficient on out-of-vehicle time than on in-vehicle time.  Introduction of this refinement will usually result in a less negative parameter for in vehicle time and a more negative parameter for out of vehicle time than for total time; say -0.031 and -0.062, respectively.  If the travel times are split as follows:
+
+| Mode        | IVT         | OVT         | Travel Cost |
+|:------------|:------------|:------------|:------------|
+| Drive Alone | 21 minutes  | 4 minutes   | $1.75       |
+| Shared Ride | 23 minutes  | 5 minutes   | $0.75       |
+| Bus         | 25 minutes  | 30 minutes  | $1.25       |
+
+the new systematic utilities and choice probabilities are as computed in Table 4-10:
 
 
 
@@ -462,7 +474,11 @@ Suppose a logit model of binary choice between car and bus is to be estimated.  
 
 Suppose that the estimation sample consists of observations of mode choice of only three individuals.  The modal travel times and observed choice for each of the three individuals in the sample is as follows:
 
-
+| Individual # | Auto Travel Time | Bus Travel Time | Chosen Mode  |
+|:------------:|:----------------:|:---------------:|:------------:|
+| 1            | 30 minutes       | 50 minutes      | Car (mode 1) |
+| 2            | 20 minutes       | 10 minutes      | Car (mode 2) |
+| 3            | 40 minutes       | 30 minutes      | Bus (mode 2) |
 
 According to the logit model, the probabilities for the observed mode for each individual are:
 
