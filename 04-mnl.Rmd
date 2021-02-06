@@ -423,21 +423,34 @@ The values of the parameters which maximize the likelihood function are obtained
 
 Further development of the derivative requires representation of the probability function, , expanded from the version that appears in Equation 4.5 is
 
+\begin{equation}
+P_{jt}= \frac{exp({X'}_{jt}\beta)}{\sum_{j'}exp({X'}_{jt}\beta)}
+(\#eq:pjtexpansion)
+\end{equation}
 
+and the first derivative with respect to each element of $\beta$ is 
 
-and the first derivative with respect to each element of   is 
+\begin{equation}
+\frac{\partial P_{jt}}{\partial \beta_k} = P_{jt}\left({X'}_{jkt}-\sum_{j'}P_{j't}X_{j'kt}\right)   \forall k
+(\#eq:deriv1beta)
+\end{equation}
 
+Substituting Equation \@ref(eq:deriv1beta) into Equation 4.64 gives
 
+\begin{equation}
+\frac{\partial (LL)}{\partial \beta_k} = \sum_{\forall t \in T} \sum_{\forall j \in J} \delta_{jt} \left({X'}_{jt} - \sum_{j't} P_{j't}X_{j't} \right) \\
+= \sum_{\forall t \in T} \sum_{\forall j \in J} (\delta_{jt} - P_{j't}) {X'}_{jt}   \forall k
+(\#eq:dLLdBetak2)
+\end{equation}
 
-Substituting Equation 4.66 into Equation 4.64 gives
+for the derivative of the log-likelihood with respect to  $\beta_k$. The maximum likelihood is obtained by setting Equation \@ref(eq:dLLdBetak2) equal to zero and solving for the best values of the parameter vector, $\hat{\beta}$. We can be sure this is the solution for a maximum value provided that the second derivative is negative definite.  In this case, the second derivative of the log-likelihood with respect to $\beta$ is 
 
+\begin{equation}
+\frac{\partial^2 (LL)}{\partial \beta \partial \beta'} = \sum_{\forall t \in T} \sum_{\forall j \in J} - P_{j't}({X'}_{jt}-\overline{X}_t)({X'}_{jt}-\overline{X}_t)'
+(\#eq:d2LLdBeta)
+\end{equation}
 
-
-for the derivative of the log-likelihood with respect to  . The maximum likelihood is obtained by setting Equation 4.67 equal to zero and solving for the best values of the parameter vector,  . We can be sure this is the solution for a maximum value provided that the second derivative is negative definite.  In this case, the second derivative of the log-likelihood with respect to   is 
-
-
-
-is negative definite for all values of  .  Equations 4.67 and 4.68 are used to solve the maximum likelihood problem using a variety of available algorithms.   In most practical problems, this involves significant computations and specialized computer programs to find the desired solution.  
+is negative definite for all values of $\beta$.  Equations \@ref(eq:dLLdBetak2) and \@ref(eq:d2LLdBeta) are used to solve the maximum likelihood problem using a variety of available algorithms.   In most practical problems, this involves significant computations and specialized computer programs to find the desired solution.  
 
 The following example illustrates the application of maximum likelihood to estimate logit model parameters.
 
