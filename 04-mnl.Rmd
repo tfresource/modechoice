@@ -9,7 +9,7 @@ library(tidyverse)
 
 The mathematical form of a discrete choice model is determined by the assumptions made regarding the error components of the utility function for each alternative as described in section 3.5.  The specific assumptions that lead to the Multinomial Logit Model are (1) the error components are extreme-value (or Gumbel) distributed, (2) the error components are identically and independently distributed across alternatives, and (3) the error components are identically and independently distributed across observations/individuals.  We discuss each of these assumptions below.
 
-The most common assumption for error distributions in the statistical and modeling literature is that errors are distributed normally.  There are good theoretical and practical reasons for using the normal distribution for many modeling applications.  However, in the case of choice models the normal distribution assumption for error terms leads to the Multinomial Probit Model (MNP) which has some properties that make it difficult to use in choice analysis .  The Gumbel distribution is selected because it has computational advantages in a context where maximization is important, closely approximates the normal distribution (see Figure 4.1 and Figure 4.2) and produces a closed-form  probabilistic choice model.
+The most common assumption for error distributions in the statistical and modeling literature is that errors are distributed normally.  There are good theoretical and practical reasons for using the normal distribution for many modeling applications.  However, in the case of choice models the normal distribution assumption for error terms leads to the Multinomial Probit Model (MNP) which has some properties that make it difficult to use in choice analysis.[^numericalproblems]  The Gumbel distribution is selected because it has computational advantages in a context where maximization is important, closely approximates the normal distribution (see Figure 4.1 and Figure 4.2) and produces a closed-form[^withoutnumint] probabilistic choice model.
 
 ```{r gumbelpdf, fig.cap="Probability density function for normal and Gumbel distributions."}
 pdf <- tibble(
@@ -127,7 +127,7 @@ A fundamental property of the multinomial logit and other choice models is that 
 
 where *i* is the alternative for which the probabilities are being computed.
 
-Adding   to the systematic components of  ,   and   gives: 
+Adding   to the systematic components of  ,   and   gives[^sumexp]: 
 
 
 
@@ -143,7 +143,7 @@ Similarly, if the utility of each alternative is increased by one, the probabili
 
 
 
-As expected, the choice probabilities are identical to those obtained before the addition of the constant utility to each mode.  The calculations supporting this comparison are shown in Table 4.3 and Table 4.4.  Table 4.3 shows the computation of the choice probabilities based on the initial set of modal utilities and Table 4.4 shows the same computation after each of the utilities is increased by one.
+As expected, the choice probabilities are identical to those obtained before the addition of the constant utility to each mode.  The calculations supporting this comparison are shown in Table 4.3 and Table 4.4.  Table 4.3 shows the computation of the choice probabilities based on the initial set of modal utilities and Table 4.4 shows the same computation after each of the utilities is increased by one.[^illustratecalcs]
 
 
 
@@ -192,6 +192,8 @@ where the constants and income parameters are relative to the Drive Alone altern
 
 These two models are equivalent as shown in Table 4.5 and Table 4.6 which correspond to the TRansit reference and Drive Alone reference examples, respectively, for an individual from a household with $50,000 annual income and facing travel times of 30, 35 and 50 minutes for Drive Alone, Shared Ride and TRansit, respectively.
 
+1.1 + 0.0008 $\times$ 50 [^income1000] - 0.02 $\times$ 30 [^timemin]
+
 
 
 
@@ -224,7 +226,7 @@ On the other hand, the IIA property may not properly reflect the behavioral rela
 
 Consider the case of a commuter who has a choice of going to work by auto or taking a blue bus.  Assume that the attributes of the auto and the blue bus are such that the probability of choosing auto is two-thirds and blue bus is one-third so the ratio of their choice probabilities is 2:1. Now suppose that a competing bus operator introduces red bus service (the bus is painted red, rather than blue) on the same route, operating the same vehicle type, using the same schedule and serving the same stops as the blue bus service.  Thus, the only difference between the red and blue bus services is the color of the buses.   
 
-The most reasonable expectation, in this case, is that the same share of people will choose auto and bus and that the bus riders will split equally between the red and blue bus services. That is, the addition of the red bus to the commuters’ choice set should have no, or very little, effect on the share of commuters choosing auto since this change does not affect the relative quality of drive alone and bus.  Therefore, we expect choice probabilities following the initiation of red bus service to be auto, two-thirds; blue bus, one-sixth and red bus, one-sixth.  However, due to the IIA property, the multinomial logit model will maintain the relative probability of auto and blue bus as 2:1.  If we assume that people are indifferent to color of their transit vehicle, the two bus services will have the same representative utility and consequently, their relative probabilities will be 1:1 and the share probabilities for the three alternatives will be: Pr(Auto) = ½, Pr(Blue Bus) = 1/4, and Pr(Red Bus) = 1/4. That is, the probability (share) of people choosing auto will decline from two-thirds to one half as a result of introducing an alternative which is identical to an existing alternative .  The red bus/blue bus paradox provides an important illustration of the possible consequences of the IIA property. Although this is an extreme case; the IIA property can be a problem in other, less extreme cases.
+The most reasonable expectation, in this case, is that the same share of people will choose auto and bus and that the bus riders will split equally between the red and blue bus services. That is, the addition of the red bus to the commuters’ choice set should have no, or very little, effect on the share of commuters choosing auto since this change does not affect the relative quality of drive alone and bus.  Therefore, we expect choice probabilities following the initiation of red bus service to be auto, two-thirds; blue bus, one-sixth and red bus, one-sixth.  However, due to the IIA property, the multinomial logit model will maintain the relative probability of auto and blue bus as 2:1.  If we assume that people are indifferent to color of their transit vehicle, the two bus services will have the same representative utility and consequently, their relative probabilities will be 1:1 and the share probabilities for the three alternatives will be: Pr(Auto) = ½, Pr(Blue Bus) = 1/4, and Pr(Red Bus) = 1/4. That is, the probability (share) of people choosing auto will decline from two-thirds to one half as a result of introducing an alternative which is identical to an existing alternative[^busfreqincr].  The red bus/blue bus paradox provides an important illustration of the possible consequences of the IIA property. Although this is an extreme case; the IIA property can be a problem in other, less extreme cases.
 
 ## Example: Prediction with Multinomial Logit Model
 
@@ -242,7 +244,7 @@ As expected, Drive Alone has the highest probability, followed by Shared Ride, a
 
 Two key attributes that influence choice of mode are travel time and travel cost.  We include these variables in the deterministic component of the utility function of each mode with the parameter for time (in minutes) equal to -0.045 and for cost (in cents) equal to -0.004 for all three modes, Table 4.9.  This implies that a minute of travel time (or a cent of cost) has the same marginal disutility regardless of the mode; such variables are referred to as generic variables.  The negative signs of the travel time and travel cost coefficients imply that the utility of a mode and the probability that it will be chosen decreases as the travel time or travel cost of that mode increases.  Positive coefficients would be inconsistent with our understanding of travel behavior and therefore any specification which results in a positive sign for travel time or travel cost should be rejected.  Such counter-intuitive results are most likely due to an incorrect or inadequate model specification; however, it is possible that the data from any particular sample leads to such counter-intuitive results.  
 
-The inclusion of travel time and travel cost variables induces a change in the alternative specific constants, to -1.865 for shared ride and -0.650 for transit, as the effect of excluding these time and cost variables is removed from the constants.  Such changes in alternative specific constants, as a result of the introduction of new variables or the elimination of included variables preserve the sample shares  and are expected.
+The inclusion of travel time and travel cost variables induces a change in the alternative specific constants, to -1.865 for shared ride and -0.650 for transit, as the effect of excluding these time and cost variables is removed from the constants.  Such changes in alternative specific constants, as a result of the introduction of new variables or the elimination of included variables preserve the sample shares[^preservation] and are expected.
 
 To illustrate the application of the multinomial logit model for the above utility equation, we assume travel time and travel cost values as follows:
 
@@ -293,7 +295,7 @@ One measure for evaluating the response to changes is to calculate the derivativ
 
 
 
-where
+where $V_i$ is the utility of the alternative.[^derivationTrain]
 
 Typically the utility function is specified to be linear in parameters; that is:
 
@@ -310,6 +312,7 @@ The value of the derivative is largest at   = ½ and becomes smaller as   approa
 Often it is important to understand how the choice probability of other alternatives changes in response to a given change in the attribute level of the action alternative.  This measure, termed the cross derivative, is obtained by computing the derivative of the choice probability of an alternative, , with respect to the attribute of the changed alternative,  .  This cross derivative for linear utility functions is:
 
 
+[^derivationTrain2]
 
 where
 
@@ -385,7 +388,7 @@ where
 	
 	
 	
-That is, the derivative of the probability with respect to a change in income is equal to the probability times the amount by which the income coefficient for that alternative exceeds the probability weighted average income coefficient over all alternatives .
+That is, the derivative of the probability with respect to a change in income is equal to the probability times the amount by which the income coefficient for that alternative exceeds the probability weighted average income coefficient over all alternatives[^comparisondecisionmaker].
 		
 It should be apparent that the sum over all alternatives of the income derivatives must be equal to one to ensure that the total probability over all alternatives is unchanged by any change in income.  This can be shown by summing equation 4.58 over all alternatives in the choice set.
 
@@ -407,7 +410,7 @@ We illustrate the basic concepts of model estimation using a binary choice model
 
 
 
-Let us assume that in this example, bus has higher travel time and lower cost than car.  For a traveler, the choice of travel mode will depend on his/her relative valuation of travel time and travel cost.  A traveler who values time much more than cost will have a higher utility for car; whereas, a traveler who values time less than cost will have a higher utility for bus. This concept is illustrated in Figure 4.5 which shows the time and cost values for auto and bus iso-utility line  for both types of travelers.  When the iso-utility lines are steep enough to ensure that some iso-utility line is below bus and above car (case 1) implying a low value of time, bus will be the chosen mode.  Conversely, if the iso-utility lines are flat enough to ensure that some iso-utility line is below car and above bus (case 2) implying a high value of time, car will be the chosen mode.
+Let us assume that in this example, bus has higher travel time and lower cost than car.  For a traveler, the choice of travel mode will depend on his/her relative valuation of travel time and travel cost.  A traveler who values time much more than cost will have a higher utility for car; whereas, a traveler who values time less than cost will have a higher utility for bus. This concept is illustrated in Figure 4.5 which shows the time and cost values for auto and bus iso-utility line[^isoutilityline] for both types of travelers.  When the iso-utility lines are steep enough to ensure that some iso-utility line is below bus and above car (case 1) implying a low value of time, bus will be the chosen mode.  Conversely, if the iso-utility lines are flat enough to ensure that some iso-utility line is below car and above bus (case 2) implying a high value of time, car will be the chosen mode.
 
 
 
@@ -443,9 +446,10 @@ P_{jt}= \frac{exp({X'}_{jt}\beta)}{\sum_{j'}exp({X'}_{jt}\beta)}
 and the first derivative with respect to each element of $\beta$ is 
 
 \begin{equation}
-\frac{\partial P_{jt}}{\partial \beta_k} = P_{jt}\left({X'}_{jkt}-\sum_{j'}P_{j't}X_{j'kt}\right)   \forall k
+\frac{\partial P_{jt}}{\partial \beta_k} = P_{jt}\left({X'}_{jkt}-\sum_{j'}P_{j't}X_{j'kt}\right)   \forall k  
 (\#eq:deriv1beta)
 \end{equation}
+[^dependencePb]
 
 Substituting Equation \@ref(eq:deriv1beta) into Equation 4.64 gives
 
@@ -496,3 +500,30 @@ Practical applications of logit models include multiple parameters and many obse
 
 
 
+
+
+[^numericalproblems]: These include numerical problems, because the MNP can only be calculated using multi-dimensional integration, and problems of interpretation.  A special case of the MNP, when the error terms are distributed independently (no covariance) and identically (same variance), obtains estimation and prediction results that are very similar to those for the MNL model.
+
+[^withoutnumint]: A model for which the probability can be calculated without use of numerical integration or simulation methods.
+
+[^sumexp]: The exponent of a summation, $exp(A+B)$, is equal to the product of the exponents of the elements in the sum, $exp(A) exp(B)$ .
+
+[^illustratecalcs]: We use tables to illustrate calculation of the utility values and MNL probabilities. The first column shows the specification expression with appropriate values for variables and parameters, the second shows the calculated utility value, the third shows the exponent of the utility including the sum of the exponents, and the fourth shows the probability values.
+
+[^income1000]: Income in thousands of dollars ($000).
+
+[^timemin]: Time in minutes.
+
+[^busfreqincr]: This example ignores the increase in bus service frequency which might increase the probability of persons choosing bus; however, the increase is unlikely to be of the magnitude suggested by the IIA property.
+
+[^preservation]: In this case, we show the preservation of probabilities for the individual.  In general, the individual probabilities are expected to change.
+
+[^derivationTrain]: Interested readers are referred to train (1986) for a derivation and proof.
+
+[^derivationTrain2]: As before, interested readers are referred to Train (1986) for derivation and proof.
+
+[^comparisondecisionmaker]: This comparison is independent of which alternative is chosen as the reference alternative since the effect of changing the reference alternative will be to increase each parameter by the same value.
+
+[^isoutilityline]: Iso-utility lines connect all points for which the values of time and cost result in the same utility.  The slope of these lines equals the inverse of the value of time, $\beta_1/\beta_2$.
+
+[^dependencePb]: Dependence of $P_{j't}$ on $b$ is made implicit to simplify notation.
