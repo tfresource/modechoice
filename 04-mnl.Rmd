@@ -578,7 +578,14 @@ The following example illustrates the application of maximum likelihood to estim
 
 Suppose a logit model of binary choice between car and bus is to be estimated.  For simplicity, let us assume the utility specification includes only the travel time variable and that the deterministic portion of the utility function for the two modes is defined as follows:
 
-
+\begin{equation}
+$\displaystyle V_{Auto} = \beta_{1} \times Travel \ Time_{Auto}$
+(\#eq:Automodes)
+\end{equation}
+\begin{equation}
+$\displaystyle V_{Bus} = \beta_{1} \times Travel \ Time_{Bus}$
+(\#eq:Busmodes)
+\end{equation}
 
 Suppose that the estimation sample consists of observations of mode choice of only three individuals.  The modal travel times and observed choice for each of the three individuals in the sample is as follows:
 
@@ -590,13 +597,31 @@ Suppose that the estimation sample consists of observations of mode choice of on
 
 According to the logit model, the probabilities for the observed mode for each individual are:
 
+\begin{equation}
+$\displaystyle Individual \ 1 \ (P_{11}) = \frac{exp(30\beta)}{exp(50\beta)+exp(30\beta)} = \frac{1}{1+exp(20\beta)}$
+(\#eq:IndividualP11)
+\end{equation}
 
+\begin{equation}
+$\displaystyle Individual \ 2 \ (P_{12}) = \frac{exp(20\beta)}{exp(10\beta)+exp(20\beta)} = \frac{1}{1+exp(-10\beta)}$
+(\#eq:IndividualP12)
+\end{equation}
+
+\begin{equation}
+$\displaystyle Individual \ 3 \ (P_{23}) = \frac{exp(30\beta)}{exp(30\beta)+exp(40\beta)} = \frac{1}{1+exp(10\beta)}$
+(\#eq:IndividualP23)
+\end{equation}
 
 The log-likelihood expression for this sample will be as follows:
 
+\begin{equation}
+$\displaystyle LL = \sum_{j=1,2}\sum_{t=1,2,3}\delta_{jt} \times \ln(P_{jt})$
+$= 1 \times \ln(P_{11}) + 0 \times \ln(P_{21}) + 1 \times \ln(P_{12}) + 0 \times \ln(P_{22}) + 0 \times \ln(P_{13}) +1 \times \ln(P_{23})$
+$= \ln(P_{11})+\ln(P_{12})+\ln(P_{23})$
+(\#eq:LogLikelihood)
+\end{equation}
 
-
-A maximum likelihood estimator finds the value of the parameter   which maximizes the log-likelihood value.  This solution is obtained by setting the first derivative of the log-likelihood function equal to zero, and solving for .  However, for this illustrative example, we can plot the graph for log-likelihood (or likelihood) as a function of   to find the point where the maximum occurs.  Figure 4.7 shows the graph of likelihood and log-likelihood as a function of .  It can be seen that the point where the maximum occurs is identical for both the likelihood and the log-likelihood functions, i.e., at .  This value is called the maximum likelihood estimate of .
+A maximum likelihood estimator finds the value of the parameter $\beta$  which maximizes the log-likelihood value.  This solution is obtained by setting the first derivative of the log-likelihood function equal to zero, and solving for $\hat{\beta}$.  However, for this illustrative example, we can plot the graph for log-likelihood (or likelihood) as a function of $\beta$ to find the point where the maximum occurs.  Figure 4.7 shows the graph of likelihood and log-likelihood as a function of $\beta$.  It can be seen that the point where the maximum occurs is identical for both the likelihood and the log-likelihood functions, $i.$$e.$, at $\beta =  -0.076$.  This value is called the maximum likelihood estimate of $\beta$.
 
 
 
