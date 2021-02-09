@@ -404,7 +404,7 @@ where
 
 
 
-In this case, the sign of the derivative is opposite to the sign of the parameter describing the impact of $X_{ik}$ on the utility of alternative $i$.  Thus an increase in $X_{ik}$ will decrease (increase) the probability of choosing alternative,  , if the parameter   is positive (negative).
+In this case, the sign of the derivative is opposite to the sign of the parameter describing the impact of $X_{ik}$ on the utility of alternative $i$.  Thus an increase in $X_{ik}$ will decrease (increase) the probability of choosing alternative, $P_j$, if the parameter $\beta_k$ is positive (negative).
 
 It is useful to recognize that the sum of the derivatives over all the alternatives must be equal to zero.  That is, 
 
@@ -414,19 +414,19 @@ This is as expected.  Since the sum of all probabilities is fixed at one, the su
 
 ### Elasticities of Choice Probabilities
 
-Elasticity is another measure that is used to quantify the extent to which the choice probabilities of each alternative will change in response to the changes in the value of an attribute.  In general, elasticity is defined as the percentage change in the response variable with respect to a one percent change in an explanatory variable.  In the context of logit models, the response variable is the choice probability of an alternative, such as , and the explanatory variable is the attribute .  Elasticities are different from derivatives in that elasticities are normalized by the variable units.  To clearly illustrate the concept of elasticity, let us consider that   and   are choice probabilities of an alternative i at attribute levels   and , respectively.  In this case, the elasticity is the proportional change in the probability divided by the proportional change in the attribute under consideration:
+Elasticity is another measure that is used to quantify the extent to which the choice probabilities of each alternative will change in response to the changes in the value of an attribute.  In general, elasticity is defined as the percentage change in the response variable with respect to a one percent change in an explanatory variable.  In the context of logit models, the response variable is the choice probability of an alternative, such as $P_i$, and the explanatory variable is the attribute $X_{ik}$.  Elasticities are different from derivatives in that elasticities are normalized by the variable units.  To clearly illustrate the concept of elasticity, let us consider that $P_{i1}$ and $P_{i2}$ are choice probabilities of an alternative $i$ at attribute levels $X_{i1}$ and $X_{i2}$, respectively.  In this case, the elasticity is the proportional change in the probability divided by the proportional change in the attribute under consideration:
 
 
 
-There is some ambiguity in the computation of this elasticity measure in terms of whether it should be normalized using the original probability-attribute combination ( , ) or the new probability-attribute combination ( , ).  A compromise approach is to compute the elasticity relative to the mid-point of both sets of variables, yielding a measure called the arc elasticity.  The expression for arc elasticity is:  
+There is some ambiguity in the computation of this elasticity measure in terms of whether it should be normalized using the original probability-attribute combination ($P_{i1}$, $X_{i1}$) or the new probability-attribute combination ($P_{i2}$, $X_{i2}$).  A compromise approach is to compute the elasticity relative to the mid-point of both sets of variables, yielding a measure called the *arc elasticity*.  The expression for arc elasticity is:  
 
 
 
-Estimates of elasticity will differ depending on whether the normalization is at the start value, final value or mid-point values.  This confusion can be avoided by computing elasticities for very small changes.  When the elasticity is computed for infinitesimally small changes, the elasticity obtained is termed the point elasticity.  The expression for point elasticity is given as a function of the derivatives discussed earlier (section 4.4.1):
+Estimates of elasticity will differ depending on whether the normalization is at the start value, final value or mid-point values.  This confusion can be avoided by computing elasticities for **very small** changes.  When the elasticity is computed for infinitesimally small changes, the elasticity obtained is termed the *point elasticity*.  The expression for point elasticity is given as a function of the derivatives discussed earlier (section 4.4.1):
 
 
 
-We are interested in both direct- and cross-elasticities corresponding to the direct- and cross-derivatives discussed above.  The direct elasticity measures the percent change in the choice probability of alternative,   with respect to a percent change in the attribute level ( ) of that alternative:
+We are interested in both *direct-* and *cross-elasticities* corresponding to the direct- and cross-derivatives discussed above.  The direct elasticity measures the percent change in the choice probability of alternative, $P_i$ with respect to a percent change in the attribute level ($X_{ik}$) of that alternative:
 
 
 
@@ -434,9 +434,9 @@ We can substitute equation 4.45 into 4.51 to obtain the following expression for
 
 
 
-Thus, the direct elasticity is not only a function of the parameter value,  , for the attribute in the utility, but is also a function of the attribute level,  , at which the elasticity is being computed.
+Thus, the direct elasticity is not only a function of the parameter value, $\beta_k$, for the attribute in the utility, but is also a function of the attribute level, $X_{ik}$, at which the elasticity is being computed.
 
-Similarly, the cross-elasticity is defined as the proportional change in the choice probability of an alternative ( ) with respect to a proportional change in some attribute of another alternative ( ).  The expression for cross elasticity in a multinomial logit model is given by:
+Similarly, the cross-elasticity is defined as the proportional change in the choice probability of an alternative ($P_j$) with respect to a proportional change in some attribute of another alternative ($X_{ik}$).  The expression for cross elasticity in a multinomial logit model is given by:
 
 
 
@@ -446,7 +446,7 @@ We substitute equation 4.46 into 4.53 to obtain the following expression for cro
 
 An important property of MNL models is that the cross-elasticities are the same for all the other alternatives in the choice set.  This property of the multinomial logit model is another manifestation of the IIA property discussed in the previous section.
 
-The elasticity expressions derived above are based on the assumption that the independent variables for which the elasticities are being derived are continuous variables (e.g., travel time and travel cost).  However, if the variable of interest is discrete in nature (e.g., number of automobiles in a household), it is not differentiable by definition.  For this reason, derivatives can not be derived for ordinal or categorical variables.  An alternative is to calculate the incremental change is each probability with respect to a one unit change in an ordered variable or a category shift for categorical variables and to use the differences to compute arc elasticities.
+The elasticity expressions derived above are based on the assumption that the independent variables for which the elasticities are being derived are continuous variables (*e.g.*, travel time and travel cost).  However, if the variable of interest is discrete in nature (*e.g.*, number of automobiles in a household), it is not differentiable by definition.  For this reason, derivatives can not be derived for ordinal or categorical variables.  An alternative is to calculate the incremental change is each probability with respect to a one unit change in an ordered variable or a category shift for categorical variables and to use the differences to compute arc elasticities.
 
 ## Measures of Responses to Changes in Decision Maker Characteristics
 
@@ -531,7 +531,7 @@ However, as discussed previously, we expect that the analyst will not know all t
 
 ### Maximum Likelihood Estimation Theory
 
-The procedure for maximum likelihood estimation involves two important steps: 1) developing a joint probability density function of the observed sample, called the likelihood function, and 2) estimating parameter values which maximize the likelihood function.  The likelihood function for a sample of ‘*T*’ individuals, each with ‘*J*’ alternatives is defined as follows:
+The procedure for maximum likelihood estimation involves two important steps: 1) developing a joint probability density function of the observed sample, called the *likelihood function*, and 2) estimating parameter values which maximize the likelihood function.  The likelihood function for a sample of ‘*T*’ individuals, each with ‘*J*’ alternatives is defined as follows:
 
 
 
@@ -539,11 +539,11 @@ where
 
 
 
-The values of the parameters which maximize the likelihood function are obtained by finding the first derivative of the likelihood function and equating it to zero.  Since the log of a function yields the same maximum as the function and is more convenient to differentiate, we maximize the log-likelihood function instead of the likelihood function itself.  The expressions for the log likelihood function and its first derivative are shown in equations 4.63 and 4.64 respectively:
+The values of the parameters which maximize the likelihood function are obtained by finding the first derivative of the likelihood function and equating it to zero.  Since the log of a function yields the same maximum as the function and is more convenient to differentiate, we maximize the *log-likelihood function* instead of the likelihood function itself.  The expressions for the log likelihood function and its first derivative are shown in equations 4.63 and 4.64 respectively:
 
 
 
-Further development of the derivative requires representation of the probability function, , expanded from the version that appears in Equation 4.5 is
+Further development of the derivative requires representation of the probability function, $P_{jt}$, expanded from the version that appears in Equation 4.5 is
 
 \begin{equation}
 P_{jt}= \frac{exp({X'}_{jt}\beta)}{\sum_{j'}exp({X'}_{jt}\beta)}
