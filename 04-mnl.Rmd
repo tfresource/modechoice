@@ -90,6 +90,7 @@ where *i* indicates the alternative for which the probability is being computed.
 This formulation implies that the probability of choosing an alternative increases monotonically with an increase in the systematic utility of that alternative and decreases with increases in the systematic utility of each of the other alternatives.  This is illustrated in Table 4.1 showing the probability of DA as a function of its own utility (with the utilities of other alternatives held constant) and in Table 4.2 as a function of the utility of other alternatives with its own utility fixed.
 
 ```{r dralonefordralone}
+
 tibble(
   case = 1:5,
   vda = c(-3.0, -1.5, 0.0, 1.5, 3.0),
@@ -99,13 +100,25 @@ tibble(
   mutate(
     p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
   ) %>%
-  knitr::kable(  caption = "Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)", 
-                 col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
+  knitr::kable(  
+    caption = "Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)", 
+     col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
 
 ```
 
 ```{r draloneforshrridetransit}
 
+tibble(
+  case = 6:11,
+  vda = 0.0,
+  vsr = c(-1.5, -1.5, -1.5, -0.5, -0.5, -0.5),
+  vtr = c(-1.5, -1.0, -0.5, -1.5, -1.0, -0.5)
+) %>%
+  mutate(
+    p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
+  ) %>%
+  knitr::kable(  caption = "Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties", 
+                 col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
 
 ```
 
