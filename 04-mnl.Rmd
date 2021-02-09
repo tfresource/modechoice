@@ -266,7 +266,6 @@ We illustrate the application of multinomial logit models with different specifi
 The simplest specification of the multinomial logit model is the ‘constants only’ model, in which the utility of each alternative has a fixed value for all decision-makers.  Typically, the alternative specific constants are considered to represent the average effect of all factors that influence the choice but are not included in the utility specification.  For example, factors such as comfort, safety, privacy and reliability may be excluded due to the difficulty associated with their measurement.  In the constants only model, it is implicitly assumed that the constants reflect the average effects of all the variables affecting the choice decision, since no variables are included explicitly in the utility specification.  If these constants are 0.0, -1.6 and -1.8 for drive alone, shared ride and transit, respectively, the probability calculation is as shown in Table 4.8.
 
 
-
 As expected, Drive Alone has the highest probability, followed by Shared Ride, and TRansit.
 
 **Example 2 -- Including Mode Related Variables - Travel Time and Travel Cost**
@@ -283,9 +282,18 @@ To illustrate the application of the multinomial logit model for the above utili
 | Shared Ride | 28 minutes  | $0.75       |
 | TRansit     | 55 minutes  | $1.25       |
 
-The utilities and probabilities are calculated as shown in Table 4.9.
+The utilities and probabilities are calculated as shown in Table 4-9.
 
-
+<center>
+**Table 4-9 MNL Probabilities for Time and Cost Model**
+</center>
+|                |Utility|Utility||
+| -------------- | :----------: | :----------: | :--------: | :-----------: |
+|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
+| Drive Alone    | -0.045x25-0.004X175         | -1.825     |0.1612      |0.7314         |
+| Shared Ride    | -1.865-0.045x28-0.004x75    | -3.425     |0.0325      |0.1477         |
+| TRansit        | -0.650-0.045x55-0.004x125   | -3.625     |0.0266      |0.1209         |
+                                                            | 0.2204     |  
 
 This specification can be refined further by decomposing travel time into its two major components: (1) in-vehicle travel time, and (2) out-of-vehicle travel time.  In-vehicle time (IVT) is defined as the time spent inside the vehicle, and out-of-vehicle time (OVT) is the time not spent inside the vehicle (including access time, waiting time, and egress time).  There is an abundance of empirical evidence that travelers are much more sensitive to out-of-vehicle time than to in-vehicle time and therefore a minute of out-of-vehicle time will generate a higher disutility than a minute of in-vehicle time.  This will be reflected in the modal utilities by a larger negative coefficient on out-of-vehicle time than on in-vehicle time.  Introduction of this refinement will usually result in a less negative parameter for in vehicle time and a more negative parameter for out of vehicle time than for total time; say -0.031 and -0.062, respectively.  If the travel times are split as follows:
 
@@ -297,20 +305,47 @@ This specification can be refined further by decomposing travel time into its tw
 
 the new systematic utilities and choice probabilities are as computed in Table 4-10:
 
-
+<center>
+**Table 4-10 MNL Probabilities for In and Out of Vehicle Time and Cost Model**
+</center>
+|                |Utility|Utility||
+| -------------- | :----------: | :----------: | :--------: | :-----------: |
+|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
+| Drive Alone    | -0.031x21-0.062X4-0.004x175         | -1.599     |0.202      |0.773         |
+| Shared Ride    | -1.90-0.031x23-0.062x5-0.004x75     | -3.223     |0.040      |0.152         |
+| TRansit        | -0.80-0.031x25-0.062x30-0.004x125   | -3.935     |0.020      |0.075         |
+                                                                    |0.261      |  
 
 **Example 3 -- Including Decision-Maker Related Biases - Income**
-The preceding examples do not include any characteristics of the traveler in the modal utilities.  However, we know that choice probabilities of the available modes also depend on characteristics of the traveler, such as his/her income.  Economic theory and empirical evidence suggests that higher income travelers are less likely to choose transit than drive alone or carpool.  We can incorporate this behavior in the model by including an alternative specific income variable in the utility of up to two of the alternatives; in this case, we include income in the transit alternative with a negative coefficient.  That is, everything else held constant, the utility of transit decreases as the income of the traveler increases.  Consequently, a higher income traveler will have a lower probability of choosing transit than a lower income traveler.  The absence of an alternative specific parameter for the carpool alternative implies that the choice of carpool, relative to drive alone, is unaffected by a traveler’s income.  The alternative specific constant of the transit utility changes substantially from the preceding example as it no longer reflects the average effect of excluding income from the transit utility specification.  The calculation of utilities and probabilities for this model for a person from a household with $50,000 annual income is shown in Table 4.11.
+The preceding examples do not include any characteristics of the traveler in the modal utilities.  However, we know that choice probabilities of the available modes also depend on characteristics of the traveler, such as his/her income.  Economic theory and empirical evidence suggests that higher income travelers are less likely to choose transit than drive alone or carpool.  We can incorporate this behavior in the model by including an alternative specific income variable in the utility of up to two of the alternatives; in this case, we include income in the transit alternative with a negative coefficient.  That is, everything else held constant, the utility of transit decreases as the income of the traveler increases.  Consequently, a higher income traveler will have a lower probability of choosing transit than a lower income traveler.  The absence of an alternative specific parameter for the carpool alternative implies that the choice of carpool, relative to drive alone, is unaffected by a traveler’s income.  The alternative specific constant of the transit utility changes substantially from the preceding example as it no longer reflects the average effect of excluding income from the transit utility specification.  The calculation of utilities and probabilities for this model for a person from a household with $50,000 annual income is shown in Table 4-11.
 
-
+<center>
+**Table 4-11 MNL Probabilities for In and Out of Vehicle Time, Cost and Income Model**
+</center>
+|                |Utility|Utility||
+| -------------- | :----------: | :----------: | :--------: | :-----------: |
+|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
+| Drive Alone    | -0.031x21-0.062X4-0.004x175                  | -1.599     |0.202      |0.780         |
+| Shared Ride    | -1.90-0.031x23-0.062x5-0.00x75               | -3.223     |0.040      |0.154         |
+| TRansit        | -0.50-0.031x25-0.062x30-0.004x125-0.0087x50  | -4.070     |0.017      |0.066         |
+                                                                             |0.259      |  
 
 The probability of choosing transit is smaller for this traveler than would have been predicted using the model reported in the preceding example.  This model will give decreasing transit probabilities for higher income travelers and increasing transit probabilities for lower income travelers.  That is, the lower the traveler’s income, the greater his/her probability of choosing the least expensive mode of travel (transit), an intuitive and reasonable result. 
 
 **Example 4 -- Interaction of Mode Attributes and Decision-Maker Related Biases**
 
-An alternative method of including income in the utility specification is to use income as a deflator of cost by forming a variable by dividing cost by income.  This formulation reflects the rationale that cost becomes a less important factor in the choice of a travel mode as the income of the traveler increases.  The revised utility functions and calculations are shown in Table 4 12 using the values for the modal attributes and income as used in preceding example. 
+An alternative method of including income in the utility specification is to use income as a deflator of cost by forming a variable by dividing cost by income.  This formulation reflects the rationale that cost becomes a less important factor in the choice of a travel mode as the income of the traveler increases.  The revised utility functions and calculations are shown in Table 4-12 using the values for the modal attributes and income as used in preceding example. 
 
-
+<center>
+**Table 4-12 MNL Probabilities for In and Out of Vehicle Time, and Cost/Income Model**
+</center>
+|                |Utility|Utility||
+| -------------- | :----------: | :----------: | :--------: | :-----------: |
+|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
+| Drive Alone    | -0.031x21-0.062X4-0.153x(175/50)         | -1.435     |0.238      |0.763         |
+| Shared Ride    | -1.90-0.031x23-0.062x5-0.153x(75/50)     | -3.153     |0.043      |0.137         |
+| TRansit        | -0.45-0.031x25-0.062x30-0.153x(125/50)   | -3.468     |0.031      |0.100         |
+                                                                         |0.312      |  
 
 This specification of income in the utility function also results in lower income travelers predicted to have higher probability of choosing transit; it also suggests that such travelers will increase their probability of choosing carpool, the least expensive mode. The reader should compute the probabilities for different income values and verify the response pattern. 
 
