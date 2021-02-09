@@ -61,7 +61,7 @@ The mean and variance of the distribution are:
 	\begin{equation}
 	Mean = \eta + 
 	
-The second and third assumptions state the location and variance of the distribution just as  and  indicate the location and variance of the normal distribution. We will return to the discussion of the independence between/among alternatives in CHAPTER 8. 
+The second and third assumptions state the location and variance of the distribution just as $\mu$ and $\sigma^2$ indicate the location and variance of the normal distribution. We will return to the discussion of the independence between/among alternatives in CHAPTER 8. 
 	
 The three assumptions, taken together, lead to the mathematical structure known as the Multinomial Logit Model (MNL), which gives the choice probabilities of each alternative as a function of the systematic portion of the utility of all the alternatives.  The general expression for the probability of choosing an alternative ‘*i*’ (*i = 1,2,.., J*) from a set of *J* alternatives is:
 	
@@ -71,9 +71,9 @@ Where
 	
 	
 	
-The exponential function is described in Figure 4.3 which shows the relationship between   and  .  Note that   is always positive and increases monotonically with  .
+The exponential function is described in Figure 4.3 which shows the relationship between $exp(V_i)$ and $V_i$.  Note that $exp(V_i)$ is always positive and increases monotonically with  $V_i$.
 
-```{r viwithexpVi, fig.cap="Relationship Between V_i and Exp(V_i)", include=FALSE}
+```{r viwithexpVi, fig.cap="Relationship Between V_i and Exp(V_i)"}
 
 tibble( x = seq(-3,3,.1), y = exp(x)) %>%
   ggplot(aes(x = x, y = y)) + 
@@ -89,7 +89,7 @@ The multinomial logit (MNL) model has several important properties.  We illustra
 
 
 
-where  ,   , and   are the probabilities of the decision-maker choosing drive alone, shared ride and transit, respectively, and  ,   and   are the systematic components of the utility for drive alone, shared ride, and transit alternatives, respectively.  It is common to replace these three equations by a single general equation to represent the probability of any alternative and to simplify the equation by replacing the explicit summation in the denominator by the summation over alternatives as:
+where $Pr(DA)$, $Pr(SR)$, and $Pr(TR)$ are the probabilities of the decision-maker choosing drive alone, shared ride and transit, respectively, and $V_{DA}$, $V_{SR}$ and $V_{TR}$ are the systematic components of the utility for drive alone, shared ride, and transit alternatives, respectively.  It is common to replace these three equations by a single general equation to represent the probability of any alternative and to simplify the equation by replacing the explicit summation in the denominator by the summation over alternatives as:
 
 
 
@@ -99,7 +99,7 @@ where *i* indicates the alternative for which the probability is being computed.
 
 This formulation implies that the probability of choosing an alternative increases monotonically with an increase in the systematic utility of that alternative and decreases with increases in the systematic utility of each of the other alternatives.  This is illustrated in Table 4.1 showing the probability of DA as a function of its own utility (with the utilities of other alternatives held constant) and in Table 4.2 as a function of the utility of other alternatives with its own utility fixed.
 
-```{r dralonefordralone, include=FALSE}
+```{r dralonefordralone}
 
 tibble(
   case = 1:5,
@@ -116,7 +116,7 @@ tibble(
 
 ```
 
-```{r draloneforshrridetransit, include=FALSE}
+```{r draloneforshrridetransit}
 
 tibble(
   case = 6:11,
@@ -134,11 +134,11 @@ tibble(
 
 
 
-We use this three-alternative example to illustrate three important properties of the MNL: (1) its sigmoid or S shape, (2) dependence of the alternative choice probabilities on the differences in the systematic utility and (3) independence of the ratio of the choice probabilities of any pair of alternatives from the attributes and availability of other alternatives.
+We use this three-alternative example to illustrate three important properties of the MNL: (1) its sigmoid or *S* shape, (2) dependence of the alternative choice probabilities on the differences in the systematic utility and (3) independence of the ratio of the choice probabilities of any pair of alternatives from the attributes and availability of other alternatives.
 
 ### The Sigmoid or S shape of Multinomial Logit Probabilities
 
-The S shape of the MNL probabilities is illustrated in Figure 4.4 where the probability of choosing Drive Alone is shown as a function of its own utility, with the utilities of the other alternatives held constant.  The S-shape limits the probability range between zero when the utility of DA is very low, relative to other alternatives, and one when the utility of DA is very high, relative to other alternatives.  This function has very gradual slope at extreme values of DA utility, relative to the other alternatives, and is much steeper when its utility reaches a value such that its choice probability is close to one-half.  This implies that if the representative utility of one alternative is very low or very high, compared with the others, a small increase in the utility of this alternative will not substantially affect its probability of being chosen.  The point at which an increase in the representative utility of an alternative has the greatest effect on its probability of being chosen (i.e., the point of maximum slope along the curve) is when its representative utility is equivalent to the combined utility of the other alternatives.  When this is true, a small increase in the utility of one alternative can ‘tip the balance’ and induce a large increase in the probability of the alternative being chosen (Train, 1993).
+The *S* shape of the MNL probabilities is illustrated in Figure 4.4 where the probability of choosing Drive Alone is shown as a function of its own utility, with the utilities of the other alternatives held constant.  The *S*-shape limits the probability range between zero when the utility of DA is very low, relative to other alternatives, and one when the utility of DA is very high, relative to other alternatives.  This function has very gradual slope at extreme values of DA utility, relative to the other alternatives, and is much steeper when its utility reaches a value such that its choice probability is close to one-half.  This implies that if the representative utility of one alternative is very low or very high, compared with the others, a small increase in the utility of this alternative will not substantially affect its probability of being chosen.  The point at which an increase in the representative utility of an alternative has the greatest effect on its probability of being chosen (*i.e.*, the point of maximum slope along the curve) is when its representative utility is equivalent to the combined utility of the other alternatives.  When this is true, a small increase in the utility of one alternative can ‘tip the balance’ and induce a large increase in the probability of the alternative being chosen (Train, 1993).
 
 ```{r mnl_prob}
 #' Function to compute mnl probabilities
@@ -172,20 +172,20 @@ ggplot(u %>% gather(Mode, Probability, drive, transit, walk),
 
 ### The Equivalent Differences Property
 
-A fundamental property of the multinomial logit and other choice models is that the choice probabilities of the alternatives depend only on the differences in the systematic utilities of different alternatives and not their actual values.  This can be illustrated in two ways.  First, we show that the choice probability equations are unchanged if the same incremental value, say  , is added to the utility of each alternative.  The original probabilities for the three alternatives in the example are given by:
+A fundamental property of the multinomial logit and other choice models is that the choice probabilities of the alternatives depend only on the differences in the systematic utilities of different alternatives and not their actual values.  This can be illustrated in two ways.  First, we show that the choice probability equations are unchanged if the same incremental value, say $\Delta V$, is added to the utility of each alternative.  The original probabilities for the three alternatives in the example are given by:
 
 
 
 where *i* is the alternative for which the probabilities are being computed.
 
-Adding   to the systematic components of  ,   and   gives[^sumexp]: 
+Adding $\Delta V$ to the systematic components of $V_{DA}$, $V_{SR}$ and $V_{TR}$ gives[^sumexp]: 
 
 
 
 
 
 
-which is the same probability as before   was added to each of the utilities.  This result applies to any value of  .  We also illustrate this property through use of a numerical example for the three alternative choice problem used earlier.  The following equations represent the case when the utility values for Drive Alone, Shared Ride and Transit equal  0.5,  1.5 and  3.0, respectively:  
+which is the same probability as before $\Delta V$ was added to each of the utilities.  This result applies to any value of $\Delta V$.  We also illustrate this property through use of a numerical example for the three alternative choice problem used earlier.  The following equations represent the case when the utility values for Drive Alone, Shared Ride and Transit equal  0.5,  1.5 and  3.0, respectively:  
 
 
 
@@ -203,20 +203,29 @@ As expected, the choice probabilities are identical to those obtained before the
 
 The expression for the probability equation of the logit model (equation 4.9) can also be presented in a different form which makes the equivalent difference property more apparent.  For the drive alone alternative, this expression can be obtained by multiplying the numerator and denominator of the standard probability expression by exp(-VDA) as shown in the following equations.
 
+\begin{equation}
+  Pr(DA) = \frac{exp(V_{DA})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})} \times \frac {exp(-V_{DA})}{exp(-V_{DA})}
+  = \frac {exp(V_{DA})\times exp(-V_{DA})}{[exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})] \times exp(-V_{DA})}
+  = \frac {}
+  (\#eq:fournineteen)
+\end{equation}
 
-
+\begin{equation}
+Pr(Auto) = \frac{exp(V_{Auto})}{exp(V_{Auto})+exp(V_{Bus})+exp(V_{Rail})}
+(\#eq:fourtwenty)
+\end{equation}
 
 which simplifies to: 
 
 
 
 
-This formulation explicitly shows that the probability of the drive alone alternative is a function of the differences in systematic utility between the drive alone alternative and each other alternative.  This can be applied to the general case for alternative i which can be represented in terms of the pairwise difference in its utility and the utility of each of the other alternatives by the following equation:
+This formulation explicitly shows that the probability of the drive alone alternative is a function of the differences in systematic utility between the drive alone alternative and each other alternative.  This can be applied to the general case for alternative $i$ which can be represented in terms of the pairwise difference in its utility and the utility of each of the other alternatives by the following equation:
 
 
-#### Implication of COnstant Differences for Alternative Specific COnstans and Variables
+#### Implication of Constant Differences for Alternative Specific Constants and Variables
 
-The constant difference property of logit models has an important implication for the specification of the utilities of the alternatives.  Recall that the systematic portion of the utility of an individual, ‘t’, and alternative ‘i’ is the sum of decision-maker related bias, mode attribute related utility, and interactions between these.  That is:
+The constant difference property of logit models has an important implication for the specification of the utilities of the alternatives.  Recall that the systematic portion of the utility of an individual, ‘$t$’, and alternative ‘$i$’ is the sum of decision-maker related bias, mode attribute related utility, and interactions between these.  That is:
 
 
 
@@ -228,9 +237,9 @@ and the differences between pairs of alternatives for prediction of DA probabili
 
 
 
-It is not possible to estimate all of the constants;  ,   and  ; and all of the income parameters;  ,   and  ; in these equations because adding any algebraic value to each of the constants or to each of the income parameters does not cause any change in the probabilities of any of the alternatives.  This phenomenon is common to all utility-based choice models and follows directly from the equivalent differences property discussed above.  The solution to this problem is to place a single constraint on each set of parameters; in this case, the constants and the income parameters.  Any constraint can be adopted for each set of parameters; however, the simplest and most widely used is to set the preference related parameters for one alternative, called the base or reference alternative, to zero and to re-interpret the remaining parameters to represent preference differences relative to the base alternative.  
+It is not possible to estimate all of the constants; $\beta_{DA,0}$,  $\beta_{SR,0}$ and $\beta_{TR,0}$; and all of the income parameters; $\beta_{DA,1}$,  $\beta_{SR,1}$ and $\beta_{TR,1}$; in these equations because adding any algebraic value to each of the constants or to each of the income parameters does not cause any change in the probabilities of any of the alternatives.  This phenomenon is common to all utility-based choice models and follows directly from the equivalent differences property discussed above.  The solution to this problem is to place a single constraint on each set of parameters; in this case, the constants and the income parameters.  Any constraint can be adopted for each set of parameters; however, the simplest and most widely used is to set the preference related parameters for one alternative, called the base or reference alternative, to zero and to re-interpret the remaining parameters to represent preference differences relative to the base alternative.  
 
-The selection of the reference alternative is arbitrary and does not affect the overall quality or interpretation of the model; however, the equations and the estimation results will appear to be different.  For example, if we set TRansit as the reference alternative by setting   and   equal to zero, the utility functions become:
+The selection of the reference alternative is arbitrary and does not affect the overall quality or interpretation of the model; however, the equations and the estimation results will appear to be different.  For example, if we set TRansit as the reference alternative by setting $\beta_{TR,0}$ and $\beta_{TR,1}$ equal to zero, the utility functions become:
 
 
 
@@ -338,7 +347,7 @@ As expected, Drive Alone has the highest probability, followed by Shared Ride, a
 
 **Example 2 -- Including Mode Related Variables - Travel Time and Travel Cost**
 
-Two key attributes that influence choice of mode are travel time and travel cost.  We include these variables in the deterministic component of the utility function of each mode with the parameter for time (in minutes) equal to -0.045 and for cost (in cents) equal to -0.004 for all three modes, Table 4.9.  This implies that a minute of travel time (or a cent of cost) has the same marginal disutility regardless of the mode; such variables are referred to as generic variables.  The negative signs of the travel time and travel cost coefficients imply that the utility of a mode and the probability that it will be chosen decreases as the travel time or travel cost of that mode increases.  Positive coefficients would be inconsistent with our understanding of travel behavior and therefore any specification which results in a positive sign for travel time or travel cost should be rejected.  Such counter-intuitive results are most likely due to an incorrect or inadequate model specification; however, it is possible that the data from any particular sample leads to such counter-intuitive results.  
+Two key attributes that influence choice of mode are travel time and travel cost.  We include these variables in the deterministic component of the utility function of each mode with the parameter for time (in minutes) equal to -0.045 and for cost (in cents) equal to -0.004 for all three modes, Table 4.9.  This implies that a minute of travel time (or a cent of cost) has the same marginal disutility regardless of the mode; such variables are referred to as *generic* variables.  The negative signs of the travel time and travel cost coefficients imply that the utility of a mode and the probability that it will be chosen decreases as the travel time or travel cost of that mode increases.  Positive coefficients would be inconsistent with our understanding of travel behavior and therefore any specification which results in a positive sign for travel time or travel cost should be rejected.  Such counter-intuitive results are most likely due to an incorrect or inadequate model specification; however, it is possible that the data from any particular sample leads to such counter-intuitive results.  
 
 The inclusion of travel time and travel cost variables induces a change in the alternative specific constants, to -1.865 for shared ride and -0.650 for transit, as the effect of excluding these time and cost variables is removed from the constants.  Such changes in alternative specific constants, as a result of the introduction of new variables or the elimination of included variables preserve the sample shares[^preservation] and are expected.
 
@@ -387,7 +396,7 @@ Choice probabilities in logit models are a function of the values of the attribu
 
 ### Derivatives of Choice Probabilities 
 
-One measure for evaluating the response to changes is to calculate the derivatives of the choice probabilities of each alternative with respect to the variable in question.  Usually, one is concerned about the change in probability of an alternative, , with respect to the change in attributes of that alternative  .  This measure, the direct derivative, is computed by differentiating   with respect to  , the kth attribute of alternative i.  The mathematical expression for the direct derivative of   with respect to   is:
+One measure for evaluating the response to changes is to calculate the *derivatives* of the choice probabilities of each alternative with respect to the variable in question.  Usually, one is concerned about the change in probability of an alternative, $P_i$, with respect to the change in attributes of that alternative $X_i$.  This measure, the *direct derivative*, is computed by differentiating $P_i$ with respect to $X_{ik}$, the $k^{th}$ attribute of alternative $i$.  The mathematical expression for the *direct derivative* of $P_i$ with respect to $X_{ik}$ is:
 
 
 
@@ -397,15 +406,15 @@ Typically the utility function is specified to be linear in parameters; that is:
 
 
 
-In this case, the expression for the direct derivative of    with respect to   reduces to:
+In this case, the expression for the *direct derivative* of $P_i$ with respect to $X_{ik}$ reduces to:
 
 
 
 where
 
-The value of the derivative is largest at   = ½ and becomes smaller as   approaches zero or one.  This implies that the magnitude of the response to a change in an attribute will be greatest when the choice probability for the alternative under consideration is 0.5 and this response diminishes as the probability approaches zero or one. The direct derivative is simply the slope of the logit model probability curve illustrated in Figure 4.4 and that its mathematical properties are consistent with the qualitative discussion of the S-shape of the logit probability curve in section 4.1.1.  The sign of the derivative is the same as the sign of the parameter describing the impact of   in the utility of alternative i.  Thus, an increase in   will increase (decrease)   if   is positive (negative).
+The value of the derivative is largest at $P_i= ½$ and becomes smaller as $P_i$ approaches zero or one.  This implies that the magnitude of the response to a change in an attribute will be greatest when the choice probability for the alternative under consideration is 0.5 and this response diminishes as the probability approaches zero or one. The direct derivative is simply the slope of the logit model probability curve illustrated in Figure 4.4 and that its mathematical properties are consistent with the qualitative discussion of the *S*-shape of the logit probability curve in section 4.1.1.  The sign of the derivative is the same as the sign of the parameter describing the impact of $X_{ik}$ in the utility of alternative $i$.  Thus, an increase in $X_{ik}$ will increase (decrease) $P_i$ if $\beta_{ik}$ is positive (negative).
 
-Often it is important to understand how the choice probability of other alternatives changes in response to a given change in the attribute level of the action alternative.  This measure, termed the cross derivative, is obtained by computing the derivative of the choice probability of an alternative, , with respect to the attribute of the changed alternative,  .  This cross derivative for linear utility functions is:
+Often it is important to understand how the choice probability of other alternatives changes in response to a given change in the attribute level of the action alternative.  This measure, termed the *cross derivative*, is obtained by computing the derivative of the choice probability of an alternative, $P_j$, with respect to the attribute of the changed alternative, $X_{ik}$.  This *cross derivative* for linear utility functions is:
 
 
 [^derivationTrain2]
@@ -414,7 +423,7 @@ where
 
 
 
-In this case, the sign of the derivative is opposite to the sign of the parameter describing the impact of   on the utility of alternative i.  Thus an increase in   will decrease (increase) the probability of choosing alternative,  , if the parameter   is positive (negative).
+In this case, the sign of the derivative is opposite to the sign of the parameter describing the impact of $X_{ik}$ on the utility of alternative $i$.  Thus an increase in $X_{ik}$ will decrease (increase) the probability of choosing alternative, $P_j$, if the parameter $\beta_k$ is positive (negative).
 
 It is useful to recognize that the sum of the derivatives over all the alternatives must be equal to zero.  That is, 
 
@@ -424,19 +433,19 @@ This is as expected.  Since the sum of all probabilities is fixed at one, the su
 
 ### Elasticities of Choice Probabilities
 
-Elasticity is another measure that is used to quantify the extent to which the choice probabilities of each alternative will change in response to the changes in the value of an attribute.  In general, elasticity is defined as the percentage change in the response variable with respect to a one percent change in an explanatory variable.  In the context of logit models, the response variable is the choice probability of an alternative, such as , and the explanatory variable is the attribute .  Elasticities are different from derivatives in that elasticities are normalized by the variable units.  To clearly illustrate the concept of elasticity, let us consider that   and   are choice probabilities of an alternative i at attribute levels   and , respectively.  In this case, the elasticity is the proportional change in the probability divided by the proportional change in the attribute under consideration:
+Elasticity is another measure that is used to quantify the extent to which the choice probabilities of each alternative will change in response to the changes in the value of an attribute.  In general, elasticity is defined as the percentage change in the response variable with respect to a one percent change in an explanatory variable.  In the context of logit models, the response variable is the choice probability of an alternative, such as $P_i$, and the explanatory variable is the attribute $X_{ik}$.  Elasticities are different from derivatives in that elasticities are normalized by the variable units.  To clearly illustrate the concept of elasticity, let us consider that $P_{i1}$ and $P_{i2}$ are choice probabilities of an alternative $i$ at attribute levels $X_{i1}$ and $X_{i2}$, respectively.  In this case, the elasticity is the proportional change in the probability divided by the proportional change in the attribute under consideration:
 
 
 
-There is some ambiguity in the computation of this elasticity measure in terms of whether it should be normalized using the original probability-attribute combination ( , ) or the new probability-attribute combination ( , ).  A compromise approach is to compute the elasticity relative to the mid-point of both sets of variables, yielding a measure called the arc elasticity.  The expression for arc elasticity is:  
+There is some ambiguity in the computation of this elasticity measure in terms of whether it should be normalized using the original probability-attribute combination ($P_{i1}$, $X_{i1}$) or the new probability-attribute combination ($P_{i2}$, $X_{i2}$).  A compromise approach is to compute the elasticity relative to the mid-point of both sets of variables, yielding a measure called the *arc elasticity*.  The expression for arc elasticity is:  
 
 
 
-Estimates of elasticity will differ depending on whether the normalization is at the start value, final value or mid-point values.  This confusion can be avoided by computing elasticities for very small changes.  When the elasticity is computed for infinitesimally small changes, the elasticity obtained is termed the point elasticity.  The expression for point elasticity is given as a function of the derivatives discussed earlier (section 4.4.1):
+Estimates of elasticity will differ depending on whether the normalization is at the start value, final value or mid-point values.  This confusion can be avoided by computing elasticities for **very small** changes.  When the elasticity is computed for infinitesimally small changes, the elasticity obtained is termed the *point elasticity*.  The expression for point elasticity is given as a function of the derivatives discussed earlier (section 4.4.1):
 
 
 
-We are interested in both direct- and cross-elasticities corresponding to the direct- and cross-derivatives discussed above.  The direct elasticity measures the percent change in the choice probability of alternative,   with respect to a percent change in the attribute level ( ) of that alternative:
+We are interested in both *direct-* and *cross-elasticities* corresponding to the direct- and cross-derivatives discussed above.  The direct elasticity measures the percent change in the choice probability of alternative, $P_i$ with respect to a percent change in the attribute level ($X_{ik}$) of that alternative:
 
 
 
@@ -444,9 +453,9 @@ We can substitute equation 4.45 into 4.51 to obtain the following expression for
 
 
 
-Thus, the direct elasticity is not only a function of the parameter value,  , for the attribute in the utility, but is also a function of the attribute level,  , at which the elasticity is being computed.
+Thus, the direct elasticity is not only a function of the parameter value, $\beta_k$, for the attribute in the utility, but is also a function of the attribute level, $X_{ik}$, at which the elasticity is being computed.
 
-Similarly, the cross-elasticity is defined as the proportional change in the choice probability of an alternative ( ) with respect to a proportional change in some attribute of another alternative ( ).  The expression for cross elasticity in a multinomial logit model is given by:
+Similarly, the cross-elasticity is defined as the proportional change in the choice probability of an alternative ($P_j$) with respect to a proportional change in some attribute of another alternative ($X_{ik}$).  The expression for cross elasticity in a multinomial logit model is given by:
 
 
 
@@ -456,7 +465,7 @@ We substitute equation 4.46 into 4.53 to obtain the following expression for cro
 
 An important property of MNL models is that the cross-elasticities are the same for all the other alternatives in the choice set.  This property of the multinomial logit model is another manifestation of the IIA property discussed in the previous section.
 
-The elasticity expressions derived above are based on the assumption that the independent variables for which the elasticities are being derived are continuous variables (e.g., travel time and travel cost).  However, if the variable of interest is discrete in nature (e.g., number of automobiles in a household), it is not differentiable by definition.  For this reason, derivatives can not be derived for ordinal or categorical variables.  An alternative is to calculate the incremental change is each probability with respect to a one unit change in an ordered variable or a category shift for categorical variables and to use the differences to compute arc elasticities.
+The elasticity expressions derived above are based on the assumption that the independent variables for which the elasticities are being derived are continuous variables (*e.g.*, travel time and travel cost).  However, if the variable of interest is discrete in nature (*e.g.*, number of automobiles in a household), it is not differentiable by definition.  For this reason, derivatives can not be derived for ordinal or categorical variables.  An alternative is to calculate the incremental change is each probability with respect to a one unit change in an ordered variable or a category shift for categorical variables and to use the differences to compute arc elasticities.
 
 ## Measures of Responses to Changes in Decision Maker Characteristics
 
@@ -541,7 +550,7 @@ However, as discussed previously, we expect that the analyst will not know all t
 
 ### Maximum Likelihood Estimation Theory
 
-The procedure for maximum likelihood estimation involves two important steps: 1) developing a joint probability density function of the observed sample, called the likelihood function, and 2) estimating parameter values which maximize the likelihood function.  The likelihood function for a sample of ‘*T*’ individuals, each with ‘*J*’ alternatives is defined as follows:
+The procedure for maximum likelihood estimation involves two important steps: 1) developing a joint probability density function of the observed sample, called the *likelihood function*, and 2) estimating parameter values which maximize the likelihood function.  The likelihood function for a sample of ‘*T*’ individuals, each with ‘*J*’ alternatives is defined as follows:
 
 
 
@@ -549,11 +558,11 @@ where
 
 
 
-The values of the parameters which maximize the likelihood function are obtained by finding the first derivative of the likelihood function and equating it to zero.  Since the log of a function yields the same maximum as the function and is more convenient to differentiate, we maximize the log-likelihood function instead of the likelihood function itself.  The expressions for the log likelihood function and its first derivative are shown in equations 4.63 and 4.64 respectively:
+The values of the parameters which maximize the likelihood function are obtained by finding the first derivative of the likelihood function and equating it to zero.  Since the log of a function yields the same maximum as the function and is more convenient to differentiate, we maximize the *log-likelihood function* instead of the likelihood function itself.  The expressions for the log likelihood function and its first derivative are shown in equations 4.63 and 4.64 respectively:
 
 
 
-Further development of the derivative requires representation of the probability function, , expanded from the version that appears in Equation 4.5 is
+Further development of the derivative requires representation of the probability function, $P_{jt}$, expanded from the version that appears in Equation 4.5 is
 
 \begin{equation}
 P_{jt}= \frac{exp({X'}_{jt}\beta)}{\sum_{j'}exp({X'}_{jt}\beta)}
