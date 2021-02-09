@@ -63,18 +63,13 @@ Where
 	
 The exponential function is described in Figure 4.3 which shows the relationship between $exp(V_i)$ and $V_i$.  Note that $exp(V_i)$ is always positive and increases monotonically with  $V_i$.
 
-```{r v_iwithexp(V_i)}
+```{r viwithexpVi, fig.cap="Relationship Between V_i and Exp(V_i)"}
 
-tibble( %>%
+tibble( x = seq(-3,3,.1), y = exp(x)) %>%
   ggplot(aes(x = x, y = y)) + 
-  geom_point() + 
+  geom_line() + 
   xlab("V_i") + 
-  ylab("Exp(V_i)") +
-  geom_abline(slope = x, intercept = 1) + 
-  geom_label() + 
-  scale_x_continuous(limits = c(-3,3)) + 
-  scale_y_continuous(limits = c(-5,25))
-)
+  ylab("Exp(V_i)") 
 
 ```
 
@@ -96,17 +91,34 @@ This formulation implies that the probability of choosing an alternative increas
 
 ```{r dralonefordralone}
 
-knitr::kable(
-  head("Case", "V_(DA)", "V_(SR)", "V_(TR)", "Pr(DA)"),
-  
-  caption = "Probability Values fo Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)"
-  
-)
+tibble(
+  case = 1:5,
+  vda = c(-3.0, -1.5, 0.0, 1.5, 3.0),
+  vsr = -1.5,
+  vtr = -0.5
+) %>%
+  mutate(
+    p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
+  ) %>%
+  knitr::kable(  
+    caption = "Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)", 
+     col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
 
 ```
 
 ```{r draloneforshrridetransit}
 
+tibble(
+  case = 6:11,
+  vda = 0.0,
+  vsr = c(-1.5, -1.5, -1.5, -0.5, -0.5, -0.5),
+  vtr = c(-1.5, -1.0, -0.5, -1.5, -1.0, -0.5)
+) %>%
+  mutate(
+    p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
+  ) %>%
+  knitr::kable(  caption = "Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties", 
+                 col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
 
 ```
 
