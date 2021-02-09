@@ -58,32 +58,32 @@ ggplot(cdf %>% gather(key = "Distribution", value = "Probability", -x),
 The Gumbel has the following cumulative distribution and probability density
 functions:
 
-	\begin{equation}
-  F(\epsilon) = exp{exp[-\mu(\Epsilon-\eta)]}
+\begin{equation}
+  F(\epsilon) = \exp\left[\exp[-\mu(\epsilon-\eta)]\right]
   (\#eq:gumbelcumdist)
-  \end{equation}
+\end{equation}
   
-  \begin{equation}
-  f(\epsilon) = \mu %*% {exp[-\mu(\Epsilon-\eta)]} %*% exp{-exp[-\mu(\Epsilon-\eta)]}
+\begin{equation}
+  f(\epsilon) = \mu \times \left[\exp[-\mu(\epsilon-\eta)]\right] \times \exp\left[-\exp[-\mu(\epsilon-\eta)]\right]
   (\#eq:gumbelprobdens)
-  \end{equation}
+\end{equation}
 	
 where
 	
-	- $\mu$ is the scale parameter which determines the variance of the        distribution and
+  - $\mu$ is the scale parameter which determines the variance of the distribution and
   - $\eta$ is the location (mode) parameter.
 	
 The mean and variance of the distribution are:
 	
-	\begin{equation}
-	Mean = \eta + \frac{0.577}{\mu}
-	(\#eq:meandistribution)
-	\end{equation}
+\begin{equation}
+  Mean = \eta + \frac{0.577}{\mu}
+  (\#eq:meandistribution)
+\end{equation}
 	
-	\begin{equation}
-	Variance = \frac{\pi^2}{6\mu^2}
-	(\#eq:variancedistribution)
-	\end{equation}
+\begin{equation}
+  Variance = \frac{\pi^2}{6\mu^2}
+  (\#eq:variancedistribution)
+\end{equation}
 	
 	
 The second and third assumptions state the location and variance of the
@@ -97,17 +97,23 @@ each alternative as a function of the systematic portion of the utility of all
 the alternatives.  The general expression for the probability of choosing an
 alternative ‘*i*’ (*i = 1,2,.., J*) from a set of *J* alternatives is:
 	
+\begin{equation}
+  Pr(i) = \frac{exp(V_i)}{\sum_{j=1}^{J}exp(V_j)}
+  (\#eq:mnl)
+\end{equation}
 	
 	
 Where
 	
+  - $Pr(i)$ is the probability of the decision-make choosing alternative *i* and
+  - $V_j$ is the systematic component of the utility of alternative *j*.
 	
 	
 The exponential function is described in Figure 4.3 which shows the relationship
 between $exp(V_i)$ and $V_i$.  Note that $exp(V_i)$ is always positive and
 increases monotonically with  $V_i$.
 
-```{r viwithexpVi, fig.cap="Relationship Between V_i and Exp(V_i)"}
+```{r viwithexpVi, fig.cap="Relationship Between V_i and Exp(V_i)", include = FALSE}
 
 tibble( x = seq(-3,3,.1), y = exp(x)) %>%
   ggplot(aes(x = x, y = y)) + 
@@ -117,15 +123,16 @@ tibble( x = seq(-3,3,.1), y = exp(x)) %>%
 
 ```
 
-
-	
 The multinomial logit (MNL) model has several important properties.  We
 illustrate these for a case in which the decision maker has three available
 alternatives:  Drive Alone (DA), Shared Ride (SR), and TRansit (TR).  The
 probabilities of each alternative are given by modifying equation 4.5 for each
 alternative to obtain:
 
-
+\begin{equation}
+  Pr(DA) = \frac{exp(V_DA)}{exp(V_DA) \plus exp(V_SR) \plus exp(V_TR)}
+  (\#eq:prDAformnl)
+\end{equation}
 
 where $Pr(DA)$, $Pr(SR)$, and $Pr(TR)$ are the probabilities of the
 decision-maker choosing drive alone, shared ride and transit, respectively, and
@@ -149,7 +156,7 @@ probability of DA as a function of its own utility (with the utilities of other
 alternatives held constant) and in Table 4.2 as a function of the utility of
 other alternatives with its own utility fixed.
 
-```{r dralonefordralone}
+```{r dralonefordralone, include = FALSE}
 
 tibble(
   case = 1:5,
@@ -166,7 +173,7 @@ tibble(
 
 ```
 
-```{r draloneforshrridetransit}
+```{r draloneforshrridetransit, include= FALSE}
 
 tibble(
   case = 6:11,
