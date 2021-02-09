@@ -342,10 +342,10 @@ An alternative method of including income in the utility specification is to use
 |                |Utility|Utility||
 | -------------- | :----------: | :----------: | :--------: | :-----------: |
 |**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | -0.031x21-0.062X4-0.153x(175/50)         | -1.435     |0.238      |0.763         |
-| Shared Ride    | -1.90-0.031x23-0.062x5-0.153x(75/50)     | -3.153     |0.043      |0.137         |
-| TRansit        | -0.45-0.031x25-0.062x30-0.153x(125/50)   | -3.468     |0.031      |0.100         |
-                                                                         |0.312      |  
+| Drive Alone    | -0.031x21-0.062X4-0.153x(175/50)         | -1.435    |0.238      |0.763         |
+| Shared Ride    | -1.90-0.031x23-0.062x5-0.153x(75/50)     | -3.153    |0.043      |0.137         |
+| TRansit        | -0.45-0.031x25-0.062x30-0.153x(125/50)   | -3.468    |0.031      |0.100         |
+                                                                        |0.312      |  
 
 This specification of income in the utility function also results in lower income travelers predicted to have higher probability of choosing transit; it also suggests that such travelers will increase their probability of choosing carpool, the least expensive mode. The reader should compute the probabilities for different income values and verify the response pattern. 
 
