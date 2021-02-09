@@ -227,22 +227,59 @@ These two models are equivalent as shown in Table 4.5 and Table 4.6 which corres
 
 As expected, the resultant probabilities are identical in both cases.  Table 4 7 shows that the differences in the alternative specific constants and income parameters between alternatives are the same for the TRansit base case and the Drive Alone base case.
 
-
+<center>
+**Table 4-7 Changes in Alternative Specific Constants and Income Parameters**
+</center>
+|                |TRansit as Base Alternative ||Change in Parameters  ||Drive Alone as Base Alternative||
+| -------------- | :----------: | :----------: | :--------: | :------: | :----------: | :-------------: |
+|**Alternative** |**Constant**  |**Income**    |**Constant**|**Income**|**Constant**  |**Income**       |
+| Drive Alone    | 1.1          | 0.008        |-1.1        |-0.008    |0.0           |0.000            |
+| Shared Ride    | 0.8          | 0.006        |-1.1        |-0.008    |-0.3          |-0.002           |
+| TRansit        | 0.0          | 0.000        |-1.1        |-0.008    |-1.1          |-0.008           |
 
 
 ## Independence of Irrelevant Alternatives Property
 
 One of the most widely discussed aspects of the multinomial logit model is its independence from irrelevant alternatives (IIA) property.  The IIA property states that for any individual, the ratio of the probabilities of choosing two alternatives is independent of the presence or attributes of any other alternative.  The premise is that other alternatives are irrelevant to the decision of choosing between the two alternatives in the pair.  To illustrate this, consider a multinomial logit model for the choice among three intercity travel modes – automobile, rail, and bus.  The probability of choosing automobile, rail and bus are: 
 
+\begin{equation}
+Pr(Auto) = \frac{exp(V_{Auto})}{exp(V_{Auto})+exp(V_{Bus})+exp(V_{Rail})}
+(\#eq:probchooseauto)
+\end{equation}
 
+\begin{equation}
+Pr(Bus) = \frac{exp(V_{Bus})}{exp(V_{Auto})+exp(V_{Bus})+exp(V_{Rail})}
+(\#eq:probchoosebus)
+\end{equation}
+
+\begin{equation}
+Pr(Rail) = \frac{exp(V_{Rail})}{exp(V_{Auto})+exp(V_{Bus})+exp(V_{Rail})}
+(\#eq:probchooserail)
+\end{equation}
 
 The ratios of each pair of probabilities are:
 
+\begin{equation}
+\frac{Pr(Auto)}{Pr(Bus)} = \frac{exp(V_{Auto})}{exp(V_{Bus})} = exp(V_{Auto} - V_{Bus})
+(\#eq:probratioab)
+\end{equation}
 
+\begin{equation}
+\frac{Pr(Auto)}{Pr(Rail)} = \frac{exp(V_{Auto})}{exp(V_{Rail})} = exp(V_{Auto} - V_{Rail})
+(\#eq:probratioar)
+\end{equation}
+
+\begin{equation}
+\frac{Pr(Bus)}{Pr(Rail)} = \frac{exp(V_{Bus})}{exp(V_{Rail})} = exp(V_{Bus} - V_{Rail})
+(\#eq:probratiobr)
+\end{equation}
 
 The ratios of probabilities for each pair of alternatives depend only on the attributes of those alternatives and not on the attributes of the third alternative and would remain the same regardless of whether that third alternative is available or not.  This formulation can be generalized to any pair of alternatives by:
 
-
+\begin{equation}
+\frac{Pr(i)}{Pr(k)} = \frac{exp(V_i)}{exp(V_k)} = exp(V_i - V_k)
+(\#eq:probratioalts)
+\end{equation}
 
 which, as before, is independent of the number or attributes of other alternatives in the choice set. 
 
@@ -264,7 +301,15 @@ We illustrate the application of multinomial logit models with different specifi
 
 The simplest specification of the multinomial logit model is the ‘constants only’ model, in which the utility of each alternative has a fixed value for all decision-makers.  Typically, the alternative specific constants are considered to represent the average effect of all factors that influence the choice but are not included in the utility specification.  For example, factors such as comfort, safety, privacy and reliability may be excluded due to the difficulty associated with their measurement.  In the constants only model, it is implicitly assumed that the constants reflect the average effects of all the variables affecting the choice decision, since no variables are included explicitly in the utility specification.  If these constants are 0.0, -1.6 and -1.8 for drive alone, shared ride and transit, respectively, the probability calculation is as shown in Table 4.8.
 
-
+<center>
+**Table 4-8 MNL Probabilities for Constants Only Model**
+</center>
+|                |Utility|Utility||
+| -------------- | :----------: | :----------: | :--------: | :-----------: |
+|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
+| Drive Alone    | 0.0          | 0.0          |1.0000      |0.7314         |
+| Shared Ride    | -1.60        | -1.60        |0.2019      |0.1477         |
+| TRansit        | -1.80        | -1.80        |0.1653      |0.1209         |
 
 As expected, Drive Alone has the highest probability, followed by Shared Ride, and TRansit.
 
@@ -396,25 +441,43 @@ Choice probabilities in logit models are also a function of the values of the ch
 
 ### Derivatives of Choice Probabilities
 
-Derivatives indicate the change in probability of each alternative in the choice set per unit change in a characteristic of the traveler. The analysis approach is similar to that employed in section 4.4.  The important difference is that in section 4.4, we were assessing the impact of a change in probability of an alternative in response to a change in an attribute of a single alternative; either the same alternative (direct-derivative and direct-elasticity) or another alternative (cross-derivative and cross-elasticity).  In the case of traveler characteristics, those characteristics may appear in alternative specific form in all alternatives (except for one reference alternative).  Thus, we are considering what, in effect, becomes a combination of one direct response and multiple cross responses.  Consider, for example, the probability of choosing alternative   in response to a change in income, specific to alternative  .  That is,
+Derivatives indicate the change in probability of each alternative in the choice set per unit change in a characteristic of the traveler. The analysis approach is similar to that employed in section 4.4.  The important difference is that in section 4.4, we were assessing the impact of a change in probability of an alternative in response to a change in an attribute of a single alternative; either the same alternative (direct-derivative and direct-elasticity) or another alternative (cross-derivative and cross-elasticity).  In the case of traveler characteristics, those characteristics may appear in alternative specific form in all alternatives (except for one reference alternative).  Thus, we are considering what, in effect, becomes a combination of one direct response and multiple cross responses.  Consider, for example, the probability of choosing alternative $i$ in response to a change in income, specific to alternative $i$.  That is,
 
+\begin{equation}
+\frac{\partial P_i}{\partial Inc_i} = (1 - P_i)P_i\beta_{Inc_i}
+(\#eq:probichangeincomei)
+\end{equation}
 
+However, since an identical change in income will occur for all alternatives in which income appears as an alternative specific variable, we consider the cross-derivative of the probability of choosing alternative $i$ in response to a change in income, specific to alternative $j$.  That is,
+	
+\begin{equation}
+\frac{\partial P_i}{\partial Inc_j} = -P_iP_j\beta_{Inc,_j}
+(\#eq:probichangeincomej)
+\end{equation}
+	
+The corresponding sum over all alternatives $i \ne j$  is
+	
+\begin{equation}
+\sum_{j\ne i}\frac{\partial P_i}{\partial Inc_j} = -P_i\sum_{j \ne i}P_j\beta_{Inc,_j}
+(\#eq:sumprobsalljnoti)
+\end{equation}
 
-However, since an identical change in income will occur for all alternatives in which income appears as an alternative specific variable, we consider the cross-derivative of the probability of choosing alternative   in response to a change in income, specific to alternative  .  That is,
+and the sum over all alternatives including $i$ is
 	
-	
-	
-The corresponding sum over all alternatives   is
-	
-	
-	
-and the sum over all alternatives including   is
-	
-	
+\begin{equation}
+\begin{split}
+\frac{\partial P_i}{\partial Inc} = P_i(1-P_i)\beta_{Inc,_i}-\sum_{j\ne i}P_iP_j\beta_{Inc,_j}\\
+= P_i\beta_{Inc,_j} - \sum_{\forall j}P_iP_j\beta_{Inc,_j}\\
+= P_i[\beta_{Inc,_i} - \sum_{\forall j}P_j\beta_{Inc,_j}]\\
+= P_i[\beta_{Inc,_i} - \overline{\beta}_{Inc}]\\
+\end{split}
+(\#eq:sumprobsallj)
+\end{equation}	
 	
 where
 	
-	
+- $\overline{\beta}_{Inc}$ is the probability weighted average of the alternative specific
+income parameters
 	
 That is, the derivative of the probability with respect to a change in income is equal to the probability times the amount by which the income coefficient for that alternative exceeds the probability weighted average income coefficient over all alternatives[^comparisondecisionmaker].
 		
@@ -422,9 +485,12 @@ It should be apparent that the sum over all alternatives of the income derivativ
 
 ### Elasticities of Choice Probabilities
 
-Elasticity is another measure that can be used to quantify the extent to which the choice probabilities are influenced by changes in a variable; in this case, a variable that describes the characteristics of the traveler.  In this case, the elasticity of the probability of alternative   to a change in income is given by 
+Elasticity is another measure that can be used to quantify the extent to which the choice probabilities are influenced by changes in a variable; in this case, a variable that describes the characteristics of the traveler.  In this case, the elasticity of the probability of alternative $i$ to a change in income is given by 
 
-
+\begin{equation}
+\eta_{Inc}^{P_i} = (\beta_{Inc_i} - \overline{\beta}_{Inc}) \times Inc
+(\#eq:elasticityitochangeinc)
+\end{equation}
 
 As before, the elasticity represents the proportional change in probability of an alternative to a proportional change in the explanatory variable.
 
@@ -520,7 +586,7 @@ The log-likelihood expression for this sample will be as follows:
 
 
 
-A maximum likelihood estimator finds the value of the parameter   which maximizes the log-likelihood value.  This solution is obtained by setting the first derivative of the log-likelihood function equal to zero, and solving for .  However, for this illustrative example, we can plot the graph for log-likelihood (or likelihood) as a function of   to find the point where the maximum occurs.  Figure 4.7 shows the graph of likelihood and log-likelihood as a function of .  It can be seen that the point where the maximum occurs is identical for both the likelihood and the log-likelihood functions, i.e., at .  This value is called the maximum likelihood estimate of .
+A maximum likelihood estimator finds the value of the parameter $\beta$  which maximizes the *log-likelihood* value.  This solution is obtained by setting the first derivative of the log-likelihood function equal to zero, and solving for $\hat{\beta}$.  However, for this illustrative example, we can plot the graph for log-likelihood (or likelihood) as a function of $\beta$  to find the point where the maximum occurs.  Figure 4.7 shows the graph of likelihood and log-likelihood as a function of $\beta$.  It can be seen that the point where the maximum occurs is identical for both the likelihood and the log-likelihood functions, *i.e.*, at $\beta = -0.076$.  This value is called the maximum likelihood estimate of $\beta$.
 
 
 
@@ -528,7 +594,9 @@ Practical applications of logit models include multiple parameters and many obse
 
 
 
-
+<center>
+**Figure 4-7 Likelihood and Log-likelihood as a Function of a Parameter Value**
+</center>
 
 [^numericalproblems]: These include numerical problems, because the MNP can only be calculated using multi-dimensional integration, and problems of interpretation.  A special case of the MNP, when the error terms are distributed independently (no covariance) and identically (same variance), obtains estimation and prediction results that are very similar to those for the MNL model.
 
