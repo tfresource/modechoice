@@ -193,8 +193,17 @@ As expected, the choice probabilities are identical to those obtained before the
 
 The expression for the probability equation of the logit model (equation 4.9) can also be presented in a different form which makes the equivalent difference property more apparent.  For the drive alone alternative, this expression can be obtained by multiplying the numerator and denominator of the standard probability expression by exp(-VDA) as shown in the following equations.
 
+\begin{equation}
+  Pr(DA) = \frac{exp(V_{DA})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})} \times \frac {exp(-V_{DA})}{exp(-V_{DA})}
+  = \frac {exp(V_{DA})\times exp(-V_{DA})}{[exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})] \times exp(-V_{DA})}
+  = \frac {}
+  (\#eq:fournineteen)
+\end{equation}
 
-
+\begin{equation}
+Pr(Auto) = \frac{exp(V_{Auto})}{exp(V_{Auto})+exp(V_{Bus})+exp(V_{Rail})}
+(\#eq:fourtwenty)
+\end{equation}
 
 which simplifies to: 
 
@@ -204,7 +213,7 @@ which simplifies to:
 This formulation explicitly shows that the probability of the drive alone alternative is a function of the differences in systematic utility between the drive alone alternative and each other alternative.  This can be applied to the general case for alternative $i$ which can be represented in terms of the pairwise difference in its utility and the utility of each of the other alternatives by the following equation:
 
 
-#### Implication of COnstant Differences for Alternative Specific COnstans and Variables
+#### Implication of Constant Differences for Alternative Specific Constants and Variables
 
 The constant difference property of logit models has an important implication for the specification of the utilities of the alternatives.  Recall that the systematic portion of the utility of an individual, ‘$t$’, and alternative ‘$i$’ is the sum of decision-maker related bias, mode attribute related utility, and interactions between these.  That is:
 
