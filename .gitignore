@@ -6,4 +6,5 @@ packages.bib
 img/cover.ai
 _bookdown_files/*
 modechoice.rds
-04-mnl.knit.md
+modechoice.md
+modechoice.Rmd
