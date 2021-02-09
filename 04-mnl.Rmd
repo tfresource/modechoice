@@ -45,14 +45,21 @@ The Gumbel has the following cumulative distribution and probability density fun
   F(\Epsilon) = exp{exp[-\mu(\Epsilon-\eta)]}
   (\#eq:gumbelcumdist)
   \end{equation}
+  
+  \begin{equation}
+  f(\Epsilon) = \mu %*% {exp[-\mu(\Epsilon-\eta)]} %*% exp{-exp[-\mu(\Epsilon-\eta)]}
+  (\#eq:gumbelprobdens)
+  \end{equation}
 	
 where
 	
-	
+	- $\mu$ is the scale parameter which determines the variance of the        distribution and
+  - $\eta$ is the location (mode) parameter.
 	
 The mean and variance of the distribution are:
 	
-	
+	\begin{equation}
+	Mean = \eta + 
 	
 The second and third assumptions state the location and variance of the distribution just as  and  indicate the location and variance of the normal distribution. We will return to the discussion of the independence between/among alternatives in CHAPTER 8. 
 	

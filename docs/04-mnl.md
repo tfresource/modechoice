@@ -50,9 +50,12 @@ ggplot(cdf %>% gather(key = "Distribution", value = "Probability", -x),
 	
 The Gumbel has the following cumulative distribution and probability density functions:
 
+	\begin{equation}
+  F(\Epsilon) = exp{exp[-\mu(\Epsilon-\eta)]}
+  (\#eq:gumbelcumdist)
+  \end{equation}
 	
-	
-Where
+where
 	
 	
 	
@@ -73,18 +76,6 @@ Where
 The exponential function is described in Figure 4.3 which shows the relationship between   and  .  Note that   is always positive and increases monotonically with  .
 
 
-```r
-tibble( x = seq(-3,3,.1), y = exp(x)) %>%
-  ggplot(aes(x = x, y = y)) + 
-  geom_line() + 
-  xlab("V_i") + 
-  ylab("Exp(V_i)") 
-```
-
-<div class="figure">
-<img src="04-mnl_files/figure-html/viwithexpVi-1.png" alt="Relationship Between V_i and Exp(V_i)" width="672" />
-<p class="caption">(\#fig:viwithexpVi)Relationship Between V_i and Exp(V_i)</p>
-</div>
 
 
 	
@@ -103,60 +94,8 @@ where *i* indicates the alternative for which the probability is being computed.
 This formulation implies that the probability of choosing an alternative increases monotonically with an increase in the systematic utility of that alternative and decreases with increases in the systematic utility of each of the other alternatives.  This is illustrated in Table 4.1 showing the probability of DA as a function of its own utility (with the utilities of other alternatives held constant) and in Table 4.2 as a function of the utility of other alternatives with its own utility fixed.
 
 
-```r
-tibble(
-  case = 1:5,
-  vda = c(-3.0, -1.5, 0.0, 1.5, 3.0),
-  vsr = -1.5,
-  vtr = -0.5
-) %>%
-  mutate(
-    p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
-  ) %>%
-  knitr::kable(  
-    caption = "Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)", 
-     col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
-```
 
 
-
-Table: (\#tab:dralonefordralone)Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)
-
-| $Case$| $V_{DA}$| $V_{SR}$| $V_{TR}$|  $Pr(DA)$|
-|------:|--------:|--------:|--------:|---------:|
-|      1|     -3.0|     -1.5|     -0.5| 0.0566117|
-|      2|     -1.5|     -1.5|     -0.5| 0.2119416|
-|      3|      0.0|     -1.5|     -0.5| 0.5465494|
-|      4|      1.5|     -1.5|     -0.5| 0.8437947|
-|      5|      3.0|     -1.5|     -0.5| 0.9603322|
-
-
-```r
-tibble(
-  case = 6:11,
-  vda = 0.0,
-  vsr = c(-1.5, -1.5, -1.5, -0.5, -0.5, -0.5),
-  vtr = c(-1.5, -1.0, -0.5, -1.5, -1.0, -0.5)
-) %>%
-  mutate(
-    p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
-  ) %>%
-  knitr::kable(  caption = "Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties", 
-                 col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
-```
-
-
-
-Table: (\#tab:draloneforshrridetransit)Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties
-
-| $Case$| $V_{DA}$| $V_{SR}$| $V_{TR}$|  $Pr(DA)$|
-|------:|--------:|--------:|--------:|---------:|
-|      6|        0|     -1.5|     -1.5| 0.6914385|
-|      7|        0|     -1.5|     -1.0| 0.6285317|
-|      8|        0|     -1.5|     -0.5| 0.5465494|
-|      9|        0|     -0.5|     -1.5| 0.5465494|
-|     10|        0|     -0.5|     -1.0| 0.5064804|
-|     11|        0|     -0.5|     -0.5| 0.4518628|
 
 
 
