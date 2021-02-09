@@ -76,7 +76,15 @@ where
 The mean and variance of the distribution are:
 	
 	\begin{equation}
-	Mean = \eta + 
+	Mean = \eta + \frac{0.577}{\mu}
+	(\#eq:meandistribution)
+	\end{equation}
+	
+	\begin{equation}
+	Variance = \frac{\pi^2}{6\mu^2}
+	(\#eq:variancedistribution)
+	\end{equation}
+	
 	
 The second and third assumptions state the location and variance of the
 distribution just as $\mu$ and $\sigma^2$ indicate the location and variance of
