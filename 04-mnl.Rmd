@@ -41,9 +41,12 @@ ggplot(cdf %>% gather(key = "Distribution", value = "Probability", -x),
 	
 The Gumbel has the following cumulative distribution and probability density functions:
 
+	\begin{equation}
+  F(\Epsilon) = exp{exp[-\mu(\Epsilon-\eta)]}
+  (\#eq:gumbelcumdist)
+  \end{equation}
 	
-	
-Where
+where
 	
 	
 	
