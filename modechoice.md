@@ -1,3 +1,78 @@
+--- 
+title: "A Self-Instructing Course in Mode Choice Modeling"
+date: "2021-02-02"
+site: bookdown::bookdown_site
+author:
+  - name: "Frank Koppelman"
+    affiliation: "Northwestern University (Emeritus)"
+  - name: "Chandra Bhat"
+    affiliation: "University of Texas as Austin"
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+# Foreword {-}
+
+Placeholder
+
+
+## Original Acknowledgements {-}
+## R Packages {-} 
+
+<!--chapter:end:index.Rmd-->
+
+
+# Introduction {#chapter1}
+
+Placeholder
+
+
+## Background
+## Use of Disaggregate Discrete Choice Models
+## Application Context in Current Course
+## Urban and Intercity Travel Mode Choice Modeling
+### Urban Travel Mode Choice Modeling
+### Intercity Mode Choice Models
+## Description of the Course
+## Organization of the Course Structure
+
+<!--chapter:end:01-intro.Rmd-->
+
+
+# Elements of the Choice Decision Process
+
+Placeholder
+
+
+## Introduction
+## The Decision Maker
+## The Alternatives
+## Attributes of Alternatives
+## The Decision Rule
+
+<!--chapter:end:02-choice-elements.Rmd-->
+
+
+# Utility-based Choice Theory
+
+Placeholder
+
+
+## Basic Construct of Utility Theory
+## Deterministic Choice Concepts
+## Probabilistic Choice Theory
+## Components of the Deterministic Portion of the Utility Function
+### Utility Associated with the Attributes of Alternatives
+### Utility 'Biases' Due to Excluded Variables
+### Utility Related to the Characteristics of the Decision Maker
+### Utility Defined by Interactions between Alternative Attributes and Decision Maker Characteristics
+## Specification of the Additive Error Term
+
+<!--chapter:end:03-utility-theory.Rmd-->
+
 # The Multinomial Logit Model
 
 
@@ -678,3 +753,119 @@ Practical applications of logit models include multiple parameters and many obse
 [^isoutilityline]: Iso-utility lines connect all points for which the values of time and cost result in the same utility.  The slope of these lines equals the inverse of the value of time, $\beta_1/\beta_2$.
 
 [^dependencePb]: Dependence of $P_{j't}$ on $b$ is made implicit to simplify notation.
+
+<!--chapter:end:04-mnl.Rmd-->
+
+# Data Assembly and Estimation of Simple Multinomial Logit Models
+
+## Introduction
+
+
+## Data Requirements Overview
+
+## Sources and Methods for Traveler and Trip Related Data Collection
+
+
+## Methods for Collecting Mode Related Data
+
+## Data STructure for Estimation
+
+
+## Application Data for Work Mode Choice in the San Francisco Bay Area
+
+
+## Estimation of MNL Model with Basic Specification
+
+## Value of Time
+
+<!--chapter:end:05-mnl-estimation.Rmd-->
+
+# Model Specification Refinement
+
+## Introduction
+
+
+## Alternative Specifications
+
+
+## Market Segmentation
+
+
+## Summary
+
+<!--chapter:end:06-specification.Rmd-->
+
+# San Francisco Bay Area Shop / Other Mode Choice
+
+## Introduction
+
+## Specification for Shop/Other Mode Choice Model
+
+
+## Initial Model Specification
+
+
+## Exploring Alternative Specifications
+
+
+
+<!--chapter:end:07-shopother.Rmd-->
+
+# Nested Logit Model
+
+## Motivation
+
+## Formulation of Nested Logit Model
+
+## Nesting Structures
+
+
+
+<!--chapter:end:08-nestedlogit.Rmd-->
+
+# Selecting a Preferred Nesting Structure
+
+## Introduction
+
+## Nested Models for Work Trips
+
+## Nested Models for Shop / Other Trips
+
+## Practical Issues and Implications
+
+<!--chapter:end:09-nesting.Rmd-->
+
+# Multiple Maxima in Nested Logit Estimation
+
+
+<!--chapter:end:10-nesting-optima.Rmd-->
+
+# Aggregate Forecasting Assessment, and Application
+
+## Background
+
+## Aggregate Forecasting
+
+
+## Aggregate Assessment of Travel Mode Choice Models
+
+<!--chapter:end:11-application.Rmd-->
+
+# Recent Advances in Discrete Choice Modeling
+
+## The GEV Class of Models
+
+## The MMNL Class of Models
+
+## The Mixed GEV Class of Models
+
+## Summary
+
+<!--chapter:end:12-advances.Rmd-->
+
+
+# References {-}
+
+
+<!--chapter:end:99-references.Rmd-->
+
