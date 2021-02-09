@@ -355,72 +355,112 @@ Choice probabilities in logit models are a function of the values of the attribu
 
 ### Derivatives of Choice Probabilities 
 
-One measure for evaluating the response to changes is to calculate the derivatives of the choice probabilities of each alternative with respect to the variable in question.  Usually, one is concerned about the change in probability of an alternative, , with respect to the change in attributes of that alternative  .  This measure, the direct derivative, is computed by differentiating   with respect to  , the kth attribute of alternative i.  The mathematical expression for the direct derivative of   with respect to   is:
+One measure for evaluating the response to changes is to calculate the $derivatives$ of the choice probabilities of each alternative with respect to the variable in question.  Usually, one is concerned about the change in probability of an alternative, $P_{i}$, with respect to the change in attributes of that alternative $X_{i}$. This measure, the $direct$ $derivative$, is computed by differentiating $P_{i}$ with respect to $X_{ik}$, the $k^{th}$ attribute of alternative $i$. The mathematical expression for the $direct$ $derivative$ of $P_{i}$ with respect to $X_{ik}$ is:
 
-
+\begin{equation}
+$\displaystyle \frac{\partial P_{i}}{\partial X_{ik}} = \displaystyle \frac{\partial V_{i}}{\partial X_{ik}} \times (P_{i}) \times (1-P_{i})$  
+(\#eq:expressionfordirectderivative)
+\end{equation}
 
 where $V_i$ is the utility of the alternative.[^derivationTrain]
 
 Typically the utility function is specified to be linear in parameters; that is:
 
-
+\begin{equation}
+$V_{i} = \beta_{0} + \beta_{1}X_{1i} + \beta_{2}X_{2i} + \cdots +  \beta_{k}X_{ki} + \cdots + \beta_{K}X_{Ki}$  
+(\#eq:linearutility)
+\end{equation}
 
 In this case, the expression for the direct derivative of    with respect to   reduces to:
 
+\begin{equation}
+$\displaystyle \frac{\partial P_{i}}{\partial X_{ki}} = \beta_{k} \times (P_{i}) \times (1-P_{i})$  
+(\#eq:reducesexpressionfordirectderivative)
+\end{equation}
 
+where $\beta_{k}$ is the coefficient of attribute $k$.
 
-where
+The value of the derivative is largest at $P_{i} = \frac{1}{2}$ and becomes smaller as $P_{i}$  approaches zero or one.  This implies that the magnitude of the response to a change in an attribute will be greatest when the choice probability for the alternative under consideration is 0.5 and this response diminishes as the probability approaches zero or one. The direct derivative is simply the slope of the logit model probability curve illustrated in Figure 4.4 and that its mathematical properties are consistent with the qualitative discussion of the S-shape of the logit probability curve in section 4.1.1.  The sign of the derivative is the same as the sign of the parameter describing the impact of $X_{ik}$ in the utility of alternative $i$.  Thus, an increase in $X_{ik}$  will increase (decrease)  $P_{i}$ if $\beta_{ik}$  is positive (negative).
 
-The value of the derivative is largest at   = ½ and becomes smaller as   approaches zero or one.  This implies that the magnitude of the response to a change in an attribute will be greatest when the choice probability for the alternative under consideration is 0.5 and this response diminishes as the probability approaches zero or one. The direct derivative is simply the slope of the logit model probability curve illustrated in Figure 4.4 and that its mathematical properties are consistent with the qualitative discussion of the S-shape of the logit probability curve in section 4.1.1.  The sign of the derivative is the same as the sign of the parameter describing the impact of   in the utility of alternative i.  Thus, an increase in   will increase (decrease)   if   is positive (negative).
+Often it is important to understand how the choice probability of other alternatives changes in response to a given change in the attribute level of the action alternative.  This measure, termed the $cross$ $derivative$, is obtained by computing the derivative of the choice probability of an alternative,$P_{j}$ , with respect to the attribute of the changed alternative, $X_{ik}$.  This $cross$ $derivative$ for linear utility functions is:
 
-Often it is important to understand how the choice probability of other alternatives changes in response to a given change in the attribute level of the action alternative.  This measure, termed the cross derivative, is obtained by computing the derivative of the choice probability of an alternative, , with respect to the attribute of the changed alternative,  .  This cross derivative for linear utility functions is:
-
-
+\begin{equation}
+$\displaystyle \frac{\partial P_{j}}{\partial X_{ik}} = \beta_{k} \times (P_{i}) \times (P_{j})   $$\forall_{i} \ne j$  
+(\#eq:linearutilityforcrossderivative)
+\end{equation}
 [^derivationTrain2]
 
-where
+where $\beta_{jk}$ is the coefficient of the $k^{th}$ attribute of alternative $j$,
+      $P_{i}$ is the probability of alternative $i$, and
+      $P_{j}$ is the probability of alternative $j$.
 
-
-
-In this case, the sign of the derivative is opposite to the sign of the parameter describing the impact of   on the utility of alternative i.  Thus an increase in   will decrease (increase) the probability of choosing alternative,  , if the parameter   is positive (negative).
+In this case, the sign of the derivative is opposite to the sign of the parameter describing the impact of $X_{ik}$ on the utility of alternative $i$.  Thus an increase in $X_{ik}$  will decrease (increase) the probability of choosing alternative, $P_{i}$, if the parameter $\beta_{k}$  is positive (negative).
 
 It is useful to recognize that the sum of the derivatives over all the alternatives must be equal to zero.  That is, 
 
-
+\begin{equation}
+$\displaystyle \sum_{\forall_{j}}\frac{\partial P_{j}}{\partial X_{ik}} = \frac{\partial P_{j}}{\partial X_{ik}} + \sum_{\forall_{j \ne i}}\frac{\partial P_{j}}{\partial X_{ik}}$
+$= \beta_{k}P_{i}(1-P_{i}) - \sum_{\forall_{j \ne i}}\beta_{k}P_{i}P_{j}$
+$= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}\sum_{\forall_{j \ne i}}P_{j}$
+$= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}(1-P_{i}) = 0$
+(\#eq:sumofderivativesequaltozero)
+\end{equation}
 
 This is as expected.  Since the sum of all probabilities is fixed at one, the sum of the derivatives of the probability due to a change in any attribute of any alternative must be equal to zero.
 
 ### Elasticities of Choice Probabilities
 
-Elasticity is another measure that is used to quantify the extent to which the choice probabilities of each alternative will change in response to the changes in the value of an attribute.  In general, elasticity is defined as the percentage change in the response variable with respect to a one percent change in an explanatory variable.  In the context of logit models, the response variable is the choice probability of an alternative, such as , and the explanatory variable is the attribute .  Elasticities are different from derivatives in that elasticities are normalized by the variable units.  To clearly illustrate the concept of elasticity, let us consider that   and   are choice probabilities of an alternative i at attribute levels   and , respectively.  In this case, the elasticity is the proportional change in the probability divided by the proportional change in the attribute under consideration:
+Elasticity is another measure that is used to quantify the extent to which the choice probabilities of each alternative will change in response to the changes in the value of an attribute.  In general, elasticity is defined as the percentage change in the response variable with respect to a one percent change in an explanatory variable.  In the context of logit models, the response variable is the choice probability of an alternative, such as $P_{i}$, and the explanatory variable is the attribute $X_{ik}$.  Elasticities are different from derivatives in that elasticities are normalized by the variable units.  To clearly illustrate the concept of elasticity, let us consider that $P_{i1}$  and $P_{i2}$ are choice probabilities of an alternative $i$ at attribute levels $X_{i1}$  and $X_{i2}$, respectively. In this case, the elasticity is the proportional change in the probability divided by the proportional change in the attribute under consideration:
 
+\begin{equation}
+$\displaystyle Elasticity = \frac{Percentage change in Probability}{Percentage Change in Attribute}$
+$= \frac{(P_{2}-P_{1})/P_{1}}{(X_{2}-X_{1})/X_{1}} = \frac{\Delta P/P_{1}}{\Delta X/X_{1}}$
+(\#eq:Elasticity)
+\end{equation}
 
+There is some ambiguity in the computation of this elasticity measure in terms of whether it should be normalized using the original probability-attribute combination ($P_{i1}$, $X_{i1}$ ) or the new probability-attribute combination ($P_{i2}$, $X_{i2}$).  A compromise approach is to compute the elasticity relative to the mid-point of both sets of variables, yielding a measure called the arc elasticity.  The expression for arc elasticity is:  
 
-There is some ambiguity in the computation of this elasticity measure in terms of whether it should be normalized using the original probability-attribute combination ( , ) or the new probability-attribute combination ( , ).  A compromise approach is to compute the elasticity relative to the mid-point of both sets of variables, yielding a measure called the arc elasticity.  The expression for arc elasticity is:  
+\begin{equation}
+$\displaystyle Arc Elasticity = \frac{\Bigg(\frac{(P_{2}-P_{1})}{(P_{1}+P_{2})/2)}\Bigg)}{\Bigg(\frac{(X_{2}-X_{1})}{(X_{1}+X_{2})/2)}\Bigg)} = \frac{\Bigg(\frac{(\Delta P)}{(P_{1}+P_{2})/2)}\Bigg)}{\Bigg(\frac{(\Delta X)}{(X_{1}+X_{2})/2)}\Bigg)}$
+(\#eq:ArcElasticity)
+\end{equation}
 
+Estimates of elasticity will differ depending on whether the normalization is at the start value, final value or mid-point values.  This confusion can be avoided by computing elasticities for $\underline{very\ small}$ changes. When the elasticity is computed for infinitesimally small changes, the elasticity obtained is termed the point elasticity.  The expression for point elasticity is given as a function of the derivatives discussed earlier (section 4.4.1):
 
+\begin{equation}
+$\displaystyle \eta_{X}^{P} = \frac{\Bigg(\frac{\partial P}{P}\Bigg)}{\Bigg(\frac{\partial X}{X}\Bigg)} = \Bigg(\frac{\partial P}{\partial X}\Bigg) \times \Bigg(\frac{X}{P}\Bigg)$
+(\#eq:PointElasticity)
+\end{equation}
 
-Estimates of elasticity will differ depending on whether the normalization is at the start value, final value or mid-point values.  This confusion can be avoided by computing elasticities for very small changes.  When the elasticity is computed for infinitesimally small changes, the elasticity obtained is termed the point elasticity.  The expression for point elasticity is given as a function of the derivatives discussed earlier (section 4.4.1):
+We are interested in both direct- and cross-elasticities corresponding to the direct- and cross-derivatives discussed above.  The direct elasticity measures the percent change in the choice probability of alternative, $P_{i}$ with respect to a percent change in the attribute level ($X_{ik}$) of that alternative:
 
-
-
-We are interested in both direct- and cross-elasticities corresponding to the direct- and cross-derivatives discussed above.  The direct elasticity measures the percent change in the choice probability of alternative,   with respect to a percent change in the attribute level ( ) of that alternative:
-
-
+\begin{equation}
+$\displaystyle \eta_{X_{ik}}^{P_{i}} = \frac{\Bigg(\frac{\partial P_{i}}{P}\Bigg)}{\Bigg(\frac{\partial X_{ik}}{X_{ik}}\Bigg)} = \Bigg(\frac{\partial P_{i}}{\partial X_{ik}}\Bigg) \times \Bigg(\frac{X_{ik}}{P_{i}}\Bigg)$
+(\#eq:LevelPointElasticity)
+\end{equation}
 
 We can substitute equation 4.45 into 4.51 to obtain the following expression for the direct elasticity
 
+\begin{equation}
+$\displaystyle \eta_{X_{ik}}^{P_{i}} = \beta_{k}P_{i}(1-P_{i})\Bigg(\frac{X_{ik}}{P_{i}}\Bigg) = \beta_{k}X_{ik}(1-P_{i})$
+(\#eq:LevelPointDirectElasticity)
+\end{equation}
 
+Thus, the direct elasticity is not only a function of the parameter value, $\beta_{k}$, for the attribute in the utility, but is also a function of the attribute level,  $X_{ik}$, at which the elasticity is being computed.
 
-Thus, the direct elasticity is not only a function of the parameter value,  , for the attribute in the utility, but is also a function of the attribute level,  , at which the elasticity is being computed.
+Similarly, the cross-elasticity is defined as the proportional change in the choice probability of an alternative ($P_{i}$) with respect to a proportional change in some attribute of another alternative ($X_{ik}$).  The expression for cross elasticity in a multinomial logit model is given by:
 
-Similarly, the cross-elasticity is defined as the proportional change in the choice probability of an alternative ( ) with respect to a proportional change in some attribute of another alternative ( ).  The expression for cross elasticity in a multinomial logit model is given by:
-
-
+\begin{equation}
+$\displaystyle \eta_{X_{ik}}^{P_{j}} = \frac{\Bigg(\frac{\partial P_{j}}{P_{j}}\Bigg)}{\Bigg(\frac{\partial X_{ik}}{X_{ik}}\Bigg)} = \Bigg(\frac{\partial P_{j}}{\partial X_{ik}}\Bigg) \times \Bigg(\frac{X_{ik}}{P_{j}}\Bigg) \ \forall j\ne i$
+(\#eq:LevelCrossElasticity)
+\end{equation}
 
 We substitute equation 4.46 into 4.53 to obtain the following expression for cross elasticity of logit model probabilities:
 
-
+\begin{equation}
+$\displaystyle \eta_{X_{ik}}^{P_{i}} = (-\beta_{k}P_{i}P_{j})\Bigg(\frac{X_{ik}}{P_{j}}\Bigg) = -\beta_{k}X_{ik}P_{i}$
+(\#eq:LevelPointCrossElasticity)
+\end{equation}
 
 An important property of MNL models is that the cross-elasticities are the same for all the other alternatives in the choice set.  This property of the multinomial logit model is another manifestation of the IIA property discussed in the previous section.
 
