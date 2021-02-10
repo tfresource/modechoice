@@ -286,13 +286,17 @@ where *i* is the alternative for which the probabilities are being computed.
 Adding $\Delta V$ to the systematic components of $V_{DA}$, $V_{SR}$ and
 $V_{TR}$ gives[^sumexp]:
 
-\begin{equation}
-  Pr(i)=\frac{exp (V_i + {\Delta V })}{exp (V_{DA}+{\Delta V }) + exp (V_{SR}+{\Delta V }) + exp (V_{TR}+{\Delta V })}
+\begin{align*}
+  Pr(i)&=&\frac{exp (V_i + {\Delta V })}{exp (V_{DA}+{\Delta V }) + exp (V_{SR}+{\Delta V }) + exp (V_{TR}+{\Delta V })} \\
+  
+  &=& \frac{exp (V_i) \times exp({\Delta V })}{exp (V_{DA}) \times exp({\Delta V }) + exp (V_{SR}) \times exp({\Delta V }) +            exp (V_{TR}) \times exp({\Delta V })} \\
+  
+  &=& \frac{exp (V_i) \times exp({\Delta V })}{[exp (V_{DA}) + exp (V_{SR}) + exp (V_{TR})] \times exp({\Delta V })} \\
+  
+  &=& \frac{exp (V_i)}{[exp (V_{DA}) + exp (V_{SR}) + exp (V_{TR})]}
+  
   (\#eq:probdeltav)
-\end{equation}
-
-
-
+\end{align*}
 
 which is the same probability as before $\Delta V$ was added to each of the
 utilities.  This result applies to any value of $\Delta V$.  We also illustrate
@@ -301,13 +305,38 @@ choice problem used earlier.  The following equations represent the case when
 the utility values for Drive Alone, Shared Ride and Transit equal  0.5,  1.5 and
 3.0, respectively:
 
+\begin{equation}
+  Pr(DA) = \frac {exp(-0.5)}{exp(-0.5) + exp(-1.5) + exp(-3.0)} = 0.690
+  (\#eq:DAutilityvalues)
+\end{equation}
 
+\begin{equation}
+  Pr(SR) = \frac {exp(-1.5)}{exp(-0.5) + exp(-1.5) + exp(-3.0)} = 0.254
+  (\#eq:SRutilityvalues)
+\end{equation}
+
+\begin{equation}
+  Pr(TR) = \frac {exp(-3.0)}{exp(-0.5) + exp(-1.5) + exp(-3.0)} = 0.057
+  (\#eq:TRutilityvalues)
+\end{equation}
 
 Similarly, if the utility of each alternative is increased by one, the
 probabilities are:
 
+\begin{equation}
+  Pr(DA) = \frac {exp(0.5)}{exp(0.5) + exp(-0.5) + exp(-2.0)} = 0.690
+  (\#eq:DAplusoneutilityvalues)
+\end{equation}
 
+\begin{equation}
+  Pr(SR) = \frac {exp(-0.5)}{exp(0.5) + exp(-0.5) + exp(-2.0)} = 0.254
+  (\#eq:SRplusoneutilityvalues)
+\end{equation}
 
+\begin{equation}
+  Pr(TR) = \frac {exp(-2.0)}{exp(0.5) + exp(-0.5) + exp(-2.0)} = 0.057
+  (\#eq:TRplusoneutilityvalues)
+\end{equation}
 
 As expected, the choice probabilities are identical to those obtained before the
 addition of the constant utility to each mode.  The calculations supporting this
