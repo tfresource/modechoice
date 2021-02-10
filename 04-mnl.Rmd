@@ -98,7 +98,7 @@ the alternatives.  The general expression for the probability of choosing an
 alternative ‘*i*’ (*i = 1,2,.., J*) from a set of *J* alternatives is:
 	
 \begin{equation}
-  Pr(i) = \frac{exp(V_i)}{\sum_{j=1}^{J}exp(V_j)}
+  Pr(i) = \frac{\exp(V_i)}{\sum_{j=1}^{J}\exp(V_j)}
   (\#eq:mnl)
 \end{equation}
 	
@@ -110,17 +110,16 @@ Where
 	
 	
 The exponential function is described in Figure 4.3 which shows the relationship
-between $exp(V_i)$ and $V_i$.  Note that $exp(V_i)$ is always positive and
+between $\exp(V_i)$ and $V_i$.  Note that $\exp(V_i)$ is always positive and
 increases monotonically with  $V_i$.
 
-```{r viwithexpVi, fig.cap="Relationship Between V_i and Exp(V_i)"}
-
+```{r viwithexpVi, fig.cap="Relationship Between $V_i$ and $\\exp(V_i)$"}
 tibble( x = seq(-3,3,.1), y = exp(x)) %>%
   ggplot(aes(x = x, y = y)) + 
   geom_line() + 
-  xlab("V_i") + 
-  ylab("Exp(V_i)") 
-
+  xlab(bquote(V[i])) + 
+  ylab(bquote(exp(V[i]))) +
+  theme_bw()
 ```
 
 The multinomial logit (MNL) model has several important properties.  We
@@ -130,17 +129,17 @@ probabilities of each alternative are given by modifying equation 4.5 for each
 alternative to obtain:
 
 \begin{equation}
-  Pr(DA) = \frac{exp(V_{DA})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
+  Pr(DA) = \frac{\exp(V_{DA})}{\exp(V_{DA}) + \exp(V_{SR}) + \exp(V_{TR})}
   (\#eq:prDAformnl)
 \end{equation}
 
 \begin{equation}
-  Pr(SR) = \frac{exp(V_{SR})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
+  Pr(SR) = \frac{\exp(V_{SR})}{\exp(V_{DA}) + \exp(V_{SR}) + \exp(V_{TR})}
   (\#eq:prSRformnl)
 \end{equation}
 
 \begin{equation}
-  Pr(TR) = \frac{exp(V_{TR})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
+  Pr(TR) = \frac{\exp(V_{TR})}{\exp(V_{DA}) + \exp(V_{SR}) + \exp(V_{TR})}
   (\#eq:prTRformnl)
 \end{equation}
 
@@ -154,12 +153,12 @@ explicit summation in the denominator by the summation over alternatives as:
 
 
 \begin{equation}
-  Pr(i) = \frac{exp(V_{i})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
+  Pr(i) = \frac{\exp(V_{i})}{\exp(V_{DA}) + \exp(V_{SR}) + \exp(V_{TR})}
   (\#eq:mnlprob)
 \end{equation}
 
 \begin{equation}
-  Pr(i) = \frac{exp(V_{i})}{\sum_{j=DA,SR,TR}exp(V_j)}
+  Pr(i) = \frac{\exp(V_{i})}{\sum_{j=DA,SR,TR}\exp(V_j)}
   (\#eq:mnlprobgeneral)
 \end{equation}
 
@@ -277,7 +276,7 @@ to the utility of each alternative.  The original probabilities for the three
 alternatives in the example are given by:
 
 \begin{equation}
-  Pr(i) = \frac{exp(V_{i})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
+  Pr(i) = \frac{\exp(V_{i})}{\exp(V_{DA}) + \exp(V_{SR}) + \exp(V_{TR})}
   (\#eq:originalprob)
 \end{equation}
 
@@ -287,14 +286,12 @@ Adding $\Delta V$ to the systematic components of $V_{DA}$, $V_{SR}$ and
 $V_{TR}$ gives[^sumexp]:
 
 \begin{align*}
-  Pr(i)&=&\frac{exp (V_i + {\Delta V })}{exp (V_{DA}+{\Delta V }) + exp (V_{SR}+{\Delta V }) + exp (V_{TR}+{\Delta V })} \\
-  
-  &=& \frac{exp (V_i) \times exp({\Delta V })}{exp (V_{DA}) \times exp({\Delta V }) + exp (V_{SR}) \times exp({\Delta V }) +            exp (V_{TR}) \times exp({\Delta V })} \\
-  
-  &=& \frac{exp (V_i) \times exp({\Delta V })}{[exp (V_{DA}) + exp (V_{SR}) + exp (V_{TR})] \times exp({\Delta V })} \\
-  
-  &=& \frac{exp (V_i)}{[exp (V_{DA}) + exp (V_{SR}) + exp (V_{TR})]}
-  
+  Pr(i)&= \frac{\exp(V_i + {\Delta V })}
+  {\exp(V_{DA}+{\Delta V }) + \exp(V_{SR}+{\Delta V }) + \exp(V_{TR}+{\Delta V })} \\
+  &= \frac{\exp(V_i) \times \exp({\Delta V })}
+  {\exp(V_{DA}) \times \exp({\Delta V }) + \exp(V_{SR}) \times \exp({\Delta V }) +            \exp(V_{TR}) \times \exp({\Delta V })} \\
+  &= \frac{\exp(V_i) \times \exp({\Delta V })}{[\exp(V_{DA}) + \exp(V_{SR}) + \exp(V_{TR})] \times \exp({\Delta V })} \\
+  &= \frac{\exp(V_i)}{[\exp(V_{DA}) + \exp(V_{SR}) + \exp(V_{TR})]}
   (\#eq:probdeltav)
 \end{align*}
 
@@ -306,17 +303,17 @@ the utility values for Drive Alone, Shared Ride and Transit equal  0.5,  1.5 and
 3.0, respectively:
 
 \begin{equation}
-  Pr(DA) = \frac {exp(-0.5)}{exp(-0.5) + exp(-1.5) + exp(-3.0)} = 0.690
+  Pr(DA) = \frac {\exp(-0.5)}{\exp(-0.5) + \exp(-1.5) + \exp(-3.0)} = 0.690
   (\#eq:DAutilityvalues)
 \end{equation}
 
 \begin{equation}
-  Pr(SR) = \frac {exp(-1.5)}{exp(-0.5) + exp(-1.5) + exp(-3.0)} = 0.254
+  Pr(SR) = \frac {\exp(-1.5)}{\exp(-0.5) + \exp(-1.5) + \exp(-3.0)} = 0.254
   (\#eq:SRutilityvalues)
 \end{equation}
 
 \begin{equation}
-  Pr(TR) = \frac {exp(-3.0)}{exp(-0.5) + exp(-1.5) + exp(-3.0)} = 0.057
+  Pr(TR) = \frac {\exp(-3.0)}{\exp(-0.5) + \exp(-1.5) + \exp(-3.0)} = 0.057
   (\#eq:TRutilityvalues)
 \end{equation}
 
@@ -324,17 +321,17 @@ Similarly, if the utility of each alternative is increased by one, the
 probabilities are:
 
 \begin{equation}
-  Pr(DA) = \frac {exp(0.5)}{exp(0.5) + exp(-0.5) + exp(-2.0)} = 0.690
+  Pr(DA) = \frac {\exp(0.5)}{\exp(0.5) + \exp(-0.5) + \exp(-2.0)} = 0.690
   (\#eq:DAplusoneutilityvalues)
 \end{equation}
 
 \begin{equation}
-  Pr(SR) = \frac {exp(-0.5)}{exp(0.5) + exp(-0.5) + exp(-2.0)} = 0.254
+  Pr(SR) = \frac {\exp(-0.5)}{\exp(0.5) + \exp(-0.5) + \exp(-2.0)} = 0.254
   (\#eq:SRplusoneutilityvalues)
 \end{equation}
 
 \begin{equation}
-  Pr(TR) = \frac {exp(-2.0)}{exp(0.5) + exp(-0.5) + exp(-2.0)} = 0.057
+  Pr(TR) = \frac {\exp(-2.0)}{\exp(0.5) + \exp(-0.5) + \exp(-2.0)} = 0.057
   (\#eq:TRplusoneutilityvalues)
 \end{equation}
 
@@ -354,14 +351,14 @@ The expression for the probability equation of the logit model (equation 4.9)
 can also be presented in a different form which makes the equivalent difference
 property more apparent.  For the drive alone alternative, this expression can be
 obtained by multiplying the numerator and denominator of the standard
-probability expression by exp(-VDA) as shown in the following equations.
+probability expression by \exp(-VDA) as shown in the following equations.
 
 \usepackage{amsmath}
 \begin{equation}
 \begin{split}
-  Pr(DA) &= \frac{exp(V_{DA})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})} \times \frac {exp(-V_{DA})}{exp(-V_{DA})}\\
-  &= \frac {exp(V_{DA})\times exp(-V_{DA})}{[exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})] \times exp(-V_{DA})}\\
-  &= \frac {exp(0)}{exp(0) + exp(V_{SR}-V_{DA}) + exp(V_{TR}-V_{DA})}
+  Pr(DA) &= \frac{\exp(V_{DA})}{\exp(V_{DA}) + \exp(V_{SR}) + \exp(V_{TR})} \times \frac {\exp(-V_{DA})}{\exp(-V_{DA})}\\
+  &= \frac {\exp(V_{DA})\times \exp(-V_{DA})}{[\exp(V_{DA}) + \exp(V_{SR}) + \exp(V_{TR})] \times \exp(-V_{DA})}\\
+  &= \frac {\exp(0)}{\exp(0) + \exp(V_{SR}-V_{DA}) + \exp(V_{TR}-V_{DA})}
   \end{split}
   (\#eq:fournineteen)
 \end{equation}
@@ -369,7 +366,7 @@ probability expression by exp(-VDA) as shown in the following equations.
 which simplifies to: 
 
 \begin{equation}
-Pr(i) = \frac{1}{exp(0) + exp(V_{SR}-V_{DA}) + exp(V_{TR}-V_{DA})}
+Pr(i) = \frac{1}{\exp(0) + \exp(V_{SR}-V_{DA}) + \exp(V_{TR}-V_{DA})}
 (\#eq:fourtwenty)
 \end{equation}
 
@@ -381,7 +378,7 @@ pairwise difference in its utility and the utility of each of the other
 alternatives by the following equation:
 
 \begin{equation}
-Pr(i) = \frac{1}{1 + \sum_{j \ne i}exp(V_j - V_i)}  \qquad \forall i \in J
+Pr(i) = \frac{1}{1 + \sum_{j \ne i}\exp(V_j - V_i)}  \qquad \forall i \in J
 (\#eq:fourtwentyone)
 \end{equation}
 
@@ -550,34 +547,34 @@ travel modes – automobile, rail, and bus.  The probability of choosing
 automobile, rail and bus are:
 
 \begin{equation}
-Pr(Auto) = \frac{exp(V_{Auto})}{exp(V_{Auto})+exp(V_{Bus})+exp(V_{Rail})}
+Pr(Auto) = \frac{\exp(V_{Auto})}{\exp(V_{Auto})+\exp(V_{Bus})+\exp(V_{Rail})}
 (\#eq:probchooseauto)
 \end{equation}
 
 \begin{equation}
-Pr(Bus) = \frac{exp(V_{Bus})}{exp(V_{Auto})+exp(V_{Bus})+exp(V_{Rail})}
+Pr(Bus) = \frac{\exp(V_{Bus})}{\exp(V_{Auto})+\exp(V_{Bus})+\exp(V_{Rail})}
 (\#eq:probchoosebus)
 \end{equation}
 
 \begin{equation}
-Pr(Rail) = \frac{exp(V_{Rail})}{exp(V_{Auto})+exp(V_{Bus})+exp(V_{Rail})}
+Pr(Rail) = \frac{\exp(V_{Rail})}{\exp(V_{Auto})+\exp(V_{Bus})+\exp(V_{Rail})}
 (\#eq:probchooserail)
 \end{equation}
 
 The ratios of each pair of probabilities are:
 
 \begin{equation}
-\frac{Pr(Auto)}{Pr(Bus)} = \frac{exp(V_{Auto})}{exp(V_{Bus})} = exp(V_{Auto} - V_{Bus})
+\frac{Pr(Auto)}{Pr(Bus)} = \frac{\exp(V_{Auto})}{\exp(V_{Bus})} = \exp(V_{Auto} - V_{Bus})
 (\#eq:probratioab)
 \end{equation}
 
 \begin{equation}
-\frac{Pr(Auto)}{Pr(Rail)} = \frac{exp(V_{Auto})}{exp(V_{Rail})} = exp(V_{Auto} - V_{Rail})
+\frac{Pr(Auto)}{Pr(Rail)} = \frac{\exp(V_{Auto})}{\exp(V_{Rail})} = \exp(V_{Auto} - V_{Rail})
 (\#eq:probratioar)
 \end{equation}
 
 \begin{equation}
-\frac{Pr(Bus)}{Pr(Rail)} = \frac{exp(V_{Bus})}{exp(V_{Rail})} = exp(V_{Bus} - V_{Rail})
+\frac{Pr(Bus)}{Pr(Rail)} = \frac{\exp(V_{Bus})}{\exp(V_{Rail})} = \exp(V_{Bus} - V_{Rail})
 (\#eq:probratiobr)
 \end{equation}
 
@@ -588,7 +585,7 @@ alternative is available or not.  This formulation can be generalized to any
 pair of alternatives by:
 
 \begin{equation}
-\frac{Pr(i)}{Pr(k)} = \frac{exp(V_i)}{exp(V_k)} = exp(V_i - V_k)
+\frac{Pr(i)}{Pr(k)} = \frac{\exp(V_i)}{\exp(V_k)} = \exp(V_i - V_k)
 (\#eq:probratioalts)
 \end{equation}
 
@@ -1222,17 +1219,16 @@ each with ‘*J*’ alternatives is defined as follows:
 \end{equation}
 
 where $\delta_{jt} = 1$ is chosen indicator ($=1$if $j$ is chosen by individual
-$t$ and 0, otherwise) and
-
-$P_{jt}$ is the probability that individual $t$ chooses alternative $j$.
+$t$ and 0, otherwise) and  $P_{jt}$ is the probability that individual $t$
+chooses alternative $j$.
 
 The values of the parameters which maximize the likelihood function are obtained
 by finding the first derivative of the likelihood function and equating it to
 zero.  Since the log of a function yields the same maximum as the function and
 is more convenient to differentiate, we maximize the *log-likelihood function*
 instead of the likelihood function itself.  The expressions for the log
-likelihood function and its first derivative are shown in equations 4.63 and
-4.64 respectively:
+likelihood function and its first derivative are shown in equations \@ref(eq:sixtythree) and
+\@ref(eq:sixtyfour) respectively:
 
 \begin{equation}
   LL(\beta) = Log(L(\beta)) = \sum_{\forall t \in T} \sum_{\forall j \in J} \delta_{jt} \times ln(P_{jt}(\beta))
@@ -1249,7 +1245,7 @@ Further development of the derivative requires representation of the probability
 function, $P_{jt}$, expanded from the version that appears in Equation 4.5 is
 
 \begin{equation}
-P_{jt}= \frac{exp({X'}_{jt}\beta)}{\sum_{j'}exp({X'}_{jt}\beta)}
+P_{jt}= \frac{\exp({X'}_{jt}\beta)}{\sum_{j'}\exp({X'}_{jt}\beta)}
 (\#eq:pjtexpansion)
 \end{equation}
 
@@ -1412,8 +1408,8 @@ model.
 [^withoutnumint]: A model for which the probability can be calculated without
 use of numerical integration or simulation methods.
 
-[^sumexp]: The exponent of a summation, $exp(A+B)$, is equal to the product of
-the exponents of the elements in the sum, $exp(A) exp(B)$ .
+[^sumexp]: The exponent of a summation, $\exp(A+B)$, is equal to the product of
+the exponents of the elements in the sum, $\\exp(A) \exp(B)$ .
 
 [^illustratecalcs]: We use tables to illustrate calculation of the utility
 values and MNL probabilities. The first column shows the specification
