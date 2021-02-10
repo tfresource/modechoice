@@ -113,7 +113,7 @@ The exponential function is described in Figure 4.3 which shows the relationship
 between $exp(V_i)$ and $V_i$.  Note that $exp(V_i)$ is always positive and
 increases monotonically with  $V_i$.
 
-```{r viwithexpVi, fig.cap="Relationship Between V_i and Exp(V_i)", include = FALSE}
+```{r viwithexpVi, fig.cap="Relationship Between V_i and Exp(V_i)"}
 
 tibble( x = seq(-3,3,.1), y = exp(x)) %>%
   ggplot(aes(x = x, y = y)) + 
@@ -130,8 +130,18 @@ probabilities of each alternative are given by modifying equation 4.5 for each
 alternative to obtain:
 
 \begin{equation}
-  Pr(DA) = \frac{exp(V_DA)}{exp(V_DA) \plus exp(V_SR) \plus exp(V_TR)}
+  Pr(DA) = \frac{exp(V_{DA})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
   (\#eq:prDAformnl)
+\end{equation}
+
+\begin{equation}
+  Pr(SR) = \frac{exp(V_{SR})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
+  (\#eq:prSRformnl)
+\end{equation}
+
+\begin{equation}
+  Pr(TR) = \frac{exp(V_{TR})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
+  (\#eq:prTRformnl)
 \end{equation}
 
 where $Pr(DA)$, $Pr(SR)$, and $Pr(TR)$ are the probabilities of the
@@ -143,7 +153,15 @@ probability of any alternative and to simplify the equation by replacing the
 explicit summation in the denominator by the summation over alternatives as:
 
 
+\begin{equation}
+  Pr(i) = \frac{exp(V_{i})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
+  (\#eq:mnlprob)
+\end{equation}
 
+\begin{equation}
+  Pr(i) = \frac{exp(V_{i})}{\sum_{j=DA,SR,TR}exp(V_j)}
+  (\#eq:mnlprobgeneral)
+\end{equation}
 
 
 where *i* indicates the alternative for which the probability is being computed. 
@@ -156,7 +174,7 @@ probability of DA as a function of its own utility (with the utilities of other
 alternatives held constant) and in Table 4.2 as a function of the utility of
 other alternatives with its own utility fixed.
 
-```{r dralonefordralone, include = FALSE}
+```{r dralonefordralone}
 
 tibble(
   case = 1:5,
@@ -173,7 +191,7 @@ tibble(
 
 ```
 
-```{r draloneforshrridetransit, include= FALSE}
+```{r draloneforshrridetransit}
 
 tibble(
   case = 6:11,
@@ -258,14 +276,20 @@ equations are unchanged if the same incremental value, say $\Delta V$, is added
 to the utility of each alternative.  The original probabilities for the three
 alternatives in the example are given by:
 
-
+\begin{equation}
+  Pr(i) = \frac{exp(V_{i})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})}
+  (\#eq:originalprob)
+\end{equation}
 
 where *i* is the alternative for which the probabilities are being computed.
 
 Adding $\Delta V$ to the systematic components of $V_{DA}$, $V_{SR}$ and
 $V_{TR}$ gives[^sumexp]:
 
-
+\begin{equation}
+  Pr(i)=\frac{exp (V_i + {\Delta V })}{exp (V_{DA}+{\Delta V }) + exp (V_{SR}+{\Delta V }) + exp (V_{TR}+{\Delta V })}
+  (\#eq:probdeltav)
+\end{equation}
 
 
 
