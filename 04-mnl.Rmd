@@ -1320,29 +1320,23 @@ the three individuals in the sample is as follows:
 According to the logit model, the probabilities for the observed mode for each
 individual are:
 
-\begin{equation}
-$\displaystyle Individual \ 1 \ (P_{11}) = \frac{exp(30\beta)}{exp(50\beta)+exp(30\beta)} = \frac{1}{1+exp(20\beta)}$
-(\#eq:IndividualP11)
-\end{equation}
-
-\begin{equation}
-$\displaystyle Individual \ 2 \ (P_{12}) = \frac{exp(20\beta)}{exp(10\beta)+exp(20\beta)} = \frac{1}{1+exp(-10\beta)}$
-(\#eq:IndividualP12)
-\end{equation}
-
-\begin{equation}
-$\displaystyle Individual \ 3 \ (P_{23}) = \frac{exp(30\beta)}{exp(30\beta)+exp(40\beta)} = \frac{1}{1+exp(10\beta)}$
-(\#eq:IndividualP23)
-\end{equation}
+\begin{align}
+\text{Individual}_1 \ (P_{11}) &= 
+  \frac{\exp(30\beta)}{\exp(50\beta)+\exp(30\beta)} = \frac{1}{1+\exp(20\beta)}   (\#eq:IndividualP11)\\
+\text{Individual}_2 (P_{12}) &= 
+  \frac{\exp(20\beta)}{\exp(10\beta)+\exp(20\beta)} = \frac{1}{1+\exp(-10\beta)} (\#eq:IndividualP12)\\
+\text{Individual}_3 \ (P_{23}) &= 
+  \frac{\exp(30\beta)}{\exp(30\beta)+\exp(40\beta)} = \frac{1}{1+\exp(10\beta)} (\#eq:IndividualP23)
+\end{align}
 
 The log-likelihood expression for this sample will be as follows:
 
-\begin{equation}
-$\displaystyle LL = \sum_{j=1,2}\sum_{t=1,2,3}\delta_{jt} \times \ln(P_{jt})$
-$= 1 \times \ln(P_{11}) + 0 \times \ln(P_{21}) + 1 \times \ln(P_{12}) + 0 \times \ln(P_{22}) + 0 \times \ln(P_{13}) +1 \times \ln(P_{23})$
-$= \ln(P_{11})+\ln(P_{12})+\ln(P_{23})$
+\begin{align}
+LL &= \sum_{j=1,2}\sum_{t=1,2,3}\delta_{jt} \times \ln(P_{jt})\\
+   &= 1 \times \ln(P_{11}) + 0 \times \ln(P_{21}) + 1 \times \ln(P_{12}) \ldots \\
+   &= \ln(P_{11})+\ln(P_{12})+\ln(P_{23})\\
 (\#eq:LogLikelihood)
-\end{equation}
+\end{align}
 
 
 A maximum likelihood estimator finds the value of the parameter $\beta$  which
