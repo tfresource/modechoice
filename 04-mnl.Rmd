@@ -356,22 +356,22 @@ property more apparent.  For the drive alone alternative, this expression can be
 obtained by multiplying the numerator and denominator of the standard
 probability expression by exp(-VDA) as shown in the following equations.
 
+\usepackage{amsmath}
 \begin{equation}
-  Pr(DA) = \frac{exp(V_{DA})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})} \times \frac {exp(-V_{DA})}{exp(-V_{DA})}
-  = \frac {exp(V_{DA})\times exp(-V_{DA})}{[exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})] \times exp(-V_{DA})}
-  = \frac {}
+\begin{split}
+  Pr(DA) &= \frac{exp(V_{DA})}{exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})} \times \frac {exp(-V_{DA})}{exp(-V_{DA})}\\
+  &= \frac {exp(V_{DA})\times exp(-V_{DA})}{[exp(V_{DA}) + exp(V_{SR}) + exp(V_{TR})] \times exp(-V_{DA})}\\
+  &= \frac {exp(0)}{exp(0) + exp(V_{SR}-V_{DA}) + exp(V_{TR}-V_{DA})}
+  \end{split}
   (\#eq:fournineteen)
-\end{equation}
-
-\begin{equation}
-Pr(Auto) = \frac{exp(V_{Auto})}{exp(V_{Auto})+exp(V_{Bus})+exp(V_{Rail})}
-(\#eq:fourtwenty)
 \end{equation}
 
 which simplifies to: 
 
-
-
+\begin{equation}
+Pr(i) = \frac{1}{exp(0) + exp(V_{SR}-V_{DA}) + exp(V_{TR}-V_{DA})}
+(\#eq:fourtwenty)
+\end{equation}
 
 This formulation explicitly shows that the probability of the drive alone
 alternative is a function of the differences in systematic utility between the
@@ -380,6 +380,10 @@ general case for alternative $i$ which can be represented in terms of the
 pairwise difference in its utility and the utility of each of the other
 alternatives by the following equation:
 
+\begin{equation}
+Pr(i) = \frac{1}{1 + \sum_{j \ne i}exp(V_j - V_i)}  \qquad \forall i \in J
+(\#eq:fourtwentyone)
+\end{equation}
 
 #### Implication of Constant Differences for Alternative Specific Constants and Variables
 
@@ -389,19 +393,57 @@ systematic portion of the utility of an individual, ‘$t$’, and alternative �
 is the sum of decision-maker related bias, mode attribute related utility, and
 interactions between these.  That is:
 
+\begin{equation}
+V_{DA} = V_{DA}(S_t) + V(X_{DA}) + V(S_t,X_{DA})
+(\#eq:fourtwentytwo)
+\end{equation}
 
+\begin{equation}
+V_{SR} = V_{SR}(S_t) + V(X_{SR}) + V(S_t,X_{SR})
+(\#eq:fourtwentythree)
+\end{equation}
+
+\begin{equation}
+V_{TR} = V_{TR}(S_t) + V(X_{TR}) + V(S_t,X_{TR})
+(\#eq:fourtwentyfour)
+\end{equation}
 
 Each term on the right hand side of each equation can be replaced by an explicit
 function of the relevant variables.  For example, if the decision-maker
 preferences are a function of income, attribute based utility is a function of
 travel time and there are no interaction terms, the utility function becomes:
 
+\begin{equation}
+  V_{DA} = \beta_{DA,0} + \beta_{DA,1} \times Income_t + \gamma \times TT_{DA}
+(\#eq:fourtwentyfive)
+\end{equation}
 
+\begin{equation}
+  V_{SR} = \beta_{SR,0} + \beta_{SR,1} \times Income_t + \gamma \times TT_{SR}
+(\#eq:fourtwentysix)
+\end{equation}
+
+\begin{equation}
+  V_{TR} = \beta_{TR,0} + \beta_{TR,1} \times Income_t + \gamma \times TT_{TR}
+(\#eq:fourtwentyseven)
+\end{equation}
 
 and the differences between pairs of alternatives for prediction of DA
 probability become:
 
+\begin{equation}
+\begin{split}
+  V_{SR} - V_{DA} = (\beta_{SR,0} - \beta_{DA,0}) + \beta_{SR,1} - \beta_{DA,1})\\ \times Income_t + \gamma \times (TT_{SR} - TT_{DA})
+\end{split}
+(\#eq:fourtwentyeight)
+\end{equation}
 
+\begin{equation}
+\begin{split}
+  V_{TR} - V_{DA} = (\beta_{TR,0} - \beta_{DA,0}) + \beta_{TR,1} - \beta_{DA,1})\\ \times Income_t + \gamma \times (TT_{TR} - TT_{TA})
+\end{split}
+(\#eq:fourtwentynine)
+\end{equation}
 
 It is not possible to estimate all of the constants; $\beta_{DA,0}$,
 $\beta_{SR,0}$ and $\beta_{TR,0}$; and all of the income parameters;
@@ -424,15 +466,40 @@ estimation results will appear to be different.  For example, if we set TRansit
 as the reference alternative by setting $\beta_{TR,0}$ and $\beta_{TR,1}$ equal
 to zero, the utility functions become:
 
+\begin{equation}
+  V_{DA,t} = \beta_{DA-TR,0} + \beta_{DA-TR,1} \times Inc_t + \gamma \times TT_{DA}
+(\#eq:fourthirty)
+\end{equation}
 
+\begin{equation}
+  V_{SR,t} = \beta_{SR-TR,0} + \beta_{SR-TR,1} \times Inc_t + \gamma \times TT_{SR}
+(\#eq:fourthirtyone)
+\end{equation}
+
+\begin{equation}
+  V_{TR,t} = \qquad \qquad \qquad 0  \qquad \qquad \qquad + \gamma \times TT_{TR}
+(\#eq:fourthirtytwo)
+\end{equation}
 
 where the modified notation for the remaining constants and income parameters is
 used to emphasize that these parameters are ‘relative to the TRansit
 alternative.’  Alternatively, if we select Drive Alone as the reference
 alternative, we obtain:
 
+\begin{equation}
+  V_{DA,t} = \qquad \qquad \qquad 0  \qquad \qquad \qquad + \gamma \times TT_{DA}
+(\#eq:fourthirtythree)
+\end{equation}
 
+\begin{equation}
+  V_{SR,t} = \beta_{SR-DA,0} + \beta_{SR-DA,1} \times Inc_t + \gamma \times TT_{SR}
+(\#eq:fourthirtyfour)
+\end{equation}
 
+\begin{equation}
+  V_{TR,t} = \beta_{TR-DA,0} + \beta_{TR-DA,1} \times Inc_t + \gamma \times TT_{TR}
+(\#eq:fourthirtyfour)
+\end{equation}
 
 where the constants and income parameters are relative to the Drive Alone alternative.
 
@@ -789,7 +856,7 @@ alternative $i$.  The mathematical expression for the *direct derivative* of
 $P_i$ with respect to $X_{ik}$ is:
 
 \begin{equation}
-$\displaystyle \frac{\partial P_{i}}{\partial X_{ik}} = \displaystyle \frac{\partial V_{i}}{\partial X_{ik}} \times (P_{i}) \times (1-P_{i})$  
+\displaystyle \frac{\partial P_{i}}{\partial X_{ik}} = \displaystyle \frac{\partial V_{i}}{\partial X_{ik}} \times (P_{i}) \times (1-P_{i})  
 (\#eq:expressionfordirectderivative)
 \end{equation}
 
@@ -798,7 +865,7 @@ where $V_i$ is the utility of the alternative.[^derivationTrain]
 Typically the utility function is specified to be linear in parameters; that is:
 
 \begin{equation}
-$V_{i} = \beta_{0} + \beta_{1}X_{1i} + \beta_{2}X_{2i} + \cdots +  \beta_{k}X_{ki} + \cdots + \beta_{K}X_{Ki}$  
+V_{i} = \beta_{0} + \beta_{1}X_{1i} + \beta_{2}X_{2i} + \cdots +  \beta_{k}X_{ki} + \cdots + \beta_{K}X_{Ki}  
 (\#eq:linearutility)
 \end{equation}
 
@@ -806,7 +873,7 @@ $V_{i} = \beta_{0} + \beta_{1}X_{1i} + \beta_{2}X_{2i} + \cdots +  \beta_{k}X_{k
 In this case, the expression for the *direct derivative* of $P_i$ with respect to $X_{ik}$ reduces to:
 
 \begin{equation}
-$\displaystyle \frac{\partial P_{i}}{\partial X_{ki}} = \beta_{k} \times (P_{i}) \times (1-P_{i})$  
+\displaystyle \frac{\partial P_{i}}{\partial X_{ki}} = \beta_{k} \times (P_{i}) \times (1-P_{i}) 
 (\#eq:reducesexpressionfordirectderivative)
 \end{equation}
 
@@ -814,24 +881,13 @@ where $\beta_{k}$ is the coefficient of attribute $k$.
 
 The value of the derivative is largest at $P_{i} = \frac{1}{2}$ and becomes smaller as $P_{i}$  approaches zero or one.  This implies that the magnitude of the response to a change in an attribute will be greatest when the choice probability for the alternative under consideration is 0.5 and this response diminishes as the probability approaches zero or one. The direct derivative is simply the slope of the logit model probability curve illustrated in Figure 4.4 and that its mathematical properties are consistent with the qualitative discussion of the S-shape of the logit probability curve in section 4.1.1.  The sign of the derivative is the same as the sign of the parameter describing the impact of $X_{ik}$ in the utility of alternative $i$.  Thus, an increase in $X_{ik}$  will increase (decrease)  $P_{i}$ if $\beta_{ik}$  is positive (negative).
 
-The value of the derivative is largest at $P_i= ½$ and becomes smaller as $P_i$
-approaches zero or one.  This implies that the magnitude of the response to a
-change in an attribute will be greatest when the choice probability for the
-alternative under consideration is 0.5 and this response diminishes as the
-probability approaches zero or one. The direct derivative is simply the slope of
-the logit model probability curve illustrated in Figure 4.4 and that its
-mathematical properties are consistent with the qualitative discussion of the
-*S*-shape of the logit probability curve in section 4.1.1.  The sign of the
-derivative is the same as the sign of the parameter describing the impact of
-$X_{ik}$ in the utility of alternative $i$.  Thus, an increase in $X_{ik}$ will
-increase (decrease) $P_i$ if $\beta_{ik}$ is positive (negative).
-Often it is important to understand how the choice probability of other alternatives changes in response to a given change in the attribute level of the action alternative.  This measure, termed the $cross$ $derivative$, is obtained by computing the derivative of the choice probability of an alternative,$P_{j}$ , with respect to the attribute of the changed alternative, $X_{ik}$.  This $cross$ $derivative$ for linear utility functions is:
+Often it is important to understand how the choice probability of other alternatives changes in response to a given change in the attribute level of the action alternative.  This measure, termed the $cross$ $derivative$, is obtained by computing the derivative of the choice probability of an alternative,$P_{j}$ , with respect to the attribute of the changed alternative, $X_{ik}$.  This $cross$ $derivative$ for linear utility functions is:[^derivationTrain2]
 
-derivative* for linear utility functions is:[^derivationTrain2]
 \begin{equation}
-$\displaystyle \frac{\partial P_{j}}{\partial X_{ik}} = \beta_{k} \times (P_{i}) \times (P_{j})   $$\forall_{i} \ne j$  
-(\#eq:linearutilityforcrossderivative)
+\displaystyle \frac{\partial P_{i}}{\partial X_{ki}} = \beta_{k} \times (P_{i}) \times (1-P_{j})  
+(\#eq:fortyfive)
 \end{equation}
+
 Often it is important to understand how the choice probability of other
 alternatives changes in response to a given change in the attribute level of the
 action alternative.  This measure, termed the *cross derivative*, is obtained by
@@ -839,8 +895,10 @@ computing the derivative of the choice probability of an alternative, $P_j$,
 with respect to the attribute of the changed alternative, $X_{ik}$.  This *cross
 derivative* for linear utility functions is:
 
-
-
+\begin{equation}
+\displaystyle \frac{\partial P_{j}}{\partial X_{ik}} = \beta_{k} \times (P_{i}) \times (P_{j})   \forall_{i} \ne j  
+(\#eq:linearutilityforcrossderivative)
+\end{equation}
 
 where $\beta_{jk}$ is the coefficient of the $k^{th}$ attribute of alternative $j$,
       $P_{i}$ is the probability of alternative $i$, and
@@ -858,10 +916,12 @@ It is useful to recognize that the sum of the derivatives over all the
 alternatives must be equal to zero.  That is,
 
 \begin{equation}
-$\displaystyle \sum_{\forall_{j}}\frac{\partial P_{j}}{\partial X_{ik}} = \frac{\partial P_{j}}{\partial X_{ik}} + \sum_{\forall_{j \ne i}}\frac{\partial P_{j}}{\partial X_{ik}}$
-$= \beta_{k}P_{i}(1-P_{i}) - \sum_{\forall_{j \ne i}}\beta_{k}P_{i}P_{j}$
-$= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}\sum_{\forall_{j \ne i}}P_{j}$
-$= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}(1-P_{i}) = 0$
+\begin{split}
+\displaystyle \sum_{\forall_{j}}\frac{\partial P_{j}}{\partial X_{ik}}\\ = \frac{\partial P_{j}}{\partial X_{ik}} + \sum_{\forall_{j \ne i}}\frac{\partial P_{j}}{\partial X_{ik}}\\
+= \beta_{k}P_{i}(1-P_{i}) - \sum_{\forall_{j \ne i}}\beta_{k}P_{i}P_{j}\\
+= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}\sum_{\forall_{j \ne i}}P_{j}\\
+= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}(1-P_{i}) = 0
+\end{split}
 (\#eq:sumofderivativesequaltozero)
 \end{equation}
 
@@ -887,8 +947,8 @@ proportional change in the probability divided by the proportional change in the
 attribute under consideration:
 
 \begin{equation}
-$\displaystyle Elasticity = \frac{Percentage change in Probability}{Percentage Change in Attribute}$
-$= \frac{(P_{2}-P_{1})/P_{1}}{(X_{2}-X_{1})/X_{1}} = \frac{\Delta P/P_{1}}{\Delta X/X_{1}}$
+\displaystyle Elasticity = \frac{Percentage change in Probability}{Percentage Change in Attribute}$
+$= \frac{(P_{2}-P_{1})/P_{1}}{(X_{2}-X_{1})/X_{1}} = \frac{\Delta P/P_{1}}{\Delta X/X_{1}}
 (\#eq:Elasticity)
 \end{equation}
 
@@ -901,14 +961,14 @@ combination ($P_{i1}$, $X_{i1}$) or the new probability-attribute combination
 relative to the mid-point of both sets of variables, yielding a measure called
 the *arc elasticity*.  The expression for arc elasticity is:
 \begin{equation}
-$\displaystyle Arc Elasticity = \frac{\Bigg(\frac{(P_{2}-P_{1})}{(P_{1}+P_{2})/2)}\Bigg)}{\Bigg(\frac{(X_{2}-X_{1})}{(X_{1}+X_{2})/2)}\Bigg)} = \frac{\Bigg(\frac{(\Delta P)}{(P_{1}+P_{2})/2)}\Bigg)}{\Bigg(\frac{(\Delta X)}{(X_{1}+X_{2})/2)}\Bigg)}$
+\displaystyle Arc Elasticity = \frac{\Bigg(\frac{(P_{2}-P_{1})}{(P_{1}+P_{2})/2)}\Bigg)}{\Bigg(\frac{(X_{2}-X_{1})}{(X_{1}+X_{2})/2)}\Bigg)} = \frac{\Bigg(\frac{(\Delta P)}{(P_{1}+P_{2})/2)}\Bigg)}{\Bigg(\frac{(\Delta X)}{(X_{1}+X_{2})/2)}\Bigg)}
 (\#eq:ArcElasticity)
 \end{equation}
 
 Estimates of elasticity will differ depending on whether the normalization is at the start value, final value or mid-point values.  This confusion can be avoided by computing elasticities for $\underline{very\ small}$ changes. When the elasticity is computed for infinitesimally small changes, the elasticity obtained is termed the point elasticity.  The expression for point elasticity is given as a function of the derivatives discussed earlier (section 4.4.1):
 
 \begin{equation}
-$\displaystyle \eta_{X}^{P} = \frac{\Bigg(\frac{\partial P}{P}\Bigg)}{\Bigg(\frac{\partial X}{X}\Bigg)} = \Bigg(\frac{\partial P}{\partial X}\Bigg) \times \Bigg(\frac{X}{P}\Bigg)$
+\displaystyle \eta_{X}^{P} = \frac{\Bigg(\frac{\partial P}{P}\Bigg)}{\Bigg(\frac{\partial X}{X}\Bigg)} = \Bigg(\frac{\partial P}{\partial X}\Bigg) \times \Bigg(\frac{X}{P}\Bigg)
 (\#eq:PointElasticity)
 \end{equation}
 
@@ -920,7 +980,7 @@ the *point elasticity*.  The expression for point elasticity is given as a
 function of the derivatives discussed earlier (section 4.4.1):
 
 \begin{equation}
-$\displaystyle \eta_{X_{ik}}^{P_{i}} = \frac{\Bigg(\frac{\partial P_{i}}{P}\Bigg)}{\Bigg(\frac{\partial X_{ik}}{X_{ik}}\Bigg)} = \Bigg(\frac{\partial P_{i}}{\partial X_{ik}}\Bigg) \times \Bigg(\frac{X_{ik}}{P_{i}}\Bigg)$
+\displaystyle \eta_{X_{ik}}^{P_{i}} = \frac{\Bigg(\frac{\partial P_{i}}{P}\Bigg)}{\Bigg(\frac{\partial X_{ik}}{X_{ik}}\Bigg)} = \Bigg(\frac{\partial P_{i}}{\partial X_{ik}}\Bigg) \times \Bigg(\frac{X_{ik}}{P_{i}}\Bigg)
 (\#eq:LevelPointElasticity)
 \end{equation}
 
@@ -937,7 +997,7 @@ We can substitute equation 4.45 into 4.51 to obtain the following expression for
 the direct elasticity
 
 \begin{equation}
-$\displaystyle \eta_{X_{ik}}^{P_{i}} = \beta_{k}P_{i}(1-P_{i})\Bigg(\frac{X_{ik}}{P_{i}}\Bigg) = \beta_{k}X_{ik}(1-P_{i})$
+\displaystyle \eta_{X_{ik}}^{P_{i}} = \beta_{k}P_{i}(1-P_{i})\Bigg(\frac{X_{ik}}{P_{i}}\Bigg) = \beta_{k}X_{ik}(1-P_{i})
 (\#eq:LevelPointDirectElasticity)
 \end{equation}
 
@@ -952,7 +1012,7 @@ choice probability of an alternative ($P_j$) with respect to a proportional
 change in some attribute of another alternative ($X_{ik}$).  The expression for
 cross elasticity in a multinomial logit model is given by:
 \begin{equation}
-$\displaystyle \eta_{X_{ik}}^{P_{j}} = \frac{\Bigg(\frac{\partial P_{j}}{P_{j}}\Bigg)}{\Bigg(\frac{\partial X_{ik}}{X_{ik}}\Bigg)} = \Bigg(\frac{\partial P_{j}}{\partial X_{ik}}\Bigg) \times \Bigg(\frac{X_{ik}}{P_{j}}\Bigg) \ \forall j\ne i$
+\displaystyle \eta_{X_{ik}}^{P_{j}} = \frac{\Bigg(\frac{\partial P_{j}}{P_{j}}\Bigg)}{\Bigg(\frac{\partial X_{ik}}{X_{ik}}\Bigg)} = \Bigg(\frac{\partial P_{j}}{\partial X_{ik}}\Bigg) \times \Bigg(\frac{X_{ik}}{P_{j}}\Bigg) \ \forall j\ne i
 (\#eq:LevelCrossElasticity)
 \end{equation}
 
@@ -962,7 +1022,7 @@ We substitute equation 4.46 into 4.53 to obtain the following expression for
 cross elasticity of logit model probabilities:
 
 \begin{equation}
-$\displaystyle \eta_{X_{ik}}^{P_{i}} = (-\beta_{k}P_{i}P_{j})\Bigg(\frac{X_{ik}}{P_{j}}\Bigg) = -\beta_{k}X_{ik}P_{i}$
+\displaystyle \eta_{X_{ik}}^{P_{i}} = (-\beta_{k}P_{i}P_{j})\Bigg(\frac{X_{ik}}{P_{j}}\Bigg) = -\beta_{k}X_{ik}P_{i}
 (\#eq:LevelPointCrossElasticity)
 \end{equation}
 
@@ -1093,7 +1153,15 @@ with two variables and no constant.  Consider that the only two modes available
 to a traveler are auto and bus and the deterministic component of the utility
 function for the two modes is defined as follows:
 
+\begin{equation}
+  V_{Auto} = \beta_1 \times TravelTime_{Auto} +  \beta_{2} \times TravelCost_{Auto}
+(\#eq:sixty)
+\end{equation}
 
+\begin{equation}
+  V_{Bus} = \beta_1 \times TravelTime_{Bus} +  \beta_{2} \times TravelCost_{Bus}
+(\#eq:sixtyone)
+\end{equation}
 
 Let us assume that in this example, bus has higher travel time and lower cost
 than car.  For a traveler, the choice of travel mode will depend on his/her
@@ -1148,11 +1216,15 @@ the *likelihood function*, and 2) estimating parameter values which maximize the
 likelihood function.  The likelihood function for a sample of ‘*T*’ individuals,
 each with ‘*J*’ alternatives is defined as follows:
 
+\begin{equation}
+  L(\beta) = \prod_{\forall t \in T} \prod_{\forall j \in J}(P_{jt}(\beta))^{\delta_{jt}}
+(\#eq:sixtytwo)
+\end{equation}
 
+where $\delta_{jt} = 1$ is chosen indicator ($=1$if $j$ is chosen by individual
+$t$ and 0, otherwise) and
 
-where
-
-
+$P_{jt}$ is the probability that individual $t$ chooses alternative $j$.
 
 The values of the parameters which maximize the likelihood function are obtained
 by finding the first derivative of the likelihood function and equating it to
@@ -1162,7 +1234,16 @@ instead of the likelihood function itself.  The expressions for the log
 likelihood function and its first derivative are shown in equations 4.63 and
 4.64 respectively:
 
+\begin{equation}
+  LL(\beta) = Log(L(\beta)) = \sum_{\forall t \in T} \sum_{\forall j \in J} \delta_{jt} \times ln(P_{jt}(\beta))
+(\#eq:sixtythree)
+\end{equation}
 
+\begin{equation}
+\frac{\partial (LL)}{\partial \beta_k} = \sum_{\forall t \in T} \sum_{\forall j \in J} \delta_{jt} \times \frac{1}{P_{jt}} \times \frac{\partial P_{jt}(\beta)}{\partial \beta} \qquad \forall k
+(\#eq:sixtyfour)
+\end{equation}
+[^dependencePb]
 
 Further development of the derivative requires representation of the probability
 function, $P_{jt}$, expanded from the version that appears in Equation 4.5 is
