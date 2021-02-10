@@ -3,6 +3,7 @@
 library(tidyverse)
 library(haven)
 library(mlogit)
+library(modelsummary)
 ```
 
 
@@ -49,5 +50,31 @@ write_rds("data/sfwork_logit.rds")
 
 
 ## Estimation of MNL Model with Basic Specification
+
+```{r basic-estimation}
+base <- mlogit(mode ~ price + catch | income, data = Fish)
+
+# estimate a model with constants only by constraining a single generic variable
+# to be zero
+market_shares <- mlogit(mode ~ price, data = Fish, constPar = c("price" = 0))
+
+# Estimate a null model by constraining ALL the parameters to be zero. 
+fixed_coefs <- rep(0,4) %>% setNames(c(names(coef(market_shares)), "price"))
+null_model <- mlogit(mode ~ price, data = Fish, start = fixed_coefs, iterlim = 0)
+```
+
+```{r basic-estimation-table}
+basic_estimation <- list(
+  "Null Model" = null_model,
+  "Market Shares" = market_shares,
+  "Base Model" = base
+)
+
+modelsummary(
+  basic_estimation, 
+  title = "Estimation Results for Zero Coefficient, Constants Only, and Base Models"
+)
+```
+
 
 ## Value of Time
