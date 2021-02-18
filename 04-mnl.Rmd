@@ -2,6 +2,7 @@
 
 ```{r setup, include = FALSE}
 library(tidyverse)
+library(kableExtra)
 ```
 
 
@@ -342,8 +343,20 @@ computation of the choice probabilities based on the initial set of modal
 utilities and Table 4.4 shows the same computation after each of the utilities
 is increased by one.[^illustratecalcs]
 
+```{r tabel4-3, echo = F}
 
+thegoods <- data.frame(
+ "Alternative"= c("Drive Alone","Shared Ride","Transit"),
+ "Expression" = c(-0.50,-1.50,-3.00),
+ "Value" = c(-0.50,-1.50,-3.00),
+ "Exponent" = c(0.607,0.223,0.050),
+ "Probability" = c(0.690,0.254,0.057))
 
+kbl(thegoods, align = "c", booktabs = T, caption = "Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative Before Adding Data") %>% 
+kable_classic() %>% 
+  add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
+
+```
 
 
 
@@ -526,7 +539,7 @@ tibble(
 <center>
 **Table 4-7 Changes in Alternative Specific Constants and Income Parameters**
 </center>
-|                |TRansit as Base Alternative ||Change in Parameters  ||Drive Alone as Base Alternative||
+|                |Transit as Base Alternative ||Change in Parameters  ||Drive Alone as Base Alternative||
 | -------------- | :----------: | :----------: | :--------: | :------: | :----------: | :-------------: |
 |**Alternative** |**Constant**  |**Income**    |**Constant**|**Income**|**Constant**  |**Income**       |
 | Drive Alone    | 1.1          | 0.008        |-1.1        |-0.008    |0.0           |0.000            |
