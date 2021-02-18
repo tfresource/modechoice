@@ -268,12 +268,19 @@ Statistical tests may be used to evaluate formal hypotheses about individual par
 
 There is sampling error associated with the model parameters because the model is estimated from only a sample of the relevant population (the relevant population includes all commuters in the Bay Area). The magnitude of the sampling error in a parameter is provided by the standard error associated with that parameter; the larger the standard error, the lower the precision with which the corresponding parameter is estimated. The standard error plays an important role in testing whether a particular parameter is equal to some hypothesized value, as we discuss next.
 
-The statistic used for testing the null hypothesis that a parameter   is equal to some hypothesized value,  , is the asymptotic t-statistic, which takes the following form:   
+The statistic used for testing the null hypothesis that a parameter $\hat{\beta_{k}}$ is equal to some hypothesized value, $\hat{\beta_{k}}$, is the asymptotic t-statistic, which takes the following form:   
 
-where
+\begin{equation}
+$\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}}$
+(\#eq:asymptotic t-statistic)
+\end{equation}
+
+where $\hat{\beta_{k}}$ is the estimate for the $k^{th}$ parameter,
+      $\beta_{k}^{*}$   is the hypothesized value for the $k^{th}$ parameter and
+      $S_{k}$           is the standard error of the estimate
 
 
-Sufficiently large absolute values of the *t-statistic* lead to the rejection of the null hypothesis that the parameter is equal to the hypothesized value. When the hypothesized value,  , is zero, the t-statistic becomes the ratio of the estimated parameter to the standard error.  The default estimation output from most software packages includes the t-statistic for the test of the hypothesis that the true value is zero.  The rejection of this null hypothesis implies that the corresponding variable has a significant impact on the modal utilities and suggests that the variable should be retained in the model.  Low absolute values of the t-statistic imply that the variable does not contribute significantly to the explanatory power of the model and can be considered for exclusion.  If it is concluded that the hypothesis is not rejected, the equality constraint can be incorporated in the model by creating a new variable  .
+Sufficiently large absolute values of the *t-statistic* lead to the rejection of the null hypothesis that the parameter is equal to the hypothesized value. When the hypothesized value, $\beta_{k}^{*}$, is zero, the t-statistic becomes the ratio of the estimated parameter to the standard error.  The default estimation output from most software packages includes the t-statistic for the test of the hypothesis that the true value is zero.  The rejection of this null hypothesis implies that the corresponding variable has a significant impact on the modal utilities and suggests that the variable should be retained in the model.  Low absolute values of the t-statistic imply that the variable does not contribute significantly to the explanatory power of the model and can be considered for exclusion.  If it is concluded that the hypothesis is not rejected, the equality constraint can be incorporated in the model by creating a new variable $X_{kl} = X_{k} + X_{l}$ .
 
 The selection of a critical value for the t-statistic test is a matter of judgment and depends on the level of confidence with which the analyst wants to test his/her hypotheses. The critical t-values for different levels of confidence for samples sizes larger than 150 (which is the norm in mode choice analysis) are shown in Table 5-3.  It should be apparent that the critical t-value increases with the desired level of confidence.  Thus, one can conclude that a particular variable has no influence on choice (or equivalently that the true parameter associated with the variable is zero) can be rejected at the 90% level of confidence if the absolute value of the t-statistic is greater than 1.645 and at the 95% level of confidence if the t-statistic is greater than 1.960 .  
 
@@ -287,18 +294,27 @@ The lack of significance of the alternative specific walk constant is immaterial
 
 #### Test of Linear Relationship between Parameters
 
-It is often interesting to determine if two parameters are statistically different from one another or if two parameters are related by a specific value ration.  These tests are similarly based on the t-statistic; however, the formulation of the test is somewhat different from that described in Section 5.7.3.1.  To test the hypothesis   vs.  ; we use the asymptotic t-statistic, which takes the following form:   
+It is often interesting to determine if two parameters are statistically different from one another or if two parameters are related by a specific value ration.  These tests are similarly based on the t-statistic; however, the formulation of the test is somewhat different from that described in Section 5.7.3.1.  To test the hypothesis $H_{0}:\beta_{k} = \beta_{l}$ vs. $H_{A}:\beta_{k} \ne \beta_{l}$; we use the asymptotic t-statistic, which takes the following form:   
+\begin{equation}
+$\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\hat\beta_{l}}{\sqrt{S_{k}^{2}+S_{l}^{2}-2S_{k,l}}}$
+(\#eq:asymptotic H0vsHA)
+\end{equation}
 
-
-where
+where $\hat{\beta_{k}}$, $\hat{\beta_{l}}$ are the estimates for the $k^{th}$ and $l^{th}$ parameters,
+      $S_{k}$, $S_{l}$                     are the standard errors of the estimates for the $k^{th}$ and $l^{th}$ parameters and
+      $S_{k,l}$                            is the error covariance for the estimates for the $k^{th}$ and $l^{th}$ parameters.
 
 
 That is the ratio is the differences between the two parameter estimates and the standard deviation of that difference.  As before, sufficiently large absolute values of the *t-statistic* lead to the rejection of the null hypothesis that the parameters are equal. Again, rejection of this null hypothesis implies that the two corresponding variables have a significant different impact on the modal utilities and suggests that the variable should be retained in the model and low absolute values of the t-statistic imply that the variables do not have significantly different effects on the utility function or the explanatory power of the model and can be combined in the model.
 
-This test can be readily extended to the test of a hypothesis that the two parameters are related by a predefined ratio; for example, the parameter for time and cost may be related by an *a priori* value of time.  In that case, the null hypothesis becomes   and the alternative hypothesis is  .  The corresponding t-statistic becomes
+This test can be readily extended to the test of a hypothesis that the two parameters are related by a predefined ratio; for example, the parameter for time and cost may be related by an *a priori* value of time.  In that case, the null hypothesis becomes $H_{0}:\beta_{cost} = (VOT) \times \beta_{time}$ and the alternative hypothesis is $H_{A}:\beta_{cost} \ne (VOT) \times \beta_{time}$. The corresponding t-statistic becomes
 
+\begin{equation}
+$\displaystyle t-statistic = \frac{\hat{\beta}_{cost}-(VOT)\hat\beta_{time}}{\sqrt{S_{cost}^{2}+(VOT)^{2}S_{time}^{2}-2(VOT)S_{time,cost}}}$
+(\#eq:corresponding t-statistic)
+\end{equation
 
-The interpretation is the same as above except that the hypothesis refers to the equality of one parameter to the other parameter times an *a priori* fixed value.  In this case, if it is concluded that the hypothesis is not rejected, the ratio constraint can be incorporated in the model by creating a new variable  .
+The interpretation is the same as above except that the hypothesis refers to the equality of one parameter to the other parameter times an *a priori* fixed value.  In this case, if it is concluded that the hypothesis is not rejected, the ratio constraint can be incorporated in the model by creating a new variable $X_{time,\ cost} = X_{cost}+(VOT)X_{time}$.
 
 #### Tests of Entire Models
 
@@ -306,7 +322,13 @@ The t-statistic is used to test the hypothesis that a single parameter is equal 
 
 If all the restrictions that distinguish between the restricted and unrestricted models are valid, one would expect the difference in log-likelihood values (at convergence) of the restricted and unrestricted models to be small. If some or all the restrictions are invalid, the difference in log-likelihood values of the restricted and unrestricted models will be “sufficiently” large to reject the hypotheses. This underlying logic is the basis for the likelihood ratio test. The test statistic is:
 
-where
+\begin{equation}
+$\displaystyle -2\times[LL_{R}-LL_{U}]$
+(\#eq:LLratiotest)
+\end{equation
+
+where $LL_{R}$ is the log-likelihood of the restricted model, and
+      $LL_{U}$ is the log-likelihood of the unrestricted model. 
 
 This test-statistic is chi-squared distributed.  Example chi-squared distributions are shown in Figure 5.4. As with the test for individual parameters, the critical value for determining if the statistic is “sufficiently large” to reject the null hypothesis depends on the level of confidence desired by the model developer.  It is also influenced by the number of restrictions  between the models.  Table 5-5 shows the chi-squared values for selected confidence levels and for different numbers of restrictions.  
 
@@ -316,9 +338,21 @@ Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared 
 
 The likelihood ratio test can be applied to test null hypotheses involving the exclusion of groups of variables from the model.  Table 5-6 illustrates the tests of two hypotheses describing restriction on some or all the parameters in the San Francisco Bay Area commuter mode choice model.  The first hypothesis is that all the parameters are equal to zero. The formal statement of the null hypothesis in this case, is:
 
+\begin{equation}
+$\displaystyle H_{0,a}:\beta_{Travel\ Time} = \beta_{Travel\ Cost} = 0,$
+$\beta_{SR2} = \beta_{SR3} = \beta_{TR} = \beta_{WK} = \beta_{BK} = 0, and$
+$\beta_{Income-SR2} = \beta_{Income-SR3} = \beta_{Income-Transit} = \beta_{Income-Bike} = \beta_{Income-Walk} = 0$
+(\#eq:nullhypothesiscase)
+\end{equation}
 
 This test is not very useful because we almost always reject the null hypothesis that all coefficients are zero. A somewhat more useful null hypothesis is that the variables in the initial model specification provide no additional information in addition to the market share information represented by the alternative specific constants.  The restrictions for this null hypothesis are:
 
+\begin{equation}
+$\displaystyle H_{0,b}:\beta_{Travel\ Time} = \beta_{Travel\ Cost} = 0, and$
+$\beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit}, and$
+$\beta_{Income-Bike} = \beta_{Income-Walk} = 0$
+(\#eq:restrictionsnullhypothesiscase)
+\end{equation}
 
 The log-likelihood values needed to test each of these hypotheses are reported in Table 5-2.  In each case, we include the log-likelihood of the restricted and unrestricted models, the calculated chi-square value and the number of restrictions or degrees of freedom as shown in Table 5-6. The confidence or significance of the rejection of the null hypothesis in each case can be obtained by referring to Table 5-5, more extensive published tables or software (most spreadsheet programs) that calculates the precise level of confidence/significance associated with each test result.
 
