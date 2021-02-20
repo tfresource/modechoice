@@ -131,10 +131,10 @@ sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.
 #this out, or until someone else that has more coding skills than I have does it.
 
 # Convert into mlogit dfidx data frame
-sf_mlogit <- dfidx(sf_work_mode, idx = list(c("perid")))
+sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altnum"))
 
 # write to data/ folder for future use
-write_rds(sf_mlogit, "data-raw/Work Trips/sfwork_logit.rds")
+write_rds(sf_mlogit, "data/worktrips.rds")
 ```
 
 ```{r figure5-1, eval = F}
@@ -145,7 +145,8 @@ write_rds(sf_mlogit, "data-raw/Work Trips/sfwork_logit.rds")
 #I'm going to elect to leave this either until I'm able to get help figuring 
 #this out, or until someone else that has more coding skills than I have does it.
 
-sf_base <- mlogit(altnum ~ cost + tvtt | wkempden, data = sf_mlogit)
+sf_base <- mlogit(chosen ~ cost + tvtt | wkempden, data = sf_mlogit)
+
 
 ```
 
