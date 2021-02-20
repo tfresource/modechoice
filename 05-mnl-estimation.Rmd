@@ -127,10 +127,11 @@ sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.
 
 # Convert into mlogit dfidx data frame
 #   mlogit 
-sf_mlogit <- dfidx(sfwork_mode)
+sf_mlogit <- dfidx(sf_work_mode, idx = list(c("hhid","perid","case")))
+#sf_mlogit2 <- dfidx(sf_work_mode, idx = list("hhid", "perid", "case", "altnum"))
 
 # write to data/ folder for future use
-write_rds("data/sfwork_logit.rds")
+write_rds(sf_mlogit, "data-raw/Work Trips/sfwork_logit.rds")
 ```
 
 
@@ -174,6 +175,7 @@ In addition, different software reports a variety of other information either as
 
 The value for the log-likelihood at zero and constants can be obtained for either software by estimating models without (zero) and with (constants) alternative specific constants  and no other variables.  Further, the log-likelihood at zero can be calculated directly as 
 
+$ \sum_t ln(1/NAlt_t)$
 
 
 ```{r basic-estimation}
@@ -233,33 +235,57 @@ This section presents a descriptive measure, called the rho-squared value   whic
 
 The relationships among modeling results will always appear in the order shown provided the estimated model includes a full set of alternative specific constants.  That is, the constants only model is always better than the equally likely model, and the estimated model with constants is always better than the constants only model.  The order of different estimated models will vary except that any model which is a restricted version of another model will be to the left of the unrestricted model.
 
-The rho-squared ( ) value is based on the relationship among the log-likelihood values indicated in Figure 5.2. It is simply the ratio of the distance between the reference model and the estimated model divided by the difference between the reference model and a perfect model.  If the reference model is the equally likely model, the rho square with respect to zero,  , is:
+The rho-squared ($\rho_0^2$ ) value is based on the relationship among the log-likelihood values indicated in Figure 5.2. It is simply the ratio of the distance between the reference model and the estimated model divided by the difference between the reference model and a perfect model.  If the reference model is the equally likely model, the rho square with respect to zero,$\rho_0^2$ , is:
 
-
+\begin{equation}
+\rho_0^2 = \frac{LL(\hat{\beta}) - LL(0)}{LL(\star) - LL(0)}
+(\#eq:fiveseven)
+\end{equation}
 
 Since the log-likelihood value for the perfect model is zero , the   measure reduces to:
 
+\begin{equation}
+\rho_0^2 = 1- \frac{LL(\hat{\beta})}{LL(0)}
+(\#eq:fiveeight)
+\end{equation}
 
 Similarly, the rho-square with respect to the constants only model is:
 
+\begin{equation}
+\rho_0^2 = \frac{LL(\hat{\beta}) - LL(c)}{LL(\star) - LL(c)} = 1- \frac{LL(\hat{\beta})}{LL(c)}
+(\#eq:fivenine)
+\end{equation}
 
-By definition, the values of both rho-squared measures lie between 0 and 1 (this is similar to the R2 measure for linear regression models).  A value of zero implies that the model is no better than the reference model, whereas a value of one implies a perfect model; that is, every choice is predicted correctly.
+By definition, the values of both rho-squared measures lie between 0 and 1 (this is similar to the R^2 measure for linear regression models).  A value of zero implies that the model is no better than the reference model, whereas a value of one implies a perfect model; that is, every choice is predicted correctly.
 
 The rho-squared values for the basic model specification in Table 5-2 are computed based on the formulae shown below as:
 
+\begin{equation}
+\rho_0^2 = 1- \frac{(-3626.2)}{(-7309.6)} = 0.5039 \qquad \rho_c^2 = 1- \frac{(-3626.2)}{(-4132.9)} = 0.1226
+(\#eq:fiveten)
+\end{equation}
 
-The rho-squared measures are widely used to describe the goodness of fit for choice models because of their intuitive formulation.  The   measures the improvement due to all elements of the model, including the fit to market shares, which is not very interesting for disaggregate analysis so it should not be used to assess models in which the sample shares are very unequal.  The rho-squared measure with respect to the constant only model,  , controls for the choice proportions in the estimation sample and is therefore a better measure to use for evaluating models.
+The rho-squared measures are widely used to describe the goodness of fit for choice models because of their intuitive formulation.  The $\rho_0^2$  measures the improvement due to all elements of the model, including the fit to market shares, which is not very interesting for disaggregate analysis so it should not be used to assess models in which the sample shares are very unequal.  The rho-squared measure with respect to the constant only model, $\rho_0^2$ , controls for the choice proportions in the estimation sample and is therefore a better measure to use for evaluating models.
 
 A problem with both rho-squared measures is that there are no guidelines for a “good” rho-squared value. Consequently, the measures are of limited value in assessing the quality of an estimated model and should be used with caution even in assessing the relative fit among alternative specifications. It is preferable to use the log-likelihood statistic (which has a formal and convenient mechanism to test among alternative model specifications) to support the selection of a preferred specification among alternative specifications.  
 
 Another problem with the rho-squared measures is that they improve no matter what variable is added to the model independent of its importance.  This directly results from the fact that the objective function of the model is being modeled with one or more additional degrees of freedom and that the same data that is used for estimation is used to assess the goodness of fit of the model.  One approach to this problem is to replace the rho-squared measure with an adjusted rho-square measure which is designed to take account of these factors.  The adjusted rho-squared for the zero model is given by:  
 
+\begin{equation}
+\bar{\rho_0^2} = \frac{[LL(\hat{\beta}) - K] -LL(0)}{LL(\star) - LL(0)} = 1-\frac{LL(\hat{\beta}) - K}{LL(0)}
+(\#eq:fiveeleven)
+\end{equation}
 
-where
+where $K$
 
 The corresponding adjusted rho-squared for the constants only model is given by:  
 
-where
+\begin{equation}
+\bar{\rho_c^2} = \frac{LL(\hat{\beta}) - K - (LL(C)-K_{MS}}{LL(\star) - (LL(C)-K_{MS})} = 1-\frac{LL(\hat{\beta}) - K}{LL(C)-K_{MS}}
+(\#eq:fivetwelve)
+\end{equation}
+
+where $K_{MS}$ is the number of degrees of freedom (parameters) used in the constants only model.
 
 ### Statistical Tests
 Statistical tests may be used to evaluate formal hypotheses about individual parameters or groups of parameters taken together. In this section we describe each of these tests.
