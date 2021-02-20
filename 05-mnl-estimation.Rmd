@@ -107,7 +107,7 @@ Surveys can be used to collect information describing the trip maker and his or 
 
 Network analysis provides the zone-to-zone in-vehicle travel times for the highway (non-transit) and transit modes (the urban area is divided into several traffic analysis zones for travel demand analysis purposes). The highway out-of-vehicle time by the highway mode is assigned a nominal value to reflect walk access/egress to/from the car. The transit out-of-vehicle time is based on transit schedules, the presence or absence of transfers, and location of bus stops vis-à-vis origin and destination locations. The highway distance of travel is obtained from the network structure and a per-mile vehicle operation cost is applied to obtain highway zone-to-zone driving costs. Parking costs are obtained from per-hour parking rates at the destination zone multiplied by half the estimated duration of the activity pursued at the destination zone (allowing half the parking cost to be charged to the incoming and departing trips) and toll costs can be identified from the network. Transit cost is determined from the actual fare for travel between zones plus any access costs to/from the transit station from/to the origin/destination. The highway in-vehicle times, out-of-vehicle times, and costs are used as the relevant values for driving alone and these values are modified appropriately to reflect increased in-vehicle times and decreased driving/parking costs for the shared ride modes. The travel times for non-motorized modes (such as bike and walk) are obtained from the zone-to-zone distance and an assumed walk/bike speed. Finally, the appropriate travel times and cost between zones is appended to each trip in the trip file based on the origin and destination zones of the trip. 
 
-## Data STructure for Estimation
+## Data Structure for Estimation
 
 The data collected from the various sources described in the previous sections must be assembled into a single data set to support model estimation.  This can be accomplished using a variety of spreadsheet, data base, statistical software or user prepared programs.  The structure of the resultant data files must satisfy the format requirements of the software packages designed for choice model estimation.  The commonly used software packages for discrete choice model estimation require the data to be structured in one of two formats: a) the trip format or b) the trip-alternative format.  This are commonly referred to as IDCase (each record contains all the information for mode choice over alternatives for a single trip) or IDCase-IDAlt (each record contains all the information for a single mode available to each trip maker so there is one record for each mode for each trip). 
 
@@ -119,19 +119,34 @@ The unavailability of an alternative is indicated in the trip format by zeros fo
 
 Either of the two data formats may be used to represent the information required for model estimation.  The choice is based on the programming decisions of the software developer taking into account data storage and computational implications of each choice.
 
-
-
-```{r loaddata}
+```{r loaddata, echo = F}
 # Read in raw SPSS file from Laurie Garrow's Dropbox
 sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.sav")
 
+#Here, I've tried to index the SF data, and either get errors that the indexes I use 
+#don't create defined data (if I try to include more than one indexing factor), or I 
+#get errors when trying to create choice models such as "labelled" errors or that I 
+#can't create a vector that is 18Gb large. #I'm going to elect to leave this either
+#until I'm able to get help figuring 
+#this out, or until someone else that has more coding skills than I have does it.
+
 # Convert into mlogit dfidx data frame
-#   mlogit 
-sf_mlogit <- dfidx(sf_work_mode, idx = list(c("hhid","perid","case")))
-#sf_mlogit2 <- dfidx(sf_work_mode, idx = list("hhid", "perid", "case", "altnum"))
+sf_mlogit <- dfidx(sf_work_mode, idx = list(c("perid")))
 
 # write to data/ folder for future use
 write_rds(sf_mlogit, "data-raw/Work Trips/sfwork_logit.rds")
+```
+
+```{r figure5-1, eval = F}
+#Trying to make a choice model similar to the one we used for the fish data. 
+#Unable to get this code to run successfully. If I can't get the data sets 
+#indexed right, I cant easily recreate the tables shown in this figure. 
+#I can just do it by hand, but that defeats the purpose of this exercise. 
+#I'm going to elect to leave this either until I'm able to get help figuring 
+#this out, or until someone else that has more coding skills than I have does it.
+
+sf_base <- mlogit(altnum ~ cost + tvtt | wkempden, data = sf_mlogit)
+
 ```
 
 
