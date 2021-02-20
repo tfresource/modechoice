@@ -394,27 +394,52 @@ The restricted models that reflect each of these hypotheses and the correspondin
 
 The statistical test of the hypothesis that time and cost have no effect has a chi-square value of
 
+\begin{equation}
+\chi^2 = -2(-4123.6-(-3626.2))=994.8
+(\#eq:ChisqTimeCostZero)
+\end{equation}
 
 with two degrees of freedom (two parameters constrained to zero).  The critical χ2 with two degrees of freedom at 99.9% confidence (or 0.001 level of significance) is 13.82.  Similarly, the statistical test of the hypothesis that income has no effect on mode choice has a chi-square value of 
 
+\begin{equation}
+\chi^2 = -2(-3637.6-(-3626.2))=22.8
+(\#eq:chisqIncomeZero)
+\end{equation}
 
 with five degrees of freedom (five income parameters are constrained to zero).  The critical χ2 with five degrees of freedom at 99.9% confidence level (or 0.001 level of significance) is 20.51.   Thus, both null hypotheses can be rejected at very high levels; that is, neither time and cost nor the income variables should be excluded from the model.  The log-likelihood ratio tests for both the above hypotheses are summarized in Table 5-8.
 
 
 #### Non-nested Hypothesis Tests
 
-The likelihood ratio test can only be applied to compare models which differ due to the application of restrictions to one of the models.  Such cases are referred to as nested hypothesis tests. However, there are important cases when the rival models do not have this type of restricted – unrestricted relationship.  For example, we might like to compare the base model to an alternative specification in which the variable cost divided by income is used to replace cost.  This reflects the expectation that the importance of cost diminishes with increasing income.  This analysis can be performed by using the non-nested hypothesis test proposed by Horowitz (1982).   The non-nested hypothesis test uses the adjusted likelihood ratio index,  , to test the hypothesis that the model with the lower   value is the true model .  In this test, the null hypothesis that the model with the lower value is the true model is rejected at the significance level determined by the following equation :
+The likelihood ratio test can only be applied to compare models which differ due to the application of restrictions to one of the models.  Such cases are referred to as nested hypothesis tests. However, there are important cases when the rival models do not have this type of restricted – unrestricted relationship.  For example, we might like to compare the base model to an alternative specification in which the variable cost divided by income is used to replace cost.  This reflects the expectation that the importance of cost diminishes with increasing income.  This analysis can be performed by using the non-nested hypothesis test proposed by Horowitz (1982).   The non-nested hypothesis test uses the adjusted likelihood ratio index, $\overline{\rho}^2$, to test the hypothesis that the model with the lower $\overline{\rho}^2$ value is the true model .  In this test, the null hypothesis that the model with the lower value is the true model is rejected at the significance level determined by the following equation :
 
+\begin{equation}
+Significance Level = \Phi \left[-{(2(\overline{\rho}^2_H-\overline{\rho}^2_L) \times LL(0) + (K_H - K_L))}^{1/2}\right]
+(\#eq:significancelevel)
+\end{equation}
 
 where
 
+- $\overline{\rho}^2_L$ is the adjusted likelihood ratio index for the model with the lower value,
+- $\overline{\rho}^2_H$ is the adjusted likelihood ratio index for the model with the higher value
+- $K_H$,$K_L$ are the numbers of parameters in models H and L, respectively, and
+- $\Phi$ is the standard normal cumulative distribution function.
 
 We illustrate the non-nested hypothesis test by applying it to compare the base model with alternative specifications that replace the cost variable with cost divided by income or cost divided by ln(income).  The estimation results for all three models are presented in Table 5-9.  Since the model using cost not adjusted for income has the best goodness of fit (highest  ), the null hypotheses for these tests is that the model with cost by income variable or the model with cost by ln(income) is the true model. higher  .  Since all the models have the same number of parameters, the term (K_H-K_L) drops out, and the equation for the test of the cost by income model being true is:
 
-
+\begin{align*}
+\Phi \left[\left(-{(2(\overline{\rho}^2_H-\overline{\rho}^2_L) \times LL(0) )}^{1/2}\right)\right] &= \Phi \left[-{(-2(0.5023-0.4897)(-7309.6))}^{1/2}\right] \\
+&= \Phi [-13.58] \ll 0.001
+(\#eq:testCostbyIncome)
+\end{align*}
 
 The corresponding test for the cost by ln(income) being true is:
 
+\begin{align*}
+\Phi \left[\left(-{(2(\overline{\rho}^2_H-\overline{\rho}^2_L) \times LL(0) )}^{1/2}\right)\right] &= \Phi \left[-{(-2(0.5023-05015)(-7309.6))}^{1/2}\right] \\
+&= \Phi [-3.420] < 0.001
+(\#eq:testCostbylnIncome)
+\end{align*}
 
 The above result implies that the null hypotheses that the models with cost by income variable or cost by ln(income) are true are rejected at a significance level greater than 0.001.  However, the significance of rejection is much lower for the cost by ln(income) model and many analysts would adopt that specification on the grounds that it is conceptually more appropriate.  This specification suggests that the value of money declines with income but the rate of decline diminishes at higher levels of income.
 
