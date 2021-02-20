@@ -352,13 +352,29 @@ thegoods <- data.frame(
  "Exponent" = c(0.607,0.223,0.050),
  "Probability" = c(0.690,0.254,0.057))
 
-kbl(thegoods, align = "c", booktabs = T, caption = "Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative Before Adding Data") %>% 
+kbl(thegoods, align = "c", booktabs = T, caption = "Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative Before Adding Delta") %>% 
+kable_classic() %>% 
+  add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
+
+```
+where the sum of the exponent variable is equal to 0.879.
+
+```{r tabel4-4, echo = F}
+
+thegoods1 <- data.frame(
+ "Alternative"= c("Drive Alone","Shared Ride","Transit"),
+ "Expression" = c("-0.50 + 1.00", "-1.50 + 1.00","-3.00 + 1.00"),
+ "Value" = c(0.50,-0.50,-2.00),
+ "Exponent" = c(1.649, 0.607, 0.135),
+ "Probability" = c(0.690,0.254,0.057))
+
+kbl(thegoods1, align = "c", booktabs = T, caption = "Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative After Adding Delta (=1.0)") %>% 
 kable_classic() %>% 
   add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
 
 ```
 
-
+Where the sum of the exponent variable is equal to 2.391
 
 The expression for the probability equation of the logit model (equation 4.9)
 can also be presented in a different form which makes the equivalent difference
@@ -508,7 +524,7 @@ alternative, we obtain:
 
 \begin{equation}
   V_{TR,t} = \beta_{TR-DA,0} + \beta_{TR-DA,1} \times Inc_t + \gamma \times TT_{TR}
-(\#eq:fourthirtyfour)
+(\#eq:fourthirtyfive)
 \end{equation}
 
 where the constants and income parameters are relative to the Drive Alone alternative.
@@ -519,10 +535,40 @@ respectively, for an individual from a household with $50,000 annual income and
 facing travel times of 30, 35 and 50 minutes for Drive Alone, Shared Ride and
 TRansit, respectively.
 
-1.1 + 0.0008 $\times$ 50 [^income1000] - 0.02 $\times$ 30 [^timemin]
+```{r tabel4-5, echo = F}
 
+thegoods2 <- data.frame(
+ "Alternative"= c("Drive Alone","Shared Ride","Transit"),
+ "Expression" = c("1.1 + 0.0008 * 50^7 - 0.02 * 30^8","0.8 + 0.006 * 50 - 0.02 * 35","0.0 + 0.000 * 50 - 0.02 * 50"),
+ "Value" = c(0.90,0.40,-1.00),
+ "Exponent" = c(2.460,1.492,0.368),
+ "Probability" = c(0.569,0.345,0.085))
 
+kbl(thegoods2, align = "c", booktabs = T, caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
+kable_classic() %>% 
+  add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
 
+```
+
+where the sum of the exponent variable equals 4.319.
+
+```{r tabel4-6, echo = F}
+
+thegoods3 <- data.frame(
+ "Alternative"= c("Drive Alone","Shared Ride","Transit"),
+ "Expression" = c("0.0 + 0.000 * 50 - 0.02 * 30","-0.3 + 0.002 * 50 - 0.02 * 35","-1.1 - 0.008 * 50 - 0.02 * 50"),
+ "Value" = c(-0.60,-1.10,-2.50),
+ "Exponent" = c(0.549,0.333,0.082),
+ "Probability" = c(0.569,0.345,0.085))
+
+kbl(thegoods3, align = "c", booktabs = T, caption = "Utility and Probability calculation with Drive Alone
+    as Base Alternative") %>% 
+kable_classic() %>% 
+  add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
+
+```
+
+where the sum of the exponent variable equals 0.964.
 
 As expected, the resultant probabilities are identical in both cases.  Table 4 7
 shows that the differences in the alternative specific constants and income
