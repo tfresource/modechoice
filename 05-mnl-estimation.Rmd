@@ -297,7 +297,7 @@ There is sampling error associated with the model parameters because the model i
 The statistic used for testing the null hypothesis that a parameter $\hat{\beta_{k}}$ is equal to some hypothesized value, $\hat{\beta_{k}}$, is the asymptotic t-statistic, which takes the following form:   
 
 \begin{equation}
-$\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}}$
+\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}}
 (\#eq:asymptotic t-statistic)
 \end{equation}
 
@@ -322,7 +322,7 @@ The lack of significance of the alternative specific walk constant is immaterial
 
 It is often interesting to determine if two parameters are statistically different from one another or if two parameters are related by a specific value ration.  These tests are similarly based on the t-statistic; however, the formulation of the test is somewhat different from that described in Section 5.7.3.1.  To test the hypothesis $H_{0}:\beta_{k} = \beta_{l}$ vs. $H_{A}:\beta_{k} \ne \beta_{l}$; we use the asymptotic t-statistic, which takes the following form:   
 \begin{equation}
-$\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\hat\beta_{l}}{\sqrt{S_{k}^{2}+S_{l}^{2}-2S_{k,l}}}$
+\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\hat\beta_{l}}{\sqrt{S_{k}^{2}+S_{l}^{2}-2S_{k,l}}} 
 (\#eq:asymptotic H0vsHA)
 \end{equation}
 
@@ -338,7 +338,7 @@ This test can be readily extended to the test of a hypothesis that the two param
 \begin{equation}
 $\displaystyle t-statistic = \frac{\hat{\beta}_{cost}-(VOT)\hat\beta_{time}}{\sqrt{S_{cost}^{2}+(VOT)^{2}S_{time}^{2}-2(VOT)S_{time,cost}}}$
 (\#eq:corresponding t-statistic)
-\end{equation
+\end{equation}
 
 The interpretation is the same as above except that the hypothesis refers to the equality of one parameter to the other parameter times an *a priori* fixed value.  In this case, if it is concluded that the hypothesis is not rejected, the ratio constraint can be incorporated in the model by creating a new variable $X_{time,\ cost} = X_{cost}+(VOT)X_{time}$.
 
@@ -349,9 +349,9 @@ The t-statistic is used to test the hypothesis that a single parameter is equal 
 If all the restrictions that distinguish between the restricted and unrestricted models are valid, one would expect the difference in log-likelihood values (at convergence) of the restricted and unrestricted models to be small. If some or all the restrictions are invalid, the difference in log-likelihood values of the restricted and unrestricted models will be “sufficiently” large to reject the hypotheses. This underlying logic is the basis for the likelihood ratio test. The test statistic is:
 
 \begin{equation}
-$\displaystyle -2\times[LL_{R}-LL_{U}]$
+\displaystyle -2\times[LL_{R}-LL_{U}]
 (\#eq:LLratiotest)
-\end{equation
+\end{equation}
 
 where $LL_{R}$ is the log-likelihood of the restricted model, and
       $LL_{U}$ is the log-likelihood of the unrestricted model. 
@@ -365,18 +365,18 @@ Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared 
 The likelihood ratio test can be applied to test null hypotheses involving the exclusion of groups of variables from the model.  Table 5-6 illustrates the tests of two hypotheses describing restriction on some or all the parameters in the San Francisco Bay Area commuter mode choice model.  The first hypothesis is that all the parameters are equal to zero. The formal statement of the null hypothesis in this case, is:
 
 \begin{equation}
-$\displaystyle H_{0,a}:\beta_{Travel\ Time} = \beta_{Travel\ Cost} = 0,$
-$\beta_{SR2} = \beta_{SR3} = \beta_{TR} = \beta_{WK} = \beta_{BK} = 0, and$
-$\beta_{Income-SR2} = \beta_{Income-SR3} = \beta_{Income-Transit} = \beta_{Income-Bike} = \beta_{Income-Walk} = 0$
+\displaystyle H_{0,a}:\beta_{Travel\ Time} = \beta_{Travel\ Cost} = 0, \\
+\beta_{SR2} = \beta_{SR3} = \beta_{TR} = \beta_{WK} = \beta_{BK} = 0, and \\
+\beta_{Income-SR2} = \beta_{Income-SR3} = \beta_{Income-Transit} = \beta_{Income-Bike} = \beta_{Income-Walk} = 0
 (\#eq:nullhypothesiscase)
 \end{equation}
 
 This test is not very useful because we almost always reject the null hypothesis that all coefficients are zero. A somewhat more useful null hypothesis is that the variables in the initial model specification provide no additional information in addition to the market share information represented by the alternative specific constants.  The restrictions for this null hypothesis are:
 
 \begin{equation}
-$\displaystyle H_{0,b}:\beta_{Travel\ Time} = \beta_{Travel\ Cost} = 0, and$
-$\beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit}, and$
-$\beta_{Income-Bike} = \beta_{Income-Walk} = 0$
+\displaystyle H_{0,b}:\beta_{Travel\ Time} = \beta_{Travel\ Cost} = 0, and \\
+\beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit}, and \\
+\beta_{Income-Bike} = \beta_{Income-Walk} = 0
 (\#eq:restrictionsnullhypothesiscase)
 \end{equation}
 
