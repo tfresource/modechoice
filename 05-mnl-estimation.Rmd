@@ -137,17 +137,18 @@ sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altnum"))
 write_rds(sf_mlogit, "data/worktrips.rds")
 ```
 
-```{r figure5-1, eval = F}
-#Trying to make a choice model similar to the one we used for the fish data. 
-#Unable to get this code to run successfully. If I can't get the data sets 
-#indexed right, I cant easily recreate the tables shown in this figure. 
-#I can just do it by hand, but that defeats the purpose of this exercise. 
-#I'm going to elect to leave this either until I'm able to get help figuring 
-#this out, or until someone else that has more coding skills than I have does it.
+```{r trip-alt}
+#trip-alt
+sf_work_mode  %>%
+  select(hhid, perid, altnum, chosen, ivtt, hhinc)
+```
 
-sf_base <- mlogit(chosen ~ cost + tvtt | wkempden, data = sf_mlogit)
-
-
+```{r trip}
+sf_work_mode  %>%
+  select(hhid, perid, altnum, chosen, ivtt, hhinc) %>%
+  group_by(hhid, perid) %>%
+  mutate( chosen = max(chosen * altnum) ) %>%
+  spread(altnum, ivtt, fill = 0)
 ```
 
 
