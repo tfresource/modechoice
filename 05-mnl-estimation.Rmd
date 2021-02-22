@@ -4,6 +4,7 @@ library(tidyverse)
 library(haven)
 library(mlogit)
 library(modelsummary)
+library(labelled)
 ```
 
 
@@ -121,14 +122,8 @@ Either of the two data formats may be used to represent the information required
 
 ```{r loaddata, echo = F}
 # Read in raw SPSS file from Laurie Garrow's Dropbox
-sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.sav")
-
-#Here, I've tried to index the SF data, and either get errors that the indexes I use 
-#don't create defined data (if I try to include more than one indexing factor), or I 
-#get errors when trying to create choice models such as "labelled" errors or that I 
-#can't create a vector that is 18Gb large. #I'm going to elect to leave this either
-#until I'm able to get help figuring 
-#this out, or until someone else that has more coding skills than I have does it.
+sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.sav") %>% 
+  mutate(altname = as_factor(altnum, levels = "labels"))
 
 # Convert into mlogit dfidx data frame
 sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altnum"))
@@ -137,18 +132,23 @@ sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altnum"))
 write_rds(sf_mlogit, "data/worktrips.rds")
 ```
 
-```{r trip-alt}
+```{r trip-alt, echo = F}
 #trip-alt
-sf_work_mode  %>%
-  select(hhid, perid, altnum, chosen, ivtt, hhinc)
+trip_alt <- sf_work_mode  %>%
+  select(hhid, perid, altname, chosen, ivtt, hhinc) %>% 
+  rename(HH_ID = hhid, Person_ID = perid, Alternate_Name = altname, Chosen = chosen, IVTT = ivtt, HH_INC = hhinc)
+
+knitr::kable(head(trip_alt), caption= "Data Layout Type II: Trip-Alternative Format", align = 'c')
 ```
 
-```{r trip}
-sf_work_mode  %>%
-  select(hhid, perid, altnum, chosen, ivtt, hhinc) %>%
+```{r trip, echo = F}
+trip_format <- sf_work_mode  %>%
+  select(hhid, perid, chosen, ivtt, hhinc, altname, altnum) %>%
   group_by(hhid, perid) %>%
   mutate( chosen = max(chosen * altnum) ) %>%
-  spread(altnum, ivtt, fill = 0)
+  spread(altname, ivtt, fill = 0)
+
+knitr::kable(head(trip_format), caption= "Data Layout Type I: Trip Format", align = 'c')
 ```
 
 
