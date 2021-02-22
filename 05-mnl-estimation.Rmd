@@ -222,6 +222,7 @@ The value for the log-likelihood at zero and constants can be obtained for eithe
 
 $ \sum_t ln(1/NAlt_t)$
 
+In the next three sections, we review the estimation results for the base model using informal judgment-based tests (section 5.7.1), goodness-of-fit measures (section 5.7.2), and statistical tests (section 5.7.3). These elements, taken together, provide a basis to evaluate each model and to compare models with different specifications. 
 
 ```{r basic-estimation}
 base <- mlogit(mode ~ price + catch | income, data = Fish)
@@ -249,8 +250,6 @@ modelsummary(
 ```
 
 
-In the next three sections, we review the estimation results for the base model using informal judgment-based tests (section 5.7.1), goodness-of-fit measures (section 5.7.2), and statistical tests (section 5.7.3). These elements, taken together, provide a basis to evaluate each model and to compare models with different specifications.  
-
 ### Informal Tests
 A variety of informal tests can be applied to an estimated model.  These tests are designed to assess the reasonableness of the implications of estimated parameters.  The most common tests concern:
 
@@ -276,11 +275,18 @@ Similar ratios may be used to assess the reasonableness of the relative magnitud
 
 ### Overall Goodness-of-Fit Measures
 
-This section presents a descriptive measure, called the rho-squared value   which can be used to describe the overall goodness of fit of the model. We can understand the formulation of this value in terms of the following figure which shows the scalar relationship among the log-likelihood values for a zero coefficients model (or the equally likely model), a constants only or market share model, the estimated model and a perfect prediction model. In the figure, LL(0) represents the log-likelihood with zero coefficients (which results in equal likelihood of choosing each available alternative),  represents the log-likelihood for the constants only model,   represents the log-likelihood for the estimated model and LL(*) = 0 is the log-likelihood for the perfect prediction model.
+This section presents a descriptive measure, called the rho-squared value ($\rho^2$) which can be used to describe the overall goodness of fit of the model. We can understand the formulation of this value in terms of the following figure which shows the scalar relationship among the log-likelihood values for a zero coefficients model (or the equally likely model), a constants only or market share model, the estimated model and a perfect prediction model. In the figure, LL(0) represents the log-likelihood with zero coefficients (which results in equal likelihood of choosing each available alternative), $LL(0)$ represents the log-likelihood for the constants only model, $LL(\hat{\beta})$  represents the log-likelihood for the estimated model and LL(*) = 0 is the log-likelihood for the perfect prediction model.
+
+```{r}
+knitr::include_graphics(rep("img/fig5.2.PNG"),
+        caption = "Relationship between Different Log-likelihood Measures")
+
+```
+
 
 The relationships among modeling results will always appear in the order shown provided the estimated model includes a full set of alternative specific constants.  That is, the constants only model is always better than the equally likely model, and the estimated model with constants is always better than the constants only model.  The order of different estimated models will vary except that any model which is a restricted version of another model will be to the left of the unrestricted model.
 
-The rho-squared ($\rho_0^2$ ) value is based on the relationship among the log-likelihood values indicated in Figure 5.2. It is simply the ratio of the distance between the reference model and the estimated model divided by the difference between the reference model and a perfect model.  If the reference model is the equally likely model, the rho square with respect to zero,$\rho_0^2$ , is:
+The rho-squared ($\rho_0^2$) value is based on the relationship among the log-likelihood values indicated in Figure 5.2. It is simply the ratio of the distance between the reference model and the estimated model divided by the difference between the reference model and a perfect model.  If the reference model is the equally likely model, the rho square with respect to zero,$\rho_0^2$ , is:
 
 \begin{equation}
 \rho_0^2 = \frac{LL(\hat{\beta}) - LL(0)}{LL(\star) - LL(0)}
