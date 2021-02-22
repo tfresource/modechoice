@@ -286,14 +286,14 @@ knitr::include_graphics(rep("img/fig5.2.PNG"),
 
 The relationships among modeling results will always appear in the order shown provided the estimated model includes a full set of alternative specific constants.  That is, the constants only model is always better than the equally likely model, and the estimated model with constants is always better than the constants only model.  The order of different estimated models will vary except that any model which is a restricted version of another model will be to the left of the unrestricted model.
 
-The rho-squared ($\rho_0^2$) value is based on the relationship among the log-likelihood values indicated in Figure 5.2. It is simply the ratio of the distance between the reference model and the estimated model divided by the difference between the reference model and a perfect model.  If the reference model is the equally likely model, the rho square with respect to zero,$\rho_0^2$ , is:
+The rho-squared ($\rho_0^2$) value is based on the relationship among the log-likelihood values indicated in Figure 5.2. It is simply the ratio of the distance between the reference model and the estimated model divided by the difference between the reference model and a perfect model.  If the reference model is the equally likely model, the rho square with respect to zero, $\rho_0^2$, is:
 
 \begin{equation}
 \rho_0^2 = \frac{LL(\hat{\beta}) - LL(0)}{LL(\star) - LL(0)}
 (\#eq:fiveseven)
 \end{equation}
 
-Since the log-likelihood value for the perfect model is zero , the   measure reduces to:
+Since the log-likelihood value for the perfect model is zero , the $\rho_0^2$ measure reduces to:
 
 \begin{equation}
 \rho_0^2 = 1- \frac{LL(\hat{\beta})}{LL(0)}
@@ -316,7 +316,7 @@ The rho-squared values for the basic model specification in Table 5-2 are comput
 (\#eq:fiveten)
 \end{equation}
 
-The rho-squared measures are widely used to describe the goodness of fit for choice models because of their intuitive formulation.  The $\rho_0^2$  measures the improvement due to all elements of the model, including the fit to market shares, which is not very interesting for disaggregate analysis so it should not be used to assess models in which the sample shares are very unequal.  The rho-squared measure with respect to the constant only model, $\rho_0^2$ , controls for the choice proportions in the estimation sample and is therefore a better measure to use for evaluating models.
+The rho-squared measures are widely used to describe the goodness of fit for choice models because of their intuitive formulation.  The $\rho_0^2$  measures the improvement due to all elements of the model, including the fit to market shares, which is not very interesting for disaggregate analysis so it should not be used to assess models in which the sample shares are very unequal.  The rho-squared measure with respect to the constant only model, $\rho_c^2$ , controls for the choice proportions in the estimation sample and is therefore a better measure to use for evaluating models.
 
 A problem with both rho-squared measures is that there are no guidelines for a “good” rho-squared value. Consequently, the measures are of limited value in assessing the quality of an estimated model and should be used with caution even in assessing the relative fit among alternative specifications. It is preferable to use the log-likelihood statistic (which has a formal and convenient mechanism to test among alternative model specifications) to support the selection of a preferred specification among alternative specifications.  
 
@@ -327,7 +327,7 @@ Another problem with the rho-squared measures is that they improve no matter wha
 (\#eq:fiveeleven)
 \end{equation}
 
-where $K$
+where $K$ is the number of degrees of freedom (parameters) used in the model.
 
 The corresponding adjusted rho-squared for the constants only model is given by:  
 
@@ -345,7 +345,7 @@ Statistical tests may be used to evaluate formal hypotheses about individual par
 
 There is sampling error associated with the model parameters because the model is estimated from only a sample of the relevant population (the relevant population includes all commuters in the Bay Area). The magnitude of the sampling error in a parameter is provided by the standard error associated with that parameter; the larger the standard error, the lower the precision with which the corresponding parameter is estimated. The standard error plays an important role in testing whether a particular parameter is equal to some hypothesized value, as we discuss next.
 
-The statistic used for testing the null hypothesis that a parameter $\hat{\beta_{k}}$ is equal to some hypothesized value, $\hat{\beta_{k}}$, is the asymptotic t-statistic, which takes the following form:   
+The statistic used for testing the null hypothesis that a parameter $\hat{\beta_{k}}$ is equal to some hypothesized value, ${\beta_{k}^*}$, is the asymptotic t-statistic, which takes the following form:   
 
 \begin{equation}
 \displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}}
@@ -354,12 +354,14 @@ The statistic used for testing the null hypothesis that a parameter $\hat{\beta_
 
 where $\hat{\beta_{k}}$ is the estimate for the $k^{th}$ parameter,
       $\beta_{k}^{*}$   is the hypothesized value for the $k^{th}$ parameter and
-      $S_{k}$           is the standard error of the estimate
+      $S_{k}$           is the standard error of the estimate.
 
 
 Sufficiently large absolute values of the *t-statistic* lead to the rejection of the null hypothesis that the parameter is equal to the hypothesized value. When the hypothesized value, $\beta_{k}^{*}$, is zero, the t-statistic becomes the ratio of the estimated parameter to the standard error.  The default estimation output from most software packages includes the t-statistic for the test of the hypothesis that the true value is zero.  The rejection of this null hypothesis implies that the corresponding variable has a significant impact on the modal utilities and suggests that the variable should be retained in the model.  Low absolute values of the t-statistic imply that the variable does not contribute significantly to the explanatory power of the model and can be considered for exclusion.  If it is concluded that the hypothesis is not rejected, the equality constraint can be incorporated in the model by creating a new variable $X_{kl} = X_{k} + X_{l}$ .
 
 The selection of a critical value for the t-statistic test is a matter of judgment and depends on the level of confidence with which the analyst wants to test his/her hypotheses. The critical t-values for different levels of confidence for samples sizes larger than 150 (which is the norm in mode choice analysis) are shown in Table 5-3.  It should be apparent that the critical t-value increases with the desired level of confidence.  Thus, one can conclude that a particular variable has no influence on choice (or equivalently that the true parameter associated with the variable is zero) can be rejected at the 90% level of confidence if the absolute value of the t-statistic is greater than 1.645 and at the 95% level of confidence if the t-statistic is greater than 1.960 .  
+
+TABLE 5-3
 
 We illustrate the use of the t-test by reviewing the t-statistics for each parameter in the initial model specification (Table 5-2). Both the travel cost and travel time parameters have large absolute t-statistic values (20.6 and 16.6, respectively) which lead us to reject the hypothesis that these variables have no effect on modal utilities at a confidence level higher than 99.9%. Thus, these variables should be retained in the model. All of the other t-statistics, except for Income-Shared Ride 2,  Income-Shared Ride 3+ and the walk constant are greater than 1.960 (95% confidence) supporting the inclusion of the corresponding variables.  The t-statistics on the shared ride specific income variables are even less than 1.645 in absolute value (90% confidence), suggesting that the effect of income on the utilities of the shared ride modes may not differentiate them from the reference (drive alone) mode. Consequently, the analyst should consider removing these income variables from the utility function specifications for the shared ride modes. The case is particularly compelling for removal of the income shared ride 3+ variable since the t-statistic is very low and the parameter has a counter-intuitive sign. Another alternative would be to combine the two shared ride income parameters suggesting that income has differential effect between drive alone and shared ride but not between shared ride 2 and shared ride 3+ (when this is done, the combined variable obtains a small negative parameter which is not statistically different from zero).  This variable could be deleted or retained according to the judgment of the analyst as described in Section 6.2.1.
 
@@ -371,7 +373,8 @@ The lack of significance of the alternative specific walk constant is immaterial
 
 #### Test of Linear Relationship between Parameters
 
-It is often interesting to determine if two parameters are statistically different from one another or if two parameters are related by a specific value ration.  These tests are similarly based on the t-statistic; however, the formulation of the test is somewhat different from that described in Section 5.7.3.1.  To test the hypothesis $H_{0}:\beta_{k} = \beta_{l}$ vs. $H_{A}:\beta_{k} \ne \beta_{l}$; we use the asymptotic t-statistic, which takes the following form:   
+It is often interesting to determine if two parameters are statistically different from one another or if two parameters are related by a specific value ration.  These tests are similarly based on the t-statistic; however, the formulation of the test is somewhat different from that described in Section 5.7.3.1.  To test the hypothesis $H_{0}:\beta_{k} = \beta_{l}$ vs. $H_{A}:\beta_{k} \ne \beta_{l}$; we use the asymptotic t-statistic, which takes the following form: 
+
 \begin{equation}
 \displaystyle t-statistic = \frac{\hat{\beta_{k}}-\hat\beta_{l}}{\sqrt{S_{k}^{2}+S_{l}^{2}-2S_{k,l}}} 
 (\#eq:asymptotic H0vsHA)
@@ -436,9 +439,11 @@ The log-likelihood values needed to test each of these hypotheses are reported i
 
 These two applications of the likelihood ratio test correspond to situations where the null hypothesis leads to a highly restrictive model.  These cases are not very interesting since the real value of the likelihood ratio test is in testing null hypotheses which are not so extreme. The log-likelihood ratio test can be applied to test null hypotheses involving the exclusion of selected groups of variables from the model. We consider two such hypotheses.  The first is that the time and cost variables have no impact on the mode choice decision, that is,
 
+$H_{0,C} : \beta_{Travel Time} = \beta_{Travel Cost} = 0$
 
 The second is that income has no effect on the travel mode choice; that is
 
+$H_{0,D} : \beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit} = \beta_{Income-Bike} = \beta_{Income-Walk} = 0$
 
 The restricted models that reflect each of these hypotheses and the corresponding unrestricted model are reported in Table 5-7 along with their log-likelihood values.  
 
@@ -450,14 +455,14 @@ The statistical test of the hypothesis that time and cost have no effect has a c
 (\#eq:ChisqTimeCostZero)
 \end{equation}
 
-with two degrees of freedom (two parameters constrained to zero).  The critical χ2 with two degrees of freedom at 99.9% confidence (or 0.001 level of significance) is 13.82.  Similarly, the statistical test of the hypothesis that income has no effect on mode choice has a chi-square value of 
+with two degrees of freedom (two parameters constrained to zero).  The critical $\chi^2$ with two degrees of freedom at 99.9% confidence (or 0.001 level of significance) is 13.82.  Similarly, the statistical test of the hypothesis that income has no effect on mode choice has a chi-square value of 
 
 \begin{equation}
 \chi^2 = -2(-3637.6-(-3626.2))=22.8
 (\#eq:chisqIncomeZero)
 \end{equation}
 
-with five degrees of freedom (five income parameters are constrained to zero).  The critical χ2 with five degrees of freedom at 99.9% confidence level (or 0.001 level of significance) is 20.51.   Thus, both null hypotheses can be rejected at very high levels; that is, neither time and cost nor the income variables should be excluded from the model.  The log-likelihood ratio tests for both the above hypotheses are summarized in Table 5-8.
+with five degrees of freedom (five income parameters are constrained to zero).  The critical $\chi^2$ with five degrees of freedom at 99.9% confidence level (or 0.001 level of significance) is 20.51.   Thus, both null hypotheses can be rejected at very high levels; that is, neither time and cost nor the income variables should be excluded from the model.  The log-likelihood ratio tests for both the above hypotheses are summarized in Table 5-8.
 
 
 #### Non-nested Hypothesis Tests
@@ -476,7 +481,7 @@ where
 - $K_H$,$K_L$ are the numbers of parameters in models H and L, respectively, and
 - $\Phi$ is the standard normal cumulative distribution function.
 
-We illustrate the non-nested hypothesis test by applying it to compare the base model with alternative specifications that replace the cost variable with cost divided by income or cost divided by ln(income).  The estimation results for all three models are presented in Table 5-9.  Since the model using cost not adjusted for income has the best goodness of fit (highest  ), the null hypotheses for these tests is that the model with cost by income variable or the model with cost by ln(income) is the true model. higher  .  Since all the models have the same number of parameters, the term (K_H-K_L) drops out, and the equation for the test of the cost by income model being true is:
+We illustrate the non-nested hypothesis test by applying it to compare the base model with alternative specifications that replace the cost variable with cost divided by income or cost divided by ln(income).  The estimation results for all three models are presented in Table 5-9.  Since the model using cost not adjusted for income has the best goodness of fit (highest $\overline{\rho}^2$), the null hypotheses for these tests is that the model with cost by income variable or the model with cost by ln(income) is the true model. higher $\overline{\rho}^2$.  Since all the models have the same number of parameters, the term (K_H-K_L) drops out, and the equation for the test of the cost by income model being true is:
 
 \begin{align*}
 \Phi \left[\left(-{(2(\overline{\rho}^2_H-\overline{\rho}^2_L) \times LL(0) )}^{1/2}\right)\right] &= \Phi \left[-{(-2(0.5023-0.4897)(-7309.6))}^{1/2}\right] \\
@@ -506,7 +511,7 @@ The value of time, as described in Section 5.7.1.3, is calculated as the ratio o
 the value of time is given by
 
 
-The units of time value are obtained from the units of the variables used to measure time and cost.  In the Base Model in Table 5.9, the units are minutes and cents.  Thus the value of time in cents per minute implied by this model is -0.0513/-0.0049 = 10.5 cents per minute.  This can be modified to /$ per hour by multiply by  0.6 = (1/100 /$ per cent)/(1/60 hour per minute).
+The units of time value are obtained from the units of the variables used to measure time and cost.  In the Base Model in Table 5.9, the units are minutes and cents.  Thus the value of time in cents per minute implied by this model is -0.0513/-0.0049 = 10.5 cents per minute.  This can be modified to \$ per hour by multiply by  0.6 = (1/100 \$ per cent)/(1/60 hour per minute).
 
 However, in general, the value of time is equal to the ratio between the derivative of utility with respect to time and the derivative of utility with respect to cost.  That is
 
