@@ -17,8 +17,8 @@ software packages for estimation of MNL and NL models. Section 5.6 describes the
 
 The first step in the development of a choice model is to assemble data about traveler choice and the variables believed to influence that choice process. In the context of travel mode choice, such data include:
 
-  - Traveler and trip related variables that influence the travelers’ assessment of modal alternatives (*e.g.*, income, automobile ownership, trip purpose,     time of day of travel, origin and destination of trip, and travel party size),
-  - Mode related variables describing each alternative available to the traveler (e.g., travel time, travel cost and service frequency for carrier modes)        and
+  - Traveler and trip related variables that influence the travelers’ assessment of modal alternatives (*e.g.*, income, automobile ownership, trip purpose, time of day of travel, origin and destination of trip, and travel party size),
+  - Mode related variables describing each alternative available to the traveler (e.g., travel time, travel cost and service frequency for carrier modes) and
   -	The observed or reported mode choice of the traveler (the “dependent” or “endogenous” variable).
 
 The first two categories of variables are selected to describe the factors which influence each decision maker’s choice of an alternative.  These independent or exogenous variables are likely to differ across trip purpose.  The commonly used explanatory variables in mode choice models include:
