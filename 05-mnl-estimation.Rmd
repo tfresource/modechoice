@@ -174,7 +174,35 @@ The travel time (TT) and travel cost (TC) variables are specified as generic in 
 
 The following mode labels are used in the subsequent discussion and equations: DA (drive alone), SR2 (shared ride with 2 people), SR3+ (shared ride with 3 or more people), TR (transit), BK (bike) and WK (walk).  The deterministic portion of the utility for these modes, based on the utility specification discussed above, may be written as:
 
+\begin{equation}
+  V_{DA} = \beta_{1} \times TT_{DA} + \beta_{2} \times TC_{DA}
+  (\#eq:utilspecDA)
+\end{equation}
 
+\begin{equation}
+  V_{SR2} = \beta_{SR2} + \beta_{1} \times TT_{SR2} + \beta_{2} \times TC_{SR2} + \gamma_{SR2} \times Inc
+  (\#eq:utilspecSR2)
+\end{equation}
+
+\begin{equation}
+  V_{SR3+} = \beta_{SR3+} + \beta_{1} \times TT_{SR3+} + \beta_{2} \times TC_{SR3+} + \gamma_{SR3+} \times Inc
+  (\#eq:utilspecSR3+)
+\end{equation}
+
+\begin{equation}
+  V_{TR} = \beta_{TR} + \beta_{1} \times TT_{TR} + \beta_{2} \times TC_{TR} + \gamma_{TR} \times Inc
+  (\#eq:utilspecTR)
+\end{equation}
+
+\begin{equation}
+  V_{BK} = \beta_{BK} + \beta_{1} \times TT_{BK} + \beta_{2} \times TC_{BK} + \gamma_{BK} \times Inc
+  (\#eq:utilspecBK)
+\end{equation}
+
+\begin{equation}
+  V_{WK} = \beta_{WK} + \beta_{1} \times TT_{WK} + \beta_{2} \times TC_{WK} + \gamma_{WK} \times Inc
+  (\#eq:utilspecBK)
+\end{equation}
 
 The estimation results reported in this manual are obtained from software programmed in the Matlab language and included in the CD-Rom distributed with the manual.  The output for the above model specification is shown in structured format in Table 5-2.  The corresponding estimation results for this specification from various commercial packages; ALOGIT, LIMDEP and ELM; are reported in Appendix A.  The outputs from these and other software package typically include, at least, the following estimation results:
 
