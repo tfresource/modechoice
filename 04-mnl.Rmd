@@ -536,7 +536,7 @@ facing travel times of 30, 35 and 50 minutes for Drive Alone, Shared Ride and
 TRansit, respectively.
 
 ```{r transit-base}
-tibble(
+transit_base <- tibble(
  "Alternative"= c("Drive Alone","Shared Ride","Transit"),
  "Expression" = c("1.1 + 0.008 * 50 - 0.02 * 30","0.8 + 0.006 * 50 - 0.02 * 35","0.0 + 0.000 * 50 - 0.02 * 50"),
 ) %>%
@@ -544,7 +544,9 @@ tibble(
     Value = c(1.1 + 0.008 * 50 - 0.02 * 30, 0.8 + 0.006 * 50 - 0.02 * 35, 0.0 + 0.000 * 50 - 0.02 * 50),
     Exponent = exp(Value),
     Probability = Exponent / sum(Exponent)
-  ) %>%
+  ) 
+
+transit_base %>%
   kableExtra::kbl(booktabs = T, caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
   kable_styling() %>%
   add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
@@ -553,7 +555,7 @@ tibble(
 where the sum of the exponent variable equals 4.319.
 
 ```{r da-base}
-tibble(
+da_base <- tibble(
  "Alternative"= c("Drive Alone","Shared Ride","Transit"),
  "Expression" = c("0.0 + 0.000 * 50 - 0.02 * 30","-0.3 - 0.002 * 50 - 0.02 * 35","-1.1 - 0.008 * 50 - 0.02 * 50"),
 ) %>%
@@ -561,7 +563,9 @@ tibble(
     Value = c(0.0 + 0.000 * 50 - 0.02 * 30, -0.3 - 0.002 * 50 - 0.02 * 35, -1.1 - 0.008 * 50 - 0.02 * 50),
     Exponent = exp(Value),
     Probability = Exponent / sum(Exponent)
-  ) %>%
+  ) 
+
+da_base %>%
   kableExtra::kbl(booktabs = T, caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
   kable_styling() %>%
   add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
@@ -574,10 +578,9 @@ shows that the differences in the alternative specific constants and income
 parameters between alternatives are the same for the TRansit base case and the
 Drive Alone base case.
 
-```{r table4-7, echo = F}
-
-tab47df <- data.frame(
- "Alternative"= c("Drive Alone","Shared Ride","Transit"),
+```{r compareutilities}
+tibble(
+ "Alternative"= da_base$Alternative,
  "Constant" = c("1.1","0.8","0.0"),
  "Income" = c("0.008", "0.006", "0.000"),
  "Constant " = c("-1.1","-1.1","-1.1"),
@@ -586,7 +589,7 @@ tab47df <- data.frame(
  "Income  " = c("0.000", "-0.002", "-0.008"))
 
 kbl(tab47df, align = "c", booktabs = T, caption = "Changes in Alternative Specific Constants and Income Parameters") %>% 
-kable_classic() %>% 
+  kable_styling() %>%
   add_header_above(c(" " = 1, "TRansit as Base Alternative"= 2, "Change in Parameters" = 2, "Drive Alone as Base Alternative" = 2), align = "center")
 ```
 
@@ -725,17 +728,20 @@ explicitly in the utility specification.  If these constants are 0.0, -1.6 and
 -1.8 for drive alone, shared ride and transit, respectively, the probability
 calculation is as shown in Table 4.8.
 
-```{r table4-8, echo = F}
+```{r constants, echo = F}
+const_tab <- tibble(
+ Alternative = c("Drive Alone","Shared Ride","Transit"),
+ Expression  = c(0.0,-1.60,-1.80)
+) %>%
+  mutate(
+    Value = Expression,
+    Exponent = exp(Value),
+    Probability = Exponent / sum(Exponent)
+  )
 
-tab48df <- data.frame(
- "Alternative"= c("Drive Alone","Shared Ride","Transit", "Sum of Exponents"),
- "Expression" = c("0.0","-1.60","-1.80", ""),
- "Value" = c("0.0", "-1.60", "-1.80", ""),
- "Exponent" = c("1.0000","0.2019","0.1653", "1.3672"),
- "Probability" = c("0.7314", "0.1477", "0.1209", ""))
-
-kbl(tab48df, align = "c", booktabs = T, caption = "MNL Properties for Constants Only Model") %>% 
-kable_classic() %>% 
+const_tab %>%
+  kbl(caption = "MNL Properties for Constants Only Model") %>% 
+  kable_styling() %>% 
   add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
 ```
 
