@@ -1,6 +1,81 @@
 # The Multinomial Logit Model
 
 
+```r
+library(tidyverse)
+```
+
+```
+## ── Attaching packages ───────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.3.2.9000     ✓ purrr   0.3.4     
+## ✓ tibble  3.0.3          ✓ dplyr   1.0.2     
+## ✓ tidyr   1.1.2          ✓ stringr 1.4.0     
+## ✓ readr   1.3.1          ✓ forcats 0.5.0
+```
+
+```
+## Warning: package 'tibble' was built under R version 4.0.2
+```
+
+```
+## Warning: package 'tidyr' was built under R version 4.0.2
+```
+
+```
+## Warning: package 'dplyr' was built under R version 4.0.2
+```
+
+```
+## ── Conflicts ──────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
+```r
+library(kableExtra)
+```
+
+```
+## 
+## Attaching package: 'kableExtra'
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     group_rows
+```
+
+```r
+#' Create a tibble object that evaluates the named expressions passed
+#' in as utility equation.
+utility_table <- function(expressions){
+  top <- tibble(
+    Alternative = names(expressions),
+    Expression = expressions 
+  ) %>%
+    rowwise() %>%
+    mutate(
+      Value = eval(parse(text = Expression)),
+      Exponent = exp(Value) 
+    ) %>%
+    ungroup() %>%
+    mutate( Probability = Exponent / sum(Exponent) )
+  
+  bottom <- tibble(
+    Alternative = "Total",
+    Expression = "",
+    Value = NA,
+    Exponent = sum(top$Exponent),
+    Probability = sum(top$Probability)
+  )
+  
+  bind_rows(top, bottom)
+}
+```
 
 
 ## Overview Description and Functional Form
@@ -22,7 +97,8 @@ distribution assumption for error terms leads to the Multinomial Probit Model
 (MNP) which has some properties that make it difficult to use in choice
 analysis.[^numericalproblems]  The Gumbel distribution is selected because it
 has computational advantages in a context where maximization is important,
-closely approximates the normal distribution (see Figure 4.1 and Figure 4.2) and
+closely approximates the normal distribution (see Figure \@ref(fig:gumbelpdf) 
+and Figure \@ref(fig:gumbelcdf)) and
 produces a closed-form[^withoutnumint] probabilistic choice model.
 
 
@@ -68,12 +144,12 @@ The Gumbel has the following cumulative distribution and probability density
 functions:
 
 \begin{equation}
-  F(\epsilon) = \exp\left[\exp[-\mu(\epsilon-\eta)]\right]
+  F(\epsilon) = e^{e^{-\mu(\epsilon-\eta)}}
   (\#eq:gumbelcumdist)
 \end{equation}
   
 \begin{equation}
-  f(\epsilon) = \mu \times \left[\exp[-\mu(\epsilon-\eta)]\right] \times \exp\left[-\exp[-\mu(\epsilon-\eta)]\right]
+  f(\epsilon) = \mu e^{-\mu(\epsilon-\eta)} \times  e^{e^{-\mu(\epsilon-\eta)}}
   (\#eq:gumbelprobdens)
 \end{equation}
 	
@@ -98,7 +174,7 @@ The mean and variance of the distribution are:
 The second and third assumptions state the location and variance of the
 distribution just as $\mu$ and $\sigma^2$ indicate the location and variance of
 the normal distribution. We will return to the discussion of the independence
-between/among alternatives in CHAPTER 8.
+between/among alternatives in [CHAPTER 8](#nested-logit-model).
 	
 The three assumptions, taken together, lead to the mathematical structure known
 as the Multinomial Logit Model (MNL), which gives the choice probabilities of
@@ -118,7 +194,7 @@ Where
   - $V_j$ is the systematic component of the utility of alternative *j*.
 	
 	
-The exponential function is described in Figure 4.3 which shows the relationship
+The exponential function is described in Figure \@ref(fig:viwithexpVi) which shows the relationship
 between $\exp(V_i)$ and $V_i$.  Note that $\exp(V_i)$ is always positive and
 increases monotonically with  $V_i$.
 
@@ -183,10 +259,10 @@ where *i* indicates the alternative for which the probability is being computed.
 This formulation implies that the probability of choosing an alternative
 increases monotonically with an increase in the systematic utility of that
 alternative and decreases with increases in the systematic utility of each of
-the other alternatives.  This is illustrated in Table 4.1 showing the
+the other alternatives.  This is illustrated in Table \@ref(tab:dralonefordralone) showing the
 probability of DA as a function of its own utility (with the utilities of other
-alternatives held constant) and in Table 4.2 as a function of the utility of
-other alternatives with its own utility fixed.
+alternatives held constant) and in Table \@ref(tab:drloneforshrridetransit) 
+as a function of the utility of other alternatives with its own utility fixed.
 
 
 ```r
@@ -199,22 +275,61 @@ tibble(
   mutate(
     p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
   ) %>%
-  knitr::kable(  
+  kableExtra::kbl(  
     caption = "Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)", 
-     col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
+    col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$")) %>%
+  kableExtra::kable_styling()
 ```
 
-
-
-Table: (\#tab:dralonefordralone)Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)
-
-| $Case$| $V_{DA}$| $V_{SR}$| $V_{TR}$|  $Pr(DA)$|
-|------:|--------:|--------:|--------:|---------:|
-|      1|     -3.0|     -1.5|     -0.5| 0.0566117|
-|      2|     -1.5|     -1.5|     -0.5| 0.2119416|
-|      3|      0.0|     -1.5|     -0.5| 0.5465494|
-|      4|      1.5|     -1.5|     -0.5| 0.8437947|
-|      5|      3.0|     -1.5|     -0.5| 0.9603322|
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:dralonefordralone)Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> $Case$ </th>
+   <th style="text-align:right;"> $V_{DA}$ </th>
+   <th style="text-align:right;"> $V_{SR}$ </th>
+   <th style="text-align:right;"> $V_{TR}$ </th>
+   <th style="text-align:right;"> $Pr(DA)$ </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> -3.0 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> 0.0566117 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> 0.2119416 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> 0.5465494 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.5 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> 0.8437947 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 3.0 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> 0.9603322 </td>
+  </tr>
+</tbody>
+</table>
 
 
 ```r
@@ -227,23 +342,68 @@ tibble(
   mutate(
     p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
   ) %>%
-  knitr::kable(  caption = "Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties", 
-                 col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
+  kableExtra::kbl(
+    caption = "Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties", 
+    col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$")) %>%
+  kableExtra::kable_styling()
 ```
 
-
-
-Table: (\#tab:draloneforshrridetransit)Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties
-
-| $Case$| $V_{DA}$| $V_{SR}$| $V_{TR}$|  $Pr(DA)$|
-|------:|--------:|--------:|--------:|---------:|
-|      6|        0|     -1.5|     -1.5| 0.6914385|
-|      7|        0|     -1.5|     -1.0| 0.6285317|
-|      8|        0|     -1.5|     -0.5| 0.5465494|
-|      9|        0|     -0.5|     -1.5| 0.5465494|
-|     10|        0|     -0.5|     -1.0| 0.5064804|
-|     11|        0|     -0.5|     -0.5| 0.4518628|
-
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:draloneforshrridetransit)Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> $Case$ </th>
+   <th style="text-align:right;"> $V_{DA}$ </th>
+   <th style="text-align:right;"> $V_{SR}$ </th>
+   <th style="text-align:right;"> $V_{TR}$ </th>
+   <th style="text-align:right;"> $Pr(DA)$ </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> 0.6914385 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> -1.0 </td>
+   <td style="text-align:right;"> 0.6285317 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> 0.5465494 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> 0.5465494 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> -1.0 </td>
+   <td style="text-align:right;"> 0.5064804 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> 0.4518628 </td>
+  </tr>
+</tbody>
+</table>
 
 
 We use this three-alternative example to illustrate three important properties
@@ -254,7 +414,8 @@ alternatives from the attributes and availability of other alternatives.
 
 ### The Sigmoid or S shape of Multinomial Logit Probabilities
 
-The *S* shape of the MNL probabilities is illustrated in Figure 4.4 where the
+The *S* shape of the MNL probabilities is illustrated in Figure 
+\@ref(tab:choiceprob)  where the
 probability of choosing Drive Alone is shown as a function of its own utility,
 with the utilities of the other alternatives held constant.  The *S*-shape
 limits the probability range between zero when the utility of DA is very low,
@@ -386,10 +547,104 @@ computation of the choice probabilities based on the initial set of modal
 utilities and Table 4.4 shows the same computation after each of the utilities
 is increased by one.[^illustratecalcs]
 
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:tabel4-3)Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative Before Adding Delta</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Utility</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> Exponent </th>
+   <th style="text-align:right;"> Probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> -0.50 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> 0.6065307 </td>
+   <td style="text-align:right;"> 0.6896721 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> -1.50 </td>
+   <td style="text-align:right;"> -1.5 </td>
+   <td style="text-align:right;"> 0.2231302 </td>
+   <td style="text-align:right;"> 0.2537162 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> -3.00 </td>
+   <td style="text-align:right;"> -3.0 </td>
+   <td style="text-align:right;"> 0.0497871 </td>
+   <td style="text-align:right;"> 0.0566117 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 0.8794479 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+</tbody>
+</table>
+where the sum of the exponent variable is equal to 0.879.
 
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:tabel4-4)Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative After Adding Delta (=1.0)</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Utility</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> Exponent </th>
+   <th style="text-align:right;"> Probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> -0.50 + 1.00 </td>
+   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:right;"> 1.6487213 </td>
+   <td style="text-align:right;"> 0.6896721 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> -1.50 + 1.00 </td>
+   <td style="text-align:right;"> -0.5 </td>
+   <td style="text-align:right;"> 0.6065307 </td>
+   <td style="text-align:right;"> 0.2537162 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> -3.00 + 1.00 </td>
+   <td style="text-align:right;"> -2.0 </td>
+   <td style="text-align:right;"> 0.1353353 </td>
+   <td style="text-align:right;"> 0.0566117 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 2.3905872 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+</tbody>
+</table>
 
-
-
+Where the sum of the exponent variable is equal to 2.391
 
 The expression for the probability equation of the logit model (equation 4.9)
 can also be presented in a different form which makes the equivalent difference
@@ -539,21 +794,140 @@ alternative, we obtain:
 
 \begin{equation}
   V_{TR,t} = \beta_{TR-DA,0} + \beta_{TR-DA,1} \times Inc_t + \gamma \times TT_{TR}
-(\#eq:fourthirtyfour)
+(\#eq:fourthirtyfive)
 \end{equation}
 
 where the constants and income parameters are relative to the Drive Alone alternative.
 
-These two models are equivalent as shown in Table 4.5 and Table 4.6 which
+These two models are equivalent as shown in Table \@ref(transit-base) and Table \@ref(da-base) which
 correspond to the TRansit reference and Drive Alone reference examples,
 respectively, for an individual from a household with $50,000 annual income and
 facing travel times of 30, 35 and 50 minutes for Drive Alone, Shared Ride and
 TRansit, respectively.
 
-1.1 + 0.0008 $\times$ 50 [^income1000] - 0.02 $\times$ 30 [^timemin]
+
+```r
+utility_table(
+ c("Drive Alone" = "1.1 + 0.008 * 50 - 0.02 * 30",
+   "Shared Ride" = "0.8 + 0.006 * 50 - 0.02 * 35",
+   "Transit" = "0.0 + 0.000 * 50 - 0.02 * 50")
+) %>%
+  kableExtra::kbl(caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
+  kable_styling() %>%
+  add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
+```
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:transit-base)Utility and Probability calculation with TRansit as Base Alternative</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Utility</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> Exponent </th>
+   <th style="text-align:right;"> Probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> 1.1 + 0.008 * 50 - 0.02 * 30 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:right;"> 2.4596031 </td>
+   <td style="text-align:right;"> 0.5694439 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> 0.8 + 0.006 * 50 - 0.02 * 35 </td>
+   <td style="text-align:right;"> 0.4 </td>
+   <td style="text-align:right;"> 1.4918247 </td>
+   <td style="text-align:right;"> 0.3453852 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> 0.0 + 0.000 * 50 - 0.02 * 50 </td>
+   <td style="text-align:right;"> -1.0 </td>
+   <td style="text-align:right;"> 0.3678794 </td>
+   <td style="text-align:right;"> 0.0851709 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 4.3193072 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+</tbody>
+</table>
+
+where the sum of the exponent variable equals 4.319.
 
 
+```r
+utility_table(
+  c( "Drive Alone" = "0.0 + 0.000 * 50 - 0.02 * 30",
+     "Shared Ride" = "-0.3 - 0.002 * 50 - 0.02 * 35",
+     "Transit" = "-1.1 - 0.008 * 50 - 0.02 * 50")
+) %>%
+  kableExtra::kbl(caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
+  kable_styling() %>%
+  add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
+```
 
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:da-base)Utility and Probability calculation with TRansit as Base Alternative</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Utility</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> Exponent </th>
+   <th style="text-align:right;"> Probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> 0.0 + 0.000 * 50 - 0.02 * 30 </td>
+   <td style="text-align:right;"> -0.6 </td>
+   <td style="text-align:right;"> 0.5488116 </td>
+   <td style="text-align:right;"> 0.5694439 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> -0.3 - 0.002 * 50 - 0.02 * 35 </td>
+   <td style="text-align:right;"> -1.1 </td>
+   <td style="text-align:right;"> 0.3328711 </td>
+   <td style="text-align:right;"> 0.3453852 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> -1.1 - 0.008 * 50 - 0.02 * 50 </td>
+   <td style="text-align:right;"> -2.5 </td>
+   <td style="text-align:right;"> 0.0820850 </td>
+   <td style="text-align:right;"> 0.0851709 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 0.9637677 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+</tbody>
+</table>
+
+where the sum of the exponent variable equals 0.964.
 
 As expected, the resultant probabilities are identical in both cases.  Table 4 7
 shows that the differences in the alternative specific constants and income
@@ -563,29 +937,67 @@ Drive Alone base case.
 
 ```r
 tibble(
-  alt = c("Drive Alone", "Shared Ride", "Transit")
-)
+ "Alternative"= c("Drive Alone", "Shared Ride", "Transit"),
+ "Constant" = c("1.1","0.8","0.0"),
+ "Income" = c("0.008", "0.006", "0.000"),
+ "Constant " = c("-1.1","-1.1","-1.1"),
+ "Income " = c("-0.008", "-0.008", "-0.008"),
+ "Constant  " = c("0.0","-0.3","-1.1"),
+ "Income  " = c("0.000", "-0.002", "-0.008")) %>%
+  kbl(caption = "Changes in Alternative Specific Constants and Income Parameters") %>% 
+  kable_styling() %>%
+  add_header_above(c(" " = 1, "TRansit as Base Alternative"= 2, "Change in Parameters" = 2, "Drive Alone as Base Alternative" = 2), align = "center")
 ```
 
-```
-## # A tibble: 3 x 1
-##   alt        
-##   <chr>      
-## 1 Drive Alone
-## 2 Shared Ride
-## 3 Transit
-```
-
-
-<center>
-**Table 4-7 Changes in Alternative Specific Constants and Income Parameters**
-</center>
-|                |TRansit as Base Alternative ||Change in Parameters  ||Drive Alone as Base Alternative||
-| -------------- | :----------: | :----------: | :--------: | :------: | :----------: | :-------------: |
-|**Alternative** |**Constant**  |**Income**    |**Constant**|**Income**|**Constant**  |**Income**       |
-| Drive Alone    | 1.1          | 0.008        |-1.1        |-0.008    |0.0           |0.000            |
-| Shared Ride    | 0.8          | 0.006        |-1.1        |-0.008    |-0.3          |-0.002           |
-| TRansit        | 0.0          | 0.000        |-1.1        |-0.008    |-1.1          |-0.008           |
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:compareutilities)Changes in Alternative Specific Constants and Income Parameters</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">TRansit as Base Alternative</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Change in Parameters</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Drive Alone as Base Alternative</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Constant </th>
+   <th style="text-align:left;"> Income </th>
+   <th style="text-align:left;"> Constant  </th>
+   <th style="text-align:left;"> Income  </th>
+   <th style="text-align:left;"> Constant   </th>
+   <th style="text-align:left;"> Income   </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> 1.1 </td>
+   <td style="text-align:left;"> 0.008 </td>
+   <td style="text-align:left;"> -1.1 </td>
+   <td style="text-align:left;"> -0.008 </td>
+   <td style="text-align:left;"> 0.0 </td>
+   <td style="text-align:left;"> 0.000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> 0.8 </td>
+   <td style="text-align:left;"> 0.006 </td>
+   <td style="text-align:left;"> -1.1 </td>
+   <td style="text-align:left;"> -0.008 </td>
+   <td style="text-align:left;"> -0.3 </td>
+   <td style="text-align:left;"> -0.002 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> 0.0 </td>
+   <td style="text-align:left;"> 0.000 </td>
+   <td style="text-align:left;"> -1.1 </td>
+   <td style="text-align:left;"> -0.008 </td>
+   <td style="text-align:left;"> -1.1 </td>
+   <td style="text-align:left;"> -0.008 </td>
+  </tr>
+</tbody>
+</table>
 
 
 ## Independence of Irrelevant Alternatives Property
@@ -720,17 +1132,55 @@ implicitly assumed that the constants reflect the average effects of all the
 variables affecting the choice decision, since no variables are included
 explicitly in the utility specification.  If these constants are 0.0, -1.6 and
 -1.8 for drive alone, shared ride and transit, respectively, the probability
-calculation is as shown in Table 4.8.
+calculation is as shown in Table \@ref(tab:constants).
 
-<center>
-**Table 4-8 MNL Probabilities for Constants Only Model**
-</center>
-|                |Utility|Utility||
-| -------------- | :----------: | :----------: | :--------: | :-----------: |
-|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | 0.0          | 0.0          |1.0000      |0.7314         |
-| Shared Ride    | -1.60        | -1.60        |0.2019      |0.1477         |
-| TRansit        | -1.80        | -1.80        |0.1653      |0.1209         |
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:constants)MNL Properties for Constants Only Model</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Utility</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> Exponent </th>
+   <th style="text-align:right;"> Probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> 0.0 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+   <td style="text-align:right;"> 0.7314243 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> -1.60 </td>
+   <td style="text-align:right;"> -1.6 </td>
+   <td style="text-align:right;"> 0.2018965 </td>
+   <td style="text-align:right;"> 0.1476720 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> -1.80 </td>
+   <td style="text-align:right;"> -1.8 </td>
+   <td style="text-align:right;"> 0.1652989 </td>
+   <td style="text-align:right;"> 0.1209036 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 1.3671954 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+</tbody>
+</table>
 
 As expected, Drive Alone has the highest probability, followed by Shared Ride, and TRansit.
 
@@ -768,18 +1218,68 @@ utility equation, we assume travel time and travel cost values as follows:
 | Shared Ride | 28 minutes  | $0.75       |
 | TRansit     | 55 minutes  | $1.25       |
 
-The utilities and probabilities are calculated as shown in Table 4-9.
+The utilities and probabilities are calculated as shown in Table \@ref(tab:utimecost).
 
-<center>
-**Table 4-9 MNL Probabilities for Time and Cost Model**
-</center>
-|                |Utility|Utility||
-| -------------- | :----------: | :----------: | :--------: | :-----------: |
-|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | -0.045x25-0.004X175         | -1.825     |0.1612      |0.7314         |
-| Shared Ride    | -1.865-0.045x28-0.004x75    | -3.425     |0.0325      |0.1477         |
-| TRansit        | -0.650-0.045x55-0.004x125   | -3.625     |0.0266      |0.1209         |
-                                                            | 0.2204     |  
+
+
+```r
+utility_table(
+  c("Drive Alone" = "-0.045*25-0.004*175",
+    "Shared Ride" = "-1.865-0.045*28-0.004*75",
+    "Transit" = "-0.650-0.045*55-0.004*125")
+) %>%
+  kbl(caption = "MNL Probabilities for Time and Cost Model") %>% 
+  kable_styling() %>% 
+  add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
+```
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:utimecost)MNL Probabilities for Time and Cost Model</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Utility</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> Exponent </th>
+   <th style="text-align:right;"> Probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> -0.045*25-0.004*175 </td>
+   <td style="text-align:right;"> -1.825 </td>
+   <td style="text-align:right;"> 0.1612176 </td>
+   <td style="text-align:right;"> 0.7314243 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> -1.865-0.045*28-0.004*75 </td>
+   <td style="text-align:right;"> -3.425 </td>
+   <td style="text-align:right;"> 0.0325493 </td>
+   <td style="text-align:right;"> 0.1476720 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> -0.650-0.045*55-0.004*125 </td>
+   <td style="text-align:right;"> -3.625 </td>
+   <td style="text-align:right;"> 0.0266491 </td>
+   <td style="text-align:right;"> 0.1209036 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 0.2204160 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+</tbody>
+</table>
 
 
 This specification can be refined further by decomposing travel time into its
@@ -803,18 +1303,69 @@ negative parameter for out of vehicle time than for total time; say -0.031 and
 | Bus         | 25 minutes  | 30 minutes  | $1.25       |
 
 the new systematic utilities and choice probabilities are as computed in Table
-4-10:
+\@ref(tab:uivtovt):
 
-<center>
-**Table 4-10 MNL Probabilities for In and Out of Vehicle Time and Cost Model**
-</center>
-|                |Utility|Utility||
-| -------------- | :----------: | :----------: | :--------: | :-----------: |
-|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | -0.031x21-0.062X4-0.004x175         | -1.599     |0.202      |0.773         |
-| Shared Ride    | -1.90-0.031x23-0.062x5-0.004x75     | -3.223     |0.040      |0.152         |
-| TRansit        | -0.80-0.031x25-0.062x30-0.004x125   | -3.935     |0.020      |0.075         |
-                                                                    |0.261      |  
+
+
+```r
+utility_table(
+  c("Drive Alone" = "-0.031*21-0.062*4-0.004*175",
+    "Shared Ride" = "-1.90-0.031*23-0.062*5-0.004*75",
+    "Transit" = "-0.80-0.031*25-0.062*30-0.004*125")
+) %>%
+  kbl(caption = "MNL Probabilities for Time and Cost Model") %>% 
+  kable_styling() %>% 
+  add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
+```
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:uivtovt)MNL Probabilities for Time and Cost Model</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Utility</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> Exponent </th>
+   <th style="text-align:right;"> Probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> -0.031*21-0.062*4-0.004*175 </td>
+   <td style="text-align:right;"> -1.599 </td>
+   <td style="text-align:right;"> 0.2020985 </td>
+   <td style="text-align:right;"> 0.7729036 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> -1.90-0.031*23-0.062*5-0.004*75 </td>
+   <td style="text-align:right;"> -3.223 </td>
+   <td style="text-align:right;"> 0.0398354 </td>
+   <td style="text-align:right;"> 0.1523460 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> -0.80-0.031*25-0.062*30-0.004*125 </td>
+   <td style="text-align:right;"> -3.935 </td>
+   <td style="text-align:right;"> 0.0195457 </td>
+   <td style="text-align:right;"> 0.0747504 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 0.2614796 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+</tbody>
+</table>
+
 
 **Example 3 -- Including Decision-Maker Related Biases - Income**
 The preceding examples do not include any characteristics of the traveler in the
@@ -834,18 +1385,70 @@ income.  The alternative specific constant of the transit utility changes
 substantially from the preceding example as it no longer reflects the average
 effect of excluding income from the transit utility specification.  The
 calculation of utilities and probabilities for this model for a person from a
-household with $50,000 annual income is shown in Table 4.11.
+household with $50,000 annual income is shown in \@ref(tab:uivtovtcost).
 
-<center>
-**Table 4-11 MNL Probabilities for In and Out of Vehicle Time, Cost and Income Model**
-</center>
-|                |Utility|Utility||
-| -------------- | :----------: | :----------: | :--------: | :-----------: |
-|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | -0.031x21-0.062X4-0.004x175                  | -1.599     |0.202      |0.780         |
-| Shared Ride    | -1.90-0.031x23-0.062x5-0.00x75               | -3.223     |0.040      |0.154         |
-| TRansit        | -0.50-0.031x25-0.062x30-0.004x125-0.0087x50  | -4.070     |0.017      |0.066         |
-                                                                             |0.259      |  
+
+
+```r
+utility_table(
+  c("Drive Alone" = " -0.031*21-0.062*4-0.004*175",
+    "Shared Ride" = "-1.90-0.031*23-0.062*5-0.004*75",
+    "Transit" = "-0.50-0.031*25-0.062*30-0.004*125-0.0087*50")
+) %>%
+  kbl(caption = "MNL Probabilities for In and Out of Vehicle Time, Cost and Income Model") %>% 
+  kable_styling() %>% 
+  add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
+```
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:uivtovtcost)MNL Probabilities for In and Out of Vehicle Time, Cost and Income Model</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Utility</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> Exponent </th>
+   <th style="text-align:right;"> Probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> -0.031*21-0.062*4-0.004*175 </td>
+   <td style="text-align:right;"> -1.599 </td>
+   <td style="text-align:right;"> 0.2020985 </td>
+   <td style="text-align:right;"> 0.7802692 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> -1.90-0.031*23-0.062*5-0.004*75 </td>
+   <td style="text-align:right;"> -3.223 </td>
+   <td style="text-align:right;"> 0.0398354 </td>
+   <td style="text-align:right;"> 0.1537978 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> -0.50-0.031*25-0.062*30-0.004*125-0.0087*50 </td>
+   <td style="text-align:right;"> -4.070 </td>
+   <td style="text-align:right;"> 0.0170774 </td>
+   <td style="text-align:right;"> 0.0659330 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 0.2590113 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+</tbody>
+</table>
+
+
 
 
 The probability of choosing transit is smaller for this traveler than would have
@@ -861,20 +1464,69 @@ An alternative method of including income in the utility specification is to use
 income as a deflator of cost by forming a variable by dividing cost by income.
 This formulation reflects the rationale that cost becomes a less important
 factor in the choice of a travel mode as the income of the traveler increases.
-The revised utility functions and calculations are shown in Table 4 12 using the
-values for the modal attributes and income as used in preceding example.
+The revised utility functions and calculations are shown in Table \@ref(tab:uinteraction) 
+using the values for the modal attributes and income as used in preceding
+example.
 
-<center>
-**Table 4-12 MNL Probabilities for In and Out of Vehicle Time, and Cost/Income Model**
-</center>
-|                |Utility|Utility||
-| -------------- | :----------: | :----------: | :--------: | :-----------: |
-|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | -0.031x21-0.062X4-0.153x(175/50)         | -1.435    |0.238      |0.763         |
-| Shared Ride    | -1.90-0.031x23-0.062x5-0.153x(75/50)     | -3.153    |0.043      |0.137         |
-| TRansit        | -0.45-0.031x25-0.062x30-0.153x(125/50)   | -3.468    |0.031      |0.100         |
-                                                                        |0.312      |  
 
+```r
+utility_table(
+  c("Drive Alone" = " -0.031*21-0.062*4-0.153*(175/50) ",
+    "Shared Ride" = " -1.90-0.031*23-0.062*5-0.153*(75/50)   ",
+    "Transit" = "-0.45-0.031*25-0.062*30-0.153*(125/50)")
+) %>%
+  kbl(caption = "MNL Probabilities for In and Out of Vehicle Time, Cost/Income Model") %>% 
+  kable_styling() %>% 
+  add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
+```
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:uinteraction)MNL Probabilities for In and Out of Vehicle Time, Cost/Income Model</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Utility</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="2"></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:left;"> Expression </th>
+   <th style="text-align:right;"> Value </th>
+   <th style="text-align:right;"> Exponent </th>
+   <th style="text-align:right;"> Probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Drive Alone </td>
+   <td style="text-align:left;"> -0.031*21-0.062*4-0.153*(175/50) </td>
+   <td style="text-align:right;"> -1.4345 </td>
+   <td style="text-align:right;"> 0.2382345 </td>
+   <td style="text-align:right;"> 0.7631451 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Shared Ride </td>
+   <td style="text-align:left;"> -1.90-0.031*23-0.062*5-0.153*(75/50) </td>
+   <td style="text-align:right;"> -3.1525 </td>
+   <td style="text-align:right;"> 0.0427451 </td>
+   <td style="text-align:right;"> 0.1369270 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:left;"> -0.45-0.031*25-0.062*30-0.153*(125/50) </td>
+   <td style="text-align:right;"> -3.4675 </td>
+   <td style="text-align:right;"> 0.0311949 </td>
+   <td style="text-align:right;"> 0.0999278 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> 0.3121745 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
+  </tr>
+</tbody>
+</table>
 
 This specification of income in the utility function also results in lower
 income travelers predicted to have higher probability of choosing transit; it
@@ -966,15 +1618,15 @@ choosing alternative, $P_j$, if the parameter $\beta_k$ is positive (negative).
 It is useful to recognize that the sum of the derivatives over all the
 alternatives must be equal to zero.  That is,
 
-\begin{equation}
-\begin{split}
-\displaystyle \sum_{\forall_{j}}\frac{\partial P_{j}}{\partial X_{ik}}\\ = \frac{\partial P_{j}}{\partial X_{ik}} + \sum_{\forall_{j \ne i}}\frac{\partial P_{j}}{\partial X_{ik}}\\
-= \beta_{k}P_{i}(1-P_{i}) - \sum_{\forall_{j \ne i}}\beta_{k}P_{i}P_{j}\\
-= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}\sum_{\forall_{j \ne i}}P_{j}\\
-= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}(1-P_{i}) = 0
-\end{split}
+\begin{align}
+ \sum_{\forall_{j}}\frac{\partial P_{j}}{\partial X_{ik}}&= 
+  \frac{\partial P_{j}}{\partial X_{ik}} + \sum_{\forall_{j \ne i}}\frac{\partial P_{j}}{\partial X_{ik}}\\
+&= \beta_{k}P_{i}(1-P_{i}) - \sum_{\forall_{j \ne i}}\beta_{k}P_{i}P_{j}\\
+&= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}\sum_{\forall_{j \ne i}}P_{j}\\
+&= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}(1-P_{i})\\
+&= 0
 (\#eq:sumofderivativesequaltozero)
-\end{equation}
+\end{align}
 
 
 This is as expected.  Since the sum of all probabilities is fixed at one, the
@@ -998,8 +1650,8 @@ proportional change in the probability divided by the proportional change in the
 attribute under consideration:
 
 \begin{equation}
-\displaystyle Elasticity = \frac{Percentage change in Probability}{Percentage Change in Attribute}$
-$= \frac{(P_{2}-P_{1})/P_{1}}{(X_{2}-X_{1})/X_{1}} = \frac{\Delta P/P_{1}}{\Delta X/X_{1}}
+\text{Elasticity} = \frac{\text{Pct Change in Probability}}{\text{Pct Change in Variable}}
+= \frac{(P_{2}-P_{1})/P_{1}}{(X_{2}-X_{1})/X_{1}} = \frac{\Delta P/P_{1}}{\Delta X/X_{1}}
 (\#eq:Elasticity)
 \end{equation}
 
