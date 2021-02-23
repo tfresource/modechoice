@@ -529,42 +529,42 @@ alternative, we obtain:
 
 where the constants and income parameters are relative to the Drive Alone alternative.
 
-These two models are equivalent as shown in Table 4.5 and Table 4.6 which
+These two models are equivalent as shown in Table \@ref(transit-base) and Table \@ref(da-base) which
 correspond to the TRansit reference and Drive Alone reference examples,
 respectively, for an individual from a household with $50,000 annual income and
 facing travel times of 30, 35 and 50 minutes for Drive Alone, Shared Ride and
 TRansit, respectively.
 
-```{r tabel4-5, echo = F}
-
-thegoods2 <- data.frame(
+```{r transit-base}
+tibble(
  "Alternative"= c("Drive Alone","Shared Ride","Transit"),
- "Expression" = c("1.1 + 0.0008 * 50^7 - 0.02 * 30^8","0.8 + 0.006 * 50 - 0.02 * 35","0.0 + 0.000 * 50 - 0.02 * 50"),
- "Value" = c(0.90,0.40,-1.00),
- "Exponent" = c(2.460,1.492,0.368),
- "Probability" = c(0.569,0.345,0.085))
-
-kbl(thegoods2, align = "c", booktabs = T, caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
-kable_classic() %>% 
+ "Expression" = c("1.1 + 0.008 * 50 - 0.02 * 30","0.8 + 0.006 * 50 - 0.02 * 35","0.0 + 0.000 * 50 - 0.02 * 50"),
+) %>%
+  mutate(
+    Value = c(1.1 + 0.008 * 50 - 0.02 * 30, 0.8 + 0.006 * 50 - 0.02 * 35, 0.0 + 0.000 * 50 - 0.02 * 50),
+    Exponent = exp(Value),
+    Probability = Exponent / sum(Exponent)
+  ) %>%
+  kableExtra::kbl(booktabs = T, caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
+  kable_styling() %>%
   add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
 ```
 
 where the sum of the exponent variable equals 4.319.
 
-```{r tabel4-6, echo = F}
-
-thegoods3 <- data.frame(
+```{r da-base}
+tibble(
  "Alternative"= c("Drive Alone","Shared Ride","Transit"),
- "Expression" = c("0.0 + 0.000 * 50 - 0.02 * 30","-0.3 + 0.002 * 50 - 0.02 * 35","-1.1 - 0.008 * 50 - 0.02 * 50"),
- "Value" = c(-0.60,-1.10,-2.50),
- "Exponent" = c(0.549,0.333,0.082),
- "Probability" = c(0.569,0.345,0.085))
-
-kbl(thegoods3, align = "c", booktabs = T, caption = "Utility and Probability calculation with Drive Alone
-    as Base Alternative") %>% 
-kable_classic() %>% 
+ "Expression" = c("0.0 + 0.000 * 50 - 0.02 * 30","-0.3 - 0.002 * 50 - 0.02 * 35","-1.1 - 0.008 * 50 - 0.02 * 50"),
+) %>%
+  mutate(
+    Value = c(0.0 + 0.000 * 50 - 0.02 * 30, -0.3 - 0.002 * 50 - 0.02 * 35, -1.1 - 0.008 * 50 - 0.02 * 50),
+    Exponent = exp(Value),
+    Probability = Exponent / sum(Exponent)
+  ) %>%
+  kableExtra::kbl(booktabs = T, caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
+  kable_styling() %>%
   add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
-
 ```
 
 where the sum of the exponent variable equals 0.964.
