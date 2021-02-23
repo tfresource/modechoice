@@ -636,3 +636,15 @@ which can be reported in a table for selected values of time or plotted in a gra
 
 The implications for value of time of these different formulations are shown in Table 5-12 and Table 5-13 Value of Time for Log of Cost Model and also in Figure 5.7 and Figure 5.8.  
 
+```{r table5-12, echo = F}
+#this code will also produce Figure 5-7
+
+
+logTime_model <- mlogit(chosen ~ log(tvtt) + cost | hhinc, data = sf_mlogit)
+summary(logTime_model)
+
+# time value of money is usually calculated by dividing Beta_cost / Beta_tvtt
+#I'm not sure how changing the trip time changes the time value of money
+
+```
+
