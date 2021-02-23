@@ -428,6 +428,38 @@ tibble(
 
 ```
 
+```{r tdistribution}
+library(ggplot2)
+ggplot(data.frame(x = c(-4,4))) +
+  # Plot the pdf
+  stat_function(
+    fun = function(x) dt(x, df = 29),
+    aes(x),
+    geom = "area", color = "grey75", fill = "grey90", alpha = 1) +
+   # Shade above 2
+  stat_function(
+    fun = function(x) ifelse(x >= 1.645, dt(x, df = 29), NA),
+    aes(x),
+    geom = "area", color = NA, fill = "grey50", alpha = 1) +
+  # Shade above 1.645
+   stat_function(
+    fun = function(x) ifelse(x >= 2, dt(x, df = 29), NA),
+    aes(x),
+    geom = "area", color = NA, fill = "grey40", alpha = 1) +
+   # Shade below -1.645
+  stat_function(
+    fun = function(x) ifelse(x <= -1.645, dt(x, df = 29), NA),
+    aes(x),
+    geom = "area", color = NA, fill = "grey50", alpha = 1) +
+  # Shade below -2
+  stat_function(
+    fun = function(x) ifelse(x <= -2, dt(x, df = 29), NA),
+    aes(x),
+    geom = "area", color = NA, fill = "grey40", alpha = 1) +
+  ggtitle(expression(paste("The", italic(t),
+    " distribution with a 90% and 95% confidence interval"))) +
+  xlab(expression(italic(t))) 
+```
 
 We illustrate the use of the t-test by reviewing the t-statistics for each parameter in the initial model specification (Table 5-2). Both the travel cost and travel time parameters have large absolute t-statistic values (20.6 and 16.6, respectively) which lead us to reject the hypothesis that these variables have no effect on modal utilities at a confidence level higher than 99.9%. Thus, these variables should be retained in the model. All of the other t-statistics, except for Income-Shared Ride 2,  Income-Shared Ride 3+ and the walk constant are greater than 1.960 (95% confidence) supporting the inclusion of the corresponding variables.  The t-statistics on the shared ride specific income variables are even less than 1.645 in absolute value (90% confidence), suggesting that the effect of income on the utilities of the shared ride modes may not differentiate them from the reference (drive alone) mode. Consequently, the analyst should consider removing these income variables from the utility function specifications for the shared ride modes. The case is particularly compelling for removal of the income shared ride 3+ variable since the t-statistic is very low and the parameter has a counter-intuitive sign. Another alternative would be to combine the two shared ride income parameters suggesting that income has differential effect between drive alone and shared ride but not between shared ride 2 and shared ride 3+ (when this is done, the combined variable obtains a small negative parameter which is not statistically different from zero).  This variable could be deleted or retained according to the judgment of the analyst as described in Section 6.2.1.
 
