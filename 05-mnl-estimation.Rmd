@@ -431,6 +431,16 @@ We illustrate the use of the t-test by reviewing the t-statistics for each param
 
 An alternative approach is to report the t-statistic to two or three decimal places and calculate the probability that a t-statistic value of that magnitude or higher would occur due to random variation in sampling as shown in Table 5-4.  This is reported as the significance level, which is the complement of the level of confidence. The significance of each parameter can be read directly from the table.  Parameters with significance greater than 0.05 (lower in magnitude but more significant), provide a stronger basis for rejecting the hypothesis that the true parameter is zero and that the corresponding variable can be excluded from the model. On the other hand, significance levels of 0.163 (for Income-SR2), 0.888 (for Income-SR3+) and 0.287 (for ASC-Walk) provide little evidence about whether the corresponding variable should or should not be included in the model .
 
+```{r table5-4, echo = F}
+
+Base_model <- mlogit(chosen ~ cost + tvtt | hhinc, data = sf_mlogit)
+
+summary(Base_model)
+
+#trying to get modelsummary::modelsummary to work, but haven't figured it out yet
+
+```
+
 It is important to recognize that a low t-statistic does not require removal of the corresponding variable from the model.  If the analyst has a strong reason to believe that the variable is important, and the parameter sign is correct, it is reasonable to retain the variable in the model.  A low t-statistic and corresponding low level of significance can best be interpreted as providing little or no information rather than as a basis for excluding a variable.  Also, one should be cautious about prematurely deleting variables which are expected to be important as the same variable may be significant when other variables are added to or deleted from the model.  
 
 The lack of significance of the alternative specific walk constant is immaterial since the constants represent the average effect of all the variables not included in the model and should always be retained despite the fact that they do not have a well-understood behavioral interpretation.
