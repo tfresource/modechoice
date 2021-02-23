@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Data Assembly and Estimation of Simple Multinomial Logit Models
 ```{r setup}
 library(tidyverse)
@@ -128,7 +133,7 @@ sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.
   mutate(altname = as_factor(altnum, levels = "labels"))
 
 # Convert into mlogit dfidx data frame
-sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altnum"))
+sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altname"))
 
 # write to data/ folder for future use
 write_rds(sf_mlogit, "data/worktrips.rds")
@@ -148,6 +153,7 @@ trip_format <- sf_work_mode  %>%
   select(hhid, perid, chosen, ivtt, hhinc, altname, altnum) %>%
   group_by(hhid, perid) %>%
   mutate( chosen = max(chosen * altnum) ) %>%
+  select(-altnum) %>%
   spread(altname, ivtt, fill = 0)
 
 knitr::kable(head(trip_format), caption= "Data Layout Type I: Trip Format", align = 'c')
@@ -283,15 +289,15 @@ $ \sum_t ln(1/NAlt_t)$
 In the next three sections, we review the estimation results for the base model using informal judgment-based tests (section 5.7.1), goodness-of-fit measures (section 5.7.2), and statistical tests (section 5.7.3). These elements, taken together, provide a basis to evaluate each model and to compare models with different specifications. 
 
 ```{r basic-estimation}
-base <- mlogit(mode ~ price + catch | income, data = Fish)
+base <- mlogit(chosen ~ ivtt , data = sf_mlogit)
 
 # estimate a model with constants only by constraining a single generic variable
 # to be zero
-market_shares <- mlogit(mode ~ price, data = Fish, constPar = c("price" = 0))
+market_shares <- mlogit(chosen ~ ivtt, data = sf_mlogit, constPar = c("ivtt" = 0))
 
 # Estimate a null model by constraining ALL the parameters to be zero. 
-fixed_coefs <- rep(0,4) %>% setNames(c(names(coef(market_shares)), "price"))
-null_model <- mlogit(mode ~ price, data = Fish, start = fixed_coefs, iterlim = 0)
+fixed_coefs <- rep(0,6) %>% setNames(c(names(coef(market_shares)), "ivtt"))
+null_model <- mlogit(chosen ~ ivtt, data = sf_mlogit, start = fixed_coefs, iterlim = 0)
 ```
 
 ```{r basic-estimation-table}
@@ -630,8 +636,13 @@ with five degrees of freedom (five income parameters are constrained to zero).  
 ```{r table5-8}
 thegoods1 <- tibble(
  "Variables"= c("Log-Likelihood of Unrestricted Model $(LL_U)$","Log-Likelihood of Restricted Model $(LL_R)$","Test Statistics [-2$(LL_R-LL_U)$]","Number of Restrictions","Critical Chi-Squared Value at 99.9% Confidence","Rejection Confidence","Rejection Significance"),
- "Test for Hypothesis $H_{0,c}$" = c(-3626.186,-4123615,994.858,2,13.82, ">>99.9%", 0.000),
+ "Test for Hypothesis $H_{0,c}$" = c(-3626.186,-4123.615,994.858,2,13.82, ">>99.9%", 0.000),
  "Test for Hypothesis $H_{0,d}$" = c(-3626.186, -3637.579, 22.786, 5, 20.51, ">>99.9%",0.000))
+tibble(
+  llu =c( -3636.186, 0),
+  llr = c()
+) %>%
+  mutate(lrtests = -2 * (llr - llu))
 
 kable(thegoods1, align = c("l", "c" ,"c"), booktabs = T, caption = "Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$")
 ```
@@ -671,54 +682,39 @@ The corresponding test for the cost by ln(income) being true is:
 
 The above result implies that the null hypotheses that the models with cost by income variable or cost by ln(income) are true are rejected at a significance level greater than 0.001.  However, the significance of rejection is much lower for the cost by ln(income) model and many analysts would adopt that specification on the grounds that it is conceptually more appropriate.  This specification suggests that the value of money declines with income but the rate of decline diminishes at higher levels of income.
 ```{r basic-estimation}
-base <- mlogit(mode ~ price + catch | income, data = Fish)
+base <- mlogit(chosen ~ ivtt , data = sf_mlogit)
 
 # estimate a model with constants only by constraining a single generic variable
 # to be zero
-market_shares <- mlogit(mode ~ price, data = Fish, constPar = c("price" = 0))
+market_shares <- mlogit(chosen ~ ivtt, data = sf_mlogit, constPar = c("ivtt" = 0))
 
 # Estimate a null model by constraining ALL the parameters to be zero. 
-fixed_coefs <- rep(0,4) %>% setNames(c(names(coef(market_shares)), "price"))
-null_model <- mlogit(mode ~ price, data = Fish, start = fixed_coefs, iterlim = 0)
+fixed_coefs <- rep(0,6) %>% setNames(c(names(coef(market_shares)), "ivtt"))
+null_model <- mlogit(chosen ~ ivtt, data = sf_mlogit, start = fixed_coefs, iterlim = 0)
 ```
 
-```{r basic-estimation-table}
-basic_estimation <- list(
-  "Null Model" = null_model,
-  "Market Shares" = market_shares,
-  "Base Model" = base
+```{r cost_models}
+sf_mlogit_costinc <- sf_mlogit %>%
+  mutate(
+    costbyinc = cost / hhinc,
+    costbylninc = cost / log(hhinc)
+  )
+
+base_model <- mlogit(chosen ~  tvtt | hhinc, data = sf_mlogit_costinc)
+income_model <- mlogit(chosen ~ tvtt + costbyinc, data = sf_mlogit_costinc, )
+lnincome_model <- mlogit(chosen ~ tvtt + costbylninc, data = sf_mlogit_costinc)
+
+
+income_estimation <- list(
+  "Base Model" = base_model,
+  "Model With Cost By Cost/Income" = income_model,
+  "Model With Cost By ln(Income)" = lnincome_model
 )
 
 modelsummary(
-  basic_estimation, 
-  title = "Estimation Results for Zero Coefficient, Constants Only, and Base Models"
+  income_estimation, 
+  title = "Models with Cost vs. Cost/Income and Cost/Ln(Income)"
 )
-```
-
-
-
-```{r basic-estimation}
-costbyinc <- sf_mlogit$cost / sf_mlogit$hhinc
-sf_mlogit <- cbind(sf_mlogit, new_col = costbyinc) 
-
-costbylninc <- sf_mlogit$cost / log(sf_mlogit$hhinc)
-sf_mlogit <- cbind(sf_mlogit, new_col = costbylninc)
-
-base_model <- mlogit(cost ~  tvtt + altnum | hhinc, data = sf_mlogit)
-income_model <- mlogit(cost ~ tvtt + altnum | costbyinc, data = sf_mlogit)
-lnincome_model <- mlogit(cost ~ tvtt + altnum | cost/log(hhinc), data = sf_mlogit)
-
-
-#income_estimation <- list(
- # "Base Model" = base_model,
-  #"Model With Cost By Cost/Income" = income_model,
-  #"Model With Cost By ln(Income)" = lnincome_model
-#)
-
-#modelsummary(
- # income_estimation, 
-  #title = "Models with Cost vs. Cost/Income and Cost/Ln(Income)"
-#)
 ```
 
 ## Value of Time
