@@ -526,8 +526,8 @@ Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared 
 
 ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
        stat_function(fun = dchisq, args = list(df = 5)) +
-       stat_function(fun = dchisq, args = list(df = 10)) +
-       stat_function(fun = dchisq, args = list(df = 15)) +
+       stat_function(fun = dchisq, args = list(df = 10), color = "blue") +
+       stat_function(fun = dchisq, args = list(df = 15), color = "red") +
        labs(x = "Test Values",
             y = "Chi-Squared")
 
