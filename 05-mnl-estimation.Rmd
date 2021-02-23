@@ -5,6 +5,7 @@ library(haven)
 library(mlogit)
 library(modelsummary)
 library(labelled)
+library(kableExtra)
 ```
 
 
@@ -581,14 +582,26 @@ The above result implies that the null hypotheses that the models with cost by i
 
 The value of time, as described in Section 5.7.1.3, is calculated as the ratio of the parameter for time over the parameter for cost.  This ratio assumes that the utility function is linear in both time and cost and that neither value is interacted with any other variables.  That is, when the time and cost portion of the utility function is 
 
+\begin{equation}
+V_i = ... + \beta_{TVT}TVT_i + \beta_{Cost}Cost_i + ...
+(\#eq:utilityvot)
+\end{equation}
 
 the value of time is given by
 
+\begin{equation}
+VofT = \beta_{TVT} \Huge/ \normalsize \beta_{Cost}
+(\#eq:VoT)
+\end{equation}
 
 The units of time value are obtained from the units of the variables used to measure time and cost.  In the Base Model in Table 5.9, the units are minutes and cents.  Thus the value of time in cents per minute implied by this model is -0.0513/-0.0049 = 10.5 cents per minute.  This can be modified to \$ per hour by multiply by  0.6 = (1/100 \$ per cent)/(1/60 hour per minute).
 
 However, in general, the value of time is equal to the ratio between the derivative of utility with respect to time and the derivative of utility with respect to cost.  That is
 
+\begin{equation}
+VofT = \frac{\partial{V_i}}{\partial{Time_i}} \Huge/ \normalsize \frac{\partial{V_i}}{\partial{Cost_i}}
+(\#eq:VoTderivratio)
+\end{equation}
 
 In the case described in Equation 5.24, this produces the ratio in Equation 5.25.  However, this more general formulation allows us to infer the value of time for a variety of special cases in addition to the linear utility case described above. 
 
@@ -596,27 +609,59 @@ In the case described in Equation 5.24, this produces the ratio in Equation 5.25
 
 This approach can be applied to any case including when either time or cost is interacted with another variable, usually a variable describing the decision maker or the decision context. For example, if cost is divided by income  as in the second model reported in Table 5-9, on the basis that a unit of cost is proportionally less important with increasing income, the utility expression becomes
 
+\begin{equation}
+V_{it} = ... + \beta_{TVT}TVT_{it} + \beta_{CostInc}\frac{Cost_{it}}{Income_t} + ...
+(\#eq:utilityvotcostinc)
+\end{equation}
 
 and the value of time becomes
 
+\begin{equation}
+VofT = \frac{\partial{V_i}}{\partial{Time_i}} \Huge/ \normalsize {\frac{\partial{V_i}}{\partial{Cost_i}}} = {\beta_{TVT}} \Huge/ \normalsize {\beta_{CostInc}} \Huge/ \normalsize {Income_i}
+(\#eq:VoTcostinc)
+\end{equation}
 
 which can be converted to
 
+\begin{equation}
+VofT = \frac{\frac{\beta_{TVT}}{\beta_{Cost}}}{Income($1000/year)}{cents/minute}
+(\#eq:VoTcostincconvert)
+\end{equation}
 
 or
 
+\begin{equation}
+VofT = \frac{0.6 \times \frac{\beta_{TVT}}{\beta_{Cost}}}{Income($1000/year)}{$/hour}
+\end{equation}
 
 Similarly, the value of time for the third specification in Table 5-9 is
 
+\begin{equation}
+VofT = \frac{0.6 \times \frac{\beta_{TVT}}{\beta_{Cost}}}{ln[Income($1000/year)]}{$/hour}
+\end{equation}
 
 The value of time implied by each of these formulations is illustrated in Table 5-10 and Figure 5.6 by showing the values of time for different income levels.  In each case, the values of travel time appear to be quite low.  This will be addressed in model specification refinement (Section 6.2.6). 
 
 
 Another approach that can be used in this case is to relate the value of travel directly to the wage rate by assuming that the working year consists of 2000 hours or 120,000 minutes and recognizing that $1000 dollars is equivalent to 100,000 cents.  This gives us 
 
+\begin{equation}
+Units_{VofT} = cents \Huge/ \normalsize minute \Huge/ \normalsize $1000 \Huge/ \normalsize year
+(\#eq:VoTlncostinc)
+\end{equation}
+\begin{equation}
+ = cents \Huge/ \normalsize minute \Huge/ \normalsize 100,000~cents \Huge/ \normalsize 120,000~minutes
+\end{equation}
+\begin{equation}
+ = 1.2
+\end{equation}
 
 That is, there are no units but a simple factor of 1.2.  This is interpreted as the value by which the ratio of the parameters should be multiplied to get the value of travel time as a fraction of the wage rate.  In the cost by income model in Table 5-9 Models with Cost vs. Cost/Income and Cost/Ln(Income), this becomes 
 
+\begin{equation}
+VofT = \beta_{TVT} \Huge/ \normalsize \beta_{CostInc} \times 1.2 = \frac{-0.0512}{-0.1692} \times 1.2 = 0.363~Wage~Rate
+(\#eq:TVTfracofwagerate)
+\end{equation}
 
 which, as before, is quite low. However, as shown in Figure 5.6 and discussed in Section 5.7.3.4, this specification and the related specification for cost by ln(income) have the advantage that the value of time is differentiated across households with different income.  
 
@@ -624,12 +669,24 @@ which, as before, is quite low. However, as shown in Figure 5.6 and discussed in
 
 If time or cost is transformed, it becomes necessary to explicitly take the derivative of utility with respect to both time and cost.  For example, if time enters the utility function using the natural log transformation, to suggest that the utility effect of increasing time decreases with time, the utility function becomes
 
+\begin{equation}
+V_{it} = ... + \beta_{ln(TVT)}ln(TVT_{it}) + \beta_{Cost}Cost_{it} + ...
+(\#eq:utilitycosttransform)
+\end{equation}
 
 and the value of time becomes 
 
+\begin{equation}
+VofT = \frac{\partial{V_{it}}}{\partial{Time_{it}}} \Huge/ \normalsize \frac{\partial{V_{it}}}{\partial{Cost_{it}}} = \beta_{ln(TVT)} \Huge/ \normalsize TVT_{it} \Huge/ \normalsize \beta_{Cost} = \frac{\beta_{ln(TVT)}}{\beta_{Cost}} \times \frac{1}{TVT_{it}}
+(\#eq:VoTcosttransformalt)
+\end{equation}
 
 Similarly, if cost is entered as the natural log of cost, the value of time becomes
 
+\begin{equation}
+VofT = \frac{\partial{V_{it}}}{\partial{Time_{it}}} \Huge/ \normalsize \frac{\partial{V_{it}}}{\partial{Cost_{it}}} = \beta_{TVT} \Huge/ \normalsize \beta_{ln(Cost)} \Huge/ \normalsize Cost_{it} = \frac{\beta_{TVT}}{\beta_{ln(Cost)}} \times Cost_{it}
+(\#eq:VoTcosttransformlncost)
+\end{equation}
 
 which can be reported in a table for selected values of time or plotted in a graph of Value of Time as a function of TVT or Cost, as appropriate (see below).  Models using each of these formulations are estimated and reported, along with the Base Model in Table 5-11. The goodness of fit is substantially improved by using ln(time), which is generally expected, but is worse when using ln(cost), for which there is no conceptual basis. 
 
