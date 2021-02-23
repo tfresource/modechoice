@@ -244,7 +244,7 @@ The following mode labels are used in the subsequent discussion and equations: D
 
 \begin{equation}
   V_{SR3+} = \beta_{SR3+} + \beta_{1} \times TT_{SR3+} + \beta_{2} \times TC_{SR3+} + \gamma_{SR3+} \times Inc
-  (\#eq:utilspecSR3+)
+  (\#eq:utilspecSR3)
 \end{equation}
 
 \begin{equation}
@@ -405,8 +405,8 @@ There is sampling error associated with the model parameters because the model i
 The statistic used for testing the null hypothesis that a parameter $\hat{\beta_{k}}$ is equal to some hypothesized value, ${\beta_{k}^*}$, is the asymptotic t-statistic, which takes the following form:   
 
 \begin{equation}
-\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}}
-(\#eq:asymptotic t-statistic)
+\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}} 
+(\#eq:asymptotict-statistic)
 \end{equation}
 
 where $\hat{\beta_{k}}$ is the estimate for the $k^{th}$ parameter,
@@ -488,6 +488,19 @@ where $LL_{R}$ is the log-likelihood of the restricted model, and
 
 This test-statistic is chi-squared distributed.  Example chi-squared distributions are shown in Figure 5.4. As with the test for individual parameters, the critical value for determining if the statistic is “sufficiently large” to reject the null hypothesis depends on the level of confidence desired by the model developer.  It is also influenced by the number of restrictions  between the models.  Table 5-5 shows the chi-squared values for selected confidence levels and for different numbers of restrictions.  
 
+Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom.  The critical chi-square values increase with the desired confidence level and the number of restrictions.
+
+```{r chisqdistrib51015, fig.cap="Chi-Squared Distribution for 5, 10, and 15 Degrees of Freedom"}
+
+ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
+       stat_function(fun = dchisq, args = list(df = 5)) +
+       stat_function(fun = dchisq, args = list(df = 10)) +
+       stat_function(fun = dchisq, args = list(df = 15)) +
+       labs(x = "Test Values",
+            y = "Chi-Squared")
+
+```
+
 ``` {r Chi-Square Distribution}
   
 ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
@@ -496,8 +509,6 @@ ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
             x = "Test Values",
             y = "PDF")
 ```
-
-Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom.  The critical chi-square values increase with the desired confidence level and the number of restrictions.
 
 
 ```{r table5-5, echo = F}
