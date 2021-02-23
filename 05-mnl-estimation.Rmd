@@ -5,6 +5,7 @@ library(haven)
 library(mlogit)
 library(modelsummary)
 library(labelled)
+library(knitr)
 library(kableExtra)
 ```
 
@@ -487,6 +488,14 @@ where $LL_{R}$ is the log-likelihood of the restricted model, and
 
 This test-statistic is chi-squared distributed.  Example chi-squared distributions are shown in Figure 5.4. As with the test for individual parameters, the critical value for determining if the statistic is “sufficiently large” to reject the null hypothesis depends on the level of confidence desired by the model developer.  It is also influenced by the number of restrictions  between the models.  Table 5-5 shows the chi-squared values for selected confidence levels and for different numbers of restrictions.  
 
+``` {r Chi-Square Distribution}
+  
+ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
+       stat_function(fun = dchisq, args = list(df = 5)) +
+       labs(title = "Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds",
+            x = "Test Values",
+            y = "PDF")
+```
 
 Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom.  The critical chi-square values increase with the desired confidence level and the number of restrictions.
 
@@ -538,6 +547,15 @@ with two degrees of freedom (two parameters constrained to zero).  The critical 
 \end{equation}
 
 with five degrees of freedom (five income parameters are constrained to zero).  The critical $\chi^2$ with five degrees of freedom at 99.9% confidence level (or 0.001 level of significance) is 20.51.   Thus, both null hypotheses can be rejected at very high levels; that is, neither time and cost nor the income variables should be excluded from the model.  The log-likelihood ratio tests for both the above hypotheses are summarized in Table 5-8.
+
+```{r table5-8}
+thegoods1 <- tibble(
+ "Variables"= c("Log-Likelihood of Unrestricted Model $(LL_U)$","Log-Likelihood of Restricted Model $(LL_R)$","Test Statistics [-2$(LL_R-LL_U)$]","Number of Restrictions","Critical Chi-Squared Value at 99.9% Confidence","Rejection Confidence","Rejection Significance"),
+ "Test for Hypothesis $H_{0,c}$" = c(-3626.186,-4123615,994.858,2,13.82, ">>99.9%", 0.000),
+ "Test for Hypothesis $H_{0,d}$" = c(-3626.186, -3637.579, 22.786, 5, 20.51, ">>99.9%",0.000))
+
+kable(thegoods1, align = c("l", "c" ,"c"), booktabs = T, caption = "Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$")
+```
 
 
 #### Non-nested Hypothesis Tests
