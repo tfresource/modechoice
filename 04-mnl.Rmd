@@ -60,12 +60,12 @@ The Gumbel has the following cumulative distribution and probability density
 functions:
 
 \begin{equation}
-  F(\epsilon) = \exp\left[\exp[-\mu(\epsilon-\eta)]\right]
+  F(\epsilon) = e^{e^{-\mu(\epsilon-\eta)}}
   (\#eq:gumbelcumdist)
 \end{equation}
   
 \begin{equation}
-  f(\epsilon) = \mu \times \left[\exp[-\mu(\epsilon-\eta)]\right] \times \exp\left[-\exp[-\mu(\epsilon-\eta)]\right]
+  f(\epsilon) = \mu e^{-\mu(\epsilon-\eta)} \times  e^{e^{-\mu(\epsilon-\eta)}}
   (\#eq:gumbelprobdens)
 \end{equation}
 	
