@@ -25,7 +25,8 @@ distribution assumption for error terms leads to the Multinomial Probit Model
 (MNP) which has some properties that make it difficult to use in choice
 analysis.[^numericalproblems]  The Gumbel distribution is selected because it
 has computational advantages in a context where maximization is important,
-closely approximates the normal distribution (see Figure 4.1 and Figure 4.2) and
+closely approximates the normal distribution (see Figure \@ref(fig:gumbelpdf) 
+and Figure \@ref(fig:gumbelcdf)) and
 produces a closed-form[^withoutnumint] probabilistic choice model.
 
 ```{r gumbelpdf, fig.cap="Probability density function for normal and Gumbel distributions."}
@@ -90,7 +91,7 @@ The mean and variance of the distribution are:
 The second and third assumptions state the location and variance of the
 distribution just as $\mu$ and $\sigma^2$ indicate the location and variance of
 the normal distribution. We will return to the discussion of the independence
-between/among alternatives in CHAPTER 8.
+between/among alternatives in [CHAPTER 8](#nested-logit-model).
 	
 The three assumptions, taken together, lead to the mathematical structure known
 as the Multinomial Logit Model (MNL), which gives the choice probabilities of
@@ -110,7 +111,7 @@ Where
   - $V_j$ is the systematic component of the utility of alternative *j*.
 	
 	
-The exponential function is described in Figure 4.3 which shows the relationship
+The exponential function is described in Figure \@ref(fig:viwithexpVi) which shows the relationship
 between $\exp(V_i)$ and $V_i$.  Note that $\exp(V_i)$ is always positive and
 increases monotonically with  $V_i$.
 
@@ -169,13 +170,12 @@ where *i* indicates the alternative for which the probability is being computed.
 This formulation implies that the probability of choosing an alternative
 increases monotonically with an increase in the systematic utility of that
 alternative and decreases with increases in the systematic utility of each of
-the other alternatives.  This is illustrated in Table 4.1 showing the
+the other alternatives.  This is illustrated in Table \@ref(tab:dralonefordralone) showing the
 probability of DA as a function of its own utility (with the utilities of other
-alternatives held constant) and in Table 4.2 as a function of the utility of
-other alternatives with its own utility fixed.
+alternatives held constant) and in Table \@ref(tab:drloneforshrridetransit) 
+as a function of the utility of other alternatives with its own utility fixed.
 
 ```{r dralonefordralone}
-
 tibble(
   case = 1:5,
   vda = c(-3.0, -1.5, 0.0, 1.5, 3.0),
@@ -185,14 +185,13 @@ tibble(
   mutate(
     p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
   ) %>%
-  knitr::kable(  
+  kableExtra::kbl(  
     caption = "Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)", 
-     col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
-
+    col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$")) %>%
+  kableExtra::kable_styling()
 ```
 
 ```{r draloneforshrridetransit}
-
 tibble(
   case = 6:11,
   vda = 0.0,
@@ -202,11 +201,11 @@ tibble(
   mutate(
     p = exp(vda) / (exp(vda) + exp(vsr) + exp(vtr))
   ) %>%
-  knitr::kable(  caption = "Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties", 
-                 col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$"))
-
+  kableExtra::kbl(
+    caption = "Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties", 
+    col.names = c("$Case$", "$V_{DA}$", "$V_{SR}$", "$V_{TR}$", "$Pr(DA)$")) %>%
+  kableExtra::kable_styling()
 ```
-
 
 
 We use this three-alternative example to illustrate three important properties
@@ -217,7 +216,8 @@ alternatives from the attributes and availability of other alternatives.
 
 ### The Sigmoid or S shape of Multinomial Logit Probabilities
 
-The *S* shape of the MNL probabilities is illustrated in Figure 4.4 where the
+The *S* shape of the MNL probabilities is illustrated in Figure 
+\@ref(tab:choiceprob)  where the
 probability of choosing Drive Alone is shown as a function of its own utility,
 with the utilities of the other alternatives held constant.  The *S*-shape
 limits the probability range between zero when the utility of DA is very low,
