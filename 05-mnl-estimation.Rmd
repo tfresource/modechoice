@@ -244,7 +244,7 @@ The following mode labels are used in the subsequent discussion and equations: D
 
 \begin{equation}
   V_{SR3+} = \beta_{SR3+} + \beta_{1} \times TT_{SR3+} + \beta_{2} \times TC_{SR3+} + \gamma_{SR3+} \times Inc
-  (\#eq:utilspecSR3+)
+  (\#eq:utilspecSR3)
 \end{equation}
 
 \begin{equation}
@@ -405,8 +405,8 @@ There is sampling error associated with the model parameters because the model i
 The statistic used for testing the null hypothesis that a parameter $\hat{\beta_{k}}$ is equal to some hypothesized value, ${\beta_{k}^*}$, is the asymptotic t-statistic, which takes the following form:   
 
 \begin{equation}
-\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}}
-(\#eq:asymptotic t-statistic)
+\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}} 
+(\#eq:asymptotict-statistic)
 \end{equation}
 
 where $\hat{\beta_{k}}$ is the estimate for the $k^{th}$ parameter,
@@ -509,9 +509,6 @@ ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
             x = "Test Values",
             y = "PDF")
 ```
-
-Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom.  The critical chi-square values increase with the desired confidence level and the number of restrictions.
-
 
 The likelihood ratio test can be applied to test null hypotheses involving the exclusion of groups of variables from the model.  Table 5-6 illustrates the tests of two hypotheses describing restriction on some or all the parameters in the San Francisco Bay Area commuter mode choice model.  The first hypothesis is that all the parameters are equal to zero. The formal statement of the null hypothesis in this case, is:
 
