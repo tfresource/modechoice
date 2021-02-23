@@ -619,7 +619,16 @@ Similarly, the value of time for the third specification in Table 5-9 is
 
 The value of time implied by each of these formulations is illustrated in Table 5-10 and Figure 5.6 by showing the values of time for different income levels.  In each case, the values of travel time appear to be quite low.  This will be addressed in model specification refinement (Section 6.2.6). 
 
-
+```{r valueoftimevsincome}
+tibble(
+  AnnualIncome = c(25000, 50000, 75000, 100000, 125000)) %>%
+  mutate(HourlyWage= AnnualIncome/2000) %>%
+  mutate(linear = HourlyWage) %>%
+  mutate(CostIncome = HourlyWage) %>%
+  mutate(CostLn = HourlyWage) %>%
+  knitr::kable( caption = "Value of Time vs. Income",
+                col.names = c("Annual Income", "Hourly Wage", "Linear", "Cost/Income", "Cost/LN(Inc.)"))
+```
 Another approach that can be used in this case is to relate the value of travel directly to the wage rate by assuming that the working year consists of 2000 hours or 120,000 minutes and recognizing that $1000 dollars is equivalent to 100,000 cents.  This gives us 
 
 
