@@ -582,6 +582,18 @@ This test is not very useful because we almost always reject the null hypothesis
 
 The log-likelihood values needed to test each of these hypotheses are reported in Table 5-2.  In each case, we include the log-likelihood of the restricted and unrestricted models, the calculated chi-square value and the number of restrictions or degrees of freedom as shown in Table 5-6. The confidence or significance of the rejection of the null hypothesis in each case can be obtained by referring to Table 5-5, more extensive published tables or software (most spreadsheet programs) that calculates the precise level of confidence/significance associated with each test result.
 
+```{r table5-6, echo = F}
+#I think I need to do a log likelihood test, but I don't know how to start or what data to use for models.
+
+tab56df <- data.frame(
+ "Variables."= c("Log-Likelihood of Unrestricted Model ($LL_U$)", "Log-Likelihood of Restricted Model ($LL_R$)", "Test Statistics [-2($LL_R-LL_U$)]", "Number of Restrictions", "Critical Chi-Squared Value at 99.9% Confidence", "Rejection Confidence", "Rejection Significance"),
+ "Test for Hypothesis H_{0,a}" = c("-3626.186", "-7309.301", "7366.830", "12", "32.91", "99.9%", "0.001"),
+ "Test for Hypothesis H_{0,b}" = c("-3626.186", "-4132.916", "1013.460", "7", "24.32", "99.9%", "0.001"))
+
+kbl(tab56df, align = "c", booktabs = T, caption = "Likelihood Ratio Test for Hypothesis $H_{0,a}$ and $H_{0,b}$") %>% 
+kable_classic()
+```
+
 
 These two applications of the likelihood ratio test correspond to situations where the null hypothesis leads to a highly restrictive model.  These cases are not very interesting since the real value of the likelihood ratio test is in testing null hypotheses which are not so extreme. The log-likelihood ratio test can be applied to test null hypotheses involving the exclusion of selected groups of variables from the model. We consider two such hypotheses.  The first is that the time and cost variables have no impact on the mode choice decision, that is,
 
@@ -592,6 +604,11 @@ The second is that income has no effect on the travel mode choice; that is
 $H_{0,D} : \beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit} = \beta_{Income-Bike} = \beta_{Income-Walk} = 0$
 
 The restricted models that reflect each of these hypotheses and the corresponding unrestricted model are reported in Table 5-7 along with their log-likelihood values.  
+
+```{r table 5-7, echo = F}
+#I have no idea what data to use, or how to format it or model it to create this table.
+
+```
 
 
 The statistical test of the hypothesis that time and cost have no effect has a chi-square value of
@@ -770,6 +787,26 @@ VofT = \frac{0.6 \times \frac{\beta_{TVT}}{\beta_{Cost}}}{ln[Income($1000/year)]
 
 The value of time implied by each of these formulations is illustrated in Table 5-10 and Figure 5.6 by showing the values of time for different income levels.  In each case, the values of travel time appear to be quite low.  This will be addressed in model specification refinement (Section 6.2.6). 
 
+```{r figure 5-6, echo = F}
+library(ggplot2)
+
+fig56df <- tibble(
+  "AnnualInc" = c(0, 25, 50, 75, 100, 125),
+  "Hourlywage" = c(0, 12.50, 25.00, 37.50, 50.00, 62.50),
+  "Linear" = c(6.26, 6.26, 6.26, 6.26, 6.26, 6.26),
+  "CostbyInc" = c(0, 4.53, 9.07, 13.60, 18.13, 21.94),
+  "CostbylnInc" = c(0, 5.18, 6.29, 6.95, 7.41, 7.72))
+
+ggplot(fig56df, aes(x=AnnualInc)) + 
+  geom_line(aes(y = Linear), color = "darkred", size = 2) + 
+  geom_line(aes(y = CostbyInc), color="steelblue", size = 2) +
+  geom_line(aes(y = CostbylnInc), color="green1", size = 2) +
+  labs(title = "Value of Time vs. Income",
+            x = "Annual Income ($000)",
+            y = "Wage Rate ($/hour)")
+
+#I think this may not be the whole dataset, since the ln curve is not as distinct. I'm not sure where this data lives.
+```
 
 Another approach that can be used in this case is to relate the value of travel directly to the wage rate by assuming that the working year consists of 2000 hours or 120,000 minutes and recognizing that $1000 dollars is equivalent to 100,000 cents.  This gives us 
 
@@ -833,3 +870,29 @@ summary(logTime_model)
 
 ```
 
+```{r table5-13, echo = F}
+
+tab513df <- tibble(
+ "Trip cost"= c("$0.25", "$0.50", "$1.00", "$2.00", "$5.00"),
+ "Value of time ($/hr)" = c("0.85", "$1.71", "$3.42", "$6.83", "$17.09"))
+
+kbl(tab513df, align = "c", booktabs = T, caption = "Value of Time for Log of Cost Model") %>% 
+kable_classic()
+```
+
+```{r figure 5-8, echo = F}
+library(ggplot2)
+
+fig58df <- tibble(
+  "Tripcost" = c(0, .25, .50, 1.00, 2.00, 5.00),
+  "Timevalue" = c(0, 0.85, 1.71, 3.42, 6.83, 17.09))
+
+ggplot(fig58df, aes(x=Tripcost)) + 
+  geom_line(aes(y = Timevalue), size = 1) + 
+  scale_y_continuous(labels=scales::dollar_format()) +
+  scale_x_continuous(labels=scales::dollar_format()) +
+  labs(title = "Value of Time for Log of Cost Model",
+            x = "Trip Cost",
+            y = "Value of Time ($/hour)")
+
+```
