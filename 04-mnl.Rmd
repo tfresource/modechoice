@@ -1,8 +1,34 @@
 # The Multinomial Logit Model
 
-```{r setup, include = FALSE}
+```{r setup}
 library(tidyverse)
 library(kableExtra)
+
+#' Create a tibble object that evaluates the named expressions passed
+#' in as utility equation.
+utility_table <- function(expressions){
+  top <- tibble(
+    Alternative = names(expressions),
+    Expression = expressions 
+  ) %>%
+    rowwise() %>%
+    mutate(
+      Value = eval(parse(text = Expression)),
+      Exponent = exp(Value) 
+    ) %>%
+    ungroup() %>%
+    mutate( Probability = Exponent / sum(Exponent) )
+  
+  bottom <- tibble(
+    Alternative = "Total",
+    Expression = "",
+    Value = NA,
+    Exponent = sum(top$Exponent),
+    Probability = sum(top$Probability)
+  )
+  
+  bind_rows(top, bottom)
+}
 ```
 
 
@@ -344,34 +370,24 @@ utilities and Table 4.4 shows the same computation after each of the utilities
 is increased by one.[^illustratecalcs]
 
 ```{r tabel4-3, echo = F}
-
-thegoods <- data.frame(
- "Alternative"= c("Drive Alone","Shared Ride","Transit"),
- "Expression" = c(-0.50,-1.50,-3.00),
- "Value" = c(-0.50,-1.50,-3.00),
- "Exponent" = c(0.607,0.223,0.050),
- "Probability" = c(0.690,0.254,0.057))
-
-kbl(thegoods, align = "c", booktabs = T, caption = "Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative Before Adding Delta") %>% 
-kable_classic() %>% 
+utility_table(
+  c("Drive Alone" = "-0.50","Shared Ride" = "-1.50","Transit" = "-3.00")
+) %>%
+  kbl(caption = "Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative Before Adding Delta") %>% 
+  kable_styling() %>%
   add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
-
 ```
 where the sum of the exponent variable is equal to 0.879.
 
 ```{r tabel4-4, echo = F}
-
-thegoods1 <- data.frame(
- "Alternative"= c("Drive Alone","Shared Ride","Transit"),
- "Expression" = c("-0.50 + 1.00", "-1.50 + 1.00","-3.00 + 1.00"),
- "Value" = c(0.50,-0.50,-2.00),
- "Exponent" = c(1.649, 0.607, 0.135),
- "Probability" = c(0.690,0.254,0.057))
-
-kbl(thegoods1, align = "c", booktabs = T, caption = "Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative After Adding Delta (=1.0)") %>% 
-kable_classic() %>% 
+utility_table(
+  c("Drive Alone" = "-0.50 + 1.00",
+    "Shared Ride" = "-1.50 + 1.00",
+    "Transit" = "-3.00 + 1.00")
+) %>%
+  kbl(caption = "Numerical Example Illustrating Equivalent Difference Property: Probability of Each Alternative After Adding Delta (=1.0)") %>% 
+  kable_styling() %>%
   add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
-
 ```
 
 Where the sum of the exponent variable is equal to 2.391
@@ -536,18 +552,12 @@ facing travel times of 30, 35 and 50 minutes for Drive Alone, Shared Ride and
 TRansit, respectively.
 
 ```{r transit-base}
-transit_base <- tibble(
- "Alternative"= c("Drive Alone","Shared Ride","Transit"),
- "Expression" = c("1.1 + 0.008 * 50 - 0.02 * 30","0.8 + 0.006 * 50 - 0.02 * 35","0.0 + 0.000 * 50 - 0.02 * 50"),
+utility_table(
+ c("Drive Alone" = "1.1 + 0.008 * 50 - 0.02 * 30",
+   "Shared Ride" = "0.8 + 0.006 * 50 - 0.02 * 35",
+   "Transit" = "0.0 + 0.000 * 50 - 0.02 * 50")
 ) %>%
-  mutate(
-    Value = c(1.1 + 0.008 * 50 - 0.02 * 30, 0.8 + 0.006 * 50 - 0.02 * 35, 0.0 + 0.000 * 50 - 0.02 * 50),
-    Exponent = exp(Value),
-    Probability = Exponent / sum(Exponent)
-  ) 
-
-transit_base %>%
-  kableExtra::kbl(booktabs = T, caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
+  kableExtra::kbl(caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
   kable_styling() %>%
   add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
 ```
@@ -555,18 +565,12 @@ transit_base %>%
 where the sum of the exponent variable equals 4.319.
 
 ```{r da-base}
-da_base <- tibble(
- "Alternative"= c("Drive Alone","Shared Ride","Transit"),
- "Expression" = c("0.0 + 0.000 * 50 - 0.02 * 30","-0.3 - 0.002 * 50 - 0.02 * 35","-1.1 - 0.008 * 50 - 0.02 * 50"),
+utility_table(
+  c( "Drive Alone" = "0.0 + 0.000 * 50 - 0.02 * 30",
+     "Shared Ride" = "-0.3 - 0.002 * 50 - 0.02 * 35",
+     "Transit" = "-1.1 - 0.008 * 50 - 0.02 * 50")
 ) %>%
-  mutate(
-    Value = c(0.0 + 0.000 * 50 - 0.02 * 30, -0.3 - 0.002 * 50 - 0.02 * 35, -1.1 - 0.008 * 50 - 0.02 * 50),
-    Exponent = exp(Value),
-    Probability = Exponent / sum(Exponent)
-  ) 
-
-da_base %>%
-  kableExtra::kbl(booktabs = T, caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
+  kableExtra::kbl(caption = "Utility and Probability calculation with TRansit as Base Alternative") %>% 
   kable_styling() %>%
   add_header_above(c(" "=1, "Utility" = 2, " " = 2), align = "center")
 ```
@@ -580,15 +584,14 @@ Drive Alone base case.
 
 ```{r compareutilities}
 tibble(
- "Alternative"= da_base$Alternative,
+ "Alternative"= c("Drive Alone", "Shared Ride", "Transit"),
  "Constant" = c("1.1","0.8","0.0"),
  "Income" = c("0.008", "0.006", "0.000"),
  "Constant " = c("-1.1","-1.1","-1.1"),
  "Income " = c("-0.008", "-0.008", "-0.008"),
  "Constant  " = c("0.0","-0.3","-1.1"),
- "Income  " = c("0.000", "-0.002", "-0.008"))
-
-kbl(tab47df, align = "c", booktabs = T, caption = "Changes in Alternative Specific Constants and Income Parameters") %>% 
+ "Income  " = c("0.000", "-0.002", "-0.008")) %>%
+  kbl(caption = "Changes in Alternative Specific Constants and Income Parameters") %>% 
   kable_styling() %>%
   add_header_above(c(" " = 1, "TRansit as Base Alternative"= 2, "Change in Parameters" = 2, "Drive Alone as Base Alternative" = 2), align = "center")
 ```
@@ -726,20 +729,14 @@ implicitly assumed that the constants reflect the average effects of all the
 variables affecting the choice decision, since no variables are included
 explicitly in the utility specification.  If these constants are 0.0, -1.6 and
 -1.8 for drive alone, shared ride and transit, respectively, the probability
-calculation is as shown in Table 4.8.
+calculation is as shown in Table \@ref(tab:constants).
 
 ```{r constants, echo = F}
-const_tab <- tibble(
- Alternative = c("Drive Alone","Shared Ride","Transit"),
- Expression  = c(0.0,-1.60,-1.80)
+utility_table(
+  c("Drive Alone" = "0.0",
+    "Shared Ride" = "-1.60",
+    "Transit" = "-1.80")
 ) %>%
-  mutate(
-    Value = Expression,
-    Exponent = exp(Value),
-    Probability = Exponent / sum(Exponent)
-  )
-
-const_tab %>%
   kbl(caption = "MNL Properties for Constants Only Model") %>% 
   kable_styling() %>% 
   add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
@@ -781,18 +778,19 @@ utility equation, we assume travel time and travel cost values as follows:
 | Shared Ride | 28 minutes  | $0.75       |
 | TRansit     | 55 minutes  | $1.25       |
 
-The utilities and probabilities are calculated as shown in Table 4-9.
+The utilities and probabilities are calculated as shown in Table \@ref(tab:utimecost).
 
-<center>
-**Table 4-9 MNL Probabilities for Time and Cost Model**
-</center>
-|                |Utility|Utility||
-| -------------- | :----------: | :----------: | :--------: | :-----------: |
-|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | -0.045x25-0.004X175         | -1.825     |0.1612      |0.7314         |
-| Shared Ride    | -1.865-0.045x28-0.004x75    | -3.425     |0.0325      |0.1477         |
-| TRansit        | -0.650-0.045x55-0.004x125   | -3.625     |0.0266      |0.1209         |
-                                                            | 0.2204     |  
+
+```{r utimecost}
+utility_table(
+  c("Drive Alone" = "-0.045*25-0.004*175",
+    "Shared Ride" = "-1.865-0.045*28-0.004*75",
+    "Transit" = "-0.650-0.045*55-0.004*125")
+) %>%
+  kbl(caption = "MNL Probabilities for Time and Cost Model") %>% 
+  kable_styling() %>% 
+  add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
+```
 
 
 This specification can be refined further by decomposing travel time into its
@@ -816,18 +814,20 @@ negative parameter for out of vehicle time than for total time; say -0.031 and
 | Bus         | 25 minutes  | 30 minutes  | $1.25       |
 
 the new systematic utilities and choice probabilities are as computed in Table
-4-10:
+\@ref(tab:uivtovt):
 
-<center>
-**Table 4-10 MNL Probabilities for In and Out of Vehicle Time and Cost Model**
-</center>
-|                |Utility|Utility||
-| -------------- | :----------: | :----------: | :--------: | :-----------: |
-|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | -0.031x21-0.062X4-0.004x175         | -1.599     |0.202      |0.773         |
-| Shared Ride    | -1.90-0.031x23-0.062x5-0.004x75     | -3.223     |0.040      |0.152         |
-| TRansit        | -0.80-0.031x25-0.062x30-0.004x125   | -3.935     |0.020      |0.075         |
-                                                                    |0.261      |  
+
+```{r uivtovt}
+utility_table(
+  c("Drive Alone" = "-0.031*21-0.062*4-0.004*175",
+    "Shared Ride" = "-1.90-0.031*23-0.062*5-0.004*75",
+    "Transit" = "-0.80-0.031*25-0.062*30-0.004*125")
+) %>%
+  kbl(caption = "MNL Probabilities for Time and Cost Model") %>% 
+  kable_styling() %>% 
+  add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
+```
+
 
 **Example 3 -- Including Decision-Maker Related Biases - Income**
 The preceding examples do not include any characteristics of the traveler in the
@@ -847,18 +847,21 @@ income.  The alternative specific constant of the transit utility changes
 substantially from the preceding example as it no longer reflects the average
 effect of excluding income from the transit utility specification.  The
 calculation of utilities and probabilities for this model for a person from a
-household with $50,000 annual income is shown in Table 4.11.
+household with $50,000 annual income is shown in \@ref(tab:uivtovtcost).
 
-<center>
-**Table 4-11 MNL Probabilities for In and Out of Vehicle Time, Cost and Income Model**
-</center>
-|                |Utility|Utility||
-| -------------- | :----------: | :----------: | :--------: | :-----------: |
-|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | -0.031x21-0.062X4-0.004x175                  | -1.599     |0.202      |0.780         |
-| Shared Ride    | -1.90-0.031x23-0.062x5-0.00x75               | -3.223     |0.040      |0.154         |
-| TRansit        | -0.50-0.031x25-0.062x30-0.004x125-0.0087x50  | -4.070     |0.017      |0.066         |
-                                                                             |0.259      |  
+
+```{r uivtovtcost}
+utility_table(
+  c("Drive Alone" = " -0.031*21-0.062*4-0.004*175",
+    "Shared Ride" = "-1.90-0.031*23-0.062*5-0.004*75",
+    "Transit" = "-0.50-0.031*25-0.062*30-0.004*125-0.0087*50")
+) %>%
+  kbl(caption = "MNL Probabilities for In and Out of Vehicle Time, Cost and Income Model") %>% 
+  kable_styling() %>% 
+  add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
+```
+
+
 
 
 The probability of choosing transit is smaller for this traveler than would have
@@ -874,20 +877,20 @@ An alternative method of including income in the utility specification is to use
 income as a deflator of cost by forming a variable by dividing cost by income.
 This formulation reflects the rationale that cost becomes a less important
 factor in the choice of a travel mode as the income of the traveler increases.
-The revised utility functions and calculations are shown in Table 4 12 using the
-values for the modal attributes and income as used in preceding example.
+The revised utility functions and calculations are shown in Table \@ref(tab:uinteraction) 
+using the values for the modal attributes and income as used in preceding
+example.
 
-<center>
-**Table 4-12 MNL Probabilities for In and Out of Vehicle Time, and Cost/Income Model**
-</center>
-|                |Utility|Utility||
-| -------------- | :----------: | :----------: | :--------: | :-----------: |
-|**Alternative** |**Expression**|**Value**     |**Exponent**|**Probability**|
-| Drive Alone    | -0.031x21-0.062X4-0.153x(175/50)         | -1.435    |0.238      |0.763         |
-| Shared Ride    | -1.90-0.031x23-0.062x5-0.153x(75/50)     | -3.153    |0.043      |0.137         |
-| TRansit        | -0.45-0.031x25-0.062x30-0.153x(125/50)   | -3.468    |0.031      |0.100         |
-                                                                        |0.312      |  
-
+```{r uinteraction}
+utility_table(
+  c("Drive Alone" = " -0.031*21-0.062*4-0.153*(175/50) ",
+    "Shared Ride" = " -1.90-0.031*23-0.062*5-0.153*(75/50)   ",
+    "Transit" = "-0.45-0.031*25-0.062*30-0.153*(125/50)")
+) %>%
+  kbl(caption = "MNL Probabilities for In and Out of Vehicle Time, Cost/Income Model") %>% 
+  kable_styling() %>% 
+  add_header_above(c(" " = 1, "Utility"= 2, " " = 2), align = "center")
+```
 
 This specification of income in the utility function also results in lower
 income travelers predicted to have higher probability of choosing transit; it
