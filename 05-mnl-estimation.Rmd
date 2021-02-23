@@ -591,8 +591,56 @@ The corresponding test for the cost by ln(income) being true is:
 \end{align*}
 
 The above result implies that the null hypotheses that the models with cost by income variable or cost by ln(income) are true are rejected at a significance level greater than 0.001.  However, the significance of rejection is much lower for the cost by ln(income) model and many analysts would adopt that specification on the grounds that it is conceptually more appropriate.  This specification suggests that the value of money declines with income but the rate of decline diminishes at higher levels of income.
+```{r basic-estimation}
+base <- mlogit(mode ~ price + catch | income, data = Fish)
+
+# estimate a model with constants only by constraining a single generic variable
+# to be zero
+market_shares <- mlogit(mode ~ price, data = Fish, constPar = c("price" = 0))
+
+# Estimate a null model by constraining ALL the parameters to be zero. 
+fixed_coefs <- rep(0,4) %>% setNames(c(names(coef(market_shares)), "price"))
+null_model <- mlogit(mode ~ price, data = Fish, start = fixed_coefs, iterlim = 0)
+```
+
+```{r basic-estimation-table}
+basic_estimation <- list(
+  "Null Model" = null_model,
+  "Market Shares" = market_shares,
+  "Base Model" = base
+)
+
+modelsummary(
+  basic_estimation, 
+  title = "Estimation Results for Zero Coefficient, Constants Only, and Base Models"
+)
+```
 
 
+
+```{r basic-estimation}
+costbyinc <- sf_mlogit$cost / sf_mlogit$hhinc
+sf_mlogit <- cbind(sf_mlogit, new_col = costbyinc) 
+
+costbylninc <- sf_mlogit$cost / log(sf_mlogit$hhinc)
+sf_mlogit <- cbind(sf_mlogit, new_col = costbylninc)
+
+base_model <- mlogit(cost ~  tvtt + altnum | hhinc, data = sf_mlogit)
+income_model <- mlogit(cost ~ tvtt + altnum | costbyinc, data = sf_mlogit)
+lnincome_model <- mlogit(cost ~ tvtt + altnum | cost/log(hhinc), data = sf_mlogit)
+
+
+#income_estimation <- list(
+ # "Base Model" = base_model,
+  #"Model With Cost By Cost/Income" = income_model,
+  #"Model With Cost By ln(Income)" = lnincome_model
+#)
+
+#modelsummary(
+ # income_estimation, 
+  #title = "Models with Cost vs. Cost/Income and Cost/Ln(Income)"
+#)
+```
 
 ## Value of Time
 
