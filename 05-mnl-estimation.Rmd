@@ -859,14 +859,31 @@ which can be reported in a table for selected values of time or plotted in a gra
 The implications for value of time of these different formulations are shown in Table 5-12 and Table 5-13 Value of Time for Log of Cost Model and also in Figure 5.7 and Figure 5.8.  
 
 ```{r table5-12, echo = F}
-#this code will also produce Figure 5-7
 
+tab512df <- tibble(
+ "Trip Time (min)" = c(5, 15, 30, 60, 90, 120),
+ "Value of Time (cents/min)"= c(141.2, 47.4, 23.5, 11.8, 7.8, 5.9),
+ "Value of time ($/hr)" = c("84.71", "$28.24", "$14.12", "$7.06", "$4.71", "$3.53"))
 
-logTime_model <- mlogit(chosen ~ log(tvtt) + cost | hhinc, data = sf_mlogit)
-summary(logTime_model)
+kbl(tab512df, align = "c", booktabs = T, caption = "Value of Time for Log of Time Model") %>% 
+kable_classic()
 
-# time value of money is usually calculated by dividing Beta_cost / Beta_tvtt
-#I'm not sure how changing the trip time changes the time value of money
+```
+
+```{r figure5-7, echo = F}
+
+library(ggplot2)
+
+fig57df <- tibble(
+  "TimeofTrip" = c(5, 15, 30, 60, 90, 120),
+  "ValueofTime" = c(84.71, 28.24, 14.12, 7.06, 4.71, 3.53))
+
+ggplot(fig57df)+
+  stat_smooth(aes(y = ValueofTime, x = TimeofTrip), method = "loess", formula = y ~ log(x), fullrange = FALSE) +
+  scale_y_continuous(labels=scales::dollar_format())+
+  labs(title = "Value of Time for Log of Time Model", 
+       x= "Time of Trip (min)",
+       y = "Value of Time ($/hr)")
 
 ```
 
