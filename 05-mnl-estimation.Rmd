@@ -500,6 +500,25 @@ ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
 Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom.  The critical chi-square values increase with the desired confidence level and the number of restrictions.
 
 
+```{r table5-5, echo = F}
+
+tab55df <- data.frame(
+ "Level of Conf."= c("90%", "95%", "99%", "99.5%", "99.9%"),
+ "1" = c("2.71", "3.84", "6.63", "7.88", "10.83"),
+ "2" = c("4.61", "5.99", "9.21", "10.60", "13.82"),
+ "3" = c("6.25", "7.81", "11.34", "12.84", "16.27"),
+ "4" = c("7.78", "9.49", "13.28", "14.86", "18.47"),
+ "5" = c("9.24", "11.07", "15.09", "16.75", "20.51"),
+ "7" = c("12.01", "14.06", "18.48", "20.28", "24.32"),
+ "10" = c("15.99", "18.31", "23.21", "25.19", "29.59"),
+ "12" = c("18.54", "21.02", "26.21", "28.30", "32.91"),
+ "15" = c("22.31", "25.00", "30.58", "32.80", "37.70"))
+
+kbl(tab55df, align = "c", booktabs = T, caption = "Critical Chi-Squared ($\\chi^2$) Values for Selected Confidence Levels by Number of Restrictions") %>% 
+kable_classic() %>% 
+  add_header_above(c(" " = 1, "Number of Restrictions"= 9), align = "center")
+```
+
 The likelihood ratio test can be applied to test null hypotheses involving the exclusion of groups of variables from the model.  Table 5-6 illustrates the tests of two hypotheses describing restriction on some or all the parameters in the San Francisco Bay Area commuter mode choice model.  The first hypothesis is that all the parameters are equal to zero. The formal statement of the null hypothesis in this case, is:
 
 \begin{equation}
