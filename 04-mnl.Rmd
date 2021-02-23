@@ -982,15 +982,15 @@ choosing alternative, $P_j$, if the parameter $\beta_k$ is positive (negative).
 It is useful to recognize that the sum of the derivatives over all the
 alternatives must be equal to zero.  That is,
 
-\begin{equation}
-\begin{split}
-\displaystyle \sum_{\forall_{j}}\frac{\partial P_{j}}{\partial X_{ik}}\\ = \frac{\partial P_{j}}{\partial X_{ik}} + \sum_{\forall_{j \ne i}}\frac{\partial P_{j}}{\partial X_{ik}}\\
-= \beta_{k}P_{i}(1-P_{i}) - \sum_{\forall_{j \ne i}}\beta_{k}P_{i}P_{j}\\
-= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}\sum_{\forall_{j \ne i}}P_{j}\\
-= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}(1-P_{i}) = 0
-\end{split}
+\begin{align}
+ \sum_{\forall_{j}}\frac{\partial P_{j}}{\partial X_{ik}}&= 
+  \frac{\partial P_{j}}{\partial X_{ik}} + \sum_{\forall_{j \ne i}}\frac{\partial P_{j}}{\partial X_{ik}}\\
+&= \beta_{k}P_{i}(1-P_{i}) - \sum_{\forall_{j \ne i}}\beta_{k}P_{i}P_{j}\\
+&= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}\sum_{\forall_{j \ne i}}P_{j}\\
+&= \beta_{k}P_{i}(1-P_{i}) - \beta_{k}P_{i}(1-P_{i})\\
+&= 0
 (\#eq:sumofderivativesequaltozero)
-\end{equation}
+\end{align}
 
 
 This is as expected.  Since the sum of all probabilities is fixed at one, the
@@ -1014,8 +1014,8 @@ proportional change in the probability divided by the proportional change in the
 attribute under consideration:
 
 \begin{equation}
-\displaystyle Elasticity = \frac{Percentage change in Probability}{Percentage Change in Attribute}$
-$= \frac{(P_{2}-P_{1})/P_{1}}{(X_{2}-X_{1})/X_{1}} = \frac{\Delta P/P_{1}}{\Delta X/X_{1}}
+\text{Elasticity} = \frac{\text{Pct Change in Probability}}{\text{Pct Change in Variable}}
+= \frac{(P_{2}-P_{1})/P_{1}}{(X_{2}-X_{1})/X_{1}} = \frac{\Delta P/P_{1}}{\Delta X/X_{1}}
 (\#eq:Elasticity)
 \end{equation}
 
