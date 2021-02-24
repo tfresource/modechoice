@@ -625,7 +625,7 @@ base_estimation <- list(
 )
 
 modelsummary(
-  base_estimation, 
+  base_estimation, fmt = "%.4f",
   title = "Estimation Results for Base Model and its Restricted Versions"
 )
 
