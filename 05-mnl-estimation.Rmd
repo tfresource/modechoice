@@ -718,9 +718,9 @@ sf_mlogit_costinc <- sf_mlogit %>%
     costbylninc = cost / log(hhinc)
   )
 
-base_model <- mlogit(chosen ~  tvtt | hhinc, data = sf_mlogit_costinc)
-income_model <- mlogit(chosen ~ tvtt + costbyinc, data = sf_mlogit_costinc, )
-lnincome_model <- mlogit(chosen ~ tvtt + costbylninc, data = sf_mlogit_costinc)
+base_model <- mlogit(chosen ~  tvtt + cost | hhinc, data = sf_mlogit_costinc)
+income_model <- mlogit(chosen ~ tvtt + costbyinc | hhinc, data = sf_mlogit_costinc)
+lnincome_model <- mlogit(chosen ~ tvtt + costbylninc | hhinc, data = sf_mlogit_costinc)
 
 
 income_estimation <- list(
