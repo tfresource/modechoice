@@ -611,9 +611,27 @@ $H_{0,D} : \beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit} = \
 
 The restricted models that reflect each of these hypotheses and the corresponding unrestricted model are reported in Table 5-7 along with their log-likelihood values.  
 
-```{r table 5-7, echo = F}
-#I have no idea what data to use, or how to format it or model it to create this table.
+```{r base_models table 5-7}
+sf_mlogit_basemodels <- sf_mlogit
+ 
+base_model <- mlogit(chosen ~  tvtt + cost| hhinc, data = sf_mlogit_basemodels)
+incomebase_model <- mlogit(chosen ~ tvtt | hhinc, data = sf_mlogit_basemodels, constPar = c("tvtt" = 0))
+timecostbase_model <- mlogit(chosen ~ tvtt + cost, data = sf_mlogit_basemodels)
 
+
+base_estimation <- list(
+  "Base Model" = base_model,
+  "Base Model without Time and Cost Variables" = incomebase_model,
+  "Base Model without Income Variables" = timecostbase_model
+)
+
+modelsummary(
+  base_estimation, 
+  title = "Estimation Results for Base Model and its Restricted Versions"
+)
+
+#This code recreates table 5-7 in the text with the correct coefficients and log likelihood
+#However, the output does not have the correct rho-square values, and is missing a number of separate statistics
 ```
 
 
