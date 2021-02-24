@@ -545,7 +545,7 @@ tibble(
 ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
   stat_function(fun = dchisq, args = list(df = 5)) +
   labs( x = "Test Values", y = "PDF") + 
-  theme_bf()
+  theme_bw()
 ```
 
 
@@ -652,16 +652,17 @@ with five degrees of freedom (five income parameters are constrained to zero).  
 
 ```{r table5-8}
 tibble(
-  llu = rep(base_model$logLik, 2),
-  llr = c(incomebase_model$logLik, timecostbase_model$logLik)
+  Hypothesis = c("$H_{0c}$","$H_{0d}$"),
+  LL_U = rep(base_model$logLik, 2),
+  LL_R = c(incomebase_model$logLik, timecostbase_model$logLik)
 ) %>%
   mutate(
-    test_stat = -2 * (llr - llu),
+    test_stat = -2 * (LL_R - LL_U),
     df = c(2, 5),
-    chisqcrit = qchisq(0.999, df),
-    pval = pchisq(test_stat, df, lower.tail = FALSE)
+    "Crtical Chi-Squared at 99.9% Conf." = qchisq(0.999, df),
+    "P-value" = pchisq(test_stat, df, lower.tail = FALSE)
   ) %>%
-  kbl(caption = "Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$") %>%
+  kbl(align = 'c', caption = "Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$") %>%
   kable_styling()
 ```
 
@@ -699,17 +700,6 @@ The corresponding test for the cost by ln(income) being true is:
 \end{align*}
 
 The above result implies that the null hypotheses that the models with cost by income variable or cost by ln(income) are true are rejected at a significance level greater than 0.001.  However, the significance of rejection is much lower for the cost by ln(income) model and many analysts would adopt that specification on the grounds that it is conceptually more appropriate.  This specification suggests that the value of money declines with income but the rate of decline diminishes at higher levels of income.
-```{r basic-estimation}
-base <- mlogit(chosen ~ ivtt , data = sf_mlogit)
-
-# estimate a model with constants only by constraining a single generic variable
-# to be zero
-market_shares <- mlogit(chosen ~ ivtt, data = sf_mlogit, constPar = c("ivtt" = 0))
-
-# Estimate a null model by constraining ALL the parameters to be zero. 
-fixed_coefs <- rep(0,6) %>% setNames(c(names(coef(market_shares)), "ivtt"))
-null_model <- mlogit(chosen ~ ivtt, data = sf_mlogit, start = fixed_coefs, iterlim = 0)
-```
 
 ```{r cost_models}
 sf_mlogit_costinc <- sf_mlogit %>%
@@ -729,8 +719,11 @@ income_estimation <- list(
   "Model With Cost By ln(Income)" = lnincome_model
 )
 
+gm <- modelsummary::gof_map
+gm$omit <- TRUE
+
 modelsummary(
-  income_estimation, 
+  income_estimation,
   title = "Models with Cost vs. Cost/Income and Cost/Ln(Income)"
 )
 ```
