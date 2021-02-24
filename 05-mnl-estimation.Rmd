@@ -614,7 +614,7 @@ The restricted models that reflect each of these hypotheses and the correspondin
 sf_mlogit_basemodels <- sf_mlogit
  
 base_model <- mlogit(chosen ~  tvtt + cost| hhinc, data = sf_mlogit_basemodels)
-incomebase_model <- mlogit(chosen ~ tvtt | hhinc, data = sf_mlogit_basemodels, constPar = c("tvtt" = 0))
+incomebase_model <- mlogit(chosen ~ 1 | hhinc, data = sf_mlogit_basemodels)
 timecostbase_model <- mlogit(chosen ~ tvtt + cost, data = sf_mlogit_basemodels)
 
 
