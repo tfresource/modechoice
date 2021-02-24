@@ -222,9 +222,8 @@ statsJtoWork <- tibble(
   "Average Cost (1990 cents)" = c(cost_raw[-c(1:4)]))
 
 #display the table =================================
-kbl(statsJtoWork, align = "c", booktabs = T, caption = "Sample Statistics for Bay Area Journey-to-Work Modal Data") %>% 
-  kable_classic() %>%
-  row_spec(0, bold = T)
+kbl(statsJtoWork, caption = "Sample Statistics for Bay Area Journey-to-Work Modal Data") %>% 
+  kable_styling()
 
 ```
 
@@ -425,17 +424,15 @@ Sufficiently large absolute values of the *t-statistic* lead to the rejection of
 The selection of a critical value for the t-statistic test is a matter of judgment and depends on the level of confidence with which the analyst wants to test his/her hypotheses. The critical t-values for different levels of confidence for samples sizes larger than 150 (which is the norm in mode choice analysis) are shown in Table 5-3.  It should be apparent that the critical t-value increases with the desired level of confidence.  Thus, one can conclude that a particular variable has no influence on choice (or equivalently that the true parameter associated with the variable is zero) can be rejected at the 90% level of confidence if the absolute value of the t-statistic is greater than 1.645 and at the 95% level of confidence if the t-statistic is greater than 1.960 .  
 
 ```{r confidencelevels}
-
-tibble(
-  confid = c(.9, .95, .99, .995, .999)) %>%
+tibble(confid = c(.9, .95, .99, .995, .999)) %>%
   mutate(tval=qnorm((1-confid)/2, lower.tail = FALSE)) %>%
-  knitr::kable( caption = "Critical t-Values for Selected Confidence Levels and Large Samples",
-                col.names = c("Confidence Level", "Critical t-value (two-tailed test)"))
-
+  kbl(caption = "Critical t-Values for Selected Confidence Levels and Large Samples",
+      col.names = c("Confidence Level", "Critical t-value (two-tailed test)")) %>%
+  kable_styling()
 ```
 
 ```{r tdistribution}
-library(ggplot2)
+these_colors <- wesanderson::wes_palette("Zissou1")
 ggplot(data.frame(x = c(-4,4))) +
   # Plot the pdf
   stat_function(
@@ -446,25 +443,26 @@ ggplot(data.frame(x = c(-4,4))) +
   stat_function(
     fun = function(x) ifelse(x >= 1.645, dt(x, df = 29), NA),
     aes(x),
-    geom = "area", color = NA, fill = "grey50", alpha = 1) +
+    geom = "area", color = NA, fill = these_colors[4], alpha = 1) +
   # Shade above 1.645
    stat_function(
     fun = function(x) ifelse(x >= 2, dt(x, df = 29), NA),
     aes(x),
-    geom = "area", color = NA, fill = "grey40", alpha = 1) +
-   # Shade below -1.645
+    geom = "area", color = NA, fill = these_colors[5], alpha = 1) +
+  # Shade below -1.645
   stat_function(
     fun = function(x) ifelse(x <= -1.645, dt(x, df = 29), NA),
     aes(x),
-    geom = "area", color = NA, fill = "grey50", alpha = 1) +
+    geom = "area", color = NA, fill = these_colors[4], alpha = 1) +
   # Shade below -2
   stat_function(
     fun = function(x) ifelse(x <= -2, dt(x, df = 29), NA),
     aes(x),
-    geom = "area", color = NA, fill = "grey40", alpha = 1) +
+    geom = "area", color = NA, fill = these_colors[5], alpha = 1) +
   ggtitle(expression(paste("The", italic(t),
     " distribution with a 90% and 95% confidence interval"))) +
-  xlab(expression(italic(t))) 
+  xlab(expression(italic(t)))  + 
+  theme_bw()
 ```
 
 We illustrate the use of the t-test by reviewing the t-statistics for each parameter in the initial model specification (Table 5-2). Both the travel cost and travel time parameters have large absolute t-statistic values (20.6 and 16.6, respectively) which lead us to reject the hypothesis that these variables have no effect on modal utilities at a confidence level higher than 99.9%. Thus, these variables should be retained in the model. All of the other t-statistics, except for Income-Shared Ride 2,  Income-Shared Ride 3+ and the walk constant are greater than 1.960 (95% confidence) supporting the inclusion of the corresponding variables.  The t-statistics on the shared ride specific income variables are even less than 1.645 in absolute value (90% confidence), suggesting that the effect of income on the utilities of the shared ride modes may not differentiate them from the reference (drive alone) mode. Consequently, the analyst should consider removing these income variables from the utility function specifications for the shared ride modes. The case is particularly compelling for removal of the income shared ride 3+ variable since the t-statistic is very low and the parameter has a counter-intuitive sign. Another alternative would be to combine the two shared ride income parameters suggesting that income has differential effect between drive alone and shared ride but not between shared ride 2 and shared ride 3+ (when this is done, the combined variable obtains a small negative parameter which is not statistically different from zero).  This variable could be deleted or retained according to the judgment of the analyst as described in Section 6.2.1.
@@ -529,28 +527,29 @@ This test-statistic is chi-squared distributed.  Example chi-squared distributio
 Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom.  The critical chi-square values increase with the desired confidence level and the number of restrictions.
 
 ```{r chisqdistrib51015, fig.cap="Chi-Squared Distribution for 5, 10, and 15 Degrees of Freedom"}
-
-ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
-       stat_function(fun = dchisq, args = list(df = 5)) +
-       stat_function(fun = dchisq, args = list(df = 10), color = "blue") +
-       stat_function(fun = dchisq, args = list(df = 15), color = "red") +
-       labs(x = "Test Values",
-            y = "Chi-Squared")
-
+these_colors = wesanderson::wes_palette("Darjeeling1")
+tibble(
+  x = seq(0, 30, 0.01),
+  `5` = dchisq(x, 5),
+  `10` = dchisq(x, 10),
+  `15` = dchisq(x, 15),
+) %>%
+  gather("Degrees of Freedom", "Chi-Squared", -x) %>%
+  ggplot(aes(x = x, y = `Chi-Squared`, color = `Degrees of Freedom`)) +
+  geom_line() + 
+  scale_color_manual(values = these_colors) + 
+  theme_bw()
 ```
 
-``` {r Chi-Square Distribution}
-  
+``` {r chisq-critdiagram, fig.cap = "Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds"}
 ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
-       stat_function(fun = dchisq, args = list(df = 5)) +
-       labs(title = "Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds",
-            x = "Test Values",
-            y = "PDF")
+  stat_function(fun = dchisq, args = list(df = 5)) +
+  labs( x = "Test Values", y = "PDF") + 
+  theme_bf()
 ```
 
 
 ```{r table5-5, echo = F}
-
 tab55df <- data.frame(
  "Level of Conf."= c("90%", "95%", "99%", "99.5%", "99.9%"),
  "1" = c("2.71", "3.84", "6.63", "7.88", "10.83"),
