@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Data Assembly and Estimation of Simple Multinomial Logit Models
 ```{r setup}
 library(tidyverse)
@@ -5,6 +10,8 @@ library(haven)
 library(mlogit)
 library(modelsummary)
 library(labelled)
+library(knitr)
+library(kableExtra)
 ```
 
 
@@ -126,7 +133,7 @@ sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.
   mutate(altname = as_factor(altnum, levels = "labels"))
 
 # Convert into mlogit dfidx data frame
-sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altnum"))
+sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altname"))
 
 # write to data/ folder for future use
 write_rds(sf_mlogit, "data/worktrips.rds")
@@ -146,6 +153,7 @@ trip_format <- sf_work_mode  %>%
   select(hhid, perid, chosen, ivtt, hhinc, altname, altnum) %>%
   group_by(hhid, perid) %>%
   mutate( chosen = max(chosen * altnum) ) %>%
+  select(-altnum) %>%
   spread(altname, ivtt, fill = 0)
 
 knitr::kable(head(trip_format), caption= "Data Layout Type I: Trip Format", align = 'c')
@@ -214,9 +222,8 @@ statsJtoWork <- tibble(
   "Average Cost (1990 cents)" = c(cost_raw[-c(1:4)]))
 
 #display the table =================================
-kbl(statsJtoWork, align = "c", booktabs = T, caption = "Sample Statistics for Bay Area Journey-to-Work Modal Data") %>% 
-  kable_classic() %>%
-  row_spec(0, bold = T)
+kbl(statsJtoWork, caption = "Sample Statistics for Bay Area Journey-to-Work Modal Data") %>% 
+  kable_styling()
 
 ```
 
@@ -242,7 +249,7 @@ The following mode labels are used in the subsequent discussion and equations: D
 
 \begin{equation}
   V_{SR3+} = \beta_{SR3+} + \beta_{1} \times TT_{SR3+} + \beta_{2} \times TC_{SR3+} + \gamma_{SR3+} \times Inc
-  (\#eq:utilspecSR3+)
+  (\#eq:utilspecSR3)
 \end{equation}
 
 \begin{equation}
@@ -281,15 +288,15 @@ $ \sum_t ln(1/NAlt_t)$
 In the next three sections, we review the estimation results for the base model using informal judgment-based tests (section 5.7.1), goodness-of-fit measures (section 5.7.2), and statistical tests (section 5.7.3). These elements, taken together, provide a basis to evaluate each model and to compare models with different specifications. 
 
 ```{r basic-estimation}
-base <- mlogit(mode ~ price + catch | income, data = Fish)
+base <- mlogit(chosen ~ ivtt , data = sf_mlogit)
 
 # estimate a model with constants only by constraining a single generic variable
 # to be zero
-market_shares <- mlogit(mode ~ price, data = Fish, constPar = c("price" = 0))
+market_shares <- mlogit(chosen ~ ivtt, data = sf_mlogit, constPar = c("ivtt" = 0))
 
 # Estimate a null model by constraining ALL the parameters to be zero. 
-fixed_coefs <- rep(0,4) %>% setNames(c(names(coef(market_shares)), "price"))
-null_model <- mlogit(mode ~ price, data = Fish, start = fixed_coefs, iterlim = 0)
+fixed_coefs <- rep(0,6) %>% setNames(c(names(coef(market_shares)), "ivtt"))
+null_model <- mlogit(chosen ~ ivtt, data = sf_mlogit, start = fixed_coefs, iterlim = 0)
 ```
 
 ```{r basic-estimation-table}
@@ -403,8 +410,8 @@ There is sampling error associated with the model parameters because the model i
 The statistic used for testing the null hypothesis that a parameter $\hat{\beta_{k}}$ is equal to some hypothesized value, ${\beta_{k}^*}$, is the asymptotic t-statistic, which takes the following form:   
 
 \begin{equation}
-\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}}
-(\#eq:asymptotic t-statistic)
+\displaystyle t-statistic = \frac{\hat{\beta_{k}}-\beta_{k}^{*}}{S_{k}} 
+(\#eq:asymptotict-statistic)
 \end{equation}
 
 where $\hat{\beta_{k}}$ is the estimate for the $k^{th}$ parameter,
@@ -417,15 +424,46 @@ Sufficiently large absolute values of the *t-statistic* lead to the rejection of
 The selection of a critical value for the t-statistic test is a matter of judgment and depends on the level of confidence with which the analyst wants to test his/her hypotheses. The critical t-values for different levels of confidence for samples sizes larger than 150 (which is the norm in mode choice analysis) are shown in Table 5-3.  It should be apparent that the critical t-value increases with the desired level of confidence.  Thus, one can conclude that a particular variable has no influence on choice (or equivalently that the true parameter associated with the variable is zero) can be rejected at the 90% level of confidence if the absolute value of the t-statistic is greater than 1.645 and at the 95% level of confidence if the t-statistic is greater than 1.960 .  
 
 ```{r confidencelevels}
-
-tibble(
-  confid = c(.9, .95, .99, .995, .999)) %>%
+tibble(confid = c(.9, .95, .99, .995, .999)) %>%
   mutate(tval=qnorm((1-confid)/2, lower.tail = FALSE)) %>%
-  knitr::kable( caption = "Critical t-Values for Selected Confidence Levels and Large Samples",
-                col.names = c("Confidence Level", "Critical t-value (two-tailed test)"))
-
+  kbl(caption = "Critical t-Values for Selected Confidence Levels and Large Samples",
+      col.names = c("Confidence Level", "Critical t-value (two-tailed test)")) %>%
+  kable_styling()
 ```
 
+```{r tdistribution}
+these_colors <- wesanderson::wes_palette("Zissou1")
+ggplot(data.frame(x = c(-4,4))) +
+  # Plot the pdf
+  stat_function(
+    fun = function(x) dt(x, df = 29),
+    aes(x),
+    geom = "area", color = "grey75", fill = "grey90", alpha = 1) +
+   # Shade above 2
+  stat_function(
+    fun = function(x) ifelse(x >= 1.645, dt(x, df = 29), NA),
+    aes(x),
+    geom = "area", color = NA, fill = these_colors[4], alpha = 1) +
+  # Shade above 1.645
+   stat_function(
+    fun = function(x) ifelse(x >= 2, dt(x, df = 29), NA),
+    aes(x),
+    geom = "area", color = NA, fill = these_colors[5], alpha = 1) +
+  # Shade below -1.645
+  stat_function(
+    fun = function(x) ifelse(x <= -1.645, dt(x, df = 29), NA),
+    aes(x),
+    geom = "area", color = NA, fill = these_colors[4], alpha = 1) +
+  # Shade below -2
+  stat_function(
+    fun = function(x) ifelse(x <= -2, dt(x, df = 29), NA),
+    aes(x),
+    geom = "area", color = NA, fill = these_colors[5], alpha = 1) +
+  ggtitle(expression(paste("The", italic(t),
+    " distribution with a 90% and 95% confidence interval"))) +
+  xlab(expression(italic(t)))  + 
+  theme_bw()
+```
 
 We illustrate the use of the t-test by reviewing the t-statistics for each parameter in the initial model specification (Table 5-2). Both the travel cost and travel time parameters have large absolute t-statistic values (20.6 and 16.6, respectively) which lead us to reject the hypothesis that these variables have no effect on modal utilities at a confidence level higher than 99.9%. Thus, these variables should be retained in the model. All of the other t-statistics, except for Income-Shared Ride 2,  Income-Shared Ride 3+ and the walk constant are greater than 1.960 (95% confidence) supporting the inclusion of the corresponding variables.  The t-statistics on the shared ride specific income variables are even less than 1.645 in absolute value (90% confidence), suggesting that the effect of income on the utilities of the shared ride modes may not differentiate them from the reference (drive alone) mode. Consequently, the analyst should consider removing these income variables from the utility function specifications for the shared ride modes. The case is particularly compelling for removal of the income shared ride 3+ variable since the t-statistic is very low and the parameter has a counter-intuitive sign. Another alternative would be to combine the two shared ride income parameters suggesting that income has differential effect between drive alone and shared ride but not between shared ride 2 and shared ride 3+ (when this is done, the combined variable obtains a small negative parameter which is not statistically different from zero).  This variable could be deleted or retained according to the judgment of the analyst as described in Section 6.2.1.
 
@@ -486,17 +524,48 @@ where $LL_{R}$ is the log-likelihood of the restricted model, and
 
 This test-statistic is chi-squared distributed.  Example chi-squared distributions are shown in Figure 5.4. As with the test for individual parameters, the critical value for determining if the statistic is “sufficiently large” to reject the null hypothesis depends on the level of confidence desired by the model developer.  It is also influenced by the number of restrictions  between the models.  Table 5-5 shows the chi-squared values for selected confidence levels and for different numbers of restrictions.  
 
-``` {r Chi-Square Distribution}
-  
-ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
-       stat_function(fun = dchisq, args = list(df = 5)) +
-       labs(title = "Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds",
-            x = "Test Values",
-            y = "PDF")
-```
-
 Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom.  The critical chi-square values increase with the desired confidence level and the number of restrictions.
 
+```{r chisqdistrib51015, fig.cap="Chi-Squared Distribution for 5, 10, and 15 Degrees of Freedom"}
+these_colors = wesanderson::wes_palette("Darjeeling1")
+tibble(
+  x = seq(0, 30, 0.01),
+  `5` = dchisq(x, 5),
+  `10` = dchisq(x, 10),
+  `15` = dchisq(x, 15),
+) %>%
+  gather("Degrees of Freedom", "Chi-Squared", -x) %>%
+  ggplot(aes(x = x, y = `Chi-Squared`, color = `Degrees of Freedom`)) +
+  geom_line() + 
+  scale_color_manual(values = these_colors) + 
+  theme_bw()
+```
+
+``` {r chisq-critdiagram, fig.cap = "Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds"}
+ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
+  stat_function(fun = dchisq, args = list(df = 5)) +
+  labs( x = "Test Values", y = "PDF") + 
+  theme_bw()
+```
+
+
+```{r table5-5, echo = F}
+tab55df <- data.frame(
+ "Level of Conf."= c("90%", "95%", "99%", "99.5%", "99.9%"),
+ "1" = c("2.71", "3.84", "6.63", "7.88", "10.83"),
+ "2" = c("4.61", "5.99", "9.21", "10.60", "13.82"),
+ "3" = c("6.25", "7.81", "11.34", "12.84", "16.27"),
+ "4" = c("7.78", "9.49", "13.28", "14.86", "18.47"),
+ "5" = c("9.24", "11.07", "15.09", "16.75", "20.51"),
+ "7" = c("12.01", "14.06", "18.48", "20.28", "24.32"),
+ "10" = c("15.99", "18.31", "23.21", "25.19", "29.59"),
+ "12" = c("18.54", "21.02", "26.21", "28.30", "32.91"),
+ "15" = c("22.31", "25.00", "30.58", "32.80", "37.70"))
+
+kbl(tab55df, align = "c", booktabs = T, caption = "Critical Chi-Squared ($\\chi^2$) Values for Selected Confidence Levels by Number of Restrictions") %>% 
+kable_classic() %>% 
+  add_header_above(c(" " = 1, "Number of Restrictions"= 9), align = "center")
+```
 
 The likelihood ratio test can be applied to test null hypotheses involving the exclusion of groups of variables from the model.  Table 5-6 illustrates the tests of two hypotheses describing restriction on some or all the parameters in the San Francisco Bay Area commuter mode choice model.  The first hypothesis is that all the parameters are equal to zero. The formal statement of the null hypothesis in this case, is:
 
@@ -518,6 +587,18 @@ This test is not very useful because we almost always reject the null hypothesis
 
 The log-likelihood values needed to test each of these hypotheses are reported in Table 5-2.  In each case, we include the log-likelihood of the restricted and unrestricted models, the calculated chi-square value and the number of restrictions or degrees of freedom as shown in Table 5-6. The confidence or significance of the rejection of the null hypothesis in each case can be obtained by referring to Table 5-5, more extensive published tables or software (most spreadsheet programs) that calculates the precise level of confidence/significance associated with each test result.
 
+```{r table5-6, echo = F}
+#I think I need to do a log likelihood test, but I don't know how to start or what data to use for models.
+
+tab56df <- data.frame(
+ "Variables."= c("Log-Likelihood of Unrestricted Model ($LL_U$)", "Log-Likelihood of Restricted Model ($LL_R$)", "Test Statistics [-2($LL_R-LL_U$)]", "Number of Restrictions", "Critical Chi-Squared Value at 99.9% Confidence", "Rejection Confidence", "Rejection Significance"),
+ "Test for Hypothesis H_{0,a}" = c("-3626.186", "-7309.301", "7366.830", "12", "32.91", "99.9%", "0.001"),
+ "Test for Hypothesis H_{0,b}" = c("-3626.186", "-4132.916", "1013.460", "7", "24.32", "99.9%", "0.001"))
+
+kbl(tab56df, align = "c", booktabs = T, caption = "Likelihood Ratio Test for Hypothesis $H_{0,a}$ and $H_{0,b}$") %>% 
+kable_classic()
+```
+
 
 These two applications of the likelihood ratio test correspond to situations where the null hypothesis leads to a highly restrictive model.  These cases are not very interesting since the real value of the likelihood ratio test is in testing null hypotheses which are not so extreme. The log-likelihood ratio test can be applied to test null hypotheses involving the exclusion of selected groups of variables from the model. We consider two such hypotheses.  The first is that the time and cost variables have no impact on the mode choice decision, that is,
 
@@ -528,6 +609,29 @@ The second is that income has no effect on the travel mode choice; that is
 $H_{0,D} : \beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit} = \beta_{Income-Bike} = \beta_{Income-Walk} = 0$
 
 The restricted models that reflect each of these hypotheses and the corresponding unrestricted model are reported in Table 5-7 along with their log-likelihood values.  
+
+```{r base_models table 5-7}
+sf_mlogit_basemodels <- sf_mlogit
+ 
+base_model <- mlogit(chosen ~  tvtt + cost| hhinc, data = sf_mlogit_basemodels)
+incomebase_model <- mlogit(chosen ~ 1 | hhinc, data = sf_mlogit_basemodels)
+timecostbase_model <- mlogit(chosen ~ tvtt + cost, data = sf_mlogit_basemodels)
+
+
+base_estimation <- list(
+  "Base Model" = base_model,
+  "Base Model without Time and Cost Variables" = incomebase_model,
+  "Base Model without Income Variables" = timecostbase_model
+)
+
+modelsummary(
+  base_estimation, fmt = "%.4f",
+  title = "Estimation Results for Base Model and its Restricted Versions"
+)
+
+#This code recreates table 5-7 in the text with the correct coefficients and log likelihood
+#However, the output does not have the correct rho-square values, and is missing a number of separate statistics
+```
 
 
 The statistical test of the hypothesis that time and cost have no effect has a chi-square value of
@@ -545,6 +649,22 @@ with two degrees of freedom (two parameters constrained to zero).  The critical 
 \end{equation}
 
 with five degrees of freedom (five income parameters are constrained to zero).  The critical $\chi^2$ with five degrees of freedom at 99.9% confidence level (or 0.001 level of significance) is 20.51.   Thus, both null hypotheses can be rejected at very high levels; that is, neither time and cost nor the income variables should be excluded from the model.  The log-likelihood ratio tests for both the above hypotheses are summarized in Table 5-8.
+
+```{r table5-8}
+tibble(
+  Hypothesis = c("$H_{0c}$","$H_{0d}$"),
+  LL_U = rep(base_model$logLik, 2),
+  LL_R = c(incomebase_model$logLik, timecostbase_model$logLik)
+) %>%
+  mutate(
+    test_stat = -2 * (LL_R - LL_U),
+    df = c(2, 5),
+    "Crtical Chi-Squared at 99.9% Conf." = qchisq(0.999, df),
+    "P-value" = pchisq(test_stat, df, lower.tail = FALSE)
+  ) %>%
+  kbl(align = 'c', caption = "Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$") %>%
+  kable_styling()
+```
 
 
 #### Non-nested Hypothesis Tests
@@ -581,7 +701,32 @@ The corresponding test for the cost by ln(income) being true is:
 
 The above result implies that the null hypotheses that the models with cost by income variable or cost by ln(income) are true are rejected at a significance level greater than 0.001.  However, the significance of rejection is much lower for the cost by ln(income) model and many analysts would adopt that specification on the grounds that it is conceptually more appropriate.  This specification suggests that the value of money declines with income but the rate of decline diminishes at higher levels of income.
 
+```{r cost_models}
+sf_mlogit_costinc <- sf_mlogit %>%
+  mutate(
+    costbyinc = cost / hhinc,
+    costbylninc = cost / log(hhinc)
+  )
 
+base_model <- mlogit(chosen ~  tvtt + cost | hhinc, data = sf_mlogit_costinc)
+income_model <- mlogit(chosen ~ tvtt + costbyinc | hhinc, data = sf_mlogit_costinc)
+lnincome_model <- mlogit(chosen ~ tvtt + costbylninc | hhinc, data = sf_mlogit_costinc)
+
+
+income_estimation <- list(
+  "Base Model" = base_model,
+  "Model With Cost By Cost/Income" = income_model,
+  "Model With Cost By ln(Income)" = lnincome_model
+)
+
+gm <- modelsummary::gof_map
+gm$omit <- TRUE
+
+modelsummary(
+  income_estimation,fmt = "%.4f",
+  title = "Models with Cost vs. Cost/Income and Cost/Ln(Income)"
+)
+```
 
 ## Value of Time
 
@@ -589,14 +734,26 @@ The above result implies that the null hypotheses that the models with cost by i
 
 The value of time, as described in Section 5.7.1.3, is calculated as the ratio of the parameter for time over the parameter for cost.  This ratio assumes that the utility function is linear in both time and cost and that neither value is interacted with any other variables.  That is, when the time and cost portion of the utility function is 
 
+\begin{equation}
+V_i = ... + \beta_{TVT}TVT_i + \beta_{Cost}Cost_i + ...
+(\#eq:utilityvot)
+\end{equation}
 
 the value of time is given by
 
+\begin{equation}
+VofT = \beta_{TVT} \Huge/ \normalsize \beta_{Cost}
+(\#eq:VoT)
+\end{equation}
 
 The units of time value are obtained from the units of the variables used to measure time and cost.  In the Base Model in Table 5.9, the units are minutes and cents.  Thus the value of time in cents per minute implied by this model is -0.0513/-0.0049 = 10.5 cents per minute.  This can be modified to \$ per hour by multiply by  0.6 = (1/100 \$ per cent)/(1/60 hour per minute).
 
 However, in general, the value of time is equal to the ratio between the derivative of utility with respect to time and the derivative of utility with respect to cost.  That is
 
+\begin{equation}
+VofT = \frac{\partial{V_i}}{\partial{Time_i}} \Huge/ \normalsize \frac{\partial{V_i}}{\partial{Cost_i}}
+(\#eq:VoTderivratio)
+\end{equation}
 
 In the case described in Equation 5.24, this produces the ratio in Equation 5.25.  However, this more general formulation allows us to infer the value of time for a variety of special cases in addition to the linear utility case described above. 
 
@@ -604,18 +761,36 @@ In the case described in Equation 5.24, this produces the ratio in Equation 5.25
 
 This approach can be applied to any case including when either time or cost is interacted with another variable, usually a variable describing the decision maker or the decision context. For example, if cost is divided by income  as in the second model reported in Table 5-9, on the basis that a unit of cost is proportionally less important with increasing income, the utility expression becomes
 
+\begin{equation}
+V_{it} = ... + \beta_{TVT}TVT_{it} + \beta_{CostInc}\frac{Cost_{it}}{Income_t} + ...
+(\#eq:utilityvotcostinc)
+\end{equation}
 
 and the value of time becomes
 
+\begin{equation}
+VofT = \frac{\partial{V_i}}{\partial{Time_i}} \Huge/ \normalsize {\frac{\partial{V_i}}{\partial{Cost_i}}} = {\beta_{TVT}} \Huge/ \normalsize {\beta_{CostInc}} \Huge/ \normalsize {Income_i}
+(\#eq:VoTcostinc)
+\end{equation}
 
 which can be converted to
 
+\begin{equation}
+VofT = \frac{\frac{\beta_{TVT}}{\beta_{Cost}}}{Income($1000/year)}{cents/minute}
+(\#eq:VoTcostincconvert)
+\end{equation}
 
 or
 
+\begin{equation}
+VofT = \frac{0.6 \times \frac{\beta_{TVT}}{\beta_{Cost}}}{Income($1000/year)}{$/hour}
+\end{equation}
 
 Similarly, the value of time for the third specification in Table 5-9 is
 
+\begin{equation}
+VofT = \frac{0.6 \times \frac{\beta_{TVT}}{\beta_{Cost}}}{ln[Income($1000/year)]}{$/hour}
+\end{equation}
 
 The value of time implied by each of these formulations is illustrated in Table 5-10 and Figure 5.6 by showing the values of time for different income levels.  In each case, the values of travel time appear to be quite low.  This will be addressed in model specification refinement (Section 6.2.6). 
 
@@ -629,11 +804,46 @@ tibble(
   knitr::kable( caption = "Value of Time vs. Income",
                 col.names = c("Annual Income", "Hourly Wage", "Linear", "Cost/Income", "Cost/LN(Inc.)"))
 ```
+```{r figure 5-6, echo = F}
+library(ggplot2)
+
+fig56df <- tibble(
+  "AnnualInc" = c(0, 25, 50, 75, 100, 125),
+  "Hourlywage" = c(0, 12.50, 25.00, 37.50, 50.00, 62.50),
+  "Linear" = c(6.26, 6.26, 6.26, 6.26, 6.26, 6.26),
+  "CostbyInc" = c(0, 4.53, 9.07, 13.60, 18.13, 21.94),
+  "CostbylnInc" = c(0, 5.18, 6.29, 6.95, 7.41, 7.72))
+
+ggplot(fig56df, aes(x=AnnualInc)) + 
+  geom_line(aes(y = Linear), color = "darkred", size = 2) + 
+  geom_line(aes(y = CostbyInc), color="steelblue", size = 2) +
+  geom_line(aes(y = CostbylnInc), color="green1", size = 2) +
+  labs(title = "Value of Time vs. Income",
+            x = "Annual Income ($000)",
+            y = "Wage Rate ($/hour)")
+
+#I think this may not be the whole dataset, since the ln curve is not as distinct. I'm not sure where this data lives.
+```
+
 Another approach that can be used in this case is to relate the value of travel directly to the wage rate by assuming that the working year consists of 2000 hours or 120,000 minutes and recognizing that $1000 dollars is equivalent to 100,000 cents.  This gives us 
 
+\begin{equation}
+Units_{VofT} = cents \Huge/ \normalsize minute \Huge/ \normalsize $1000 \Huge/ \normalsize year
+(\#eq:VoTlncostinc)
+\end{equation}
+\begin{equation}
+ = cents \Huge/ \normalsize minute \Huge/ \normalsize 100,000~cents \Huge/ \normalsize 120,000~minutes
+\end{equation}
+\begin{equation}
+ = 1.2
+\end{equation}
 
 That is, there are no units but a simple factor of 1.2.  This is interpreted as the value by which the ratio of the parameters should be multiplied to get the value of travel time as a fraction of the wage rate.  In the cost by income model in Table 5-9 Models with Cost vs. Cost/Income and Cost/Ln(Income), this becomes 
 
+\begin{equation}
+VofT = \beta_{TVT} \Huge/ \normalsize \beta_{CostInc} \times 1.2 = \frac{-0.0512}{-0.1692} \times 1.2 = 0.363~Wage~Rate
+(\#eq:TVTfracofwagerate)
+\end{equation}
 
 which, as before, is quite low. However, as shown in Figure 5.6 and discussed in Section 5.7.3.4, this specification and the related specification for cost by ln(income) have the advantage that the value of time is differentiated across households with different income.  
 
@@ -641,12 +851,24 @@ which, as before, is quite low. However, as shown in Figure 5.6 and discussed in
 
 If time or cost is transformed, it becomes necessary to explicitly take the derivative of utility with respect to both time and cost.  For example, if time enters the utility function using the natural log transformation, to suggest that the utility effect of increasing time decreases with time, the utility function becomes
 
+\begin{equation}
+V_{it} = ... + \beta_{ln(TVT)}ln(TVT_{it}) + \beta_{Cost}Cost_{it} + ...
+(\#eq:utilitycosttransform)
+\end{equation}
 
 and the value of time becomes 
 
+\begin{equation}
+VofT = \frac{\partial{V_{it}}}{\partial{Time_{it}}} \Huge/ \normalsize \frac{\partial{V_{it}}}{\partial{Cost_{it}}} = \beta_{ln(TVT)} \Huge/ \normalsize TVT_{it} \Huge/ \normalsize \beta_{Cost} = \frac{\beta_{ln(TVT)}}{\beta_{Cost}} \times \frac{1}{TVT_{it}}
+(\#eq:VoTcosttransformalt)
+\end{equation}
 
 Similarly, if cost is entered as the natural log of cost, the value of time becomes
 
+\begin{equation}
+VofT = \frac{\partial{V_{it}}}{\partial{Time_{it}}} \Huge/ \normalsize \frac{\partial{V_{it}}}{\partial{Cost_{it}}} = \beta_{TVT} \Huge/ \normalsize \beta_{ln(Cost)} \Huge/ \normalsize Cost_{it} = \frac{\beta_{TVT}}{\beta_{ln(Cost)}} \times Cost_{it}
+(\#eq:VoTcosttransformlncost)
+\end{equation}
 
 which can be reported in a table for selected values of time or plotted in a graph of Value of Time as a function of TVT or Cost, as appropriate (see below).  Models using each of these formulations are estimated and reported, along with the Base Model in Table 5-11. The goodness of fit is substantially improved by using ln(time), which is generally expected, but is worse when using ln(cost), for which there is no conceptual basis. 
 
@@ -654,14 +876,57 @@ which can be reported in a table for selected values of time or plotted in a gra
 The implications for value of time of these different formulations are shown in Table 5-12 and Table 5-13 Value of Time for Log of Cost Model and also in Figure 5.7 and Figure 5.8.  
 
 ```{r table5-12, echo = F}
-#this code will also produce Figure 5-7
 
+tab512df <- tibble(
+ "Trip Time (min)" = c(5, 15, 30, 60, 90, 120),
+ "Value of Time (cents/min)"= c(141.2, 47.4, 23.5, 11.8, 7.8, 5.9),
+ "Value of time ($/hr)" = c("84.71", "$28.24", "$14.12", "$7.06", "$4.71", "$3.53"))
 
-logTime_model <- mlogit(chosen ~ log(tvtt) + cost | hhinc, data = sf_mlogit)
-summary(logTime_model)
-
-# time value of money is usually calculated by dividing Beta_cost / Beta_tvtt
-#I'm not sure how changing the trip time changes the time value of money
+kbl(tab512df, align = "c", booktabs = T, caption = "Value of Time for Log of Time Model") %>% 
+kable_classic()
 
 ```
 
+```{r figure5-7, echo = F}
+
+library(ggplot2)
+
+fig57df <- tibble(
+  "TimeofTrip" = c(5, 15, 30, 60, 90, 120),
+  "ValueofTime" = c(84.71, 28.24, 14.12, 7.06, 4.71, 3.53))
+
+ggplot(fig57df)+
+  stat_smooth(aes(y = ValueofTime, x = TimeofTrip), method = "loess", formula = y ~ log(x), fullrange = FALSE) +
+  scale_y_continuous(labels=scales::dollar_format())+
+  labs(title = "Value of Time for Log of Time Model", 
+       x= "Time of Trip (min)",
+       y = "Value of Time ($/hr)")
+
+```
+
+```{r table5-13, echo = F}
+
+tab513df <- tibble(
+ "Trip cost"= c("$0.25", "$0.50", "$1.00", "$2.00", "$5.00"),
+ "Value of time ($/hr)" = c("0.85", "$1.71", "$3.42", "$6.83", "$17.09"))
+
+kbl(tab513df, align = "c", booktabs = T, caption = "Value of Time for Log of Cost Model") %>% 
+kable_classic()
+```
+
+```{r figure 5-8, echo = F}
+library(ggplot2)
+
+fig58df <- tibble(
+  "Tripcost" = c(0, .25, .50, 1.00, 2.00, 5.00),
+  "Timevalue" = c(0, 0.85, 1.71, 3.42, 6.83, 17.09))
+
+ggplot(fig58df, aes(x=Tripcost)) + 
+  geom_line(aes(y = Timevalue), size = 1) + 
+  scale_y_continuous(labels=scales::dollar_format()) +
+  scale_x_continuous(labels=scales::dollar_format()) +
+  labs(title = "Value of Time for Log of Cost Model",
+            x = "Trip Cost",
+            y = "Value of Time ($/hour)")
+
+```
