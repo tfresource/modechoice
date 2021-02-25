@@ -872,6 +872,32 @@ VofT = \frac{\partial{V_{it}}}{\partial{Time_{it}}} \Huge/ \normalsize \frac{\pa
 
 which can be reported in a table for selected values of time or plotted in a graph of Value of Time as a function of TVT or Cost, as appropriate (see below).  Models using each of these formulations are estimated and reported, along with the Base Model in Table 5-11. The goodness of fit is substantially improved by using ln(time), which is generally expected, but is worse when using ln(cost), for which there is no conceptual basis. 
 
+```{r Table5-11 Base model and log transformations}
+sf_mlogit_lntransformations <- sf_mlogit %>%
+  mutate(
+    lntraveltime = log(tvtt),
+    lntravelcost = log(cost)
+  )
+
+base_model <- mlogit(chosen ~  tvtt + cost | hhinc, data = sf_mlogit_lntransformations)
+lntravaltime_model <- mlogit(chosen ~ cost + lntraveltime  | hhinc, data = sf_mlogit_lntransformations)
+lntravelcost_model <- mlogit(chosen ~ tvtt + lntravelcost | hhinc, data = sf_mlogit_lntransformations)
+
+
+transformations_estimation <- list(
+  "Base Model" = base_model,
+  "Model With Log of Travel Time" = lntravaltime_model,
+  "Model With Log of Travel Cost" = lntravelcost_model
+)
+
+gm <- modelsummary::gof_map
+gm$omit <- TRUE
+
+modelsummary(
+  transformations_estimation,fmt = "%.4f",
+  title = "Base Model and Log Transformations"
+)
+```
 
 The implications for value of time of these different formulations are shown in Table 5-12 and Table 5-13 Value of Time for Log of Cost Model and also in Figure 5.7 and Figure 5.8.  
 
