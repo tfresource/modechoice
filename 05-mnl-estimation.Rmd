@@ -587,16 +587,28 @@ This test is not very useful because we almost always reject the null hypothesis
 
 The log-likelihood values needed to test each of these hypotheses are reported in Table 5-2.  In each case, we include the log-likelihood of the restricted and unrestricted models, the calculated chi-square value and the number of restrictions or degrees of freedom as shown in Table 5-6. The confidence or significance of the rejection of the null hypothesis in each case can be obtained by referring to Table 5-5, more extensive published tables or software (most spreadsheet programs) that calculates the precise level of confidence/significance associated with each test result.
 
-```{r table5-6, echo = F}
-#I think I need to do a log likelihood test, but I don't know how to start or what data to use for models.
 
-tab56df <- data.frame(
- "Variables."= c("Log-Likelihood of Unrestricted Model ($LL_U$)", "Log-Likelihood of Restricted Model ($LL_R$)", "Test Statistics [-2($LL_R-LL_U$)]", "Number of Restrictions", "Critical Chi-Squared Value at 99.9% Confidence", "Rejection Confidence", "Rejection Significance"),
- "Test for Hypothesis H_{0,a}" = c("-3626.186", "-7309.301", "7366.830", "12", "32.91", "99.9%", "0.001"),
- "Test for Hypothesis H_{0,b}" = c("-3626.186", "-4132.916", "1013.460", "7", "24.32", "99.9%", "0.001"))
+```{r table5-6, echo = FALSE}
+#Create models for likelihood ratio test
+sf_mlogit_basemodels <- sf_mlogit
+base_model <- mlogit(chosen ~  tvtt + cost| hhinc, data = sf_mlogit_basemodels)
+null_modela <- mlogit(chosen ~ ivtt, data = sf_mlogit_basemodels, start = fixed_coefs, iterlim = 0)
+null_modelb <-  mlogit(chosen ~ ivtt, data = sf_mlogit_basemodels, constPar = c("ivtt" = 0))
 
-kbl(tab56df, align = "c", booktabs = T, caption = "Likelihood Ratio Test for Hypothesis $H_{0,a}$ and $H_{0,b}$") %>% 
-kable_classic()
+#Create likelihood ratio test table
+tibble(
+  Hypothesis = c("$H_{0a}$","$H_{0b}$"),
+  LL_U = rep(base_model$logLik, 2),
+  LL_R = c(null_modela$logLik, null_modelb$logLik)
+) %>%
+  mutate(
+    test_stat = -2 * (LL_R - LL_U),
+    df = c(12, 7),
+    "Crtical Chi-Squared at 99.9% Conf." = qchisq(0.999, df),
+    "P-value" = pchisq(test_stat, df, lower.tail = FALSE)
+  ) %>%
+  kbl(align = 'c', caption = "Likelihood Ratio Test for Hypothesis $H_{0,a}$ and $H_{0,b}$") %>%
+  kable_styling()
 ```
 
 
@@ -941,6 +953,9 @@ kable_classic()
 ```
 
 ```{r figure 5-8, echo = F}
+
+#I can recreate this better with the sf_mlogit dataset, but I need to figure out where wage rate comes from
+
 library(ggplot2)
 
 fig58df <- tibble(
