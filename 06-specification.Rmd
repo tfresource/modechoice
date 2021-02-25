@@ -183,12 +183,25 @@ include total travel time (the sum of in-vehicle and out-of-vehicle time) and ou
 divided by distance in place of in- and out-of-vehicle travel time. This specification, as shown
 below, is consistent with our expectations provided that β1 and β2 are negative: 
 
+\begin{equation}
+$\displaystyle V_{m} = \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + ......$
+$\displaystyle = \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + ......$
+$\displaystyle = \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_ + ......$
+(\#eq:IVT&OVT)
+\end{equation}
 
 An alternative approach is to impose a constraint on the relative importance of OVT and IVT.
 This is achieved by replacing the travel time variables in the modal utility equations with a
 weighted travel time (WTT) variable defined as in-vehicle time plus the appropriate travel time
 importance ratio (TIR) times out-of-vehicle time (IVT + TIR×OVT). The mechanics of how this
 constraint works is illustrated as follows: 
+
+\begin{equation}
+$\displaystyle V_{m} = \gamma_{0,m} + \beta_{1} \times IVT + (\beta_{1} \times TIR) \times OVT + ...$
+$\displaystyle = \gamma_{0,m} + \beta_{1} \times (IVT + TIR \times OVT) + ...$
+$\displaystyle = \gamma_{0,m} + \beta_{1} \times WTT + ...$
+(\#eq:IVT+TIRxOVT)
+\end{equation}
 
 so that the parameter for out-of-vehicle time is equal to the parameter for in-vehicle time
 multiplied by the selected travel time ratio (TTR). In Models 8W and 9W, we use travel
@@ -200,9 +213,15 @@ none of the other models are constrained versions of Model 7W, we use the non-ne
 test (see Section 5.7.3.2, Equation 5.21) to compare it with Models 6W, 8W, and 9W.
  
 We illustrate the non-nested hypothesis test by applying it to the hypothesis that
-Model 6W is the true model given that Model 7W has a higher 2
-ρ . Since both models have the
+Model 6W is the true model given that Model 7W has a higher $\overline{\rho}^{2}$. Since both models have the
 same number of parameters, the term (K7-K6) drops out, and the equation becomes
+
+\begin{equation}
+$\displaystyle (Level \ of\ Rejection) = \Phi[-(-2(\overline{\rho_{7}}^{2}-\overline{\rho_{6}}^{2})\ l(0))^{1/2}]$
+$\displaystyle = \Phi[-(-2(0.5129-0.5074)(-7309.6))^{1/2}]$
+$\displaystyle = \Phi(-8.97)<< 0.001$
+(\#eq:non-nestedhypothesistest)
+\end{equation}
 
 That is, the null hypothesis that Model 6W is the true model is rejected with significance much
 greater than 0.001. Models 8W and 9W are also rejected as the true model at an even higher
@@ -218,7 +237,13 @@ as a function of distance. The time values are obtained as described earlier by 
 the time parameters (in utils-per-minute) by the cost parameter in utils per cent. For example,
 the values for Model 7W are:
 
+Value of IVTT $= \frac{\beta_{mot\ tvtt}}{\beta_{cost}} = \frac{-0.0415}{-0.0041}$
+              = 10.1 cents/min = $6.07/hr
 
+Value of OVT (5 Mile Trip) $= \frac{\beta_{mot\ tvtt}+ \frac{\beta_{OVT/Dist}}{Dist}}{\beta_{cost}}$
+                           $= \frac{-0.0415+ \frac{-0.1812}{5}}{-0.0041}$
+                            = 19.0 cents/min = $11.38/hr
+                            
 These values of time are fixed for IVT but vary with distance for OVT34 as reported in Table 6-6
 for Model 7W. The corresponding values of time for Models 6W, 8W and 9W are shown in
 Table 6-7.
@@ -455,16 +480,34 @@ described earlier to test the difference between two models. In this case, the u
 is the set of all the segmented models and the restricted model is the pooled model which
 imposes the restriction that the parameters for each segment are identical. 
 
-Thus, the null hypothesis is that ββ β β 1 2 ===== " " s S , where βs , is the
-vector of coefficients for the s
-th market segment. Following the approach described in
+Thus, the null hypothesis is that β1 = β2 = ... = βs = ... = βS , where βs , is the
+vector of coefficients for the $S^{th}$ market segment. Following the approach described in
 CHAPTER 5, we reject the null hypothesis that the restricted model is the correct model at
 significance level p if the calculated value of the statistic is greater than the test or critical value.
 That is, if: 
 
-Substituting the log-likelihood for the pooled model for RA and the sum of market segment
-model log-likelihoods for UA in equation 5.16, the null hypothesis, that all segments have the
+\begin{equation}
+$\displaystyle -2 \times [l_{R} - l_{U}]\ge \chi^{2}_{n,(p)}$
+(\#eq:log-likelihoodtestatlevelp)
+\end{equation}
+
+Substituting the log-likelihood for the pooled model for lR and the sum of market segment
+model log-likelihoods for lU in equation 5.16, the null hypothesis, that all segments have the
 same choice function, is rejected at level p if:
+
+\begin{equation}
+$\displaystyle -2 \times \Bigg[l(\beta) - \sum^{S}_{s=1} l(\beta_{s})\Bigg]\ge \chi^{2}_{n,(p)}$
+(\#eq:rejectedlog-likelihoodtestatlevelp)
+\end{equation}
+
+Where $l(\beta)$ is the log-likelihood for the pooled model,
+      $l(\beta_{s})$ is the log-likelihood of the model estimated with $s^{th}$ market segment,
+      $\chi^{2}_{n}$ is the chi-square distribution with n degrees of freedom,
+      $n$ is equal to the number of restrictions, $\sum^{S}_{s=1} K_{s} - K$
+      $K$ is the number of coefficients in the pooled model, and
+      $K_{s}$ is the number of coefficients in the $s^{th}$ market segment model.
+
+$K_{s}$ is generally equal to $K$ in which case $n$ is given by K x (S-1)
 
 ### Market Segmentation Example
 We illustrate the market segmentation test for two cases, automobile ownership (zero/one car
@@ -482,6 +525,7 @@ We can make the following observations from the estimation results of the automo
 ownership segmentation models (Table 6-14): 
 
   - The segmented model rejects the pooled model at a very high level of statistical significance
+  $-2\times\Bigg[l(\beta) - \sum^{S}_{s=1} l(\beta_{s})\Bigg] = -2\times[-3444.2-(-1049.3-2296.7)] = 196.4$
   - The alternative specific constants for all other modes relative to drive alone are much more
     negative for the higher auto ownership group than for the lower auto ownership group.
     These differences indicate the increased preference for drive alone among persons from
