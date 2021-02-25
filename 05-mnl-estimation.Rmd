@@ -723,7 +723,7 @@ gm <- modelsummary::gof_map
 gm$omit <- TRUE
 
 modelsummary(
-  income_estimation,
+  income_estimation,fmt = "%.4f",
   title = "Models with Cost vs. Cost/Income and Cost/Ln(Income)"
 )
 ```
