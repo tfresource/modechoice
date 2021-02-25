@@ -1,12 +1,556 @@
-# Model Specification Refinement
+# Model Specification Refinement: San Francisco Bay Area Work Mode Choice
 
 ## Introduction
+This chapter describes and demonstrates the refinement of the utility function specification for
+the multinomial logit (MNL) model for work mode choice in the San Francisco Bay Area. The
+process combines the use of intuition, statistical analysis and testing, and judgment. The
+intuition and judgment components of the model refinement process are based on theory,
+anecdotal evidence, logical analysis, and the accumulated empirical experience of the model
+developer. This empirical experience can be and often is enhanced through the advice of others
+or through review of reports and published papers documenting previous modeling studies for
+similar choice problems and contexts.
 
+We explore a variety of different specifications of the utility functions to demonstrate
+some of the most common specifications and testing methods. These tests include both formal
+statistical tests and informal judgments about the signs, magnitudes, or relative magnitudes of
+parameters based on our knowledge about the underlying behavioral relationships that influence
+mode choice. The use of judgment and experience is an essential element of successful model
+development since it is almost impossible to determine the “best” model specification solely on
+the basis of statistical tests. A model that fits the data well may not necessarily describe the
+causal relationships and may not produce the most reasonable predictions. Also, it is not
+uncommon to find several model specifications that, for all practical purposes, fit the data
+equally well, but which have very different specifications and forecast implications. Therefore,
+practical model building involves considerable use of subjective judgment and is as much an art
+as it is a science.
+
+Different modelers have different styles and approaches to the model development
+process. One of the most common approaches is to start with a minimal specification which
+includes those variables that are considered essential to any reasonable model. In the case of
+mode choice, such a specification might include travel time, travel cost and departure frequency
+where appropriate for each alternative. Working from this minimal specification, incremental
+changes are proposed and tested in an effort to improve the model in terms of its behavioral
+realism and/or its empirical fit to the data while avoiding excessive complexity of the model.
+Another common approach is to start with a richer specification which represents the model
+developer’s judgment about the set of variables that is likely to be included in the final model
+specification. For example, such a model might include travel time (separated into in-vehicle
+and out-of-vehicle time), out of vehicle travel time might be adjusted to take account of the total
+distance traveled, out of pocket travel cost (possibly adjusted by household income), frequency
+of departure for carrier modes, household automobile ownership or availability, household
+income, and size of the travel party. 
+
+We adopt the first of these methods in the following section for refinement of the
+specification of a model of work mode choice as it is the most appropriate approach for those
+who are new to discrete choice modeling. At each stage in the model development process, we
+introduce incremental changes to the modal utility functions and re-estimate the model with the
+objective of finding a more refined model specification that performs better statistically and is
+consistent with theory and our a priori expectations about mode choice behavior. We introduce
+small changes at each step as the estimation results for each stage provide useful insights which
+may be helpful in further refining the model. The appropriateness of each specification change
+is evaluated at each step using both judgmental and statistical tests.
+ In the rest of this chapter, we describe and demonstrate this process for work mode
+choice in the San Francisco Bay Area.
 
 ## Alternative Specifications
+The basic multinomial logit mode choice model for work commute in the San Francisco Bay
+Area was reported in Table 5-2 in CHAPTER 5. The refinements we consider include:
+  - Different specifications of the income effects,
+  - Different specifications of travel time,
+  - Additional decision maker related variables such as gender and automobiles owned,
+  - Additional variables that represent the interaction of decision maker related variables
+    with mode related variables (e.g., interaction of income with cost), and
+  - Additional trip context variables (e.g., dummy variable indicating if the trip
+    origin/destination is in a Central Business District).
+    
+### Refinement of Specification for Alternative Specific Income Effects
+The estimation results for the base model in CHAPTER 5 yielded time and cost parameter
+estimates that had the expected (negative) sign and were statistically significant. The parameters
+for the alternative specific income variables were significant and had the expected sign (negative
+relative to drive alone) except for the shared ride specific income variables (shared ride 2 and
+shared ride 3+) which were not significant and the sign on the shared ride 3+ income variable
+was counter-intuitive. All else being equal, we expect the preference for shared ride 2 to be
+negative relative to drive alone and for shared ride 3+ to be more negative than shared ride 2
+because of the increasing inconvenience of coordinating with other travelers as the number of
+persons in the ride sharing group increases. However, the empirical results provide only limited
+support for the first expectation and are inconsistent with the second expectation. This suggests
+that the effect of income on choice is not necessarily different among the automobile modes.
 
+We approach this inconsistency between expectation and empirical results by thinking of
+other plausible relationships for the effect of income on shared ride choice and developing
+alternative specifications which represent these relationships. Options for consideration include: 
+
+  - The effect of income relative to drive alone is the same for the two shared ride modes (shared
+    ride 2 and shared ride 3+) but is different from drive alone and different from the other
+    modes. This relationship is represented by constraining the income coefficients in the two
+    shared alternatives to be equal as follows: 
+    
+  - The effect of income relative to drive alone is the same for both shared ride modes and
+    transit but is different for the other modes. This is represented in the model by constraining
+    the income coefficients in both shared ride modes and the transit mode to be equal as: 
+
+  - The effect of income on all the automobile modes (drive alone, shared ride 2, and shared
+    ride 3+) is the same, but the effect is different for the other modes. We include this
+    constraint by setting the income coefficients in the utilities of the automobile modes to be
+    equal. In this case, we set them to zero since drive alone is the reference mode. 
+    
+The estimation results for the base model (from CHAPTER 5) and for these three alternative
+models are reported in Table 6-1. The parameter estimates for all three models are consistent
+with expectations. That is, the effect of increasing income is neutral or negative for the shared
+ride modes relative to drive alone and equal to or more negative for transit, bike and walk than
+for shared ride. Further, all the parameters are significant except for the shared ride income
+parameters in Model 1W. 
+
+Selection of one of these four models to represent the effect of income should consider
+the statistical relationships among them and the reasonableness of the resultant models. Since
+Models 1W, 2W and 3W are constrained versions of the Base Model and Models 2W and 3W
+are constrained versions of Model 1W, we can use the likelihood ratio test to evaluate the
+hypotheses implied by each of these models (see section 5.7.3.2). We use this test to determine
+if the hypothesis that each of these models is the true model is or is not rejected by the less
+restricted model. The likelihood ratio statistics (equation 5.16), the degrees of freedom or
+number of restrictions and the level of significance for each test are reported relative to the Base
+Model and to Model 1W in the first and second rows of Table 6-2, respectively. The Base
+Model cannot reject any of the subsequent models at a reasonable level of significance. Further,
+the Base Model has a counter-intuitive relationship between the parameters for shared ride 2 and
+shared ride 3+. Thus, Model 1W or Model 3W can represent the effect of income on mode
+choice in this case. We choose Model 1W because it is most consistent with our prior
+hypotheses about the effect of income on preference between drive alone and shared ride and
+other modes. However, the differences among these models are small both statistically and
+behaviorally so the decision should be subject to a review before adoption of the final
+specification.31
+
+
+### Different Specifications of Travel Time
+The specification for travel time in the above models implies that the utility value of time is
+equal for all the alternatives and between in-vehicle and out-of-vehicle time. However, we
+expect travelers in non-motorized modes to be more sensitive to travel time than travelers in
+motorized modes (since walking or biking is physically more demanding than traveling in a car)
+and we expect that travelers are more sensitive to out-of-vehicle travel time (OVT) than to in 
+vehicle travel time (IVT).
+
+The estimation results for two specifications of travel time that relax these constraints are
+reported with those for Model 1W in Table 6-3. Model 5W relaxes the time constraints in Model
+1W by specifying distinct time variables for the motorized and non-motorized modes based on
+our expectation that travelers are likely to be more sensitive to travel time by non-motorized
+modes. Model 6W relaxes the constraint further by disaggregating the travel time for motorized
+modes into distinct components for IVT and OVT. This specification allows the two
+components of travel time for motorized travel to have different effects on utility with the
+expectation that travelers are more sensitive to out-of-vehicle time than in-vehicle time.
+
+The estimation results for Model 5W rejects the hypothesis of equal value of travel time
+across modes implied in Model 1W and Model 6W rejects the hypothesis of equal value of in
+and out of travel time for the motorized modes at a very high level of significance (0.001). The
+estimated parameters associated with travel time in Model 6W have the correct signs and the
+magnitude of the parameters for OVT for motorized modes and for time for non-motorized
+modes are larger in magnitude than the parameter for IVT, as expected; however, the parameter
+for IVT is very small and not statistically significant. Further, the ratio of OVT to IVT for
+motorized modes, 30 times, is far greater than expected. Nonetheless, since Model 6W rejects
+the constraints imposed by both Models 1W and 5W at a very high level of significance, we
+cannot discard this model without further exploration.
+
+Another perspective on the suitability of these models can be obtained by calculating the
+relative importance of each component of travel time and cost which gives us the implied value
+of each component of time. The implied value of in-vehicle-time for motorized modes is computed 
+for each model using the estimated motorized in-vehicle-time and cost parameters and
+similarly for the other time components: 
+
+The implied values of in- and out-of-vehicle times for motorized modes in Models 1W, 5W, and
+6W are reported in Table 6-4. The values of motorized in-vehicle time and non-motorized time
+are somewhat low but not unreasonable compared to the average wage rate of $21.20 per hour in
+the region (1990 dollars); however, the value of in-vehicle time is unreasonably low.
+Nevertheless, the likelihood ratio tests reject both Model 5W and Model 1W at very high levels
+of significance. This raises doubt about the suitability of those models and suggests the need to
+consider other specifications to evaluate the influence of travel time components on the utilities
+of the different alternatives.
+
+Two approaches are commonly taken to identify a specification which is not statistically
+rejected by other models and has good behavioral relationships among variables. The first is to
+examine a range of different specifications in an attempt to find one which is both behaviorally
+sound and statistically supported. The other is to constrain the relationships between or among
+parameter values to ratios which we are considered reasonable. The formulation of these
+constraints is based on the judgment and prior empirical experience of the analyst. Therefore,
+the use of such constraints imposes a responsibility on the analyst to provide a sound basis for
+his/her decision. The advice of other more experienced analysts is often enlisted to expand
+and/or support these judgments. 
+
+
+The primary shortcoming of the specification in Model 6W is that the estimated value of
+IVT is unrealistically small. At least two alternatives can be considered for getting an improved
+estimate of the value of out-of-vehicle time. One is to use an approach that has been effective in
+other contexts; that is, to assume that the sensitivity of travelers to OVT diminishes with the trip
+distance. The idea behind this is that travelers are more willing to tolerate higher out-of-vehicle
+time for a long trip rather than for a short trip. We still expect that travelers will be more
+sensitive to OVT than IVT for any travel distance. A formulation which ensures this result is to
+include total travel time (the sum of in-vehicle and out-of-vehicle time) and out-of-vehicle time
+divided by distance in place of in- and out-of-vehicle travel time. This specification, as shown
+below, is consistent with our expectations provided that β1 and β2 are negative: 
+
+
+An alternative approach is to impose a constraint on the relative importance of OVT and IVT.
+This is achieved by replacing the travel time variables in the modal utility equations with a
+weighted travel time (WTT) variable defined as in-vehicle time plus the appropriate travel time
+importance ratio (TIR) times out-of-vehicle time (IVT + TIR×OVT). The mechanics of how this
+constraint works is illustrated as follows: 
+
+so that the parameter for out-of-vehicle time is equal to the parameter for in-vehicle time
+multiplied by the selected travel time ratio (TTR). In Models 8W and 9W, we use travel
+importance ratios of 2.5 and 4.0, respectively. The estimation results for these models
+compared to Model 6W are reported in Table 6-5. The parameter estimates obtained for the travel 
+time, cost, and income variables in all four models have the correct signs and are statistically 
+significant. Model 7W has substantially better goodness-of-fit than Models 6W, 8W and 9W. Since 
+none of the other models are constrained versions of Model 7W, we use the non-nested hypothesis 
+test (see Section 5.7.3.2, Equation 5.21) to compare it with Models 6W, 8W, and 9W.
+ 
+We illustrate the non-nested hypothesis test by applying it to the hypothesis that
+Model 6W is the true model given that Model 7W has a higher 2
+ρ . Since both models have the
+same number of parameters, the term (K7-K6) drops out, and the equation becomes
+
+That is, the null hypothesis that Model 6W is the true model is rejected with significance much
+greater than 0.001. Models 8W and 9W are also rejected as the true model at an even higher
+level of significance.
+
+
+Before adopting Model 7W, it is a good idea to evaluate and interpret the relative
+importance of in-vehicle and out-of-vehicle time and between each component of time and cost.
+Despite the difference in the specification, this analysis is undertaken the same way as earlier;
+that is, the parameters for time is divided by the parameter for cost to obtain the values of time.
+The values of IVT and OVT in cents-per-minute (and dollars-per-hour) are shown in Table 6-6
+as a function of distance. The time values are obtained as described earlier by dividing each of
+the time parameters (in utils-per-minute) by the cost parameter in utils per cent. For example,
+the values for Model 7W are:
+
+
+These values of time are fixed for IVT but vary with distance for OVT34 as reported in Table 6-6
+for Model 7W. The corresponding values of time for Models 6W, 8W and 9W are shown in
+Table 6-7.
+
+The prevailing wage rate in the San Francisco Bay Area is $21.20 per hour35. In
+comparison, the values of in-vehicle time implied by Models 6W, 8W, and 9W are very low and
+the values of out of vehicle time are somewhat low. Model 7W produces higher, but still low,
+values of time. Finally, we can examine the ratio of time values of OVT relative to IVT for all
+four models as shown in Figure 6.1. The ratio for Model 6W is clearly unacceptable. Those for
+Models 7W, 8W and 9W are more reasonable.
+
+The selection of a preferred travel time specification among the four alternative specifications
+tested is relatively straightforward in this case. Model 7W outperforms the other models in all
+the evaluations undertaken; it has the best goodness-of-fit, the most intuitive relationship
+between the IVT and OVT variables and the most acceptable values of time36. Consequently,
+Model 7W is our preferred travel time specification. We can still consider imposing a constraint
+between the time and cost variables to force the value of time to more reasonable levels.
+However, we defer this until we explore other specification improvements. 
+
+### Including Additinal Decision Maker Related Variables
+There are strong theoretical and empirical reasons to expect that a variety of decision maker
+related variables such as income, car availability, residential location, number of workers in the
+household and others, influence workers’ choice of travel mode. The models reported to this
+point include income as the only decision maker related explanatory variable. To the extent that
+these variables influence the mode choice decision of travelers, their inclusion in the model will
+increase the explanatory power and predictive accuracy of the model. 
+
+There are two general approaches to including decision maker related variables in
+models. One is to include such variables as specific to each alternative (except for one base or
+reference alternative) to indicate the extent to which changes in the variable value will increase
+or decrease the utility of the mode to that traveler (relative to the reference alternative). The
+other is to include such variables as interactions with mode related characteristics. For example,
+dividing cost by income to reflect the decreasing importance of cost with increasing annual
+income. The inclusion of decision maker related variables as alternative specific variables is
+demonstrated in this section. Similar treatment of trip context variables is considered in section
+6.2.4. Interactions with mode characteristics are demonstrated in section 6.2.5.
+
+We consider number of automobiles in the household, the number of autos divided by the
+number of household workers and the number of autos divided by the number of persons of
+driving age in the household. Since these variables are constant across all alternatives, they must
+be included as distinct variables for each alternative (except for the reference alternative). This
+is considered a full set of alternative specific variables. The estimation results for these
+specifications and Model 7W are reported in Table 6-8.
+
+These three new models have much better goodness-of-fit than Model 7W. Each model
+rejects Model 7W as the true model at a very high level of significance. The parameters for
+alternative specific automobile availability variables in all the three models have the expected
+signs, negative relative to drive alone, with the exception of the shared ride 3+ variable in Model
+10W which is not significant. Further, the signs and magnitude of the parameters for time, cost,
+and income are stable across the models. Finally, Models 11W and 12W which include cars-perworker and 
+cars-per-number-of-adults, respectively, reject Model 10W as the true model.
+
+Overall, Models 11W and 12W are superior to the other two models in terms of
+behavioral appeal, they provide an indication of automobile availability, and goodness of fit,
+they statistically reject Models 7W and 10W statistical fit. Model 11W has slightly better
+goodness-of-fit than Model 12W but the difference is so small that the non-nested hypothesis test
+is not able to distinguish between the two models. Therefore, selection of a preferred model is
+primarily a matter of judgment. We select Model 11W but selection of Model 12W would be
+equally appropriate. 
+
+### Including Trip Context variables
+The models considered to this point include variables that describe the attributes of alternatives,
+modes, and the characteristics of decision-makers (the work commuters). The mode choice decision also 
+is influenced by variables that describe the context in which the trip is made. For
+example, a work trip to the regional central business district (CBD) is more likely to be made by
+transit than an otherwise similar trip to a suburban work place because the CBD is generally
+well-served by transit, has more opportunities to make additional stops by walking and is less
+auto friendly due to congestion and limited and expensive parking. This suggests that the model
+specification can be enhanced by including variables related to the context of the trip, such as
+destination zone location.
+
+We consider two distinct variables to describe the trip destination context. One is a
+dummy variable which indicates whether the destination zone (workplace) is located in the
+CBD; the other is the employment density of different workplace destinations. The CBD
+variable implies an abrupt increase in the likelihood of using public transit at the CBD boundary.
+The density variable implies a continuous increase in the likelihood of using public transit with
+increasing workplace density. A third option is to include both variables in the model. There is
+disagreement about whether to include such combinations of variables since they both represent
+the same underlying phenomenon: increasing transit use with increasing density of
+development. There is no firm rule about this point; each case must be evaluated on its merits
+based on statistical tests and reasonableness of the estimation results. As with the addition of
+characteristics of the traveler, we introduce each variable as a full set of alternative specific
+variables, each of which represents the effect of a change in that variable on the utility of the
+alternative relative to the reference alternative (drive alone). Model 13W adds the alternative
+specific CBD dummy variables to the variables in Model 11W. Model 14W adds the alternative
+specific employment density variables and Model 15W adds both. Estimation results for these
+specifications and Model 11W are reported in Table 6-9. 
+
+Each of the new Models (13W, 14W and 15W) significantly reject Model 11W as the
+true model at a very high level of significance. Further, the parameters for all of the alternative
+specific CBD dummy and employment density variables have a positive sign, implying that all
+else being equal, an individual is less likely to choose drive alone mode for trips destined to a
+CBD and/or high employment density zones, as expected.
+
+Since Models 13W and 14W are restricted versions of Model 15W, we can use the loglikelihood test 
+which rejects the hypothesis that each of these models is the true model.
+Therefore, purely on statistical grounds, Model 15W is preferred over Models 13W and 14W.
+However, this improvement in statistical fit comes at the cost of increased model complexity,
+and it may be appropriate to adopt Model 13W or 14W, sacrificing statistical fit in favor of
+parsimony37. For now, we choose Model 15W as the preferred model for its stronger statistical
+results, but we will return to the issue of model complexity. 
+
+### Interactions between Trip maker and/or Context Characteristics and Mode Attributes
+Another approach to the inclusion of trip maker or context characteristics is through interactions
+with mode attributes. The most common example of this approach is to take account of the
+expectation that low-income travelers will be more sensitive to travel cost than high-income
+travelers by using cost divided by income in place of cost as an explanatory variable. Such a
+specification implies that the importance of cost in mode choice diminishes with increasing 
+household income. Table 6-11 portrays the estimation results for two models that differ only in
+how they represent cost; Model 15W includes travel cost while Model 16W includes travel cost
+divided by income.
+
+The cost by income variable has the expected sign and is statistically significant, but the
+overall goodness-of-fit for the cost divided by income model is lower than that for model 15 that
+uses cost without interaction with income. However, because theory and common sense suggest
+that the importance of cost should decrease with income, we may choose Model 16W despite the
+differences in the goodness-of-fit statistics. Since the estimation results contradict our
+understanding of the decision making behavior, it is useful to consider other aspects of model
+results. In the case of mode choice, we are particularly interested in the relative value of the time
+and cost parameters because it measures the implied value of time used by travelers in choosing
+their travel mode. Values of time evaluated with earlier models were somewhat lower than
+expected when compared to the average wage rate. Using the cost by income formulation in
+Model 16W, we can calculate the implied value of time using the relationship developed in
+Section 5.8.2.
+
+The implied values of IVT and OVT from Model 16W are substantially higher than those
+from Model 15W (Table 6-12) and more in line with our a priori expectations. This
+improvement in the estimate of values of time more than offsets the difference in goodness-of-fit
+so we adopt Model 16W as our preferred specification. Thus, our strong belief in both valuing
+time relative to wage rate and higher estimates of the value of time provide evidence which is
+strong enough to override the statistical test results. Nonetheless, we may still decide to impose
+parameter constraints to obtain higher values of time. 
+
+### Additional Model Refinement
+Generally, it is appropriate to test the preferred model specification against a variety of other
+specifications; particularly reviewing decisions made earlier in the model development process.
+Such testing would include reducing model complexity by the elimination of selected variables
+(e.g., dropping either the CBD Dummy or Employment Density variables or combining some of
+the alternative specific parameters), changing the form used for inclusion of different variables
+(e.g., replacing income by log of income) or adding new variables which substantially improve
+the explanatory power and behavioral realism of the model.
+
+In this section, we consider simplifying the model specification by dropping variables
+that are not statistically significant or by collapsing alternative specific variables that do not
+differ across alternatives. The cost and time parameters are all significant and should be
+included because they represent the impact of policy changes in mode service attributes. Among
+the traveler and context variables, those for income have the lowest t-statistics so might be
+considered for elimination; however, we prefer to keep these in the model since income
+differences are important in mode selection, particularly for transit. However, the extremely low 
+values and lack of significance for the shared ride alternatives suggest that income has no
+differential impact on the choice of drive alone versus any of the shared ride alternatives and
+these variables should be dropped from the model (or constrained to zero). In addition, the
+parameter for the number of automobiles by number of workers variable for shared ride 3+
+alternative is smaller in magnitude than the parameter for the shared ride 2 alternative. This is
+counter-intuitive as we expect shared ride 3+ travelers to be more sensitive to automobile
+availability. This can be addressed by constraining the alternative specific variables for the
+shared ride modes to be equal (we accomplish by summing the two variables). The estimation
+results for the simplified specification (constraining income for the shared ride alternatives to
+zero, and constraining the automobile ownership by number of workers variable for the two
+shared ride alternatives to be equal) and Model 16W are reported in Table 6-13.
+
+The goodness-of-fit for the two models are very close, suggesting that the constraints
+imposed to simplify the model do not significantly impact the explanatory power of the model.
+The results of the likelihood ratio test confirm that the restrictions imposed in Model 17W
+cannot be statistically rejected. The parameter estimates for all the variables have the right sign
+and are all statistically significant (except CBD dummy for bike and walk). We therefore select
+Model 17W as our preferred model.
+
+As discussed in the next section, the other major approach to searching for improved
+models is market segmentation and segmenting the population into groups which are expected to
+use different criteria in making their mode choice decisions. 
 
 ## Market Segmentation
+The models considered to this point implicitly assume that the entire population, represented by
+the sample, uses the same model decision structure, variable and importance weights
+(parameters) to select their commute to work mode. That is, we assume that the population is
+homogeneous with respect to the importance it places on different aspects of service except as
+differentiated by decision-maker characteristics included in the model specification. If this
+assumption is incorrect, the estimated model will not adequately represent the underlying
+decision processes of the entire population or of distinct behavioral groups within the population.
+For example, mode preference may differ between low and high-income travelers as low-income
+travelers are expected to be more sensitive to cost and less sensitive to time than high-income
+travelers. This phenomenon is incorporated in the preceding models to a limited extent through
+the use of alternative specific income variables and cost divided by income in the utility
+specification. Market segmentation can be used to determine whether the impact of other
+variables is different among population groups. The most common approach to market
+segmentation is for the analyst to consider sample segments which are mutually exclusive and
+collectively exhaustive (that is, each case is included in one and only one segment). Models are
+estimated for the sample associated with each segment and compared to the pooled model (all
+segments represented by a single model) to determine if there are statistically significant and
+important differences among the market segments.
 
+Market segmentation is usually based on socio-economic and trip related variables such
+as income, auto ownership and trip purpose which may be used separately or jointly. Trip
+purpose has already been used in our analysis by considering work commute trips exclusively.
+Once segmentation variables are selected (income, auto ownership, etc.), different numbers of
+segments may be considered for each dimension (e.g., we could use high, medium and low
+income segments or only high and low income segments). All members of each segment are
+assumed to have identical preferences and identical sensitivities to all the variables in the utility
+equation.
+
+Analysts will often have some a priori ideas about the best segmentation variables and
+the appropriate groupings of the population with respect to these variables. In the case of
+continuous variables, such as income, the analyst may consider different boundaries between
+segments. In cases where the analyst does not have a strong basis for selecting model segments,
+he/she can test different combinations of socio-economic and trip-related variables in the data for
+segmentation. This approach is limited by the fact that the number of segments grows very fast
+with the number of segmentation variables (e.g., three income segments, two gender segments
+and three home location segments results in 18 distinct groups). The multiplicity of segments
+creates interpretational problems due to the complexity of comparing results among segments
+and estimation problems due to the small number of observations in some of the segments (with
+as many as 2,000 cases, eighteen segments would be likely to produce many segments with
+fewer than 100 cases and some with fewer than 50 cases, well below the threshold for reliable
+estimation results). The alternative of pre-defining market segments along one dimension at a
+time is practical and easy to implement but it has the disadvantage that this approach does not
+account for interactions among the segmentation variables.
+
+### Market Segmentation Tests
+The determination of whether to segment the data is based on a comparison of the pooled model
+for the entire sample/population and a set of segment specific models for each segment of the
+sample/population. This comparison includes: (1) a statistical test, referred to as the market
+segmentation or taste variation test, to determine if the segments are statistically different from
+one another, (2) statistical significance and reasonableness of the parameters in each of the
+segments, and (3) reasonableness of the relationships among parameters in each segment and
+between parameters in the different market segments.
+
+The statistical test for market segmentation consists of three steps. First, the sample is
+divided into a number of market segments which are mutually exclusive and collectively
+exhaustive. A preferred model specification is used to estimate a pooled model for the entire
+data set and to estimate models for each market segment. Finally, the goodness-of-fit differences
+between the segmented models (taken as a group) and the pooled model are evaluated to
+determine if they are statistically different. This test is an extension of the likelihood ratio test
+described earlier to test the difference between two models. In this case, the unrestricted model
+is the set of all the segmented models and the restricted model is the pooled model which
+imposes the restriction that the parameters for each segment are identical. 
+
+Thus, the null hypothesis is that ββ β β 1 2 ===== " " s S , where βs , is the
+vector of coefficients for the s
+th market segment. Following the approach described in
+CHAPTER 5, we reject the null hypothesis that the restricted model is the correct model at
+significance level p if the calculated value of the statistic is greater than the test or critical value.
+That is, if: 
+
+Substituting the log-likelihood for the pooled model for RA and the sum of market segment
+model log-likelihoods for UA in equation 5.16, the null hypothesis, that all segments have the
+same choice function, is rejected at level p if:
+
+### Market Segmentation Example
+We illustrate the market segmentation test for two cases, automobile ownership (zero/one car
+households and households with more than one car), and gender (male and female). In the case
+of segmentation by automobile ownership, it is appealing to include a distinct segment for
+households with no cars since the mode choice behavior of this segment is very different from
+the rest of the population due to their dependence on non-automobile modes. However, the
+small size of this segment in the data set, only 160 of the 5029 work trip reports from households
+with no cars, precludes use of a no car segment; this group is combined with the one car
+ownership households for estimation. Using the same utility specification as in Model 17W, the
+estimation results for the pooled and segmented models for auto ownership and for gender are
+reported in Table 6-14 and Table 6-15.
+
+We can make the following observations from the estimation results of the automobile
+ownership segmentation models (Table 6-14): 
+
+  - The segmented model rejects the pooled model at a very high level of statistical significance
+  - The alternative specific constants for all other modes relative to drive alone are much more
+    negative for the higher auto ownership group than for the lower auto ownership group.
+    These differences indicate the increased preference for drive alone among persons from
+    multi-car households. This makes intuitive sense, as travelers in households with fewer
+    automobiles are more likely to choose non-automobile modes, all else being equal. 
+  - The alternative specific income coefficients are insignificant or marginally significant for
+    both segments suggesting that the effect of income differences is adequately explained by the
+    segment difference.
+  - The sensitivity to automobile availability is much higher among low auto ownership
+    households where an increase in availability (from 0) will be relatively important, than
+    among higher auto ownership households where the number of cars is likely to closely approximate 
+    the number of drivers and an increase in availability will be relatively unimportant. 
+  - The differences in the alternative specific CBD dummy variables and the Employment
+    Density variables are very small and not significant suggesting that these variables could be
+    constrained to be equal across auto ownership segments.
+  - The differences in the time parameters also are very small and not significant suggesting that
+    these variables could be constrained to be equal across auto ownership segments.
+  - The magnitude of the cost by income parameter is much smaller in the lower automobile
+    ownership segment than in the higher automobile ownership segment indicating that cost
+    may be of little importance in households with low car availability.
+
+We can make the following observations from the estimation results of the gender segmentation
+models (Table 6-15):
+  - The segmented model rejects the pooled model at a very high level of statistical significance.
+  - The alternative specific constants relative to the drive alone mode are less negative (more
+  positive) in the female segment suggesting the preference for drive alone mode is less
+  pronounced among females. This is especially true for the non-motorized modes (bike and
+  walk) where the difference in the modal constants between the two groups is large and highly
+  significant. 
+
+  - The female segment parameters for alternative specific variables; Income, Autos per Worker,
+    CBD Dummy and Employment Density are generally more favorable to non-auto modes and
+    especially bike and walk, but the differences are small and marginally or not significant.
+  - Both groups show almost identical sensitivity to motorized in-vehicle travel time. However,
+    the female group is more sensitive to non-motorized travel time while the male group is more
+    sensitive to out-of-vehicle time.
+  - The female segment exhibits a much lower sensitivity to cost than males.
+  
+The above observations demonstrate that taste variations exist between the auto ownership
+segments and between the gender segments. However, in each case, the differences appear to be
+associated with a subset of parameters. One approach to simplifying the segmentation is to
+adopt a pooled model which includes segment related parameters where the differences are
+important39. For example, such a model would at a minimum include different parameters for
+each of the segment for the following variables:
+  - Travel cost by income,
+  - Total travel time for non-motorized modes, and
+  - Out-of-vehicle time by distance.
 
 ## Summary
+This chapter demonstrates the development of an MNL model specification for work mode to
+choice using data from the San Francisco Bay Area for a realistic context. We start with
+relatively simple model specifications and develop more complex models which provide
+additional insight into the behavioral choices being made. We begin with the variables: travel
+cost, total travel time and household income. We then develop a more comprehensive model
+which includes: 1) cost divided by income to account for travelers different sensitivity to cost
+depending on household income, 2) two variables for time by motorized vehicle (which capture
+the constraint that OVTT is valued less for longer trips than shorter trips but is valued more
+highly than IVTT for all trip distances) and an additional variable for non-motorized personal
+transport (walk and bike), 3) alternative specific income variables, 4) number of autos per
+worker in the household, 5) location of the work zone (CBD or not), and 6) employment density
+of the work location.
+
+The specification search was not necessarily exhaustive and improvements to the final
+preferred model specification are possible. The example describes the basis for the decisions
+made at each point in the model specification search process. Clearly, different decisions could 
+be made at some of these points. Thus, the final model result is based on a complex mix of
+empirical results, statistical analysis and judgment. The challenge to the analyst is to make good
+judgment, describe the basis for the judgments made, and be prepared to demonstrate the
+implications of making different judgments.
+
+In the next chapter, we extend our work to consideration of home-based shop/other trips
+and we consider adoption of the more sophisticated nested logit model.
