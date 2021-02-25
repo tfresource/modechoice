@@ -473,9 +473,7 @@ An alternative approach is to report the t-statistic to two or three decimal pla
 
 Base_model <- mlogit(chosen ~ cost + tvtt | hhinc, data = sf_mlogit)
 
-summary(Base_model)
-
-#trying to get modelsummary::modelsummary to work, but haven't figured it out yet
+modelsummary(Base_model, statistic = "statistic", statistic_vertical = FALSE, stars = TRUE, notes = list('Note: The numbers in the parentheses are the t-statistics'))
 
 ```
 
