@@ -1,4 +1,9 @@
 # Model Specification Refinement: San Francisco Bay Area Work Mode Choice
+```{r setup}
+library(mlogit)
+library(tidyverse)
+library(modelsummary)
+```
 
 ## Introduction
 This chapter describes and demonstrates the refinement of the utility function specification for
