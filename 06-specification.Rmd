@@ -485,6 +485,27 @@ described earlier to test the difference between two models. In this case, the u
 is the set of all the segmented models and the restricted model is the pooled model which
 imposes the restriction that the parameters for each segment are identical. 
 
+```{r segmentation}
+sf_work <- read_rds("data/worktrips.rds")
+
+base_model <- mlogit(chosen ~ tvtt + cost | wkempden, data = sf_work)
+withincome <- mlogit(chosen ~ tvtt + cost | hhinc + wkempden, data = sf_work)
+highincome <- mlogit(chosen ~ tvtt + cost | hhinc + wkempden, 
+                     data = sf_work %>% filter(hhinc > 50))
+low_income <- mlogit(chosen ~ tvtt + cost | hhinc + wkempden, 
+                     data = sf_work %>% filter(hhinc <= 50))
+
+list(
+  "Base" = base_model,
+  "Income" = withincome,
+  "High Income" = highincome,
+  "Low Income"  = low_income
+) %>%
+  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE)
+```
+
+
+
 Thus, the null hypothesis is that β1 = β2 = ... = βs = ... = βS , where βs , is the
 vector of coefficients for the $S^{th}$ market segment. Following the approach described in
 CHAPTER 5, we reject the null hypothesis that the restricted model is the correct model at
