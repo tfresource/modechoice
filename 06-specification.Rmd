@@ -439,6 +439,10 @@ VOTdistance <- function(model, timevar, timedistvar, dist, costvar) {
   (coef(model)[timevar]+(timedistvar/dist))*0.6/coef(model)[costvar]
 }
 
+#the parameters in this model are not quite correct
+#need to restrict tvtt to only non-motorized modes
+model_16w <- mlogit(chosen ~ tvtt + I(ovtt + ivtt) + I(ovtt/dist) + I(cost/hhinc) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+
 
 #table 6-12
 
