@@ -57,7 +57,7 @@ choice in the San Francisco Bay Area.
 
 ## Alternative Specifications
 The basic multinomial logit mode choice model for work commute in the San Francisco Bay
-Area was reported in Table 5-2 in CHAPTER 5. The refinements we consider include:
+Area was reported in Table 5-2 \@ref(tab:basic-estimation-table) in CHAPTER 5 \@ref(mnl-estimation.Rmd). The refinements we consider include:
   - Different specifications of the income effects,
   - Different specifications of travel time,
   - Additional decision maker related variables such as gender and automobiles owned,
@@ -336,6 +336,55 @@ alternative relative to the reference alternative (drive alone). Model 13W adds 
 specific CBD dummy variables to the variables in Model 11W. Model 14W adds the alternative
 specific employment density variables and Model 15W adds both. Estimation results for these
 specifications and Model 11W are reported in Table 6-9. 
+
+```{r Table 6-9 trip context models, echo = F}
+#Estimates are close but slightly off. I'm not sure how the variables might be off
+#I added both columns of CBD workers together after neither gave the right answer.
+#I'm not sure how to get travel time estimates for motorized/non-motorized modes
+#I'm also not sure how to calculated the adjusted rho-square values
+sf_mlogit_tripcontext <- sf_mlogit %>%
+  mutate(cbddumall = wkccbd + wknccbd)
+ 
+model_11w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk, data = sf_mlogit_tripcontext)
+model_13w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
+model_14w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+
+
+tripcontext_estimation <- list(
+  "Model 11W" = model_11w,
+  "Model 13W" = model_13w,
+  "Model 14W" = model_14w,
+  "Model 15W" = model_15w
+)
+
+modelsummary(
+  tripcontext_estimation, fmt = "%.4f",
+  title = "Estimation Results for Models with Trip Context Variables"
+)
+
+```
+
+```{r Table 6-10 trip context VoT, echo = F}
+
+#Update these models when correct above in Table 6-9
+model_13w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
+model_14w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+
+#In a column for each model I want to divide the travel time coefficient by the cost coefficient 
+#I need to make the models above match the values in the text and update the values here
+#Not sure how to get beta values for OVT of different trip lengths
+tibble(
+  "Value of Time ($/hr)" = c("Value of Motorized IVT", "Value of Motorized OVT (10 mile trip)", "Value of Motorized OVT (20 mile trip)", "Value of Non-Motorized Time"),
+  "Model 13W" = c(as.numeric(0.6 * -0.0286 / -0.0033, options(digits = 3)), 0.6 * -0.1501 / -0.0033, 0.6 * -0.1501 / -0.0033, 0.6 * -0.0464 / -0.0033),
+  "Model 14W" = c(0.6 * -0.0299 / -0.0029, 0.6 * -0.1575 / -0.0029, 0.6 * -0.1575 / -0.0029, 0.6 * -0.0459 / -0.0029),
+  "Model 15W" = c(0.6 * -0.0231 / -0.0024, 0.6 * -0.1324 / -0.0024, 0.6 * -0.1324 / -0.0024, 0.6 * -0.0467 / -0.0024)
+) %>%
+  kbl(align = 'c', caption = "Implied Values of Time in Models 13W, 14W, and 15W") %>%
+  kable_styling()
+```
+
 
 Each of the new Models (13W, 14W and 15W) significantly reject Model 11W as the
 true model at a very high level of significance. Further, the parameters for all of the alternative
