@@ -431,6 +431,14 @@ time relative to wage rate and higher estimates of the value of time provide evi
 strong enough to override the statistical test results. Nonetheless, we may still decide to impose
 parameter constraints to obtain higher values of time. 
 
+``` {r impliedVOT15-16W}
+
+
+#table 6-12
+
+
+```
+
 ### Additional Model Refinement
 Generally, it is appropriate to test the preferred model specification against a variety of other
 specifications; particularly reviewing decisions made earlier in the model development process.
