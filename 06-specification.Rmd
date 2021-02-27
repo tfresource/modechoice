@@ -432,6 +432,12 @@ strong enough to override the statistical test results. Nonetheless, we may stil
 parameter constraints to obtain higher values of time. 
 
 ``` {r impliedVOT15-16W}
+VOTsimple <- function(model, timevar, costvar) {
+  coef(model)[timevar]*0.6/coef(model)[costvar]
+}
+VOTdistance <- function(model, timevar, timedistvar, dist, costvar) {
+  (coef(model)[timevar]+(timedistvar/dist))*0.6/coef(model)[costvar]
+}
 
 
 #table 6-12
