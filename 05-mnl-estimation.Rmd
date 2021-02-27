@@ -922,13 +922,28 @@ The implications for value of time of these different formulations are shown in 
 
 ```{r table5-12, echo = F}
 
-tab512df <- tibble(
- "Trip Time (min)" = c(5, 15, 30, 60, 90, 120),
- "Value of Time (cents/min)"= c(141.2, 47.4, 23.5, 11.8, 7.8, 5.9),
- "Value of time ($/hr)" = c("84.71", "$28.24", "$14.12", "$7.06", "$4.71", "$3.53"))
+vot <- function(model, triptime){
+  coef(model)["lntraveltime"] / (coef(model)["cost"]*triptime)
+}
+vot5 <- vot(lntravaltime_model, 5)
+vot15 <- vot(lntravaltime_model, 15)
+vot30 <- vot(lntravaltime_model, 30)
+vot60 <- vot(lntravaltime_model, 60)
+vot90 <- vot(lntravaltime_model, 90)
+vot120 <- vot(lntravaltime_model, 120)
 
-kbl(tab512df, align = "c", booktabs = T, caption = "Value of Time for Log of Time Model") %>% 
-kable_classic()
+votlnTime1 <- tibble(
+  TTime = c(5, 15, 30, 60, 90, 120),
+  ValueCentsMin = c(vot5, vot15, vot30, vot60, vot90, vot120)
+)
+votlnTime1 %>%
+  select(TTime, ValueCentsMin) %>%
+  mutate(ValueDollarsHr = ValueCentsMin * 0.6) %>%
+  kbl(align = "c", booktabs = T, format = "html", digits = 2, 
+      caption = "Value of Time for Log of Time Model", 
+      col.names = c("Trip Time (min)", "Value of Time (cents/min)", "Value of Time ($/hr)")) %>%
+  kable_classic()
+
 
 ```
 
