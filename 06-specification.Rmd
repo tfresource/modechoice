@@ -439,6 +439,26 @@ VOTdistance <- function(model, timevar, timedistvar, dist, costvar) {
   (coef(model)[timevar]+(timedistvar/dist))*0.6/coef(model)[costvar]
 }
 
+# code for new columns
+# thank you stack overflow:
+# https://stackoverflow.com/questions/37321020/adding-new-column-with-conditional-values-using-ifelse
+
+#new column for TT motorized only
+morecolumns <- sf_mlogit_tripcontext
+morecolumns$tvttMotor <- morecolumns$tvtt
+morecolumns$tvttMotor[morecolumns$altname == "Bike"] <- 0
+morecolumns$tvttMotor[morecolumns$altname == "Walk"] <- 0
+
+#new column for TT non-motorized only
+morecolumns$tvttNM <- 0
+morecolumns$tvttNM[morecolumns$altname == "Bike"] <- morecolumns$tvtt
+morecolumns$tvttNM[morecolumns$altname == "Walk"] <- morecolumns$tvtt
+
+#new column for OVTT non-motorized only
+morecolumns$ovttMotor <- morecolumns$ovtt
+morecolumns$ovttMotor[morecolumns$altname == "Bike"] <- 0
+morecolumns$ovttMotor[morecolumns$altname == "Walk"] <- 0
+
 #the parameters in this model are not quite correct
 #need to restrict tvtt to only non-motorized modes
 model_16w <- mlogit(chosen ~ tvtt + I(ovtt + ivtt) + I(ovtt/dist) + I(cost/hhinc) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
