@@ -459,10 +459,12 @@ morecolumns$ovttMotor <- morecolumns$ovtt
 morecolumns$ovttMotor[morecolumns$altname == "Bike"] <- 0
 morecolumns$ovttMotor[morecolumns$altname == "Walk"] <- 0
 
-#the parameters in this model are not quite correct
-#need to restrict tvtt to only non-motorized modes
-model_16w <- mlogit(chosen ~ tvtt + I(ovtt + ivtt) + I(ovtt/dist) + I(cost/hhinc) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+# Model 16W
 
+#the parameters in this model are not quite correct
+model_16w <- mlogit(chosen ~ tvttMotor + tvttNM + I(ovttMotor/dist) + I(cost/hhinc) | hhinc + vehbywrk + cbddumall + wkempden, data = morecolumns)
+
+modelsummary(model_16w)
 
 #table 6-12
 
