@@ -490,6 +490,18 @@ As discussed in the next section, the other major approach to searching for impr
 models is market segmentation and segmenting the population into groups which are expected to
 use different criteria in making their mode choice decisions. 
 
+``` {r model16v17}
+
+# Model 17 W
+#will update when model_16w is figured out
+model_17w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+
+#table 6-13
+modelsummary(model_17w)
+
+
+```
+
 ## Market Segmentation
 The models considered to this point implicitly assume that the entire population, represented by
 the sample, uses the same model decision structure, variable and importance weights
