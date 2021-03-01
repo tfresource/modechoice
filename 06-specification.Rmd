@@ -681,6 +681,23 @@ models (Table 6-15):
   walk) where the difference in the modal constants between the two groups is large and highly
   significant. 
 
+``` {r segbygender}
+
+# uses Model 17W as the basis
+#will update when model_17w is nailed down
+model_17w_males <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(femdum == 1))
+model_17w_females <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(femdum == 0))
+# table 6-15
+list(
+  "Pooled Model" = model_17w,
+  "Males Only" = model_17w_males,
+  "Females Only" = model_17w_females
+) %>%
+  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE)
+
+
+```
+
   - The female segment parameters for alternative specific variables; Income, Autos per Worker,
     CBD Dummy and Employment Density are generally more favorable to non-auto modes and
     especially bike and walk, but the differences are small and marginally or not significant.
