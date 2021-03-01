@@ -641,6 +641,24 @@ ownership segmentation models (Table 6-14):
   - The alternative specific income coefficients are insignificant or marginally significant for
     both segments suggesting that the effect of income differences is adequately explained by the
     segment difference.
+    
+``` {r segbycars}
+# uses Model 17W as the basis
+#will update when model_17w is nailed down
+model_17w_lowcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(numveh <= 1))
+model_17w_highcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(numveh >= 2))
+
+# table 6-14
+list(
+  "Pooled Model" = model_17w,
+  "0-1 Car HH's" = model_17w_lowcars,
+  "2+ Car HH's" = model_17w_highcars
+) %>%
+  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE)
+
+
+```
+    
   - The sensitivity to automobile availability is much higher among low auto ownership
     households where an increase in availability (from 0) will be relatively important, than
     among higher auto ownership households where the number of cars is likely to closely approximate 
