@@ -462,7 +462,7 @@ morecolumns$ovttMotor[morecolumns$altname == "Walk"] <- 0
 # Model 16W
 
 #the parameters in this model are not quite correct
-model_16w <- mlogit(chosen ~ tvttMotor + tvttNM + I(ovttMotor/dist) + I(cost/hhinc) | hhinc + vehbywrk + cbddumall + wkempden, data = morecolumns)
+model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 modelsummary(model_16w)
 
