@@ -138,13 +138,13 @@ behaviorally so the decision should be subject to a review before adoption of th
 specification.31
 
 ```{r Table 6-1 alternative Specifications of Income, echo = F}
-model_base <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
-#Having issues setting two variables to be equal to each other
-model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
-#Having issues setting two variables to be equal to each other
-model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2" = "hhinc:Share ride 3++" = "hhinc:Transit"))
-model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0))
 
+model_base <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
+#Having issues setting Shared Ride 2, 3+, and Transit to be equal to each other
+model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
+model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c('hhinc:2' = 0, 'hhinc:3' = 0))
 
 altspecinc_estimation <- list(
   "Base Model " = model_base,
@@ -213,12 +213,10 @@ his/her decision. The advice of other more experienced analysts is often enliste
 and/or support these judgments. 
 
 ```{r Table 6-3 alternative Specifications of Travel Time, echo = F}
-#Having issues setting two variables to be equal to each other
-model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
-#Having issues setting two variables to be equal to each other
-model_5w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
-#Having issues setting two variables to be equal to each other
-model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_5w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + cost | hhinc, data = sf_mlogit)
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit)
 
 altspectvtt_estimation <- list(
   "Model 1W" = model_1w,
@@ -394,9 +392,13 @@ sf_mlogit_autoavailability <- sf_mlogit %>%
   mutate(autoperad = numveh / numadlt,
          mot_ovttbydist = mot_ovtt / dist)
 
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
 model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc, data = sf_mlogit_autoavailability)
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
 model_10w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + numveh, data = sf_mlogit_autoavailability)
-model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk, data = sf_mlogit_autoavailability, constPar = c('hhinc:Share ride 2' = -0.002, 'hhinc:Share ride 3++' = -0.002))
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk, data = sf_mlogit_autoavailability)
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
 model_12w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + autoperad, data = sf_mlogit_autoavailability)
 
 Autoavailability_estimation <- list(
