@@ -139,9 +139,9 @@ specification.31
 
 ```{r Table 6-1 alternative Specifications of Income, echo = F}
 model_base <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
-model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
-model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
-model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("incsh2", "incsh3" = 0))
+model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
+model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2" = "hhinc:Share ride 3++" = "hhinc:Transit"))
+model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0))
 
 
 tripcontext_estimation <- list(
@@ -212,9 +212,9 @@ and/or support these judgments.
 
 ```{r Table 6-3 alternative Specifications of Travel Time, echo = F}
 
-model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
-model_5w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + cost | hhinc, data = sf_mlogit)
-model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit)
+model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
+model_5w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
+model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
 
 tripcontext_estimation <- list(
   "Model 1W" = model_1w,
