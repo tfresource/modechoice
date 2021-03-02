@@ -213,9 +213,8 @@ and/or support these judgments.
 ```{r Table 6-3 alternative Specifications of Travel Time, echo = F}
 
 model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
-model_5w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
-model_6w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
-
+model_5w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + cost | hhinc, data = sf_mlogit)
+model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit)
 
 tripcontext_estimation <- list(
   "Model 1W" = model_1w,
@@ -386,15 +385,14 @@ primarily a matter of judgment. We select Model 11W but selection of Model 12W w
 equally appropriate.
 
 ```{r Table 6-8 Estimation for Auto Availability, echo = F}
-sf_mlogit_tripcontext <- sf_mlogit %>%
-  mutate(cbddumall = wkccbd + wknccbd) %>%
+sf_mlogit_autoavailability <- sf_mlogit %>%
   mutate(autoperhh = numveh / hhowndum) %>%
   mutate(autoperad = numveh / numadlt)
 
-model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc, data = sf_mlogit_tripcontext)
-model_10w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + autoperhh, data = sf_mlogit_tripcontext)
-model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk, data = sf_mlogit_tripcontext)
-model_12w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + autoperad, data = sf_mlogit_tripcontext)
+model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc, data = sf_mlogit_autoavailability)
+model_10w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + autoperhh, data = sf_mlogit_autoavailability)
+model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk, data = sf_mlogit_autoavailability)
+model_12w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + autoperad, data = sf_mlogit_autoavailability)
 
 Autoavailability_estimation <- list(
   "Model 7W" = model_7w,
