@@ -396,14 +396,18 @@ is not able to distinguish between the two models. Therefore, selection of a pre
 primarily a matter of judgment. We select Model 11W but selection of Model 12W would be
 equally appropriate.
 
-```{r Table 6-8 alternative Specifications of Travel Time, echo = F}
+```{r Table 6-8 Estimation for Auto Availability, echo = F}
+sf_mlogit_tripcontext <- sf_mlogit %>%
+  mutate(cbddumall = wkccbd + wknccbd) %>%
+  mutate(autoperhh = numveh / hhowndum) %>%
+  mutate(autoperad = numveh / numadlt)
 
-model_7w <- mlogit(chosen ~ tvtt + cost | hhinc , data = sf_mlogit)
-model_10w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbyhh, data = sf_mlogit)
-model_11w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk, data = sf_mlogit)
-model_12w <- mlogit(chosen ~ tvtt + cost | hhinc +  , data = sf_mlogit)
+model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc, data = sf_mlogit_tripcontext)
+model_10w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + autoperhh, data = sf_mlogit_tripcontext)
+model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk, data = sf_mlogit_tripcontext)
+model_12w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + autoperad, data = sf_mlogit_tripcontext)
 
-tripcontext_estimation <- list(
+Autoavailability_estimation <- list(
   "Model 7W" = model_7w,
   "Model 10W" = model_10w,
   "Model 11W" = model_11w,
@@ -411,7 +415,7 @@ tripcontext_estimation <- list(
   )
 
 modelsummary(
-  tripcontext_estimation, fmt = "%.4f",
+ Autoavailability_estimation, fmt = "%.4f",
   title = "Estimation Results for Auto Availiability Specification Testing"
 )
 
