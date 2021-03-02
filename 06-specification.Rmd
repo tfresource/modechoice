@@ -138,9 +138,6 @@ behaviorally so the decision should be subject to a review before adoption of th
 specification.31
 
 ```{r Table 6-1 alternative Specifications of Income, echo = F}
-
-sf_mlogit <- read_rds("data/worktrips.rds")
- 
 model_base <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
 model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
 model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
