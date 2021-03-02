@@ -300,11 +300,12 @@ level of significance.
 sf_mlogit_trip_estimates <- sf_mlogit %>%
   mutate(TIR8 = 2.4, TIR9 = 4, ovtd = mot_ovtt/dist)
  
-model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit_trip_estimates)
-model_7w <- mlogit(chosen ~ nm_tvtt  + ovtd + cost | hhinc, data = sf_mlogit_trip_estimates) #This one works
-model_8w <- mlogit(chosen ~ nm_tvtt + mot_ovtt * TIR8 + mot_ivtt + cost | hhinc + altnum, data = sf_mlogit_trip_estimates)
-model_9w <- mlogit(chosen ~ nm_tvtt + mot_ovtt * TIR9 + mot_ivtt + cost | hhinc + altnum, data = sf_mlogit_trip_estimates)
+model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit_trip_estimates) #works but values are wrong
+model_7w <- mlogit(chosen ~ nm_tvtt  + ovtd + cost | hhinc, data = sf_mlogit_trip_estimates) #works but values are wrong
+model_8w <- mlogit(chosen ~ nm_tvtt + (mot_ovtt * TIR8) + mot_ivtt + cost | hhinc + altnum, data = sf_mlogit_trip_estimates)
+model_9w <- mlogit(chosen ~ nm_tvtt + (mot_ovtt * TIR9) + mot_ivtt + cost | hhinc + altnum, data = sf_mlogit_trip_estimates)
 
+#constPar = c("ivtt" = 0)
 
 trip_1 <- list(
   "Model 6W" = model_6w,
