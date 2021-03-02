@@ -555,8 +555,8 @@ parameter constraints to obtain higher values of time.
 VOTsimple <- function(model, timevar, costvar) {
   coef(model)[timevar]*0.6/coef(model)[costvar]
 }
-VOTdistance <- function(model, timevar, timedistvar, dist, costvar) {
-  (coef(model)[timevar]+(timedistvar/dist))*0.6/coef(model)[costvar]
+VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
+  (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
 }
 
 # Model 16W
