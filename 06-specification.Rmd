@@ -441,12 +441,13 @@ specifications and Model 11W are reported in Table 6-9.
 #I added both columns of CBD workers together after neither gave the right answer.
 #I'm also not sure how to calculated the adjusted rho-square values
 sf_mlogit_tripcontext <- sf_mlogit %>%
-  mutate(cbddumall = wkccbd + wknccbd)
+  mutate(cbddumall = wkccbd + wknccbd,
+         mot_ovttbydist = mot_ovtt / dist)
  
-model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk, data = sf_mlogit_tripcontext)
-model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
-model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk, data = sf_mlogit_tripcontext)
+model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
+model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 
 tripcontext_estimation <- list(
@@ -514,8 +515,8 @@ divided by income.
 sf_mlogit_tripcontext %>%
   mutate(costbyinc = cost / hhinc)
 
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
-model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 incomeinteraction_estimation <- list(
   "Model 15W" = model_15w,
