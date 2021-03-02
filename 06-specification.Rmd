@@ -122,7 +122,29 @@ other modes. However, the differences among these models are small both statisti
 behaviorally so the decision should be subject to a review before adoption of the final
 specification.31
 
+```{r Table 6-1 alternative Specifications of Income, echo = F}
 
+sf_mlogit <- read_rds("data/worktrips.rds")
+ 
+model_base <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
+model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
+model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
+model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("incsh2", "incsh3" = 0))
+
+
+tripcontext_estimation <- list(
+  "Base Model " = model_base,
+  "Model 1W" = model_1w,
+  "Model 2W" = model_2w,
+  "Model 3W" = model_3w
+)
+
+modelsummary(
+  tripcontext_estimation, fmt = "%.4f",
+  title = "Alternative Specifications of Income Variable"
+)
+
+```
 ### Different Specifications of Travel Time
 The specification for travel time in the above models implies that the utility value of time is
 equal for all the alternatives and between in-vehicle and out-of-vehicle time. However, we
@@ -176,6 +198,25 @@ the use of such constraints imposes a responsibility on the analyst to provide a
 his/her decision. The advice of other more experienced analysts is often enlisted to expand
 and/or support these judgments. 
 
+```{r Table 6-3 alternative Specifications of Travel Time, echo = F}
+
+model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
+model_5w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
+model_6w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
+
+
+tripcontext_estimation <- list(
+  "Model 1W" = model_1w,
+  "Model 5W" = model_5w,
+  "Model 6W" = model_6w
+)
+
+modelsummary(
+  tripcontext_estimation, fmt = "%.4f",
+  title = "Estimation Results for Alternative Specifications of Travel Time"
+)
+
+```
 
 The primary shortcoming of the specification in Model 6W is that the estimated value of
 IVT is unrealistically small. At least two alternatives can be considered for getting an improved
@@ -307,7 +348,28 @@ they statistically reject Models 7W and 10W statistical fit. Model 11W has sligh
 goodness-of-fit than Model 12W but the difference is so small that the non-nested hypothesis test
 is not able to distinguish between the two models. Therefore, selection of a preferred model is
 primarily a matter of judgment. We select Model 11W but selection of Model 12W would be
-equally appropriate. 
+equally appropriate.
+
+```{r Table 6-8 alternative Specifications of Travel Time, echo = F}
+
+model_7w <- mlogit(chosen ~ tvtt + cost | hhinc , data = sf_mlogit)
+model_10w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbyhh, data = sf_mlogit)
+model_11w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk, data = sf_mlogit)
+model_12w <- mlogit(chosen ~ tvtt + cost | hhinc +  , data = sf_mlogit)
+
+tripcontext_estimation <- list(
+  "Model 7W" = model_7w,
+  "Model 10W" = model_10w,
+  "Model 11W" = model_11w,
+  "Model 12W" = model_12w
+  )
+
+modelsummary(
+  tripcontext_estimation, fmt = "%.4f",
+  title = "Estimation Results for Auto Availiability Specification Testing"
+)
+
+```
 
 ### Including Trip Context variables
 The models considered to this point include variables that describe the attributes of alternatives,
