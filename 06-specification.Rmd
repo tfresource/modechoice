@@ -14,15 +14,7 @@ library(kableExtra)
 ```
 
 ```{r loaddata, echo = F}
-# Read in raw SPSS file from Laurie Garrow's Dropbox
-sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.sav") %>% 
-  mutate(altname = as_factor(altnum, levels = "labels"))
-
-# Convert into mlogit dfidx data frame
-sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altname"))
-
-# write to data/ folder for future use
-write_rds(sf_mlogit, "data/worktrips.rds")
+sf_mlogit <- read_rds("data/worktrips.rds")
 ```
 
 ## Introduction
