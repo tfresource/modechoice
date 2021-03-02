@@ -445,17 +445,16 @@ specific employment density variables and Model 15W adds both. Estimation result
 specifications and Model 11W are reported in Table 6-9. 
 
 ```{r Table 6-9 trip context models, echo = F}
-#Estimates are close but slightly off. I'm not sure how the variables might be off
+#Estimates are close but slightly off, even after changing the travel time variables
 #I added both columns of CBD workers together after neither gave the right answer.
-#I'm not sure how to get travel time estimates for motorized/non-motorized modes
 #I'm also not sure how to calculated the adjusted rho-square values
 sf_mlogit_tripcontext <- sf_mlogit %>%
   mutate(cbddumall = wkccbd + wknccbd)
  
-model_11w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk, data = sf_mlogit_tripcontext)
-model_13w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
-model_14w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
-model_15w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk, data = sf_mlogit_tripcontext)
+model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
+model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 
 tripcontext_estimation <- list(
@@ -475,12 +474,12 @@ modelsummary(
 ```{r Table 6-10 trip context VoT, echo = F}
 
 #Update these models when correct above in Table 6-9
-model_13w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
-model_14w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
-model_15w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
+model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 #In a column for each model I want to divide the travel time coefficient by the cost coefficient 
-#I need to make the models above match the values in the text and update the values here
+#I used the coefficients given straight in the text and the values here are still a little off
 #Not sure how to get beta values for OVT of different trip lengths
 tibble(
   "Value of Time ($/hr)" = c("Value of Motorized IVT", "Value of Motorized OVT (10 mile trip)", "Value of Motorized OVT (20 mile trip)", "Value of Non-Motorized Time"),
@@ -516,6 +515,27 @@ specification implies that the importance of cost in mode choice diminishes with
 household income. Table 6-11 portrays the estimation results for two models that differ only in
 how they represent cost; Model 15W includes travel cost while Model 16W includes travel cost
 divided by income.
+
+```{r Table 6-11 income interaction models, echo = F}
+#I feel I've created the interaction term correctly and included the right variables, but values are still slightly off
+
+sf_mlogit_tripcontext %>%
+  mutate(costbyinc = cost / hhinc)
+
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+
+incomeinteraction_estimation <- list(
+  "Model 15W" = model_15w,
+  "Model 16W" = model_16w
+)
+
+modelsummary(
+  incomeinteraction_estimation, fmt = "%.4f",
+  title = "Estimation Results for Models with Trip Context Variables"
+)
+```
+
 
 The cost by income variable has the expected sign and is statistically significant, but the
 overall goodness-of-fit for the cost divided by income model is lower than that for model 15 that
