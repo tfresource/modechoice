@@ -396,7 +396,7 @@ sf_mlogit_autoavailability <- sf_mlogit %>%
 
 model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc, data = sf_mlogit_autoavailability)
 model_10w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + numveh, data = sf_mlogit_autoavailability)
-model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk, data = sf_mlogit_autoavailability, constPar = c('hhinc:Share ride 2' = -0.002, 'hhinc:Share ride 3++' = -0.002))
+model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk, data = sf_mlogit_autoavailability)
 model_12w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + autoperad, data = sf_mlogit_autoavailability)
 
 Autoavailability_estimation <- list(
@@ -449,7 +449,6 @@ sf_mlogit_tripcontext <- sf_mlogit %>%
   mutate(cbddumall = wkccbd + wknccbd,
          mot_ovttbydist = mot_ovtt / dist)
  
-model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk, data = sf_mlogit_tripcontext)
 model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
 model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
 model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
@@ -463,7 +462,7 @@ tripcontext_estimation <- list(
 )
 
 modelsummary(
-  tripcontext_estimation, fmt = "%.4f",
+  tripcontext_estimation, fmt = "%.4f", statistic_vertical = FALSE,
   title = "Estimation Results for Models with Trip Context Variables"
 )
 
