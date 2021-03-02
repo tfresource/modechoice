@@ -69,7 +69,7 @@ choice in the San Francisco Bay Area.
 
 ## Alternative Specifications
 The basic multinomial logit mode choice model for work commute in the San Francisco Bay
-Area was reported in Table 5-2 \@ref(tab:basic-estimation-table) in CHAPTER 5 \@ref(mnl-estimation.Rmd). The refinements we consider include:
+Area was reported in Table 5-2 \@ref(basic-estimation-table) in CHAPTER 5 \@ref(mnl-estimation.Rmd). The refinements we consider include:
   - Different specifications of the income effects,
   - Different specifications of travel time,
   - Additional decision maker related variables such as gender and automobiles owned,
@@ -139,12 +139,14 @@ specification.31
 
 ```{r Table 6-1 alternative Specifications of Income, echo = F}
 model_base <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
+#Having issues setting two variables to be equal to each other
 model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
+#Having issues setting two variables to be equal to each other
 model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2" = "hhinc:Share ride 3++" = "hhinc:Transit"))
 model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0))
 
 
-tripcontext_estimation <- list(
+altspecinc_estimation <- list(
   "Base Model " = model_base,
   "Model 1W" = model_1w,
   "Model 2W" = model_2w,
@@ -152,7 +154,7 @@ tripcontext_estimation <- list(
 )
 
 modelsummary(
-  tripcontext_estimation, fmt = "%.4f",
+  altspecinc_estimation, fmt = "%.4f",
   title = "Alternative Specifications of Income Variable"
 )
 
@@ -211,19 +213,21 @@ his/her decision. The advice of other more experienced analysts is often enliste
 and/or support these judgments. 
 
 ```{r Table 6-3 alternative Specifications of Travel Time, echo = F}
-
+#Having issues setting two variables to be equal to each other
 model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
+#Having issues setting two variables to be equal to each other
 model_5w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
+#Having issues setting two variables to be equal to each other
 model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit, constPar = c("hhinc:Share ride 2' = 'hhinc:Share ride 3++"))
 
-tripcontext_estimation <- list(
+altspectvtt_estimation <- list(
   "Model 1W" = model_1w,
   "Model 5W" = model_5w,
   "Model 6W" = model_6w
 )
 
 modelsummary(
-  tripcontext_estimation, fmt = "%.4f",
+  altspectvtt_estimation, fmt = "%.4f",
   title = "Estimation Results for Alternative Specifications of Travel Time"
 )
 
@@ -385,14 +389,15 @@ primarily a matter of judgment. We select Model 11W but selection of Model 12W w
 equally appropriate.
 
 ```{r Table 6-8 Estimation for Auto Availability, echo = F}
+# all models working, but values are different to Table
 sf_mlogit_autoavailability <- sf_mlogit %>%
-  mutate(autoperhh = numveh / hhowndum) %>%
-  mutate(autoperad = numveh / numadlt)
+  mutate(autoperad = numveh / numadlt,
+         mot_ovttbydist = mot_ovtt / dist)
 
-model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc, data = sf_mlogit_autoavailability)
-model_10w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + autoperhh, data = sf_mlogit_autoavailability)
-model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk, data = sf_mlogit_autoavailability)
-model_12w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + autoperad, data = sf_mlogit_autoavailability)
+model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc, data = sf_mlogit_autoavailability)
+model_10w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + numveh, data = sf_mlogit_autoavailability)
+model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk, data = sf_mlogit_autoavailability, constPar = c('hhinc:Share ride 2' = -0.002, 'hhinc:Share ride 3++' = -0.002))
+model_12w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + autoperad, data = sf_mlogit_autoavailability)
 
 Autoavailability_estimation <- list(
   "Model 7W" = model_7w,
@@ -467,13 +472,13 @@ modelsummary(
 ```{r Table 6-10 trip context VoT, echo = F}
 
 #Update these models when correct above in Table 6-9
-model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
-model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
+model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 #In a column for each model I want to divide the travel time coefficient by the cost coefficient 
 #I used the coefficients given straight in the text and the values here are still a little off
-#Not sure how to get beta values for OVT of different trip lengths
+#Once we figure out the coefficient issue in the model I can convert this table to using direct functions
 tibble(
   "Value of Time ($/hr)" = c("Value of Motorized IVT", "Value of Motorized OVT (10 mile trip)", "Value of Motorized OVT (20 mile trip)", "Value of Non-Motorized Time"),
   "Model 13W" = c(as.numeric(0.6 * -0.0286 / -0.0033, options(digits = 3)), 0.6 * -0.1501 / -0.0033, 0.6 * -0.1501 / -0.0033, 0.6 * -0.0464 / -0.0033),
