@@ -634,17 +634,19 @@ with two degrees of freedom (two parameters constrained to zero).  The critical 
 with five degrees of freedom (five income parameters are constrained to zero).  The critical $\chi^2$ with five degrees of freedom at 99.9% confidence level (or 0.001 level of significance) is 20.51.   Thus, both null hypotheses can be rejected at very high levels; that is, neither time and cost nor the income variables should be excluded from the model.  The log-likelihood ratio tests for both the above hypotheses are summarized in Table 5-8.
 
 ```{r table5-8}
-thegoods1 <- tibble(
- "Variables"= c("Log-Likelihood of Unrestricted Model $(LL_U)$","Log-Likelihood of Restricted Model $(LL_R)$","Test Statistics [-2$(LL_R-LL_U)$]","Number of Restrictions","Critical Chi-Squared Value at 99.9% Confidence","Rejection Confidence","Rejection Significance"),
- "Test for Hypothesis $H_{0,c}$" = c(-3626.186,-4123.615,994.858,2,13.82, ">>99.9%", 0.000),
- "Test for Hypothesis $H_{0,d}$" = c(-3626.186, -3637.579, 22.786, 5, 20.51, ">>99.9%",0.000))
 tibble(
-  llu =c( -3636.186, 0),
-  llr = c()
+  Hypothesis = c("$H_{0c}$","$H_{0d}$"),
+  LL_U = rep(base_model$logLik, 2),
+  LL_R = c(incomebase_model$logLik, timecostbase_model$logLik)
 ) %>%
-  mutate(lrtests = -2 * (llr - llu))
-
-kable(thegoods1, align = c("l", "c" ,"c"), booktabs = T, caption = "Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$")
+  mutate(
+    test_stat = -2 * (LL_R - LL_U),
+    df = c(2, 5),
+    "Crtical Chi-Squared at 99.9% Conf." = qchisq(0.999, df),
+    "P-value" = pchisq(test_stat, df, lower.tail = FALSE)
+  ) %>%
+  kbl(align = 'c', caption = "Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$") %>%
+  kable_styling()
 ```
 
 
