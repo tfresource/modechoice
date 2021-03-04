@@ -598,12 +598,13 @@ strong enough to override the statistical test results. Nonetheless, we may stil
 parameter constraints to obtain higher values of time. 
 
 ``` {r impliedVOT15-16W}
-VOTsimple <- function(model, timevar, costvar) {
-  coef(model)[timevar]*0.6/coef(model)[costvar]
-}
-VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
-  (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
-}
+#functions below are defined earlier :)
+#VOTsimple <- function(model, timevar, costvar) {
+#  coef(model)[timevar]*0.6/coef(model)[costvar]
+#}
+#VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
+#  (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
+#}
 
 # Model 16W
 model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
