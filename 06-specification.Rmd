@@ -205,6 +205,11 @@ of each component of time. The implied value of in-vehicle-time for motorized mo
 for each model using the estimated motorized in-vehicle-time and cost parameters and
 similarly for the other time components: 
 
+\begin{equation}
+Value of motorized IVTT (\$/hour) = \frac{\beta_{motorized ivtt (1/min.)}}{\beta_{cost (1/cents)}} \times \frac{60 min./hour}{100 cents/\$} 
+(\#eq:valueofivtt)
+\end{equation}
+
 The implied values of in- and out-of-vehicle times for motorized modes in Models 1W, 5W, and
 6W are reported in Table 6-4. The values of motorized in-vehicle time and non-motorized time
 are somewhat low but not unreasonable compared to the average wage rate of $21.20 per hour in
