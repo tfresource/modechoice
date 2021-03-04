@@ -249,6 +249,29 @@ modelsummary(
 ```
 [^trumodel], [^valuesoftime]
 
+```{r Table 6-4 Vot models 1w 5w and 6w, echo = FALSE}
+#These functions are based off the equations given in the text above Table 6-6
+VOTsimple <- function(model, timevar, costvar) {
+  coef(model)[timevar]*0.6/coef(model)[costvar]
+}
+VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
+  (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
+}
+
+#Table 6-4 based off coefficients from models 1w, 5w, 6w
+#These values are different from those in the text because the model coefficients are as well
+tibble(
+  "Value of Time ($/hr)" = c("Value of Non-Motorized Time", "Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
+  "Model 1W" = c(VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost")),
+  "Model 5W" = c(VOTsimple(model_14w, "mot_tvtt", "cost"), VOTdistance(model_14w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_14w, "nm_tvtt", "cost")),
+  "Model 6W" = c(VOTsimple(model_15w, "mot_tvtt", "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_15w, "nm_tvtt", "cost"))
+) %>%
+  kbl(align = 'c', caption = "Implied Values of Time in Models 13W, 14W, and 15W") %>%
+  kable_styling()
+
+```
+
+
 The primary shortcoming of the specification in Model 6W is that the estimated value of
 IVT is unrealistically small. At least two alternatives can be considered for getting an improved
 estimate of the value of out-of-vehicle time. One is to use an approach that has been effective in
@@ -513,11 +536,6 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
   (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
 }
 
-#Show models here for reference - delete once table completed as they show in previous chunk
-model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
-model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
-
 #Table 6-10 based off coefficients from models 13w, 14w, 15w
 #These values are different from those in the text because the model coefficients are as well
 tibble(
@@ -561,7 +579,7 @@ divided by income.
 sf_mlogit_tripcontext %>%
   mutate(costbyinc = cost / hhinc)
 
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+#Create model 16w
 model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 incomeinteraction_estimation <- list(
