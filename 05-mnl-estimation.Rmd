@@ -681,7 +681,7 @@ The corresponding test for the cost by ln(income) being true is:
 \end{align*}
 
 The above result implies that the null hypotheses that the models with cost by income variable or cost by ln(income) are true are rejected at a significance level greater than 0.001.  However, the significance of rejection is much lower for the cost by ln(income) model and many analysts would adopt that specification on the grounds that it is conceptually more appropriate.  This specification suggests that the value of money declines with income but the rate of decline diminishes at higher levels of income.
-```{r basic-estimation}
+```{r basic-estimation1}
 base <- mlogit(chosen ~ ivtt , data = sf_mlogit)
 
 # estimate a model with constants only by constraining a single generic variable
