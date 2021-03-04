@@ -249,6 +249,7 @@ modelsummary(
 ```
 [^trumodel], [^valuesoftime]
 
+<<<<<<< Updated upstream
 ```{r Table 6-4-Vot models-1w-5w-and-6w, echo = FALSE}
 #These functions are based off the equations given in the text above Table 6-6
 VOTsimple <- function(model, timevar, costvar) {
@@ -260,17 +261,18 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
 
 #Table 6-4 based off coefficients from models 1w, 5w, 6w
 #These values are different from those in the text because the model coefficients are as well
+=======
+```{r Vot-1-5-6, echo = FALSE}
+>>>>>>> Stashed changes
 tibble(
-  "Value of Time ($/hr)" = c("Value of Non-Motorized Time", "Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
-  "Model 1W" = c(VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost")),
-  "Model 5W" = c(VOTsimple(model_14w, "mot_tvtt", "cost"), VOTdistance(model_14w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_14w, "nm_tvtt", "cost")),
-  "Model 6W" = c(VOTsimple(model_15w, "mot_tvtt", "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_15w, "nm_tvtt", "cost"))
+"Value of Time ($/hr)" = c("Value of Non-Motorized Time", "Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
+"Model 1W" = round(c(VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost")),2),
+"Model 5W" = round(c(VOTsimple(model_5w, "nm_tvtt", "cost"), VOTsimple(model_5w, "mot_tvtt", "cost"), VOTsimple(model_5w, "mot_tvtt", "cost")),2),
+"Model 6W" = round(c(VOTsimple(model_6w, "nm_tvtt", "cost"), VOTsimple(model_6w, "mot_ovtt", "cost"), VOTsimple(model_6w, "mot_ivtt", "cost")),2)
 ) %>%
-  kbl(align = 'c', caption = "Implied Values of Time in Models 13W, 14W, and 15W") %>%
-  kable_styling()
-
+   kbl(align = 'c', caption = "Implied Values of Time in Models 13W, 14W, and 15W") %>%
+   kable_styling()
 ```
-
 
 The primary shortcoming of the specification in Model 6W is that the estimated value of
 IVT is unrealistically small. At least two alternatives can be considered for getting an improved
@@ -505,10 +507,10 @@ specific CBD dummy variables to the variables in Model 11W. Model 14W adds the a
 specific employment density variables and Model 15W adds both. Estimation results for these
 specifications and Model 11W are reported in Table 6-9. 
 
-```{r Table 6-9 trip context models, echo = F}
+```{r trip-context-models, echo = F}
 #Estimates are close but slightly off, even after changing the travel time variables
-#I added both columns of CBD workers together after neither gave the right answer.
-#I'm also not sure how to calculated the adjusted rho-square values
+#However, the coefficients given here provide the correct value of time values in Table 6-10
+
 sf_mlogit_tripcontext <- sf_mlogit %>%
   mutate(cbddumall = wkccbd + wknccbd,
          mot_ovttbydist = mot_ovtt / dist)
@@ -516,8 +518,9 @@ sf_mlogit_tripcontext <- sf_mlogit %>%
 model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
 model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
 model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+```
 
-
+```{r trip-context-table, echo = FALSE}
 tripcontext_estimation <- list(
   "Model 11W" = model_11w,
   "Model 13W" = model_13w,
@@ -529,10 +532,9 @@ modelsummary(
   tripcontext_estimation, fmt = "%.4f", statistic_vertical = FALSE,
   title = "Estimation Results for Models with Trip Context Variables"
 )
-
 ```
 
-```{r Table 6-10 trip context VoT from models, echo = F}
+```{r Vot-13-14-15, echo = F}
 #These functions are based off the equations given in the text above Table 6-6
 VOTsimple <- function(model, timevar, costvar) {
   coef(model)[timevar]*0.6/coef(model)[costvar]
@@ -545,9 +547,9 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
 #These values are different from those in the text because the model coefficients are as well
 tibble(
   "Value of Time ($/hr)" = c("Value of Motorized IVT", "Value of Motorized OVT (10 mile trip)", "Value of Motorized OVT (20 mile trip)", "Value of Non-Motorized Time"),
-  "Model 13W" = c(VOTsimple(model_13w, "mot_tvtt", "cost"), VOTdistance(model_13w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_13w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_13w, "nm_tvtt", "cost")),
-  "Model 14W" = c(VOTsimple(model_14w, "mot_tvtt", "cost"), VOTdistance(model_14w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_14w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_14w, "nm_tvtt", "cost")),
-  "Model 15W" = c(VOTsimple(model_15w, "mot_tvtt", "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_15w, "nm_tvtt", "cost"))
+  "Model 13W" = round(c(VOTsimple(model_13w, "mot_tvtt", "cost"), VOTdistance(model_13w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_13w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_13w, "nm_tvtt", "cost")),2),
+  "Model 14W" = round(c(VOTsimple(model_14w, "mot_tvtt", "cost"), VOTdistance(model_14w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_14w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_14w, "nm_tvtt", "cost")),2),
+  "Model 15W" = round(c(VOTsimple(model_15w, "mot_tvtt", "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_15w, "nm_tvtt", "cost")),2)
 ) %>%
   kbl(align = 'c', caption = "Implied Values of Time in Models 13W, 14W, and 15W") %>%
   kable_styling()
@@ -584,7 +586,7 @@ divided by income.
 sf_mlogit_tripcontext %>%
   mutate(costbyinc = cost / hhinc)
 
-#Create model 16w
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 incomeinteraction_estimation <- list(
@@ -629,12 +631,13 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
 }
 
 # Model 16W
+
+#the parameters in this model are not quite correct
 model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 modelsummary(model_16w)
 
 #table 6-12
-tibble ( c("Value of In-Vehicle Time", "Value of Out-of-Vehicle Time (10 mile trip)", "Value of Out-of-Vehicle Time (20 mile trip)"), "Model 15W" = c(VOTsimple(model_15w, "mot_tvtt", "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 20, "cost")), "Model 16W" = c(0.47*21.20, 0.77*21.20, 0.62*21.20) )
 
 
 ```
