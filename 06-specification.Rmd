@@ -249,6 +249,29 @@ modelsummary(
 ```
 [^trumodel], [^valuesoftime]
 
+```{r Table 6-4 Vot models 1w 5w and 6w, echo = FALSE}
+#These functions are based off the equations given in the text above Table 6-6
+VOTsimple <- function(model, timevar, costvar) {
+  coef(model)[timevar]*0.6/coef(model)[costvar]
+}
+VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
+  (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
+}
+
+#Table 6-4 based off coefficients from models 1w, 5w, 6w
+#These values are different from those in the text because the model coefficients are as well
+tibble(
+  "Value of Time ($/hr)" = c("Value of Non-Motorized Time", "Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
+  "Model 1W" = c(VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost")),
+  "Model 5W" = c(VOTsimple(model_14w, "mot_tvtt", "cost"), VOTdistance(model_14w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_14w, "nm_tvtt", "cost")),
+  "Model 6W" = c(VOTsimple(model_15w, "mot_tvtt", "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_15w, "nm_tvtt", "cost"))
+) %>%
+  kbl(align = 'c', caption = "Implied Values of Time in Models 13W, 14W, and 15W") %>%
+  kable_styling()
+
+```
+
+
 The primary shortcoming of the specification in Model 6W is that the estimated value of
 IVT is unrealistically small. At least two alternatives can be considered for getting an improved
 estimate of the value of out-of-vehicle time. One is to use an approach that has been effective in
@@ -304,16 +327,21 @@ That is, the null hypothesis that Model 6W is the true model is rejected with si
 greater than $0.001$. Models 8W and 9W are also rejected as the true model at an even higher
 level of significance.
 
-```{rtable6-5}
+```{r table6-5}
 sf_mlogit_trip_estimates <- sf_mlogit %>%
-  mutate(TIR8 = 2.4, TIR9 = 4, ovtd = mot_ovtt/dist)
+  mutate(
+    TIR8 = (mot_ivtt + 2.4 * mot_ovtt),  
+    TIR9 = (mot_ivtt + 4 * mot_ovtt), 
+    ovtd = mot_ovtt/dist
+    )
  
-model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit_trip_estimates) #works but values are wrong
-model_7w <- mlogit(chosen ~ nm_tvtt  + ovtd + cost | hhinc, data = sf_mlogit_trip_estimates) #works but values are wrong
-model_8w <- mlogit(chosen ~ nm_tvtt + (mot_ovtt * TIR8) + mot_ivtt + cost | hhinc + altnum, data = sf_mlogit_trip_estimates)
-model_9w <- mlogit(chosen ~ nm_tvtt + (mot_ovtt * TIR9) + mot_ivtt + cost | hhinc + altnum, data = sf_mlogit_trip_estimates)
+model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + ovtd + cost | hhinc, 
+                   data = sf_mlogit_trip_estimates)
+model_8w <- mlogit(chosen ~ nm_tvtt + TIR8  + cost | hhinc, 
+                   data = sf_mlogit_trip_estimates)
+model_9w <- mlogit(chosen ~ nm_tvtt + TIR9 + cost | hhinc, 
+                   data = sf_mlogit_trip_estimates)
 
-#constPar = c("ivtt" = 0)
 
 trip_1 <- list(
   "Model 6W" = model_6w,
@@ -513,11 +541,6 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
   (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
 }
 
-#Show models here for reference - delete once table completed as they show in previous chunk
-model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
-model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
-
 #Table 6-10 based off coefficients from models 13w, 14w, 15w
 #These values are different from those in the text because the model coefficients are as well
 tibble(
@@ -561,7 +584,7 @@ divided by income.
 sf_mlogit_tripcontext %>%
   mutate(costbyinc = cost / hhinc)
 
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+#Create model 16w
 model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 incomeinteraction_estimation <- list(
