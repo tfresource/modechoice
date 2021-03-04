@@ -1,8 +1,20 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Model Specification Refinement: San Francisco Bay Area Work Mode Choice
 ```{r setup}
 library(mlogit)
 library(tidyverse)
 library(modelsummary)
+library(haven)
+library(knitr)
+library(kableExtra)
+```
+
+```{r loaddata, echo = F}
+sf_mlogit <- read_rds("data/worktrips.rds")
 ```
 
 ## Introduction
@@ -48,7 +60,7 @@ specification of a model of work mode choice as it is the most appropriate appro
 who are new to discrete choice modeling. At each stage in the model development process, we
 introduce incremental changes to the modal utility functions and re-estimate the model with the
 objective of finding a more refined model specification that performs better statistically and is
-consistent with theory and our a priori expectations about mode choice behavior. We introduce
+consistent with theory and our *a priori* expectations about mode choice behavior. We introduce
 small changes at each step as the estimation results for each stage provide useful insights which
 may be helpful in further refining the model. The appropriateness of each specification change
 is evaluated at each step using both judgmental and statistical tests.
@@ -57,13 +69,13 @@ choice in the San Francisco Bay Area.
 
 ## Alternative Specifications
 The basic multinomial logit mode choice model for work commute in the San Francisco Bay
-Area was reported in Table 5-2 \@ref(tab:basic-estimation-table) in CHAPTER 5 \@ref(mnl-estimation.Rmd). The refinements we consider include:
+Area was reported in Table 5-2 \@ref(basic-estimation-table) in CHAPTER 5 \@ref(mnl-estimation.Rmd). The refinements we consider include:
   - Different specifications of the income effects,
   - Different specifications of travel time,
   - Additional decision maker related variables such as gender and automobiles owned,
   - Additional variables that represent the interaction of decision maker related variables
-    with mode related variables (e.g., interaction of income with cost), and
-  - Additional trip context variables (e.g., dummy variable indicating if the trip
+    with mode related variables (*e.g.*, interaction of income with cost), and
+  - Additional trip context variables (*e.g.*, dummy variable indicating if the trip
     origin/destination is in a Central Business District).
     
 ### Refinement of Specification for Alternative Specific Income Effects
@@ -88,11 +100,15 @@ alternative specifications which represent these relationships. Options for cons
     modes. This relationship is represented by constraining the income coefficients in the two
     shared alternatives to be equal as follows: 
     
+<<<<<<< HEAD
 \begin{equation}
 H_0 : \beta_{INCOMESR2} = \beta_{INCOMESR3+}
 (\#eq:incomeandsharedrides)
 \end{equation}
     
+=======
+
+>>>>>>> 7cbd687dc679212540f1c12ca22b673f2f47a337
   - The effect of income relative to drive alone is the same for both shared ride modes and
     transit but is different for the other modes. This is represented in the model by constraining
     the income coefficients in both shared ride modes and the transit mode to be equal as: 
@@ -101,6 +117,8 @@ H_0 : \beta_{INCOMESR2} = \beta_{INCOMESR3+}
 H_0 : \beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit}
 (\#eq:incomeonsharedrideandtransit)
 \end{equation}
+
+
 
   - The effect of income on all the automobile modes (drive alone, shared ride 2, and shared
     ride 3+) is the same, but the effect is different for the other modes. We include this
@@ -137,7 +155,28 @@ other modes. However, the differences among these models are small both statisti
 behaviorally so the decision should be subject to a review before adoption of the final
 specification.31
 
+```{r Table 6-1 alternative Specifications of Income, echo = F}
 
+model_base <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
+#Having issues setting Shared Ride 2, 3+, and Transit to be equal to each other
+model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
+model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c('hhinc:2' = 0, 'hhinc:3' = 0))
+
+altspecinc_estimation <- list(
+  "Base Model " = model_base,
+  "Model 1W" = model_1w,
+  "Model 2W" = model_2w,
+  "Model 3W" = model_3w
+)
+
+modelsummary(
+  altspecinc_estimation, fmt = "%.4f",
+  title = "Alternative Specifications of Income Variable"
+)
+
+```
 ### Different Specifications of Travel Time
 The specification for travel time in the above models implies that the utility value of time is
 equal for all the alternatives and between in-vehicle and out-of-vehicle time. However, we
@@ -157,7 +196,7 @@ expectation that travelers are more sensitive to out-of-vehicle time than in-veh
 
 The estimation results for Model 5W rejects the hypothesis of equal value of travel time
 across modes implied in Model 1W and Model 6W rejects the hypothesis of equal value of in
-and out of travel time for the motorized modes at a very high level of significance (0.001). The
+and out of travel time for the motorized modes at a very high level of significance $(0.001)$. The
 estimated parameters associated with travel time in Model 6W have the correct signs and the
 magnitude of the parameters for OVT for motorized modes and for time for non-motorized
 modes are larger in magnitude than the parameter for IVT, as expected; however, the parameter
@@ -191,6 +230,24 @@ the use of such constraints imposes a responsibility on the analyst to provide a
 his/her decision. The advice of other more experienced analysts is often enlisted to expand
 and/or support these judgments. 
 
+```{r Table 6-3 alternative Specifications of Travel Time, echo = F}
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_5w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + cost | hhinc, data = sf_mlogit)
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit)
+
+altspectvtt_estimation <- list(
+  "Model 1W" = model_1w,
+  "Model 5W" = model_5w,
+  "Model 6W" = model_6w
+)
+
+modelsummary(
+  altspectvtt_estimation, fmt = "%.4f",
+  title = "Estimation Results for Alternative Specifications of Travel Time"
+)
+
+```
 
 The primary shortcoming of the specification in Model 6W is that the estimated value of
 IVT is unrealistically small. At least two alternatives can be considered for getting an improved
@@ -201,7 +258,7 @@ time for a long trip rather than for a short trip. We still expect that traveler
 sensitive to OVT than IVT for any travel distance. A formulation which ensures this result is to
 include total travel time (the sum of in-vehicle and out-of-vehicle time) and out-of-vehicle time
 divided by distance in place of in- and out-of-vehicle travel time. This specification, as shown
-below, is consistent with our expectations provided that β1 and β2 are negative: 
+below, is consistent with our expectations provided that $β1$ and $β$2 are negative: 
 
 \begin{equation}
 $\displaystyle V_{m} = \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + ......$
@@ -244,9 +301,32 @@ $\displaystyle = \Phi(-8.97)<< 0.001$
 \end{equation}
 
 That is, the null hypothesis that Model 6W is the true model is rejected with significance much
-greater than 0.001. Models 8W and 9W are also rejected as the true model at an even higher
+greater than $0.001$. Models 8W and 9W are also rejected as the true model at an even higher
 level of significance.
 
+```{rtable6-5}
+sf_mlogit_trip_estimates <- sf_mlogit %>%
+  mutate(TIR8 = 2.4, TIR9 = 4, ovtd = mot_ovtt/dist)
+ 
+model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit_trip_estimates) #works but values are wrong
+model_7w <- mlogit(chosen ~ nm_tvtt  + ovtd + cost | hhinc, data = sf_mlogit_trip_estimates) #works but values are wrong
+model_8w <- mlogit(chosen ~ nm_tvtt + (mot_ovtt * TIR8) + mot_ivtt + cost | hhinc + altnum, data = sf_mlogit_trip_estimates)
+model_9w <- mlogit(chosen ~ nm_tvtt + (mot_ovtt * TIR9) + mot_ivtt + cost | hhinc + altnum, data = sf_mlogit_trip_estimates)
+
+#constPar = c("ivtt" = 0)
+
+trip_1 <- list(
+  "Model 6W" = model_6w,
+  "Model 7W" = model_7w,
+  "Model 8W" = model_8w,
+  "Model 9W" = model_9w
+)
+
+modelsummary(
+  trip_1, fmt = "%.4f",
+  title = "Estimation Results for Additionaly Travel Time Specification Testing"
+)
+```
 
 Before adopting Model 7W, it is a good idea to evaluate and interpret the relative
 importance of in-vehicle and out-of-vehicle time and between each component of time and cost.
@@ -322,7 +402,36 @@ they statistically reject Models 7W and 10W statistical fit. Model 11W has sligh
 goodness-of-fit than Model 12W but the difference is so small that the non-nested hypothesis test
 is not able to distinguish between the two models. Therefore, selection of a preferred model is
 primarily a matter of judgment. We select Model 11W but selection of Model 12W would be
-equally appropriate. 
+equally appropriate.
+
+```{r Table 6-8 Estimation for Auto Availability, echo = F}
+# all models working, but values are different to Table
+sf_mlogit_autoavailability <- sf_mlogit %>%
+  mutate(autoperad = numveh / numadlt,
+         mot_ovttbydist = mot_ovtt / dist)
+
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc, data = sf_mlogit_autoavailability)
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_10w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + numveh, data = sf_mlogit_autoavailability)
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_11w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk, data = sf_mlogit_autoavailability)
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_12w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + autoperad, data = sf_mlogit_autoavailability)
+
+Autoavailability_estimation <- list(
+  "Model 7W" = model_7w,
+  "Model 10W" = model_10w,
+  "Model 11W" = model_11w,
+  "Model 12W" = model_12w
+  )
+
+modelsummary(
+ Autoavailability_estimation, fmt = "%.4f",
+  title = "Estimation Results for Auto Availiability Specification Testing"
+)
+
+```
 
 ### Including Trip Context variables
 The models considered to this point include variables that describe the attributes of alternatives,
@@ -353,17 +462,16 @@ specific employment density variables and Model 15W adds both. Estimation result
 specifications and Model 11W are reported in Table 6-9. 
 
 ```{r Table 6-9 trip context models, echo = F}
-#Estimates are close but slightly off. I'm not sure how the variables might be off
+#Estimates are close but slightly off, even after changing the travel time variables
 #I added both columns of CBD workers together after neither gave the right answer.
-#I'm not sure how to get travel time estimates for motorized/non-motorized modes
 #I'm also not sure how to calculated the adjusted rho-square values
 sf_mlogit_tripcontext <- sf_mlogit %>%
-  mutate(cbddumall = wkccbd + wknccbd)
+  mutate(cbddumall = wkccbd + wknccbd,
+         mot_ovttbydist = mot_ovtt / dist)
  
-model_11w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk, data = sf_mlogit_tripcontext)
-model_13w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
-model_14w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
-model_15w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
+model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 
 tripcontext_estimation <- list(
@@ -374,7 +482,7 @@ tripcontext_estimation <- list(
 )
 
 modelsummary(
-  tripcontext_estimation, fmt = "%.4f",
+  tripcontext_estimation, fmt = "%.4f", statistic_vertical = FALSE,
   title = "Estimation Results for Models with Trip Context Variables"
 )
 
@@ -383,13 +491,13 @@ modelsummary(
 ```{r Table 6-10 trip context VoT, echo = F}
 
 #Update these models when correct above in Table 6-9
-model_13w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
-model_14w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
-model_15w <- mlogit(chosen ~ tvtt + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
+model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 #In a column for each model I want to divide the travel time coefficient by the cost coefficient 
-#I need to make the models above match the values in the text and update the values here
-#Not sure how to get beta values for OVT of different trip lengths
+#I used the coefficients given straight in the text and the values here are still a little off
+#Once we figure out the coefficient issue in the model I can convert this table to using direct functions
 tibble(
   "Value of Time ($/hr)" = c("Value of Motorized IVT", "Value of Motorized OVT (10 mile trip)", "Value of Motorized OVT (20 mile trip)", "Value of Non-Motorized Time"),
   "Model 13W" = c(as.numeric(0.6 * -0.0286 / -0.0033, options(digits = 3)), 0.6 * -0.1501 / -0.0033, 0.6 * -0.1501 / -0.0033, 0.6 * -0.0464 / -0.0033),
@@ -425,6 +533,27 @@ household income. Table 6-11 portrays the estimation results for two models that
 how they represent cost; Model 15W includes travel cost while Model 16W includes travel cost
 divided by income.
 
+```{r Table 6-11 income interaction models, echo = F}
+#I feel I've created the interaction term correctly and included the right variables, but values are still slightly off
+
+sf_mlogit_tripcontext %>%
+  mutate(costbyinc = cost / hhinc)
+
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+
+incomeinteraction_estimation <- list(
+  "Model 15W" = model_15w,
+  "Model 16W" = model_16w
+)
+
+modelsummary(
+  incomeinteraction_estimation, fmt = "%.4f",
+  title = "Estimation Results for Models with Trip Context Variables"
+)
+```
+
+
 The cost by income variable has the expected sign and is statistically significant, but the
 overall goodness-of-fit for the cost divided by income model is lower than that for model 15 that
 uses cost without interaction with income. However, because theory and common sense suggest
@@ -439,7 +568,7 @@ Model 16W, we can calculate the implied value of time using the relationship dev
 Section 5.8.2.
 
 The implied values of IVT and OVT from Model 16W are substantially higher than those
-from Model 15W (Table 6-12) and more in line with our a priori expectations. This
+from Model 15W (Table 6-12) and more in line with our *a priori* expectations. This
 improvement in the estimate of values of time more than offsets the difference in goodness-of-fit
 so we adopt Model 16W as our preferred specification. Thus, our strong belief in both valuing
 time relative to wage rate and higher estimates of the value of time provide evidence which is
@@ -450,8 +579,8 @@ parameter constraints to obtain higher values of time.
 VOTsimple <- function(model, timevar, costvar) {
   coef(model)[timevar]*0.6/coef(model)[costvar]
 }
-VOTdistance <- function(model, timevar, timedistvar, dist, costvar) {
-  (coef(model)[timevar]+(timedistvar/dist))*0.6/coef(model)[costvar]
+VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
+  (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
 }
 
 # Model 16W
@@ -543,10 +672,9 @@ purpose has already been used in our analysis by considering work commute trips 
 Once segmentation variables are selected (income, auto ownership, etc.), different numbers of
 segments may be considered for each dimension (e.g., we could use high, medium and low
 income segments or only high and low income segments). All members of each segment are
-assumed to have identical preferences and identical sensitivities to all the variables in the utility
-equation.
+assumed to have identical preferences and identical sensitivities to all the variables in the utility equation.
 
-Analysts will often have some a priori ideas about the best segmentation variables and
+Analysts will often have some *a priori* ideas about the best segmentation variables and
 the appropriate groupings of the population with respect to these variables. In the case of
 continuous variables, such as income, the analyst may consider different boundaries between
 segments. In cases where the analyst does not have a strong basis for selecting model segments,
@@ -602,7 +730,7 @@ list(
 
 
 
-Thus, the null hypothesis is that β1 = β2 = ... = βs = ... = βS , where βs , is the
+Thus, the null hypothesis is that $\underline\beta_1 = \underline\beta_2 = ... = \underlineβ_s = ... = \underlineβ_S$ , where βs , is the
 vector of coefficients for the $S^{th}$ market segment. Following the approach described in
 CHAPTER 5, we reject the null hypothesis that the restricted model is the correct model at
 significance level p if the calculated value of the statistic is greater than the test or critical value.
@@ -613,7 +741,7 @@ $\displaystyle -2 \times [l_{R} - l_{U}]\ge \chi^{2}_{n,(p)}$
 (\#eq:log-likelihoodtestatlevelp)
 \end{equation}
 
-Substituting the log-likelihood for the pooled model for lR and the sum of market segment
+Substituting the log-likelihood for the pooled model for $l_R$ and the sum of market segment
 model log-likelihoods for lU in equation 5.16, the null hypothesis, that all segments have the
 same choice function, is rejected at level p if:
 
@@ -629,7 +757,7 @@ Where $l(\beta)$ is the log-likelihood for the pooled model,
       $K$ is the number of coefficients in the pooled model, and
       $K_{s}$ is the number of coefficients in the $s^{th}$ market segment model.
 
-$K_{s}$ is generally equal to $K$ in which case $n$ is given by K x (S-1)
+$K_{s}$ is generally equal to $K$ in which case $n$ is given by $K x (S-1)$
 
 ### Market Segmentation Example
 We illustrate the market segmentation test for two cases, automobile ownership (zero/one car
