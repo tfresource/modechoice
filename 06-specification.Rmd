@@ -249,8 +249,7 @@ modelsummary(
 ```
 [^trumodel], [^valuesoftime]
 
-<<<<<<< Updated upstream
-```{r Table 6-4-Vot models-1w-5w-and-6w, echo = FALSE}
+```{r VOTfunctions, echo = FALSE}
 #These functions are based off the equations given in the text above Table 6-6
 VOTsimple <- function(model, timevar, costvar) {
   coef(model)[timevar]*0.6/coef(model)[costvar]
@@ -258,12 +257,12 @@ VOTsimple <- function(model, timevar, costvar) {
 VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
   (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
 }
+```
 
+
+```{r Vot-1-5-6, echo = FALSE}
 #Table 6-4 based off coefficients from models 1w, 5w, 6w
 #These values are different from those in the text because the model coefficients are as well
-=======
-```{r Vot-1-5-6, echo = FALSE}
->>>>>>> Stashed changes
 tibble(
 "Value of Time ($/hr)" = c("Value of Non-Motorized Time", "Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
 "Model 1W" = round(c(VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost")),2),
