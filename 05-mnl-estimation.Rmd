@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 # Data Assembly and Estimation of Simple Multinomial Logit Models
-```{r setup}
+```{r setup, message=FALSE}
 library(tidyverse)
 library(haven)
 library(mlogit)
@@ -92,21 +92,7 @@ A further problem is that it may be difficult to obtain a random sample as it ma
 
 In addition to the sampling approaches discussed above, combinations of the approaches can also be used.  For example, enriched sampling uses a combination of household or workplace sampling with choice based sampling to increase the number of transit users in the study data.  As with choice based sampling, special estimation techniques are required to offset the biases associated with this sampling approach.
 
-Another issue in survey sampling is the sample size to be used.  The size of the sample required to adequately represent the population is a function of the level of statistical accuracy and confidence desired from the survey.  The precision of parameter estimates and the statistical validity of estimation results improve with sample size.  However, the cost of the survey also increases with sample size and in many cases it is necessary to restrict the sample size to ensure that the cost of the survey remains within budgetary constraints.  The decision about sample size requires a careful evaluation of the need for adequate data to satisfy study objectives *vis-à-vis* budgetary constraints. Interested readers are referred to Ben-Akiva and Lerman (1985; Chapter 8) or Börsch-Supan (1987) for a more comprehensive discussion of sampling methods and sample size issues.
-
-
-```{r llcll0}
-data("Fishing", package = "mlogit")
-Fish <- dfidx(Fishing, varying = 2:9, shape = "wide", choice = "mode")
-
-mnl <- mlogit(mode ~ price + catch, data = Fish)
-
-ll0 <- nrow(Fish) * log(1 / 4)
-llC <- sum(mnl$freq * log(mnl$freq / sum(mnl$freq)))
-
-rhoc <- 1 - logLik(mnl) / llC
-rho0 <- 1 - logLik(mnl) / ll0
-```
+Another issue in survey sampling is the sample size to be used.  The size of the sample required to adequately represent the population is a function of the level of statistical accuracy and confidence desired from the survey.  The precision of parameter estimates and the statistical validity of estimation results improve with sample size.  However, the cost of the survey also increases with sample size and in many cases it is necessary to restrict the sample size to ensure that the cost of the survey remains within budgetary constraints.  The decision about sample size requires a careful evaluation of the need for adequate data to satisfy study objectives *vis-à-vis* budgetary constraints. Interested readers are referred to @benakivalerman1985 or @borschsupan1987 for a more comprehensive discussion of sampling methods and sample size issues.
 
 
 ## Methods for Collecting Mode Related Data
@@ -119,9 +105,9 @@ Network analysis provides the zone-to-zone in-vehicle travel times for the highw
 
 The data collected from the various sources described in the previous sections must be assembled into a single data set to support model estimation.  This can be accomplished using a variety of spreadsheet, data base, statistical software or user prepared programs.  The structure of the resultant data files must satisfy the format requirements of the software packages designed for choice model estimation.  The commonly used software packages for discrete choice model estimation require the data to be structured in one of two formats: a) the trip format or b) the trip-alternative format.  This are commonly referred to as IDCase (each record contains all the information for mode choice over alternatives for a single trip) or IDCase-IDAlt (each record contains all the information for a single mode available to each trip maker so there is one record for each mode for each trip). 
 
-In the trip format, each record provides all the relevant information about an individual trip, including the traveler/trip related variables, mode related variables for all available modes and a variable indicating which alternative was chosen.  In the trip-alternative format, each record includes information on the traveler/trip related variables, the attributes of that modal alternative, and a choice variable that indicates whether the alternative was or was not chosen.
+In the trip format, each record provides all the relevant information about an individual trip, including the traveler/trip related variables, mode related variables for all available modes and a variable indicating which alternative was chosen.  In the trip-alternative format, each record includes information on the traveler/trip related variables, the attributes of that modal alternative, and a choice variable that indicates whether the alternative was or was not chosen [^dataformats].
 
-The two data structures are illustrated in Figure 5.1 for four observations (individuals) with up to three modal alternatives available.  The first column in both formats is the trip number. In the trip (or IDCase) format, this is followed by traveler/trip related variables (e.g., income), the level of service (time and cost in the figure) variables associated with each alternative and a variable that indicates the chosen alternative.  In the trip-alternative (or IDCase-IDAlt) format, the second column generally identifies the alternative number with which that record is associated. Additional columns will generally include a 0-1 variable indicating the chosen alternative, the number of alternatives available, traveler/trip related variables mode related attributes for the alternative with which the record is associated. Data is displayed in these two formats in Figure 5.1.  
+The two data structures are illustrated in Figure 5.1 for four observations (individuals) with up to three modal alternatives available.  The first column in both formats is the trip number. In the trip (or IDCase) format, this is followed by traveler/trip related variables (e.g., income), the level of service (time and cost in the figure) variables associated with each alternative and a variable that indicates the chosen alternative.  In the trip-alternative (or IDCase-IDAlt) format, the second column generally identifies the alternative number with which that record is associated. Additional columns will generally include a 0-1 variable indicating the chosen alternative [^altfreq], the number of alternatives available, traveler/trip related variables mode related attributes for the alternative with which the record is associated. Data is displayed in these two formats in Figure 5.1.  
 
 The unavailability of an alternative is indicated in the trip format by zeros for all attribute variables of the unavailable alternative and in the trip-alternative format by excluding the record for the unavailable alternative. Thus, the second individual in the sample of Figure 5.1 has only two alternatives available.
 
@@ -145,18 +131,20 @@ trip_alt <- sf_work_mode  %>%
   select(hhid, perid, altname, chosen, ivtt, hhinc) %>% 
   rename(HH_ID = hhid, Person_ID = perid, Alternate_Name = altname, Chosen = chosen, IVTT = ivtt, HH_INC = hhinc)
 
-knitr::kable(head(trip_alt), caption= "Data Layout Type II: Trip-Alternative Format", align = 'c')
+kbl(head(trip_alt, n = 10), caption= "Data Layout Type II: Trip-Alternative Format") %>%
+  kable_styling()
 ```
 
 ```{r trip, echo = F}
 trip_format <- sf_work_mode  %>%
   select(hhid, perid, chosen, ivtt, hhinc, altname, altnum) %>%
   group_by(hhid, perid) %>%
-  mutate( chosen = max(chosen * altnum) ) %>%
+  mutate( chosen = max(chosen * altnum), altname = str_c(altname, " - Travel Time")) %>%
   select(-altnum) %>%
   spread(altname, ivtt, fill = 0)
 
-knitr::kable(head(trip_format), caption= "Data Layout Type I: Trip Format", align = 'c')
+kbl(head(trip_format), caption= "Data Layout Type I: Trip Format") %>%
+  kable_styling()
 ```
 
 
@@ -164,9 +152,9 @@ knitr::kable(head(trip_format), caption= "Data Layout Type I: Trip Format", alig
 
 The examples used in previous chapters are based on simulated or hypothetical data to highlight fundamental concepts of multinomial logit choice models.  Henceforth, our discussion of model specification and interpretation of results will be based on application data sets assembled from travel survey and other data collection to support transportation decision making in selected urban regions. Use of real data provides richer examples and “hands-on” experience in estimating mode choice models. The data used in this chapter was collected for the analysis of work trip mode choice in the San Francisco Bay Area in 1990. 
 
-The San Francisco Bay Area work mode choice data set comprises 5,029 home-to-work commute trips in the San Francisco Bay Area.  The data is drawn from the San Francisco Bay Area Household Travel Survey conducted by the Metropolitan Transportation Commission (MTC) in the spring and fall of 1990 (see White and Company, Inc., 1991, for details of survey sampling and administration procedures). This survey included a one day travel diary for each household member older than five years and detailed individual and household socio-demographic information. 
+The San Francisco Bay Area work mode choice data set comprises 5,029 home-to-work commute trips in the San Francisco Bay Area.  The data is drawn from the San Francisco Bay Area Household Travel Survey conducted by the Metropolitan Transportation Commission (MTC) in the spring and fall of 1990 (see (@whiteco, 1991) for details of survey sampling and administration procedures). This survey included a one day travel diary for each household member older than five years and detailed individual and household socio-demographic information. 
 
-There are six work mode choice alternatives in the region: drive alone, shared-ride with 2 people, shared ride with 3 or more people, transit, bike, and walk . The drive alone mode is available for a trip only if the trip-maker's household has a vehicle available and if the trip-maker has a driver's license. The shared-ride modes (with 2 people and with 3 or more people) are available for all trips. Transit availability is determined based on the residence and work zones of individuals. The bike mode is deemed available if the one-way home-to-work distance is less than 12 miles, while the walk mode is considered to be available if the one-way home to work distance is less than 4 miles (the distance thresholds to determine bike and walk availability are determined based on the maximum one-way distance of bike and walk-users, respectively).
+There are six work mode choice alternatives in the region: drive alone, shared-ride with 2 people, shared ride with 3 or more people, transit, bike, and walk [^mtcmodel]. The drive alone mode is available for a trip only if the trip-maker's household has a vehicle available and if the trip-maker has a driver's license. The shared-ride modes (with 2 people and with 3 or more people) are available for all trips. Transit availability is determined based on the residence and work zones of individuals. The bike mode is deemed available if the one-way home-to-work distance is less than 12 miles, while the walk mode is considered to be available if the one-way home to work distance is less than 4 miles (the distance thresholds to determine bike and walk availability are determined based on the maximum one-way distance of bike and walk-users, respectively).
 
 Level of service data were generated by the Metropolitan Transportation Commission for each zone pair and for each mode.  These data were appended to the home-based work trips based on the origin and destination of each trip. The data includes traveler, trip related area and mode related variables for each trip including in-vehicle travel time, out-of-vehicle travel time, travel cost, travel distance, and a mode availability indicator.
 
@@ -195,12 +183,6 @@ sf_wm_tvtt <- sf_work_mode  %>%
   mutate( chosen = max(chosen * altnum) ) %>%
   spread(altnum, tvtt, fill = 0)
 tvtt_raw <- apply(sf_wm_tvtt,2,function(x) mean(x[x>0]))
-#calculate the number of rows
-nrow(sf_wm_tvtt)
-#calculate the number of zeros in each column
-
-#calculate the "fraction of sample with mode available"
-
 #calculate market share
 Base_model <- mlogit(chosen ~ cost + tvtt | hhinc, data = sf_mlogit)
 mrktshr_raw <- Base_model$freq / nrow(sf_wm_tvtt)
@@ -215,16 +197,16 @@ cost_raw <- apply(sf_wm_cost,2,function(x) mean(x[x>0]))
 #create the table ==================================
 statsJtoWork <- tibble(
   "Mode"= c("1. Drive Alone","2. Shared Ride (2)","3. Shared Ride (3+)", "4. Transit", "5. Bike", "6. Walk"),
-  "Fraction of Sample with Mode Available" = c(0,0,0,0,0,0),
-  "Market Share" = c(mrktshr_raw),
+  "Fraction of Sample with Mode Available (%)" = c(94.6,100.0,100.0,79.6,34.6,29.4),
+  "Market Share (%)" = c(mrktshr_raw) * 100,
   "Average IVTT (minutes)" = c(ivtt_raw[ -c(1:4)]), 
   "Average OVTT (minutes)" = c(ovtt_raw[c(5:9)],  tvtt_raw[c(10)]),
   "Average Cost (1990 cents)" = c(cost_raw[-c(1:4)]))
 
 #display the table =================================
-kbl(statsJtoWork, align = "c", booktabs = T, caption = "Sample Statistics for Bay Area Journey-to-Work Modal Data") %>% 
-  kable_classic() %>%
-  row_spec(0, bold = T)
+kbl(statsJtoWork, digits = 1,
+    caption = "Sample Statistics for Bay Area Journey-to-Work Modal Data") %>% 
+  kable_styling()
 
 ```
 
@@ -232,7 +214,7 @@ kbl(statsJtoWork, align = "c", booktabs = T, caption = "Sample Statistics for Ba
 
 We use the San Francisco Bay Area data to estimate a multinomial logit work mode choice model using a basic specification which includes travel time, travel cost and household income as the explanatory variables.  Travel time and travel cost represent mode related attributes; all other things being equal, a faster mode of travel is more likely to be chosen than a slower mode and a less expensive mode is more likely to be chosen than a costlier mode.  Household income is included in the model with the expectation that travelers from high income households are more likely to drive alone than to use other travel modes.
 
-The multinomial logit work trip mode choice models are estimated using ALOGIT, LIMDEP and ELM software, to illustrate differences in the outputs of these packages , as well as a specially programmed module for Matlab.  The data sets, input control files, and estimation output results for this a selection of other model specifications for both software packages are included in the CD-ROM supplied with this manual.  The Matlab module code, command files and output for all specifications in the manual are also included in the CD-ROM. 
+The multinomial logit work trip mode choice models are estimated using ALOGIT, LIMDEP and ELM software, to illustrate differences in the outputs of these packages [^estimation], as well as a specially programmed module for Matlab.  The data sets, input control files, and estimation output results for this a selection of other model specifications for both software packages are included in the CD-ROM supplied with this manual.  The Matlab module code, command files and output for all specifications in the manual are also included in the CD-ROM. 
 
 The travel time (TT) and travel cost (TC) variables are specified as generic in this model.  This implies that an increase of one unit of travel time or travel cost has the same impact on modal utility for all six modes.  Household Income (Inc) is included as an alternative-specific variable. The drive alone mode is considered the base alternative for household income and the modal constants (see section 4.1.2.2 for a discussion of the need for a base alternative for these variables).
 
@@ -268,9 +250,16 @@ The following mode labels are used in the subsequent discussion and equations: D
   (\#eq:utilspecBK)
 \end{equation}
 
-The estimation results reported in this manual are obtained from software programmed in the Matlab language and included in the CD-Rom distributed with the manual.  The output for the above model specification is shown in structured format in Table 5-2.  The corresponding estimation results for this specification from various commercial packages; ALOGIT, LIMDEP and ELM; are reported in Appendix A.  The outputs from these and other software package typically include, at least, the following estimation results:
+The estimation results reported in this manual are obtained from software
+programmed using the `mlogit` package for R, with estimation code embedded in
+the document. The
+output for the above model specification is shown in structured format in Table
+\@ref(tab:basic-estimation-table). Other commercial and free software packages are
+available, including ALOGIT, LIMDEP, Biogeme (Python), Apollo (R), and ELM.
+The outputs from these and other software package typically include, at least,
+the following estimation results:
 
-  - Parameter  names, parameter estimates, standard errors of these estimates and the corresponding t-statistics for each variable/parameter; 
+  - Parameter [^corres] names, parameter estimates, standard errors of these estimates and the corresponding t-statistics for each variable/parameter; 
   - Log-likelihood values at zero (equal probability model), constants only (market shares model) and at convergence and
   - Rho-Squared and other indicators of goodness of fit.
 
@@ -282,14 +271,14 @@ In addition, different software reports a variety of other information either as
   -	The number of iterations required to obtain convergence, and
   -	The status of the convergence process at each iteration.
 
-The value for the log-likelihood at zero and constants can be obtained for either software by estimating models without (zero) and with (constants) alternative specific constants  and no other variables.  Further, the log-likelihood at zero can be calculated directly as 
+The value for the log-likelihood at zero and constants can be obtained for either software by estimating models without (zero) and with (constants) alternative specific constants [^zeromodel] and no other variables.  Further, the log-likelihood at zero can be calculated directly as 
 
 $ \sum_t ln(1/NAlt_t)$
 
 In the next three sections, we review the estimation results for the base model using informal judgment-based tests (section 5.7.1), goodness-of-fit measures (section 5.7.2), and statistical tests (section 5.7.3). These elements, taken together, provide a basis to evaluate each model and to compare models with different specifications. 
 
 ```{r basic-estimation}
-base <- mlogit(chosen ~ ivtt , data = sf_mlogit)
+base <- mlogit(chosen ~ ivtt + cost, data = sf_mlogit)
 
 # estimate a model with constants only by constraining a single generic variable
 # to be zero
@@ -323,17 +312,27 @@ A variety of informal tests can be applied to an estimated model.  These tests a
 
 #### Signs of Parameters
 
-The most basic test of the estimation results is to examine the signs of the estimated parameters with theory, intuition and judgment regarding the expected impact of the corresponding variables.  The estimated coefficients on the travel time and cost variables in Table 5-2 are negative, as expected, implying that the utility of a mode decreases as the mode becomes slower and/or more expensive.  This, in turn, will reduce the choice probability of the corresponding mode.
+The most basic test of the estimation results is to examine the signs of the estimated parameters with theory, intuition and judgment regarding the expected impact of the corresponding variables.  The estimated coefficients on the travel time and cost variables in Table \@ref(tab:basic-estimation-table) are negative, as expected, implying that the utility of a mode decreases as the mode becomes slower and/or more expensive.  This, in turn, will reduce the choice probability of the corresponding mode.
 
 #### Differences in Alternative Specific Variable Parameters across Alternatives
 
-We often have expectations about the impact of decision-maker characteristics on different alternatives.  For example, when analyzing mode choice, we expect a number of variables to be more positive for automobile alternatives, especially Drive Alone, than for other alternatives.  These include income, automobile ownership, home ownership, single family dwelling unit, etc. Since DA is the reference alternative in these models, we expect negative parameters on all alternative specific income variables, with small values for the shared ride alternatives and larger values for other alternatives, to reflect our intuition that increasing income will be associated with decreased preference for all other alternatives relative to drive alone. All the estimated alternative specific income parameters in Table 5-2 Estimation Results for Zero Coefficient, Constants Only and Base Models are negative, as expected, with the exception of the parameter for shared ride 3+.  The positive sign for the shared ride 3+ parameter is counter-intuitive but very small and not significantly different from zero. An approach to address this problem is described in section 5.7.3.1.
+We often have expectations about the impact of decision-maker characteristics on different alternatives.  For example, when analyzing mode choice, we expect a number of variables to be more positive for automobile alternatives, especially Drive Alone, than for other alternatives.  These include income, automobile ownership, home ownership, single family dwelling unit, etc. Since DA is the reference alternative in these models, we expect negative parameters on all alternative specific income variables, with small values for the shared ride alternatives and larger values for other alternatives, to reflect our intuition that increasing income will be associated with decreased preference for all other alternatives relative to drive alone. All the estimated alternative specific income parameters in Table \@ref(tab:basic-estimation-table) Estimation Results for Zero Coefficient, Constants Only and Base Models are negative, as expected, with the exception of the parameter for shared ride 3+.  The positive sign for the shared ride 3+ parameter is counter-intuitive but very small and not significantly different from zero. An approach to address this problem is described in section 5.7.3.1.
 
-Additional informal tests involve comparisons among the estimated income parameters. The differences in the magnitude of these alternative-specific income parameters indicate the relative impact of increasing income on the utility and, hence, the choice probability of each mode. The results reported in Table 5 2 show that an increase in income will have a larger negative effect on the utilities of the non-motorized modes (bike and walk) than on those of transit and shared ride 2 modes. It is important to understand that the change in the choice probability of that alternative is not determined by the sign of the income parameter for a particular alternative but on the value of the parameter relative to the weighted mean of the income parameters across all alternatives, as described in section 4.5. For example, in the base model specification (Table 5-2), an increase in income will increase the probability of choosing drive alone and shared ride 3+ (the alternatives with the most positive parameters ) and will decrease the probability of choosing walk and bike (the alternatives with the smallest, most negative, parameters).  However, the effect on shared ride 2 and transit is unclear; as income increases, they will lose some probability to drive alone and shared ride 3+ and gain some from walk and bike.  The net effect will depend on the difference between the parameter for the alternative of interest and the individual choice probability weighted average of all the alternative specific income parameters (including zero for the base alternative) as illustrated in equation 4.58.
+Additional informal tests involve comparisons among the estimated income parameters. The differences in the magnitude of these alternative-specific income parameters indicate the relative impact of increasing income on the utility and, hence, the choice probability of each mode. The results reported in Table 5 2 show that an increase in income will have a larger negative effect on the utilities of the non-motorized modes (bike and walk) than on those of transit and shared ride 2 modes. It is important to understand that the change in the choice probability of that alternative is not determined by the sign of the income parameter for a particular alternative but on the value of the parameter relative to the weighted mean of the income parameters across all alternatives, as described in section 4.5. For example, in the base model specification (Table \@ref(tab:basic-estimation-table)), an increase in income will increase the probability of choosing drive alone and shared ride 3+ (the alternatives with the most positive parameters [^altdrivealone]) and will decrease the probability of choosing walk and bike (the alternatives with the smallest, most negative, parameters).  However, the effect on shared ride 2 and transit is unclear; as income increases, they will lose some probability to drive alone and shared ride 3+ and gain some from walk and bike.  The net effect will depend on the difference between the parameter for the alternative of interest and the individual choice probability weighted average of all the alternative specific income parameters (including zero for the base alternative) as illustrated in equation 4.58.
 
 #### The Ratio of Pairs of Parameters
 
-The ratio of the estimated travel time and travel cost parameters provides an estimate of the value of time implied by the model; this can serve as another important informal test for evaluating the reasonableness of the model. For example, in the Base Model reported in Table 5-2, the implied value of time is (-0.05134)/(-0.00492) or 10.4 cents per minute (the units are determined from the units of the time and cost variables used in estimation). This is equivalent to \$6.26 per hour which is much lower that the average wage rate in the area at the time of the survey, approximately \$21.20 per hour, suggesting that the estimated value of time may be too low.  We revisit this issue in greater detail in the next chapter.
+The ratio of the estimated travel time and travel cost parameters provides an
+estimate of the value of time implied by the model; this can serve as another
+important informal test for evaluating the reasonableness of the model. For
+example, in the Base Model reported in Table \@ref(tab:basic-estimation-table),
+the implied value of time is $`r coef(base)["ivtt"]`/`r coef(base)["cost"]`$ or
+`r coef(base)["ivtt"]/ coef(base)["cost"]` cents per minute (the units are
+determined from the units of the time and cost variables used in estimation).
+This is equivalent to \$6.26 per hour which is much lower that the average wage
+rate in the area at the time of the survey, approximately \$21.20 per hour,
+suggesting that the estimated value of time may be too low.  We revisit this
+issue in greater detail in the next chapter.
 
 Similar ratios may be used to assess the reasonableness of the relative magnitudes of other pairs of parameters.  These include out of vehicle time relative to in vehicle time, travel time reliability (if available) relative to average travel time, etc.
 
@@ -341,7 +340,7 @@ Similar ratios may be used to assess the reasonableness of the relative magnitud
 
 This section presents a descriptive measure, called the rho-squared value ($\rho^2$) which can be used to describe the overall goodness of fit of the model. We can understand the formulation of this value in terms of the following figure which shows the scalar relationship among the log-likelihood values for a zero coefficients model (or the equally likely model), a constants only or market share model, the estimated model and a perfect prediction model. In the figure, LL(0) represents the log-likelihood with zero coefficients (which results in equal likelihood of choosing each available alternative), $LL(0)$ represents the log-likelihood for the constants only model, $LL(\hat{\beta})$  represents the log-likelihood for the estimated model and LL(*) = 0 is the log-likelihood for the perfect prediction model.
 
-```{r loglikelihooddif, fig.cap="Relationship between Different Log-likelihood Measures"}
+```{r loglikelihooddif, fig.cap="Relationship between Different Log-likelihood Measures", echo = FALSE}
 knitr::include_graphics("img/fig5.2.PNG")
 
 ```
@@ -356,7 +355,7 @@ The rho-squared ($\rho_0^2$) value is based on the relationship among the log-li
 (\#eq:fiveseven)
 \end{equation}
 
-Since the log-likelihood value for the perfect model is zero , the $\rho_0^2$ measure reduces to:
+Since the log-likelihood value for the perfect model is zero [^predict], the $\rho_0^2$ measure reduces to:
 
 \begin{equation}
 \rho_0^2 = 1- \frac{LL(\hat{\beta})}{LL(0)}
@@ -372,7 +371,7 @@ Similarly, the rho-square with respect to the constants only model is:
 
 By definition, the values of both rho-squared measures lie between 0 and 1 (this is similar to the R^2 measure for linear regression models).  A value of zero implies that the model is no better than the reference model, whereas a value of one implies a perfect model; that is, every choice is predicted correctly.
 
-The rho-squared values for the basic model specification in Table 5-2 are computed based on the formulae shown below as:
+The rho-squared values for the basic model specification in Table \@ref(tab:basic-estimation-table) are computed based on the formulae shown below as:
 
 \begin{equation}
 \rho_0^2 = 1- \frac{(-3626.2)}{(-7309.6)} = 0.5039 \qquad \rho_c^2 = 1- \frac{(-3626.2)}{(-4132.9)} = 0.1226
@@ -422,20 +421,18 @@ where $\hat{\beta_{k}}$ is the estimate for the $k^{th}$ parameter,
 
 Sufficiently large absolute values of the *t-statistic* lead to the rejection of the null hypothesis that the parameter is equal to the hypothesized value. When the hypothesized value, $\beta_{k}^{*}$, is zero, the t-statistic becomes the ratio of the estimated parameter to the standard error.  The default estimation output from most software packages includes the t-statistic for the test of the hypothesis that the true value is zero.  The rejection of this null hypothesis implies that the corresponding variable has a significant impact on the modal utilities and suggests that the variable should be retained in the model.  Low absolute values of the t-statistic imply that the variable does not contribute significantly to the explanatory power of the model and can be considered for exclusion.  If it is concluded that the hypothesis is not rejected, the equality constraint can be incorporated in the model by creating a new variable $X_{kl} = X_{k} + X_{l}$ .
 
-The selection of a critical value for the t-statistic test is a matter of judgment and depends on the level of confidence with which the analyst wants to test his/her hypotheses. The critical t-values for different levels of confidence for samples sizes larger than 150 (which is the norm in mode choice analysis) are shown in Table 5-3.  It should be apparent that the critical t-value increases with the desired level of confidence.  Thus, one can conclude that a particular variable has no influence on choice (or equivalently that the true parameter associated with the variable is zero) can be rejected at the 90% level of confidence if the absolute value of the t-statistic is greater than 1.645 and at the 95% level of confidence if the t-statistic is greater than 1.960 .  
+The selection of a critical value for the t-statistic test is a matter of judgment and depends on the level of confidence with which the analyst wants to test his/her hypotheses. The critical t-values for different levels of confidence for samples sizes larger than 150 (which is the norm in mode choice analysis) are shown in Table 5-3.  It should be apparent that the critical t-value increases with the desired level of confidence.  Thus, one can conclude that a particular variable has no influence on choice (or equivalently that the true parameter associated with the variable is zero) can be rejected at the 90% level of confidence if the absolute value of the t-statistic is greater than 1.645 and at the 95% level of confidence if the t-statistic is greater than 1.960 [^confidlevel].  
 
 ```{r confidencelevels}
-
-tibble(
-  confid = c(.9, .95, .99, .995, .999)) %>%
+tibble(confid = c(.9, .95, .99, .995, .999)) %>%
   mutate(tval=qnorm((1-confid)/2, lower.tail = FALSE)) %>%
-  knitr::kable( caption = "Critical t-Values for Selected Confidence Levels and Large Samples",
-                col.names = c("Confidence Level", "Critical t-value (two-tailed test)"))
-
+  kbl(caption = "Critical t-Values for Selected Confidence Levels and Large Samples",
+      col.names = c("Confidence Level", "Critical t-value (two-tailed test)")) %>%
+  kable_styling()
 ```
 
 ```{r tdistribution}
-library(ggplot2)
+these_colors <- wesanderson::wes_palette("Zissou1")
 ggplot(data.frame(x = c(-4,4))) +
   # Plot the pdf
   stat_function(
@@ -446,40 +443,40 @@ ggplot(data.frame(x = c(-4,4))) +
   stat_function(
     fun = function(x) ifelse(x >= 1.645, dt(x, df = 29), NA),
     aes(x),
-    geom = "area", color = NA, fill = "grey50", alpha = 1) +
+    geom = "area", color = NA, fill = these_colors[4], alpha = 1) +
   # Shade above 1.645
    stat_function(
     fun = function(x) ifelse(x >= 2, dt(x, df = 29), NA),
     aes(x),
-    geom = "area", color = NA, fill = "grey40", alpha = 1) +
-   # Shade below -1.645
+    geom = "area", color = NA, fill = these_colors[5], alpha = 1) +
+  # Shade below -1.645
   stat_function(
     fun = function(x) ifelse(x <= -1.645, dt(x, df = 29), NA),
     aes(x),
-    geom = "area", color = NA, fill = "grey50", alpha = 1) +
+    geom = "area", color = NA, fill = these_colors[4], alpha = 1) +
   # Shade below -2
   stat_function(
     fun = function(x) ifelse(x <= -2, dt(x, df = 29), NA),
     aes(x),
-    geom = "area", color = NA, fill = "grey40", alpha = 1) +
+    geom = "area", color = NA, fill = these_colors[5], alpha = 1) +
   ggtitle(expression(paste("The", italic(t),
     " distribution with a 90% and 95% confidence interval"))) +
-  xlab(expression(italic(t))) 
+  xlab(expression(italic(t)))  + 
+  theme_bw()
 ```
 
 We illustrate the use of the t-test by reviewing the t-statistics for each parameter in the initial model specification (Table 5-2). Both the travel cost and travel time parameters have large absolute t-statistic values (20.6 and 16.6, respectively) which lead us to reject the hypothesis that these variables have no effect on modal utilities at a confidence level higher than 99.9%. Thus, these variables should be retained in the model. All of the other t-statistics, except for Income-Shared Ride 2,  Income-Shared Ride 3+ and the walk constant are greater than 1.960 (95% confidence) supporting the inclusion of the corresponding variables.  The t-statistics on the shared ride specific income variables are even less than 1.645 in absolute value (90% confidence), suggesting that the effect of income on the utilities of the shared ride modes may not differentiate them from the reference (drive alone) mode. Consequently, the analyst should consider removing these income variables from the utility function specifications for the shared ride modes. The case is particularly compelling for removal of the income shared ride 3+ variable since the t-statistic is very low and the parameter has a counter-intuitive sign. Another alternative would be to combine the two shared ride income parameters suggesting that income has differential effect between drive alone and shared ride but not between shared ride 2 and shared ride 3+ (when this is done, the combined variable obtains a small negative parameter which is not statistically different from zero).  This variable could be deleted or retained according to the judgment of the analyst as described in Section 6.2.1.
 
-An alternative approach is to report the t-statistic to two or three decimal places and calculate the probability that a t-statistic value of that magnitude or higher would occur due to random variation in sampling as shown in Table 5-4.  This is reported as the significance level, which is the complement of the level of confidence. The significance of each parameter can be read directly from the table.  Parameters with significance greater than 0.05 (lower in magnitude but more significant), provide a stronger basis for rejecting the hypothesis that the true parameter is zero and that the corresponding variable can be excluded from the model. On the other hand, significance levels of 0.163 (for Income-SR2), 0.888 (for Income-SR3+) and 0.287 (for ASC-Walk) provide little evidence about whether the corresponding variable should or should not be included in the model .
+An alternative approach is to report the t-statistic to two or three decimal places and calculate the probability that a t-statistic value of that magnitude or higher would occur due to random variation in sampling as shown in Table 5-4.  This is reported as the significance level, which is the complement of the level of confidence. The significance of each parameter can be read directly from the table.  Parameters with significance greater than 0.05 (lower in magnitude but more significant), provide a stronger basis for rejecting the hypothesis that the true parameter is zero and that the corresponding variable can be excluded from the model. On the other hand, significance levels of 0.163 (for Income-SR2), 0.888 (for Income-SR3+) and 0.287 (for ASC-Walk) provide little evidence about whether the corresponding variable should or should not be included in the model [^retorelim].
 
 ```{r table5-4, echo = F}
 
 Base_model <- mlogit(chosen ~ cost + tvtt | hhinc, data = sf_mlogit)
 
-summary(Base_model)
-
-#trying to get modelsummary::modelsummary to work, but haven't figured it out yet
+modelsummary(Base_model, statistic = "statistic", statistic_vertical = FALSE, stars = TRUE, notes = list('Note: The numbers in the parentheses are the t-statistics'))
 
 ```
+[^siglevels]: Significance levels reported as 0.0000 are equivalent to less than 0.00005
 
 It is important to recognize that a low t-statistic does not require removal of the corresponding variable from the model.  If the analyst has a strong reason to believe that the variable is important, and the parameter sign is correct, it is reasonable to retain the variable in the model.  A low t-statistic and corresponding low level of significance can best be interpreted as providing little or no information rather than as a basis for excluding a variable.  Also, one should be cautious about prematurely deleting variables which are expected to be important as the same variable may be significant when other variables are added to or deleted from the model.  
 
@@ -524,33 +521,34 @@ If all the restrictions that distinguish between the restricted and unrestricted
 where $LL_{R}$ is the log-likelihood of the restricted model, and
       $LL_{U}$ is the log-likelihood of the unrestricted model. 
 
-This test-statistic is chi-squared distributed.  Example chi-squared distributions are shown in Figure 5.4. As with the test for individual parameters, the critical value for determining if the statistic is “sufficiently large” to reject the null hypothesis depends on the level of confidence desired by the model developer.  It is also influenced by the number of restrictions  between the models.  Table 5-5 shows the chi-squared values for selected confidence levels and for different numbers of restrictions.  
+This test-statistic is chi-squared distributed.  Example chi-squared distributions are shown in Figure 5.4. As with the test for individual parameters, the critical value for determining if the statistic is “sufficiently large” to reject the null hypothesis depends on the level of confidence desired by the model developer.  It is also influenced by the number of restrictions [^restrictandconstraint] between the models.  Table 5-5 shows the chi-squared values for selected confidence levels and for different numbers of restrictions.  
 
 Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom.  The critical chi-square values increase with the desired confidence level and the number of restrictions.
 
 ```{r chisqdistrib51015, fig.cap="Chi-Squared Distribution for 5, 10, and 15 Degrees of Freedom"}
-
-ggplot(data.frame(x = c(0, 30)), aes(x = x)) +
-       stat_function(fun = dchisq, args = list(df = 5)) +
-       stat_function(fun = dchisq, args = list(df = 10), color = "blue") +
-       stat_function(fun = dchisq, args = list(df = 15), color = "red") +
-       labs(x = "Test Values",
-            y = "Chi-Squared")
-
+these_colors = wesanderson::wes_palette("Darjeeling1")
+tibble(
+  x = seq(0, 30, 0.01),
+  `5` = dchisq(x, 5),
+  `10` = dchisq(x, 10),
+  `15` = dchisq(x, 15),
+) %>%
+  gather("Degrees of Freedom", "Chi-Squared", -x) %>%
+  ggplot(aes(x = x, y = `Chi-Squared`, color = `Degrees of Freedom`)) +
+  geom_line() + 
+  scale_color_manual(values = these_colors) + 
+  theme_bw()
 ```
 
-``` {r Chi-Square Distribution}
-  
+``` {r chisq-critdiagram, fig.cap = "Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds"}
 ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
-       stat_function(fun = dchisq, args = list(df = 5)) +
-       labs(title = "Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds",
-            x = "Test Values",
-            y = "PDF")
+  stat_function(fun = dchisq, args = list(df = 5)) +
+  labs( x = "Test Values", y = "PDF") + 
+  theme_bw()
 ```
 
 
 ```{r table5-5, echo = F}
-
 tab55df <- data.frame(
  "Level of Conf."= c("90%", "95%", "99%", "99.5%", "99.9%"),
  "1" = c("2.71", "3.84", "6.63", "7.88", "10.83"),
@@ -586,18 +584,30 @@ This test is not very useful because we almost always reject the null hypothesis
 (\#eq:restrictionsnullhypothesiscase)
 \end{equation}
 
-The log-likelihood values needed to test each of these hypotheses are reported in Table 5-2.  In each case, we include the log-likelihood of the restricted and unrestricted models, the calculated chi-square value and the number of restrictions or degrees of freedom as shown in Table 5-6. The confidence or significance of the rejection of the null hypothesis in each case can be obtained by referring to Table 5-5, more extensive published tables or software (most spreadsheet programs) that calculates the precise level of confidence/significance associated with each test result.
+The log-likelihood values needed to test each of these hypotheses are reported in Table \@ref(tab:basic-estimation-table).  In each case, we include the log-likelihood of the restricted and unrestricted models, the calculated chi-square value and the number of restrictions or degrees of freedom as shown in Table 5-6. The confidence or significance of the rejection of the null hypothesis in each case can be obtained by referring to Table 5-5, more extensive published tables or software (most spreadsheet programs) that calculates the precise level of confidence/significance associated with each test result.
 
-```{r table5-6, echo = F}
-#I think I need to do a log likelihood test, but I don't know how to start or what data to use for models.
 
-tab56df <- data.frame(
- "Variables."= c("Log-Likelihood of Unrestricted Model ($LL_U$)", "Log-Likelihood of Restricted Model ($LL_R$)", "Test Statistics [-2($LL_R-LL_U$)]", "Number of Restrictions", "Critical Chi-Squared Value at 99.9% Confidence", "Rejection Confidence", "Rejection Significance"),
- "Test for Hypothesis H_{0,a}" = c("-3626.186", "-7309.301", "7366.830", "12", "32.91", "99.9%", "0.001"),
- "Test for Hypothesis H_{0,b}" = c("-3626.186", "-4132.916", "1013.460", "7", "24.32", "99.9%", "0.001"))
+```{r table5-6, echo = FALSE}
+#Create models for likelihood ratio test
+sf_mlogit_basemodels <- sf_mlogit
+base_model <- mlogit(chosen ~  tvtt + cost| hhinc, data = sf_mlogit_basemodels)
+null_modela <- mlogit(chosen ~ ivtt, data = sf_mlogit_basemodels, start = fixed_coefs, iterlim = 0)
+null_modelb <-  mlogit(chosen ~ ivtt, data = sf_mlogit_basemodels, constPar = c("ivtt" = 0))
 
-kbl(tab56df, align = "c", booktabs = T, caption = "Likelihood Ratio Test for Hypothesis $H_{0,a}$ and $H_{0,b}$") %>% 
-kable_classic()
+#Create likelihood ratio test table
+tibble(
+  Hypothesis = c("$H_{0a}$","$H_{0b}$"),
+  LL_U = rep(base_model$logLik, 2),
+  LL_R = c(null_modela$logLik, null_modelb$logLik)
+) %>%
+  mutate(
+    test_stat = -2 * (LL_R - LL_U),
+    df = c(12, 7),
+    "Crtical Chi-Squared at 99.9% Conf." = qchisq(0.999, df),
+    "P-value" = pchisq(test_stat, df, lower.tail = FALSE)
+  ) %>%
+  kbl(align = 'c', caption = "Likelihood Ratio Test for Hypothesis $H_{0,a}$ and $H_{0,b}$") %>%
+  kable_styling()
 ```
 
 
@@ -611,9 +621,27 @@ $H_{0,D} : \beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit} = \
 
 The restricted models that reflect each of these hypotheses and the corresponding unrestricted model are reported in Table 5-7 along with their log-likelihood values.  
 
-```{r table 5-7, echo = F}
-#I have no idea what data to use, or how to format it or model it to create this table.
+```{r base_models table 5-7}
+sf_mlogit_basemodels <- sf_mlogit
+ 
+base_model <- mlogit(chosen ~  tvtt + cost| hhinc, data = sf_mlogit_basemodels)
+incomebase_model <- mlogit(chosen ~ 1 | hhinc, data = sf_mlogit_basemodels)
+timecostbase_model <- mlogit(chosen ~ tvtt + cost, data = sf_mlogit_basemodels)
 
+
+base_estimation <- list(
+  "Base Model" = base_model,
+  "Base Model without Time and Cost Variables" = incomebase_model,
+  "Base Model without Income Variables" = timecostbase_model
+)
+
+modelsummary(
+  base_estimation, fmt = "%.4f",
+  title = "Estimation Results for Base Model and its Restricted Versions"
+)
+
+#This code recreates table 5-7 in the text with the correct coefficients and log likelihood
+#However, the output does not have the correct rho-square values, and is missing a number of separate statistics
 ```
 
 
@@ -652,7 +680,7 @@ tibble(
 
 #### Non-nested Hypothesis Tests
 
-The likelihood ratio test can only be applied to compare models which differ due to the application of restrictions to one of the models.  Such cases are referred to as nested hypothesis tests. However, there are important cases when the rival models do not have this type of restricted – unrestricted relationship.  For example, we might like to compare the base model to an alternative specification in which the variable cost divided by income is used to replace cost.  This reflects the expectation that the importance of cost diminishes with increasing income.  This analysis can be performed by using the non-nested hypothesis test proposed by Horowitz (1982).   The non-nested hypothesis test uses the adjusted likelihood ratio index, $\overline{\rho}^2$, to test the hypothesis that the model with the lower $\overline{\rho}^2$ value is the true model .  In this test, the null hypothesis that the model with the lower value is the true model is rejected at the significance level determined by the following equation :
+The likelihood ratio test can only be applied to compare models which differ due to the application of restrictions to one of the models.  Such cases are referred to as nested hypothesis tests. However, there are important cases when the rival models do not have this type of restricted – unrestricted relationship.  For example, we might like to compare the base model to an alternative specification in which the variable cost divided by income is used to replace cost.  This reflects the expectation that the importance of cost diminishes with increasing income.  This analysis can be performed by using the non-nested hypothesis test proposed by (@horowitz1986, 1982).   The non-nested hypothesis test uses the adjusted likelihood ratio index, $\overline{\rho}^2$, to test the hypothesis that the model with the lower $\overline{\rho}^2$ value is the true model [^alttest].  In this test, the null hypothesis that the model with the lower value is the true model is rejected at the significance level determined by the following equation [^benakivalerman]:
 
 \begin{equation}
 Significance Level = \Phi \left[-{(2(\overline{\rho}^2_H-\overline{\rho}^2_L) \times LL(0) + (K_H - K_L))}^{1/2}\right]
@@ -683,17 +711,6 @@ The corresponding test for the cost by ln(income) being true is:
 \end{align*}
 
 The above result implies that the null hypotheses that the models with cost by income variable or cost by ln(income) are true are rejected at a significance level greater than 0.001.  However, the significance of rejection is much lower for the cost by ln(income) model and many analysts would adopt that specification on the grounds that it is conceptually more appropriate.  This specification suggests that the value of money declines with income but the rate of decline diminishes at higher levels of income.
-```{r basic-estimation1}
-base <- mlogit(chosen ~ ivtt , data = sf_mlogit)
-
-# estimate a model with constants only by constraining a single generic variable
-# to be zero
-market_shares <- mlogit(chosen ~ ivtt, data = sf_mlogit, constPar = c("ivtt" = 0))
-
-# Estimate a null model by constraining ALL the parameters to be zero. 
-fixed_coefs <- rep(0,6) %>% setNames(c(names(coef(market_shares)), "ivtt"))
-null_model <- mlogit(chosen ~ ivtt, data = sf_mlogit, start = fixed_coefs, iterlim = 0)
-```
 
 ```{r cost_models}
 sf_mlogit_costinc <- sf_mlogit %>%
@@ -702,9 +719,9 @@ sf_mlogit_costinc <- sf_mlogit %>%
     costbylninc = cost / log(hhinc)
   )
 
-base_model <- mlogit(chosen ~  tvtt | hhinc, data = sf_mlogit_costinc)
-income_model <- mlogit(chosen ~ tvtt + costbyinc, data = sf_mlogit_costinc, )
-lnincome_model <- mlogit(chosen ~ tvtt + costbylninc, data = sf_mlogit_costinc)
+base_model <- mlogit(chosen ~  tvtt + cost | hhinc, data = sf_mlogit_costinc)
+income_model <- mlogit(chosen ~ tvtt + costbyinc | hhinc, data = sf_mlogit_costinc)
+lnincome_model <- mlogit(chosen ~ tvtt + costbylninc | hhinc, data = sf_mlogit_costinc)
 
 
 income_estimation <- list(
@@ -713,8 +730,11 @@ income_estimation <- list(
   "Model With Cost By ln(Income)" = lnincome_model
 )
 
+gm <- modelsummary::gof_map
+gm$omit <- TRUE
+
 modelsummary(
-  income_estimation, 
+  income_estimation,
   title = "Models with Cost vs. Cost/Income and Cost/Ln(Income)"
 )
 ```
@@ -750,7 +770,7 @@ In the case described in Equation 5.24, this produces the ratio in Equation 5.25
 
 ### Value of Time when Cost is Interacted with another Variable
 
-This approach can be applied to any case including when either time or cost is interacted with another variable, usually a variable describing the decision maker or the decision context. For example, if cost is divided by income  as in the second model reported in Table 5-9, on the basis that a unit of cost is proportionally less important with increasing income, the utility expression becomes
+This approach can be applied to any case including when either time or cost is interacted with another variable, usually a variable describing the decision maker or the decision context. For example, if cost is divided by income [^incomerate] as in the second model reported in Table 5-9, on the basis that a unit of cost is proportionally less important with increasing income, the utility expression becomes
 
 \begin{equation}
 V_{it} = ... + \beta_{TVT}TVT_{it} + \beta_{CostInc}\frac{Cost_{it}}{Income_t} + ...
@@ -785,26 +805,45 @@ VofT = \frac{0.6 \times \frac{\beta_{TVT}}{\beta_{Cost}}}{ln[Income($1000/year)]
 
 The value of time implied by each of these formulations is illustrated in Table 5-10 and Figure 5.6 by showing the values of time for different income levels.  In each case, the values of travel time appear to be quite low.  This will be addressed in model specification refinement (Section 6.2.6). 
 
+```{r valueoftimevsincome}
+tibble(
+  AnnualIncome = c(25000, 50000, 75000, 100000, 125000)) %>%
+  mutate(HourlyWage= AnnualIncome/2000) %>%
+  mutate(linear = c(6.26, 6.26, 6.26, 6.26, 6.26)) %>%
+  mutate(CostIncome = c(4.53, 9.07, 13.60, 18.13, 21.94)) %>%
+  mutate(CostLn = c(5.18, 6.29, 6.95, 7.41, 7.72)) %>%
+  knitr::kable( caption = "Value of Time vs. Income",
+                col.names = c("Annual Income", "Hourly Wage", "Linear", "Cost/Income", "Cost/LN(Inc.)"))
+```
+
 ```{r figure 5-6, echo = F}
 library(ggplot2)
 
-fig56df <- tibble(
-  "AnnualInc" = c(0, 25, 50, 75, 100, 125),
-  "Hourlywage" = c(0, 12.50, 25.00, 37.50, 50.00, 62.50),
-  "Linear" = c(6.26, 6.26, 6.26, 6.26, 6.26, 6.26),
-  "CostbyInc" = c(0, 4.53, 9.07, 13.60, 18.13, 21.94),
-  "CostbylnInc" = c(0, 5.18, 6.29, 6.95, 7.41, 7.72))
-
-ggplot(fig56df, aes(x=AnnualInc)) + 
-  geom_line(aes(y = Linear), color = "darkred", size = 2) + 
-  geom_line(aes(y = CostbyInc), color="steelblue", size = 2) +
-  geom_line(aes(y = CostbylnInc), color="green1", size = 2) +
+tibble(
+  income = seq(0, 150, 2)
+) %>%
+  
+  #The coefficient values for beta of cost and time below come from the respective models in Table 5-9
+  mutate(
+    Cost = 6.26,
+    CostInc = 0.6 * -0.0512 / -0.1692 * income,
+    CostLnInc = 0.6 * -0.0512 / -0.0191 * log(income)
+  ) %>%
+  
+  ggplot() + 
+  geom_line(aes(y = Cost, x = income, color = "Cost"), size = 2) + 
+  geom_line(aes(y = CostInc, x = income, color = "CostInc"), size = 2) +
+  geom_line(aes(y = CostLnInc, x = income, color = "CostLnInc"), size = 2) +
   labs(title = "Value of Time vs. Income",
             x = "Annual Income ($000)",
-            y = "Wage Rate ($/hour)")
+            y = "Wage Rate ($/hour)") +
+  scale_x_continuous(labels=scales::dollar_format()) +
+  scale_y_continuous(labels=scales::dollar_format()) +
+  theme(legend.position = "right",
+        legend.title = element_blank())
 
-#I think this may not be the whole dataset, since the ln curve is not as distinct. I'm not sure where this data lives.
 ```
+
 
 Another approach that can be used in this case is to relate the value of travel directly to the wage rate by assuming that the working year consists of 2000 hours or 120,000 minutes and recognizing that $1000 dollars is equivalent to 100,000 cents.  This gives us 
 
@@ -853,40 +892,60 @@ VofT = \frac{\partial{V_{it}}}{\partial{Time_{it}}} \Huge/ \normalsize \frac{\pa
 
 which can be reported in a table for selected values of time or plotted in a graph of Value of Time as a function of TVT or Cost, as appropriate (see below).  Models using each of these formulations are estimated and reported, along with the Base Model in Table 5-11. The goodness of fit is substantially improved by using ln(time), which is generally expected, but is worse when using ln(cost), for which there is no conceptual basis. 
 
+```{r Table5-11}
+base_model <- mlogit(chosen ~  tvtt + cost | hhinc, data = sf_mlogit)
+lntravaltime_model <- mlogit(chosen ~ cost + log(tvtt) | hhinc, data = sf_mlogit)
+# lots of variables have zero cost, and log(0) = -Inf. To keep this model estimable, we can
+# add 0.01 dollars to all alternatives, because log function is monotonically increasing.
+lntravelcost_model <- mlogit(chosen ~ tvtt + I(log(cost + 0.01)) | hhinc, data = sf_mlogit)
+
+transformations_estimation <- list(
+  "Base Model" = base_model,
+  "Model With Log of Travel Time" = lntravaltime_model,
+  "Model With Log of Travel Cost" = lntravelcost_model
+)
+
+gm <- modelsummary::gof_map
+gm$omit <- TRUE
+
+modelsummary(
+  transformations_estimation,fmt = "%.4f",
+  title = "Base Model and Log Transformations"
+)
+```
 
 The implications for value of time of these different formulations are shown in Table 5-12 and Table 5-13 Value of Time for Log of Cost Model and also in Figure 5.7 and Figure 5.8.  
 
-```{r table5-12, echo = F}
+```{r table5-12}
+# in a log of time model, the value of time is a function of the trip time.
+ln_vot <- function(model, ttime){
+  ValueCentsMin = coef(model)["log(tvtt)"] / (coef(model)["cost"] * ttime)
+}
 
-tab512df <- tibble(
- "Trip Time (min)" = c(5, 15, 30, 60, 90, 120),
- "Value of Time (cents/min)"= c(141.2, 47.4, 23.5, 11.8, 7.8, 5.9),
- "Value of time ($/hr)" = c("84.71", "$28.24", "$14.12", "$7.06", "$4.71", "$3.53"))
-
-kbl(tab512df, align = "c", booktabs = T, caption = "Value of Time for Log of Time Model") %>% 
-kable_classic()
-
+tibble(
+  triptime = c(5, 15, 30, 60, 90, 120),
+  vot = ln_vot(lntravaltime_model, triptime)
+) %>%
+  mutate(vot_dhr = vot * 0.6) %>%
+  kbl(digits = 2, 
+      caption = "Value of Time for Log of Time Model", 
+      col.names = c("Trip Time (min)", "Value of Time (cents/min)", "Value of Time ($/hr)")) %>%
+  kable_styling()
 ```
 
-```{r figure5-7, echo = F}
-
-library(ggplot2)
-
-fig57df <- tibble(
-  "TimeofTrip" = c(5, 15, 30, 60, 90, 120),
-  "ValueofTime" = c(84.71, 28.24, 14.12, 7.06, 4.71, 3.53))
-
-ggplot(fig57df)+
-  stat_smooth(aes(y = ValueofTime, x = TimeofTrip), method = "loess", formula = y ~ log(x), fullrange = FALSE) +
+```{r figure5-7, fig.cap="Value of time for log of time model as a function of trip time."}
+tibble(
+  triptime = seq(5, 120, by = 1),
+  vot = 0.6 * ln_vot(lntravaltime_model, triptime)
+) %>%
+ggplot(aes(y = vot, x = triptime)) +
+  geom_line() + 
   scale_y_continuous(labels=scales::dollar_format())+
-  labs(title = "Value of Time for Log of Time Model", 
-       x= "Time of Trip (min)",
-       y = "Value of Time ($/hr)")
-
+  labs( x= "Time of Trip (min)", y = "Value of Time ($/hr)") + 
+  theme_bw()
 ```
 
 ```{r table5-13, echo = F}
-
 tab513df <- tibble(
  "Trip cost"= c("$0.25", "$0.50", "$1.00", "$2.00", "$5.00"),
  "Value of time ($/hr)" = c("0.85", "$1.71", "$3.42", "$6.83", "$17.09"))
@@ -896,6 +955,9 @@ kable_classic()
 ```
 
 ```{r figure 5-8, echo = F}
+
+#I can recreate this better with the sf_mlogit dataset, but I need to figure out where wage rate comes from
+
 library(ggplot2)
 
 fig58df <- tibble(
@@ -911,3 +973,38 @@ ggplot(fig58df, aes(x=Tripcost)) +
             y = "Value of Time ($/hour)")
 
 ```
+
+[^dataformats]: The data formats required vary for different programs and are documented in the relevant software.
+
+[^altfreq]: When the same behavior is observed repeatedly for a case, the chosen alternative will be replaced by the
+frequency with which each alternative is chosen.
+
+[^mtcmodel]: The estimation reported by the Metropolitan Transportation Commission (Travel Demand Models for the San Francisco Bay Area
+(BAYCAST-90): Technical Summary, Metropolitan Transportation Commission, Oakland, California, June 1997) includes drive alone, sharedride
+with 2 people, shared ride with 3 or more people, transit with walk access, transit with auto access, bike and walk.
+
+[^estimation]: Essentially identical estimation results are produced by these and a variety of other commercially available and programmer developed
+estimation procedures. However, some software applies simplifying assumptions that are not appropriate in every case. See Appendix A for
+additional information.
+
+[^zeromodel]: The zero model can be estimated with constants included but restricted to zero, the constants model can be
+estimated with constants included and not restricted.
+
+[^corres]: Commonly, the name is selected to match the corresponding variable name.
+
+[^altdrivealone]: If all the reported constants are negative, the alternative with the most positive parameter is drive alone at zero.
+
+[^predict]: The perfect model “predicts” a probability of one for the chosen mode for each and every case so the contribution of each case to the loglikelihood function is ln(1) = 0.
+
+[^confidlevel]: Confidence levels commonly used are in the range of 90% to 99%.
+
+[^retorelim]: Generally, it is good policy to retain or eliminate full sets of constants and alternative specific variables unless
+there is a good reason to do otherwise until all other variables have been selected.
+
+[^restrictandconstraint]: The number of restrictions is the number of constraints imposed on the unrestricted model to obtain the restricted model. If three variables are deleted from the unrestricted mode; that is, their parameters are restricted to zero; the number of restrictions is three.
+
+[^alttest]: The alternative test, that the model with the higher $\overline{\rho}^2$ value is the true model, cannot be undertaken as an inferior model can never be used to reject a superior model.
+
+[^benakivalerman]: Modified from Ben-Akiva and Lerman, Chapter 7, 1985
+
+[^incomerate]: The value of income commonly used is the total household income since that value is most commonly collected in surveys. This raises a variety of potential problems in interpretation as the hourly wage rate based on household income is only the wage rate of the worker in a single worker household and does not readily apply to any worker in multi-worker household to non-workers. This issue is not explicitly addressed in this manual but raises more general issues of model interpretation and use of the results.
