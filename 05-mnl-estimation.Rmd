@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 # Data Assembly and Estimation of Simple Multinomial Logit Models
-```{r setup}
+```{r setup, message=FALSE}
 library(tidyverse)
 library(haven)
 library(mlogit)
@@ -92,7 +92,7 @@ A further problem is that it may be difficult to obtain a random sample as it ma
 
 In addition to the sampling approaches discussed above, combinations of the approaches can also be used.  For example, enriched sampling uses a combination of household or workplace sampling with choice based sampling to increase the number of transit users in the study data.  As with choice based sampling, special estimation techniques are required to offset the biases associated with this sampling approach.
 
-Another issue in survey sampling is the sample size to be used.  The size of the sample required to adequately represent the population is a function of the level of statistical accuracy and confidence desired from the survey.  The precision of parameter estimates and the statistical validity of estimation results improve with sample size.  However, the cost of the survey also increases with sample size and in many cases it is necessary to restrict the sample size to ensure that the cost of the survey remains within budgetary constraints.  The decision about sample size requires a careful evaluation of the need for adequate data to satisfy study objectives *vis-à-vis* budgetary constraints. Interested readers are referred to (@benakivalerman1985, Chapter 8) or (@borschsupan1987, 1985) for a more comprehensive discussion of sampling methods and sample size issues.
+Another issue in survey sampling is the sample size to be used.  The size of the sample required to adequately represent the population is a function of the level of statistical accuracy and confidence desired from the survey.  The precision of parameter estimates and the statistical validity of estimation results improve with sample size.  However, the cost of the survey also increases with sample size and in many cases it is necessary to restrict the sample size to ensure that the cost of the survey remains within budgetary constraints.  The decision about sample size requires a careful evaluation of the need for adequate data to satisfy study objectives *vis-à-vis* budgetary constraints. Interested readers are referred to @benakivalerman1985 or @borschsupan1987 for a more comprehensive discussion of sampling methods and sample size issues.
 
 
 ## Methods for Collecting Mode Related Data
@@ -250,7 +250,14 @@ The following mode labels are used in the subsequent discussion and equations: D
   (\#eq:utilspecBK)
 \end{equation}
 
-The estimation results reported in this manual are obtained from software programmed in the Matlab language and included in the CD-Rom distributed with the manual.  The output for the above model specification is shown in structured format in Table 5-2.  The corresponding estimation results for this specification from various commercial packages; ALOGIT, LIMDEP and ELM; are reported in Appendix A.  The outputs from these and other software package typically include, at least, the following estimation results:
+The estimation results reported in this manual are obtained from software
+programmed using the `mlogit` package for R, with estimation code embedded in
+the document. The
+output for the above model specification is shown in structured format in Table
+\@ref(tab:basic-estimation-table). Other commercial and free software packages are
+available, including ALOGIT, LIMDEP, Biogeme (Python), Apollo (R), and ELM.
+The outputs from these and other software package typically include, at least,
+the following estimation results:
 
   - Parameter [^corres] names, parameter estimates, standard errors of these estimates and the corresponding t-statistics for each variable/parameter; 
   - Log-likelihood values at zero (equal probability model), constants only (market shares model) and at convergence and
@@ -271,7 +278,7 @@ $ \sum_t ln(1/NAlt_t)$
 In the next three sections, we review the estimation results for the base model using informal judgment-based tests (section 5.7.1), goodness-of-fit measures (section 5.7.2), and statistical tests (section 5.7.3). These elements, taken together, provide a basis to evaluate each model and to compare models with different specifications. 
 
 ```{r basic-estimation}
-base <- mlogit(chosen ~ ivtt , data = sf_mlogit)
+base <- mlogit(chosen ~ ivtt + cost, data = sf_mlogit)
 
 # estimate a model with constants only by constraining a single generic variable
 # to be zero
@@ -305,17 +312,27 @@ A variety of informal tests can be applied to an estimated model.  These tests a
 
 #### Signs of Parameters
 
-The most basic test of the estimation results is to examine the signs of the estimated parameters with theory, intuition and judgment regarding the expected impact of the corresponding variables.  The estimated coefficients on the travel time and cost variables in Table 5-2 are negative, as expected, implying that the utility of a mode decreases as the mode becomes slower and/or more expensive.  This, in turn, will reduce the choice probability of the corresponding mode.
+The most basic test of the estimation results is to examine the signs of the estimated parameters with theory, intuition and judgment regarding the expected impact of the corresponding variables.  The estimated coefficients on the travel time and cost variables in Table \@ref(tab:basic-estimation-table) are negative, as expected, implying that the utility of a mode decreases as the mode becomes slower and/or more expensive.  This, in turn, will reduce the choice probability of the corresponding mode.
 
 #### Differences in Alternative Specific Variable Parameters across Alternatives
 
-We often have expectations about the impact of decision-maker characteristics on different alternatives.  For example, when analyzing mode choice, we expect a number of variables to be more positive for automobile alternatives, especially Drive Alone, than for other alternatives.  These include income, automobile ownership, home ownership, single family dwelling unit, etc. Since DA is the reference alternative in these models, we expect negative parameters on all alternative specific income variables, with small values for the shared ride alternatives and larger values for other alternatives, to reflect our intuition that increasing income will be associated with decreased preference for all other alternatives relative to drive alone. All the estimated alternative specific income parameters in Table 5-2 Estimation Results for Zero Coefficient, Constants Only and Base Models are negative, as expected, with the exception of the parameter for shared ride 3+.  The positive sign for the shared ride 3+ parameter is counter-intuitive but very small and not significantly different from zero. An approach to address this problem is described in section 5.7.3.1.
+We often have expectations about the impact of decision-maker characteristics on different alternatives.  For example, when analyzing mode choice, we expect a number of variables to be more positive for automobile alternatives, especially Drive Alone, than for other alternatives.  These include income, automobile ownership, home ownership, single family dwelling unit, etc. Since DA is the reference alternative in these models, we expect negative parameters on all alternative specific income variables, with small values for the shared ride alternatives and larger values for other alternatives, to reflect our intuition that increasing income will be associated with decreased preference for all other alternatives relative to drive alone. All the estimated alternative specific income parameters in Table \@ref(tab:basic-estimation-table) Estimation Results for Zero Coefficient, Constants Only and Base Models are negative, as expected, with the exception of the parameter for shared ride 3+.  The positive sign for the shared ride 3+ parameter is counter-intuitive but very small and not significantly different from zero. An approach to address this problem is described in section 5.7.3.1.
 
-Additional informal tests involve comparisons among the estimated income parameters. The differences in the magnitude of these alternative-specific income parameters indicate the relative impact of increasing income on the utility and, hence, the choice probability of each mode. The results reported in Table 5 2 show that an increase in income will have a larger negative effect on the utilities of the non-motorized modes (bike and walk) than on those of transit and shared ride 2 modes. It is important to understand that the change in the choice probability of that alternative is not determined by the sign of the income parameter for a particular alternative but on the value of the parameter relative to the weighted mean of the income parameters across all alternatives, as described in section 4.5. For example, in the base model specification (Table 5-2), an increase in income will increase the probability of choosing drive alone and shared ride 3+ (the alternatives with the most positive parameters [^altdrivealone]) and will decrease the probability of choosing walk and bike (the alternatives with the smallest, most negative, parameters).  However, the effect on shared ride 2 and transit is unclear; as income increases, they will lose some probability to drive alone and shared ride 3+ and gain some from walk and bike.  The net effect will depend on the difference between the parameter for the alternative of interest and the individual choice probability weighted average of all the alternative specific income parameters (including zero for the base alternative) as illustrated in equation 4.58.
+Additional informal tests involve comparisons among the estimated income parameters. The differences in the magnitude of these alternative-specific income parameters indicate the relative impact of increasing income on the utility and, hence, the choice probability of each mode. The results reported in Table 5 2 show that an increase in income will have a larger negative effect on the utilities of the non-motorized modes (bike and walk) than on those of transit and shared ride 2 modes. It is important to understand that the change in the choice probability of that alternative is not determined by the sign of the income parameter for a particular alternative but on the value of the parameter relative to the weighted mean of the income parameters across all alternatives, as described in section 4.5. For example, in the base model specification (Table \@ref(tab:basic-estimation-table)), an increase in income will increase the probability of choosing drive alone and shared ride 3+ (the alternatives with the most positive parameters [^altdrivealone]) and will decrease the probability of choosing walk and bike (the alternatives with the smallest, most negative, parameters).  However, the effect on shared ride 2 and transit is unclear; as income increases, they will lose some probability to drive alone and shared ride 3+ and gain some from walk and bike.  The net effect will depend on the difference between the parameter for the alternative of interest and the individual choice probability weighted average of all the alternative specific income parameters (including zero for the base alternative) as illustrated in equation 4.58.
 
 #### The Ratio of Pairs of Parameters
 
-The ratio of the estimated travel time and travel cost parameters provides an estimate of the value of time implied by the model; this can serve as another important informal test for evaluating the reasonableness of the model. For example, in the Base Model reported in Table 5-2, the implied value of time is (-0.05134)/(-0.00492) or 10.4 cents per minute (the units are determined from the units of the time and cost variables used in estimation). This is equivalent to \$6.26 per hour which is much lower that the average wage rate in the area at the time of the survey, approximately \$21.20 per hour, suggesting that the estimated value of time may be too low.  We revisit this issue in greater detail in the next chapter.
+The ratio of the estimated travel time and travel cost parameters provides an
+estimate of the value of time implied by the model; this can serve as another
+important informal test for evaluating the reasonableness of the model. For
+example, in the Base Model reported in Table \@ref(tab:basic-estimation-table),
+the implied value of time is $`r coef(base)["ivtt"]`/`r coef(base)["cost"]`$ or
+`r coef(base)["ivtt"]/ coef(base)["cost"]` cents per minute (the units are
+determined from the units of the time and cost variables used in estimation).
+This is equivalent to \$6.26 per hour which is much lower that the average wage
+rate in the area at the time of the survey, approximately \$21.20 per hour,
+suggesting that the estimated value of time may be too low.  We revisit this
+issue in greater detail in the next chapter.
 
 Similar ratios may be used to assess the reasonableness of the relative magnitudes of other pairs of parameters.  These include out of vehicle time relative to in vehicle time, travel time reliability (if available) relative to average travel time, etc.
 
@@ -323,7 +340,7 @@ Similar ratios may be used to assess the reasonableness of the relative magnitud
 
 This section presents a descriptive measure, called the rho-squared value ($\rho^2$) which can be used to describe the overall goodness of fit of the model. We can understand the formulation of this value in terms of the following figure which shows the scalar relationship among the log-likelihood values for a zero coefficients model (or the equally likely model), a constants only or market share model, the estimated model and a perfect prediction model. In the figure, LL(0) represents the log-likelihood with zero coefficients (which results in equal likelihood of choosing each available alternative), $LL(0)$ represents the log-likelihood for the constants only model, $LL(\hat{\beta})$  represents the log-likelihood for the estimated model and LL(*) = 0 is the log-likelihood for the perfect prediction model.
 
-```{r loglikelihooddif, fig.cap="Relationship between Different Log-likelihood Measures"}
+```{r loglikelihooddif, fig.cap="Relationship between Different Log-likelihood Measures", echo = FALSE}
 knitr::include_graphics("img/fig5.2.PNG")
 
 ```
@@ -354,7 +371,7 @@ Similarly, the rho-square with respect to the constants only model is:
 
 By definition, the values of both rho-squared measures lie between 0 and 1 (this is similar to the R^2 measure for linear regression models).  A value of zero implies that the model is no better than the reference model, whereas a value of one implies a perfect model; that is, every choice is predicted correctly.
 
-The rho-squared values for the basic model specification in Table 5-2 are computed based on the formulae shown below as:
+The rho-squared values for the basic model specification in Table \@ref(tab:basic-estimation-table) are computed based on the formulae shown below as:
 
 \begin{equation}
 \rho_0^2 = 1- \frac{(-3626.2)}{(-7309.6)} = 0.5039 \qquad \rho_c^2 = 1- \frac{(-3626.2)}{(-4132.9)} = 0.1226
@@ -567,7 +584,7 @@ This test is not very useful because we almost always reject the null hypothesis
 (\#eq:restrictionsnullhypothesiscase)
 \end{equation}
 
-The log-likelihood values needed to test each of these hypotheses are reported in Table 5-2.  In each case, we include the log-likelihood of the restricted and unrestricted models, the calculated chi-square value and the number of restrictions or degrees of freedom as shown in Table 5-6. The confidence or significance of the rejection of the null hypothesis in each case can be obtained by referring to Table 5-5, more extensive published tables or software (most spreadsheet programs) that calculates the precise level of confidence/significance associated with each test result.
+The log-likelihood values needed to test each of these hypotheses are reported in Table \@ref(tab:basic-estimation-table).  In each case, we include the log-likelihood of the restricted and unrestricted models, the calculated chi-square value and the number of restrictions or degrees of freedom as shown in Table 5-6. The confidence or significance of the rejection of the null hypothesis in each case can be obtained by referring to Table 5-5, more extensive published tables or software (most spreadsheet programs) that calculates the precise level of confidence/significance associated with each test result.
 
 
 ```{r table5-6, echo = FALSE}
