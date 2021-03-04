@@ -565,13 +565,12 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
 }
 
 # Model 16W
-
-#the parameters in this model are not quite correct
 model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 modelsummary(model_16w)
 
 #table 6-12
+tibble ( c("Value of In-Vehicle Time", "Value of Out-of-Vehicle Time (10 mile trip)", "Value of Out-of-Vehicle Time (20 mile trip)"), "Model 15W" = c(VOTsimple(model_15w, "mot_tvtt", "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 20, "cost")), "Model 16W" = c(0.47*21.20, 0.77*21.20, 0.62*21.20) )
 
 
 ```
