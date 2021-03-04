@@ -682,7 +682,7 @@ use different criteria in making their mode choice decisions.
 ``` {r model16v17}
 
 # Model 17 W
-model_17w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0))
+model_17w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0, "vehbywrk:Share ride 2" = -0.3166, "vehbywrk:Share ride 3++" = -0.3166))
 
 #table 6-13
 modelsummary(model_17w)
@@ -831,8 +831,8 @@ ownership segmentation models (Table 6-14):
     
 ``` {r segbycars}
 # uses Model 17W as the basis
-model_17w_lowcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(numveh <= 1))
-model_17w_highcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(numveh >= 2))
+model_17w_lowcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(numveh <= 1), constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0, "vehbywrk:Share ride 2" = -3.015, "vehbywrk:Share ride 3++" = -3.015))
+model_17w_highcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(numveh >= 2), constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0, "vehbywrk:Share ride 2" = -0.241, "vehbywrk:Share ride 3++" = -0.241))
 
 # table 6-14
 list(
@@ -870,8 +870,8 @@ models (Table 6-15):
 ``` {r segbygender}
 
 # uses Model 17W as the basis
-model_17w_males <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(femdum == 1))
-model_17w_females <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(femdum == 0))
+model_17w_males <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(femdum == 0), "vehbywrk:Share ride 2" = -3.015, "vehbywrk:Share ride 3++" = -3.015)
+model_17w_females <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(femdum == 1), constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0, "vehbywrk:Share ride 2" = -0.607, "vehbywrk:Share ride 3++" = -0.607))
 # table 6-15
 list(
   "Pooled Model" = model_17w,
