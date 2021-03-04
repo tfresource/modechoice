@@ -149,14 +149,14 @@ other modes. However, the differences among these models are small both statisti
 behaviorally so the decision should be subject to a review before adoption of the final
 specification [^statbasis].
 
-```{r Table 6-1 alternative Specifications of Income, echo = F}
+```{r Table-6-1 alternative Specifications of Income, echo = F}
 
 model_base <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
 #Having issues setting Shared Ride 2 and 3+ to be equal to each other
 model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
 #Having issues setting Shared Ride 2, 3+, and Transit to be equal to each other
 model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
-model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c('hhinc:2' = 0, 'hhinc:3' = 0))
+model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c('hhinc:Share ride 2' = 0, 'hhinc:Share ride 3++' = 0))
 
 altspecinc_estimation <- list(
   "Base Model " = model_base,
@@ -229,7 +229,7 @@ the use of such constraints imposes a responsibility on the analyst to provide a
 his/her decision. The advice of other more experienced analysts is often enlisted to expand
 and/or support these judgments. 
 
-```{r Table 6-3 alternative Specifications of Travel Time, echo = F}
+```{r Table-6-3-alternative-Specifications-of-Travel-Time, echo = F}
 #Having issues setting Shared Ride 2 and 3+ to be equal to each other
 model_5w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + cost | hhinc, data = sf_mlogit)
 #Having issues setting Shared Ride 2 and 3+ to be equal to each other
@@ -249,7 +249,7 @@ modelsummary(
 ```
 [^trumodel], [^valuesoftime]
 
-```{r Table 6-4 Vot models 1w 5w and 6w, echo = FALSE}
+```{r Table 6-4-Vot models-1w-5w-and-6w, echo = FALSE}
 #These functions are based off the equations given in the text above Table 6-6
 VOTsimple <- function(model, timevar, costvar) {
   coef(model)[timevar]*0.6/coef(model)[costvar]
@@ -621,13 +621,12 @@ strong enough to override the statistical test results. Nonetheless, we may stil
 parameter constraints to obtain higher values of time. 
 
 ``` {r impliedVOT15-16W}
-#functions below are defined earlier :)
-#VOTsimple <- function(model, timevar, costvar) {
-#  coef(model)[timevar]*0.6/coef(model)[costvar]
-#}
-#VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
-#  (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
-#}
+VOTsimple <- function(model, timevar, costvar) {
+  coef(model)[timevar]*0.6/coef(model)[costvar]
+}
+VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
+  (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
+}
 
 # Model 16W
 model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
@@ -682,7 +681,8 @@ use different criteria in making their mode choice decisions.
 ``` {r model16v17}
 
 # Model 17 W
-model_17w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0))
+#will update when model_16w is figured out
+model_17w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 #table 6-13
 modelsummary(model_17w)
@@ -831,8 +831,9 @@ ownership segmentation models (Table 6-14):
     
 ``` {r segbycars}
 # uses Model 17W as the basis
-model_17w_lowcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(numveh <= 1))
-model_17w_highcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(numveh >= 2))
+#will update when model_17w is nailed down
+model_17w_lowcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(numveh <= 1))
+model_17w_highcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(numveh >= 2))
 
 # table 6-14
 list(
@@ -870,8 +871,9 @@ models (Table 6-15):
 ``` {r segbygender}
 
 # uses Model 17W as the basis
-model_17w_males <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(femdum == 1))
-model_17w_females <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(femdum == 0))
+#will update when model_17w is nailed down
+model_17w_males <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(femdum == 1))
+model_17w_females <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(femdum == 0))
 # table 6-15
 list(
   "Pooled Model" = model_17w,
