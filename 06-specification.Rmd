@@ -355,6 +355,22 @@ values of time. Finally, we can examine the ratio of time values of OVT relative
 four models as shown in Figure 6.1. The ratio for Model 6W is clearly unacceptable. Those for
 Models 7W, 8W and 9W are more reasonable.
 
+```{r Table 6-6 Model 7W Implied Values of Time as a Function of Trip Distance, echo = F}
+
+"Value of Motorized Out-of-Vehicle Time"
+"Value of Motorized In-Vehicle Time"
+"Value of Non-Motorized Time"
+
+```
+
+```{r Table 6-7 Implied Values of Time in Models 6W, 8W, Model 9W, echo = F}
+
+"Value of Out-of-Vehicle Time"
+"Value of In-Vehicle Time"
+
+```
+
+
 The selection of a preferred travel time specification among the four alternative specifications
 tested is relatively straightforward in this case. Model 7W outperforms the other models in all
 the evaluations undertaken; it has the best goodness-of-fit, the most intuitive relationship
