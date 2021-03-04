@@ -847,9 +847,8 @@ models (Table 6-15):
 ``` {r segbygender}
 
 # uses Model 17W as the basis
-#will update when model_17w is nailed down
-model_17w_males <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(femdum == 1))
-model_17w_females <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(femdum == 0))
+model_17w_males <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(femdum == 1))
+model_17w_females <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(femdum == 0))
 # table 6-15
 list(
   "Pooled Model" = model_17w,
