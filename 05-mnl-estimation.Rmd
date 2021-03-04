@@ -198,7 +198,7 @@ cost_raw <- apply(sf_wm_cost,2,function(x) mean(x[x>0]))
 statsJtoWork <- tibble(
   "Mode"= c("1. Drive Alone","2. Shared Ride (2)","3. Shared Ride (3+)", "4. Transit", "5. Bike", "6. Walk"),
   "Fraction of Sample with Mode Available (%)" = c(94.6,100.0,100.0,79.6,34.6,29.4),
-  "Market Share (%)" = c(mrktshr_raw),
+  "Market Share (%)" = c(mrktshr_raw) * 100,
   "Average IVTT (minutes)" = c(ivtt_raw[ -c(1:4)]), 
   "Average OVTT (minutes)" = c(ovtt_raw[c(5:9)],  tvtt_raw[c(10)]),
   "Average Cost (1990 cents)" = c(cost_raw[-c(1:4)]))
