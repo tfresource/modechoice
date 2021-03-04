@@ -504,21 +504,27 @@ modelsummary(
 
 ```
 
-```{r Table 6-10 trip context VoT, echo = F}
+```{r Table 6-10 trip context VoT from models, echo = F}
+#These functions are based off the equations given in the text above Table 6-6
+VOTsimple <- function(model, timevar, costvar) {
+  coef(model)[timevar]*0.6/coef(model)[costvar]
+}
+VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
+  (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
+}
 
-#Update these models when correct above in Table 6-9
+#Show models here for reference - delete once table completed as they show in previous chunk
 model_13w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall, data = sf_mlogit_tripcontext)
 model_14w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + wkempden, data = sf_mlogit_tripcontext)
 model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
-#In a column for each model I want to divide the travel time coefficient by the cost coefficient 
-#I used the coefficients given straight in the text and the values here are still a little off
-#Once we figure out the coefficient issue in the model I can convert this table to using direct functions
+#Table 6-10 based off coefficients from models 13w, 14w, 15w
+#These values are different from those in the text because the model coefficients are as well
 tibble(
   "Value of Time ($/hr)" = c("Value of Motorized IVT", "Value of Motorized OVT (10 mile trip)", "Value of Motorized OVT (20 mile trip)", "Value of Non-Motorized Time"),
-  "Model 13W" = c(as.numeric(0.6 * -0.0286 / -0.0033, options(digits = 3)), 0.6 * -0.1501 / -0.0033, 0.6 * -0.1501 / -0.0033, 0.6 * -0.0464 / -0.0033),
-  "Model 14W" = c(0.6 * -0.0299 / -0.0029, 0.6 * -0.1575 / -0.0029, 0.6 * -0.1575 / -0.0029, 0.6 * -0.0459 / -0.0029),
-  "Model 15W" = c(0.6 * -0.0231 / -0.0024, 0.6 * -0.1324 / -0.0024, 0.6 * -0.1324 / -0.0024, 0.6 * -0.0467 / -0.0024)
+  "Model 13W" = c(VOTsimple(model_13w, "mot_tvtt", "cost"), VOTdistance(model_13w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_13w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_13w, "nm_tvtt", "cost")),
+  "Model 14W" = c(VOTsimple(model_14w, "mot_tvtt", "cost"), VOTdistance(model_14w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_14w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_14w, "nm_tvtt", "cost")),
+  "Model 15W" = c(VOTsimple(model_15w, "mot_tvtt", "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 10, "cost"), VOTdistance(model_15w, "mot_tvtt", "mot_ovttbydist", 20, "cost"), VOTsimple(model_15w, "nm_tvtt", "cost"))
 ) %>%
   kbl(align = 'c', caption = "Implied Values of Time in Models 13W, 14W, and 15W") %>%
   kable_styling()
@@ -564,7 +570,7 @@ incomeinteraction_estimation <- list(
 )
 
 modelsummary(
-  incomeinteraction_estimation, fmt = "%.4f",
+  incomeinteraction_estimation, fmt = "%.4f", statistic_vertical = FALSE,
   title = "Estimation Results for Models with Trip Context Variables"
 )
 ```
