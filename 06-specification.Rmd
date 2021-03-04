@@ -808,9 +808,8 @@ ownership segmentation models (Table 6-14):
     
 ``` {r segbycars}
 # uses Model 17W as the basis
-#will update when model_17w is nailed down
-model_17w_lowcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(numveh <= 1))
-model_17w_highcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext %>% filter(numveh >= 2))
+model_17w_lowcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(numveh <= 1))
+model_17w_highcars <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0) %>% filter(numveh >= 2))
 
 # table 6-14
 list(
