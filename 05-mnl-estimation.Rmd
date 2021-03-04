@@ -131,18 +131,20 @@ trip_alt <- sf_work_mode  %>%
   select(hhid, perid, altname, chosen, ivtt, hhinc) %>% 
   rename(HH_ID = hhid, Person_ID = perid, Alternate_Name = altname, Chosen = chosen, IVTT = ivtt, HH_INC = hhinc)
 
-knitr::kable(head(trip_alt), caption= "Data Layout Type II: Trip-Alternative Format", align = 'c')
+kbl(head(trip_alt, n = 10), caption= "Data Layout Type II: Trip-Alternative Format") %>%
+  kable_styling()
 ```
 
 ```{r trip, echo = F}
 trip_format <- sf_work_mode  %>%
   select(hhid, perid, chosen, ivtt, hhinc, altname, altnum) %>%
   group_by(hhid, perid) %>%
-  mutate( chosen = max(chosen * altnum) ) %>%
+  mutate( chosen = max(chosen * altnum), altname = str_c(altname, " - Travel Time")) %>%
   select(-altnum) %>%
   spread(altname, ivtt, fill = 0)
 
-knitr::kable(head(trip_format), caption= "Data Layout Type I: Trip Format", align = 'c')
+kbl(head(trip_format), caption= "Data Layout Type I: Trip Format") %>%
+  kable_styling()
 ```
 
 
