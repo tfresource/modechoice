@@ -95,20 +95,6 @@ In addition to the sampling approaches discussed above, combinations of the appr
 Another issue in survey sampling is the sample size to be used.  The size of the sample required to adequately represent the population is a function of the level of statistical accuracy and confidence desired from the survey.  The precision of parameter estimates and the statistical validity of estimation results improve with sample size.  However, the cost of the survey also increases with sample size and in many cases it is necessary to restrict the sample size to ensure that the cost of the survey remains within budgetary constraints.  The decision about sample size requires a careful evaluation of the need for adequate data to satisfy study objectives *vis-à-vis* budgetary constraints. Interested readers are referred to (@benakivalerman1985, Chapter 8) or (@borschsupan1987, 1985) for a more comprehensive discussion of sampling methods and sample size issues.
 
 
-```{r llcll0}
-data("Fishing", package = "mlogit")
-Fish <- dfidx(Fishing, varying = 2:9, shape = "wide", choice = "mode")
-
-mnl <- mlogit(mode ~ price + catch, data = Fish)
-
-ll0 <- nrow(Fish) * log(1 / 4)
-llC <- sum(mnl$freq * log(mnl$freq / sum(mnl$freq)))
-
-rhoc <- 1 - logLik(mnl) / llC
-rho0 <- 1 - logLik(mnl) / ll0
-```
-
-
 ## Methods for Collecting Mode Related Data
 
 Surveys can be used to collect information describing the trip maker and his or her household, the context of the trip (purpose, time of day, frequency of travel, origin, and destination), the chosen mode and the respondent’s perception of travel service.  However, objective data about modal service (mode availability and level of service) must be obtained from other sources. Modal data is usually generated from simulation of network service characteristics including carrier schedules and fare and observed volumes, travel times and tolls on roadway links.
