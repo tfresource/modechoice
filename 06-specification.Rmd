@@ -88,14 +88,29 @@ alternative specifications which represent these relationships. Options for cons
     modes. This relationship is represented by constraining the income coefficients in the two
     shared alternatives to be equal as follows: 
     
+\begin{equation}
+H_0 : \beta_{INCOMESR2} = \beta_{INCOMESR3+}
+(\#eq:incomeandsharedrides)
+\end{equation}
+    
   - The effect of income relative to drive alone is the same for both shared ride modes and
     transit but is different for the other modes. This is represented in the model by constraining
     the income coefficients in both shared ride modes and the transit mode to be equal as: 
+    
+\begin{equation}
+H_0 : \beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit}
+(\#eq:incomeonsharedrideandtransit)
+\end{equation}
 
   - The effect of income on all the automobile modes (drive alone, shared ride 2, and shared
     ride 3+) is the same, but the effect is different for the other modes. We include this
     constraint by setting the income coefficients in the utilities of the automobile modes to be
     equal. In this case, we set them to zero since drive alone is the reference mode. 
+    
+\begin{equation}
+H_0 : \beta_{IncomeSR2} = \beta_{IncomeSR3+} = 0
+(\#eq:automotivemodessame)
+\end{equation}
     
 The estimation results for the base model (from CHAPTER 5) and for these three alternative
 models are reported in Table 6-1. The parameter estimates for all three models are consistent
