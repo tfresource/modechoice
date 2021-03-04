@@ -875,17 +875,12 @@ VofT = \frac{\partial{V_{it}}}{\partial{Time_{it}}} \Huge/ \normalsize \frac{\pa
 
 which can be reported in a table for selected values of time or plotted in a graph of Value of Time as a function of TVT or Cost, as appropriate (see below).  Models using each of these formulations are estimated and reported, along with the Base Model in Table 5-11. The goodness of fit is substantially improved by using ln(time), which is generally expected, but is worse when using ln(cost), for which there is no conceptual basis. 
 
-```{r Table5-11 Base model and log transformations}
-sf_mlogit_lntransformations <- sf_mlogit %>%
-  mutate(
-    lntraveltime = log(tvtt),
-    lntravelcost = log(cost)
-  )
-
-base_model <- mlogit(chosen ~  tvtt + cost | hhinc, data = sf_mlogit_lntransformations)
-lntravaltime_model <- mlogit(chosen ~ cost + lntraveltime  | hhinc, data = sf_mlogit_lntransformations)
-lntravelcost_model <- mlogit(chosen ~ tvtt + lntravelcost | hhinc, data = sf_mlogit_lntransformations)
-
+```{r Table5-11}
+base_model <- mlogit(chosen ~  tvtt + cost | hhinc, data = sf_mlogit)
+lntravaltime_model <- mlogit(chosen ~ cost + log(tvtt) | hhinc, data = sf_mlogit)
+# lots of variables have zero cost, and log(0) = -Inf. To keep this model estimable, we can
+# add 0.01 dollars to all alternatives, because log function is monotonically increasing.
+lntravelcost_model <- mlogit(chosen ~ tvtt + I(log(cost + 0.01)) | hhinc, data = sf_mlogit)
 
 transformations_estimation <- list(
   "Base Model" = base_model,
@@ -904,52 +899,36 @@ modelsummary(
 
 The implications for value of time of these different formulations are shown in Table 5-12 and Table 5-13 Value of Time for Log of Cost Model and also in Figure 5.7 and Figure 5.8.  
 
-```{r table5-12, echo = F}
-
-vot <- function(model, triptime){
-  coef(model)["lntraveltime"] / (coef(model)["cost"]*triptime)
+```{r table5-12}
+# in a log of time model, the value of time is a function of the trip time.
+ln_vot <- function(model, ttime){
+  ValueCentsMin = coef(model)["log(tvtt)"] / (coef(model)["cost"] * ttime)
 }
-vot5 <- vot(lntravaltime_model, 5)
-vot15 <- vot(lntravaltime_model, 15)
-vot30 <- vot(lntravaltime_model, 30)
-vot60 <- vot(lntravaltime_model, 60)
-vot90 <- vot(lntravaltime_model, 90)
-vot120 <- vot(lntravaltime_model, 120)
 
-votlnTime1 <- tibble(
-  TTime = c(5, 15, 30, 60, 90, 120),
-  ValueCentsMin = c(vot5, vot15, vot30, vot60, vot90, vot120)
-)
-votlnTime1 %>%
-  select(TTime, ValueCentsMin) %>%
-  mutate(ValueDollarsHr = ValueCentsMin * 0.6) %>%
-  kbl(align = "c", booktabs = T, format = "html", digits = 2, 
+tibble(
+  triptime = c(5, 15, 30, 60, 90, 120),
+  vot = ln_vot(lntravaltime_model, triptime)
+) %>%
+  mutate(vot_dhr = vot * 0.6) %>%
+  kbl(digits = 2, 
       caption = "Value of Time for Log of Time Model", 
       col.names = c("Trip Time (min)", "Value of Time (cents/min)", "Value of Time ($/hr)")) %>%
-  kable_classic()
-
-
+  kable_styling()
 ```
 
-```{r figure5-7, echo = F}
-
-library(ggplot2)
-
-fig57df <- tibble(
-  "TimeofTrip" = c(5, 15, 30, 60, 90, 120),
-  "ValueofTime" = c(84.71, 28.24, 14.12, 7.06, 4.71, 3.53))
-
-ggplot(fig57df)+
-  stat_smooth(aes(y = ValueofTime, x = TimeofTrip), method = "loess", formula = y ~ log(x), fullrange = FALSE) +
+```{r figure5-7, fig.cap="Value of time for log of time model as a function of trip time."}
+tibble(
+  triptime = seq(5, 120, by = 1),
+  vot = 0.6 * ln_vot(lntravaltime_model, triptime)
+) %>%
+ggplot(aes(y = vot, x = triptime)) +
+  geom_line() + 
   scale_y_continuous(labels=scales::dollar_format())+
-  labs(title = "Value of Time for Log of Time Model", 
-       x= "Time of Trip (min)",
-       y = "Value of Time ($/hr)")
-
+  labs( x= "Time of Trip (min)", y = "Value of Time ($/hr)") + 
+  theme_bw()
 ```
 
 ```{r table5-13, echo = F}
-
 tab513df <- tibble(
  "Trip cost"= c("$0.25", "$0.50", "$1.00", "$2.00", "$5.00"),
  "Value of time ($/hr)" = c("0.85", "$1.71", "$3.42", "$6.83", "$17.09"))
