@@ -263,9 +263,7 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
 ```{r Vot-1-5-6, echo = FALSE}
 #Table 6-4 based off coefficients from models 1w, 5w, 6w
 #These values are different from those in the text because the model coefficients are as well
-=======
-```{r Vot-1-5-6, echo = FALSE}
->>>>>>> Stashed changes
+
 tibble(
 "Value of Time ($/hr)" = c("Value of Non-Motorized Time", "Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
 "Model 1W" = round(c(VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost")),2),
