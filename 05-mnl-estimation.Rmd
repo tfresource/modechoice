@@ -114,43 +114,84 @@ Network analysis provides the zone-to-zone in-vehicle travel times for the highw
 
 ## Data Structure for Estimation {#estimation-data-structure}
 
-The data collected from the various sources described in the previous sections must be assembled into a single data set to support model estimation.  This can be accomplished using a variety of spreadsheet, data base, statistical software or user prepared programs.  The structure of the resultant data files must satisfy the format requirements of the software packages designed for choice model estimation.  The commonly used software packages for discrete choice model estimation require the data to be structured in one of two formats: a) the trip format or b) the trip-alternative format.  This are commonly referred to as IDCase (each record contains all the information for mode choice over alternatives for a single trip) or IDCase-IDAlt (each record contains all the information for a single mode available to each trip maker so there is one record for each mode for each trip). 
-
-In the trip format, each record provides all the relevant information about an individual trip, including the traveler/trip related variables, mode related variables for all available modes and a variable indicating which alternative was chosen.  In the trip-alternative format, each record includes information on the traveler/trip related variables, the attributes of that modal alternative, and a choice variable that indicates whether the alternative was or was not chosen [^dataformats].
-
-The two data structures are illustrated in Figure 5.1 for four observations (individuals) with up to three modal alternatives available.  The first column in both formats is the trip number. In the trip (or IDCase) format, this is followed by traveler/trip related variables (e.g., income), the level of service (time and cost in the figure) variables associated with each alternative and a variable that indicates the chosen alternative.  In the trip-alternative (or IDCase-IDAlt) format, the second column generally identifies the alternative number with which that record is associated. Additional columns will generally include a 0-1 variable indicating the chosen alternative [^altfreq], the number of alternatives available, traveler/trip related variables mode related attributes for the alternative with which the record is associated. Data is displayed in these two formats in Figure 5.1.  
-
-The unavailability of an alternative is indicated in the trip format by zeros for all attribute variables of the unavailable alternative and in the trip-alternative format by excluding the record for the unavailable alternative. Thus, the second individual in the sample of Figure 5.1 has only two alternatives available.
-
-Either of the two data formats may be used to represent the information required for model estimation.  The choice is based on the programming decisions of the software developer taking into account data storage and computational implications of each choice.
-
-```{r loaddata, echo = F}
-# Read in raw SPSS file from Laurie Garrow's Dropbox
+```{r loaddata}
+# Read in raw SPSS file
+# 
+# We received the work mode choice dataset from Laurie Garrow, who had converted
+# the file into a labeled SPSS data object. This code reads the file into R
+# using the haven::read_spss function, and then creates a new alternative column
+# as the label of the alternative number
 sf_work_mode <- read_spss("data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.sav") %>% 
   mutate(altname = as_factor(altnum, levels = "labels"))
 
 # Convert into mlogit dfidx data frame
+# mlogit requires instructions on which rows are the alternative, and which rows
+# are the cases. This dataset is in IDCase-ALT format
 sf_mlogit <- dfidx(sf_work_mode, idx = c("case", "altname"))
 
 # write to data/ folder for future use
 write_rds(sf_mlogit, "data/worktrips.rds")
 ```
 
-```{r trip-alt, echo = F}
+
+The data collected from the various sources described in the previous sections
+must be assembled into a single data set to support model estimation.  This can
+be accomplished using a variety of spreadsheet, data base, statistical software
+or user prepared programs.  The structure of the resultant data files must
+satisfy the format requirements of the software packages designed for choice
+model estimation.  The commonly used software packages for discrete choice model
+estimation require the data to be structured in one of two formats: a) the trip
+format or b) the trip-alternative format.  This are commonly referred to as
+IDCase (each record contains all the information for mode choice over
+alternatives for a single trip) or IDCase-IDAlt (each record contains all the
+information for a single mode available to each trip maker so there is one
+record for each mode for each trip).
+
+In the trip format, each record provides all the relevant information about an
+individual trip, including the traveler/trip related variables, mode related
+variables for all available modes and a variable indicating which alternative
+was chosen.  In the trip-alternative format, each record includes information on
+the traveler/trip related variables, the attributes of that modal alternative,
+and a choice variable that indicates whether the alternative was or was not
+chosen [^dataformats].
+
+The two data structures are illustrated in Tables \@ref(tab:trip-alt) and \@ref(tab:trip)
+for four observations
+(individuals) with up to three modal alternatives available.  The first columns
+in both formats is the household and person ID value. In the trip (or IDCase) format, this is
+followed by traveler/trip related variables (e.g., income), the level of service
+(time and cost in the figure) variables associated with each alternative and a
+variable that indicates the chosen alternative.  In the trip-alternative (or
+IDCase-IDAlt) format, the second column generally identifies the alternative
+number with which that record is associated. Additional columns will generally
+include a 0-1 variable indicating the chosen alternative [^altfreq], the number
+of alternatives available, traveler/trip related variables mode related
+attributes for the alternative with which the record is associated. 
+
+The unavailability of an alternative is indicated in the trip format by zeros
+Either of the two data formats may be used to represent the information required
+for model estimation.  The choice is based on the programming decisions of the
+software developer taking into account data storage and computational
+implications of each choice.
+
+
+```{r trip-alt}
 #trip-alt
 trip_alt <- sf_work_mode  %>%
+  filter(case <= 4)  %>%
   select(hhid, perid, altname, chosen, ivtt, hhinc) %>% 
-  rename(HH_ID = hhid, Person_ID = perid, Alternate_Name = altname, Chosen = chosen, IVTT = ivtt, HH_INC = hhinc)
+  rename(hhid, perid, Alternative = altname, chosen, IVTT = ivtt, Income = hhinc)
 
-kbl(head(trip_alt, n = 10), caption= "Data Layout Type II: Trip-Alternative Format") %>%
+kbl(trip_alt, caption= "Data Layout Type II: Trip-Alternative Format") %>%
   kable_styling()
 ```
 
-```{r trip, echo = F}
+```{r trip}
 trip_format <- sf_work_mode  %>%
-  select(hhid, perid, chosen, ivtt, hhinc, altname, altnum) %>%
+  filter(case <= 4)  %>%
+  select(hhid, perid, chosen, ivtt, Income = hhinc, altname, altnum) %>%
   group_by(hhid, perid) %>%
-  mutate( chosen = max(chosen * altnum), altname = str_c(altname, " - Travel Time")) %>%
+  mutate( chosen = altname[which(chosen == 1)], altname = str_c(altname, " - Travel Time")) %>%
   select(-altnum) %>%
   spread(altname, ivtt, fill = 0)
 
