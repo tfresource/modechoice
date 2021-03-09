@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Data Assembly and Estimation of Simple Multinomial Logit Models
+# Data Assembly and Estimation of Simple Multinomial Logit Models {#estimation-chapter}
 ```{r setup, message=FALSE}
 library(tidyverse)
 library(haven)
@@ -15,13 +15,13 @@ library(kableExtra)
 ```
 
 
-## Introduction
-This chapter describes the estimation of basic specifications for the multinomial logit (MNL) model including the collection and organization of data required for model estimation. The chapter is organized as follows: Section 5.2 presents an overview of the data required to estimate mode choice models.
-Section 5.3 reviews data collection approaches for obtaining traveler and trip-related data. Section 5.4 discusses the methods for collecting data which
-describes the availability and service characteristics of the various modal alternatives.  Section 5.5 illustrates two different data structures used by
-software packages for estimation of MNL and NL models. Section 5.6 describes the data used to estimate work mode choice model in the San Francisco Bay Region. Section 5.7 describes preliminary estimation results for mode choice to work based on this data and interpret these results in terms of judgment, descriptive measures and statistical tests.  CHAPTER 6 extends this example to the estimation of more sophisticated models.  CHAPTER 7 develops a parallel example for shop/other mode choice in the San Francisco Bay Region.  CHAPTER 9 extends the examples from previous chapters and explores nested logit models for work and shop/other trips in the San Francisco Bay Region. Additional examples based on data collected in different urban regions are presented in the appendices.
+## Introduction {#estimation-intro}
+This chapter describes the estimation of basic specifications for the multinomial logit (MNL) model including the collection and organization of data required for model estimation. The chapter is organized as follows: Section \@ref(estimation-data) presents an overview of the data required to estimate mode choice models.
+Section \@ref(estimation-collection-methods-traveller) reviews data collection approaches for obtaining traveler and trip-related data. Section \@ref(estimation-collection-methods) discusses the methods for collecting data which
+describes the availability and service characteristics of the various modal alternatives.  Section \@ref(estimation-data-structure) illustrates two different data structures used by
+software packages for estimation of MNL and NL models. Section \@ref(estimation-sf-work-data) describes the data used to estimate work mode choice model in the San Francisco Bay Region. Section \@ref(estimation-basic) describes preliminary estimation results for mode choice to work based on this data and interpret these results in terms of judgment, descriptive measures and statistical tests. Section \@ref(estimation-value-of-time) goes into more detail on value of time estimates retrieved from choice models. [CHAPTER 6](#specification-chapter) extends this example to the estimation of more sophisticated models.  [CHAPTER 7](#other-purpose-chapter) develops a parallel example for shop/other mode choice in the San Francisco Bay Region.  [CHAPTER 9](#nesting-selection-chapter) extends the examples from previous chapters and explores nested logit models for work and shop/other trips in the San Francisco Bay Region. Additional examples based on data collected in different urban regions are presented in the appendices.
 
-## Data Requirements Overview
+## Data Requirements Overview {#estimation-data}
 
 The first step in the development of a choice model is to assemble data about traveler choice and the variables believed to influence that choice process. In the context of travel mode choice, such data include:
 
@@ -58,7 +58,7 @@ The first two categories of variables are selected to describe the factors which
     *	Out-of-vehicle time divided by total trip distance.
 
 
-## Sources and Methods for Traveler and Trip Related Data Collection
+## Sources and Methods for Traveler and Trip Related Data Collection {#estimation-collection-methods-traveller}
 
 Traveler and trip related data (including the actual mode choice of the traveler) needed for estimation of mode choice models are generally obtained by surveying a sample of travelers from the population of interest.  This section discusses the types of surveys that may be used to obtain traveler and/or trip-related information (Section 5.3.1) and associated sample design considerations (Section 5.3.2).
 
@@ -95,13 +95,13 @@ In addition to the sampling approaches discussed above, combinations of the appr
 Another issue in survey sampling is the sample size to be used.  The size of the sample required to adequately represent the population is a function of the level of statistical accuracy and confidence desired from the survey.  The precision of parameter estimates and the statistical validity of estimation results improve with sample size.  However, the cost of the survey also increases with sample size and in many cases it is necessary to restrict the sample size to ensure that the cost of the survey remains within budgetary constraints.  The decision about sample size requires a careful evaluation of the need for adequate data to satisfy study objectives *vis-à-vis* budgetary constraints. Interested readers are referred to @benakivalerman1985 or @borschsupan1987 for a more comprehensive discussion of sampling methods and sample size issues.
 
 
-## Methods for Collecting Mode Related Data
+## Methods for Collecting Mode Related Data {#estimation-collection-methods}
 
 Surveys can be used to collect information describing the trip maker and his or her household, the context of the trip (purpose, time of day, frequency of travel, origin, and destination), the chosen mode and the respondent’s perception of travel service.  However, objective data about modal service (mode availability and level of service) must be obtained from other sources. Modal data is usually generated from simulation of network service characteristics including carrier schedules and fare and observed volumes, travel times and tolls on roadway links.
 
 Network analysis provides the zone-to-zone in-vehicle travel times for the highway (non-transit) and transit modes (the urban area is divided into several traffic analysis zones for travel demand analysis purposes). The highway out-of-vehicle time by the highway mode is assigned a nominal value to reflect walk access/egress to/from the car. The transit out-of-vehicle time is based on transit schedules, the presence or absence of transfers, and location of bus stops vis-à-vis origin and destination locations. The highway distance of travel is obtained from the network structure and a per-mile vehicle operation cost is applied to obtain highway zone-to-zone driving costs. Parking costs are obtained from per-hour parking rates at the destination zone multiplied by half the estimated duration of the activity pursued at the destination zone (allowing half the parking cost to be charged to the incoming and departing trips) and toll costs can be identified from the network. Transit cost is determined from the actual fare for travel between zones plus any access costs to/from the transit station from/to the origin/destination. The highway in-vehicle times, out-of-vehicle times, and costs are used as the relevant values for driving alone and these values are modified appropriately to reflect increased in-vehicle times and decreased driving/parking costs for the shared ride modes. The travel times for non-motorized modes (such as bike and walk) are obtained from the zone-to-zone distance and an assumed walk/bike speed. Finally, the appropriate travel times and cost between zones is appended to each trip in the trip file based on the origin and destination zones of the trip. 
 
-## Data Structure for Estimation
+## Data Structure for Estimation {#estimation-data-structure}
 
 The data collected from the various sources described in the previous sections must be assembled into a single data set to support model estimation.  This can be accomplished using a variety of spreadsheet, data base, statistical software or user prepared programs.  The structure of the resultant data files must satisfy the format requirements of the software packages designed for choice model estimation.  The commonly used software packages for discrete choice model estimation require the data to be structured in one of two formats: a) the trip format or b) the trip-alternative format.  This are commonly referred to as IDCase (each record contains all the information for mode choice over alternatives for a single trip) or IDCase-IDAlt (each record contains all the information for a single mode available to each trip maker so there is one record for each mode for each trip). 
 
@@ -148,7 +148,7 @@ kbl(head(trip_format), caption= "Data Layout Type I: Trip Format") %>%
 ```
 
 
-## Application Data for Work Mode Choice in the San Francisco Bay Area
+## Application Data for Work Mode Choice in the San Francisco Bay Area {#estimation-sf-work-data}
 
 The examples used in previous chapters are based on simulated or hypothetical data to highlight fundamental concepts of multinomial logit choice models.  Henceforth, our discussion of model specification and interpretation of results will be based on application data sets assembled from travel survey and other data collection to support transportation decision making in selected urban regions. Use of real data provides richer examples and “hands-on” experience in estimating mode choice models. The data used in this chapter was collected for the analysis of work trip mode choice in the San Francisco Bay Area in 1990. 
 
@@ -210,7 +210,7 @@ kbl(statsJtoWork, digits = 1,
 
 ```
 
-## Estimation of MNL Model with Basic Specification
+## Estimation of MNL Model with Basic Specification {#estimation-basic}
 
 We use the San Francisco Bay Area data to estimate a multinomial logit work mode choice model using a basic specification which includes travel time, travel cost and household income as the explanatory variables.  Travel time and travel cost represent mode related attributes; all other things being equal, a faster mode of travel is more likely to be chosen than a slower mode and a less expensive mode is more likely to be chosen than a costlier mode.  Household income is included in the model with the expectation that travelers from high income households are more likely to drive alone than to use other travel modes.
 
@@ -739,7 +739,7 @@ modelsummary(
 )
 ```
 
-## Value of Time
+## Value of Time {#estimation-value-of-time}
 
 ### Value of Time for Linear Utility Function
 
