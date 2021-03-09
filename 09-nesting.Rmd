@@ -1,4 +1,4 @@
-# Selecting a Preferred Nesting Structure
+# Selecting a Preferred Nesting Structure {#nesting-selection-chapter}
 
 ## Introduction
 
