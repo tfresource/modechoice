@@ -35,31 +35,38 @@ The first step in the development of a choice model is to assemble data about tr
 
 The first two categories of variables are selected to describe the factors which influence each decision maker’s choice of an alternative.  These independent or exogenous variables are likely to differ across trip purpose.  The commonly used explanatory variables in mode choice models include:
 
-  -	Traveler (Decision Maker) Related Variables
-    *	Income of traveler or traveler's household, 
-    *	Number of automobiles in traveler's household,
-    *	Number of workers in traveler's household,
-    *	Sex of the traveler,
-    *	Age group of the traveler,
-    *	Functions of these variables such as number of autos divided by number of workers and
-  - Trip Context Variables 
-    *	Trip purpose,
-    *	Employment density at the traveler's workplace,
-    *	Population density at the home location and
-    *	Dummy variable indicating whether the traveler's workplace is in the Central Business District (CBD).
-  - Mode (Alternative) Related Variables
-    *	Total travel time,	
-    *	In-vehicle travel time,	
-    *	Out-of-vehicle travel time,	
-    *	Walk time,
-    *	Wait time,
-    *	Number of transfers	
-    *	Transit headway and	
-    *	Travel cost.	
-  - Interaction of Mode and Traveler or Trip Related Variables
-    *	Travel cost divided by household income,
-    *	Travel time or cost interacted with sex or age group of traveler, and
-    *	Out-of-vehicle time divided by total trip distance.
+Traveler (Decision Maker) Related Variables:
+
+  -	Income of traveler or traveler's household, 
+  -	Number of automobiles in traveler's household,
+  -	Number of workers in traveler's household,
+  -	Sex of the traveler,
+  -	Age group of the traveler,
+  -	Functions of these variables such as number of autos divided by number of workers
+  
+Trip Context Variables:
+
+  -	Trip purpose,
+  -	Employment density at the traveler's workplace,
+  -	Population density at the home location and
+  -	Dummy variable indicating whether the traveler's workplace is in the Central Business District (CBD).
+  
+Mode (Alternative) Related Variables:
+
+  -	Total travel time,	
+  -	In-vehicle travel time,	
+  -	Out-of-vehicle travel time,	
+  -	Walk time,
+  -	Wait time,
+  -	Number of transfers	
+  -	Transit headway and	
+  -	Travel cost.	
+  
+Interaction of Mode and Traveler or Trip Related Variables:
+
+  -	Travel cost divided by household income,
+  -	Travel time or cost interacted with sex or age group of traveler, and
+  -	Out-of-vehicle time divided by total trip distance.
 
 
 ## Sources and Methods for Traveler and Trip Related Data Collection {#estimation-collection-methods-traveller}
