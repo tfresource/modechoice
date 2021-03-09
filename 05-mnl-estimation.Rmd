@@ -71,9 +71,9 @@ Interaction of Mode and Traveler or Trip Related Variables:
 
 ## Sources and Methods for Traveler and Trip Related Data Collection {#estimation-collection-methods-traveller}
 
-Traveler and trip related data (including the actual mode choice of the traveler) needed for estimation of mode choice models are generally obtained by surveying a sample of travelers from the population of interest.  This section discusses the types of surveys that may be used to obtain traveler and/or trip-related information (Section 5.3.1) and associated sample design considerations (Section 5.3.2).
+Traveler and trip related data (including the actual mode choice of the traveler) needed for estimation of mode choice models are generally obtained by surveying a sample of travelers from the population of interest.  This section discusses the types of surveys that may be used to obtain traveler and/or trip-related information (Section \@ref(estimation-survey-types)) and associated sample design considerations (Section \@ref(estimation-survey-considerations)).
 
-### Travel Survey Types
+### Travel Survey Types {#estimation-survey-types}
 
 There are several types of travel surveys.  The most common of these are household, workplace and intercept surveys.
 
@@ -85,7 +85,7 @@ There are several types of travel surveys.  The most common of these are househo
 
 **Intercept Surveys** “intercept” potential respondents during their travel.  The emphasis of the survey is on collecting information about the specific trip being undertaken by the traveler.  Intercept surveys are commonly used for intercity travel studies due to the high cost of identifying intercity travelers through home-based or work-based surveys.  In intercept surveys, travelers are intercepted at a roadside rest area for highway travel and on board carriers (or at carrier terminals) for other modes of travel.  The traveler is usually given a brief survey (paper or interview) for immediate completion or future response and/or recruited for a future phone survey.  A variant of highway intercept surveys is to record the license plate of vehicles and subsequently contact the owners of a sample of vehicles to obtain information on the trip that was observed. Intercept surveys can be used to cover all available modes or they can be used to enrich a household or workplace survey sample by providing additional observations for users of infrequently used modes since few such users are likely to be identified through household or workplace surveys.
 
-### Sampling Design Considerations
+### Sampling Design Considerations {#estimation-survey-considerations}
 
 The first issue to consider in sample design is the population of interest in the study. Obviously, the population of interest will depend on the purpose of the study. In the context of urban work mode choice analysis, the population of interest would be all commuters in the urban region. In the context of non-business intercity mode choice, the population of interest would be all non-business intercity travelers in the relevant corridor.  However, most surveys are designed to addresses a number of current or potential analysis and decision issues.  Thus, the population of interest is selected based on the full range of such issues and is likely to include a wide range of households and household members each undertaking a variety of trips.
 
