@@ -211,7 +211,7 @@ practical implications of these properties in model development and application.
 The chapter concludes with an overview of methods used for estimating the model
 parameters.
 	
-In [CHAPTER 5][Data Assembly and Estimation of Simple Multinomial Logit Models], 
+In [CHAPTER 5][#estimation-chapter], 
 we first discuss the data requirements for developing disaggregate
 mode choice models, the potential sources for these data, and the format in
 which these data need to be organized for estimation.  Next, the data sets used
@@ -223,7 +223,7 @@ estimation results of this model specification are reviewed with a comprehensive
 discussion of informal and formal tests to evaluate the appropriateness of model
 parameters and the overall goodness-of-fit statistics of the model.
 	
-[CHAPTER 6][Model Specification Refinement] describes and demonstrates the 
+[CHAPTER 6][#specification-chapter] describes and demonstrates the 
 process by which the utility function
 specification for the work mode choice model can be refined using intuition,
 statistical analysis, testing, and judgment.  Many specifications of the utility
