@@ -391,7 +391,7 @@ Similar ratios may be used to assess the reasonableness of the relative magnitud
 This section presents a descriptive measure, called the rho-squared value ($\rho^2$) which can be used to describe the overall goodness of fit of the model. We can understand the formulation of this value in terms of the following figure which shows the scalar relationship among the log-likelihood values for a zero coefficients model (or the equally likely model), a constants only or market share model, the estimated model and a perfect prediction model. In the figure, LL(0) represents the log-likelihood with zero coefficients (which results in equal likelihood of choosing each available alternative), $LL(0)$ represents the log-likelihood for the constants only model, $LL(\hat{\beta})$  represents the log-likelihood for the estimated model and LL(*) = 0 is the log-likelihood for the perfect prediction model.
 
 ```{r loglikelihooddif, fig.cap="Relationship between Different Log-likelihood Measures", echo = FALSE}
-knitr::include_graphics("img/fig5.2.PNG")
+knitr::include_graphics("img/likelihood_numberline.PNG")
 
 ```
 

@@ -1,4 +1,4 @@
-# Model Specification Refinement
+# Model Specification Refinement {#specification-chapter}
 
 ## Introduction
 
