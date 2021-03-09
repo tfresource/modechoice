@@ -179,8 +179,7 @@ implications of each choice.
 #trip-alt
 trip_alt <- sf_work_mode  %>%
   filter(case <= 4)  %>%
-  select(hhid, perid, altname, chosen, ivtt, hhinc) %>% 
-  rename(hhid, perid, Alternative = altname, chosen, IVTT = ivtt, Income = hhinc)
+  select(hhid, perid, Alternative = altname, chosen, IVTT = ivtt, Income = hhinc) 
 
 kbl(trip_alt, caption= "Data Layout Type II: Trip-Alternative Format") %>%
   kable_styling()
