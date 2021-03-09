@@ -4,14 +4,18 @@ editor_options:
   chunk_output_type: console
 ---
 # Data Assembly and Estimation of Simple Multinomial Logit Models {#estimation-chapter}
-```{r setup, message=FALSE}
-library(tidyverse)
-library(haven)
-library(mlogit)
-library(modelsummary)
-library(labelled)
+```{r setup, warning = FALSE, message = FALSE, cache = FALSE}
+# packages used in this chapter
+library(tidyverse) # general data munging
+library(haven) # read spss data into R
+library(mlogit) # multinomial logit estimation
+library(modelsummary) # pretty tables
+library(kableExtra)   # pretty tables
+library(labelled) # point labels
+
+# helping with book creation
 library(knitr)
-library(kableExtra)
+knitr::opts_chunk$set(cache = TRUE)
 ```
 
 
