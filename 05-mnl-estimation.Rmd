@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Data Assembly and Estimation of Simple Multinomial Logit Models
+# Data Assembly and Estimation of Simple Multinomial Logit Models {#chapter5}
 ```{r setup, message=FALSE}
 library(tidyverse)
 library(haven)
@@ -482,7 +482,7 @@ It is important to recognize that a low t-statistic does not require removal of 
 
 The lack of significance of the alternative specific walk constant is immaterial since the constants represent the average effect of all the variables not included in the model and should always be retained despite the fact that they do not have a well-understood behavioral interpretation.
 
-#### Test of Linear Relationship between Parameters
+#### Test of Linear Relationship between Parameters {#section5-7-3-2}
 
 It is often interesting to determine if two parameters are statistically different from one another or if two parameters are related by a specific value ration.  These tests are similarly based on the t-statistic; however, the formulation of the test is somewhat different from that described in Section 5.7.3.1.  To test the hypothesis $H_{0}:\beta_{k} = \beta_{l}$ vs. $H_{A}:\beta_{k} \ne \beta_{l}$; we use the asymptotic t-statistic, which takes the following form: 
 
@@ -768,7 +768,7 @@ VofT = \frac{\partial{V_i}}{\partial{Time_i}} \Huge/ \normalsize \frac{\partial{
 
 In the case described in Equation 5.24, this produces the ratio in Equation 5.25.  However, this more general formulation allows us to infer the value of time for a variety of special cases in addition to the linear utility case described above. 
 
-### Value of Time when Cost is Interacted with another Variable
+### Value of Time when Cost is Interacted with another Variable {#section5-8-2}
 
 This approach can be applied to any case including when either time or cost is interacted with another variable, usually a variable describing the decision maker or the decision context. For example, if cost is divided by income [^incomerate] as in the second model reported in Table 5-9, on the basis that a unit of cost is proportionally less important with increasing income, the utility expression becomes
 
