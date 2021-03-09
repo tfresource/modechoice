@@ -171,6 +171,17 @@ modelsummary(
 )
 
 ```
+
+```{r Table-6-2, echo = F}
+tibble(
+"Reference Model -->" = c("Loglikelihood Ratio", "Degrees of Freedom", "Significance"),
+"Base Model vs Model 1W" = c(c(-2*(logLik(model_1w)-logLik(model_base)), df.residual(model_1w), p.value(model_1w)))
+)%>%
+   kbl(align = 'c', caption = "Likelihood Ratio Tests between Models in Table 6-1 (Likelihood Ratio Statistic, Degrees of Freedom, and Rejection Significance Level") %>%
+   kable_styling()
+```
+
+
 ### Different Specifications of Travel Time
 The specification for travel time in the above models implies that the utility value of time is
 equal for all the alternatives and between in-vehicle and out-of-vehicle time. However, we
