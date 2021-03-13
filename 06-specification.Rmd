@@ -647,15 +647,23 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
   (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
 }
 
-# Model 16W
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + I(mot_ovtt/dist) + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
-#the parameters in this model are not quite correct
 model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
-modelsummary(model_16w)
-
-#table 6-12
-
+tibble(
+      "Measure" = c("Value of In-Vehicle Time","Value of Out-of-Vehilce Time (10 mile trip)", "Value of Out-of-Vehilce Time (20 mile trip)"),
+       "Model 15W" = c(
+         paste("$", round(VOTsimple(model_15w,"mot_tvtt","cost"),2), "/hr"),
+         paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 10,"cost"),2), "/hr"), 
+         paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 20,"cost"),2), "/hr")), 
+       "Model 16W (Wage Rate = $21.20)" = c(
+         paste("0.47 x Wage Rate ($", round(0.47*21.20,2), "/hr)"), 
+         paste("0.77 x Wage Rate ($", round(0.77*21.20,2), "/hr)"), 
+         paste("0.62 x Wage Rate ($", round(0.62*21.20,2), "/hr)"))
+      ) %>%
+  kbl(caption = "Implied Value of Time in Models 15W and 16W") %>%
+  kable_classic()
 
 ```
 
