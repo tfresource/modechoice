@@ -1,6 +1,32 @@
 # Selecting a Preferred Nesting Structure {#nesting-selection-chapter}
 
+```{r setup}
+library(mlogit)
+library(tidyverse)
+```
+
 ## Introduction
+
+## Nested Models for Work Trips
+
+```{r sf_work}
+sf_work <- read_rds("data/worktrips.rds")
+```
+
+```{r nesting}
+nl_1 <- mlogit(chosen ~ mot_tvtt + nm_tvtt | hhinc + vehbywrk, data = sf_work,
+             nests = list(motorized = c('Drive alone', 'Share ride 2', 'Share ride 3+', 'Transit'),  
+                          other = c('Bike', 'Walk')),
+             constPar = c("iv:other" = 1))
+
+
+nl_2 <- mlogit(chosen ~ mot_tvtt + nm_tvtt | hhinc + vehbywrk, data = sf_work,
+             nests = list(auto = c('Drive alone', 'Share ride 2', 'Share ride 3+'),  
+                          nonauto = c('Bike', 'Walk', 'Transit')),
+             constPar = c("iv:auto" = 1))
+```
+
+
 
 ## Nested Models for Work Trips
 
