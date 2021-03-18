@@ -403,12 +403,25 @@ values of time. Finally, we can examine the ratio of time values of OVT relative
 four models as shown in Figure 6.1. The ratio for Model 6W is clearly unacceptable. Those for
 Models 7W, 8W and 9W are more reasonable.
 
-```{r Table 6-6 Model 7W Implied Values of Time as a Function of Trip Distance, echo = F}
+```{r model7w_vot, echo = F}
+model7_vot <- function(model, timepar, costpar, distance){
+  if(timepar == "mot_ovttbydist"){
+    ( coef(model)[timepar] / distance) / coef(model)[costpar]
+  } else {
+    coef(model)[timepar] / coef(model)[costpar]
+  }
+}
 
-"Value of Motorized Out-of-Vehicle Time"
-"Value of Motorized In-Vehicle Time"
-"Value of Non-Motorized Time"
-
+tibble(distance = c(5, 10, 20)) %>%
+  rowwise() %>%
+  mutate(
+  "mot_ovtt" = model7_vot(model_7w, "mot_ovttbydist", "cost", distance),
+  "mot_ivtt" = model7_vot(model_7w, "mot_tvtt", "cost", distance),
+  "mot_tvtt" = mot_ovtt + mot_ivtt,
+  "nm_tvtt" = model7_vot(model_7w, "nm_tvtt", "cost", distance),
+) %>%
+  kbl(caption ="Model 7W Implied Values of Time as a Function of Trip Distance" ) %>%
+  kable_styling()
 ```
 
 ```{r Table 6-7 Implied Values of Time in Models 6W, 8W, Model 9W, echo = F}
