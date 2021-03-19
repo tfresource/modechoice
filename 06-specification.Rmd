@@ -610,13 +610,10 @@ household income. Table 6-11 portrays the estimation results for two models that
 how they represent cost; Model 15W includes travel cost while Model 16W includes travel cost
 divided by income.
 
-```{r Table 6-11 income interaction models, echo = F}
+```{r income_interaction, echo = F}
 #I feel I've created the interaction term correctly and included the right variables, but values are still slightly off
-
-sf_mlogit_tripcontext %>%
-  mutate(costbyinc = cost / hhinc)
-
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | 
+                      hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 incomeinteraction_estimation <- list(
@@ -660,25 +657,42 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
   (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
 }
 
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + I(mot_ovtt/dist) + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + I(mot_ovtt/dist) + cost | 
+                      hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
-model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | 
+                      hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 tibble(
-      "Measure" = c("Value of In-Vehicle Time","Value of Out-of-Vehilce Time (10 mile trip)", "Value of Out-of-Vehilce Time (20 mile trip)"),
-       "Model 15W" = c(
-         paste("$", round(VOTsimple(model_15w,"mot_tvtt","cost"),2), "/hr"),
-         paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 10,"cost"),2), "/hr"), 
-         paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 20,"cost"),2), "/hr")), 
-       "Model 16W (Wage Rate = $21.20)" = c(
-         paste("0.47 x Wage Rate ($", round(0.47*21.20,2), "/hr)"), 
-         paste("0.77 x Wage Rate ($", round(0.77*21.20,2), "/hr)"), 
-         paste("0.62 x Wage Rate ($", round(0.62*21.20,2), "/hr)"))
-      ) %>%
+  "Measure" = c("Value of In-Vehicle Time","Value of Out-of-Vehilce Time (10 mile trip)", 
+                "Value of Out-of-Vehilce Time (20 mile trip)"),
+  "Model 15W" = c(
+    paste("$", round(VOTsimple(model_15w,"mot_tvtt","cost"),2), "/hr"),
+    paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 10,"cost"),2), "/hr"), 
+    paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 20,"cost"),2), "/hr")
+  ), 
+  "Model 16W (Wage Rate = $21.20)" = c(
+    paste( coef(model_16w)["mot_tvtt"] / coef(model_16w)["I(cost/hhinc)"] * 21.20, "$ /hr)"), 
+    (coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 10) / coef(model_16w)["I(cost/hhinc)"] * 21.20,
+    (coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 20) / coef(model_16w)["I(cost/hhinc)"] * 21.20
+  )) %>%
   kbl(caption = "Implied Value of Time in Models 15W and 16W") %>%
-  kable_classic()
+  kable_styling()
 
 ```
+
+```{r compare-1516}
+modelsummary(
+  list("15W" = model_15w, "16W" = model_16w), 
+  coef_map = c("mot_tvtt" = "Motorized Travel Time", 
+               "nm_tvtt" = "Non-motorized Travel Time",
+               "I(mot_ovtt/dist)" = "Motorized time per distance",
+               "cost" = "Trip Cost",
+               "I(cost/hhinc)" = "Trip cost divided by income"
+               )
+)
+```
+
 
 ### Additional Model Refinement
 Generally, it is appropriate to test the preferred model specification against a variety of other
