@@ -3,17 +3,17 @@
 ```{r setup}
 library(mlogit)
 library(tidyverse)
+library(modelsummary)
+library(haven)
+library(knitr)
+library(kableExtra)
 ```
-
-## Introduction
-
-## Nested Models for Work Trips
 
 ```{r sf_work}
 sf_work <- read_rds("data/worktrips.rds")
 ```
 
-```{r nesting}
+```{r nesting examples}
 nl_1 <- mlogit(chosen ~ mot_tvtt + nm_tvtt | hhinc + vehbywrk, data = sf_work,
              nests = list(motorized = c('Drive alone', 'Share ride 2', 'Share ride 3+', 'Transit'),  
                           other = c('Bike', 'Walk')),
@@ -26,10 +26,51 @@ nl_2 <- mlogit(chosen ~ mot_tvtt + nm_tvtt | hhinc + vehbywrk, data = sf_work,
              constPar = c("iv:auto" = 1))
 ```
 
+## Introduction
+
+This chapter re-examines the San Francisco mode choice models estimated in CHAPTER 6 and CHAPTER 7 and evaluates whether the MNL models should be replaced by nested logit models.  The final, un-segmented, specifications, Model 17W for work trips and Model 14 S/O for shop/other trips, are taken as the base specifications for estimating nested logit models .  Nested models for work trips are examined first, followed by shop/other trips.  The chapter concludes with consideration of the policy implications of adopting alternative nesting structures.  
+Although the number of possible nests for six alternatives is large, the nature of the alternatives allows certain nests to be rejected as implausible.  For example, it is unreasonable to suppose that Bike and Transit have substantial unobserved characteristics that lead to correlation in the error terms of their utility functions.  For this reason, this chapter considers four plausible nests which are combined in different ways.  For Work trips , these are:
+•	Motorized (M) alternatives, comprised of Drive Alone, Shared Ride 2, Shared Ride 3+, and Transit; 
+•	Private automobile (P) alternatives, including Drive Alone, Shared Ride 2 and Shared Ride 3+ alternatives; 
+•	Shared ride (S) alternatives; and 
+•	Non-Motorized (NM) alternatives comprised of Bike and Walk.  
+  
+Given these four nests or groupings of alternatives and recognizing that Motorized includes both Automobile and Transit alternatives and that Automobile includes Drive Alone and the Shared Ride alternatives, fifteen nest structures as described below. We begin with four single nest models (and, based on the results of these estimations, we explore a selection of more complex structures.
 
 
 ## Nested Models for Work Trips
 
+The estimation of nested logit models for work trips begins with consideration of the four single nest models mentioned above and illustrated in Figure 9.1. Each of these models obtains improved goodness-of-fit relative to the MNL model (see Table 9 1).  Three of the four models; Models 18W, 20W, 21W; result in acceptable logsum parameters and two of these models (Models 18W and 20W) significantly reject the MNL model at close to the 0.05 level (see the chi-square test and significance in the last two rows of  Table 9 1.  However, the model with the private automobile nest (Model 19W) is rejected because the logsum parameter is greater than one and the model with the non-motorized nest (Model 21W) cannot reject the MNL model at any reasonable level.
+
+Next we consider three models with the non-motorized nest in parallel with each of the three other nests (Figure 9.2).  In each case, the new models in Table 9 2; Models 22W, 23W and 24W; have better goodness of fit than the corresponding single nest models.  Model 23W is rejected because the nest parameter for private automobile is greater than one, as before.  Models 22W and 23W both reject the single non-motorized nest (Model 21W) at close to the 0.05 level; however, neither rejects the corresponding Motorized and Shared Ride models (Models 18W and 20W, respectively).  In such cases, the analyst can decide to include the non-motorized nest or not, for other than statistical reasons.  
+
+Another option is to consider ‘hierarchical’ two nest models with Motorized and Private Automobile, Motorized and Shared Ride or Private Automobile and Shared Ride as illustrated in Figure 9.3.  Of the three models reported in Table 9 3, only Model 26W, Motorized and Shared Ride, produces an acceptable result.  Model 27W is rejected because the private automobile nest coefficient is greater than one, as before. Model 25W is also rejected, despite the fact that the automobile nest parameter is less than one because it is greater than the logsum parameter for the motorized nest which is above it (see Section 8.4).  Model 26W, however, represents an attractive model achieving the best goodness-of-fit of any of the models considered, with acceptable logsum parameters.  Further, it rejects the MNL model (Model 17W), the Motorized (Model 18W) and the Shared Ride (Model 20W) nest models at roughly the 0.03, 0.07 and 0.06 levels, respectively.
+
+Table 9 4 presents four additional nested model structures for work trips.  The first two models extend the nesting structures previously estimated.  Model 28W adds the non-motorized nest to Model 26W (see Figure 9.4) with further improved goodness-of-fit, but cannot reject Model 26W at any reasonable level of significance.  Model 29W which includes the Motorized, Private Automobile and Shared Ride Nests (see Figure 9.3) is infeasible as it obtains a logsum for the automobile nest that is greater than for the motorized nest, as before.  However, Model 29W presents a structure that represents our expectation of the relationship among the motorized modes.  Thus, we estimate Model 30W which is identical to Model 29W except that it constrains the automobile nest parameter to 0.75 times the value of the motorized nest parameter.  While Model 30W results in a poorer goodness-of-fit than any of the other models including the simple MNL model; it is worth considering because it reflects increased substitution as we move from the Motorized Nest to the Private Automobile Nest to the Shared Ride Nest, as expected.  The data does not support this structure (relative to the MNL) but if the analyst or policy makers are convinced it is correct, the use of the relational constraint can produce a model consistent with these assumptions.
+
+The final model, Model 31W, extends Model 30W by adding the Non-Motorized nest to the structure.  It therefore has the same issues regarding the constrained nest parameters, but it offers the advantage of including the substitution effects associated with all four nests previously selected.  Again, the decision on the acceptance of this model may be based primarily on the judgment of analysts and policy makers.
+
+Based on these results, Models 26W, 28W, 30W and 31W are all potential candidates for a final model.  Model 26W is not rejected by any other model and is the simplest structure of this group.  Model 28W is slightly better than Model 26W but enough to statistically reject it.  Models 30W and 31W have a poorer goodness of fit than Model 26W and 28W, respectively but they incorporate the private automobile intermediate nest.  The decision about which of these models to use is largely a matter of judgment.  It is possible that other models might also be considered.
+We further examine Model 26W, because of its simplicity, to demonstrate the differences in direct-elasticity and cross-elasticity between the MNL (17W) model and pairs of alternatives in different parts of the NL tree associated with 26W.
+
+The structure of the nested logit model (26W) in Figure 9.3 is reproduced here so that each nest can be readily identified.  The following table reports the elasticities for the MNL Model 17W and the NL Model 26W.
+
+It is apparent from the above table that reduction in the magnitude of the utility parameter for the NL model results in a lower direct and cross elasticity for alternatives that are in neither of the nests depicted in Figure 9.5 than they would have in the corresponding MNL model while alternatives in the lowest and intermediate nests have increased elasticity. The magnitude in of the elasticity increases as alternatives or pairs of alternatives are in lower nests in the tree.  Possibly, a better way to think about this is that adoption of the MNL model results in some type of averaged elasticities rather than the distinct elasticities for alternatives in a properly formed NL model.
+
 ## Nested Models for Shop / Other Trips
 
+The exploration of nested logit models for shop/other trips follows the same approach as used with work trips, beginning with the consideration of four single nest models depicted in Figure 9.4.  For these trips, all four of the single nest structures produce valid models (Table 9 6).  Further, Models 15 S/O, 16 S/O and 17 S/O strongly reject the MNL model; however, the non-motorized nest (Model 18 S/O) does not reject the MNL model at any reasonable level of significance. 
+
+Despite the marginal significance of the non-motorized nest, the possible two parallel nest models including non-motorized and one other nest, were estimated and are reported in Table 9 7.  All three specifications result in valid models with improved goodness-of-fit over the MNL and the single nest NM model (Model 18 S/O) but Models 19 S/O, 20 S/O and 21 S/O do not reject the corresponding Motorized (Model 15 S/O), Private Automobile (Model 16 S/O) and Shared Ride (Model 17 S/O) nest models, which are restricted forms of these models, at a high level of confidence.  
+It is important to note that a variety of different initial parameters were required to find the solution for Model 20 S/O reported here. The selection of different starting values for the model parameters, especially the nest parameter(s) may lead to convergence at different values in or out of the acceptable range as discussed in CHAPTER 10.  
+
+As in the case of work trips, hierarchical two-nest models, depicted in Figure 9.2, are considered next, Table 9 8.  Model 22 S/O obtains a satisfactory parameter for the automobile logsum but the motorized logsum is not significantly different from one and the model does not reject the single nest Private Automobile structure (Model 16 S/O).  However, Models 23 S/O (with shared ride under the motorized nest) and 24 S/O (with shared ride under the automobile nest) provide excellent results. The similarity interpretation of these nests is reasonable and both models strongly reject the MNL model and the constrained single nest models reported in Table 9 7.
+
+Unlike the case of the home-based work models, the home-based shop/other data set supports complex nested models which combine the hierarchical and parallel nests to capture the different substitutability between several groups of alternatives.  Models 25 S/O and 26 S/O improve goodness-of-fit over both the best hierarchical (Model 24 S/O) and parallel (Model 20 S/O) two-nest models.  These more complex models can reject all of the single nest models at the .05 level or higher, but cannot reject the best two-nest models at a high level of confidence.  Even so, they may still be preferred for their potentially more realistic representation of trade-offs between pairs of alternatives.  The same rationale could be applied between the two models, as Model 26 S/O cannot reject 25 S/O, either, but allows for greater substitutability between the non-motorized modes (for which the statistical evidence is moderately significant).  The nesting coefficient for the motorized nest is not particularly significant in either model, but it can be retained given the reasonableness of its value.  
+
 ## Practical Issues and Implications
+
+A large number of nested logit structures can be proposed for any context in which the number of alternatives is not very small.  As seen, even in the case of four alternatives, there are 25 possible nest structures and this number increases to 235 for five alternatives and beyond 2000 for six or more alternatives.  Since searching across this many nest structures is generally infeasible, it is the responsibility of the analyst to propose a subset of these structures for primary consideration or, alternatively, to eliminate a subset of such structures from consideration.  At the same time, it is desirable for the analyst to remain open to other possible structures that may be suggested by others who have familiarity with the behavior under study.
+	It is not uncommon for some or all of the proposed structures to be infeasible due to obtaining an estimated logsum or nesting parameter that is greater than one or greater than the parameter in a higher level nest.  It is a matter of judgment whether to eliminate the proposed structure based on the estimation results or to constrain selected nest parameters to fixed values or to relative values that ensure that the structure is consistent with utility maximization.  This ‘imposition’ of a fixed value or other constraints on nest parameters requires careful judgment, discussion with other modeling and policy analysts and open reporting so that potential users of the model are aware of the basis for the proposed model.
+	An important part of the decision process is the differential interpretation associated with any nested logit model relative to the multinomial logit model or other nested logit models.  The central element of such interpretation is the way in which a change in any of the characteristics of an alternative affects the probability of that alternative and each other alternative being chosen.  This is the essential element of competition/substitution between pairs of alternatives and may dramatically influence the predicted impact of selected policy changes.
+
