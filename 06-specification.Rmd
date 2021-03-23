@@ -173,16 +173,14 @@ modelsummary(
 ```
 
 ```{r Table-6-2, echo = F}
-#not sure if this table is relevant given that fact that we arent' restricting model 1 or 2. Also, why are we
-#restricting model 3, but not the others? I haven't figured out a way to determine the rejection levels for the models.
-# I'm not entirely sure this table is useful (now or in the past) except for the fact that it displays the logliklihood ratio # test
+#This table is incomplete because Models 1-3 are not being restricted in the same way as in the original table. 
 tibble(
-"Test" = c("Loglikelihood Ratio Test", "Degrees of Freedom", "Rejection Significance Level"),
-"Base Model vs Model 1W" = c(-2*(logLik(model_1w)-logLik(model_base)), 1, "p.value(model_1w)"),
-"Base Model vs Model 2W" = c(-2*(logLik(model_2w)-logLik(model_base)), 2, "p.value(model_2w)"),
-"Base Model vs Model 3W" = c(-2*(logLik(model_3w)-logLik(model_base)), 2, "p.value(model_3w)"),
-"Model 1W vs Model 2W" = c(-2*(logLik(model_2w)-logLik(model_1w)), 1, "p.value(model_2w)"),
-"Model 1W vs model 3W" = c(-2*(logLik(model_2w)-logLik(model_3w)), 1, modelsummary(model_3w, statistic = 'p.value'))
+"Test" = c("Loglikelihood Ratio Test", "Degrees of Freedom", "Significance Level"),
+"Base Model vs Model 1W" = c(-2*(logLik(model_1w)-logLik(model_base)), 1, chisq.test(model_1w, model_base)),
+"Base Model vs Model 2W" = c(-2*(logLik(model_2w)-logLik(model_base)), 2, chisq.test(model_2w, model_base)),
+"Base Model vs Model 3W" = c(-2*(logLik(model_3w)-logLik(model_base)), 2, chisq.test(model_3w, model_base)),
+"Model 1W vs Model 2W" = c(-2*(logLik(model_2w)-logLik(model_1w)), 1, chisq.test(model_2w, model_1w)),
+"Model 1W vs model 3W" = c(-2*(logLik(model_2w)-logLik(model_3w)), 1, chisq.test(model_2w, model_3w))
 )%>%
    kbl(align = 'c', caption = "Likelihood Ratio Tests between Models in Table 6-1 (Likelihood Ratio Statistic, Degrees of Freedom, and Rejection Significance Level") %>%
    kable_styling()
