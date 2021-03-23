@@ -21,6 +21,15 @@ More extreme examples of this phenomenon have been described in the modeling lit
 
 The derivation of the nested logit model is based on the assumption that some of the alternatives share common components in their random error terms.  That is, the random term of the nested alternatives can be decomposed into a portion associated with each alternative and a portion associated with groups of alternatives.  For example, consider an urban mode choice where a traveler has four modes (drive alone, shared ride, commuter rail and bus) available for making an intercity trip.  The utility equations for these alternatives are:
 
+\usepackage{amsmath}
+\begin{align}
+U_{DA} &= V_{DA} + \epsilon_{DA} \\
+U_{SR} &= V_{SR} + \epsilon_{SR} \\
+U_{Bus} &= V_{PT} + V_{Bus} + \epsilon_{SR} + \epsilon_{Bus} \\
+U_{LTR} &= V_{PT} + V_{LTR} + \epsilon_{SR} + \epsilon_{LTR}
+(\#eq:eightone)
+\end{align}
+
 The utility terms for bus and light rail each include a distinct observed component,   and  , and a common observed component,  , for public transit (PT); they also include distinct random components,   and  , and a common random component,  .  The common error component creates a covariance between the total errors for bus,  , and Light Rail,  .  This covariance violates the assumption underlying the MNL model representing an increased similarity between pairs of nested alternatives (bus and Light Rail, in this case) and leads to greater cross-elasticity between these alternatives.  
 	The total error for each of the four alternatives is assumed to be distributed Gumbel with scale parameter equal to one, as in the MNL model.  The variance of these distributions is: 
 
