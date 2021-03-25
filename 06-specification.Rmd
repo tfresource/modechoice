@@ -173,17 +173,29 @@ modelsummary(
 ```
 
 ```{r Table-6-2, echo = F}
-#This table is incomplete because Models 1-3 are not being restricted in the same way as in the original table. 
+
+#This table is incomplete because Models 1-3 are not being restricted in the same way as in the original table.
+
+lrtest_compare <- function(m){
+  lrtest(m, model_base)[2, 4]
+}
+lrtest_p <- function(m){
+  lrtest(m, model_base)[2, 5]
+}
+
 tibble(
-"Test" = c("Loglikelihood Ratio Test", "Degrees of Freedom", "Significance Level"),
-"Base Model vs Model 1W" = c(-2*(logLik(model_1w)-logLik(model_base)), 1, chisq.test(model_1w, model_base)),
-"Base Model vs Model 2W" = c(-2*(logLik(model_2w)-logLik(model_base)), 2, chisq.test(model_2w, model_base)),
-"Base Model vs Model 3W" = c(-2*(logLik(model_3w)-logLik(model_base)), 2, chisq.test(model_3w, model_base)),
-"Model 1W vs Model 2W" = c(-2*(logLik(model_2w)-logLik(model_1w)), 1, chisq.test(model_2w, model_1w)),
-"Model 1W vs model 3W" = c(-2*(logLik(model_2w)-logLik(model_3w)), 1, chisq.test(model_2w, model_3w))
-)%>%
-   kbl(align = 'c', caption = "Likelihood Ratio Tests between Models in Table 6-1 (Likelihood Ratio Statistic, Degrees of Freedom, and Rejection Significance Level") %>%
-   kable_styling()
+  model = list(model_1w, model_2w, model_3w)
+) %>%
+  mutate(
+    Model = c("Model 1W","Model 2W","Model 3W"),
+    loglik = map_dbl(model, logLik),
+    lrtest = map_dbl(model, lrtest_compare),
+    p_val = map_dbl(model, lrtest_p)
+  ) %>%
+  select(-model)%>%
+  kbl(align = 'c', caption = "Likelihood Ratio Tests between Models 1W, 2W, 3W and Base Model") %>%
+  kable_styling()
+
 ```
 
 
@@ -350,7 +362,9 @@ sf_mlogit_trip_estimates <- sf_mlogit %>%
   mutate(
     TIR8 = (mot_ivtt + 2.4 * mot_ovtt),  
     TIR9 = (mot_ivtt + 4 * mot_ovtt), 
-    ovtd = mot_ovtt/dist
+    ovtd = mot_ovtt/dist,
+    scalemot = 2.4 * mot_ovtt,
+    scalemot2 = 4 * mot_ovtt
     )
  
 model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + ovtd + cost | hhinc, 
@@ -359,7 +373,10 @@ model_8w <- mlogit(chosen ~ nm_tvtt + TIR8  + cost | hhinc,
                    data = sf_mlogit_trip_estimates)
 model_9w <- mlogit(chosen ~ nm_tvtt + TIR9 + cost | hhinc, 
                    data = sf_mlogit_trip_estimates)
-
+model_8a <- mlogit(chosen ~ nm_tvtt + (mot_ivtt + scalemot) + cost | hhinc,
+                    data = sf_mlogit_trip_estimates)
+model_9a <- mlogit(chosen ~ nm_tvtt + (mot_ivtt + scalemot2) + cost | hhinc, 
+                   data = sf_mlogit_trip_estimates)
 
 trip_1 <- list(
   "Model 6W" = model_6w,
@@ -429,6 +446,36 @@ tibble(distance = c(5, 10, 20)) %>%
 
 ```
 
+```{r figure6-1}
+vottable <- tibble(
+"Value of Time ($/hr)" = c("Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
+"Model 6W" = round(c(VOTsimple(model_6w, "mot_ovtt", "cost"), VOTsimple(model_6w, "mot_ivtt", "cost")),2),
+
+"Model 7W" = round(c(VOTsimple(model_7w, "mot_tvtt", "cost"), VOTsimple(model_7w, "mot_tvtt", "cost")),2),
+
+"Model 8W" = round(c(VOTsimple(model_8a, "scalemot", "cost"), VOTsimple(model_8a, "mot_ivtt", "cost")),2),
+
+"Model 9W" = round(c(VOTsimple(model_9a, "scalemot2", "cost"), VOTsimple(model_9a, "mot_ivtt", "cost")),2)
+) 
+
+model_6wa = as.numeric(vottable[1,"Model 6W"]/vottable[2,"Model 6W"])
+model_7wa = as.numeric(vottable[1,"Model 7W"]/vottable[2,"Model 7W"])
+model_8wa = as.numeric(vottable[1,"Model 8W"]/vottable[2,"Model 8W"])
+model_9wa = as.numeric(vottable[1,"Model 9W"]/vottable[2,"Model 9W"])
+
+tibble(
+  distance = .8:10,
+  model6 = model_6wa,
+  model7 = model_7wa/distance,
+  model8 = model_8wa,
+  model9 = model_9wa
+) %>%
+  gather(model, vot, -distance) %>%
+  ggplot(aes(x = distance, y = vot, color = model)) + 
+    geom_line()
+
+
+```
 
 The selection of a preferred travel time specification among the four alternative specifications
 tested is relatively straightforward in this case. Model 7W outperforms the other models in all
@@ -612,7 +659,7 @@ divided by income.
 #I feel I've created the interaction term correctly and included the right variables, but values are still slightly off
 model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | 
                       hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
-model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + I(cost/hhinc) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 incomeinteraction_estimation <- list(
   "Model 15W" = model_15w,
