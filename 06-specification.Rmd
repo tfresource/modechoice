@@ -101,7 +101,7 @@ alternative specifications which represent these relationships. Options for cons
     shared alternatives to be equal as follows: 
     
 \begin{equation}
-H_0 : \beta_{INCOMESR2} = \beta_{INCOMESR3+}
+H_0 : \beta_{IncomeSR2} = \beta_{IncomeSR3+}
 (\#eq:incomeandsharedrides)
 \end{equation}
     
@@ -234,7 +234,7 @@ for each model using the estimated motorized in-vehicle-time and cost parameters
 similarly for the other time components: 
 
 \begin{equation}
-Value of motorized IVTT (\$/hour) = \frac{\beta_{motorized ivtt (1/min.)}}{\beta_{cost (1/cents)}} \times \frac{60 min./hour}{100 cents/\$} 
+$\displaystyle =  \text{Value of motorized IVTT (\$/hour)} = \frac{\beta_\text{motorized ivtt (1/min.)}}{\beta_{cost (1/cents)}} \times \frac{60 min./hour}{100 cents/\$} $
 (\#eq:valueofivtt)
 \end{equation}
 
@@ -315,7 +315,7 @@ below, is consistent with our expectations provided that $β1$ and $β$2 are neg
 \begin{equation}
 $\displaystyle V_{m} = \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + ......$
 $\displaystyle = \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + ......$
-$\displaystyle = \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_ + ......$
+$\displaystyle = \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_{m} + ......$
 (\#eq:IVT&OVT)
 \end{equation}
 
