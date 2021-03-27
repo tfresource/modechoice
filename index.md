@@ -1,6 +1,6 @@
 --- 
 title: "A Self-Instructing Course in Mode Choice Modeling"
-date: "2021-03-09"
+date: "2021-03-17"
 site: bookdown::bookdown_site
 author:
   - name: "Frank Koppelman"

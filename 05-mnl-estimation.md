@@ -4,7 +4,8 @@ editor_options:
   chunk_output_type: console
 ---
 # Data Assembly and Estimation of Simple Multinomial Logit Models {#estimation-chapter}
-```{r setup, warning = FALSE, message = FALSE, cache = FALSE}
+
+```r
 # packages used in this chapter
 library(tidyverse) # general data munging
 library(haven) # read spss data into R
@@ -114,7 +115,8 @@ Network analysis provides the zone-to-zone in-vehicle travel times for the highw
 
 ## Data Structure for Estimation {#estimation-data-structure}
 
-```{r loaddata}
+
+```r
 # Read in raw SPSS file
 # 
 # We received the work mode choice dataset from Laurie Garrow, who had converted
@@ -175,7 +177,8 @@ software developer taking into account data storage and computational
 implications of each choice.
 
 
-```{r trip-alt}
+
+```r
 #trip-alt
 trip_alt <- sf_work_mode  %>%
   filter(case <= 4)  %>%
@@ -185,7 +188,168 @@ kbl(trip_alt, caption= "Data Layout Type II: Trip-Alternative Format") %>%
   kable_styling()
 ```
 
-```{r trip}
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:trip-alt)Data Layout Type II: Trip-Alternative Format</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> hhid </th>
+   <th style="text-align:right;"> perid </th>
+   <th style="text-align:left;"> Alternative </th>
+   <th style="text-align:right;"> chosen </th>
+   <th style="text-align:right;"> IVTT </th>
+   <th style="text-align:right;"> Income </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Drive alone </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 13.38 </td>
+   <td style="text-align:right;"> 42.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Share ride 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 18.38 </td>
+   <td style="text-align:right;"> 42.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Share ride 3+ </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 20.38 </td>
+   <td style="text-align:right;"> 42.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 25.90 </td>
+   <td style="text-align:right;"> 42.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Bike </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 40.50 </td>
+   <td style="text-align:right;"> 42.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Drive alone </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 29.92 </td>
+   <td style="text-align:right;"> 17.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Share ride 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 34.92 </td>
+   <td style="text-align:right;"> 17.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Share ride 3+ </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 21.92 </td>
+   <td style="text-align:right;"> 17.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 22.96 </td>
+   <td style="text-align:right;"> 17.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Bike </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 58.95 </td>
+   <td style="text-align:right;"> 17.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Drive alone </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 8.60 </td>
+   <td style="text-align:right;"> 12.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Share ride 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 13.60 </td>
+   <td style="text-align:right;"> 12.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Share ride 3+ </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 15.60 </td>
+   <td style="text-align:right;"> 12.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 16.87 </td>
+   <td style="text-align:right;"> 12.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Drive alone </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 30.60 </td>
+   <td style="text-align:right;"> 55.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Share ride 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 35.70 </td>
+   <td style="text-align:right;"> 55.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Share ride 3+ </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 22.70 </td>
+   <td style="text-align:right;"> 55.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 24.27 </td>
+   <td style="text-align:right;"> 55.0 </td>
+  </tr>
+</tbody>
+</table>
+
+
+```r
 trip_format <- sf_work_mode  %>%
   filter(case <= 4)  %>%
   select(hhid, perid, chosen, ivtt, Income = hhinc, altname, altnum) %>%
@@ -197,6 +361,69 @@ trip_format <- sf_work_mode  %>%
 kbl(head(trip_format), caption= "Data Layout Type I: Trip Format") %>%
   kable_styling()
 ```
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:trip)Data Layout Type I: Trip Format</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> hhid </th>
+   <th style="text-align:right;"> perid </th>
+   <th style="text-align:left;"> chosen </th>
+   <th style="text-align:right;"> Income </th>
+   <th style="text-align:right;"> Bike - Travel Time </th>
+   <th style="text-align:right;"> Drive alone - Travel Time </th>
+   <th style="text-align:right;"> Share ride 2 - Travel Time </th>
+   <th style="text-align:right;"> Share ride 3+ - Travel Time </th>
+   <th style="text-align:right;"> Transit - Travel Time </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Drive alone </td>
+   <td style="text-align:right;"> 42.5 </td>
+   <td style="text-align:right;"> 40.50 </td>
+   <td style="text-align:right;"> 13.38 </td>
+   <td style="text-align:right;"> 18.38 </td>
+   <td style="text-align:right;"> 20.38 </td>
+   <td style="text-align:right;"> 25.90 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:right;"> 17.5 </td>
+   <td style="text-align:right;"> 58.95 </td>
+   <td style="text-align:right;"> 29.92 </td>
+   <td style="text-align:right;"> 34.92 </td>
+   <td style="text-align:right;"> 21.92 </td>
+   <td style="text-align:right;"> 22.96 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Drive alone </td>
+   <td style="text-align:right;"> 12.5 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 8.60 </td>
+   <td style="text-align:right;"> 13.60 </td>
+   <td style="text-align:right;"> 15.60 </td>
+   <td style="text-align:right;"> 16.87 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Transit </td>
+   <td style="text-align:right;"> 55.0 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 30.60 </td>
+   <td style="text-align:right;"> 35.70 </td>
+   <td style="text-align:right;"> 22.70 </td>
+   <td style="text-align:right;"> 24.27 </td>
+  </tr>
+</tbody>
+</table>
 
 
 ## Application Data for Work Mode Choice in the San Francisco Bay Area {#estimation-sf-work-data}
@@ -211,7 +438,8 @@ Level of service data were generated by the Metropolitan Transportation Commissi
 
 Table \@ref(tab:statsJtoWork) provides information about the availability and usage of each alternative and the average values of in-vehicle time, out-of-vehicle time and travel cost in the sample.  Drive alone is available to most work commuters in the Bay Area and is the most frequently chosen alternative. The shared-ride modes are available for all trips (by construction) and together account for the next largest share of chosen alternatives.  The combined total of drive alone and shared ride trips represent close to 85% of all work trips. Transit trips constitute roughly 10% of work trips, a substantially greater share than in most metropolitan regions in the U.S.  The fraction of trips using non-motorized modes (walk and bike) constitutes a small but not insignificant portion of total trips.
 
-```{r statsJtoWork}
+
+```r
 #calculations =======================================
 #calculate IVTT
 sf_wm_ivtt <- sf_work_mode  %>%
@@ -259,6 +487,70 @@ kbl(statsJtoWork, digits = 1,
     caption = "Sample Statistics for Bay Area Journey-to-Work Modal Data") %>% 
   kable_styling()
 ```
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:statsJtoWork)Sample Statistics for Bay Area Journey-to-Work Modal Data</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Mode </th>
+   <th style="text-align:right;"> Fraction of Sample with Mode Available (%) </th>
+   <th style="text-align:right;"> Market Share (%) </th>
+   <th style="text-align:right;"> Average IVTT (minutes) </th>
+   <th style="text-align:right;"> Average OVTT (minutes) </th>
+   <th style="text-align:right;"> Average Cost (1990 cents) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 1. Drive Alone </td>
+   <td style="text-align:right;"> 94.6 </td>
+   <td style="text-align:right;"> 72.3 </td>
+   <td style="text-align:right;"> 20.9 </td>
+   <td style="text-align:right;"> 3.7 </td>
+   <td style="text-align:right;"> 176.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2. Shared Ride (2) </td>
+   <td style="text-align:right;"> 100.0 </td>
+   <td style="text-align:right;"> 10.3 </td>
+   <td style="text-align:right;"> 25.2 </td>
+   <td style="text-align:right;"> 3.9 </td>
+   <td style="text-align:right;"> 89.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 3. Shared Ride (3+) </td>
+   <td style="text-align:right;"> 100.0 </td>
+   <td style="text-align:right;"> 3.2 </td>
+   <td style="text-align:right;"> 26.8 </td>
+   <td style="text-align:right;"> 3.9 </td>
+   <td style="text-align:right;"> 50.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 4. Transit </td>
+   <td style="text-align:right;"> 79.6 </td>
+   <td style="text-align:right;"> 9.9 </td>
+   <td style="text-align:right;"> 24.6 </td>
+   <td style="text-align:right;"> 28.8 </td>
+   <td style="text-align:right;"> 122.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5. Bike </td>
+   <td style="text-align:right;"> 34.6 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 28.0 </td>
+   <td style="text-align:right;"> 3.7 </td>
+   <td style="text-align:right;"> NaN </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 6. Walk </td>
+   <td style="text-align:right;"> 29.4 </td>
+   <td style="text-align:right;"> 3.3 </td>
+   <td style="text-align:right;"> NaN </td>
+   <td style="text-align:right;"> 48.7 </td>
+   <td style="text-align:right;"> NaN </td>
+  </tr>
+</tbody>
+</table>
 
 ## Estimation of MNL Model with Basic Specification {#estimation-basic}
 
@@ -327,7 +619,8 @@ $ \sum_t ln(1/NAlt_t)$
 
 In the next three sections, we review the estimation results for the base model using informal judgment-based tests (section 5.7.1), goodness-of-fit measures (section 5.7.2), and statistical tests (section 5.7.3). These elements, taken together, provide a basis to evaluate each model and to compare models with different specifications. 
 
-```{r basic-estimation}
+
+```r
 base <- mlogit(chosen ~ ivtt + cost, data = sf_mlogit)
 
 # estimate a model with constants only by constraining a single generic variable
@@ -339,7 +632,8 @@ fixed_coefs <- rep(0,6) %>% setNames(c(names(coef(market_shares)), "ivtt"))
 null_model <- mlogit(chosen ~ ivtt, data = sf_mlogit, start = fixed_coefs, iterlim = 0)
 ```
 
-```{r basic-estimation-table}
+
+```r
 basic_estimation <- list(
   "Null Model" = null_model,
   "Market Shares" = market_shares,
@@ -351,6 +645,140 @@ modelsummary(
   title = "Estimation Results for Zero Coefficient, Constants Only, and Base Models"
 )
 ```
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:basic-estimation-table)Estimation Results for Zero Coefficient, Constants Only, and Base Models</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Null Model </th>
+   <th style="text-align:center;"> Market Shares </th>
+   <th style="text-align:center;"> Base Model </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 2 </td>
+   <td style="text-align:center;"> 0.000 </td>
+   <td style="text-align:center;"> -2.137 </td>
+   <td style="text-align:center;"> -2.425 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.044) </td>
+   <td style="text-align:center;"> (0.048) </td>
+   <td style="text-align:center;"> (0.058) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 3++ </td>
+   <td style="text-align:center;"> 0.000 </td>
+   <td style="text-align:center;"> -3.303 </td>
+   <td style="text-align:center;"> -3.856 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.046) </td>
+   <td style="text-align:center;"> (0.081) </td>
+   <td style="text-align:center;"> (0.095) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Transit </td>
+   <td style="text-align:center;"> 0.000 </td>
+   <td style="text-align:center;"> -1.950 </td>
+   <td style="text-align:center;"> -2.060 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.053) </td>
+   <td style="text-align:center;"> (0.051) </td>
+   <td style="text-align:center;"> (0.065) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Bike </td>
+   <td style="text-align:center;"> 0.000 </td>
+   <td style="text-align:center;"> -3.335 </td>
+   <td style="text-align:center;"> -3.424 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.085) </td>
+   <td style="text-align:center;"> (0.145) </td>
+   <td style="text-align:center;"> (0.166) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Walk </td>
+   <td style="text-align:center;"> 0.000 </td>
+   <td style="text-align:center;"> -2.040 </td>
+   <td style="text-align:center;"> -2.717 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.073) </td>
+   <td style="text-align:center;"> (0.085) </td>
+   <td style="text-align:center;"> (0.096) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ivtt </td>
+   <td style="text-align:center;"> 0.000 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -0.032 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.003) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.005) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> cost </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -0.005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.000) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 5029 </td>
+   <td style="text-align:center;"> 5029 </td>
+   <td style="text-align:center;"> 5029 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AIC </td>
+   <td style="text-align:center;"> 14631.2 </td>
+   <td style="text-align:center;"> 8277.8 </td>
+   <td style="text-align:center;"> 7600.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIC </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> -7309.601 </td>
+   <td style="text-align:center;"> -4132.916 </td>
+   <td style="text-align:center;"> -3793.129 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho2 </td>
+   <td style="text-align:center;"> -0.505 </td>
+   <td style="text-align:center;"> 0.149 </td>
+   <td style="text-align:center;"> 0.219 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho20 </td>
+   <td style="text-align:center;"> 0.189 </td>
+   <td style="text-align:center;"> 0.541 </td>
+   <td style="text-align:center;"> 0.579 </td>
+  </tr>
+</tbody>
+</table>
 
 
 ### Informal Tests
@@ -376,8 +804,8 @@ The ratio of the estimated travel time and travel cost parameters provides an
 estimate of the value of time implied by the model; this can serve as another
 important informal test for evaluating the reasonableness of the model. For
 example, in the Base Model reported in Table \@ref(tab:basic-estimation-table),
-the implied value of time is $`r coef(base)["ivtt"]`/`r coef(base)["cost"]`$ or
-`r coef(base)["ivtt"]/ coef(base)["cost"]` cents per minute (the units are
+the implied value of time is $-0.0315962/-0.0050606$ or
+6.2435342 cents per minute (the units are
 determined from the units of the time and cost variables used in estimation).
 This is equivalent to \$6.26 per hour which is much lower that the average wage
 rate in the area at the time of the survey, approximately \$21.20 per hour,
@@ -390,10 +818,10 @@ Similar ratios may be used to assess the reasonableness of the relative magnitud
 
 This section presents a descriptive measure, called the rho-squared value ($\rho^2$) which can be used to describe the overall goodness of fit of the model. We can understand the formulation of this value in terms of the following figure which shows the scalar relationship among the log-likelihood values for a zero coefficients model (or the equally likely model), a constants only or market share model, the estimated model and a perfect prediction model. In the figure, LL(0) represents the log-likelihood with zero coefficients (which results in equal likelihood of choosing each available alternative), $LL(0)$ represents the log-likelihood for the constants only model, $LL(\hat{\beta})$  represents the log-likelihood for the estimated model and LL(*) = 0 is the log-likelihood for the perfect prediction model.
 
-```{r loglikelihooddif, fig.cap="Relationship between Different Log-likelihood Measures", echo = FALSE}
-knitr::include_graphics("img/likelihood_numberline.PNG")
-
-```
+<div class="figure">
+<img src="img/likelihood_numberline.PNG" alt="Relationship between Different Log-likelihood Measures" width="616" />
+<p class="caption">(\#fig:loglikelihooddif)Relationship between Different Log-likelihood Measures</p>
+</div>
 
 
 The relationships among modeling results will always appear in the order shown provided the estimated model includes a full set of alternative specific constants.  That is, the constants only model is always better than the equally likely model, and the estimated model with constants is always better than the constants only model.  The order of different estimated models will vary except that any model which is a restricted version of another model will be to the left of the unrestricted model.
@@ -473,7 +901,8 @@ Sufficiently large absolute values of the *t-statistic* lead to the rejection of
 
 The selection of a critical value for the t-statistic test is a matter of judgment and depends on the level of confidence with which the analyst wants to test his/her hypotheses. The critical t-values for different levels of confidence for samples sizes larger than 150 (which is the norm in mode choice analysis) are shown in Table 5-3.  It should be apparent that the critical t-value increases with the desired level of confidence.  Thus, one can conclude that a particular variable has no influence on choice (or equivalently that the true parameter associated with the variable is zero) can be rejected at the 90% level of confidence if the absolute value of the t-statistic is greater than 1.645 and at the 95% level of confidence if the t-statistic is greater than 1.960 [^confidlevel].  
 
-```{r confidencelevels}
+
+```r
 tibble(confid = c(.9, .95, .99, .995, .999)) %>%
   mutate(tval=qnorm((1-confid)/2, lower.tail = FALSE)) %>%
   kbl(caption = "Critical t-Values for Selected Confidence Levels and Large Samples",
@@ -481,7 +910,40 @@ tibble(confid = c(.9, .95, .99, .995, .999)) %>%
   kable_styling()
 ```
 
-```{r tdistribution}
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:confidencelevels)Critical t-Values for Selected Confidence Levels and Large Samples</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Confidence Level </th>
+   <th style="text-align:right;"> Critical t-value (two-tailed test) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 0.900 </td>
+   <td style="text-align:right;"> 1.644854 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.950 </td>
+   <td style="text-align:right;"> 1.959964 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.990 </td>
+   <td style="text-align:right;"> 2.575829 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.995 </td>
+   <td style="text-align:right;"> 2.807034 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 0.999 </td>
+   <td style="text-align:right;"> 3.290527 </td>
+  </tr>
+</tbody>
+</table>
+
+
+```r
 these_colors <- wesanderson::wes_palette("Zissou1")
 ggplot(data.frame(x = c(-4,4))) +
   # Plot the pdf
@@ -515,17 +977,106 @@ ggplot(data.frame(x = c(-4,4))) +
   theme_bw()
 ```
 
+<img src="05-mnl-estimation_files/figure-html/tdistribution-1.png" width="672" />
+
 We illustrate the use of the t-test by reviewing the t-statistics for each parameter in the initial model specification (Table 5-2). Both the travel cost and travel time parameters have large absolute t-statistic values (20.6 and 16.6, respectively) which lead us to reject the hypothesis that these variables have no effect on modal utilities at a confidence level higher than 99.9%. Thus, these variables should be retained in the model. All of the other t-statistics, except for Income-Shared Ride 2,  Income-Shared Ride 3+ and the walk constant are greater than 1.960 (95% confidence) supporting the inclusion of the corresponding variables.  The t-statistics on the shared ride specific income variables are even less than 1.645 in absolute value (90% confidence), suggesting that the effect of income on the utilities of the shared ride modes may not differentiate them from the reference (drive alone) mode. Consequently, the analyst should consider removing these income variables from the utility function specifications for the shared ride modes. The case is particularly compelling for removal of the income shared ride 3+ variable since the t-statistic is very low and the parameter has a counter-intuitive sign. Another alternative would be to combine the two shared ride income parameters suggesting that income has differential effect between drive alone and shared ride but not between shared ride 2 and shared ride 3+ (when this is done, the combined variable obtains a small negative parameter which is not statistically different from zero).  This variable could be deleted or retained according to the judgment of the analyst as described in Section 6.2.1.
 
 An alternative approach is to report the t-statistic to two or three decimal places and calculate the probability that a t-statistic value of that magnitude or higher would occur due to random variation in sampling as shown in Table 5-4.  This is reported as the significance level, which is the complement of the level of confidence. The significance of each parameter can be read directly from the table.  Parameters with significance greater than 0.05 (lower in magnitude but more significant), provide a stronger basis for rejecting the hypothesis that the true parameter is zero and that the corresponding variable can be excluded from the model. On the other hand, significance levels of 0.163 (for Income-SR2), 0.888 (for Income-SR3+) and 0.287 (for ASC-Walk) provide little evidence about whether the corresponding variable should or should not be included in the model [^retorelim].
 
-```{r table5-4, echo = F}
-
-Base_model <- mlogit(chosen ~ cost + tvtt | hhinc, data = sf_mlogit)
-
-modelsummary(Base_model, statistic = "statistic", statistic_vertical = FALSE, stars = TRUE, notes = list('Note: The numbers in the parentheses are the t-statistics'))
-
-```
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Model 1 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 2 </td>
+   <td style="text-align:center;"> -2.178*** (-20.815) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 3++ </td>
+   <td style="text-align:center;"> -3.725*** (-20.964) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Transit </td>
+   <td style="text-align:center;"> -0.671*** (-5.060) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Bike </td>
+   <td style="text-align:center;"> -2.376*** (-7.804) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Walk </td>
+   <td style="text-align:center;"> -0.207 (-1.066) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> cost </td>
+   <td style="text-align:center;"> -0.005*** (-20.597) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> tvtt </td>
+   <td style="text-align:center;"> -0.051*** (-16.565) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 2 </td>
+   <td style="text-align:center;"> -0.002 (-1.397) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 3++ </td>
+   <td style="text-align:center;"> 0.000 (0.141) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Transit </td>
+   <td style="text-align:center;"> -0.005*** (-2.891) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Bike </td>
+   <td style="text-align:center;"> -0.013** (-2.406) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Walk </td>
+   <td style="text-align:center;"> -0.010*** (-3.194) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 5029 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AIC </td>
+   <td style="text-align:center;"> 7276.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIC </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> -3626.186 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho2 </td>
+   <td style="text-align:center;"> 0.253 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho20 </td>
+   <td style="text-align:center;"> 0.598 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border:0;" colspan="100%">
+<sup></sup> Note: The numbers in the parentheses are the t-statistics</td>
+</tr>
+</tfoot>
+<tfoot>
+<tr>
+<td style="padding: 0; border:0;" colspan="100%">
+<sup></sup> * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01</td>
+</tr>
+</tfoot>
+</table>
 [^siglevels]: Significance levels reported as 0.0000 are equivalent to less than 0.00005
 
 It is important to recognize that a low t-statistic does not require removal of the corresponding variable from the model.  If the analyst has a strong reason to believe that the variable is important, and the parameter sign is correct, it is reasonable to retain the variable in the model.  A low t-statistic and corresponding low level of significance can best be interpreted as providing little or no information rather than as a basis for excluding a variable.  Also, one should be cautious about prematurely deleting variables which are expected to be important as the same variable may be significant when other variables are added to or deleted from the model.  
@@ -575,7 +1126,8 @@ This test-statistic is chi-squared distributed.  Example chi-squared distributio
 
 Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom.  The critical chi-square values increase with the desired confidence level and the number of restrictions.
 
-```{r chisqdistrib51015, fig.cap="Chi-Squared Distribution for 5, 10, and 15 Degrees of Freedom"}
+
+```r
 these_colors = wesanderson::wes_palette("Darjeeling1")
 tibble(
   x = seq(0, 30, 0.01),
@@ -590,31 +1142,108 @@ tibble(
   theme_bw()
 ```
 
-``` {r chisq-critdiagram, fig.cap = "Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds"}
+<div class="figure">
+<img src="05-mnl-estimation_files/figure-html/chisqdistrib51015-1.png" alt="Chi-Squared Distribution for 5, 10, and 15 Degrees of Freedom" width="672" />
+<p class="caption">(\#fig:chisqdistrib51015)Chi-Squared Distribution for 5, 10, and 15 Degrees of Freedom</p>
+</div>
+
+
+```r
 ggplot(data.frame(x = c(0, 20)), aes(x = x)) +
   stat_function(fun = dchisq, args = list(df = 5)) +
   labs( x = "Test Values", y = "PDF") + 
   theme_bw()
 ```
 
+<div class="figure">
+<img src="05-mnl-estimation_files/figure-html/chisq-critdiagram-1.png" alt="Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds" width="672" />
+<p class="caption">(\#fig:chisq-critdiagram)Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds</p>
+</div>
 
-```{r table5-5, echo = F}
-tab55df <- data.frame(
- "Level of Conf."= c("90%", "95%", "99%", "99.5%", "99.9%"),
- "1" = c("2.71", "3.84", "6.63", "7.88", "10.83"),
- "2" = c("4.61", "5.99", "9.21", "10.60", "13.82"),
- "3" = c("6.25", "7.81", "11.34", "12.84", "16.27"),
- "4" = c("7.78", "9.49", "13.28", "14.86", "18.47"),
- "5" = c("9.24", "11.07", "15.09", "16.75", "20.51"),
- "7" = c("12.01", "14.06", "18.48", "20.28", "24.32"),
- "10" = c("15.99", "18.31", "23.21", "25.19", "29.59"),
- "12" = c("18.54", "21.02", "26.21", "28.30", "32.91"),
- "15" = c("22.31", "25.00", "30.58", "32.80", "37.70"))
 
-kbl(tab55df, align = "c", booktabs = T, caption = "Critical Chi-Squared ($\\chi^2$) Values for Selected Confidence Levels by Number of Restrictions") %>% 
-kable_classic() %>% 
-  add_header_above(c(" " = 1, "Number of Restrictions"= 9), align = "center")
-```
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>(\#tab:table5-5)Critical Chi-Squared ($\chi^2$) Values for Selected Confidence Levels by Number of Restrictions</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;" colspan="1"></th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="9"><div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">Number of Restrictions</div></th>
+</tr>
+  <tr>
+   <th style="text-align:center;"> Level.of.Conf. </th>
+   <th style="text-align:center;"> X1 </th>
+   <th style="text-align:center;"> X2 </th>
+   <th style="text-align:center;"> X3 </th>
+   <th style="text-align:center;"> X4 </th>
+   <th style="text-align:center;"> X5 </th>
+   <th style="text-align:center;"> X7 </th>
+   <th style="text-align:center;"> X10 </th>
+   <th style="text-align:center;"> X12 </th>
+   <th style="text-align:center;"> X15 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 90% </td>
+   <td style="text-align:center;"> 2.71 </td>
+   <td style="text-align:center;"> 4.61 </td>
+   <td style="text-align:center;"> 6.25 </td>
+   <td style="text-align:center;"> 7.78 </td>
+   <td style="text-align:center;"> 9.24 </td>
+   <td style="text-align:center;"> 12.01 </td>
+   <td style="text-align:center;"> 15.99 </td>
+   <td style="text-align:center;"> 18.54 </td>
+   <td style="text-align:center;"> 22.31 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 95% </td>
+   <td style="text-align:center;"> 3.84 </td>
+   <td style="text-align:center;"> 5.99 </td>
+   <td style="text-align:center;"> 7.81 </td>
+   <td style="text-align:center;"> 9.49 </td>
+   <td style="text-align:center;"> 11.07 </td>
+   <td style="text-align:center;"> 14.06 </td>
+   <td style="text-align:center;"> 18.31 </td>
+   <td style="text-align:center;"> 21.02 </td>
+   <td style="text-align:center;"> 25.00 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 99% </td>
+   <td style="text-align:center;"> 6.63 </td>
+   <td style="text-align:center;"> 9.21 </td>
+   <td style="text-align:center;"> 11.34 </td>
+   <td style="text-align:center;"> 13.28 </td>
+   <td style="text-align:center;"> 15.09 </td>
+   <td style="text-align:center;"> 18.48 </td>
+   <td style="text-align:center;"> 23.21 </td>
+   <td style="text-align:center;"> 26.21 </td>
+   <td style="text-align:center;"> 30.58 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 99.5% </td>
+   <td style="text-align:center;"> 7.88 </td>
+   <td style="text-align:center;"> 10.60 </td>
+   <td style="text-align:center;"> 12.84 </td>
+   <td style="text-align:center;"> 14.86 </td>
+   <td style="text-align:center;"> 16.75 </td>
+   <td style="text-align:center;"> 20.28 </td>
+   <td style="text-align:center;"> 25.19 </td>
+   <td style="text-align:center;"> 28.30 </td>
+   <td style="text-align:center;"> 32.80 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 99.9% </td>
+   <td style="text-align:center;"> 10.83 </td>
+   <td style="text-align:center;"> 13.82 </td>
+   <td style="text-align:center;"> 16.27 </td>
+   <td style="text-align:center;"> 18.47 </td>
+   <td style="text-align:center;"> 20.51 </td>
+   <td style="text-align:center;"> 24.32 </td>
+   <td style="text-align:center;"> 29.59 </td>
+   <td style="text-align:center;"> 32.91 </td>
+   <td style="text-align:center;"> 37.70 </td>
+  </tr>
+</tbody>
+</table>
 
 The likelihood ratio test can be applied to test null hypotheses involving the exclusion of groups of variables from the model.  Table 5-6 illustrates the tests of two hypotheses describing restriction on some or all the parameters in the San Francisco Bay Area commuter mode choice model.  The first hypothesis is that all the parameters are equal to zero. The formal statement of the null hypothesis in this case, is:
 
@@ -637,28 +1266,40 @@ This test is not very useful because we almost always reject the null hypothesis
 The log-likelihood values needed to test each of these hypotheses are reported in Table \@ref(tab:basic-estimation-table).  In each case, we include the log-likelihood of the restricted and unrestricted models, the calculated chi-square value and the number of restrictions or degrees of freedom as shown in Table 5-6. The confidence or significance of the rejection of the null hypothesis in each case can be obtained by referring to Table 5-5, more extensive published tables or software (most spreadsheet programs) that calculates the precise level of confidence/significance associated with each test result.
 
 
-```{r table5-6, echo = FALSE}
-#Create models for likelihood ratio test
-sf_mlogit_basemodels <- sf_mlogit
-base_model <- mlogit(chosen ~  tvtt + cost| hhinc, data = sf_mlogit_basemodels)
-null_modela <- mlogit(chosen ~ ivtt, data = sf_mlogit_basemodels, start = fixed_coefs, iterlim = 0)
-null_modelb <-  mlogit(chosen ~ ivtt, data = sf_mlogit_basemodels, constPar = c("ivtt" = 0))
-
-#Create likelihood ratio test table
-tibble(
-  Hypothesis = c("$H_{0a}$","$H_{0b}$"),
-  LL_U = rep(base_model$logLik, 2),
-  LL_R = c(null_modela$logLik, null_modelb$logLik)
-) %>%
-  mutate(
-    test_stat = -2 * (LL_R - LL_U),
-    df = c(12, 7),
-    "Crtical Chi-Squared at 99.9% Conf." = qchisq(0.999, df),
-    "P-value" = pchisq(test_stat, df, lower.tail = FALSE)
-  ) %>%
-  kbl(align = 'c', caption = "Likelihood Ratio Test for Hypothesis $H_{0,a}$ and $H_{0,b}$") %>%
-  kable_styling()
-```
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:table5-6)Likelihood Ratio Test for Hypothesis $H_{0,a}$ and $H_{0,b}$</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> Hypothesis </th>
+   <th style="text-align:center;"> LL_U </th>
+   <th style="text-align:center;"> LL_R </th>
+   <th style="text-align:center;"> test_stat </th>
+   <th style="text-align:center;"> df </th>
+   <th style="text-align:center;"> Crtical Chi-Squared at 99.9% Conf. </th>
+   <th style="text-align:center;"> P-value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> $H_{0a}$ </td>
+   <td style="text-align:center;"> -3626.186 </td>
+   <td style="text-align:center;"> -7309.601 </td>
+   <td style="text-align:center;"> 7366.829 </td>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> 32.90949 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> $H_{0b}$ </td>
+   <td style="text-align:center;"> -3626.186 </td>
+   <td style="text-align:center;"> -4132.916 </td>
+   <td style="text-align:center;"> 1013.459 </td>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> 24.32189 </td>
+   <td style="text-align:center;"> 0 </td>
+  </tr>
+</tbody>
+</table>
 
 
 These two applications of the likelihood ratio test correspond to situations where the null hypothesis leads to a highly restrictive model.  These cases are not very interesting since the real value of the likelihood ratio test is in testing null hypotheses which are not so extreme. The log-likelihood ratio test can be applied to test null hypotheses involving the exclusion of selected groups of variables from the model. We consider two such hypotheses.  The first is that the time and cost variables have no impact on the mode choice decision, that is,
@@ -671,7 +1312,8 @@ $H_{0,D} : \beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit} = \
 
 The restricted models that reflect each of these hypotheses and the corresponding unrestricted model are reported in Table 5-7 along with their log-likelihood values.  
 
-```{r base_models table 5-7}
+
+```r
 sf_mlogit_basemodels <- sf_mlogit
  
 base_model <- mlogit(chosen ~  tvtt + cost| hhinc, data = sf_mlogit_basemodels)
@@ -689,7 +1331,203 @@ modelsummary(
   base_estimation, fmt = "%.4f",
   title = "Estimation Results for Base Model and its Restricted Versions"
 )
+```
 
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:base_models table 5-7)Estimation Results for Base Model and its Restricted Versions</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Base Model </th>
+   <th style="text-align:center;"> Base Model without Time and Cost Variables </th>
+   <th style="text-align:center;"> Base Model without Income Variables </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 2 </td>
+   <td style="text-align:center;"> -2.1780 </td>
+   <td style="text-align:center;"> -2.1098 </td>
+   <td style="text-align:center;"> -2.3083 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1046) </td>
+   <td style="text-align:center;"> (0.0993) </td>
+   <td style="text-align:center;"> (0.0547) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 3++ </td>
+   <td style="text-align:center;"> -3.7251 </td>
+   <td style="text-align:center;"> -3.4722 </td>
+   <td style="text-align:center;"> -3.7024 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1777) </td>
+   <td style="text-align:center;"> (0.1656) </td>
+   <td style="text-align:center;"> (0.0929) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Transit </td>
+   <td style="text-align:center;"> -0.6709 </td>
+   <td style="text-align:center;"> -1.8198 </td>
+   <td style="text-align:center;"> -0.9739 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1326) </td>
+   <td style="text-align:center;"> (0.1023) </td>
+   <td style="text-align:center;"> (0.0885) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Bike </td>
+   <td style="text-align:center;"> -2.3763 </td>
+   <td style="text-align:center;"> -2.6721 </td>
+   <td style="text-align:center;"> -3.0705 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.3045) </td>
+   <td style="text-align:center;"> (0.3028) </td>
+   <td style="text-align:center;"> (0.1539) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Walk </td>
+   <td style="text-align:center;"> -0.2068 </td>
+   <td style="text-align:center;"> -1.5985 </td>
+   <td style="text-align:center;"> -0.7040 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1941) </td>
+   <td style="text-align:center;"> (0.1636) </td>
+   <td style="text-align:center;"> (0.1293) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> tvtt </td>
+   <td style="text-align:center;"> -0.0513 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -0.0514 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0031) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.0031) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> cost </td>
+   <td style="text-align:center;"> -0.0049 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -0.0049 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0002) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.0002) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 2 </td>
+   <td style="text-align:center;"> -0.0022 </td>
+   <td style="text-align:center;"> -0.0004 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0016) </td>
+   <td style="text-align:center;"> (0.0015) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 3++ </td>
+   <td style="text-align:center;"> 0.0004 </td>
+   <td style="text-align:center;"> 0.0030 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0025) </td>
+   <td style="text-align:center;"> (0.0024) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Transit </td>
+   <td style="text-align:center;"> -0.0053 </td>
+   <td style="text-align:center;"> -0.0022 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0018) </td>
+   <td style="text-align:center;"> (0.0016) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Bike </td>
+   <td style="text-align:center;"> -0.0128 </td>
+   <td style="text-align:center;"> -0.0122 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0053) </td>
+   <td style="text-align:center;"> (0.0054) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Walk </td>
+   <td style="text-align:center;"> -0.0097 </td>
+   <td style="text-align:center;"> -0.0089 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0030) </td>
+   <td style="text-align:center;"> (0.0030) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 5029 </td>
+   <td style="text-align:center;"> 5029 </td>
+   <td style="text-align:center;"> 5029 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AIC </td>
+   <td style="text-align:center;"> 7276.4 </td>
+   <td style="text-align:center;"> 8267.2 </td>
+   <td style="text-align:center;"> 7289.2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIC </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> -3626.186 </td>
+   <td style="text-align:center;"> -4123.615 </td>
+   <td style="text-align:center;"> -3637.579 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho2 </td>
+   <td style="text-align:center;"> 0.2534 </td>
+   <td style="text-align:center;"> 0.1510 </td>
+   <td style="text-align:center;"> 0.2511 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho20 </td>
+   <td style="text-align:center;"> 0.5976 </td>
+   <td style="text-align:center;"> 0.5424 </td>
+   <td style="text-align:center;"> 0.5963 </td>
+  </tr>
+</tbody>
+</table>
+
+```r
 #This code recreates table 5-7 in the text with the correct coefficients and log likelihood
 #However, the output does not have the correct rho-square values, and is missing a number of separate statistics
 ```
@@ -711,7 +1549,8 @@ with two degrees of freedom (two parameters constrained to zero).  The critical 
 
 with five degrees of freedom (five income parameters are constrained to zero).  The critical $\chi^2$ with five degrees of freedom at 99.9% confidence level (or 0.001 level of significance) is 20.51.   Thus, both null hypotheses can be rejected at very high levels; that is, neither time and cost nor the income variables should be excluded from the model.  The log-likelihood ratio tests for both the above hypotheses are summarized in Table 5-8.
 
-```{r table5-8}
+
+```r
 tibble(
   Hypothesis = c("$H_{0c}$","$H_{0d}$"),
   LL_U = rep(base_model$logLik, 2),
@@ -726,6 +1565,41 @@ tibble(
   kbl(align = 'c', caption = "Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$") %>%
   kable_styling()
 ```
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:table5-8)Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> Hypothesis </th>
+   <th style="text-align:center;"> LL_U </th>
+   <th style="text-align:center;"> LL_R </th>
+   <th style="text-align:center;"> test_stat </th>
+   <th style="text-align:center;"> df </th>
+   <th style="text-align:center;"> Crtical Chi-Squared at 99.9% Conf. </th>
+   <th style="text-align:center;"> P-value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> $H_{0c}$ </td>
+   <td style="text-align:center;"> -3626.186 </td>
+   <td style="text-align:center;"> -4123.615 </td>
+   <td style="text-align:center;"> 994.8581 </td>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> 13.81551 </td>
+   <td style="text-align:center;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> $H_{0d}$ </td>
+   <td style="text-align:center;"> -3626.186 </td>
+   <td style="text-align:center;"> -3637.579 </td>
+   <td style="text-align:center;"> 22.7845 </td>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> 20.51501 </td>
+   <td style="text-align:center;"> 0.0003711 </td>
+  </tr>
+</tbody>
+</table>
 
 
 #### Non-nested Hypothesis Tests
@@ -762,7 +1636,8 @@ The corresponding test for the cost by ln(income) being true is:
 
 The above result implies that the null hypotheses that the models with cost by income variable or cost by ln(income) are true are rejected at a significance level greater than 0.001.  However, the significance of rejection is much lower for the cost by ln(income) model and many analysts would adopt that specification on the grounds that it is conceptually more appropriate.  This specification suggests that the value of money declines with income but the rate of decline diminishes at higher levels of income.
 
-```{r cost_models}
+
+```r
 sf_mlogit_costinc <- sf_mlogit %>%
   mutate(
     costbyinc = cost / hhinc,
@@ -788,6 +1663,224 @@ modelsummary(
   title = "Models with Cost vs. Cost/Income and Cost/Ln(Income)"
 )
 ```
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:cost_models)Models with Cost vs. Cost/Income and Cost/Ln(Income)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Base Model </th>
+   <th style="text-align:center;"> Model With Cost By Cost/Income </th>
+   <th style="text-align:center;"> Model With Cost By ln(Income) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 2 </td>
+   <td style="text-align:center;"> -2.178 </td>
+   <td style="text-align:center;"> -2.377 </td>
+   <td style="text-align:center;"> -2.282 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.105) </td>
+   <td style="text-align:center;"> (0.106) </td>
+   <td style="text-align:center;"> (0.105) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 3++ </td>
+   <td style="text-align:center;"> -3.725 </td>
+   <td style="text-align:center;"> -4.080 </td>
+   <td style="text-align:center;"> -3.906 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.178) </td>
+   <td style="text-align:center;"> (0.175) </td>
+   <td style="text-align:center;"> (0.177) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Transit </td>
+   <td style="text-align:center;"> -0.671 </td>
+   <td style="text-align:center;"> -0.758 </td>
+   <td style="text-align:center;"> -0.731 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.133) </td>
+   <td style="text-align:center;"> (0.132) </td>
+   <td style="text-align:center;"> (0.133) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Bike </td>
+   <td style="text-align:center;"> -2.376 </td>
+   <td style="text-align:center;"> -2.771 </td>
+   <td style="text-align:center;"> -2.556 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.305) </td>
+   <td style="text-align:center;"> (0.296) </td>
+   <td style="text-align:center;"> (0.301) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Walk </td>
+   <td style="text-align:center;"> -0.207 </td>
+   <td style="text-align:center;"> -0.598 </td>
+   <td style="text-align:center;"> -0.369 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.194) </td>
+   <td style="text-align:center;"> (0.195) </td>
+   <td style="text-align:center;"> (0.194) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> tvtt </td>
+   <td style="text-align:center;"> -0.051 </td>
+   <td style="text-align:center;"> -0.051 </td>
+   <td style="text-align:center;"> -0.051 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.003) </td>
+   <td style="text-align:center;"> (0.003) </td>
+   <td style="text-align:center;"> (0.003) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> cost </td>
+   <td style="text-align:center;"> -0.005 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.000) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 2 </td>
+   <td style="text-align:center;"> -0.002 </td>
+   <td style="text-align:center;"> 0.003 </td>
+   <td style="text-align:center;"> 0.000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.002) </td>
+   <td style="text-align:center;"> (0.002) </td>
+   <td style="text-align:center;"> (0.002) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 3++ </td>
+   <td style="text-align:center;"> 0.000 </td>
+   <td style="text-align:center;"> 0.010 </td>
+   <td style="text-align:center;"> 0.003 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.003) </td>
+   <td style="text-align:center;"> (0.002) </td>
+   <td style="text-align:center;"> (0.002) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Transit </td>
+   <td style="text-align:center;"> -0.005 </td>
+   <td style="text-align:center;"> -0.001 </td>
+   <td style="text-align:center;"> -0.004 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.002) </td>
+   <td style="text-align:center;"> (0.002) </td>
+   <td style="text-align:center;"> (0.002) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Bike </td>
+   <td style="text-align:center;"> -0.013 </td>
+   <td style="text-align:center;"> -0.004 </td>
+   <td style="text-align:center;"> -0.010 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.005) </td>
+   <td style="text-align:center;"> (0.005) </td>
+   <td style="text-align:center;"> (0.005) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Walk </td>
+   <td style="text-align:center;"> -0.010 </td>
+   <td style="text-align:center;"> -0.002 </td>
+   <td style="text-align:center;"> -0.007 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.003) </td>
+   <td style="text-align:center;"> (0.003) </td>
+   <td style="text-align:center;"> (0.003) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> costbyinc </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -0.169 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.010) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> costbylninc </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -0.019 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.001) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 5029 </td>
+   <td style="text-align:center;"> 5029 </td>
+   <td style="text-align:center;"> 5029 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AIC </td>
+   <td style="text-align:center;"> 7276.4 </td>
+   <td style="text-align:center;"> 7460.8 </td>
+   <td style="text-align:center;"> 7282.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIC </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> -3626.186 </td>
+   <td style="text-align:center;"> -3718.390 </td>
+   <td style="text-align:center;"> -3629.000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho2 </td>
+   <td style="text-align:center;"> 0.253 </td>
+   <td style="text-align:center;"> 0.234 </td>
+   <td style="text-align:center;"> 0.253 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho20 </td>
+   <td style="text-align:center;"> 0.598 </td>
+   <td style="text-align:center;"> 0.587 </td>
+   <td style="text-align:center;"> 0.597 </td>
+  </tr>
+</tbody>
+</table>
 
 ## Value of Time {#estimation-value-of-time}
 
@@ -855,7 +1948,8 @@ VofT = \frac{0.6 \times \frac{\beta_{TVT}}{\beta_{Cost}}}{ln[Income($1000/year)]
 
 The value of time implied by each of these formulations is illustrated in Table 5-10 and Figure 5.6 by showing the values of time for different income levels.  In each case, the values of travel time appear to be quite low.  This will be addressed in model specification refinement (Section 6.2.6). 
 
-```{r valueoftimevsincome}
+
+```r
 tibble(
   AnnualIncome = c(25000, 50000, 75000, 100000, 125000)) %>%
   mutate(HourlyWage= AnnualIncome/2000) %>%
@@ -866,31 +1960,57 @@ tibble(
                 col.names = c("Annual Income", "Hourly Wage", "Linear", "Cost/Income", "Cost/LN(Inc.)"))
 ```
 
-```{r figure 5-6, echo = F}
-tibble(
-  income = seq(0, 150, 2)
-) %>%
-  
-  #The coefficient values for beta of cost and time below come from the respective models in Table 5-9
-  mutate(
-    Cost = 6.26,
-    CostInc = 0.6 * -0.0512 / -0.1692 * income,
-    CostLnInc = 0.6 * -0.0512 / -0.0191 * log(income)
-  ) %>%
-  
-  ggplot() + 
-  geom_line(aes(y = Cost, x = income, color = "Cost"), size = 2) + 
-  geom_line(aes(y = CostInc, x = income, color = "CostInc"), size = 2) +
-  geom_line(aes(y = CostLnInc, x = income, color = "CostLnInc"), size = 2) +
-  labs(title = "Value of Time vs. Income",
-            x = "Annual Income ($000)",
-            y = "Wage Rate ($/hour)") +
-  scale_x_continuous(labels=scales::dollar_format()) +
-  scale_y_continuous(labels=scales::dollar_format()) +
-  theme(legend.position = "right",
-        legend.title = element_blank())
+<table>
+<caption>(\#tab:valueoftimevsincome)Value of Time vs. Income</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Annual Income </th>
+   <th style="text-align:right;"> Hourly Wage </th>
+   <th style="text-align:right;"> Linear </th>
+   <th style="text-align:right;"> Cost/Income </th>
+   <th style="text-align:right;"> Cost/LN(Inc.) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 25000 </td>
+   <td style="text-align:right;"> 12.5 </td>
+   <td style="text-align:right;"> 6.26 </td>
+   <td style="text-align:right;"> 4.53 </td>
+   <td style="text-align:right;"> 5.18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 50000 </td>
+   <td style="text-align:right;"> 25.0 </td>
+   <td style="text-align:right;"> 6.26 </td>
+   <td style="text-align:right;"> 9.07 </td>
+   <td style="text-align:right;"> 6.29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 75000 </td>
+   <td style="text-align:right;"> 37.5 </td>
+   <td style="text-align:right;"> 6.26 </td>
+   <td style="text-align:right;"> 13.60 </td>
+   <td style="text-align:right;"> 6.95 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 100000 </td>
+   <td style="text-align:right;"> 50.0 </td>
+   <td style="text-align:right;"> 6.26 </td>
+   <td style="text-align:right;"> 18.13 </td>
+   <td style="text-align:right;"> 7.41 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 125000 </td>
+   <td style="text-align:right;"> 62.5 </td>
+   <td style="text-align:right;"> 6.26 </td>
+   <td style="text-align:right;"> 21.94 </td>
+   <td style="text-align:right;"> 7.72 </td>
+  </tr>
+</tbody>
+</table>
 
-```
+<img src="05-mnl-estimation_files/figure-html/figure 5-6-1.png" width="672" />
 
 
 Another approach that can be used in this case is to relate the value of travel directly to the wage rate by assuming that the working year consists of 2000 hours or 120,000 minutes and recognizing that $1000 dollars is equivalent to 100,000 cents.  This gives us 
@@ -940,7 +2060,8 @@ VofT = \frac{\partial{V_{it}}}{\partial{Time_{it}}} \Huge/ \normalsize \frac{\pa
 
 which can be reported in a table for selected values of time or plotted in a graph of Value of Time as a function of TVT or Cost, as appropriate (see below).  Models using each of these formulations are estimated and reported, along with the Base Model in Table 5-11. The goodness of fit is substantially improved by using ln(time), which is generally expected, but is worse when using ln(cost), for which there is no conceptual basis. 
 
-```{r Table5-11}
+
+```r
 base_model <- mlogit(chosen ~  tvtt + cost | hhinc, data = sf_mlogit)
 lntravaltime_model <- mlogit(chosen ~ cost + log(tvtt) | hhinc, data = sf_mlogit)
 # lots of variables have zero cost, and log(0) = -Inf. To keep this model estimable, we can
@@ -962,9 +2083,228 @@ modelsummary(
 )
 ```
 
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:Table5-11)Base Model and Log Transformations</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Base Model </th>
+   <th style="text-align:center;"> Model With Log of Travel Time </th>
+   <th style="text-align:center;"> Model With Log of Travel Cost </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 2 </td>
+   <td style="text-align:center;"> -2.1780 </td>
+   <td style="text-align:center;"> -1.7457 </td>
+   <td style="text-align:center;"> -2.4748 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1046) </td>
+   <td style="text-align:center;"> (0.1091) </td>
+   <td style="text-align:center;"> (0.1072) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Share ride 3++ </td>
+   <td style="text-align:center;"> -3.7251 </td>
+   <td style="text-align:center;"> -3.1395 </td>
+   <td style="text-align:center;"> -4.3121 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1777) </td>
+   <td style="text-align:center;"> (0.1805) </td>
+   <td style="text-align:center;"> (0.1782) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Transit </td>
+   <td style="text-align:center;"> -0.6709 </td>
+   <td style="text-align:center;"> 0.0788 </td>
+   <td style="text-align:center;"> 0.0194 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1326) </td>
+   <td style="text-align:center;"> (0.1509) </td>
+   <td style="text-align:center;"> (0.1371) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Bike </td>
+   <td style="text-align:center;"> -2.3763 </td>
+   <td style="text-align:center;"> -1.6413 </td>
+   <td style="text-align:center;"> -10.4405 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.3045) </td>
+   <td style="text-align:center;"> (0.3092) </td>
+   <td style="text-align:center;"> (0.5238) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (Intercept) × Walk </td>
+   <td style="text-align:center;"> -0.2068 </td>
+   <td style="text-align:center;"> 1.1878 </td>
+   <td style="text-align:center;"> -7.7790 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1941) </td>
+   <td style="text-align:center;"> (0.2324) </td>
+   <td style="text-align:center;"> (0.4402) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> tvtt </td>
+   <td style="text-align:center;"> -0.0513 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -0.0602 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0031) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.0032) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> cost </td>
+   <td style="text-align:center;"> -0.0049 </td>
+   <td style="text-align:center;"> -0.0034 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0002) </td>
+   <td style="text-align:center;"> (0.0002) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 2 </td>
+   <td style="text-align:center;"> -0.0022 </td>
+   <td style="text-align:center;"> -0.0026 </td>
+   <td style="text-align:center;"> -0.0009 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0016) </td>
+   <td style="text-align:center;"> (0.0016) </td>
+   <td style="text-align:center;"> (0.0015) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 3++ </td>
+   <td style="text-align:center;"> 0.0004 </td>
+   <td style="text-align:center;"> 0.0001 </td>
+   <td style="text-align:center;"> 0.0025 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0025) </td>
+   <td style="text-align:center;"> (0.0025) </td>
+   <td style="text-align:center;"> (0.0024) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Transit </td>
+   <td style="text-align:center;"> -0.0053 </td>
+   <td style="text-align:center;"> -0.0066 </td>
+   <td style="text-align:center;"> -0.0051 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0018) </td>
+   <td style="text-align:center;"> (0.0019) </td>
+   <td style="text-align:center;"> (0.0018) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Bike </td>
+   <td style="text-align:center;"> -0.0128 </td>
+   <td style="text-align:center;"> -0.0125 </td>
+   <td style="text-align:center;"> -0.0131 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0053) </td>
+   <td style="text-align:center;"> (0.0053) </td>
+   <td style="text-align:center;"> (0.0054) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Walk </td>
+   <td style="text-align:center;"> -0.0097 </td>
+   <td style="text-align:center;"> -0.0090 </td>
+   <td style="text-align:center;"> -0.0089 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0030) </td>
+   <td style="text-align:center;"> (0.0031) </td>
+   <td style="text-align:center;"> (0.0031) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> log(tvtt) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -2.3992 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.1244) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I(log(cost + 0.01)) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> -1.0150 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.0502) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 5029 </td>
+   <td style="text-align:center;"> 5029 </td>
+   <td style="text-align:center;"> 5029 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AIC </td>
+   <td style="text-align:center;"> 7276.4 </td>
+   <td style="text-align:center;"> 7205.0 </td>
+   <td style="text-align:center;"> 7383.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIC </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> -3626.186 </td>
+   <td style="text-align:center;"> -3590.502 </td>
+   <td style="text-align:center;"> -3679.717 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho2 </td>
+   <td style="text-align:center;"> 0.2534 </td>
+   <td style="text-align:center;"> 0.2608 </td>
+   <td style="text-align:center;"> 0.2424 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> rho20 </td>
+   <td style="text-align:center;"> 0.5976 </td>
+   <td style="text-align:center;"> 0.6015 </td>
+   <td style="text-align:center;"> 0.5916 </td>
+  </tr>
+</tbody>
+</table>
+
 The implications for value of time of these different formulations are shown in Table 5-12 and Table 5-13 Value of Time for Log of Cost Model and also in Figure 5.7 and Figure 5.8.  
 
-```{r table5-12}
+
+```r
 # in a log of time model, the value of time is a function of the trip time.
 ln_vot <- function(model, ttime){
   ValueCentsMin = coef(model)["log(tvtt)"] / (coef(model)["cost"] * ttime)
@@ -981,7 +2321,51 @@ tibble(
   kable_styling()
 ```
 
-```{r figure5-7, fig.cap="Value of time for log of time model as a function of trip time."}
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:table5-12)Value of Time for Log of Time Model</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Trip Time (min) </th>
+   <th style="text-align:right;"> Value of Time (cents/min) </th>
+   <th style="text-align:right;"> Value of Time ($/hr) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 139.76 </td>
+   <td style="text-align:right;"> 83.86 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 46.59 </td>
+   <td style="text-align:right;"> 27.95 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 23.29 </td>
+   <td style="text-align:right;"> 13.98 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:right;"> 11.65 </td>
+   <td style="text-align:right;"> 6.99 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 7.76 </td>
+   <td style="text-align:right;"> 4.66 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 120 </td>
+   <td style="text-align:right;"> 5.82 </td>
+   <td style="text-align:right;"> 3.49 </td>
+  </tr>
+</tbody>
+</table>
+
+
+```r
 tibble(
   triptime = seq(5, 120, by = 1),
   vot = 0.6 * ln_vot(lntravaltime_model, triptime)
@@ -993,34 +2377,44 @@ ggplot(aes(y = vot, x = triptime)) +
   theme_bw()
 ```
 
-```{r table5-13, echo = F}
-tab513df <- tibble(
- "Trip cost"= c("$0.25", "$0.50", "$1.00", "$2.00", "$5.00"),
- "Value of time ($/hr)" = c("0.85", "$1.71", "$3.42", "$6.83", "$17.09"))
+<div class="figure">
+<img src="05-mnl-estimation_files/figure-html/figure5-7-1.png" alt="Value of time for log of time model as a function of trip time." width="672" />
+<p class="caption">(\#fig:figure5-7)Value of time for log of time model as a function of trip time.</p>
+</div>
 
-kbl(tab513df, align = "c", booktabs = T, caption = "Value of Time for Log of Cost Model") %>% 
-kable_classic()
-```
+<table class=" lightable-classic" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto;'>
+<caption>(\#tab:table5-13)Value of Time for Log of Cost Model</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> Trip cost </th>
+   <th style="text-align:center;"> Value of time ($/hr) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> $0.25 </td>
+   <td style="text-align:center;"> 0.85 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> $0.50 </td>
+   <td style="text-align:center;"> $1.71 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> $1.00 </td>
+   <td style="text-align:center;"> $3.42 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> $2.00 </td>
+   <td style="text-align:center;"> $6.83 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> $5.00 </td>
+   <td style="text-align:center;"> $17.09 </td>
+  </tr>
+</tbody>
+</table>
 
-```{r figure 5-8, echo = F}
-
-#I can recreate this better with the sf_mlogit dataset, but I need to figure out where wage rate comes from
-
-library(ggplot2)
-
-fig58df <- tibble(
-  "Tripcost" = c(0, .25, .50, 1.00, 2.00, 5.00),
-  "Timevalue" = c(0, 0.85, 1.71, 3.42, 6.83, 17.09))
-
-ggplot(fig58df, aes(x=Tripcost)) + 
-  geom_line(aes(y = Timevalue), size = 1) + 
-  scale_y_continuous(labels=scales::dollar_format()) +
-  scale_x_continuous(labels=scales::dollar_format()) +
-  labs(title = "Value of Time for Log of Cost Model",
-            x = "Trip Cost",
-            y = "Value of Time ($/hour)")
-
-```
+<img src="05-mnl-estimation_files/figure-html/figure 5-8-1.png" width="672" />
 
 [^dataformats]: The data formats required vary for different programs and are documented in the relevant software.
 
