@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Model Specification Refinement: San Francisco Bay Area Work Mode Choice
+# Model Specification Refinement: San Francisco Bay Area Work Mode Choice {#specifcation-chapter}
 ```{r setup}
 library(mlogit)
 library(tidyverse)
@@ -69,7 +69,7 @@ choice in the San Francisco Bay Area.
 
 ## Alternative Specifications
 The basic multinomial logit mode choice model for work commute in the San Francisco Bay
-Area was reported in Table 5-2 \@ref(basic-estimation-table) in CHAPTER 5 \@ref(mnl-estimation.Rmd). The refinements we consider include:
+Area was reported in Table 5-2 \@ref(tab:basic-estimation-table) in [CHAPTER 5](#chapter5) . The refinements we consider include:
   - Different specifications of the income effects,
   - Different specifications of travel time,
   - Additional decision maker related variables such as gender and automobiles owned,
@@ -79,7 +79,7 @@ Area was reported in Table 5-2 \@ref(basic-estimation-table) in CHAPTER 5 \@ref(
     origin/destination is in a Central Business District).
     
 ### Refinement of Specification for Alternative Specific Income Effects
-The estimation results for the base model in CHAPTER 5 yielded time and cost parameter
+The estimation results for the base model in [CHAPTER 5](#chapter5) yielded time and cost parameter
 estimates that had the expected (negative) sign and were statistically significant. The parameters
 for the alternative specific income variables were significant and had the expected sign (negative
 relative to drive alone) except for the shared ride specific income variables (shared ride 2 and
@@ -124,7 +124,7 @@ H_0 : \beta_{IncomeSR2} = \beta_{IncomeSR3+} = 0
 (\#eq:automotivemodessame)
 \end{equation}
     
-The estimation results for the base model (from CHAPTER 5) and for these three alternative
+The estimation results for the base model (from [CHAPTER 5](#chapter5)) and for these three alternative
 models are reported in Table 6-1. The parameter estimates for all three models are consistent
 with expectations. That is, the effect of increasing income is neutral or negative for the shared
 ride modes relative to drive alone and equal to or more negative for transit, bike and walk than
@@ -135,7 +135,7 @@ Selection of one of these four models to represent the effect of income should c
 the statistical relationships among them and the reasonableness of the resultant models. Since
 Models 1W, 2W and 3W are constrained versions of the Base Model and Models 2W and 3W
 are constrained versions of Model 1W, we can use the likelihood ratio test to evaluate the
-hypotheses implied by each of these models (see section 5.7.3.2). We use this test to determine
+hypotheses implied by each of these models (see [section 5.7.3.2](#section5-7-3-2)). We use this test to determine
 if the hypothesis that each of these models is the true model is or is not rejected by the less
 restricted model. The likelihood ratio statistics (equation 5.16), the degrees of freedom or
 number of restrictions and the level of significance for each test are reported relative to the Base
@@ -171,6 +171,34 @@ modelsummary(
 )
 
 ```
+
+```{r Table-6-2, echo = F}
+
+#This table is incomplete because Models 1-3 are not being restricted in the same way as in the original table.
+
+lrtest_compare <- function(m){
+  lrtest(m, model_base)[2, 4]
+}
+lrtest_p <- function(m){
+  lrtest(m, model_base)[2, 5]
+}
+
+tibble(
+  model = list(model_1w, model_2w, model_3w)
+) %>%
+  mutate(
+    Model = c("Model 1W","Model 2W","Model 3W"),
+    loglik = map_dbl(model, logLik),
+    lrtest = map_dbl(model, lrtest_compare),
+    p_val = map_dbl(model, lrtest_p)
+  ) %>%
+  select(-model)%>%
+  kbl(align = 'c', caption = "Likelihood Ratio Tests between Models 1W, 2W, 3W and Base Model") %>%
+  kable_styling()
+
+```
+
+
 ### Different Specifications of Travel Time
 The specification for travel time in the above models implies that the utility value of time is
 equal for all the alternatives and between in-vehicle and out-of-vehicle time. However, we
@@ -311,7 +339,7 @@ compared to Model 6W are reported in Table 6-5. The parameter estimates obtained
 time, cost, and income variables in all four models have the correct signs and are statistically 
 significant. Model 7W has substantially better goodness-of-fit than Models 6W, 8W and 9W. Since 
 none of the other models are constrained versions of Model 7W, we use the non-nested hypothesis 
-test (see Section 5.7.3.2, Equation 5.21) to compare it with Models 6W, 8W, and 9W.
+test (see [Section 5.7.3.2](#section5-7-3-2), Equation 5.21) to compare it with Models 6W, 8W, and 9W.
  
 We illustrate the non-nested hypothesis test by applying it to the hypothesis that
 Model 6W is the true model given that Model 7W has a higher $\overline{\rho}^{2}$. Since both models have the
@@ -333,7 +361,9 @@ sf_mlogit_trip_estimates <- sf_mlogit %>%
   mutate(
     TIR8 = (mot_ivtt + 2.4 * mot_ovtt),  
     TIR9 = (mot_ivtt + 4 * mot_ovtt), 
-    ovtd = mot_ovtt/dist
+    ovtd = mot_ovtt/dist,
+    scalemot = 2.4 * mot_ovtt,
+    scalemot2 = 4 * mot_ovtt
     )
  
 model_7w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + ovtd + cost | hhinc, 
@@ -342,7 +372,10 @@ model_8w <- mlogit(chosen ~ nm_tvtt + TIR8  + cost | hhinc,
                    data = sf_mlogit_trip_estimates)
 model_9w <- mlogit(chosen ~ nm_tvtt + TIR9 + cost | hhinc, 
                    data = sf_mlogit_trip_estimates)
-
+model_8a <- mlogit(chosen ~ nm_tvtt + (mot_ivtt + scalemot) + cost | hhinc,
+                    data = sf_mlogit_trip_estimates)
+model_9a <- mlogit(chosen ~ nm_tvtt + (mot_ivtt + scalemot2) + cost | hhinc, 
+                   data = sf_mlogit_trip_estimates)
 
 trip_1 <- list(
   "Model 6W" = model_6w,
@@ -377,36 +410,26 @@ These values of time are fixed for IVT but vary with distance for OVT[^costbyinc
 for Model 7W. The corresponding values of time for Models 6W, 8W and 9W are shown in
 Table 6-7.
 
-The prevailing wage rate in the San Francisco Bay Area is $21.20 per hour[^refsfmodel]. In
-comparison, the values of in-vehicle time implied by Models 6W, 8W, and 9W are very low and
-the values of out of vehicle time are somewhat low. Model 7W produces higher, but still low,
-values of time. Finally, we can examine the ratio of time values of OVT relative to IVT for all
-four models as shown in Figure 6.1. The ratio for Model 6W is clearly unacceptable. Those for
-Models 7W, 8W and 9W are more reasonable.
 
-```{r Table 6-6 Model 7W Implied Values of Time as a Function of Trip Distance, echo = F}
+```{r model7w_vot, echo = F}
+model7_vot <- function(model, timepar, costpar, distance){
+  if(timepar == "mot_ovttbydist"){
+    ( coef(model)[timepar] / distance) / coef(model)[costpar]
+  } else {
+    coef(model)[timepar] / coef(model)[costpar]
+  }
+}
 
-#Table 6-4 based off coefficients from models 1w, 5w, 6w
-#These values are different from those in the text because the model coefficients are as well
-tibble(
-"Value of Time ($/hr)" = c("Value of Non-Motorized Time", "Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
-"Model 1W" = round(c(VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost"), VOTsimple(model_1w, "tvtt", "cost")),2),
-"Model 5W" = round(c(VOTsimple(model_5w, "nm_tvtt", "cost"), VOTsimple(model_5w, "mot_tvtt", "cost"), VOTsimple(model_5w, "mot_tvtt", "cost")),2),
-"Model 6W" = round(c(VOTsimple(model_6w, "nm_tvtt", "cost"), VOTsimple(model_6w, "mot_ovtt", "cost"), VOTsimple(model_6w, "mot_ivtt", "cost")),2)
+tibble(distance = c(5, 10, 20)) %>%
+  rowwise() %>%
+  mutate(
+  "mot_ovtt" = model7_vot(model_7w, "mot_ovttbydist", "cost", distance),
+  "mot_ivtt" = model7_vot(model_7w, "mot_tvtt", "cost", distance),
+  "mot_tvtt" = mot_ovtt + mot_ivtt,
+  "nm_tvtt" = model7_vot(model_7w, "nm_tvtt", "cost", distance),
 ) %>%
-   kbl(align = 'c', caption = "Implied Values of Time in Models 13W, 14W, and 15W") %>%
-   kable_styling()
-
-
-"Value of Motorized Out-of-Vehicle Time"
-"Value of Motorized In-Vehicle Time"
-"Value of Non-Motorized Time"
-
-
-
-```
-
-
+  kbl(caption ="Model 7W Implied Values of Time as a Function of Trip Distance" ) %>%
+  kable_styling()
 ```
 
 ```{r Table 6-7 Implied Values of Time in Models 6W, 8W, Model 9W, echo = F}
@@ -416,6 +439,43 @@ tibble(
 
 ```
 
+The prevailing wage rate in the San Francisco Bay Area is $21.20 per hour[^refsfmodel]. In
+comparison, the values of in-vehicle time implied by Models 6W, 8W, and 9W are very low and
+the values of out of vehicle time are somewhat low. Model 7W produces higher, but still low,
+values of time. Finally, we can examine the ratio of time values of OVT relative to IVT for all
+four models as shown in Figure 6.1. The ratio for Model 6W is clearly unacceptable. Those for
+Models 7W, 8W and 9W are more reasonable.
+
+```{r figure6-1}
+vottable <- tibble(
+"Value of Time ($/hr)" = c("Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
+"Model 6W" = round(c(VOTsimple(model_6w, "mot_ovtt", "cost"), VOTsimple(model_6w, "mot_ivtt", "cost")),2),
+
+"Model 7W" = round(c(VOTsimple(model_7w, "mot_tvtt", "cost"), VOTsimple(model_7w, "mot_tvtt", "cost")),2),
+
+"Model 8W" = round(c(VOTsimple(model_8a, "scalemot", "cost"), VOTsimple(model_8a, "mot_ivtt", "cost")),2),
+
+"Model 9W" = round(c(VOTsimple(model_9a, "scalemot2", "cost"), VOTsimple(model_9a, "mot_ivtt", "cost")),2)
+) 
+
+model_6wa = as.numeric(vottable[1,"Model 6W"]/vottable[2,"Model 6W"])
+model_7wa = as.numeric(vottable[1,"Model 7W"]/vottable[2,"Model 7W"])
+model_8wa = as.numeric(vottable[1,"Model 8W"]/vottable[2,"Model 8W"])
+model_9wa = as.numeric(vottable[1,"Model 9W"]/vottable[2,"Model 9W"])
+
+tibble(
+  distance = .8:10,
+  model6 = model_6wa,
+  model7 = model_7wa/distance,
+  model8 = model_8wa,
+  model9 = model_9wa
+) %>%
+  gather(model, vot, -distance) %>%
+  ggplot(aes(x = distance, y = vot, color = model)) + 
+    geom_line()
+
+
+```
 
 The selection of a preferred travel time specification among the four alternative specifications
 tested is relatively straightforward in this case. Model 7W outperforms the other models in all
@@ -440,8 +500,7 @@ or decrease the utility of the mode to that traveler (relative to the reference 
 other is to include such variables as interactions with mode related characteristics. For example,
 dividing cost by income to reflect the decreasing importance of cost with increasing annual
 income. The inclusion of decision maker related variables as alternative specific variables is
-demonstrated in this section. Similar treatment of trip context variables is considered in section
-6.2.4. Interactions with mode characteristics are demonstrated in section 6.2.5.
+demonstrated in this section. Similar treatment of trip context variables is considered in [Section 6.2.4](#section6-2-4). Interactions with mode characteristics are demonstrated in [Section 6.2.5](#section6-2-5).
 
 We consider number of automobiles in the household, the number of autos divided by the
 number of household workers and the number of autos divided by the number of persons of
@@ -495,7 +554,7 @@ modelsummary(
 
 ```
 
-### Including Trip Context variables
+### Including Trip Context variables {#section6-2-4}
 The models considered to this point include variables that describe the attributes of alternatives,
 modes, and the characteristics of decision-makers (the work commuters). The mode choice decision also 
 is influenced by variables that describe the context in which the trip is made. For
@@ -586,7 +645,7 @@ and it may be appropriate to adopt Model 13W or 14W, sacrificing statistical fit
 parsimony[^parsimony]. For now, we choose Model 15W as the preferred model for its stronger statistical
 results, but we will return to the issue of model complexity. 
 
-### Interactions between Trip maker and/or Context Characteristics and Mode Attributes
+### Interactions between Trip maker and/or Context Characteristics and Mode Attributes {#section6-2-5}
 Another approach to the inclusion of trip maker or context characteristics is through interactions
 with mode attributes. The most common example of this approach is to take account of the
 expectation that low-income travelers will be more sensitive to travel cost than high-income
@@ -596,14 +655,11 @@ household income. Table 6-11 portrays the estimation results for two models that
 how they represent cost; Model 15W includes travel cost while Model 16W includes travel cost
 divided by income.
 
-```{r Table 6-11 income interaction models, echo = F}
+```{r income_interaction, echo = F}
 #I feel I've created the interaction term correctly and included the right variables, but values are still slightly off
-
-sf_mlogit_tripcontext %>%
-  mutate(costbyinc = cost / hhinc)
-
-model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
-model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + costbyinc | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + cost | 
+                      hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_16w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + mot_ovttbydist + I(cost/hhinc) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
 incomeinteraction_estimation <- list(
   "Model 15W" = model_15w,
@@ -628,7 +684,7 @@ and cost parameters because it measures the implied value of time used by travel
 their travel mode. Values of time evaluated with earlier models were somewhat lower than
 expected when compared to the average wage rate. Using the cost by income formulation in
 Model 16W, we can calculate the implied value of time using the relationship developed in
-Section 5.8.2.
+[Section 5.8.2](#section5-8-2).
 
 The implied values of IVT and OVT from Model 16W are substantially higher than those
 from Model 15W (Table 6-12) and more in line with our *a priori* expectations. This
@@ -646,17 +702,42 @@ VOTdistance <- function(model, timevar, timedistvar, dist_value, costvar) {
   (coef(model)[timevar]+(coef(model)[timedistvar]/dist_value))*0.6/coef(model)[costvar]
 }
 
-# Model 16W
+model_15w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + I(mot_ovtt/dist) + cost | 
+                      hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
-#the parameters in this model are not quite correct
-model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
+model_16w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | 
+                      hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext)
 
-modelsummary(model_16w)
-
-#table 6-12
-
+tibble(
+  "Measure" = c("Value of In-Vehicle Time","Value of Out-of-Vehilce Time (10 mile trip)", 
+                "Value of Out-of-Vehilce Time (20 mile trip)"),
+  "Model 15W" = c(
+    paste("$", round(VOTsimple(model_15w,"mot_tvtt","cost"),2), "/hr"),
+    paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 10,"cost"),2), "/hr"), 
+    paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 20,"cost"),2), "/hr")
+  ), 
+  "Model 16W (Wage Rate = $21.20)" = c(
+    paste( coef(model_16w)["mot_tvtt"] / coef(model_16w)["I(cost/hhinc)"] * 21.20, "$ /hr)"), 
+    (coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 10) / coef(model_16w)["I(cost/hhinc)"] * 21.20,
+    (coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 20) / coef(model_16w)["I(cost/hhinc)"] * 21.20
+  )) %>%
+  kbl(caption = "Implied Value of Time in Models 15W and 16W") %>%
+  kable_styling()
 
 ```
+
+```{r compare-1516}
+modelsummary(
+  list("15W" = model_15w, "16W" = model_16w), 
+  coef_map = c("mot_tvtt" = "Motorized Travel Time", 
+               "nm_tvtt" = "Non-motorized Travel Time",
+               "I(mot_ovtt/dist)" = "Motorized time per distance",
+               "cost" = "Trip Cost",
+               "I(cost/hhinc)" = "Trip cost divided by income"
+               )
+)
+```
+
 
 ### Additional Model Refinement
 Generally, it is appropriate to test the preferred model specification against a variety of other
@@ -794,7 +875,7 @@ list(
 
 Thus, the null hypothesis is that $\underline\beta_1 = \underline\beta_2 = ... = \underlineβ_s = ... = \underlineβ_S$ , where βs , is the
 vector of coefficients for the $S^{th}$ market segment. Following the approach described in
-CHAPTER 5, we reject the null hypothesis that the restricted model is the correct model at
+[CHAPTER 5](#chapter5), we reject the null hypothesis that the restricted model is the correct model at
 significance level p if the calculated value of the statistic is greater than the test or critical value.
 That is, if: 
 
