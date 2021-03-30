@@ -109,9 +109,33 @@ To ensure that all the variance components are positive, as required, the nestin
 
 Adopting a nested logit model implies rejection of the MNL .  We can use standard statistical tests of the hypothesis that the MNL model is the true model since the nested logit model is a generalization of the MNL model.  In the case of multiple nests, the hypothesis that the MNL is the true model is equivalent to the hypothesis that all the logsum parameters are equal to one.  We can use the likelihood ratio statistic with degrees of freedom equal to the number of logsum parameters (the number of restrictions between the NL and the MNL) to test this hypothesis.  We reject the null hypothesis that the MNL model is the correct model if the calculated value is greater than the test or critical value for the distribution as:
 
+\begin{equation}
+$\displaystyle -2 \times [l^{MNL} - l^{NL}]\ge \chi^{2}_{n}$
+where n is the number of restrictions (nests) between the MNL and NL models.
+(\#eq:log-likelihoodtestMNLmodel)
+\end{equation}
+
 In the case of a simple NL model with a single nest, we can use the t-statistic to test the hypothesis that the logsum parameter is equal to one.  Even in a more complex NL model, we can test each logsum term to determine if a portion of the nesting structure can be eliminated.  For each case in which the hypothesis that the logsum parameter is equal to one is not rejected, the corresponding branch of the tree can be eliminated and the alternatives can go directly to the next level.  The t-statistics must be evaluated for the appropriate null hypothesis.  For nests directly under the root of the tree, the null hypothesis is  ; for other nests, the null hypothesis is that the parameter for that nest is equal to the parameter for the next higher nest in the tree.  That is, for a top level nest,
 
+\begin{equation}
+$\displaystyle t-statistic = \frac{\hat\theta - 1}{S_{k}}$
+where $\hat\theta$ is the estimate of the logsum parameter for nest {k},
+      1            is the hypothesized value against which the logsum parameter is being tested;
+      $S_{k}$        is the standard error of the parameter estimate.
+(\#eq:toplevelnest)
+\end{equation}
+
 For other nests, 
+
+\begin{equation}
+$\displaystyle t-statistic = \frac{\hat\theta_{k \subset j} - \hat\theta_{j}}{\sqrt {S^{2}_{k\subset j} + S^{2}_{j}-2S_{k\subset j,j}}}$
+where $\hat\theta_{k\subset j}$ is the estimate of the logsum parameter for nest k that is included under nest j,
+      $\hat\theta_{j}$          is the estimate of the logsum parameter for nest j,
+      $S^{2}_{k\subset j}$      is the error variance of the logsum parameter for nest k that is included under nest j,
+      $S^{2}_{j}$               is the error variance of the logsum parameter for nest j, and
+      $S_{k\subset j,j}$        is the error covariance of the two logsum parameters.
+(\#eq:toplevelnest)
+\end{equation}
 
 It is important to note that these are not necessarily the test values that will be reported by all computer programs, many of which apply the test for the null hypothesis that the logsum is equal to zero or one only.  If the test against zero is reported , the user must obtain or calculate the standard errors of estimate for the relevant parameters and calculate the t-statistic(s) as defined above.
 	The likelihood ratio test can also be used to test the significance of more complex nested models or between models with different nesting structures as long as the nesting structure of one model can be obtained as a restriction of the other.  To choose between two nested logit models where neither model is a restricted version of the other, we use the non-nested hypothesis test discussed in CHAPTER 5 (section 5.7.3.2).
