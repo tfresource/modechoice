@@ -31,12 +31,16 @@ U_{LTR} &= V_{PT} + V_{LTR} + \epsilon_{SR} + \epsilon_{LTR}
 \end{align}
 
 The utility terms for bus and light rail each include a distinct observed component,   and  , and a common observed component,  , for public transit (PT); they also include distinct random components,   and  , and a common random component,  .  The common error component creates a covariance between the total errors for bus,  , and Light Rail,  .  This covariance violates the assumption underlying the MNL model representing an increased similarity between pairs of nested alternatives (bus and Light Rail, in this case) and leads to greater cross-elasticity between these alternatives.  
-	The total error for each of the four alternatives is assumed to be distributed Gumbel with scale parameter equal to one, as in the MNL model.  The variance of these distributions is: 
+  The total error for each of the four alternatives is assumed to be distributed Gumbel with scale parameter equal to one, as in the MNL model.  The variance of these distributions is: 
 
 The distinct error components,   and  , also are assumed to be distributed Gumbel, but with scale parameter,  .   However, in practice we estimate  , the inverse of the Gumbel scale parameter.     , commonly referred to as the logsum parameter, is bounded by zero and one.  That is, the variance of these distributions is:
 
 where	  is bounded by one and positive infinity (  is bounded by zero and one) to ensure that the conditional variance for bus,  ,  is less than the total variance for bus,  , and similarly for Light Rail.  This is required to ensure that the variance for the common public transit error component,  , is non-negative. These assumptions are adequate to derive a nested logit model using utility maximization principles.  The choice structure implied by these equations is depicted by the nesting structure in Figure 8.3, in which bus and light rail are more similar to each other than they are to drive alone and shared ride. 
-It is convenient to interpret this structure as if there are two levels of choice even though the derivation of the model makes no assumptions about the structure of the choice process .  The figure depicts an upper level (marginal) choice among drive alone, shared ride, and public transit and a lower level (conditional) choice between bus and light rail, given that public transit is chosen.
+  It is convenient to interpret this structure as if there are two levels of choice even though the derivation of the model makes no assumptions about the structure of the choice process .  The figure depicts an upper level (marginal) choice among drive alone, shared ride, and public transit and a lower level (conditional) choice between bus and light rail, given that public transit is chosen.
+
+```{r Twoleveltwoalternatives, fig.cap="Two-Level Nest Structure with Two Alternatives in Lower Nest"}
+knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-html/Twoleveltwoalternatives.PNG"))
+```
 
 The choice probabilities for the lower level nested alternatives (commuter rail or bus), conditional on choice of these alternatives are given by:
 
@@ -64,12 +68,20 @@ The differences between the nested logit model and the multinomial logit model c
 
 ## Nesting Structures
 
-The assumptions underlying the model described in the preceding section (correlation of error terms for the bus and light rail alternatives) results in a two-level model with a single public transit nest for the four alternative (drive alone, shared ride, commuter rail, and bus) mode choice problem.  This nesting structure is one of many possible two-level nested logit models which can be constructed for a choice set with four alternatives.  The possible set of two-level nested logit models includes six combinations of two alternatives in a nest with the remaining alternatives at the upper level, four combinations of three alternatives in a nest and one at the upper level and three combinations of two alternatives in a nest and two alternatives in a parallel nest for a total of thirteen two level nest structures (Figure 8.2).  The number of two level nest structures increases rapidly with the number of alternatives as shown in Table 8 3 below.  
+The assumptions underlying the model described in the preceding section (correlation of error terms for the bus and light rail alternatives) results in a two-level model with a single public transit nest for the four alternative (drive alone, shared ride, commuter rail, and bus) mode choice problem.  This nesting structure is one of many possible two-level nested logit models which can be constructed for a choice set with four alternatives.  The possible set of two-level nested logit models includes six combinations of two alternatives in a nest with the remaining alternatives at the upper level, four combinations of three alternatives in a nest and one at the upper level and three combinations of two alternatives in a nest and two alternatives in a parallel nest for a total of thirteen two level nest structures (Figure 8.2).  The number of two level nest structures increases rapidly with the number of alternatives as shown in Table 8 3 below.
+
+```{r Threetypestwolevelnests, fig.cap="Three Types of Two Level Nests"}
+knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-html/Threetypestwolevelnests.PNG"))
+```
 
 Some of these nesting structures are likely to be behaviorally unreasonable; for example, it doesn’t seem reasonable to include bus and car in the same nest. The selection of a preferred nesting structure requires a combination of judgment (about reasonable nesting structures) and statistical hypothesis testing; specifically, testing the hypothesis that the MNL or a simpler NL model is the true model.  
 	Further, sub-groups of alternatives within any group may themselves be more similar to each other than to other alternatives in the larger group.  Representation of these differences in similarity can result in multiple levels of nesting, hierarchically identifying increasingly similar alternatives at each level (Borsch-Supan, 1987).  For example, in the four alternative case, the case of three alternatives in a lower nest might represent alternatives that include group riding (shared ride, bus and light rail).  If we believe that the bus and light rail alternatives are more similar than either alternative is to shared ride, utility equations with the following common error terms will show an intermediate level of error correlation among all group travel modes, and an additional level of error correlation between commuter rail and bus.
 
 In this case, the group travel modes (shared ride, commuter rail and bus) will be nested at the second level and commuter rail and bus will be nested at the third or lowest level as shown in Figure 8.3.  In this model structure, the lower level nest is a binary choice between commuter rail and bus, conditional on choice of public transit; the second level nest represents a choice between shared ride and public transit conditional on group travel; and the highest level represents a choice between drive alone and group travel.
+
+```{r Threelevelfouralternatives, fig.cap="Three-Level Nest Structure for Four Alternatives"}
+knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-html/Threelevelfouralternatives.PNG"))
+```
 
 Twelve three-level nested structures are possible with four alternatives; these are combinations of two alternatives at the lowest level, one alternative at the intermediate level and one alternative at the upper level. 
 The probability equations for the two-level nested logit model can be extended readily to the three-level case as illustrated below.  The probabilities for each nested alternative in the lowest level, commuter rail or bus, conditional on choice of public transit (PT) are given by: 
@@ -83,6 +95,10 @@ The marginal probabilities of shared ride, commuter rail and bus are the product
 The value of the logsum parameters decrease as we go down the tree.  This follows from the requirement that the error variance at each level of the tree must be lower than at the next higher level since the total variance for each alternative is fixed and the variance at each level of the tree must be positive (non-negative).  The total variance for each alternative,  , is given by:  
 
 The variance components for alternatives, group elements and public transit elements of each alternative are shown in the following figure.
+
+```{r Decompositionoferrorvariance, fig.cap="Decomposition of Error Variance"}
+knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-html/Decompositionoferrorvariance.PNG"))
+```
 
 This figure helps to explain the hierarchical restrictions on logsum parameters.  Section 8.2.1 described the initial restriction on the logsum for a single nest level or a two level tree as follows:  .  However, in multi-level tree structures, as shown in Section 8.3, the logsum parameter at each level is restricted to be between zero and the logsum parameter at the next higher level of the nesting structure.  Thus, in the example in Figure 8.4 above,   and  .  This hierarchical restriction ensures that the variance of each error term in equations 8.22 through 8.25 is positive, as required.  In particular, the variances are defined as
 
