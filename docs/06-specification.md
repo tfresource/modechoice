@@ -37,7 +37,7 @@ library(tidyverse)
 ```
 
 ```
-## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+## -- Attaching packages ------------------------ tidyverse 1.3.0 --
 ```
 
 ```
@@ -48,7 +48,7 @@ library(tidyverse)
 ```
 
 ```
-## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## -- Conflicts --------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks dfidx::filter(), stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 ```
@@ -819,13 +819,15 @@ time for a long trip rather than for a short trip. We still expect that traveler
 sensitive to OVT than IVT for any travel distance. A formulation which ensures this result is to
 include total travel time (the sum of in-vehicle and out-of-vehicle time) and out-of-vehicle time
 divided by distance in place of in- and out-of-vehicle travel time. This specification, as shown
-below, is consistent with our expectations provided that $β1$ and $β$2 are negative: 
+below, is consistent with our expectations provided that $\beta_1$ and $\beta_2$ are negative: 
 
 \begin{equation}
-$\displaystyle = V_{m} = \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + ......$
-$\displaystyle = = \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + ......$
-$\displaystyle = = \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_{m} + ......$
-(\#eq:IVT&OVT)
+\begin{split}
+V_{m} &= \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + \ldots \\
+&= \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + \ldots \\
+&= \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_{m} + \ldots
+\end{split}
+(\#eq:IVTOVT)
 \end{equation}
 
 An alternative approach is to impose a constraint on the relative importance of OVT and IVT.
@@ -835,10 +837,12 @@ importance ratio (TIR) times out-of-vehicle time (IVT + TIR×OVT). The mechanics
 constraint works is illustrated as follows: 
 
 \begin{equation}
-$\displaystyle V_{m} = \gamma_{0,m} + \beta_{1} \times IVT + (\beta_{1} \times TIR) \times OVT + ...$
-$\displaystyle = \gamma_{0,m} + \beta_{1} \times (IVT + TIR \times OVT) + ...$
-$\displaystyle = \gamma_{0,m} + \beta_{1} \times WTT + ...$
-(\#eq:IVT+TIRxOVT)
+\begin{split}
+V_{m} &= \gamma_{0,m} + \beta_{1} \times IVT + (\beta_{1} \times TIR) \times OVT + \ldots \\
+ &= \gamma_{0,m} + \beta_{1} \times (IVT + TIR \times OVT) + \ldots \\
+ &= \gamma_{0,m} + \beta_{1} \times WTT + \ldots 
+\end{split}
+(\#eq:IVTTIROVT)
 \end{equation}
 
 so that the parameter for out-of-vehicle time is equal to the parameter for in-vehicle time
@@ -1235,10 +1239,9 @@ Table 6-7.
  <thead>
   <tr>
    <th style="text-align:right;"> distance </th>
-   <th style="text-align:right;"> mot_ovtt </th>
-   <th style="text-align:right;"> mot_ivtt </th>
-   <th style="text-align:right;"> mot_tvtt </th>
-   <th style="text-align:right;"> nm_tvtt </th>
+   <th style="text-align:right;"> Value of Motorized Out-of-Vehicle Time </th>
+   <th style="text-align:right;"> Value of Motorized In-Vehicle Time </th>
+   <th style="text-align:right;"> Value of Non-Motorized Time </th>
   </tr>
  </thead>
 <tbody>
@@ -1246,34 +1249,48 @@ Table 6-7.
    <td style="text-align:right;"> 5 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 10.10156 </td>
-   <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 11.53997 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 10 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 10.10156 </td>
-   <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 11.53997 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 20 </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 10.10156 </td>
-   <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 11.53997 </td>
   </tr>
 </tbody>
 </table>
 
-
-```
-## [1] "Value of Out-of-Vehicle Time"
-```
-
-```
-## [1] "Value of In-Vehicle Time"
-```
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:Table 6-7 Implied Values of Time in Models 6W, 8W, Model 9W)Implied Values of Time in Models 6W, 8W, and 9W</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> Value of Time ($/hr) </th>
+   <th style="text-align:center;"> Model 6W </th>
+   <th style="text-align:center;"> Model 8W </th>
+   <th style="text-align:center;"> Model 9W </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> Value of Out-of-vehicle Time </td>
+   <td style="text-align:center;"> 9.50 </td>
+   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> Value of In-vehicle Time </td>
+   <td style="text-align:center;"> 0.32 </td>
+   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;"> NA </td>
+  </tr>
+</tbody>
+</table>
 
 The prevailing wage rate in the San Francisco Bay Area is $21.20 per hour[^refsfmodel]. In
 comparison, the values of in-vehicle time implied by Models 6W, 8W, and 9W are very low and
