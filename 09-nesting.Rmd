@@ -13,19 +13,6 @@ library(kableExtra)
 sf_work <- read_rds("data/worktrips.rds")
 ```
 
-```{r nesting examples}
-nl_1 <- mlogit(chosen ~ mot_tvtt + nm_tvtt | hhinc + vehbywrk, data = sf_work,
-             nests = list(motorized = c('Drive alone', 'Share ride 2', 'Share ride 3+', 'Transit'),  
-                          other = c('Bike', 'Walk')),
-             constPar = c("iv:other" = 1))
-
-
-nl_2 <- mlogit(chosen ~ mot_tvtt + nm_tvtt | hhinc + vehbywrk, data = sf_work,
-             nests = list(auto = c('Drive alone', 'Share ride 2', 'Share ride 3+'),  
-                          nonauto = c('Bike', 'Walk', 'Transit')),
-             constPar = c("iv:auto" = 1))
-```
-
 ## Introduction
 
 This chapter re-examines the San Francisco mode choice models estimated in CHAPTER 6 and CHAPTER 7 and evaluates whether the MNL models should be replaced by nested logit models.  The final, un-segmented, specifications, Model 17W for work trips and Model 14 S/O for shop/other trips, are taken as the base specifications for estimating nested logit models .  Nested models for work trips are examined first, followed by shop/other trips.  The chapter concludes with consideration of the policy implications of adopting alternative nesting structures.  
