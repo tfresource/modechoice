@@ -33,8 +33,8 @@ Each of these models obtains improved goodness-of-fit relative to the MNL model
 (see Table \@ref(tab:singlenest-work)).  Three of the four models; Models 18W, 20W, 21W; result in
 acceptable logsum parameters and two of these models (Models 18W and 20W)
 significantly reject the MNL model at close to the 0.05 level (see the
-chi-square test and significance in the last two rows of  Table
-\@ref(tab:singlenest-work).  However, the model with the private automobile nest
+chi-square test and significance in the Table
+\@ref(tab:singlenest-lrt).  However, the model with the private automobile nest
 (Model 19W) is rejected because the logsum parameter is greater than one and the
 model with the non-motorized nest (Model 21W) cannot reject the MNL model at any
 reasonable level.
@@ -101,14 +101,31 @@ this_map <- c(
 "iv:non_motorized" = "Non-Motorized Nesting Coefficient"
 )
 
-list(
+single_nest <- list(
   "Model 17W" = m17w,
   "Model 18W" = m18w,
   "Model 19W" = m19w,
   "Model 20W" = m20w,
   "Model 21W" = m21w
+  )
+
+modelsummary(single_nest,
+             fmt = "%.4f", coef_map = this_map, statistic = "statistic", statistic_vertical = FALSE)
+```
+
+
+```{r single-nest-lrt}
+tibble(
+  model_name = names(single_nest),
+  model = single_nest,
+) %>%
+  mutate(
+    loglik = map_dbl(model, logLik),
+    lrtest = -2 * (loglik[1] - loglik) ,
+    p.value = pchisq(lrtest, 1, lower.tail = FALSE)
   ) %>%
-  modelsummary(fmt = "%.4f", coef_map = this_map, statistic = "statistic", statistic_vertical = FALSE)
+  select(-model) %>%
+  kbl(col.names = c("Model", "Log Likelihood", "LR Test", "p-value")) %>% kable_styling()
 ```
 
 
