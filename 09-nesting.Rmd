@@ -40,7 +40,90 @@ Given these four nests or groupings of alternatives and recognizing that Motoriz
 
 ## Nested Models for Work Trips
 
-The estimation of nested logit models for work trips begins with consideration of the four single nest models mentioned above and illustrated in Figure 9.1. Each of these models obtains improved goodness-of-fit relative to the MNL model (see Table 9 1).  Three of the four models; Models 18W, 20W, 21W; result in acceptable logsum parameters and two of these models (Models 18W and 20W) significantly reject the MNL model at close to the 0.05 level (see the chi-square test and significance in the last two rows of  Table 9 1.  However, the model with the private automobile nest (Model 19W) is rejected because the logsum parameter is greater than one and the model with the non-motorized nest (Model 21W) cannot reject the MNL model at any reasonable level.
+The estimation of nested logit models for work trips begins with consideration
+of the four single nest models mentioned above and illustrated in Figure 9.1.
+Each of these models obtains improved goodness-of-fit relative to the MNL model
+(see Table \@ref(tab:singlenest-work)).  Three of the four models; Models 18W, 20W, 21W; result in
+acceptable logsum parameters and two of these models (Models 18W and 20W)
+significantly reject the MNL model at close to the 0.05 level (see the
+chi-square test and significance in the last two rows of  Table
+\@ref(tab:singlenest-work).  However, the model with the private automobile nest
+(Model 19W) is rejected because the logsum parameter is greater than one and the
+model with the non-motorized nest (Model 21W) cannot reject the MNL model at any
+reasonable level.
+
+```{r singlenest-work-estimation}
+work_formula <- chosen ~ I(cost / hhinc) + mot_tvtt + nm_tvtt + movtbyds |  
+                 hhinc + vehbywrk + I(wkccbd+wknccbd) + wkempden
+m17w <- mlogit(work_formula, data = sf_work)
+m18w <- mlogit(work_formula, data = sf_work, 
+               nests = list(motorized = c('Drive alone', 'Share ride 2', 
+                                          'Share ride 3+', 'Transit'),  
+                            other = c('Bike', 'Walk')),
+               constPar = c("iv:other" = 1))
+m19w <- mlogit(work_formula, data = sf_work, 
+               nests = list(privateauto = c('Drive alone', 'Share ride 2', 
+                                          'Share ride 3+'),  
+                            other = c('Bike', 'Walk', "Transit")),
+               constPar = c("iv:other" = 1))
+m20w <- mlogit(work_formula, data = sf_work,
+               nests = list( shared_ride = c('Share ride 2', 'Share ride 3+'),  
+                            other = c('Drive alone',  'Bike','Transit',  'Walk')),
+               constPar = c("iv:other" = 1))
+m21w <- mlogit(work_formula, data = sf_work,
+               nests = list(non_motorized = c('Bike', 'Walk'),  
+                            other = c('Drive alone','Share ride 2', 'Share ride 3+', 'Transit')),
+               constPar = c("iv:other" = 1))
+```
+
+
+```{r singlenest-work}
+this_map <- c(
+  "I(cost/hhinc)" = "Travel Cost by Income" ,
+  "mot_tvtt" = "Motorized Modes Travel Time",
+  "nm_tvtt" = "Non-Motorized Modes Travel Time",
+  "movtbyds" = "Motorized OVT by Distance",
+#"hhinc:Share ride 2", 
+#"hhinc:Share ride 3++", 
+#"hhinc:Transit", 
+#"hhinc:Bike", 
+#"hhinc:Walk", 
+#"vehbywrk:Share ride 2", 
+#"vehbywrk:Share ride 3++", 
+#"vehbywrk:Transit", 
+#"vehbywrk:Bike", 
+#"vehbywrk:Walk", 
+#"wknccbd:Share ride 2", 
+#"wknccbd:Share ride 3++", 
+#"wknccbd:Transit", 
+#"wknccbd:Bike", 
+#"wknccbd:Walk", 
+#"wkempden:Share ride 2", 
+#"wkempden:Share ride 3++", 
+#"wkempden:Transit", 
+#"wkempden:Bike", 
+#"wkempden:Walk",
+"(Intercept):Share ride 2"   = "Constants Shared ride 2",
+"(Intercept):Share ride 3++" = "Constant: Shared ride 3+", 
+"(Intercept):Transit"        = "Constant: Transit", 
+"(Intercept):Bike"           = "Constant: Bike", 
+"(Intercept):Walk"           = "Constant: Walk",
+"iv:motorized" = "Motorized Nesting Coefficient",
+"iv:privateauto" = "Private Auto Nesting Coefficient",
+"iv:shared_ride" = "Shared Ride Nesting Coefficient",
+"iv:non_motorized" = "Non-Motorized Nesting Coefficient"
+)
+
+list(
+  "Model 17W" = m17w,
+  "Model 18W" = m18w,
+  "Model 19W" = m19w,
+  "Model 20W" = m20w,
+  "Model 21W" = m21w
+  ) %>%
+  modelsummary(fmt = "%.4f", coef_map = this_map, statistic = "statistic", statistic_vertical = FALSE)
+```
+
 
 Next we consider three models with the non-motorized nest in parallel with each of the three other nests (Figure 9.2).  In each case, the new models in Table 9 2; Models 22W, 23W and 24W; have better goodness of fit than the corresponding single nest models.  Model 23W is rejected because the nest parameter for private automobile is greater than one, as before.  Models 22W and 23W both reject the single non-motorized nest (Model 21W) at close to the 0.05 level; however, neither rejects the corresponding Motorized and Shared Ride models (Models 18W and 20W, respectively).  In such cases, the analyst can decide to include the non-motorized nest or not, for other than statistical reasons.  
 
