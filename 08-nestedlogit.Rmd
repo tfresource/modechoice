@@ -84,6 +84,15 @@ knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-
 Some of these nesting structures are likely to be behaviorally unreasonable; for example, it doesn’t seem reasonable to include bus and car in the same nest. The selection of a preferred nesting structure requires a combination of judgment (about reasonable nesting structures) and statistical hypothesis testing; specifically, testing the hypothesis that the MNL or a simpler NL model is the true model.  
 	Further, sub-groups of alternatives within any group may themselves be more similar to each other than to other alternatives in the larger group.  Representation of these differences in similarity can result in multiple levels of nesting, hierarchically identifying increasingly similar alternatives at each level (Borsch-Supan, 1987).  For example, in the four alternative case, the case of three alternatives in a lower nest might represent alternatives that include group riding (shared ride, bus and light rail).  If we believe that the bus and light rail alternatives are more similar than either alternative is to shared ride, utility equations with the following common error terms will show an intermediate level of error correlation among all group travel modes, and an additional level of error correlation between commuter rail and bus.
 
+\begin{equation}
+\begin{split}
+U_{DA} & = V_{DA} + \epsilon_{DA} \\
+U_{SR} & = V_{GRP} + V_{SR} + \epsilon_{GRP} + \epsilon_{SR} \\
+U_{Bus} & = V_{GRP} + V_{PT} + V_{Bus} + \epsilon_{GRP} + \epsilon_{PT} + \epsilon_{Bus} \\
+U_{LTR} & = V_{GRP} + V_{PT} + V_{LTR} + \epsilon_{GRP} + \epsilon_{PT} + \epsilon_{LTR}
+\end{split}
+\end{equation}
+
 In this case, the group travel modes (shared ride, commuter rail and bus) will be nested at the second level and commuter rail and bus will be nested at the third or lowest level as shown in Figure 8.3.  In this model structure, the lower level nest is a binary choice between commuter rail and bus, conditional on choice of public transit; the second level nest represents a choice between shared ride and public transit conditional on group travel; and the highest level represents a choice between drive alone and group travel.
 
 ```{r Threelevelfouralternatives, fig.cap="Three-Level Nest Structure for Four Alternatives"}
@@ -93,7 +102,33 @@ knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-
 Twelve three-level nested structures are possible with four alternatives; these are combinations of two alternatives at the lowest level, one alternative at the intermediate level and one alternative at the upper level. 
 The probability equations for the two-level nested logit model can be extended readily to the three-level case as illustrated below.  The probabilities for each nested alternative in the lowest level, commuter rail or bus, conditional on choice of public transit (PT) are given by: 
 
+\begin{equation}
+Pr(Bus \mid PT) = \frac {\exp(\frac{V_{Bus}}{\theta_{PT}})} {\exp(\frac{V_{Bus}}{\theta_{PT}}) + \exp{\frac{V_{LTR}}{\theta_{PT}}}}
+(\#eq:twolevelNLmodels)
+\end{equation}
+
+\begin{equation}
+Pr(LTR \mid PT) = \frac {\exp(\frac{V_{LTR}}{\theta_{PT}})} {\exp(\frac{V_{Bus}}{\theta_{PT}}) + \exp{\frac{V_{LTR}}{\theta_{PT}}}}
+(\#eq:threelevelNLmodels)
+\end{equation}
+
+where $\theta_{PT}$ is the logsum paratmeter at the lowest (i.e. public transit) nest level.
+
 The probabilities for each alternative in the second level nest, shared ride and public transit, conditional on the choice of group travel (GRP) modes are:
+
+\begin{equation}
+Pr(SR \setminus GRP) = \frac {\exp(\frac{V_{SR}}{\theta_{GRP}})} {\exp(\frac{V_{SR}}{\theta_{GRP}}) + \exp{\frac{{V_{PT} + \theta_{PT} \times \Gamma_{PT}}{\theta_{GRP}}}}}
+(\#eq:SRGRP)
+\end{equation}
+
+\begin{equation}
+Pr(PT \setminus GRP) = \frac {\exp(\frac{V_{PT} + \theta_{PT} \times \Gamma_{PT}}{\theta_{GRP}})} {\exp(\frac{V_{SR}}{\theta_{GRP}}) + \exp{\frac{{V_{PT} + \theta_{PT} \times \Gamma_{PT}}{\theta_{GRP}}}}}
+(\#eq:PTGRP)
+\end{equation}
+
+where $\theta_{GRP}$ is the logsum parameter for the intermediate level (i.e. for the group travel modes) and,
+
+$\Gamma_{PT}$ is the "logsum" of the exponents of the nested utilities for the lower nest level:
 
 Finally, the probabilities for automobile and the common carrier nest are:
 
