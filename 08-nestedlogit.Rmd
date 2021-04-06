@@ -11,7 +11,7 @@ library(kableExtra)
 
 The Multinomial Logit Model (MNL) structure has been widely used for both urban and intercity mode choice models primarily due to its simple mathematical form, ease of estimation and interpretation, and the ability to add or remove choice alternatives.  However, the MNL model has been widely criticized for its Independence of Irrelevant Alternatives (IIA) property (see [Section 4.2](#IIA-section).  The IIA property of the MNL restricts the ratio of the choice probabilities for any pair of alternatives to be independent of the existence and characteristics of other alternatives in the choice set.  This restriction implies that introduction of a new mode or improvements to any existing mode will reduce the probability of existing modes in proportion to their probabilities before the change.
 	The IIA property is a major limitation of the MNL model as it implies equal competition between all pairs of alternatives, an inappropriate assumption in many choice situations.  For example, in the case of urban mode choice among drive alone, shared ride, bus and light rail; the bus and light rail alternatives are likely to be more similar to each other than they are to either of the other alternatives due to shared attributes which are not included in the measured portion of the utility function; for example, bus and light rail may have the same fare structure and operating policies, the same lack of privacy, control of the environment, and so on.  Such similarities, if not included in the measured portion of the utility function, lead to correlation between the errors associated with these alternatives, a violation of the assumptions which underlie the derivation of the MNL.
-	The way in which this undesirable characteristic of the IIA property manifests itself can be illustrated using this example.  Assume that the choice probabilities (for an individual or a homogeneous group of individuals) are 65%, 15%, 10% and 10% for drive alone, shared ride, bus and light rail, respectively.  If the light rail service were to be improved in such a way as to increase its choice probability to 19%, the MNL model would predict that the shares of the other alternatives would decrease proportionately as shown in Table 8.1, decreasing the probability for the drive alone, shared ride and bus alternatives by a factor of 0.90.  As a result, the MNL model predicts that most of the increased light rail ridership comes from drive alone (6.5%) while only 1.5% comes from car pool and 1% from bus.  This is inconsistent with expectations and empirical evidence that most of the new light rail riders will be diverted from bus and carpool.  This inconsistency is a direct result of the IIA property of the MNL model.  Thus, in these types of choice situations, the MNL model will yield incorrect predictions of diversions from existing modes.
+	The way in which this undesirable characteristic of the IIA property manifests itself can be illustrated using this example.  Assume that the choice probabilities (for an individual or a homogeneous group of individuals) are 65%, 15%, 10% and 10% for drive alone, shared ride, bus and light rail, respectively.  If the light rail service were to be improved in such a way as to increase its choice probability to 19%, the MNL model would predict that the shares of the other alternatives would decrease proportionately as shown in Table 8-1, decreasing the probability for the drive alone, shared ride and bus alternatives by a factor of 0.90.  As a result, the MNL model predicts that most of the increased light rail ridership comes from drive alone (6.5%) while only 1.5% comes from car pool and 1% from bus.  This is inconsistent with expectations and empirical evidence that most of the new light rail riders will be diverted from bus and carpool.  This inconsistency is a direct result of the IIA property of the MNL model.  Thus, in these types of choice situations, the MNL model will yield incorrect predictions of diversions from existing modes.
 
 More extreme examples of this phenomenon have been described in the modeling literature.  Most widely known among them is the red bus/blue bus problem described in [Section 4.2.1](#bus-paradox).
 	These and numerous other examples illustrate that the IIA property is difficult to justify in situations where some alternatives compete more closely with each other than they do with other alternatives.  This limitation of the MNL model results from the assumption of the independence of error terms in the utility of the alternatives [Section 3.5](#additive-error-term), which is used to derive the model.  Different models can be derived through the use of different assumptions concerning the structure of the error distributions of alternative utilities.  Among them, the Nested Logit (NL) model (Williams, 1977; McFadden, 1978; Daly and Zachary, 1978), is the simplest and most widely used.  The NL model represents important deviations from the IIA property but retains most of the computational advantages of the MNL model (Borsch-Supan, 1987).  The NL model is characterized by grouping (or nesting) subsets of alternatives that are more similar to each other with respect to excluded characteristics than they are to other alternatives.
@@ -63,12 +63,12 @@ The logsum parameter, $\theta$ , (sometimes called the “dissimilarity paramete
 
 ### Disaggregate Direct and Cross-Elasticities
 
-The differences between the nested logit model and the multinomial logit model can be illustrated by comparison of the elasticities of each alternative to changes in the value of a variable associated with it (direct elasticity) or with another alternative (cross elasticity) as reported in Table 8 2.  The MNL direct- and cross-elasticity equations are the same for all alternatives.  This is a manifestation of the IIA property of the MNL model.  
-	However, the elasticity expressions for the NL model are differentiated between cases in which the alternative being considered is or is not in the same nest as the alternative which is changed.  Both models produce identical direct- and cross-elasticities when the attribute that is changed is for one of the non-nested alternatives.  However, the elasticity equations for changes in the attributes of nested alternatives are different.  These differences are attributable to the value of $\theta$  in the elasticity equations.  When $\theta$  is equal to one, its maximum value, the expression, $\frac{1-\theta}{\theta}$ , in the elasticity formulae in Table 8 2 becomes zero and the direct and cross-elasticity expressions for the nested alternatives collapse to the corresponding equations for the alternatives not in the nest.  As the scale parameter, $\theta$ , decreases from one to zero, this expression increases and the direct- and cross-elasticities within the nest become larger (possibly, much larger) than the direct- and cross-elasticities between the nests.  That is, the sensitivity of a nested alternative to changes in its attributes or to changes in the attributes of other nested alternatives becomes much greater than the corresponding changes for non-nested alternatives.  Although the same comparison appears to exist between nested alternatives and similar alternatives in the MNL model, this can only be evaluated by taking account of differences in the $\beta$  parameters between the MNL and NL models.
+The differences between the nested logit model and the multinomial logit model can be illustrated by comparison of the elasticities of each alternative to changes in the value of a variable associated with it (direct elasticity) or with another alternative (cross elasticity) as reported in Table 8-2.  The MNL direct- and cross-elasticity equations are the same for all alternatives.  This is a manifestation of the IIA property of the MNL model.  
+	However, the elasticity expressions for the NL model are differentiated between cases in which the alternative being considered is or is not in the same nest as the alternative which is changed.  Both models produce identical direct- and cross-elasticities when the attribute that is changed is for one of the non-nested alternatives.  However, the elasticity equations for changes in the attributes of nested alternatives are different.  These differences are attributable to the value of $\theta$  in the elasticity equations.  When $\theta$  is equal to one, its maximum value, the expression, $\frac{1-\theta}{\theta}$ , in the elasticity formulae in Table 8-2 becomes zero and the direct and cross-elasticity expressions for the nested alternatives collapse to the corresponding equations for the alternatives not in the nest.  As the scale parameter, $\theta$ , decreases from one to zero, this expression increases and the direct- and cross-elasticities within the nest become larger (possibly, much larger) than the direct- and cross-elasticities between the nests.  That is, the sensitivity of a nested alternative to changes in its attributes or to changes in the attributes of other nested alternatives becomes much greater than the corresponding changes for non-nested alternatives.  Although the same comparison appears to exist between nested alternatives and similar alternatives in the MNL model, this can only be evaluated by taking account of differences in the $\beta$  parameters between the MNL and NL models.
 
 ## Nesting Structures {#nesting-structures}
 
-The assumptions underlying the model described in the preceding section (correlation of error terms for the bus and light rail alternatives) results in a two-level model with a single public transit nest for the four alternative (drive alone, shared ride, commuter rail, and bus) mode choice problem.  This nesting structure is one of many possible two-level nested logit models which can be constructed for a choice set with four alternatives.  The possible set of two-level nested logit models includes six combinations of two alternatives in a nest with the remaining alternatives at the upper level, four combinations of three alternatives in a nest and one at the upper level and three combinations of two alternatives in a nest and two alternatives in a parallel nest for a total of thirteen two level nest structures (Figure 8.2).  The number of two level nest structures increases rapidly with the number of alternatives as shown in Table 8 3 below.
+The assumptions underlying the model described in the preceding section (correlation of error terms for the bus and light rail alternatives) results in a two-level model with a single public transit nest for the four alternative (drive alone, shared ride, commuter rail, and bus) mode choice problem.  This nesting structure is one of many possible two-level nested logit models which can be constructed for a choice set with four alternatives.  The possible set of two-level nested logit models includes six combinations of two alternatives in a nest with the remaining alternatives at the upper level, four combinations of three alternatives in a nest and one at the upper level and three combinations of two alternatives in a nest and two alternatives in a parallel nest for a total of thirteen two level nest structures (Figure 8.2).  The number of two level nest structures increases rapidly with the number of alternatives as shown in Table 8-3 below.
 
 ```{r Threetypestwolevelnests, fig.cap="Three Types of Two Level Nests"}
 knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-html/Threetypestwolevelnests.PNG"))
@@ -94,6 +94,29 @@ The marginal probabilities of shared ride, commuter rail and bus are the product
 
 The value of the logsum parameters decrease as we go down the tree.  This follows from the requirement that the error variance at each level of the tree must be lower than at the next higher level since the total variance for each alternative is fixed and the variance at each level of the tree must be positive (non-negative).  The total variance for each alternative, $Var(\varepsilon^*_{Mode})$ , is given by:  
 
+\begin{equation}
+$Var(\varepsilon^*_{DA})=\frac{\pi^2}{6}$
+(\#eq:Var-DA)
+\end{equation}
+
+\begin{equation}
+$Var(\varepsilon^*_{SR}) = Var(\varepsilon_{SR}+\varepsilon_{GRP})$
+$=Var(\varepsilon_{SR})+ Var(\varepsilon_{GRP}) =\frac{\pi^2}{6}$
+(\#eq:Var-SR)
+\end{equation}
+
+\begin{equation}
+$Var(\varepsilon^*_{Bus}) = Var(\varepsilon_{GRP}+\varepsilon_{PT}+\varepsilon_{Bus})$
+$=Var(\varepsilon_{GRP}) + Var(\varepsilon_{PT}) + Var(\varepsilon_{Bus}) =\frac{\pi^2}{6}$
+(\#eq:Var-Bus)
+\end{equation}
+
+\begin{equation}
+$Var(\varepsilon^*_{LTR}) = Var(\varepsilon_{GRP}+\varepsilon_{PT}+\varepsilon_{LTR})$
+$=Var(\varepsilon_{GRP}) + Var(\varepsilon_{PT}) + Var(\varepsilon_{LTR}) =\frac{\pi^2}{6}$
+(\#eq:Var-LTR)
+\end{equation}
+
 The variance components for alternatives, group elements and public transit elements of each alternative are shown in the following figure.
 
 ```{r Decompositionoferrorvariance, fig.cap="Decomposition of Error Variance"}
@@ -102,7 +125,32 @@ knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-
 
 This figure helps to explain the hierarchical restrictions on logsum parameters.  [Section 8.2.1](#logsum-param) described the initial restriction on the logsum for a single nest level or a two level tree as follows: $0 < \theta < 1$ .  However, in multi-level tree structures, as shown in [Section 8.3](#nesting-structures), the logsum parameter at each level is restricted to be between zero and the logsum parameter at the next higher level of the nesting structure.  Thus, in the example in Figure 8.4 above, $0 < \theta_{Grp} < 1$  and $0 < \theta_{PT} < \theta_{Grp}$ .  This hierarchical restriction ensures that the variance of each error term in equations 8.22 through 8.25 is positive, as required.  In particular, the variances are defined as
 
-To ensure that all the variance components are positive, as required, the nesting parameters must be constrained as shown $0 < \theta_{PT} < \theta_{Grp}$.  These hierarchical constraints apply to all levels of nested logit models.  The examples of two-level and three-level nesting structures shown in Figure 8.2 and Figure 8.3 represent four of the twenty-eight different nested models (13 two-level and 12 three-level) that are feasible for a four-alternative case.  The number of distinct nests increases rapidly with an increasing alternatives (see Table 8.3). 
+\begin{equation}
+$Var(\varepsilon_{Total})=\frac{\pi^2}{6}$
+(\#eq:Var-Total)
+\end{equation}
+
+\begin{equation}
+$Var(\varepsilon_{GRP})=\frac{\pi^2\theta^2_{GRP}}{6}$
+(\#eq:Var-GRP)
+\end{equation}
+
+\begin{equation}
+$Var(\varepsilon_{PT})=\frac{\pi^2\theta^2_{PT}}{6}$
+(\#eq:Var-PT)
+\end{equation}
+
+\begin{equation}
+$Var(\varepsilon_{Total}-\varepsilon_{GRP})=\frac{\pi^2}{6}(1-\theta^2_{GRP})$
+(\#eq:Var-Total-minus-GRP)
+\end{equation}
+
+\begin{equation}
+$Var(\varepsilon_{GRP}-\varepsilon_{PT})=\frac{\pi^2}{6}(\theta^2_{GRP}-\theta^2_{PT})$
+(\#eq:Var-GRP-minus-PT)
+\end{equation}
+
+To ensure that all the variance components are positive, as required, the nesting parameters must be constrained as shown $0 < \theta_{PT} < \theta_{Grp}$.  These hierarchical constraints apply to all levels of nested logit models.  The examples of two-level and three-level nesting structures shown in Figure 8.2 and Figure 8.3 represent four of the twenty-eight different nested models (13 two-level and 12 three-level) that are feasible for a four-alternative case.  The number of distinct nests increases rapidly with an increasing alternatives (see Table 8-3). 
 	The large number of feasible nesting structures poses a substantial problem of determining which one best reflects the choice behavior of the population.  The analyst’s judgment can be used to substantially reduce this to a smaller number of realistic structures (based on our understanding of the competitive relationships); however, the analyst needs to be cautious in excluding structures since some apparently non-intuitive structures may have good fit statistics and their interpretation may provide useful insight into the choice behavior under study.
 
 ## Statistical Testing of Nested Logit Structures {#testing-NL-structures}
