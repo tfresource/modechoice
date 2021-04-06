@@ -1,0 +1,43 @@
+---
+title: "Practice Exam"
+author: "Greg Macfarlane"
+date: "4/6/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(mlogit)
+```
+
+This exam requires me to estimate choice models on the `Car` dataset from the
+`mlogit` package.  This dataset needs to be turned into a dataset that we
+can use the `mlogit` function on.
+
+```{r data}
+data(Car, package = "mlogit")
+car_mlogit <- Car %>%
+  mutate(choice = gsub("choice", "", choice)) %>%
+  dfidx( varying = 5:70, shape = "wide", choice = "choice", sep = "")
+```
+
+
+## Initial model specification
+
+```{r}
+ints   <- mlogit(choice ~ price + fuel, data = car_mlogit)
+noints <- mlogit(choice ~ price + fuel|  - 1 , data = car_mlogit)
+```
+
+```{r}
+library(modelsummary)
+modelsummary(list(ints, noints), stars = TRUE)
+```
+
+## Segmentation Analysis
+
+```{r}
+model1 <- mlogit(mode ~ price + catch, data = Fish)
+```
+

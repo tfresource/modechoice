@@ -1,0 +1,50 @@
+---
+title: "Practice Exam"
+author: "694R: Advanced Choice Modeling"
+date: "4/6/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+> This is your practice exam. The final will have a similar format, but with a
+different data set. All resources are available to you, including notes, the
+course textbook, the internet, and your classmates. Your final exam will be the
+same, *except* you must complete the final exam independently. As a result, I
+encourage you to work as independently as possible, offering help but not
+seeking it unless you are entirely stuck.
+
+The `mlogit` library for R includes a dataset called `Car`,
+which represents the car purchased by a person from a set of options.
+
+```{r Car}
+# load Car object into workspace
+data(Car, package = "mlogit")
+# show first ten rows of data
+Car %>% as_tibble()
+```
+
+Each of the `r nrow(Car)` individuals in the data has six alternatives. A
+complete data dictionary is available in the mlogit help files by calling
+`?mlogit::Car`.  Transform this dataset as necessary to estimate choice models using the 
+`mlogit()` function. 
+
+Identify a preferred model to explain car choice. Consider the following
+in your identification process:
+
+  - Alternative representations of model parameters (e.g., log transforms and divisions).
+  - Statistical significance and behavioral intuitiveness of the model parameters.
+  - Comparative relationships between model parameters (e.g., value of time estimate).
+  - Statistical goodness of fit tests between candidate models.
+  - Data segmentation
+  - Nesting structures
+
+Construct your analysis in an Rmarkdown file, paired with appropriate textual
+discussion. Expose your model code, but print your model results and statistical 
+tests in publication-quality HTML tables. Submit your html file to the assignment
+on Learning Suite before the deadline, after confirming that you can view the
+file independently in a web browser.
+
