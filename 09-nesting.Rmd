@@ -213,6 +213,30 @@ It is important to note that a variety of different initial parameters were requ
 
 As in the case of work trips, hierarchical two-nest models, depicted in Figure 9.2, are considered next, Table 9 8.  Model 22 S/O obtains a satisfactory parameter for the automobile logsum but the motorized logsum is not significantly different from one and the model does not reject the single nest Private Automobile structure (Model 16 S/O).  However, Models 23 S/O (with shared ride under the motorized nest) and 24 S/O (with shared ride under the automobile nest) provide excellent results. The similarity interpretation of these nests is reasonable and both models strongly reject the MNL model and the constrained single nest models reported in Table 9 7.
 
+```{r Hierarchical Two Nest Models for Shop/Other Trips}
+m22SO <- mlogit(work_formula, data = sf_work,
+               nests = list(motorized = c('Drive alone', 'Share ride 2', 
+                                          'Share ride 3+', 'Transit'),  
+                            non_motorized = c('Bike', 'Walk')))
+m23SO <- mlogit(work_formula, data = sf_work,
+               nests = list(auto = c('Drive alone', 'Share ride 2', 'Share ride 3+'),  
+                            transit = c("Transit"), non_motorized = c('Bike', 'Walk')),
+               constPar = c("iv:transit" = 1))
+m24SO <- mlogit(work_formula, data = sf_work,
+               nests = list(shared = c('Share ride 2', 'Share ride 3+'),  
+                            other = c("Drive alone", "Transit"), non_motorized = c('Bike', 'Walk')),
+               constPar = c("iv:other" = 1))
+
+
+
+parallel_nest <- list(
+  "Model 14SO" = m14SO,
+  "Model 22SO" = m22SO,
+  "Model 23SO" = m23SO,
+  "Model 24SO" = m24SO
+  )
+```
+
 Unlike the case of the home-based work models, the home-based shop/other data set supports complex nested models which combine the hierarchical and parallel nests to capture the different substitutability between several groups of alternatives.  Models 25 S/O and 26 S/O improve goodness-of-fit over both the best hierarchical (Model 24 S/O) and parallel (Model 20 S/O) two-nest models.  These more complex models can reject all of the single nest models at the .05 level or higher, but cannot reject the best two-nest models at a high level of confidence.  Even so, they may still be preferred for their potentially more realistic representation of trade-offs between pairs of alternatives.  The same rationale could be applied between the two models, as Model 26 S/O cannot reject 25 S/O, either, but allows for greater substitutability between the non-motorized modes (for which the statistical evidence is moderately significant).  The nesting coefficient for the motorized nest is not particularly significant in either model, but it can be retained given the reasonableness of its value.  
 
 ## Practical Issues and Implications
