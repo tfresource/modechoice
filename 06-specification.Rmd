@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Model Specification Refinement: San Francisco Bay Area Work Mode Choice {#specifcation-chapter}
+# Model Specification Refinement: San Francisco Bay Area Work Mode Choice {#specification-chapter}
 ```{r setup}
 library(mlogit)
 library(tidyverse)
