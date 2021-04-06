@@ -947,7 +947,7 @@ list(
   "0-1 Car HH's" = model_17w_lowcars,
   "2+ Car HH's" = model_17w_highcars
 ) %>%
-  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE)
+  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE, title = "Estimation Results for Market Segmentation by Automobile Ownership")
 
 
 ```
