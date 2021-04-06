@@ -989,7 +989,7 @@ list(
   "Males Only" = model_17w_males,
   "Females Only" = model_17w_females
 ) %>%
-  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE)
+  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE, title = "Estimation Results for Market Segmentation by Gender")
 
 
 ```
