@@ -131,6 +131,10 @@ tibble(
 
 Next we consider three models with the non-motorized nest in parallel with each of the three other nests (Figure 9.2).  In each case, the new models in Table 9 2; Models 22W, 23W and 24W; have better goodness of fit than the corresponding single nest models.  Model 23W is rejected because the nest parameter for private automobile is greater than one, as before.  Models 22W and 23W both reject the single non-motorized nest (Model 21W) at close to the 0.05 level; however, neither rejects the corresponding Motorized and Shared Ride models (Models 18W and 20W, respectively).  In such cases, the analyst can decide to include the non-motorized nest or not, for other than statistical reasons.  
 
+```{r Decompositionoferrorvariance, fig.cap="Non-Motorized Nest in Parallel with Motorized, Private Automobile and Shared Ride Nests"}
+knitr::include_graphics(rep("_bookdown_files/09-Preferred-nesting-structure_files/figure-html/Nonmotorizednestinparallel.PNG"))
+```
+
 ```{r parallel-nests-work-estimation}
 m22w <- mlogit(work_formula, data = sf_work,
                nests = list(motorized = c('Drive alone', 'Share ride 2', 
@@ -186,6 +190,10 @@ Based on these results, Models 26W, 28W, 30W and 31W are all potential candidate
 We further examine Model 26W, because of its simplicity, to demonstrate the differences in direct-elasticity and cross-elasticity between the MNL (17W) model and pairs of alternatives in different parts of the NL tree associated with 26W.
 
 The structure of the nested logit model (26W) in Figure 9.3 is reproduced here so that each nest can be readily identified.  The following table reports the elasticities for the MNL Model 17W and the NL Model 26W.
+
+```{r Decompositionoferrorvariance, fig.cap="Motorized-Shared Ride Nest (Model 26W)"}
+knitr::include_graphics(rep("_bookdown_files/09-Preferred-nesting-structure_files/figure-html/Motorizedsharedridenest.PNG"))
+```
 
 It is apparent from the above table that reduction in the magnitude of the utility parameter for the NL model results in a lower direct and cross elasticity for alternatives that are in neither of the nests depicted in Figure 9.5 than they would have in the corresponding MNL model while alternatives in the lowest and intermediate nests have increased elasticity. The magnitude in of the elasticity increases as alternatives or pairs of alternatives are in lower nests in the tree.  Possibly, a better way to think about this is that adoption of the MNL model results in some type of averaged elasticities rather than the distinct elasticities for alternatives in a properly formed NL model.
 
