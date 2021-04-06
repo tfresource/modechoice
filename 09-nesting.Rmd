@@ -132,15 +132,16 @@ tibble(
 Next we consider three models with the non-motorized nest in parallel with each of the three other nests (Figure 9.2).  In each case, the new models in Table 9 2; Models 22W, 23W and 24W; have better goodness of fit than the corresponding single nest models.  Model 23W is rejected because the nest parameter for private automobile is greater than one, as before.  Models 22W and 23W both reject the single non-motorized nest (Model 21W) at close to the 0.05 level; however, neither rejects the corresponding Motorized and Shared Ride models (Models 18W and 20W, respectively).  In such cases, the analyst can decide to include the non-motorized nest or not, for other than statistical reasons.  
 
 ```{r parallel-nests-work}
-
+m24w <- mlogit(work_formula, data = sf_work,
+               nests = list(shared = c('Share ride 2', 'Share ride 3+'),  
+                            other = c('Drive alone', 'Transit'),
+                            non_motorized = c('Bike', 'Walk')),
+               constPar = c("iv:other" = 1))
 
 
 
 parallel_nest <- list(
-  "Model 17W" = m17w,
-  "Model 22W" = m22w,
-  "Model 23W" = m23w,
-  "Model 24W" = m24w,
+  "Model 24W" = m24w
   )
 
 ```
