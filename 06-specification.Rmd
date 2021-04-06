@@ -720,16 +720,16 @@ tibble(
     paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 20,"cost"),2), "/hr")
   ), 
   "Model 16W (Wage Rate = $21.20)" = c(
-    paste( coef(model_16w)["mot_tvtt"] / coef(model_16w)["I(cost/hhinc)"] * 21.20, "$ /hr)"), 
-    (coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 10) / coef(model_16w)["I(cost/hhinc)"] * 21.20,
-    (coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 20) / coef(model_16w)["I(cost/hhinc)"] * 21.20
+    paste("$", round(coef(model_16w)["mot_tvtt"] / coef(model_16w)["I(cost/hhinc)"] * 21.20, 2), "/hr"), 
+    paste("$", round((coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 10) / coef(model_16w)["I(cost/hhinc)"] * 21.20, 2), "/hr"),
+    paste("$", round((coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 20) / coef(model_16w)["I(cost/hhinc)"] * 21.20, 2), "/hr")
   )) %>%
   kbl(caption = "Implied Value of Time in Models 15W and 16W") %>%
   kable_styling()
 
 ```
 
-```{r compare-1516}
+```{r compare-1516, echo=FALSE}
 modelsummary(
   list("15W" = model_15w, "16W" = model_16w), 
   coef_map = c("mot_tvtt" = "Motorized Travel Time", 
