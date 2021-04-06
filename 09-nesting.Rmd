@@ -187,7 +187,14 @@ Table 9 4 presents four additional nested model structures for work trips.  The 
 The final model, Model 31W, extends Model 30W by adding the Non-Motorized nest to the structure.  It therefore has the same issues regarding the constrained nest parameters, but it offers the advantage of including the substitution effects associated with all four nests previously selected.  Again, the decision on the acceptance of this model may be based primarily on the judgment of analysts and policy makers.
 
 Based on these results, Models 26W, 28W, 30W and 31W are all potential candidates for a final model.  Model 26W is not rejected by any other model and is the simplest structure of this group.  Model 28W is slightly better than Model 26W but enough to statistically reject it.  Models 30W and 31W have a poorer goodness of fit than Model 26W and 28W, respectively but they incorporate the private automobile intermediate nest.  The decision about which of these models to use is largely a matter of judgment.  It is possible that other models might also be considered.
-We further examine Model 26W, because of its simplicity, to demonstrate the differences in direct-elasticity and cross-elasticity between the MNL (17W) model and pairs of alternatives in different parts of the NL tree associated with 26W.
+  We further examine Model 26W, because of its simplicity, to demonstrate the differences in direct-elasticity and cross-elasticity between the MNL (17W) model and pairs of alternatives in different parts of the NL tree associated with 26W.
+
+```{r MNL 17W vs. NL Model 26W}
+parallel_nest <- list(
+  "Model 17W" = m17w,
+  "Model 26W" = m26w
+  )
+```
 
 The structure of the nested logit model (26W) in Figure 9.3 is reproduced here so that each nest can be readily identified.  The following table reports the elasticities for the MNL Model 17W and the NL Model 26W.
 
