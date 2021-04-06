@@ -787,7 +787,12 @@ use different criteria in making their mode choice decisions.
 model_17w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0, "vehbywrk:Share ride 2" = -0.3166, "vehbywrk:Share ride 3++" = -0.3166))
 
 #table 6-13
-modelsummary(model_17w)
+list_1617 <- list(
+  "Model 16W" = model_16w,
+  "Model 17W" = model_17w
+  )
+modelsummary(list_1617, title = "Estimation Results for Model 16W and Its Constrained Version")
+
 
 
 ```
