@@ -956,17 +956,21 @@ list(
     households where an increase in availability (from 0) will be relatively important, than
     among higher auto ownership households where the number of cars is likely to closely approximate 
     the number of drivers and an increase in availability will be relatively unimportant. 
+    
   - The differences in the alternative specific CBD dummy variables and the Employment
     Density variables are very small and not significant suggesting that these variables could be
     constrained to be equal across auto ownership segments.
+    
   - The differences in the time parameters also are very small and not significant suggesting that
     these variables could be constrained to be equal across auto ownership segments.
+    
   - The magnitude of the cost by income parameter is much smaller in the lower automobile
     ownership segment than in the higher automobile ownership segment indicating that cost
     may be of little importance in households with low car availability.
 
 We can make the following observations from the estimation results of the gender segmentation
 models (Table 6-15):
+
   - The segmented model rejects the pooled model at a very high level of statistical significance.
   - The alternative specific constants relative to the drive alone mode are less negative (more
   positive) in the female segment suggesting the preference for drive alone mode is less
