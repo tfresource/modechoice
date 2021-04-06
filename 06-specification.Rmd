@@ -309,9 +309,11 @@ divided by distance in place of in- and out-of-vehicle travel time. This specifi
 below, is consistent with our expectations provided that $β1$ and $β$2 are negative: 
 
 \begin{equation}
-$\displaystyle V_{m} = \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + ......$
-$\displaystyle = \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + ......$
-$\displaystyle = \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_{m} + ......$
+\begin{split}
+V_{m} &= \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + \ldots\\
+& = \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + \ldots\\
+& = \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_{m} + \ldots
+\end{split}
 (\#eq:IVT&OVT)
 \end{equation}
 
@@ -322,9 +324,11 @@ importance ratio (TIR) times out-of-vehicle time (IVT + TIR×OVT). The mechanics
 constraint works is illustrated as follows: 
 
 \begin{equation}
-$\displaystyle V_{m} = \gamma_{0,m} + \beta_{1} \times IVT + (\beta_{1} \times TIR) \times OVT + ...$
-$\displaystyle = \gamma_{0,m} + \beta_{1} \times (IVT + TIR \times OVT) + ...$
-$\displaystyle = \gamma_{0,m} + \beta_{1} \times WTT + ...$
+\begin{split}
+V_{m} &= \gamma_{0,m} + \beta_{1} \times IVT + (\beta_{1} \times TIR) \times OVT + \ldots \\
+&= \gamma_{0,m} + \beta_{1} \times (IVT + TIR \times OVT) + \ldots\\
+&= \gamma_{0,m} + \beta_{1} \times WTT + \ldots
+\end{split}
 (\#eq:IVT+TIRxOVT)
 \end{equation}
 
@@ -337,14 +341,17 @@ significant. Model 7W has substantially better goodness-of-fit than Models 6W, 8
 none of the other models are constrained versions of Model 7W, we use the non-nested hypothesis 
 test (see [Section 5.7.3.2](#section5-7-3-2), Equation 5.21) to compare it with Models 6W, 8W, and 9W.
  
-We illustrate the non-nested hypothesis test by applying it to the hypothesis that
-Model 6W is the true model given that Model 7W has a higher $\overline{\rho}^{2}$. Since both models have the
-same number of parameters, the term (K7-K6) drops out, and the equation becomes
+We illustrate the non-nested hypothesis test by applying it to the hypothesis
+that Model 6W is the true model given that Model 7W has a higher
+$\bar{\rho}^{2}$. Since both models have the same number of parameters, the
+term (K7-K6) drops out, and the equation becomes
 
 \begin{equation}
-$\displaystyle (Level \ of\ Rejection) = \Phi[-(-2(\overline{\rho_{7}}^{2}-\overline{\rho_{6}}^{2})\ l(0))^{1/2}]$
-$\displaystyle = \Phi[-(-2(0.5129-0.5074)(-7309.6))^{1/2}]$
-$\displaystyle = \Phi(-8.97)<< 0.001$
+\begin{split}
+\mathrm{Level of Rejection} &= \Phi[-(-2(\bar{\rho_{7}}^{2}-\bar{\rho_{6}}^{2})\ l(0))^{1/2}]\\
+&= \Phi[-(-2(0.5129-0.5074)(-7309.6))^{1/2}]\\
+&= \Phi(-8.97)<< 0.001
+\end{split}
 (\#eq:non-nestedhypothesistest)
 \end{equation}
 
