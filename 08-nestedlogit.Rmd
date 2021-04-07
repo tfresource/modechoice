@@ -48,9 +48,30 @@ This is the standard logit form except for the inclusion of the logsum parameter
 
 The expected utility of the public transit alternatives equals this value,  , times the logsum parameter,  , plus other attributes common to the pair of alternatives,  .    is computed from the log of the sum of the exponents of the nested utilities (equations 8.4 and 8.5), commonly referred to as the “logsum” variable.  
 
-An important feature of these equations is that the logsum parameter, , appears in the denominator of the conditional utility for all the nested alternatives.  The implication of this is that all of the utility function parameters,  , are scaled by a common value.  Since   is bounded by zero and one, the magnitudes of all the resultant parameters,  , are increased implying that the choice between the nested alternatives is more sensitive to changes to any of the variables in these functions than are alternatives not in the nest.  Further, if the number of alternatives in any nest is reduced to one, the utility in the marginal model becomes identically equal to the utility for the remaining alternative.  That is, if the bus alternative is not available to some travelers, the utility of the nest becomes:
+\begin{equation}
+  \Gamma_{PT} = log \left[ exp \left( \frac{V_{Bus}}{\theta_{PT}} \right) +exp \left( \frac{V_{LTR}}{\theta_{PT}} \right) \right]
+  (\#eq:utilitytransit)
+\end{equation}
+
+An important feature of these equations is that the logsum parameter, $\theta_{PT}$, appears in the denominator of the conditional utility for all the nested alternatives.  The implication of this is that all of the utility function parameters, $\beta$, are scaled by a common value.  Since $\theta_{PT}$ is bounded by zero and one, the magnitudes of all the resultant parameters, $\beta/\theta_{PT}$, are increased implying that the choice between the nested alternatives is more sensitive to changes to any of the variables in these functions than are alternatives not in the nest.  Further, if the number of alternatives in any nest is reduced to one, the utility in the marginal model becomes identically equal to the utility for the remaining alternative.  That is, if the bus alternative is not available to some travelers, the utility of the nest becomes:
+
+\begin{align*}
+  V^*_{PT} &= V_{PT} + \theta_{PT} log \left[ exp \left( \frac{V_{LTR}}{\theta_{PT}} \right) \right] \\
+  &= V_{PT} + V_{LRT}
+  (\#eq:utilitytransitnest)
+\end{align*}
 
 The probability of choosing the nested alternatives can be obtained by multiplying the conditional probability of the nested alternative by the marginal probability as follows:
+
+\begin{equation}
+P(Bus) = P(Bus \mid PT) \times P(PT)
+  (\#eq:probbus)
+\end{equation}
+
+\begin{equation}
+P(Bus) = P(Bus \mid PT) \times P(PT)
+  (\#eq:problightrail)
+\end{equation}
 
 ### Interpretation of the Logsum Parameter
 
