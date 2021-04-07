@@ -63,6 +63,16 @@ An important feature of these equations is that the logsum parameter, $\theta_{P
 
 The probability of choosing the nested alternatives can be obtained by multiplying the conditional probability of the nested alternative by the marginal probability as follows:
 
+\begin{equation}
+P(Bus) = P(Bus \mid PT) \times P(PT)
+  (\#eq:probbus)
+\end{equation}
+
+\begin{equation}
+P(Bus) = P(Bus \mid PT) \times P(PT)
+  (\#eq:problightrail)
+\end{equation}
+
 ### Interpretation of the Logsum Parameter {#logsum-param}
 
 The logsum parameter, $\theta$ , (sometimes called the “dissimilarity parameter” or the “nesting coefficient”), is a function of the underlying correlation between the unobserved components for pairs of alternatives in that nest, and it characterizes the degree of substitutability between those alternatives.  The value of the logsum parameter is bounded by zero and one to ensure consistency with random utility maximization principles.  Different values of the parameter indicate the degree of dissimilarity between pairs of alternatives in the nest. The interpretation of different values of the logsum parameter is as follows:
