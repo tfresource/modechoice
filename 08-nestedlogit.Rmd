@@ -39,7 +39,7 @@ where	$\mu_{PT}$  is bounded by one and positive infinity ($\theta_{PT}$  is bou
   It is convenient to interpret this structure as if there are two levels of choice even though the derivation of the model makes no assumptions about the structure of the choice process .  The figure depicts an upper level (marginal) choice among drive alone, shared ride, and public transit and a lower level (conditional) choice between bus and light rail, given that public transit is chosen.
 
 ```{r Twoleveltwoalternatives, fig.cap="Two-Level Nest Structure with Two Alternatives in Lower Nest"}
-knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-html/Twoleveltwoalternatives.PNG"))
+knitr::include_graphics(rep("img/Twoleveltwoalternatives.PNG"))
 ```
 
 The choice probabilities for the lower level nested alternatives (commuter rail or bus), conditional on choice of these alternatives are given by:
@@ -129,7 +129,7 @@ tibble(
 The assumptions underlying the model described in the preceding section (correlation of error terms for the bus and light rail alternatives) results in a two-level model with a single public transit nest for the four alternative (drive alone, shared ride, commuter rail, and bus) mode choice problem.  This nesting structure is one of many possible two-level nested logit models which can be constructed for a choice set with four alternatives.  The possible set of two-level nested logit models includes six combinations of two alternatives in a nest with the remaining alternatives at the upper level, four combinations of three alternatives in a nest and one at the upper level and three combinations of two alternatives in a nest and two alternatives in a parallel nest for a total of thirteen two level nest structures (Figure 8.2).  The number of two level nest structures increases rapidly with the number of alternatives as shown in Table 8-3 below.
 
 ```{r Threetypestwolevelnests, fig.cap="Three Types of Two Level Nests"}
-knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-html/Threetypestwolevelnests.PNG"))
+knitr::include_graphics(rep("img/Threetypestwolevelnests.PNG"))
 ```
 
 Some of these nesting structures are likely to be behaviorally unreasonable; for example, it doesn’t seem reasonable to include bus and car in the same nest. The selection of a preferred nesting structure requires a combination of judgment (about reasonable nesting structures) and statistical hypothesis testing; specifically, testing the hypothesis that the MNL or a simpler NL model is the true model.  
@@ -138,7 +138,7 @@ Some of these nesting structures are likely to be behaviorally unreasonable; for
 In this case, the group travel modes (shared ride, commuter rail and bus) will be nested at the second level and commuter rail and bus will be nested at the third or lowest level as shown in Figure 8.3.  In this model structure, the lower level nest is a binary choice between commuter rail and bus, conditional on choice of public transit; the second level nest represents a choice between shared ride and public transit conditional on group travel; and the highest level represents a choice between drive alone and group travel.
 
 ```{r Threelevelfouralternatives, fig.cap="Three-Level Nest Structure for Four Alternatives"}
-knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-html/Threelevelfouralternatives.PNG"))
+knitr::include_graphics(rep("img/Threelevelfouralternatives.PNG"))
 ```
 
 Twelve three-level nested structures are possible with four alternatives; these are combinations of two alternatives at the lowest level, one alternative at the intermediate level and one alternative at the upper level. 
@@ -178,7 +178,7 @@ $=Var(\varepsilon_{GRP}) + Var(\varepsilon_{PT}) + Var(\varepsilon_{LTR}) =\frac
 The variance components for alternatives, group elements and public transit elements of each alternative are shown in the following figure.
 
 ```{r Decompositionoferrorvariance, fig.cap="Decomposition of Error Variance"}
-knitr::include_graphics(rep("_bookdown_files/08-nested-logit-model_files/figure-html/Decompositionoferrorvariance.PNG"))
+knitr::include_graphics(rep("img/Decompositionoferrorvariance.PNG"))
 ```
 
 This figure helps to explain the hierarchical restrictions on logsum parameters.  [Section 8.2.1](#logsum-param) described the initial restriction on the logsum for a single nest level or a two level tree as follows: $0 < \theta < 1$ .  However, in multi-level tree structures, as shown in [Section 8.3](#nesting-structures), the logsum parameter at each level is restricted to be between zero and the logsum parameter at the next higher level of the nesting structure.  Thus, in the example in Figure 8.4 above, $0 < \theta_{Grp} < 1$  and $0 < \theta_{PT} < \theta_{Grp}$ .  This hierarchical restriction ensures that the variance of each error term in equations 8.22 through 8.25 is positive, as required.  In particular, the variances are defined as
