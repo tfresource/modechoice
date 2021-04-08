@@ -1,0 +1,68 @@
+---
+title: "Final Exam"
+author: "694R: Advanced Choice Modeling"
+date: "4/6/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(mlogit)
+```
+
+> This is your final exam. The final will have a similar format, but with a
+different data set. All resources are available to you, including notes, the
+course textbook, the internet, etc., but *not* your classmates. 
+
+At the link below, I have placed an `.rds` file containing the daily activity
+pattern chosen for a random sample of individuals who responded to the National
+Household Travel Survey.
+
+```{r dap}
+# load dap object into workspace
+dap <- read_rds(url("https://github.com/byu-transpolab/wheelchair_cdap2/raw/master/data/person_dap.rds"))
+# show first ten rows of data
+dap
+```
+
+Each of the `r nrow(dap)` individuals in the data has six alternatives for their
+overall daily activity pattern:
+
+  - `H`: the person spent the entire day at *home*, with no trips.
+  - `NM`: the person left the house any number of times to conduct *non-mandatory*
+    activities: shopping, entertainment, social engagements, etc.
+  - `W_1`: the person left the house for *one work* tour, meaning they left
+  their home, went to work, and returned home with any number of other activities
+  or non-mandatory tours in their day.
+  - `W_2`: the person left the house for *two work* tours, meaning they left
+  their home, went to work, and returned home before leaving for work and returning once more.
+  - `S_1`: the same as `W_1`, but the person went to school instead of work.
+  - `S_2`: the same as `W_2`, but the person went to school instead of work.
+  
+A complete data dictionary and codebook is available at the [Oak Ridge National
+Laboratory Website (CLICK HERE)](https://nhts.ornl.gov/tables09/CodebookBrowser.aspx) if you need
+clarification on variable names. I have converted the original numeric codings to
+meaningful labels already. You can transform this dataset into a choice modeling 
+dataset with the code below.
+
+```{r dfidx}
+choice_data <- dfidx(dap, choice = "dap2", idnames = "id", shape = "wide")
+```
+
+Identify a preferred model to explain daily activity pattern choice. Consider
+the following in your identification process:
+
+  - Alternative representations of model parameters (e.g., log transforms and divisions).
+  - Statistical significance and behavioral intuitiveness of the model parameters.
+  - Comparative relationships between model parameters (e.g., value of time estimate).
+  - Statistical goodness of fit tests between candidate models.
+  - Data segmentation
+  - Nesting structures
+
+Construct your analysis in an Rmarkdown file, paired with appropriate textual
+discussion. Expose your model code, but print your model results and statistical 
+tests in publication-quality HTML tables. Submit your html file to the assignment
+on Learning Suite before the deadline, after confirming that you can view the
+file independently in a web browser.
+
