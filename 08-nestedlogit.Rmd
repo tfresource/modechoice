@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Nested Logit Model {#nestedlogit-chapter}
 ```{r setup}
 library(mlogit)
@@ -208,8 +213,22 @@ $Var(\varepsilon_{GRP}-\varepsilon_{PT})=\frac{\pi^2}{6}(\theta^2_{GRP}-\theta^2
 (\#eq:Var-GRP-minus-PT)
 \end{equation}
 
-To ensure that all the variance components are positive, as required, the nesting parameters must be constrained as shown $0 < \theta_{PT} < \theta_{Grp}$.  These hierarchical constraints apply to all levels of nested logit models.  The examples of two-level and three-level nesting structures shown in Figure 8.2 and Figure 8.3 represent four of the twenty-eight different nested models (13 two-level and 12 three-level) that are feasible for a four-alternative case.  The number of distinct nests increases rapidly with an increasing alternatives (see Table 8-3). 
+To ensure that all the variance components are positive, as required, the nesting parameters must be constrained as shown $0 < \theta_{PT} < \theta_{Grp}$.  These hierarchical constraints apply to all levels of nested logit models.  The examples of two-level and three-level nesting structures shown in Figure 8.2 and Figure 8.3 represent four of the twenty-eight different nested models (13 two-level and 12 three-level) that are feasible for a four-alternative case.  The number of distinct nests increases rapidly with an increasing number of alternatives (see \@ref(tab:possible-nesting-structures)).
 	The large number of feasible nesting structures poses a substantial problem of determining which one best reflects the choice behavior of the population.  The analyst’s judgment can be used to substantially reduce this to a smaller number of realistic structures (based on our understanding of the competitive relationships); however, the analyst needs to be cautious in excluding structures since some apparently non-intuitive structures may have good fit statistics and their interpretation may provide useful insight into the choice behavior under study.
+	
+```{r possible-nesting-structures, echo = FALSE}
+tibble(
+  alt = 3:6,
+  L2 = c(3, 13, 50, 201),
+  L3 = c(0, 12, 125, 1040),
+  Lall = c(3, 25, 235, 2711)
+) %>%
+  kableExtra::kbl(  
+    caption = "Number of Possible Nesting Structures", 
+    col.names = c("Number of <br/>Alternatives", "Possible 2-Level <br/>Nesting Structures", "Possible 3-Level <br/>Nesting Structures", "Total Possible Nesting <br/>Structures All Levels"), align = "cccc", escape = FALSE) %>%
+  kable_styling("hover", full_width = F)
+```
+
 
 ## Statistical Testing of Nested Logit Structures {#testing-NL-structures}
 
