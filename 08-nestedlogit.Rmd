@@ -37,8 +37,20 @@ U_{LTR} &= V_{PT} + V_{LTR} + \epsilon_{SR} + \epsilon_{LTR}
 
 The utility terms for bus and light rail each include a distinct observed component, $V_{Bus}$  and  $V_{LTR}$, and a common observed component, $V_{PT}$ , for public transit (PT); they also include distinct random components, $\varepsilon_{Bus}$ and $\varepsilon_{LTR}$ , and a common random component, $\varepsilon_{PT}$ .  The common error component creates a covariance between the total errors for bus, $\varepsilon_{PT} + \varepsilon_{Bus}$ , and Light Rail, $\varepsilon_{PT} + \varepsilon_{LTR}$ .  This covariance violates the assumption underlying the MNL model representing an increased similarity between pairs of nested alternatives (bus and Light Rail, in this case) and leads to greater cross-elasticity between these alternatives.  
   The total error for each of the four alternatives is assumed to be distributed Gumbel with scale parameter equal to one, as in the MNL model.  The variance of these distributions is: 
+  
+
+\begin{equation}
+V_{AR} (\epsilon_{DA}) =  V_{AR} (\epsilon_{SR}) = V_{AR} (\epsilon_{PT} + \epsilon_{Bus}) = V_{AR} (\epsilon_{PT} + \epsilon_{LTR}) = \pi^2/6
+(\#eq:eighttwo)
+\end{equation}
+
 
 The distinct error components, $\varepsilon_{Bus}$  and $\varepsilon_{LTR}$ , also are assumed to be distributed Gumbel, but with scale parameter, $\mu_{PT}$ .   However, in practice we estimate  $\theta_{PT} = \frac{1}{\mu_{PT}}$, the inverse of the Gumbel scale parameter.  $\theta_{PT}$  , commonly referred to as the logsum parameter, is bounded by zero and one.  That is, the variance of these distributions is:
+
+\begin{equation}
+V_{AR}(\epsilon_{Bus}) = V_{AR} (\epsilon_{LTR}) = \pi^2/(6 \mu_{PT}^2) = (\pi^2 \theta_{PT}^2)/6
+(\#eq:eightthree)
+\end{equation}
 
 where	$\mu_{PT}$  is bounded by one and positive infinity ($\theta_{PT}$  is bounded by zero and one) to ensure that the conditional variance for bus, $Var(\varepsilon_{Bus})$ ,  is less than the total variance for bus, $Var(\varepsilon_{PT}+\varepsilon_{Bus})$ , and similarly for Light Rail.  This is required to ensure that the variance for the common public transit error component, $\varepsilon_{PT}$ , is non-negative. These assumptions are adequate to derive a nested logit model using utility maximization principles.  The choice structure implied by these equations is depicted by the nesting structure in Figure 8.3, in which bus and light rail are more similar to each other than they are to drive alone and shared ride. 
   It is convenient to interpret this structure as if there are two levels of choice even though the derivation of the model makes no assumptions about the structure of the choice process .  The figure depicts an upper level (marginal) choice among drive alone, shared ride, and public transit and a lower level (conditional) choice between bus and light rail, given that public transit is chosen.
@@ -49,7 +61,32 @@ knitr::include_graphics(rep("img/Twoleveltwoalternatives.PNG"))
 
 The choice probabilities for the lower level nested alternatives (commuter rail or bus), conditional on choice of these alternatives are given by:
 
+\begin{equation}
+Pr(BUS/PT) = \frac{exp(V_{BUS}/ \theta_{PT})}{exp(V_{BUS}/ \theta_{PT}) + exp(V_{LTR}/ \theta_{PT})}
+(\#eq:egihtfour)
+\end{equation}
+
+\begin{equation}
+Pr(LTR/PT) = \frac{exp(V_{LTR}/ \theta_{PT})}{exp(V_{BUS}/ \theta_{PT}) + exp(V_{LTR}/ \theta_{PT})}
+(\#eq:eightfive)
+\end{equation}
+
 This is the standard logit form except for the inclusion of the logsum parameter in the denominator of each utility function. The marginal choice probabilities for the drive alone, shared ride, and public transit alternatives are:
+
+\begin{equation}
+Pr(DA) = \frac{exp(V_{DA})} {exp(V_{DA}) + exp(V_{SR}) + exp(V_{PT} + \theta_{PT} \Gamma_{PT})}
+(\#eq:egihtsix)
+\end{equation}\
+
+\begin{equation}
+Pr(DA) = \frac{exp(V_{SR})} {exp(V_{DA}) + exp(V_{SR}) + exp(V_{PT} + \theta_{PT} \Gamma_{PT})}
+(\#eq:egihtseven)
+\end{equation}
+
+\begin{equation}
+Pr(DA) = \frac{exp(V_{PT} + \theta_{PT} \Gamma_{PT})} {exp(V_{DA}) + exp(V_{SR}) + exp(V_{PT} + \theta_{PT} \Gamma_{PT})}
+(\#eq:eighteight)
+\end{equation}
 
 The expected utility of the public transit alternatives equals this value, $\Gamma_{PT}$ , times the logsum parameter, $\theta_{PT}$ , plus other attributes common to the pair of alternatives, $V_{PT}$ .  $\Gamma_{PT}$  is computed from the log of the sum of the exponents of the nested utilities (equations 8.4 and 8.5), commonly referred to as the “logsum” variable.  
 
@@ -151,32 +188,61 @@ The probability equations for the two-level nested logit model can be extended r
 
 The probabilities for each alternative in the second level nest, shared ride and public transit, conditional on the choice of group travel (GRP) modes are:
 
+$\Gamma_{PT}$ is the "logsum" of the exponents of the nested utilites for the lower nest level:
+
+\begin{equation}
+\Gamma_{PT} = log(exp(\frac{V_{BUS}}{\theta_{PT}}) + exp(\frac{V_{LTR}}{\theta_{PT}}))
+(\#eq:eighteen)
+\end{equation}
+
 Finally, the probabilities for automobile and the common carrier nest are:
 
+\usepackage{amsmath}
+\begin{align}
+Pr(DA) = \frac{exp(V_{DA})} {exp(V_{DA}) + exp(V_{GRP} + \theta_{GRP} \Gamma_{GRP})} \\
+Pr(GRP) = \frac{exp(V_{GRP} + \theta_{GRP} \Gamma_{GRP})} {exp(V_{DA}) + exp(V_{GRP} + \theta_{GRP} \Gamma_{GRP})}
+(\#eq:eight19)
+\end{align}
+
+where $\theta_{GRP}$ is the logsum parameter for the intermediate level (*i.e.*, for the common carrier modes), and $\Gamma_{GRP}$ is the logsum of the exponents of the nested utilities for the intermediate nest:
+
+\begin{equation}
+\Gamma_{GRP} = log({exp \frac{V_{SR}}{\theta_{GRP}}+ exp \frac{V_{PT} + \theta_{PT} \Gamma_{PT}}{\theta_{GRP}}})
+(\#eq:twenty)
+\end{equation}
+
 The marginal probabilities of shared ride, commuter rail and bus are the product of the probabilities of each branch from the root (top of the tree) to the alternative:
+
+\usepackage{amsmath}
+\begin{align}
+Pr(SR) = Pr(SR|GRP) \times Pr(GRP) \\
+Pr(BUS) = Pr(BUS|PT) \times Pr(PT|GRP) \times Pr(GRP) \\
+Pr(LTR) = Pr(LTR|PT) \times Pr(PT|GRP) \times Pr(GRP) \\
+(\#eq:eighttopone)
+\end{align}
 
 The value of the logsum parameters decrease as we go down the tree.  This follows from the requirement that the error variance at each level of the tree must be lower than at the next higher level since the total variance for each alternative is fixed and the variance at each level of the tree must be positive (non-negative).  The total variance for each alternative, $Var(\varepsilon^*_{Mode})$ , is given by:  
 
 \begin{equation}
-$Var(\varepsilon^*_{DA})=\frac{\pi^2}{6}$
+Var(\varepsilon^*_{DA})=\frac{\pi^2}{6}
 (\#eq:Var-DA)
 \end{equation}
 
 \begin{equation}
-$Var(\varepsilon^*_{SR}) = Var(\varepsilon_{SR}+\varepsilon_{GRP})$
-$=Var(\varepsilon_{SR})+ Var(\varepsilon_{GRP}) =\frac{\pi^2}{6}$
+Var(\varepsilon^*_{SR}) = Var(\varepsilon_{SR}+\varepsilon_{GRP})
+=Var(\varepsilon_{SR})+ Var(\varepsilon_{GRP}) =\frac{\pi^2}{6}
 (\#eq:Var-SR)
 \end{equation}
 
 \begin{equation}
-$Var(\varepsilon^*_{Bus}) = Var(\varepsilon_{GRP}+\varepsilon_{PT}+\varepsilon_{Bus})$
-$=Var(\varepsilon_{GRP}) + Var(\varepsilon_{PT}) + Var(\varepsilon_{Bus}) =\frac{\pi^2}{6}$
+Var(\varepsilon^*_{Bus}) = Var(\varepsilon_{GRP}+\varepsilon_{PT}+\varepsilon_{Bus})
+=Var(\varepsilon_{GRP}) + Var(\varepsilon_{PT}) + Var(\varepsilon_{Bus}) =\frac{\pi^2}{6}
 (\#eq:Var-Bus)
 \end{equation}
 
 \begin{equation}
-$Var(\varepsilon^*_{LTR}) = Var(\varepsilon_{GRP}+\varepsilon_{PT}+\varepsilon_{LTR})$
-$=Var(\varepsilon_{GRP}) + Var(\varepsilon_{PT}) + Var(\varepsilon_{LTR}) =\frac{\pi^2}{6}$
+Var(\varepsilon^*_{LTR}) = Var(\varepsilon_{GRP}+\varepsilon_{PT}+\varepsilon_{LTR})
+=Var(\varepsilon_{GRP}) + Var(\varepsilon_{PT}) + Var(\varepsilon_{LTR}) =\frac{\pi^2}{6}
 (\#eq:Var-LTR)
 \end{equation}
 
