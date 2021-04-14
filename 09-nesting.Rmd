@@ -218,23 +218,34 @@ It is apparent from the above table that reduction in the magnitude of the utili
 ## Nested Models for Shop / Other Trips
 
 The exploration of nested logit models for shop/other trips follows the same approach as used with work trips, beginning with the consideration of four single nest models depicted in Figure 9.4.  For these trips, all four of the single nest structures produce valid models (Table 9-6).  Further, Models 15 S/O, 16 S/O and 17 S/O strongly reject the MNL model; however, the non-motorized nest (Model 18 S/O) does not reject the MNL model at any reasonable level of significance. 
+```{r shopother}
+sf_nonwork <- read_rds("data/shopother.rds")
+#"Transit", "Share 2", "Share 3+","Drive alone and Share 2/3+", "Share 2/3+","Bike", "Walk", "Drive alone"
+```
 
-```{r parallel two nest models, ehco = False}
-m14SO <- mlogit(work_formula, data = sf_work)
-m15SO <- mlogit(work_formula, data = sf_work,
-               nests = list(motorized = c('Drive alone', 'Share ride 2', 'Share ride 3+','Transit'),  
+```{r parallel two nest models, echo = False}
+#This table has the right idea, though I'm not sure what I can do to fix it or make it more accurate. I also don't know why it isn't showing the other constants...
+SO_formula <- chosen ~ totcost + tvtt  + I(totcost/log(income)) + ovttdist |  
+                 income + veh_wkr + ave_dens
+m14SO <- mlogit(SO_formula, data = sf_shopother)
+m15SO <- mlogit(SO_formula, data = sf_shopother,
+               nests = list(motorized = c('Drive alone', 'Drive alone and Share 2/3+', 'Share 2/3+','Transit',
+                                          'Share 2','Share 3+'),  
                              non_motorized = c('Bike', 'Walk')),
                constPar = c("iv:non_motorized" = 1))
-m16SO <- mlogit(work_formula, data = sf_work,
-               nests = list(private_auto = c('Drive alone', 'Share ride 2', 'Share ride 3+'), 
+m16SO <- mlogit(SO_formula, data = sf_shopother,
+               nests = list(private_auto = c('Drive alone', 'Drive alone and Share 2/3+', 'Share 2/3+',
+                                          'Share 2','Share 3+'), 
                             other = c('Transit', 'Bike', 'Walk')),
                constPar = c("iv:other" = 1))
-m17SO <- mlogit(work_formula, data = sf_work,
-               nests = list(shared = c('Share ride 2', 'Share ride 3+'),  
-                            other = c("Drive alone", "Transit",'Bike', 'Walk')),
+m17SO <- mlogit(SO_formula, data = sf_shopother,
+               nests = list(shared = c('Share 2/3+','Transit',
+                                          'Share 2','Share 3+'),  
+                            other = c("Drive alone", "Transit",'Bike', 'Walk','Drive alone and Share 2/3+')),
                constPar = c("iv:other" = 1))
-m18SO <- mlogit(work_formula, data = sf_work,
-               nests = list(other = c("Drive alone", "Transit", 'Share ride 2', 'Share ride 3+'), 
+m18SO <- mlogit(SO_formula, data = sf_shopother,
+               nests = list(other = c('Drive alone', 'Drive alone and Share 2/3+', 'Share 2/3+','Transit',
+                                          'Share 2','Share 3+'), 
                             non_motorized = c('Bike', 'Walk')),
                constPar = c("iv:other" = 1))
 

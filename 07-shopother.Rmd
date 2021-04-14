@@ -12,13 +12,16 @@ library(modelsummary)
 
 
 ```{r sf_nonwork, eval = FALSE} 
-sf_shopother_raw <- read_spss("data-raw/Shopping Trips/SPSS/MTC Shopping v2.SAV") 
-  #mutate(altname = as_factor(ALTID, levels = "labels"))
-sf_shopother <- dfidx(sf_shopother_raw, idx = c("CASENUM", "ALTID"))
+sf_shopother_raw <- read_spss("data-raw/Shopping Trips/SPSS/MTC Shopping v2.SAV") %>%
+  mutate(ALTNAME = factor(ALTID, labels = c("Transit", "Share 2", "Share 3+","Drive alone and Share 2/3+",
+                                               "Share 2/3+","Bike", "Walk", "Drive alone")))
+names(sf_shopother_raw) <- tolower(names(sf_shopother_raw))
+sf_shopother <- dfidx(sf_shopother_raw, idx = c("casenum", "altname"))
 
 # write to data/ folder for future use
 write_rds(sf_shopother, "data/shopother.rds")
 
+#add labels to alternative names
 ```
 
 
