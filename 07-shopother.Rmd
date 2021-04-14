@@ -10,10 +10,15 @@ library(modelsummary)
 
 ## Introduction
 
+
 ```{r sf_nonwork, eval = FALSE} 
-sf_nonwork_raw <- read_spss()
-sf_nonwork <- dfidx()
-write_rds("data/sf_nonwork.rds")
+sf_shopother_raw <- read_spss("data-raw/Shopping Trips/SPSS/MTC Shopping v2.SAV") 
+  #mutate(altname = as_factor(ALTID, levels = "labels"))
+sf_shopother <- dfidx(sf_shopother_raw, idx = c("CASENUM", "ALTID"))
+
+# write to data/ folder for future use
+write_rds(sf_shopother, "data/shopother.rds")
+
 ```
 
 
