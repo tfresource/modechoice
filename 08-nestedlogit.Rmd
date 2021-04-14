@@ -117,12 +117,14 @@ where $\theta_{PT}$ is the logsum paratmeter at the lowest (i.e. public transit)
 The probabilities for each alternative in the second level nest, shared ride and public transit, conditional on the choice of group travel (GRP) modes are:
 
 \begin{equation}
-Pr(SR \setminus GRP) = \frac {\exp(\frac{V_{SR}}{\theta_{GRP}})} {\exp(\frac{V_{SR}}{\theta_{GRP}}) + \exp{\frac{{V_{PT} + \theta_{PT} \times \Gamma_{PT}}{\theta_{GRP}}}}}
+Pr(SR \ GRP) = \frac {\exp(\frac{V_{SR}}{\theta_{GRP}})} 
+{\exp(\frac{V_{SR}}{\theta_{GRP}}) + \exp{\frac{{V_{PT} + \theta_{PT} \times \Gamma_{PT}}{\theta_{GRP}}}}}
 (\#eq:SRGRP)
 \end{equation}
 
 \begin{equation}
-Pr(PT \setminus GRP) = \frac {\exp(\frac{V_{PT} + \theta_{PT} \times \Gamma_{PT}}{\theta_{GRP}})} {\exp(\frac{V_{SR}}{\theta_{GRP}}) + \exp{\frac{{V_{PT} + \theta_{PT} \times \Gamma_{PT}}{\theta_{GRP}}}}}
+Pr(PT \ GRP) = \frac {\exp(\frac{V_{PT} + \theta_{PT} \times \Gamma_{PT}}
+{\theta_{GRP}})} {\exp(\frac{V_{SR}}{\theta_{GRP}}) + \exp{\frac{{V_{PT} + \theta_{PT} \times \Gamma_{PT}}{\theta_{GRP}}}}}
 (\#eq:PTGRP)
 \end{equation}
 
