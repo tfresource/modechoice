@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Selecting a Preferred Nesting Structure {#nesting-selection-chapter}
 
 ```{r setup}
@@ -23,6 +28,10 @@ Although the number of possible nests for six alternatives is large, the nature 
 •	Non-Motorized (NM) alternatives comprised of Bike and Walk.  
   
 Given these four nests or groupings of alternatives and recognizing that Motorized includes both Automobile and Transit alternatives and that Automobile includes Drive Alone and the Shared Ride alternatives, fifteen nest structures as described below. We begin with four single nest models (and, based on the results of these estimations, we explore a selection of more complex structures.
+
+```{r SNModelsparallelfig, fig.cap="Single Nest Models", echo = FALSE}
+knitr::include_graphics(rep("img/Single_nest_models.png"))
+```
 
 
 ## Nested Models for Work Trips
@@ -209,6 +218,37 @@ It is apparent from the above table that reduction in the magnitude of the utili
 ## Nested Models for Shop / Other Trips
 
 The exploration of nested logit models for shop/other trips follows the same approach as used with work trips, beginning with the consideration of four single nest models depicted in Figure 9.4.  For these trips, all four of the single nest structures produce valid models (Table 9-6).  Further, Models 15 S/O, 16 S/O and 17 S/O strongly reject the MNL model; however, the non-motorized nest (Model 18 S/O) does not reject the MNL model at any reasonable level of significance. 
+
+```{r parallel two nest models, ehco = False}
+m14SO <- mlogit(work_formula, data = sf_work)
+m15SO <- mlogit(work_formula, data = sf_work,
+               nests = list(motorized = c('Drive alone', 'Share ride 2', 'Share ride 3+','Transit'),  
+                             non_motorized = c('Bike', 'Walk')),
+               constPar = c("iv:non_motorized" = 1))
+m16SO <- mlogit(work_formula, data = sf_work,
+               nests = list(private_auto = c('Drive alone', 'Share ride 2', 'Share ride 3+'), 
+                            other = c('Transit', 'Bike', 'Walk')),
+               constPar = c("iv:other" = 1))
+m17SO <- mlogit(work_formula, data = sf_work,
+               nests = list(shared = c('Share ride 2', 'Share ride 3+'),  
+                            other = c("Drive alone", "Transit",'Bike', 'Walk')),
+               constPar = c("iv:other" = 1))
+m18SO <- mlogit(work_formula, data = sf_work,
+               nests = list(other = c("Drive alone", "Transit", 'Share ride 2', 'Share ride 3+'), 
+                            non_motorized = c('Bike', 'Walk')),
+               constPar = c("iv:other" = 1))
+
+parallel_nests <- list(
+  "Model 14SO" = m14SO,
+  "Model 15SO" = m15SO,
+  "Model 16SO" = m16SO,
+  "Model 17SO" = m17SO,
+  "Model 18SO" = m18SO
+  )
+
+modelsummary(parallel_nests,
+             fmt = "%.4f", coef_map = this_map, statistic = "statistic", statistic_vertical = FALSE)
+```
 
 Despite the marginal significance of the non-motorized nest, the possible two parallel nest models including non-motorized and one other nest, were estimated and are reported in Table 9-7.  All three specifications result in valid models with improved goodness-of-fit over the MNL and the single nest NM model (Model 18 S/O) but Models 19 S/O, 20 S/O and 21 S/O do not reject the corresponding Motorized (Model 15 S/O), Private Automobile (Model 16 S/O) and Shared Ride (Model 17 S/O) nest models, which are restricted forms of these models, at a high level of confidence.  
 It is important to note that a variety of different initial parameters were required to find the solution for Model 20 S/O reported here. The selection of different starting values for the model parameters, especially the nest parameter(s) may lead to convergence at different values in or out of the acceptable range as discussed in [CHAPTER 10](#nesting-optima-chapter).  
