@@ -310,15 +310,15 @@ time for a long trip rather than for a short trip. We still expect that traveler
 sensitive to OVT than IVT for any travel distance. A formulation which ensures this result is to
 include total travel time (the sum of in-vehicle and out-of-vehicle time) and out-of-vehicle time
 divided by distance in place of in- and out-of-vehicle travel time. This specification, as shown
-below, is consistent with our expectations provided that $β1$ and $β$2 are negative: 
+below, is consistent with our expectations provided that $\beta_1$ and $\beta_2$ are negative: 
 
 \begin{equation}
 \begin{split}
 V_{m} &= \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + \ldots\\
-& = \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + \ldots\\
-& = \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_{m} + \ldots
+      &= \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + \ldots\\
+      &= \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_{m} + \ldots
 \end{split}
-(\#eq:IVT&OVT)
+(\#eq:IVT-OVT)
 \end{equation}
 
 An alternative approach is to impose a constraint on the relative importance of OVT and IVT.
@@ -330,10 +330,10 @@ constraint works is illustrated as follows:
 \begin{equation}
 \begin{split}
 V_{m} &= \gamma_{0,m} + \beta_{1} \times IVT + (\beta_{1} \times TIR) \times OVT + \ldots \\
-&= \gamma_{0,m} + \beta_{1} \times (IVT + TIR \times OVT) + \ldots\\
-&= \gamma_{0,m} + \beta_{1} \times WTT + \ldots
+      &= \gamma_{0,m} + \beta_{1} \times (IVT + TIR \times OVT) + \ldots\\
+      &= \gamma_{0,m} + \beta_{1} \times WTT + \ldots
 \end{split}
-(\#eq:IVT+TIRxOVT)
+(\#eq:IVT-TIRxOVT)
 \end{equation}
 
 so that the parameter for out-of-vehicle time is equal to the parameter for in-vehicle time
