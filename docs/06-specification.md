@@ -3,86 +3,14 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Model Specification Refinement: San Francisco Bay Area Work Mode Choice {#specifcation-chapter}
+# Model Specification Refinement: San Francisco Bay Area Work Mode Choice {#specification-chapter}
+
+
 
 ```r
-library(mlogit)
+# work trips data frame constructed in chapter 5
+sf_mlogit <- read_rds("data/worktrips.rds")
 ```
-
-```
-## Warning: package 'mlogit' was built under R version 4.0.3
-```
-
-```
-## Loading required package: dfidx
-```
-
-```
-## Warning: package 'dfidx' was built under R version 4.0.3
-```
-
-```
-## 
-## Attaching package: 'dfidx'
-```
-
-```
-## The following object is masked from 'package:stats':
-## 
-##     filter
-```
-
-```r
-library(tidyverse)
-```
-
-```
-## -- Attaching packages ------------------------ tidyverse 1.3.0 --
-```
-
-```
-## v ggplot2 3.3.2     v purrr   0.3.4
-## v tibble  3.0.3     v dplyr   1.0.2
-## v tidyr   1.1.2     v stringr 1.4.0
-## v readr   1.3.1     v forcats 0.5.0
-```
-
-```
-## -- Conflicts --------------------------- tidyverse_conflicts() --
-## x dplyr::filter() masks dfidx::filter(), stats::filter()
-## x dplyr::lag()    masks stats::lag()
-```
-
-```r
-library(modelsummary)
-```
-
-```
-## Warning: package 'modelsummary' was built under R version 4.0.3
-```
-
-```r
-library(haven)
-library(knitr)
-library(kableExtra)
-```
-
-```
-## Warning: package 'kableExtra' was built under R version 4.0.3
-```
-
-```
-## 
-## Attaching package: 'kableExtra'
-```
-
-```
-## The following object is masked from 'package:dplyr':
-## 
-##     group_rows
-```
-
-
 
 ## Introduction
 This chapter describes and demonstrates the refinement of the utility function specification for
@@ -136,7 +64,7 @@ choice in the San Francisco Bay Area.
 
 ## Alternative Specifications
 The basic multinomial logit mode choice model for work commute in the San Francisco Bay
-Area was reported in Table 5-2 \@ref(tab:basic-estimation-table) in [CHAPTER 5](#chapter5) . The refinements we consider include:
+Area was reported in Table \@ref(tab:basic-estimation-table) in [CHAPTER 5](#chapter5) . The refinements we consider include:
   - Different specifications of the income effects,
   - Different specifications of travel time,
   - Additional decision maker related variables such as gender and automobiles owned,
@@ -192,7 +120,7 @@ H_0 : \beta_{IncomeSR2} = \beta_{IncomeSR3+} = 0
 \end{equation}
     
 The estimation results for the base model (from [CHAPTER 5](#chapter5)) and for these three alternative
-models are reported in Table 6-1. The parameter estimates for all three models are consistent
+models are reported in Table \@ref(tab:incpsec-models). The parameter estimates for all three models are consistent
 with expectations. That is, the effect of increasing income is neutral or negative for the shared
 ride modes relative to drive alone and equal to or more negative for transit, bike and walk than
 for shared ride. Further, all the parameters are significant except for the shared ride income
@@ -204,9 +132,9 @@ Models 1W, 2W and 3W are constrained versions of the Base Model and Models 2W an
 are constrained versions of Model 1W, we can use the likelihood ratio test to evaluate the
 hypotheses implied by each of these models (see [section 5.7.3.2](#section5-7-3-2)). We use this test to determine
 if the hypothesis that each of these models is the true model is or is not rejected by the less
-restricted model. The likelihood ratio statistics (equation 5.16), the degrees of freedom or
+restricted model. The likelihood ratio statistics (Equation 5.16), the degrees of freedom or
 number of restrictions and the level of significance for each test are reported relative to the Base
-Model and to Model 1W in the first and second rows of Table 6-2, respectively. The Base
+Model and to Model 1W in Table \@ref(tab:incspec-goftest), respectively. The Base
 Model cannot reject any of the subsequent models at a reasonable level of significance. Further,
 the Base Model has a counter-intuitive relationship between the parameters for shared ride 2 and
 shared ride 3+. Thus, Model 1W or Model 3W can represent the effect of income on mode
@@ -216,8 +144,30 @@ other modes. However, the differences among these models are small both statisti
 behaviorally so the decision should be subject to a review before adoption of the final
 specification [^statbasis].
 
+
+```r
+model_base <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, )
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_1w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
+#Having issues setting Shared Ride 2, 3+, and Transit to be equal to each other
+model_2w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit)
+model_3w <- mlogit(chosen ~ tvtt + cost | hhinc, data = sf_mlogit, constPar = c('hhinc:Share ride 2' = 0, 'hhinc:Share ride 3++' = 0))
+
+altspecinc_estimation <- list(
+  "Base Model " = model_base,
+  "Model 1W" = model_1w,
+  "Model 2W" = model_2w,
+  "Model 3W" = model_3w
+)
+
+modelsummary(
+  altspecinc_estimation, fmt = "%.4f",
+  title = "Alternative Specifications of Income Variable"
+)
+```
+
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>(\#tab:Table-6-1 alternative Specifications of Income)Alternative Specifications of Income Variable</caption>
+<caption>(\#tab:incspec-models)Alternative Specifications of Income Variable</caption>
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -390,11 +340,11 @@ specification [^statbasis].
    <td style="text-align:center;"> -0.0093 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;"> (0.0030) </td>
-   <td style="text-align:center;"> (0.0030) </td>
-   <td style="text-align:center;"> (0.0030) </td>
-   <td style="text-align:center;"> (0.0030) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.0030) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.0030) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.0030) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.0030) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -442,7 +392,7 @@ specification [^statbasis].
 </table>
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:Table-6-2)Likelihood Ratio Tests between Models 1W, 2W, 3W and Base Model</caption>
+<caption>(\#tab:incspec-goftest)Likelihood Ratio Tests between Models 1W, 2W, 3W and Base Model</caption>
  <thead>
   <tr>
    <th style="text-align:center;"> Model </th>
@@ -483,7 +433,7 @@ and we expect that travelers are more sensitive to out-of-vehicle travel time (O
 vehicle travel time (IVT).
 
 The estimation results for two specifications of travel time that relax these constraints are
-reported with those for Model 1W in Table 6-3. Model 5W relaxes the time constraints in Model
+reported with those for Model 1W in Table \@ref(tab:timespec-models). Model 5W relaxes the time constraints in Model
 1W by specifying distinct time variables for the motorized and non-motorized modes based on
 our expectation that travelers are likely to be more sensitive to travel time by non-motorized
 modes. Model 6W relaxes the constraint further by disaggregating the travel time for motorized
@@ -514,7 +464,7 @@ $\displaystyle =  \text{Value of motorized IVTT (\$/hour)} = \frac{\beta_\text{m
 \end{equation}
 
 The implied values of in- and out-of-vehicle times for motorized modes in Models 1W, 5W, and
-6W are reported in Table 6-4. The values of motorized in-vehicle time and non-motorized time
+6W are reported in Table \@ref(tab:timespec-vot). The values of motorized in-vehicle time and non-motorized time
 are somewhat low but not unreasonable compared to the average wage rate of $21.20 per hour in
 the region (1990 dollars); however, the value of in-vehicle time is unreasonably low.
 Nevertheless, the likelihood ratio tests reject both Model 5W and Model 1W at very high levels
@@ -532,8 +482,27 @@ the use of such constraints imposes a responsibility on the analyst to provide a
 his/her decision. The advice of other more experienced analysts is often enlisted to expand
 and/or support these judgments. 
 
+
+```r
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_5w <- mlogit(chosen ~ mot_tvtt + nm_tvtt + cost | hhinc, data = sf_mlogit)
+#Having issues setting Shared Ride 2 and 3+ to be equal to each other
+model_6w <- mlogit(chosen ~ nm_tvtt + mot_ovtt + mot_ivtt + cost | hhinc, data = sf_mlogit)
+
+altspectvtt_estimation <- list(
+  "Model 1W" = model_1w,
+  "Model 5W" = model_5w,
+  "Model 6W" = model_6w
+)
+
+modelsummary(
+  altspectvtt_estimation, fmt = "%.4f",
+  title = "Estimation Results for Alternative Specifications of Travel Time[^trumodel], [^valuesoftime]"
+)
+```
+
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>(\#tab:Table-6-3-alternative-Specifications-of-Travel-Time)Estimation Results for Alternative Specifications of Travel Time</caption>
+<caption>(\#tab:timespec-models)Estimation Results for Alternative Specifications of Travel Time[^trumodel], [^valuesoftime]</caption>
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -730,10 +699,10 @@ and/or support these judgments.
    <td style="text-align:center;"> -0.0025 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> (0.0062) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.0062) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -773,13 +742,12 @@ and/or support these judgments.
   </tr>
 </tbody>
 </table>
-[^trumodel], [^valuesoftime]
 
 
 
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:Vot-1-5-6)Implied Values of Time in Models 13W, 14W, and 15W</caption>
+<caption>(\#tab:timespec-vot)Implied Values of Time in Models 13W, 14W, and 15W</caption>
  <thead>
   <tr>
    <th style="text-align:center;"> Value of Time ($/hr) </th>
@@ -823,11 +791,11 @@ below, is consistent with our expectations provided that $\beta_1$ and $\beta_2$
 
 \begin{equation}
 \begin{split}
-V_{m} &= \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + \ldots \\
-&= \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + \ldots \\
-&= \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_{m} + \ldots
+V_{m} &= \gamma_{0,m} + \beta_{1} \times TTT_{m} + \beta_{2} \times \Big(\frac{OVT_{m}}{Dist}\Big) + \ldots\\
+      &= \gamma_{0,m} + \beta_{1} \times (IVT_{m} + OVT_{m}) + \frac{\beta_{2}}{Dist} \times OVT_{m} + \ldots\\
+      &= \gamma_{0,m} + \beta_{1} \times IVT_{m} + \Big(\beta_{1} + \frac{\beta_{2}}{Dist}\Big) \times OVT_{m} + \ldots
 \end{split}
-(\#eq:IVTOVT)
+(\#eq:IVT-OVT)
 \end{equation}
 
 An alternative approach is to impose a constraint on the relative importance of OVT and IVT.
@@ -839,10 +807,10 @@ constraint works is illustrated as follows:
 \begin{equation}
 \begin{split}
 V_{m} &= \gamma_{0,m} + \beta_{1} \times IVT + (\beta_{1} \times TIR) \times OVT + \ldots \\
- &= \gamma_{0,m} + \beta_{1} \times (IVT + TIR \times OVT) + \ldots \\
- &= \gamma_{0,m} + \beta_{1} \times WTT + \ldots 
+      &= \gamma_{0,m} + \beta_{1} \times (IVT + TIR \times OVT) + \ldots\\
+      &= \gamma_{0,m} + \beta_{1} \times WTT + \ldots
 \end{split}
-(\#eq:IVTTIROVT)
+(\#eq:IVT-TIRxOVT)
 \end{equation}
 
 so that the parameter for out-of-vehicle time is equal to the parameter for in-vehicle time
@@ -854,14 +822,17 @@ significant. Model 7W has substantially better goodness-of-fit than Models 6W, 8
 none of the other models are constrained versions of Model 7W, we use the non-nested hypothesis 
 test (see [Section 5.7.3.2](#section5-7-3-2), Equation 5.21) to compare it with Models 6W, 8W, and 9W.
  
-We illustrate the non-nested hypothesis test by applying it to the hypothesis that
-Model 6W is the true model given that Model 7W has a higher $\overline{\rho}^{2}$. Since both models have the
-same number of parameters, the term (K7-K6) drops out, and the equation becomes
+We illustrate the non-nested hypothesis test by applying it to the hypothesis
+that Model 6W is the true model given that Model 7W has a higher
+$\bar{\rho}^{2}$. Since both models have the same number of parameters, the
+term (K7-K6) drops out, and the equation becomes
 
 \begin{equation}
-$\displaystyle (Level \ of\ Rejection) = \Phi[-(-2(\overline{\rho_{7}}^{2}-\overline{\rho_{6}}^{2})\ l(0))^{1/2}]$
-$\displaystyle = \Phi[-(-2(0.5129-0.5074)(-7309.6))^{1/2}]$
-$\displaystyle = \Phi(-8.97)<< 0.001$
+\begin{split}
+\mathrm{Level of Rejection} &= \Phi[-(-2(\bar{\rho_{7}}^{2}-\bar{\rho_{6}}^{2})\ l(0))^{1/2}]\\
+&= \Phi[-(-2(0.5129-0.5074)(-7309.6))^{1/2}]\\
+&= \Phi(-8.97)<< 0.001
+\end{split}
 (\#eq:non-nestedhypothesistest)
 \end{equation}
 
@@ -890,22 +861,11 @@ model_8a <- mlogit(chosen ~ nm_tvtt + (mot_ivtt + scalemot) + cost | hhinc,
                     data = sf_mlogit_trip_estimates)
 model_9a <- mlogit(chosen ~ nm_tvtt + (mot_ivtt + scalemot2) + cost | hhinc, 
                    data = sf_mlogit_trip_estimates)
-
-trip_1 <- list(
-  "Model 6W" = model_6w,
-  "Model 7W" = model_7w,
-  "Model 8W" = model_8w,
-  "Model 9W" = model_9w
-)
-
-modelsummary(
-  trip_1, fmt = "%.4f",
-  title = "Estimation Results for Additionaly Travel Time Specification Testing"
-)
 ```
 
+
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>(\#tab:table6-5)Estimation Results for Additionaly Travel Time Specification Testing</caption>
+<caption>(\#tab:tirspec-models-tab)Estimation Results for Additional Travel Time Specification Testing</caption>
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -1162,11 +1122,11 @@ modelsummary(
    <td style="text-align:center;"> -0.0173 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> (0.0013) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.0013) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -1217,7 +1177,7 @@ Before adopting Model 7W, it is a good idea to evaluate and interpret the relati
 importance of in-vehicle and out-of-vehicle time and between each component of time and cost.
 Despite the difference in the specification, this analysis is undertaken the same way as earlier;
 that is, the parameters for time is divided by the parameter for cost to obtain the values of time.
-The values of IVT and OVT in cents-per-minute (and dollars-per-hour) are shown in Table 6-6
+The values of IVT and OVT in cents-per-minute (and dollars-per-hour) are shown in Table \@ref(tab:model7w-vot)
 as a function of distance. The time values are obtained as described earlier by dividing each of
 the time parameters (in utils-per-minute) by the cost parameter in utils per cent. For example,
 the values for Model 7W are:
@@ -1229,18 +1189,18 @@ Value of OVT (5 Mile Trip) $= \frac{\beta_{mot\ tvtt}+ \frac{\beta_{OVT/Dist}}{D
                            $= \frac{-0.0415+ \frac{-0.1812}{5}}{-0.0041}$
                             = 19.0 cents/min = $11.38/hr
                             
-These values of time are fixed for IVT but vary with distance for OVT[^costbyinc] as reported in Table 6-6
+These values of time are fixed for IVT but vary with distance for OVT[^costbyinc] as reported in Table \@ref(tab:model7w-vot)
 for Model 7W. The corresponding values of time for Models 6W, 8W and 9W are shown in
-Table 6-7.
+Table \@ref(tab:timespec-vot2)
 
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:model7w_vot)Model 7W Implied Values of Time as a Function of Trip Distance</caption>
+<caption>(\#tab:model7w-vot)Model 7W Implied Values of Time as a Function of Trip Distance</caption>
  <thead>
   <tr>
    <th style="text-align:right;"> distance </th>
    <th style="text-align:right;"> Value of Motorized Out-of-Vehicle Time </th>
-   <th style="text-align:right;"> Value of Motorized In-Vehicle Time </th>
+   <th style="text-align:right;"> Value of Motorized Total Time </th>
    <th style="text-align:right;"> Value of Non-Motorized Time </th>
   </tr>
  </thead>
@@ -1267,7 +1227,7 @@ Table 6-7.
 </table>
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:Table 6-7 Implied Values of Time in Models 6W, 8W, Model 9W)Implied Values of Time in Models 6W, 8W, and 9W</caption>
+<caption>(\#tab:timspec-vot2)Implied Values of Time in Models 6W, 8W, and 9W</caption>
  <thead>
   <tr>
    <th style="text-align:center;"> Value of Time ($/hr) </th>
@@ -1296,40 +1256,43 @@ The prevailing wage rate in the San Francisco Bay Area is $21.20 per hour[^refsf
 comparison, the values of in-vehicle time implied by Models 6W, 8W, and 9W are very low and
 the values of out of vehicle time are somewhat low. Model 7W produces higher, but still low,
 values of time. Finally, we can examine the ratio of time values of OVT relative to IVT for all
-four models as shown in Figure 6.1. The ratio for Model 6W is clearly unacceptable. Those for
-Models 7W, 8W and 9W are more reasonable.
+four models as shown in Figure \@ref(fig:vottable). The ratio for Model 6W is
+unacceptably high. Those for Models 7W, 8W and 9W are more reasonable.
 
 
 ```r
 vottable <- tibble(
-"Value of Time ($/hr)" = c("Value of Out-of-vehicle Time", "Value of In-vehicle Time"),
-"Model 6W" = round(c(VOTsimple(model_6w, "mot_ovtt", "cost"), VOTsimple(model_6w, "mot_ivtt", "cost")),2),
-
-"Model 7W" = round(c(VOTsimple(model_7w, "mot_tvtt", "cost"), VOTsimple(model_7w, "mot_tvtt", "cost")),2),
-
-"Model 8W" = round(c(VOTsimple(model_8a, "scalemot", "cost"), VOTsimple(model_8a, "mot_ivtt", "cost")),2),
-
-"Model 9W" = round(c(VOTsimple(model_9a, "scalemot2", "cost"), VOTsimple(model_9a, "mot_ivtt", "cost")),2)
-) 
-
-model_6wa = as.numeric(vottable[1,"Model 6W"]/vottable[2,"Model 6W"])
-model_7wa = as.numeric(vottable[1,"Model 7W"]/vottable[2,"Model 7W"])
-model_8wa = as.numeric(vottable[1,"Model 8W"]/vottable[2,"Model 8W"])
-model_9wa = as.numeric(vottable[1,"Model 9W"]/vottable[2,"Model 9W"])
+  model = c("Model 6W", "Model 7W", "Model 8W", "Model 9W"),
+  ovtt = c( VOTsimple(model_6w, "mot_ovtt", "cost"), VOTsimple(model_7w, "mot_tvtt", "cost"), 
+            VOTsimple(model_8a, "scalemot", "cost"), VOTsimple(model_9a, "scalemot2", "cost")),
+  ivtt =  c(VOTsimple(model_6w, "mot_ivtt", "cost"), VOTsimple(model_7w, "mot_tvtt", "cost"),
+            VOTsimple(model_8a, "mot_ivtt", "cost"), VOTsimple(model_9a, "mot_ivtt", "cost")),
+  ratio = ovtt / ivtt
+)
 
 tibble(
   distance = .8:10,
-  model6 = model_6wa,
-  model7 = model_7wa/distance,
-  model8 = model_8wa,
-  model9 = model_9wa
+  `Model 6W` = vottable$ratio[1],
+  `Model 7W` = vottable$ratio[2] / distance,
+  `Model 8W` = vottable$ratio[3],
+  `Model 9W` = vottable$ratio[4],
 ) %>%
   gather(model, vot, -distance) %>%
   ggplot(aes(x = distance, y = vot, color = model)) + 
-    geom_line()
+  scale_color_discrete("Model") + 
+  geom_line()  + xlab("Distance") + ylab("Value of Time Ratio") + 
+  scale_y_log10()
 ```
 
-<img src="06-specification_files/figure-html/figure6-1-1.png" width="672" />
+```
+## Warning: attributes are not identical across measure variables;
+## they will be dropped
+```
+
+<div class="figure">
+<img src="06-specification_files/figure-html/vottable-1.png" alt="Ratio of Out-of-Vehicle and In-Vehicle Time Coefficients for Work Models 6, 7, 8, and 9" width="672" />
+<p class="caption">(\#fig:vottable)Ratio of Out-of-Vehicle and In-Vehicle Time Coefficients for Work Models 6, 7, 8, and 9</p>
+</div>
 
 The selection of a preferred travel time specification among the four alternative specifications
 tested is relatively straightforward in this case. Model 7W outperforms the other models in all
@@ -1791,11 +1754,11 @@ equally appropriate.
    <td style="text-align:center;"> -0.7943 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> (0.2082) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.2082) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -1872,6 +1835,14 @@ specifications and Model 11W are reported in Table 6-9.
 
 
 
+
+```
+## Warning in sanity_ellipsis(vcov, ...): The `statistic_vertical` argument
+## is deprecated and will be ignored. To display uncertainty estimates next to
+## your coefficients, use a `glue` string in the `estimate` argument. See `?
+## modelsummary`
+```
+
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>(\#tab:trip-context-table)Estimation Results for Models with Trip Context Variables</caption>
  <thead>
@@ -1886,206 +1857,409 @@ specifications and Model 11W are reported in Table 6-9.
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) × Share ride 2 </td>
-   <td style="text-align:center;"> -1.5651 (0.1364) </td>
-   <td style="text-align:center;"> -1.6134 (0.1403) </td>
-   <td style="text-align:center;"> -1.5818 (0.1370) </td>
-   <td style="text-align:center;"> -1.6192 (0.1403) </td>
+   <td style="text-align:center;"> -1.5651 </td>
+   <td style="text-align:center;"> -1.6134 </td>
+   <td style="text-align:center;"> -1.5818 </td>
+   <td style="text-align:center;"> -1.6192 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1364) </td>
+   <td style="text-align:center;"> (0.1403) </td>
+   <td style="text-align:center;"> (0.1370) </td>
+   <td style="text-align:center;"> (0.1403) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Share ride 3++ </td>
-   <td style="text-align:center;"> -3.2375 (0.2195) </td>
-   <td style="text-align:center;"> -3.6071 (0.2333) </td>
-   <td style="text-align:center;"> -3.2913 (0.2219) </td>
-   <td style="text-align:center;"> -3.6182 (0.2333) </td>
+   <td style="text-align:center;"> -3.2375 </td>
+   <td style="text-align:center;"> -3.6071 </td>
+   <td style="text-align:center;"> -3.2913 </td>
+   <td style="text-align:center;"> -3.6182 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.2195) </td>
+   <td style="text-align:center;"> (0.2333) </td>
+   <td style="text-align:center;"> (0.2219) </td>
+   <td style="text-align:center;"> (0.2333) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Transit </td>
-   <td style="text-align:center;"> 0.9262 (0.1924) </td>
-   <td style="text-align:center;"> -0.2034 (0.2426) </td>
-   <td style="text-align:center;"> 0.4180 (0.2090) </td>
-   <td style="text-align:center;"> -0.4729 (0.2512) </td>
+   <td style="text-align:center;"> 0.9262 </td>
+   <td style="text-align:center;"> -0.2034 </td>
+   <td style="text-align:center;"> 0.4180 </td>
+   <td style="text-align:center;"> -0.4729 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1924) </td>
+   <td style="text-align:center;"> (0.2426) </td>
+   <td style="text-align:center;"> (0.2090) </td>
+   <td style="text-align:center;"> (0.2512) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Bike </td>
-   <td style="text-align:center;"> -1.8303 (0.4082) </td>
-   <td style="text-align:center;"> -1.6502 (0.4284) </td>
-   <td style="text-align:center;"> -1.5966 (0.4170) </td>
-   <td style="text-align:center;"> -1.5145 (0.4296) </td>
+   <td style="text-align:center;"> -1.8303 </td>
+   <td style="text-align:center;"> -1.6502 </td>
+   <td style="text-align:center;"> -1.5966 </td>
+   <td style="text-align:center;"> -1.5145 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.4082) </td>
+   <td style="text-align:center;"> (0.4284) </td>
+   <td style="text-align:center;"> (0.4170) </td>
+   <td style="text-align:center;"> (0.4296) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Walk </td>
-   <td style="text-align:center;"> -0.2371 (0.3410) </td>
-   <td style="text-align:center;"> 0.0845 (0.3476) </td>
-   <td style="text-align:center;"> -0.0399 (0.3442) </td>
-   <td style="text-align:center;"> 0.2108 (0.3483) </td>
+   <td style="text-align:center;"> -0.2371 </td>
+   <td style="text-align:center;"> 0.0845 </td>
+   <td style="text-align:center;"> -0.0399 </td>
+   <td style="text-align:center;"> 0.2108 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.3410) </td>
+   <td style="text-align:center;"> (0.3476) </td>
+   <td style="text-align:center;"> (0.3442) </td>
+   <td style="text-align:center;"> (0.3483) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mot_tvtt </td>
-   <td style="text-align:center;"> -0.0384 (0.0036) </td>
-   <td style="text-align:center;"> -0.0286 (0.0038) </td>
-   <td style="text-align:center;"> -0.0299 (0.0038) </td>
-   <td style="text-align:center;"> -0.0231 (0.0039) </td>
+   <td style="text-align:center;"> -0.0384 </td>
+   <td style="text-align:center;"> -0.0286 </td>
+   <td style="text-align:center;"> -0.0299 </td>
+   <td style="text-align:center;"> -0.0231 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0036) </td>
+   <td style="text-align:center;"> (0.0038) </td>
+   <td style="text-align:center;"> (0.0038) </td>
+   <td style="text-align:center;"> (0.0039) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> nm_tvtt </td>
-   <td style="text-align:center;"> -0.0470 (0.0056) </td>
-   <td style="text-align:center;"> -0.0464 (0.0057) </td>
-   <td style="text-align:center;"> -0.0459 (0.0057) </td>
-   <td style="text-align:center;"> -0.0467 (0.0058) </td>
+   <td style="text-align:center;"> -0.0470 </td>
+   <td style="text-align:center;"> -0.0464 </td>
+   <td style="text-align:center;"> -0.0459 </td>
+   <td style="text-align:center;"> -0.0467 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0056) </td>
+   <td style="text-align:center;"> (0.0057) </td>
+   <td style="text-align:center;"> (0.0057) </td>
+   <td style="text-align:center;"> (0.0058) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mot_ovttbydist </td>
-   <td style="text-align:center;"> -0.1814 (0.0185) </td>
-   <td style="text-align:center;"> -0.1501 (0.0197) </td>
-   <td style="text-align:center;"> -0.1575 (0.0190) </td>
-   <td style="text-align:center;"> -0.1324 (0.0197) </td>
+   <td style="text-align:center;"> -0.1814 </td>
+   <td style="text-align:center;"> -0.1501 </td>
+   <td style="text-align:center;"> -0.1575 </td>
+   <td style="text-align:center;"> -0.1324 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0185) </td>
+   <td style="text-align:center;"> (0.0197) </td>
+   <td style="text-align:center;"> (0.0190) </td>
+   <td style="text-align:center;"> (0.0197) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cost </td>
-   <td style="text-align:center;"> -0.0042 (0.0002) </td>
-   <td style="text-align:center;"> -0.0033 (0.0003) </td>
-   <td style="text-align:center;"> -0.0029 (0.0003) </td>
-   <td style="text-align:center;"> -0.0024 (0.0003) </td>
+   <td style="text-align:center;"> -0.0042 </td>
+   <td style="text-align:center;"> -0.0033 </td>
+   <td style="text-align:center;"> -0.0029 </td>
+   <td style="text-align:center;"> -0.0024 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0002) </td>
+   <td style="text-align:center;"> (0.0003) </td>
+   <td style="text-align:center;"> (0.0003) </td>
+   <td style="text-align:center;"> (0.0003) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Share ride 2 </td>
-   <td style="text-align:center;"> -0.0022 (0.0016) </td>
-   <td style="text-align:center;"> -0.0022 (0.0016) </td>
-   <td style="text-align:center;"> -0.0022 (0.0016) </td>
-   <td style="text-align:center;"> -0.0022 (0.0016) </td>
+   <td style="text-align:center;"> -0.0022 </td>
+   <td style="text-align:center;"> -0.0022 </td>
+   <td style="text-align:center;"> -0.0022 </td>
+   <td style="text-align:center;"> -0.0022 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0016) </td>
+   <td style="text-align:center;"> (0.0016) </td>
+   <td style="text-align:center;"> (0.0016) </td>
+   <td style="text-align:center;"> (0.0016) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Share ride 3++ </td>
-   <td style="text-align:center;"> 0.0001 (0.0025) </td>
-   <td style="text-align:center;"> -0.0004 (0.0025) </td>
-   <td style="text-align:center;"> -0.0003 (0.0025) </td>
-   <td style="text-align:center;"> -0.0005 (0.0025) </td>
+   <td style="text-align:center;"> 0.0001 </td>
+   <td style="text-align:center;"> -0.0004 </td>
+   <td style="text-align:center;"> -0.0003 </td>
+   <td style="text-align:center;"> -0.0005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0025) </td>
+   <td style="text-align:center;"> (0.0025) </td>
+   <td style="text-align:center;"> (0.0025) </td>
+   <td style="text-align:center;"> (0.0025) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Transit </td>
-   <td style="text-align:center;"> -0.0060 (0.0020) </td>
-   <td style="text-align:center;"> -0.0061 (0.0020) </td>
-   <td style="text-align:center;"> -0.0070 (0.0020) </td>
-   <td style="text-align:center;"> -0.0070 (0.0021) </td>
+   <td style="text-align:center;"> -0.0060 </td>
+   <td style="text-align:center;"> -0.0061 </td>
+   <td style="text-align:center;"> -0.0070 </td>
+   <td style="text-align:center;"> -0.0070 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0020) </td>
+   <td style="text-align:center;"> (0.0020) </td>
+   <td style="text-align:center;"> (0.0020) </td>
+   <td style="text-align:center;"> (0.0021) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Bike </td>
-   <td style="text-align:center;"> -0.0116 (0.0053) </td>
-   <td style="text-align:center;"> -0.0111 (0.0052) </td>
-   <td style="text-align:center;"> -0.0112 (0.0053) </td>
-   <td style="text-align:center;"> -0.0109 (0.0053) </td>
+   <td style="text-align:center;"> -0.0116 </td>
+   <td style="text-align:center;"> -0.0111 </td>
+   <td style="text-align:center;"> -0.0112 </td>
+   <td style="text-align:center;"> -0.0109 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0053) </td>
+   <td style="text-align:center;"> (0.0052) </td>
+   <td style="text-align:center;"> (0.0053) </td>
+   <td style="text-align:center;"> (0.0053) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Walk </td>
-   <td style="text-align:center;"> -0.0080 (0.0032) </td>
-   <td style="text-align:center;"> -0.0078 (0.0032) </td>
-   <td style="text-align:center;"> -0.0079 (0.0032) </td>
-   <td style="text-align:center;"> -0.0081 (0.0032) </td>
+   <td style="text-align:center;"> -0.0080 </td>
+   <td style="text-align:center;"> -0.0078 </td>
+   <td style="text-align:center;"> -0.0079 </td>
+   <td style="text-align:center;"> -0.0081 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0032) </td>
+   <td style="text-align:center;"> (0.0032) </td>
+   <td style="text-align:center;"> (0.0032) </td>
+   <td style="text-align:center;"> (0.0032) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Share ride 2 </td>
-   <td style="text-align:center;"> -0.4298 (0.0767) </td>
-   <td style="text-align:center;"> -0.4129 (0.0769) </td>
-   <td style="text-align:center;"> -0.4044 (0.0764) </td>
-   <td style="text-align:center;"> -0.3988 (0.0769) </td>
+   <td style="text-align:center;"> -0.4298 </td>
+   <td style="text-align:center;"> -0.4129 </td>
+   <td style="text-align:center;"> -0.4044 </td>
+   <td style="text-align:center;"> -0.3988 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0767) </td>
+   <td style="text-align:center;"> (0.0769) </td>
+   <td style="text-align:center;"> (0.0764) </td>
+   <td style="text-align:center;"> (0.0769) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Share ride 3++ </td>
-   <td style="text-align:center;"> -0.2732 (0.1129) </td>
-   <td style="text-align:center;"> -0.2175 (0.1114) </td>
-   <td style="text-align:center;"> -0.2423 (0.1133) </td>
-   <td style="text-align:center;"> -0.1880 (0.1111) </td>
+   <td style="text-align:center;"> -0.2732 </td>
+   <td style="text-align:center;"> -0.2175 </td>
+   <td style="text-align:center;"> -0.2423 </td>
+   <td style="text-align:center;"> -0.1880 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1129) </td>
+   <td style="text-align:center;"> (0.1114) </td>
+   <td style="text-align:center;"> (0.1133) </td>
+   <td style="text-align:center;"> (0.1111) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Transit </td>
-   <td style="text-align:center;"> -0.9903 (0.1157) </td>
-   <td style="text-align:center;"> -0.9113 (0.1148) </td>
-   <td style="text-align:center;"> -0.9956 (0.1190) </td>
-   <td style="text-align:center;"> -0.9303 (0.1179) </td>
+   <td style="text-align:center;"> -0.9903 </td>
+   <td style="text-align:center;"> -0.9113 </td>
+   <td style="text-align:center;"> -0.9956 </td>
+   <td style="text-align:center;"> -0.9303 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1157) </td>
+   <td style="text-align:center;"> (0.1148) </td>
+   <td style="text-align:center;"> (0.1190) </td>
+   <td style="text-align:center;"> (0.1179) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Bike </td>
-   <td style="text-align:center;"> -0.6731 (0.2515) </td>
-   <td style="text-align:center;"> -0.6982 (0.2561) </td>
-   <td style="text-align:center;"> -0.7137 (0.2585) </td>
-   <td style="text-align:center;"> -0.7151 (0.2590) </td>
+   <td style="text-align:center;"> -0.6731 </td>
+   <td style="text-align:center;"> -0.6982 </td>
+   <td style="text-align:center;"> -0.7137 </td>
+   <td style="text-align:center;"> -0.7151 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.2515) </td>
+   <td style="text-align:center;"> (0.2561) </td>
+   <td style="text-align:center;"> (0.2585) </td>
+   <td style="text-align:center;"> (0.2590) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Walk </td>
-   <td style="text-align:center;"> -0.6286 (0.1627) </td>
-   <td style="text-align:center;"> -0.7197 (0.1682) </td>
-   <td style="text-align:center;"> -0.6815 (0.1671) </td>
-   <td style="text-align:center;"> -0.7276 (0.1694) </td>
+   <td style="text-align:center;"> -0.6286 </td>
+   <td style="text-align:center;"> -0.7197 </td>
+   <td style="text-align:center;"> -0.6815 </td>
+   <td style="text-align:center;"> -0.7276 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1627) </td>
+   <td style="text-align:center;"> (0.1682) </td>
+   <td style="text-align:center;"> (0.1671) </td>
+   <td style="text-align:center;"> (0.1694) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Share ride 2 </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.2571 (0.1100) </td>
+   <td style="text-align:center;"> 0.2571 </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.2037 (0.1246) </td>
+   <td style="text-align:center;"> 0.2037 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.1100) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.1246) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Share ride 3++ </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 1.0520 (0.1725) </td>
+   <td style="text-align:center;"> 1.0520 </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 1.0161 (0.1926) </td>
+   <td style="text-align:center;"> 1.0161 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.1725) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.1926) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Transit </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 1.3556 (0.1613) </td>
+   <td style="text-align:center;"> 1.3556 </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 1.2037 (0.1678) </td>
+   <td style="text-align:center;"> 1.2037 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.1613) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.1678) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Bike </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.3755 (0.3214) </td>
+   <td style="text-align:center;"> 0.3755 </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.4609 (0.3601) </td>
+   <td style="text-align:center;"> 0.4609 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.3214) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.3601) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Walk </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.1740 (0.2252) </td>
+   <td style="text-align:center;"> 0.1740 </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.1074 (0.2508) </td>
+   <td style="text-align:center;"> 0.1074 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.2252) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.2508) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Share ride 2 </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.0011 (0.0004) </td>
-   <td style="text-align:center;"> 0.0010 (0.0004) </td>
+   <td style="text-align:center;"> 0.0011 </td>
+   <td style="text-align:center;"> 0.0010 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.0004) </td>
+   <td style="text-align:center;"> (0.0004) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Share ride 3++ </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.0022 (0.0004) </td>
-   <td style="text-align:center;"> 0.0013 (0.0005) </td>
+   <td style="text-align:center;"> 0.0022 </td>
+   <td style="text-align:center;"> 0.0013 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.0004) </td>
+   <td style="text-align:center;"> (0.0005) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Transit </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.0027 (0.0004) </td>
-   <td style="text-align:center;"> 0.0021 (0.0004) </td>
+   <td style="text-align:center;"> 0.0027 </td>
+   <td style="text-align:center;"> 0.0021 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.0004) </td>
+   <td style="text-align:center;"> (0.0004) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Bike </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.0011 (0.0011) </td>
-   <td style="text-align:center;"> 0.0008 (0.0012) </td>
+   <td style="text-align:center;"> 0.0011 </td>
+   <td style="text-align:center;"> 0.0008 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> (0.0011) </td>
+   <td style="text-align:center;"> (0.0012) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Walk </td>
    <td style="text-align:center;">  </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> 0.0015 (0.0007) </td>
-   <td style="text-align:center;"> 0.0018 (0.0008) </td>
+   <td style="text-align:center;"> 0.0015 </td>
+   <td style="text-align:center;"> 0.0018 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.0007) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.0008) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -2195,6 +2369,14 @@ household income. Table 6-11 portrays the estimation results for two models that
 how they represent cost; Model 15W includes travel cost while Model 16W includes travel cost
 divided by income.
 
+
+```
+## Warning in sanity_ellipsis(vcov, ...): The `statistic_vertical` argument
+## is deprecated and will be ignored. To display uncertainty estimates next to
+## your coefficients, use a `glue` string in the `estimate` argument. See `?
+## modelsummary`
+```
+
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>(\#tab:income_interaction)Estimation Results for Models with Trip Context Variables</caption>
  <thead>
@@ -2207,153 +2389,303 @@ divided by income.
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) × Share ride 2 </td>
-   <td style="text-align:center;"> -1.6192 (0.1403) </td>
-   <td style="text-align:center;"> -1.6976 (0.1419) </td>
+   <td style="text-align:center;"> -1.6192 </td>
+   <td style="text-align:center;"> -1.6976 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1403) </td>
+   <td style="text-align:center;"> (0.1419) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Share ride 3++ </td>
-   <td style="text-align:center;"> -3.6182 (0.2333) </td>
-   <td style="text-align:center;"> -3.7733 (0.2356) </td>
+   <td style="text-align:center;"> -3.6182 </td>
+   <td style="text-align:center;"> -3.7733 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.2333) </td>
+   <td style="text-align:center;"> (0.2356) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Transit </td>
-   <td style="text-align:center;"> -0.4729 (0.2512) </td>
-   <td style="text-align:center;"> -0.6930 (0.2496) </td>
+   <td style="text-align:center;"> -0.4729 </td>
+   <td style="text-align:center;"> -0.6930 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.2512) </td>
+   <td style="text-align:center;"> (0.2496) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Bike </td>
-   <td style="text-align:center;"> -1.5145 (0.4296) </td>
-   <td style="text-align:center;"> -1.6233 (0.4290) </td>
+   <td style="text-align:center;"> -1.5145 </td>
+   <td style="text-align:center;"> -1.6233 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.4296) </td>
+   <td style="text-align:center;"> (0.4290) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Walk </td>
-   <td style="text-align:center;"> 0.2108 (0.3483) </td>
-   <td style="text-align:center;"> 0.0751 (0.3492) </td>
+   <td style="text-align:center;"> 0.2108 </td>
+   <td style="text-align:center;"> 0.0751 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.3483) </td>
+   <td style="text-align:center;"> (0.3492) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mot_tvtt </td>
-   <td style="text-align:center;"> -0.0231 (0.0039) </td>
-   <td style="text-align:center;"> -0.0202 (0.0038) </td>
+   <td style="text-align:center;"> -0.0231 </td>
+   <td style="text-align:center;"> -0.0202 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0039) </td>
+   <td style="text-align:center;"> (0.0038) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> nm_tvtt </td>
-   <td style="text-align:center;"> -0.0467 (0.0058) </td>
-   <td style="text-align:center;"> -0.0455 (0.0058) </td>
+   <td style="text-align:center;"> -0.0467 </td>
+   <td style="text-align:center;"> -0.0455 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0058) </td>
+   <td style="text-align:center;"> (0.0058) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mot_ovttbydist </td>
-   <td style="text-align:center;"> -0.1324 (0.0197) </td>
-   <td style="text-align:center;"> -0.1326 (0.0196) </td>
+   <td style="text-align:center;"> -0.1324 </td>
+   <td style="text-align:center;"> -0.1326 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0197) </td>
+   <td style="text-align:center;"> (0.0196) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cost </td>
-   <td style="text-align:center;"> -0.0024 (0.0003) </td>
+   <td style="text-align:center;"> -0.0024 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0003) </td>
    <td style="text-align:center;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Share ride 2 </td>
-   <td style="text-align:center;"> -0.0022 (0.0016) </td>
-   <td style="text-align:center;"> -0.0006 (0.0016) </td>
+   <td style="text-align:center;"> -0.0022 </td>
+   <td style="text-align:center;"> -0.0006 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0016) </td>
+   <td style="text-align:center;"> (0.0016) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Share ride 3++ </td>
-   <td style="text-align:center;"> -0.0005 (0.0025) </td>
-   <td style="text-align:center;"> 0.0023 (0.0025) </td>
+   <td style="text-align:center;"> -0.0005 </td>
+   <td style="text-align:center;"> 0.0023 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0025) </td>
+   <td style="text-align:center;"> (0.0025) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Transit </td>
-   <td style="text-align:center;"> -0.0070 (0.0021) </td>
-   <td style="text-align:center;"> -0.0052 (0.0021) </td>
+   <td style="text-align:center;"> -0.0070 </td>
+   <td style="text-align:center;"> -0.0052 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0021) </td>
+   <td style="text-align:center;"> (0.0021) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Bike </td>
-   <td style="text-align:center;"> -0.0109 (0.0053) </td>
-   <td style="text-align:center;"> -0.0086 (0.0052) </td>
+   <td style="text-align:center;"> -0.0109 </td>
+   <td style="text-align:center;"> -0.0086 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0053) </td>
+   <td style="text-align:center;"> (0.0052) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Walk </td>
-   <td style="text-align:center;"> -0.0081 (0.0032) </td>
-   <td style="text-align:center;"> -0.0060 (0.0032) </td>
+   <td style="text-align:center;"> -0.0081 </td>
+   <td style="text-align:center;"> -0.0060 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0032) </td>
+   <td style="text-align:center;"> (0.0032) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Share ride 2 </td>
-   <td style="text-align:center;"> -0.3988 (0.0769) </td>
-   <td style="text-align:center;"> -0.3780 (0.0765) </td>
+   <td style="text-align:center;"> -0.3988 </td>
+   <td style="text-align:center;"> -0.3780 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0769) </td>
+   <td style="text-align:center;"> (0.0765) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Share ride 3++ </td>
-   <td style="text-align:center;"> -0.1880 (0.1111) </td>
-   <td style="text-align:center;"> -0.1475 (0.1101) </td>
+   <td style="text-align:center;"> -0.1880 </td>
+   <td style="text-align:center;"> -0.1475 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1111) </td>
+   <td style="text-align:center;"> (0.1101) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Transit </td>
-   <td style="text-align:center;"> -0.9303 (0.1179) </td>
-   <td style="text-align:center;"> -0.9400 (0.1185) </td>
+   <td style="text-align:center;"> -0.9303 </td>
+   <td style="text-align:center;"> -0.9400 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1179) </td>
+   <td style="text-align:center;"> (0.1185) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Bike </td>
-   <td style="text-align:center;"> -0.7151 (0.2590) </td>
-   <td style="text-align:center;"> -0.7046 (0.2586) </td>
+   <td style="text-align:center;"> -0.7151 </td>
+   <td style="text-align:center;"> -0.7046 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.2590) </td>
+   <td style="text-align:center;"> (0.2586) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Walk </td>
-   <td style="text-align:center;"> -0.7276 (0.1694) </td>
-   <td style="text-align:center;"> -0.7240 (0.1696) </td>
+   <td style="text-align:center;"> -0.7276 </td>
+   <td style="text-align:center;"> -0.7240 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1694) </td>
+   <td style="text-align:center;"> (0.1696) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Share ride 2 </td>
-   <td style="text-align:center;"> 0.2037 (0.1246) </td>
-   <td style="text-align:center;"> 0.2458 (0.1241) </td>
+   <td style="text-align:center;"> 0.2037 </td>
+   <td style="text-align:center;"> 0.2458 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1246) </td>
+   <td style="text-align:center;"> (0.1241) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Share ride 3++ </td>
-   <td style="text-align:center;"> 1.0161 (0.1926) </td>
-   <td style="text-align:center;"> 1.0923 (0.1909) </td>
+   <td style="text-align:center;"> 1.0161 </td>
+   <td style="text-align:center;"> 1.0923 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1926) </td>
+   <td style="text-align:center;"> (0.1909) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Transit </td>
-   <td style="text-align:center;"> 1.2037 (0.1678) </td>
-   <td style="text-align:center;"> 1.3024 (0.1657) </td>
+   <td style="text-align:center;"> 1.2037 </td>
+   <td style="text-align:center;"> 1.3024 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.1678) </td>
+   <td style="text-align:center;"> (0.1657) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Bike </td>
-   <td style="text-align:center;"> 0.4609 (0.3601) </td>
-   <td style="text-align:center;"> 0.4829 (0.3613) </td>
+   <td style="text-align:center;"> 0.4609 </td>
+   <td style="text-align:center;"> 0.4829 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.3601) </td>
+   <td style="text-align:center;"> (0.3613) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Walk </td>
-   <td style="text-align:center;"> 0.1074 (0.2508) </td>
-   <td style="text-align:center;"> 0.0936 (0.2524) </td>
+   <td style="text-align:center;"> 0.1074 </td>
+   <td style="text-align:center;"> 0.0936 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.2508) </td>
+   <td style="text-align:center;"> (0.2524) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Share ride 2 </td>
-   <td style="text-align:center;"> 0.0010 (0.0004) </td>
-   <td style="text-align:center;"> 0.0016 (0.0004) </td>
+   <td style="text-align:center;"> 0.0010 </td>
+   <td style="text-align:center;"> 0.0016 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0004) </td>
+   <td style="text-align:center;"> (0.0004) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Share ride 3++ </td>
-   <td style="text-align:center;"> 0.0013 (0.0005) </td>
-   <td style="text-align:center;"> 0.0022 (0.0005) </td>
+   <td style="text-align:center;"> 0.0013 </td>
+   <td style="text-align:center;"> 0.0022 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0005) </td>
+   <td style="text-align:center;"> (0.0005) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Transit </td>
-   <td style="text-align:center;"> 0.0021 (0.0004) </td>
-   <td style="text-align:center;"> 0.0031 (0.0004) </td>
+   <td style="text-align:center;"> 0.0021 </td>
+   <td style="text-align:center;"> 0.0031 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0004) </td>
+   <td style="text-align:center;"> (0.0004) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Bike </td>
-   <td style="text-align:center;"> 0.0008 (0.0012) </td>
-   <td style="text-align:center;"> 0.0019 (0.0012) </td>
+   <td style="text-align:center;"> 0.0008 </td>
+   <td style="text-align:center;"> 0.0019 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0012) </td>
+   <td style="text-align:center;"> (0.0012) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Walk </td>
-   <td style="text-align:center;"> 0.0018 (0.0008) </td>
-   <td style="text-align:center;"> 0.0029 (0.0007) </td>
+   <td style="text-align:center;"> 0.0018 </td>
+   <td style="text-align:center;"> 0.0029 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.0008) </td>
+   <td style="text-align:center;"> (0.0007) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> I(cost/hhinc) </td>
    <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> -0.0528 (0.0108) </td>
+   <td style="text-align:center;"> -0.0528 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.0108) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -2434,9 +2766,9 @@ tibble(
     paste("$", round(VOTdistance(model_15w, "mot_tvtt", "I(mot_ovtt/dist)", 20,"cost"),2), "/hr")
   ), 
   "Model 16W (Wage Rate = $21.20)" = c(
-    paste( coef(model_16w)["mot_tvtt"] / coef(model_16w)["I(cost/hhinc)"] * 21.20, "$ /hr)"), 
-    (coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 10) / coef(model_16w)["I(cost/hhinc)"] * 21.20,
-    (coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 20) / coef(model_16w)["I(cost/hhinc)"] * 21.20
+    paste("$", round(coef(model_16w)["mot_tvtt"] / coef(model_16w)["I(cost/hhinc)"] * 21.20, 2), "/hr"), 
+    paste("$", round((coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 10) / coef(model_16w)["I(cost/hhinc)"] * 21.20, 2), "/hr"),
+    paste("$", round((coef(model_16w)["mot_tvtt"] + coef(model_16w)["I(mot_ovtt/dist)"] / 20) / coef(model_16w)["I(cost/hhinc)"] * 21.20, 2), "/hr")
   )) %>%
   kbl(caption = "Implied Value of Time in Models 15W and 16W") %>%
   kable_styling()
@@ -2455,33 +2787,20 @@ tibble(
   <tr>
    <td style="text-align:left;"> Value of In-Vehicle Time </td>
    <td style="text-align:left;"> $ 5.88 /hr </td>
-   <td style="text-align:left;"> 8.10313592785373 $ /hr) </td>
+   <td style="text-align:left;"> $ 8.1 /hr </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Value of Out-of-Vehilce Time (10 mile trip) </td>
    <td style="text-align:left;"> $ 9.25 /hr </td>
-   <td style="text-align:left;"> 13.4216399185657 </td>
+   <td style="text-align:left;"> $ 13.42 /hr </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Value of Out-of-Vehilce Time (20 mile trip) </td>
    <td style="text-align:left;"> $ 7.57 /hr </td>
-   <td style="text-align:left;"> 10.7623879232097 </td>
+   <td style="text-align:left;"> $ 10.76 /hr </td>
   </tr>
 </tbody>
 </table>
-
-
-```r
-modelsummary(
-  list("15W" = model_15w, "16W" = model_16w), 
-  coef_map = c("mot_tvtt" = "Motorized Travel Time", 
-               "nm_tvtt" = "Non-motorized Travel Time",
-               "I(mot_ovtt/dist)" = "Motorized time per distance",
-               "cost" = "Trip Cost",
-               "I(cost/hhinc)" = "Trip cost divided by income"
-               )
-)
-```
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
  <thead>
@@ -2538,9 +2857,9 @@ modelsummary(
    <td style="text-align:center;"> -0.053 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> (0.011) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.011) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -2621,239 +2940,341 @@ use different criteria in making their mode choice decisions.
 model_17w <- mlogit(chosen ~ I(cost/hhinc) + mot_tvtt + nm_tvtt + I(mot_ovtt/dist) | hhinc + vehbywrk + cbddumall + wkempden, data = sf_mlogit_tripcontext, constPar = c("hhinc:Share ride 2" = 0, "hhinc:Share ride 3++" = 0, "vehbywrk:Share ride 2" = -0.3166, "vehbywrk:Share ride 3++" = -0.3166))
 
 #table 6-13
-modelsummary(model_17w)
+list_1617 <- list(
+  "Model 16W" = model_16w,
+  "Model 17W" = model_17w
+  )
+modelsummary(list_1617, title = "Estimation Results for Model 16W and Its Constrained Version")
 ```
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:model16v17)Estimation Results for Model 16W and Its Constrained Version</caption>
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
-   <th style="text-align:center;"> Model 1 </th>
+   <th style="text-align:center;"> Model 16W </th>
+   <th style="text-align:center;"> Model 17W </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) × Share ride 2 </td>
+   <td style="text-align:center;"> -1.698 </td>
    <td style="text-align:center;"> -1.808 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.142) </td>
    <td style="text-align:center;"> (0.063) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Share ride 3++ </td>
+   <td style="text-align:center;"> -3.773 </td>
    <td style="text-align:center;"> -3.434 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.236) </td>
    <td style="text-align:center;"> (0.126) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Transit </td>
+   <td style="text-align:center;"> -0.693 </td>
    <td style="text-align:center;"> -0.685 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.250) </td>
    <td style="text-align:center;"> (0.244) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Bike </td>
+   <td style="text-align:center;"> -1.623 </td>
    <td style="text-align:center;"> -1.629 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.429) </td>
    <td style="text-align:center;"> (0.426) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (Intercept) × Walk </td>
+   <td style="text-align:center;"> 0.075 </td>
    <td style="text-align:center;"> 0.068 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.349) </td>
    <td style="text-align:center;"> (0.346) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> I(cost/hhinc) </td>
+   <td style="text-align:center;"> -0.053 </td>
    <td style="text-align:center;"> -0.052 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.011) </td>
    <td style="text-align:center;"> (0.010) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> mot_tvtt </td>
    <td style="text-align:center;"> -0.020 </td>
+   <td style="text-align:center;"> -0.020 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.004) </td>
    <td style="text-align:center;"> (0.004) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> nm_tvtt </td>
    <td style="text-align:center;"> -0.045 </td>
+   <td style="text-align:center;"> -0.045 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.006) </td>
    <td style="text-align:center;"> (0.006) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> I(mot_ovtt/dist) </td>
    <td style="text-align:center;"> -0.133 </td>
+   <td style="text-align:center;"> -0.133 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (0.020) </td>
+   <td style="text-align:center;"> (0.020) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 2 </td>
+   <td style="text-align:center;"> -0.001 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.002) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hhinc × Share ride 3++ </td>
+   <td style="text-align:center;"> 0.002 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.003) </td>
+   <td style="text-align:center;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Transit </td>
+   <td style="text-align:center;"> -0.005 </td>
    <td style="text-align:center;"> -0.005 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (0.002) </td>
+   <td style="text-align:center;"> (0.002) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Bike </td>
+   <td style="text-align:center;"> -0.009 </td>
    <td style="text-align:center;"> -0.009 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (0.005) </td>
+   <td style="text-align:center;"> (0.005) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> hhinc × Walk </td>
+   <td style="text-align:center;"> -0.006 </td>
    <td style="text-align:center;"> -0.006 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (0.003) </td>
+   <td style="text-align:center;"> (0.003) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> vehbywrk × Share ride 2 </td>
+   <td style="text-align:center;"> -0.378 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.076) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> vehbywrk × Share ride 3++ </td>
+   <td style="text-align:center;"> -0.147 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.110) </td>
+   <td style="text-align:center;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Transit </td>
+   <td style="text-align:center;"> -0.940 </td>
    <td style="text-align:center;"> -0.946 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.119) </td>
    <td style="text-align:center;"> (0.114) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Bike </td>
+   <td style="text-align:center;"> -0.705 </td>
    <td style="text-align:center;"> -0.702 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.259) </td>
    <td style="text-align:center;"> (0.257) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> vehbywrk × Walk </td>
+   <td style="text-align:center;"> -0.724 </td>
    <td style="text-align:center;"> -0.722 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.170) </td>
    <td style="text-align:center;"> (0.167) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Share ride 2 </td>
+   <td style="text-align:center;"> 0.246 </td>
    <td style="text-align:center;"> 0.260 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.124) </td>
    <td style="text-align:center;"> (0.123) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Share ride 3++ </td>
+   <td style="text-align:center;"> 1.092 </td>
    <td style="text-align:center;"> 1.069 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (0.191) </td>
+   <td style="text-align:center;"> (0.191) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Transit </td>
+   <td style="text-align:center;"> 1.302 </td>
    <td style="text-align:center;"> 1.309 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (0.166) </td>
+   <td style="text-align:center;"> (0.166) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Bike </td>
+   <td style="text-align:center;"> 0.483 </td>
    <td style="text-align:center;"> 0.489 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (0.361) </td>
+   <td style="text-align:center;"> (0.361) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> cbddumall × Walk </td>
+   <td style="text-align:center;"> 0.094 </td>
    <td style="text-align:center;"> 0.102 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (0.252) </td>
+   <td style="text-align:center;"> (0.252) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Share ride 2 </td>
    <td style="text-align:center;"> 0.002 </td>
+   <td style="text-align:center;"> 0.002 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.000) </td>
    <td style="text-align:center;"> (0.000) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Share ride 3++ </td>
    <td style="text-align:center;"> 0.002 </td>
+   <td style="text-align:center;"> 0.002 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.000) </td>
    <td style="text-align:center;"> (0.000) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Transit </td>
    <td style="text-align:center;"> 0.003 </td>
+   <td style="text-align:center;"> 0.003 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.000) </td>
    <td style="text-align:center;"> (0.000) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Bike </td>
    <td style="text-align:center;"> 0.002 </td>
+   <td style="text-align:center;"> 0.002 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.001) </td>
    <td style="text-align:center;"> (0.001) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> wkempden × Walk </td>
    <td style="text-align:center;"> 0.003 </td>
+   <td style="text-align:center;"> 0.003 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;"> (0.001) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.001) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.001) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
    <td style="text-align:center;"> 5029 </td>
+   <td style="text-align:center;"> 5029 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> AIC </td>
+   <td style="text-align:center;"> 6941.6 </td>
    <td style="text-align:center;"> 6946.4 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> BIC </td>
    <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> -3441.782 </td>
    <td style="text-align:center;"> -3444.185 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> rho2 </td>
    <td style="text-align:center;"> 0.291 </td>
+   <td style="text-align:center;"> 0.291 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> rho20 </td>
+   <td style="text-align:center;"> 0.618 </td>
    <td style="text-align:center;"> 0.618 </td>
   </tr>
 </tbody>
@@ -2940,6 +3361,13 @@ list(
   "Low Income"  = low_income
 ) %>%
   modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE)
+```
+
+```
+## Warning in sanity_ellipsis(vcov, ...): The `statistic_vertical` argument
+## is deprecated and will be ignored. To display uncertainty estimates next to
+## your coefficients, use a `glue` string in the `estimate` argument. See `?
+## modelsummary`
 ```
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -3185,11 +3613,11 @@ list(
    <td style="text-align:center;"> -0.01316 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;"> (0.00304) </td>
-   <td style="text-align:center;"> (0.00541) </td>
-   <td style="text-align:center;"> (0.00971) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.00304) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.00541) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.00971) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -3311,10 +3739,18 @@ list(
   "0-1 Car HH's" = model_17w_lowcars,
   "2+ Car HH's" = model_17w_highcars
 ) %>%
-  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE)
+  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE, title = "Estimation Results for Market Segmentation by Automobile Ownership")
+```
+
+```
+## Warning in sanity_ellipsis(vcov, ...): The `statistic_vertical` argument
+## is deprecated and will be ignored. To display uncertainty estimates next to
+## your coefficients, use a `glue` string in the `estimate` argument. See `?
+## modelsummary`
 ```
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:segbycars)Estimation Results for Market Segmentation by Automobile Ownership</caption>
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -3619,10 +4055,10 @@ list(
    <td style="text-align:center;"> -0.00089 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;"> (0.00074) </td>
-   <td style="text-align:center;"> (0.00097) </td>
-   <td style="text-align:center;"> (0.00214) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.00074) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.00097) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.00214) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -3673,17 +4109,21 @@ list(
     households where an increase in availability (from 0) will be relatively important, than
     among higher auto ownership households where the number of cars is likely to closely approximate 
     the number of drivers and an increase in availability will be relatively unimportant. 
+    
   - The differences in the alternative specific CBD dummy variables and the Employment
     Density variables are very small and not significant suggesting that these variables could be
     constrained to be equal across auto ownership segments.
+    
   - The differences in the time parameters also are very small and not significant suggesting that
     these variables could be constrained to be equal across auto ownership segments.
+    
   - The magnitude of the cost by income parameter is much smaller in the lower automobile
     ownership segment than in the higher automobile ownership segment indicating that cost
     may be of little importance in households with low car availability.
 
 We can make the following observations from the estimation results of the gender segmentation
 models (Table 6-15):
+
   - The segmented model rejects the pooled model at a very high level of statistical significance.
   - The alternative specific constants relative to the drive alone mode are less negative (more
   positive) in the female segment suggesting the preference for drive alone mode is less
@@ -3702,10 +4142,18 @@ list(
   "Males Only" = model_17w_males,
   "Females Only" = model_17w_females
 ) %>%
-  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE)
+  modelsummary(fmt = "%.5f", stars = TRUE, statistic_vertical = TRUE, title = "Estimation Results for Market Segmentation by Gender")
+```
+
+```
+## Warning in sanity_ellipsis(vcov, ...): The `statistic_vertical` argument
+## is deprecated and will be ignored. To display uncertainty estimates next to
+## your coefficients, use a `glue` string in the `estimate` argument. See `?
+## modelsummary`
 ```
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:segbygender)Estimation Results for Market Segmentation by Gender</caption>
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -4010,10 +4458,10 @@ list(
    <td style="text-align:center;"> 0.00525*** </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;"> (0.00074) </td>
-   <td style="text-align:center;"> (0.00104) </td>
-   <td style="text-align:center;"> (0.00116) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.00074) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.00104) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.00116) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -4122,4 +4570,4 @@ specifications).
 [^fixedseg]: If one or more segments is defined so that one or more of the variables is fixed for all members of the segment, the parameters for that
 segment, $K_{s}$, will be fewer than K. For example, if none of the members of the low income group owned cars in income segmentation, it would not be possible to estimate parameters for the effect of auto ownership in that segment.
 
-[^extensivedis]: For a more extensive discussion see Chapter 7, Section 7.5, in (@benakivalerman, 1985).
+[^extensivedis]: For a more extensive discussion see Chapter 7, Section 7.5, in [@benakivalerman1985].
