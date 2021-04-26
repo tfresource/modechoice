@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-03-09" />
+<meta name="date" content="2021-04-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="elements-of-the-choice-decision-process.html"/>
 <link rel="next" href="the-multinomial-logit-model.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,24 +50,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -135,33 +135,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Self-Instructing Course in Mode Choice Modeling</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#original-acknowledgements"><i class="fa fa-check"></i>Original Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#r-packages"><i class="fa fa-check"></i>R Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="chapter1.html"><a href="chapter1.html#background"><i class="fa fa-check"></i><b>1.1</b> Background</a></li>
 <li class="chapter" data-level="1.2" data-path="chapter1.html"><a href="chapter1.html#use-of-disaggregate-discrete-choice-models"><i class="fa fa-check"></i><b>1.2</b> Use of Disaggregate Discrete Choice Models</a></li>
 <li class="chapter" data-level="1.3" data-path="chapter1.html"><a href="chapter1.html#application-context-in-current-course"><i class="fa fa-check"></i><b>1.3</b> Application Context in Current Course</a></li>
-<li class="chapter" data-level="1.4" data-path="chapter1.html"><a href="chapter1.html#urban-and-intercity-travel-mode-choice-modeling"><i class="fa fa-check"></i><b>1.4</b> Urban and Intercity Travel Mode Choice Modeling</a><ul>
+<li class="chapter" data-level="1.4" data-path="chapter1.html"><a href="chapter1.html#urban-and-intercity-travel-mode-choice-modeling"><i class="fa fa-check"></i><b>1.4</b> Urban and Intercity Travel Mode Choice Modeling</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="chapter1.html"><a href="chapter1.html#urban-travel-mode-choice-modeling"><i class="fa fa-check"></i><b>1.4.1</b> Urban Travel Mode Choice Modeling</a></li>
 <li class="chapter" data-level="1.4.2" data-path="chapter1.html"><a href="chapter1.html#intercity-mode-choice-models"><i class="fa fa-check"></i><b>1.4.2</b> Intercity Mode Choice Models</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="chapter1.html"><a href="chapter1.html#description-of-the-course"><i class="fa fa-check"></i><b>1.5</b> Description of the Course</a></li>
 <li class="chapter" data-level="1.6" data-path="chapter1.html"><a href="chapter1.html#organization-of-the-course-structure"><i class="fa fa-check"></i><b>1.6</b> Organization of the Course Structure</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html"><i class="fa fa-check"></i><b>2</b> Elements of the Choice Decision Process</a><ul>
+<li class="chapter" data-level="2" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html"><i class="fa fa-check"></i><b>2</b> Elements of the Choice Decision Process</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
 <li class="chapter" data-level="2.2" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#the-decision-maker"><i class="fa fa-check"></i><b>2.2</b> The Decision Maker</a></li>
 <li class="chapter" data-level="2.3" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#the-alternatives"><i class="fa fa-check"></i><b>2.3</b> The Alternatives</a></li>
 <li class="chapter" data-level="2.4" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#attributes-of-alternatives"><i class="fa fa-check"></i><b>2.4</b> Attributes of Alternatives</a></li>
 <li class="chapter" data-level="2.5" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#the-decision-rule"><i class="fa fa-check"></i><b>2.5</b> The Decision Rule</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html"><i class="fa fa-check"></i><b>3</b> Utility-based Choice Theory</a><ul>
+<li class="chapter" data-level="3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html"><i class="fa fa-check"></i><b>3</b> Utility-based Choice Theory</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#basic-construct-of-utility-theory"><i class="fa fa-check"></i><b>3.1</b> Basic Construct of Utility Theory</a></li>
 <li class="chapter" data-level="3.2" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#deterministic-choice-concepts"><i class="fa fa-check"></i><b>3.2</b> Deterministic Choice Concepts</a></li>
 <li class="chapter" data-level="3.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#probabilistic-choice-theory"><i class="fa fa-check"></i><b>3.3</b> Probabilistic Choice Theory</a></li>
-<li class="chapter" data-level="3.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#components-of-the-deterministic-portion-of-the-utility-function"><i class="fa fa-check"></i><b>3.4</b> Components of the Deterministic Portion of the Utility Function</a><ul>
+<li class="chapter" data-level="3.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#components-of-the-deterministic-portion-of-the-utility-function"><i class="fa fa-check"></i><b>3.4</b> Components of the Deterministic Portion of the Utility Function</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-associated-with-the-attributes-of-alternatives"><i class="fa fa-check"></i><b>3.4.1</b> Utility Associated with the Attributes of Alternatives</a></li>
 <li class="chapter" data-level="3.4.2" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-biases-due-to-excluded-variables"><i class="fa fa-check"></i><b>3.4.2</b> Utility ‘Biases’ Due to Excluded Variables</a></li>
 <li class="chapter" data-level="3.4.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-related-to-the-characteristics-of-the-decision-maker"><i class="fa fa-check"></i><b>3.4.3</b> Utility Related to the Characteristics of the Decision Maker</a></li>
@@ -169,80 +175,108 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#specification-of-the-additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a><ul>
-<li class="chapter" data-level="4.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#overview-description-and-functional-form"><i class="fa fa-check"></i><b>4.1</b> Overview Description and Functional Form</a><ul>
+<li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#overview-description-and-functional-form"><i class="fa fa-check"></i><b>4.1</b> Overview Description and Functional Form</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-sigmoid-or-s-shape-of-multinomial-logit-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> The Sigmoid or S shape of Multinomial Logit Probabilities</a></li>
 <li class="chapter" data-level="4.1.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-equivalent-differences-property"><i class="fa fa-check"></i><b>4.1.2</b> The Equivalent Differences Property</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a><ul>
+<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-red-busblue-bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-prediction-with-multinomial-logit-model"><i class="fa fa-check"></i><b>4.3</b> Example: Prediction with Multinomial Logit Model</a></li>
-<li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a><ul>
+<li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#derivatives-of-choice-probabilities"><i class="fa fa-check"></i><b>4.4.1</b> Derivatives of Choice Probabilities</a></li>
 <li class="chapter" data-level="4.4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#elasticities-of-choice-probabilities"><i class="fa fa-check"></i><b>4.4.2</b> Elasticities of Choice Probabilities</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-responses-to-changes-in-decision-maker-characteristics"><i class="fa fa-check"></i><b>4.5</b> Measures of Responses to Changes in Decision Maker Characteristics</a><ul>
+<li class="chapter" data-level="4.5" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-responses-to-changes-in-decision-maker-characteristics"><i class="fa fa-check"></i><b>4.5</b> Measures of Responses to Changes in Decision Maker Characteristics</a>
+<ul>
 <li class="chapter" data-level="4.5.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#derivatives-of-choice-probabilities-1"><i class="fa fa-check"></i><b>4.5.1</b> Derivatives of Choice Probabilities</a></li>
 <li class="chapter" data-level="4.5.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#elasticities-of-choice-probabilities-1"><i class="fa fa-check"></i><b>4.5.2</b> Elasticities of Choice Probabilities</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#model-estimation-concept-and-method"><i class="fa fa-check"></i><b>4.6</b> Model Estimation: Concept and Method</a><ul>
+<li class="chapter" data-level="4.6" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#model-estimation-concept-and-method"><i class="fa fa-check"></i><b>4.6</b> Model Estimation: Concept and Method</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#graphical-representation-of-model-estimation"><i class="fa fa-check"></i><b>4.6.1</b> Graphical Representation of Model Estimation</a></li>
 <li class="chapter" data-level="4.6.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#maximum-likelihood-estimation-theory"><i class="fa fa-check"></i><b>4.6.2</b> Maximum Likelihood Estimation Theory</a></li>
 <li class="chapter" data-level="4.6.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-of-maximum-likelihood-estimation"><i class="fa fa-check"></i><b>4.6.3</b> Example of Maximum Likelihood Estimation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="estimation-chapter.html"><a href="estimation-chapter.html"><i class="fa fa-check"></i><b>5</b> Data Assembly and Estimation of Simple Multinomial Logit Models</a><ul>
+<li class="chapter" data-level="5" data-path="estimation-chapter.html"><a href="estimation-chapter.html"><i class="fa fa-check"></i><b>5</b> Data Assembly and Estimation of Simple Multinomial Logit Models</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-intro"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
 <li class="chapter" data-level="5.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-data"><i class="fa fa-check"></i><b>5.2</b> Data Requirements Overview</a></li>
-<li class="chapter" data-level="5.3" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-collection-methods-traveller"><i class="fa fa-check"></i><b>5.3</b> Sources and Methods for Traveler and Trip Related Data Collection</a><ul>
+<li class="chapter" data-level="5.3" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-collection-methods-traveller"><i class="fa fa-check"></i><b>5.3</b> Sources and Methods for Traveler and Trip Related Data Collection</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-survey-types"><i class="fa fa-check"></i><b>5.3.1</b> Travel Survey Types</a></li>
 <li class="chapter" data-level="5.3.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-survey-considerations"><i class="fa fa-check"></i><b>5.3.2</b> Sampling Design Considerations</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-collection-methods"><i class="fa fa-check"></i><b>5.4</b> Methods for Collecting Mode Related Data</a></li>
 <li class="chapter" data-level="5.5" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-data-structure"><i class="fa fa-check"></i><b>5.5</b> Data Structure for Estimation</a></li>
 <li class="chapter" data-level="5.6" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-sf-work-data"><i class="fa fa-check"></i><b>5.6</b> Application Data for Work Mode Choice in the San Francisco Bay Area</a></li>
-<li class="chapter" data-level="5.7" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-basic"><i class="fa fa-check"></i><b>5.7</b> Estimation of MNL Model with Basic Specification</a><ul>
+<li class="chapter" data-level="5.7" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-basic"><i class="fa fa-check"></i><b>5.7</b> Estimation of MNL Model with Basic Specification</a>
+<ul>
 <li class="chapter" data-level="5.7.1" data-path="estimation-chapter.html"><a href="estimation-chapter.html#informal-tests"><i class="fa fa-check"></i><b>5.7.1</b> Informal Tests</a></li>
 <li class="chapter" data-level="5.7.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#overall-goodness-of-fit-measures"><i class="fa fa-check"></i><b>5.7.2</b> Overall Goodness-of-Fit Measures</a></li>
 <li class="chapter" data-level="5.7.3" data-path="estimation-chapter.html"><a href="estimation-chapter.html#statistical-tests"><i class="fa fa-check"></i><b>5.7.3</b> Statistical Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="5.8" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-value-of-time"><i class="fa fa-check"></i><b>5.8</b> Value of Time</a><ul>
+<li class="chapter" data-level="5.8" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-value-of-time"><i class="fa fa-check"></i><b>5.8</b> Value of Time</a>
+<ul>
 <li class="chapter" data-level="5.8.1" data-path="estimation-chapter.html"><a href="estimation-chapter.html#value-of-time-for-linear-utility-function"><i class="fa fa-check"></i><b>5.8.1</b> Value of Time for Linear Utility Function</a></li>
-<li class="chapter" data-level="5.8.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#value-of-time-when-cost-is-interacted-with-another-variable"><i class="fa fa-check"></i><b>5.8.2</b> Value of Time when Cost is Interacted with another Variable</a></li>
+<li class="chapter" data-level="5.8.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#section5-8-2"><i class="fa fa-check"></i><b>5.8.2</b> Value of Time when Cost is Interacted with another Variable</a></li>
 <li class="chapter" data-level="5.8.3" data-path="estimation-chapter.html"><a href="estimation-chapter.html#value-of-time-for-time-or-cost-transformation"><i class="fa fa-check"></i><b>5.8.3</b> Value of Time for Time or Cost Transformation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="specification-chapter.html"><a href="specification-chapter.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement</a><ul>
+<li class="chapter" data-level="6" data-path="specification-chapter.html"><a href="specification-chapter.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement: San Francisco Bay Area Work Mode Choice</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="specification-chapter.html"><a href="specification-chapter.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a></li>
-<li class="chapter" data-level="6.3" data-path="specification-chapter.html"><a href="specification-chapter.html#market-segmentation"><i class="fa fa-check"></i><b>6.3</b> Market Segmentation</a></li>
+<li class="chapter" data-level="6.2" data-path="specification-chapter.html"><a href="specification-chapter.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="specification-chapter.html"><a href="specification-chapter.html#refinement-of-specification-for-alternative-specific-income-effects"><i class="fa fa-check"></i><b>6.2.1</b> Refinement of Specification for Alternative Specific Income Effects</a></li>
+<li class="chapter" data-level="6.2.2" data-path="specification-chapter.html"><a href="specification-chapter.html#different-specifications-of-travel-time"><i class="fa fa-check"></i><b>6.2.2</b> Different Specifications of Travel Time</a></li>
+<li class="chapter" data-level="6.2.3" data-path="specification-chapter.html"><a href="specification-chapter.html#including-additinal-decision-maker-related-variables"><i class="fa fa-check"></i><b>6.2.3</b> Including Additinal Decision Maker Related Variables</a></li>
+<li class="chapter" data-level="6.2.4" data-path="specification-chapter.html"><a href="specification-chapter.html#section6-2-4"><i class="fa fa-check"></i><b>6.2.4</b> Including Trip Context variables</a></li>
+<li class="chapter" data-level="6.2.5" data-path="specification-chapter.html"><a href="specification-chapter.html#section6-2-5"><i class="fa fa-check"></i><b>6.2.5</b> Interactions between Trip maker and/or Context Characteristics and Mode Attributes</a></li>
+<li class="chapter" data-level="6.2.6" data-path="specification-chapter.html"><a href="specification-chapter.html#additional-model-refinement"><i class="fa fa-check"></i><b>6.2.6</b> Additional Model Refinement</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="specification-chapter.html"><a href="specification-chapter.html#market-segmentation"><i class="fa fa-check"></i><b>6.3</b> Market Segmentation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="specification-chapter.html"><a href="specification-chapter.html#market-segmentation-tests"><i class="fa fa-check"></i><b>6.3.1</b> Market Segmentation Tests</a></li>
+<li class="chapter" data-level="6.3.2" data-path="specification-chapter.html"><a href="specification-chapter.html#market-segmentation-example"><i class="fa fa-check"></i><b>6.3.2</b> Market Segmentation Example</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="specification-chapter.html"><a href="specification-chapter.html#summary"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a><ul>
+<li class="chapter" data-level="7" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.2" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#specification-for-shopother-mode-choice-model"><i class="fa fa-check"></i><b>7.2</b> Specification for Shop/Other Mode Choice Model</a></li>
 <li class="chapter" data-level="7.3" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#initial-model-specification"><i class="fa fa-check"></i><b>7.3</b> Initial Model Specification</a></li>
 <li class="chapter" data-level="7.4" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#exploring-alternative-specifications"><i class="fa fa-check"></i><b>7.4</b> Exploring Alternative Specifications</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a><ul>
+<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="nested-logit-model.html"><a href="nested-logit-model.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
 <li class="chapter" data-level="8.2" data-path="nested-logit-model.html"><a href="nested-logit-model.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a></li>
 <li class="chapter" data-level="8.3" data-path="nested-logit-model.html"><a href="nested-logit-model.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a><ul>
+<li class="chapter" data-level="9" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
 <li class="chapter" data-level="9.2" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-work-trips"><i class="fa fa-check"></i><b>9.2</b> Nested Models for Work Trips</a></li>
 <li class="chapter" data-level="9.3" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-shop-other-trips"><i class="fa fa-check"></i><b>9.3</b> Nested Models for Shop / Other Trips</a></li>
 <li class="chapter" data-level="9.4" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#practical-issues-and-implications"><i class="fa fa-check"></i><b>9.4</b> Practical Issues and Implications</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation.html"><a href="multiple-maxima-in-nested-logit-estimation.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation</a></li>
-<li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a><ul>
+<li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="chapter1.html"><a href="chapter1.html#background"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
 <li class="chapter" data-level="11.2" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-forecasting"><i class="fa fa-check"></i><b>11.2</b> Aggregate Forecasting</a></li>
 <li class="chapter" data-level="11.3" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-assessment-of-travel-mode-choice-models"><i class="fa fa-check"></i><b>11.3</b> Aggregate Assessment of Travel Mode Choice Models</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html"><i class="fa fa-check"></i><b>12</b> Recent Advances in Discrete Choice Modeling</a><ul>
+<li class="chapter" data-level="12" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html"><i class="fa fa-check"></i><b>12</b> Recent Advances in Discrete Choice Modeling</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-gev-class-of-models"><i class="fa fa-check"></i><b>12.1</b> The GEV Class of Models</a></li>
 <li class="chapter" data-level="12.2" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mmnl-class-of-models"><i class="fa fa-check"></i><b>12.2</b> The MMNL Class of Models</a></li>
 <li class="chapter" data-level="12.3" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mixed-gev-class-of-models"><i class="fa fa-check"></i><b>12.3</b> The Mixed GEV Class of Models</a></li>
@@ -268,9 +302,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="utility-based-choice-theory" class="section level1">
+<div id="utility-based-choice-theory" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Utility-based Choice Theory</h1>
-<div id="basic-construct-of-utility-theory" class="section level2">
+<div id="basic-construct-of-utility-theory" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Basic Construct of Utility Theory</h2>
 <p>Utility is an indicator of value to an individual. Generally, we think about utility as being derived from the attributes of alternatives or sets of alternatives; e.g., the total set of groceries purchased in a week. The utility maximization rule states that an individual will select the alternative from his/her set of available alternatives that maximizes his or her utility. Further, the rule implies that there is a function containing attributes of alternatives and characteristics of individuals that describes an individual’s utility valuation for each alternative. The utility function, <span class="math inline">\(U\)</span>, has the property that an alternative is chosen if its utility is greater than the utility of all other alternatives in the individual’s choice set. Alternatively, this can be stated as alternative, <span class="math inline">\(&#39;i&#39;\)</span>, is chosen among a set of alternatives, if and only if the utility of alternative, <span class="math inline">\(&#39;i&#39;\)</span>, is greater than or equal to the utility of all alternatives , <span class="math inline">\(&#39;j&#39;\)</span>, in the choice set, <span class="math inline">\(C\)</span>. This can be expressed mathematically as:</p>
 <p><span class="math display" id="eq:decisionrule">\[\begin{equation}
@@ -293,23 +327,23 @@ alternative to the right, and</li>
 <p>That is, if the utility of alternative <span class="math inline">\(i\)</span> is greater than or equal to the utility of all alternatives, <span class="math inline">\(j\)</span>; alternative <span class="math inline">\(i\)</span> will be preferred and chosen from the set of alternatives, <span class="math inline">\(C\)</span>.</p>
 <p>The underlying concept of utility allows us to rank a series of alternatives and identify the single alternative that has highest utility. The primary implication of this ranking or ordering of alternatives is that there is no absolute reference or zero point, for utility values. Thus, the only valuation that is important is the difference in utility between pairs of alternatives; particularly whether that difference is positive or negative. Any function that produces the same preference orderings can serve as a utility function and will give the same predictions of choice, regardless of the numerical values of the utilities assigned to individual alternatives. It also follows that utility functions, which result in the same order among alternatives, are equivalent.</p>
 </div>
-<div id="deterministic-choice-concepts" class="section level2">
+<div id="deterministic-choice-concepts" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Deterministic Choice Concepts</h2>
 <p>The utility maximization rule, which states that an individual chooses the alternative with the highest utility, implies no uncertainty in the individual’s decision process; that is, the individual is certain to choose the highest ranked alternative under the observed choice conditions. Utility models that yield certain predictions of choice are called deterministic utility models. The application of deterministic utility to the case of a decision between two alternatives is illustrated in Figure <a href="utility-based-choice-theory.html#fig:detchoice">3.1</a> that portrays a utility space in which the utilities of alternatives 1 and 2 are plotted along the horizontal and vertical axes, respectively, for each individual. The 45° line represents those points for which the utilities of the two alternatives are equal. Individuals B, C and D (above the equal-utility line) have higher utility for alternative 2 than for alternative 1 and are certain to choose alternative 2. Similarly, individuals A, E, and F (below the line) have higher utility for alternative 1 and are certain to choose that alternative. If deterministic utility models described behavior correctly, we would expect that an individual would make the same choice over time and that similar individuals (individuals having the same individual and household characteristics), would make the same choices when faced with the same set of alternatives. In practice, however, we observe variations in an individual’s choice and different choices among apparently similar individuals when faced with similar or even identical alternatives. For example, in studies of work trip mode choice, it is commonly observed that individuals, who are represented as having identical personal characteristics and who face the same sets of travel alternatives, choose different modes of travel to work. Further, some of these individuals vary their choices from day to day for no observable reason resulting in observed choices which appear to contradict the utility evaluations; that is, person A may choose Alternative 2 even though <span class="math inline">\(U_1 &gt; U_2\)</span> or person C may choose Alternative 2 even though <span class="math inline">\(U_2 &gt; U_1\)</span> . These observations raise questions about the appropriateness of deterministic utility models for modeling travel or other human behavior. The challenge is to develop a model structure that provides a reasonable representation of these unexplained variations in travel behavior.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="utility-based-choice-theory.html#cb3-1"></a><span class="kw">tibble</span>(<span class="dt">U1 =</span> <span class="kw">c</span>(<span class="fl">2.5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">6</span>), </span>
-<span id="cb3-2"><a href="utility-based-choice-theory.html#cb3-2"></a>       <span class="dt">U2 =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
-<span id="cb3-3"><a href="utility-based-choice-theory.html#cb3-3"></a>       <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>, <span class="st">&quot;F&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb3-4"><a href="utility-based-choice-theory.html#cb3-4"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> U1, <span class="dt">y =</span> U2, <span class="dt">label =</span> label)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-5"><a href="utility-based-choice-theory.html#cb3-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-6"><a href="utility-based-choice-theory.html#cb3-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Utility for Alternative 1&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-7"><a href="utility-based-choice-theory.html#cb3-7"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Utility for Alternative 2&quot;</span>) <span class="op">+</span></span>
-<span id="cb3-8"><a href="utility-based-choice-theory.html#cb3-8"></a><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-9"><a href="utility-based-choice-theory.html#cb3-9"></a><span class="st">  </span><span class="kw">geom_label</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-10"><a href="utility-based-choice-theory.html#cb3-10"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data =</span> </span>
-<span id="cb3-11"><a href="utility-based-choice-theory.html#cb3-11"></a>              <span class="kw">tibble</span>(<span class="dt">U1 =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="dt">U2 =</span> <span class="kw">c</span>(<span class="fl">6.5</span>, <span class="fl">1.5</span>), </span>
-<span id="cb3-12"><a href="utility-based-choice-theory.html#cb3-12"></a>                     <span class="dt">label=</span> <span class="kw">c</span>(<span class="st">&quot;Alt. 2 Preferred&quot;</span>, <span class="st">&quot;Alt. 1 Preferred&quot;</span>))) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-13"><a href="utility-based-choice-theory.html#cb3-13"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">8</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-14"><a href="utility-based-choice-theory.html#cb3-14"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">8</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="utility-based-choice-theory.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">U1 =</span> <span class="fu">c</span>(<span class="fl">2.5</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">6</span>), </span>
+<span id="cb3-2"><a href="utility-based-choice-theory.html#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">U2 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">5</span>),</span>
+<span id="cb3-3"><a href="utility-based-choice-theory.html#cb3-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">label =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>, <span class="st">&quot;F&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="utility-based-choice-theory.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> U1, <span class="at">y =</span> U2, <span class="at">label =</span> label)) <span class="sc">+</span> </span>
+<span id="cb3-5"><a href="utility-based-choice-theory.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb3-6"><a href="utility-based-choice-theory.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Utility for Alternative 1&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb3-7"><a href="utility-based-choice-theory.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Utility for Alternative 2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="utility-based-choice-theory.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="st">&quot;dotted&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb3-9"><a href="utility-based-choice-theory.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>() <span class="sc">+</span> </span>
+<span id="cb3-10"><a href="utility-based-choice-theory.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> </span>
+<span id="cb3-11"><a href="utility-based-choice-theory.html#cb3-11" aria-hidden="true" tabindex="-1"></a>              <span class="fu">tibble</span>(<span class="at">U1 =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="at">U2 =</span> <span class="fu">c</span>(<span class="fl">6.5</span>, <span class="fl">1.5</span>), </span>
+<span id="cb3-12"><a href="utility-based-choice-theory.html#cb3-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">label=</span> <span class="fu">c</span>(<span class="st">&quot;Alt. 2 Preferred&quot;</span>, <span class="st">&quot;Alt. 1 Preferred&quot;</span>))) <span class="sc">+</span> </span>
+<span id="cb3-13"><a href="utility-based-choice-theory.html#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>)) <span class="sc">+</span> </span>
+<span id="cb3-14"><a href="utility-based-choice-theory.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>))</span></code></pre></div>
 <div class="figure"><span id="fig:detchoice"></span>
 <img src="03-utility-theory_files/figure-html/detchoice-1.png" alt="Illustration of Deterministic Choice" width="672" />
 <p class="caption">
@@ -318,7 +352,7 @@ Figure 3.1: Illustration of Deterministic Choice
 </div>
 <p>There are three primary sources of error in the use of deterministic utility functions. First, the individual may have incomplete or incorrect information or misperceptions about the attributes of some or all of the alternatives. As a result, different individuals, each with different information or perceptions about the same alternatives are likely to make different choices. Second, the analyst or observer has different or incomplete information about the same attributes relative to the individuals and an inadequate understanding of the function the individual uses to evaluate the utility of each alternative. For example, the analyst may not have good measures of the reliability of a particular transit service, the likelihood of getting a seat at a particular time of day or the likelihood of finding a parking space at a suburban rail station. However, the traveler, especially if he/she is a regular user, is likely to know these things or to have opinions about them. Third, the analyst is unlikely to know, or account for, specific circumstances of the individual’s travel decision. For example, an individual’s choice of mode for the work trip may depend on whether there are family visitors or that another family member has a special travel need on a particular day. Using models which do not account for and incorporate this lack of information results in the apparent behavioral inconsistencies described above. While human behavior may be argued to be inconsistent, it can also be argued that the inconsistency is only apparent and can be attributed to the analyst’s lack of knowledge regarding the individual’s decision making process. Models that take account of this lack of information on the part of the analyst are called random utility or probabilistic choice models.</p>
 </div>
-<div id="probabilistic-choice-theory" class="section level2">
+<div id="probabilistic-choice-theory" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Probabilistic Choice Theory</h2>
 <p>If analysts thoroughly understood all aspects of the internal decision making process of choosers as well as their perception of alternatives, they would be able to describe that process and predict mode choice using deterministic utility models. Experience has shown, however, that analysts do not have such knowledge; they do not fully understand the decision process of each individual or their perceptions of alternatives and they have no realistic possibility of obtaining this information. Therefore, mode choice models should take a form that recognizes and accommodates the analyst’s lack of information and understanding. The data and models used by analysts describe preferences and choice in terms of probabilities of choosing each alternative rather than predicting that an individual will choose a particular mode with certainty. Effectively, these probabilities reflect the population probabilities that people with the given set of characteristics and facing the same set of alternatives choose each of the alternatives.</p>
 <p>As with deterministic choice theory, the individual is assumed to choose an alternative if its utility is greater than that of any other alternative. The probability prediction of the analyst results from differences between the estimated utility values and the utility values used by the traveler. We represent this difference by decomposing the utility of the alternative, from the perspective of the decision maker, into two components. One component of the utility function represents the portion of the utility observed by the analyst, often called the deterministic (or observable) portion of the utility. The other component is the difference between the unknown utility used by the individual and the utility estimated by the analyst. Since the utility used by the decision maker is unknown, we represent this difference as a random error. Formally, we represent this by:</p>
@@ -336,7 +370,7 @@ the analyst, and</li>
 </ul>
 <p>The analyst does not have any information about the error term. However, the total error which is the sum of errors from many sources (imperfect information, measurement errors, omission of modal attributes, omission of the characteristics of the individual that influence his/her choice decision and/or errors in the utility function) is represented by a random variable. Different assumptions about the distribution of the random variables associated with the utility of each alternative result in different representations of the model used to describe and predict choice probabilities. The assumptions used in the development of logit type models are discussed in the next Chapter.</p>
 </div>
-<div id="components-of-the-deterministic-portion-of-the-utility-function" class="section level2">
+<div id="components-of-the-deterministic-portion-of-the-utility-function" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Components of the Deterministic Portion of the Utility Function</h2>
 <p>The deterministic or observable portion (often called the systematic portion) of the utility of an alternative is a mathematical function of the attributes of the alternative and the characteristics of the decision maker. The systematic portion of utility can have any mathematical form but the function is most generally formulated as additive to simplify the estimation process. This function includes unknown parameters which are estimated in the modeling process. The systematic portion of the utility function can be broken into components that are (1) exclusively related to the attributes of alternatives, (2) exclusively related to the characteristics of the decision maker and (3) represent interactions between the attributes of alternatives and the characteristics of the decision maker. Thus, the systematic portion of utility can be represented by:</p>
 <p><span class="math display" id="eq:threethree">\[\begin{equation}
@@ -354,7 +388,7 @@ of alternative <span class="math inline">\(i\)</span>, and</li>
 the attributes of alternative <span class="math inline">\(i\)</span> and the characteristics of individual <span class="math inline">\(t\)</span>.</li>
 </ul>
 <p>Each of these utility components is discussed separately</p>
-<div id="utility-associated-with-the-attributes-of-alternatives" class="section level3">
+<div id="utility-associated-with-the-attributes-of-alternatives" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Utility Associated with the Attributes of Alternatives</h3>
 <p>The utility component associated exclusively with alternatives includes variables that describe the attributes of alternatives. These attributes influence the utility of each alternative for all people in the population of interest. The attributes considered for inclusion in this component are service attributes which are measurable and which are expected to influence people’s preferences/choices among alternatives. These include measures of travel time, travel cost, walk access distance, transfers required, crowding, seat availability, and others. For example:
 * Total travel time,
@@ -409,7 +443,7 @@ V(X_{TR}) = \gamma_{11} \times 0 + \gamma_{12} \times TT_{TR} + \gamma_2 \times 
 \end{equation}\]</span></p>
 <p>That is, two distinct parameters would be estimated for travel time; one for travel time by DA and SR, <span class="math inline">\(\gamma_{11}\)</span>, and the other for travel time by TR, <span class="math inline">\(\gamma_{12}\)</span>. These parameters could be compared to determine if the differences are statistically significant or large enough to be important.</p>
 </div>
-<div id="utility-biases-due-to-excluded-variables" class="section level3">
+<div id="utility-biases-due-to-excluded-variables" class="section level3" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Utility ‘Biases’ Due to Excluded Variables</h3>
 <p>It has been widely observed that decision makers exhibit preferences for alternatives which cannot be explained by the observed attributes of those alternatives. These preferences are described as alternative specific preference or bias; they measure the average preference of individuals with different characteristics for an alternative relative to a ‘reference’ alternative. As will be shown in CHAPTER 4, the selection of the reference alternative does not influence the interpretation of the model estimation results. In the simplest case, we assume that the bias is the same for all decision makers. In this case, this portion of the utility function would be:</p>
 <p><span class="math display" id="eq:threeeleven">\[\begin{equation}
@@ -419,7 +453,7 @@ Bias_i = \beta_{i0} \times ASC_i
 <p>where <span class="math inline">\(\beta_{i0}\)</span> represents an increase in the utility of alternative <span class="math inline">\(i\)</span> for all choosers and <span class="math inline">\(ASC_i\)</span> is equal to one for alternative <span class="math inline">\(i\)</span> and zero for all other alternatives.</p>
 <p>More detailed observation generally indicates that people with different personal and family characteristics have different preferences among sets of alternatives. For example, members of high income households are less likely to choose transit alternatives than low income individuals, all other things being equal. Similarly, members of households with fewer automobiles than workers are more likely to choose transit alternatives. Thus, it is useful to consider that the bias may differ across individuals as discussed in the next section.</p>
 </div>
-<div id="utility-related-to-the-characteristics-of-the-decision-maker" class="section level3">
+<div id="utility-related-to-the-characteristics-of-the-decision-maker" class="section level3" number="3.4.3">
 <h3><span class="header-section-number">3.4.3</span> Utility Related to the Characteristics of the Decision Maker</h3>
 <p>The differences in ‘bias’ across individuals can be represented by incorporating personal and household variables in mode choice models. Variables commonly used for this purpose include:
 * Income of the traveler’s household,
@@ -456,7 +490,7 @@ V(S_{TR})=\beta_{SR,0}\times1+\beta_{TR,1}\times Inc_{t}+\beta_{TR,2}\times NCar
 </ul>
 <p>It is important to recognize that the parameters that describe the effect of traveler characteristics differ across alternatives while the variables are identical across alternatives for each individual.</p>
 </div>
-<div id="utility-defined-by-interactions-between-alternative-attributes-and-decision-maker-characteristics" class="section level3">
+<div id="utility-defined-by-interactions-between-alternative-attributes-and-decision-maker-characteristics" class="section level3" number="3.4.4">
 <h3><span class="header-section-number">3.4.4</span> Utility Defined by Interactions between Alternative Attributes and Decision Maker Characteristics</h3>
 <p>The final component of utility takes into account differences in how attributes are evaluated by different decision makers. One effect of income, described earlier, is to increase the preference for travel by private automobile. This representation implies that the preference for DA and SR increase with income, independent of the attributes of travel by each alternative. Another way to represent the influence of income is that increasing income reduces the importance of monetary cost in the evaluation of modal alternatives. The idea that high income travelers place less importance on cost can be represented by dividing the cost of travel of an alternative by annual income or some function of annual income of the traveler or his/her household. Another interaction effect might be that different travelers evaluate travel time differently. For example, one might argue that because women commonly take increased responsibility for home maintenance and child care, they are likely to evaluate increased travel time to work more negatively than men. This could be represented by adding a variable to the model which represents the product of a dummy variable for female (one if the traveler is a woman and zero otherwise) times travel time, as illustrated below in the utility equations for a three alternative mode choice example (Drive Alone, Shared Ride, and Transit) using the same notation described previously.</p>
 <p><span class="math display" id="eq:threesixteen">\[\begin{equation}
@@ -474,7 +508,7 @@ V(X_{TR},S_{i})=\gamma_{1}\times TT_{TR}+\gamma_{2}\times TT_{TR}\times Fem+\gam
 <p>In this example, <span class="math inline">\(\gamma_1\)</span> represents the utility value of one minute of travel time to men and <span class="math inline">\(\gamma_2\)</span> represents the additional utility value of one minute of travel time to women. Thus, the total utility value of one minute of travel time to women is <span class="math inline">\(\gamma_1+\gamma_2\)</span>. In this case, <span class="math inline">\(\gamma_1\)</span>, is expected to be negative indicating that increased travel time reduces the utility of an alternative. <span class="math inline">\(\gamma_2\)</span> may be negative or positive, indicating that women are more or less sensitive to increases in travel time.</p>
 </div>
 </div>
-<div id="specification-of-the-additive-error-term" class="section level2">
+<div id="specification-of-the-additive-error-term" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Specification of the Additive Error Term</h2>
 <p>As described in section 3.3, the utility of each alternative is represented by a deterministic component, which is represented in the utility function by observed and measured variables, and an additive error term, <span class="math inline">\(\epsilon_i\)</span> which represents those components of the utility function which are not included in the model. In the three alternative examples used above, the total utility of each alternative can be represented by:</p>
 <p><span class="math display" id="eq:threenineteen">\[\begin{equation}
