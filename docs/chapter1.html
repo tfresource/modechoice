@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-03-09" />
+<meta name="date" content="2021-04-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,6 +32,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="elements-of-the-choice-decision-process.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,24 +50,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,7 +86,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -135,33 +135,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Self-Instructing Course in Mode Choice Modeling</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Foreword</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#original-acknowledgements"><i class="fa fa-check"></i>Original Acknowledgements</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#r-packages"><i class="fa fa-check"></i>R Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="chapter1.html"><a href="chapter1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="chapter1.html"><a href="chapter1.html#background"><i class="fa fa-check"></i><b>1.1</b> Background</a></li>
 <li class="chapter" data-level="1.2" data-path="chapter1.html"><a href="chapter1.html#use-of-disaggregate-discrete-choice-models"><i class="fa fa-check"></i><b>1.2</b> Use of Disaggregate Discrete Choice Models</a></li>
 <li class="chapter" data-level="1.3" data-path="chapter1.html"><a href="chapter1.html#application-context-in-current-course"><i class="fa fa-check"></i><b>1.3</b> Application Context in Current Course</a></li>
-<li class="chapter" data-level="1.4" data-path="chapter1.html"><a href="chapter1.html#urban-and-intercity-travel-mode-choice-modeling"><i class="fa fa-check"></i><b>1.4</b> Urban and Intercity Travel Mode Choice Modeling</a><ul>
+<li class="chapter" data-level="1.4" data-path="chapter1.html"><a href="chapter1.html#urban-and-intercity-travel-mode-choice-modeling"><i class="fa fa-check"></i><b>1.4</b> Urban and Intercity Travel Mode Choice Modeling</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="chapter1.html"><a href="chapter1.html#urban-travel-mode-choice-modeling"><i class="fa fa-check"></i><b>1.4.1</b> Urban Travel Mode Choice Modeling</a></li>
 <li class="chapter" data-level="1.4.2" data-path="chapter1.html"><a href="chapter1.html#intercity-mode-choice-models"><i class="fa fa-check"></i><b>1.4.2</b> Intercity Mode Choice Models</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="chapter1.html"><a href="chapter1.html#description-of-the-course"><i class="fa fa-check"></i><b>1.5</b> Description of the Course</a></li>
 <li class="chapter" data-level="1.6" data-path="chapter1.html"><a href="chapter1.html#organization-of-the-course-structure"><i class="fa fa-check"></i><b>1.6</b> Organization of the Course Structure</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html"><i class="fa fa-check"></i><b>2</b> Elements of the Choice Decision Process</a><ul>
+<li class="chapter" data-level="2" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html"><i class="fa fa-check"></i><b>2</b> Elements of the Choice Decision Process</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
 <li class="chapter" data-level="2.2" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#the-decision-maker"><i class="fa fa-check"></i><b>2.2</b> The Decision Maker</a></li>
 <li class="chapter" data-level="2.3" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#the-alternatives"><i class="fa fa-check"></i><b>2.3</b> The Alternatives</a></li>
 <li class="chapter" data-level="2.4" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#attributes-of-alternatives"><i class="fa fa-check"></i><b>2.4</b> Attributes of Alternatives</a></li>
 <li class="chapter" data-level="2.5" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#the-decision-rule"><i class="fa fa-check"></i><b>2.5</b> The Decision Rule</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html"><i class="fa fa-check"></i><b>3</b> Utility-based Choice Theory</a><ul>
+<li class="chapter" data-level="3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html"><i class="fa fa-check"></i><b>3</b> Utility-based Choice Theory</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#basic-construct-of-utility-theory"><i class="fa fa-check"></i><b>3.1</b> Basic Construct of Utility Theory</a></li>
 <li class="chapter" data-level="3.2" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#deterministic-choice-concepts"><i class="fa fa-check"></i><b>3.2</b> Deterministic Choice Concepts</a></li>
 <li class="chapter" data-level="3.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#probabilistic-choice-theory"><i class="fa fa-check"></i><b>3.3</b> Probabilistic Choice Theory</a></li>
-<li class="chapter" data-level="3.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#components-of-the-deterministic-portion-of-the-utility-function"><i class="fa fa-check"></i><b>3.4</b> Components of the Deterministic Portion of the Utility Function</a><ul>
+<li class="chapter" data-level="3.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#components-of-the-deterministic-portion-of-the-utility-function"><i class="fa fa-check"></i><b>3.4</b> Components of the Deterministic Portion of the Utility Function</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-associated-with-the-attributes-of-alternatives"><i class="fa fa-check"></i><b>3.4.1</b> Utility Associated with the Attributes of Alternatives</a></li>
 <li class="chapter" data-level="3.4.2" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-biases-due-to-excluded-variables"><i class="fa fa-check"></i><b>3.4.2</b> Utility ‘Biases’ Due to Excluded Variables</a></li>
 <li class="chapter" data-level="3.4.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-related-to-the-characteristics-of-the-decision-maker"><i class="fa fa-check"></i><b>3.4.3</b> Utility Related to the Characteristics of the Decision Maker</a></li>
@@ -169,80 +175,108 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#specification-of-the-additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a><ul>
-<li class="chapter" data-level="4.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#overview-description-and-functional-form"><i class="fa fa-check"></i><b>4.1</b> Overview Description and Functional Form</a><ul>
+<li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#overview-description-and-functional-form"><i class="fa fa-check"></i><b>4.1</b> Overview Description and Functional Form</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-sigmoid-or-s-shape-of-multinomial-logit-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> The Sigmoid or S shape of Multinomial Logit Probabilities</a></li>
 <li class="chapter" data-level="4.1.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-equivalent-differences-property"><i class="fa fa-check"></i><b>4.1.2</b> The Equivalent Differences Property</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a><ul>
+<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-red-busblue-bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-prediction-with-multinomial-logit-model"><i class="fa fa-check"></i><b>4.3</b> Example: Prediction with Multinomial Logit Model</a></li>
-<li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a><ul>
+<li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a>
+<ul>
 <li class="chapter" data-level="4.4.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#derivatives-of-choice-probabilities"><i class="fa fa-check"></i><b>4.4.1</b> Derivatives of Choice Probabilities</a></li>
 <li class="chapter" data-level="4.4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#elasticities-of-choice-probabilities"><i class="fa fa-check"></i><b>4.4.2</b> Elasticities of Choice Probabilities</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-responses-to-changes-in-decision-maker-characteristics"><i class="fa fa-check"></i><b>4.5</b> Measures of Responses to Changes in Decision Maker Characteristics</a><ul>
+<li class="chapter" data-level="4.5" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-responses-to-changes-in-decision-maker-characteristics"><i class="fa fa-check"></i><b>4.5</b> Measures of Responses to Changes in Decision Maker Characteristics</a>
+<ul>
 <li class="chapter" data-level="4.5.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#derivatives-of-choice-probabilities-1"><i class="fa fa-check"></i><b>4.5.1</b> Derivatives of Choice Probabilities</a></li>
 <li class="chapter" data-level="4.5.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#elasticities-of-choice-probabilities-1"><i class="fa fa-check"></i><b>4.5.2</b> Elasticities of Choice Probabilities</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#model-estimation-concept-and-method"><i class="fa fa-check"></i><b>4.6</b> Model Estimation: Concept and Method</a><ul>
+<li class="chapter" data-level="4.6" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#model-estimation-concept-and-method"><i class="fa fa-check"></i><b>4.6</b> Model Estimation: Concept and Method</a>
+<ul>
 <li class="chapter" data-level="4.6.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#graphical-representation-of-model-estimation"><i class="fa fa-check"></i><b>4.6.1</b> Graphical Representation of Model Estimation</a></li>
 <li class="chapter" data-level="4.6.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#maximum-likelihood-estimation-theory"><i class="fa fa-check"></i><b>4.6.2</b> Maximum Likelihood Estimation Theory</a></li>
 <li class="chapter" data-level="4.6.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-of-maximum-likelihood-estimation"><i class="fa fa-check"></i><b>4.6.3</b> Example of Maximum Likelihood Estimation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="estimation-chapter.html"><a href="estimation-chapter.html"><i class="fa fa-check"></i><b>5</b> Data Assembly and Estimation of Simple Multinomial Logit Models</a><ul>
+<li class="chapter" data-level="5" data-path="estimation-chapter.html"><a href="estimation-chapter.html"><i class="fa fa-check"></i><b>5</b> Data Assembly and Estimation of Simple Multinomial Logit Models</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-intro"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
 <li class="chapter" data-level="5.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-data"><i class="fa fa-check"></i><b>5.2</b> Data Requirements Overview</a></li>
-<li class="chapter" data-level="5.3" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-collection-methods-traveller"><i class="fa fa-check"></i><b>5.3</b> Sources and Methods for Traveler and Trip Related Data Collection</a><ul>
+<li class="chapter" data-level="5.3" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-collection-methods-traveller"><i class="fa fa-check"></i><b>5.3</b> Sources and Methods for Traveler and Trip Related Data Collection</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-survey-types"><i class="fa fa-check"></i><b>5.3.1</b> Travel Survey Types</a></li>
 <li class="chapter" data-level="5.3.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-survey-considerations"><i class="fa fa-check"></i><b>5.3.2</b> Sampling Design Considerations</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-collection-methods"><i class="fa fa-check"></i><b>5.4</b> Methods for Collecting Mode Related Data</a></li>
 <li class="chapter" data-level="5.5" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-data-structure"><i class="fa fa-check"></i><b>5.5</b> Data Structure for Estimation</a></li>
 <li class="chapter" data-level="5.6" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-sf-work-data"><i class="fa fa-check"></i><b>5.6</b> Application Data for Work Mode Choice in the San Francisco Bay Area</a></li>
-<li class="chapter" data-level="5.7" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-basic"><i class="fa fa-check"></i><b>5.7</b> Estimation of MNL Model with Basic Specification</a><ul>
+<li class="chapter" data-level="5.7" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-basic"><i class="fa fa-check"></i><b>5.7</b> Estimation of MNL Model with Basic Specification</a>
+<ul>
 <li class="chapter" data-level="5.7.1" data-path="estimation-chapter.html"><a href="estimation-chapter.html#informal-tests"><i class="fa fa-check"></i><b>5.7.1</b> Informal Tests</a></li>
 <li class="chapter" data-level="5.7.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#overall-goodness-of-fit-measures"><i class="fa fa-check"></i><b>5.7.2</b> Overall Goodness-of-Fit Measures</a></li>
 <li class="chapter" data-level="5.7.3" data-path="estimation-chapter.html"><a href="estimation-chapter.html#statistical-tests"><i class="fa fa-check"></i><b>5.7.3</b> Statistical Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="5.8" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-value-of-time"><i class="fa fa-check"></i><b>5.8</b> Value of Time</a><ul>
+<li class="chapter" data-level="5.8" data-path="estimation-chapter.html"><a href="estimation-chapter.html#estimation-value-of-time"><i class="fa fa-check"></i><b>5.8</b> Value of Time</a>
+<ul>
 <li class="chapter" data-level="5.8.1" data-path="estimation-chapter.html"><a href="estimation-chapter.html#value-of-time-for-linear-utility-function"><i class="fa fa-check"></i><b>5.8.1</b> Value of Time for Linear Utility Function</a></li>
-<li class="chapter" data-level="5.8.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#value-of-time-when-cost-is-interacted-with-another-variable"><i class="fa fa-check"></i><b>5.8.2</b> Value of Time when Cost is Interacted with another Variable</a></li>
+<li class="chapter" data-level="5.8.2" data-path="estimation-chapter.html"><a href="estimation-chapter.html#section5-8-2"><i class="fa fa-check"></i><b>5.8.2</b> Value of Time when Cost is Interacted with another Variable</a></li>
 <li class="chapter" data-level="5.8.3" data-path="estimation-chapter.html"><a href="estimation-chapter.html#value-of-time-for-time-or-cost-transformation"><i class="fa fa-check"></i><b>5.8.3</b> Value of Time for Time or Cost Transformation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="specification-chapter.html"><a href="specification-chapter.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement</a><ul>
+<li class="chapter" data-level="6" data-path="specification-chapter.html"><a href="specification-chapter.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement: San Francisco Bay Area Work Mode Choice</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="specification-chapter.html"><a href="specification-chapter.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a></li>
-<li class="chapter" data-level="6.3" data-path="specification-chapter.html"><a href="specification-chapter.html#market-segmentation"><i class="fa fa-check"></i><b>6.3</b> Market Segmentation</a></li>
+<li class="chapter" data-level="6.2" data-path="specification-chapter.html"><a href="specification-chapter.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="specification-chapter.html"><a href="specification-chapter.html#refinement-of-specification-for-alternative-specific-income-effects"><i class="fa fa-check"></i><b>6.2.1</b> Refinement of Specification for Alternative Specific Income Effects</a></li>
+<li class="chapter" data-level="6.2.2" data-path="specification-chapter.html"><a href="specification-chapter.html#different-specifications-of-travel-time"><i class="fa fa-check"></i><b>6.2.2</b> Different Specifications of Travel Time</a></li>
+<li class="chapter" data-level="6.2.3" data-path="specification-chapter.html"><a href="specification-chapter.html#including-additinal-decision-maker-related-variables"><i class="fa fa-check"></i><b>6.2.3</b> Including Additinal Decision Maker Related Variables</a></li>
+<li class="chapter" data-level="6.2.4" data-path="specification-chapter.html"><a href="specification-chapter.html#section6-2-4"><i class="fa fa-check"></i><b>6.2.4</b> Including Trip Context variables</a></li>
+<li class="chapter" data-level="6.2.5" data-path="specification-chapter.html"><a href="specification-chapter.html#section6-2-5"><i class="fa fa-check"></i><b>6.2.5</b> Interactions between Trip maker and/or Context Characteristics and Mode Attributes</a></li>
+<li class="chapter" data-level="6.2.6" data-path="specification-chapter.html"><a href="specification-chapter.html#additional-model-refinement"><i class="fa fa-check"></i><b>6.2.6</b> Additional Model Refinement</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="specification-chapter.html"><a href="specification-chapter.html#market-segmentation"><i class="fa fa-check"></i><b>6.3</b> Market Segmentation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="specification-chapter.html"><a href="specification-chapter.html#market-segmentation-tests"><i class="fa fa-check"></i><b>6.3.1</b> Market Segmentation Tests</a></li>
+<li class="chapter" data-level="6.3.2" data-path="specification-chapter.html"><a href="specification-chapter.html#market-segmentation-example"><i class="fa fa-check"></i><b>6.3.2</b> Market Segmentation Example</a></li>
+</ul></li>
 <li class="chapter" data-level="6.4" data-path="specification-chapter.html"><a href="specification-chapter.html#summary"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a><ul>
+<li class="chapter" data-level="7" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.2" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#specification-for-shopother-mode-choice-model"><i class="fa fa-check"></i><b>7.2</b> Specification for Shop/Other Mode Choice Model</a></li>
 <li class="chapter" data-level="7.3" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#initial-model-specification"><i class="fa fa-check"></i><b>7.3</b> Initial Model Specification</a></li>
 <li class="chapter" data-level="7.4" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#exploring-alternative-specifications"><i class="fa fa-check"></i><b>7.4</b> Exploring Alternative Specifications</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a><ul>
+<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="nested-logit-model.html"><a href="nested-logit-model.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
 <li class="chapter" data-level="8.2" data-path="nested-logit-model.html"><a href="nested-logit-model.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a></li>
 <li class="chapter" data-level="8.3" data-path="nested-logit-model.html"><a href="nested-logit-model.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a><ul>
+<li class="chapter" data-level="9" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
 <li class="chapter" data-level="9.2" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-work-trips"><i class="fa fa-check"></i><b>9.2</b> Nested Models for Work Trips</a></li>
 <li class="chapter" data-level="9.3" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-shop-other-trips"><i class="fa fa-check"></i><b>9.3</b> Nested Models for Shop / Other Trips</a></li>
 <li class="chapter" data-level="9.4" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#practical-issues-and-implications"><i class="fa fa-check"></i><b>9.4</b> Practical Issues and Implications</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation.html"><a href="multiple-maxima-in-nested-logit-estimation.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation</a></li>
-<li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a><ul>
+<li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="chapter1.html"><a href="chapter1.html#background"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
 <li class="chapter" data-level="11.2" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-forecasting"><i class="fa fa-check"></i><b>11.2</b> Aggregate Forecasting</a></li>
 <li class="chapter" data-level="11.3" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-assessment-of-travel-mode-choice-models"><i class="fa fa-check"></i><b>11.3</b> Aggregate Assessment of Travel Mode Choice Models</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html"><i class="fa fa-check"></i><b>12</b> Recent Advances in Discrete Choice Modeling</a><ul>
+<li class="chapter" data-level="12" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html"><i class="fa fa-check"></i><b>12</b> Recent Advances in Discrete Choice Modeling</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-gev-class-of-models"><i class="fa fa-check"></i><b>12.1</b> The GEV Class of Models</a></li>
 <li class="chapter" data-level="12.2" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mmnl-class-of-models"><i class="fa fa-check"></i><b>12.2</b> The MMNL Class of Models</a></li>
 <li class="chapter" data-level="12.3" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mixed-gev-class-of-models"><i class="fa fa-check"></i><b>12.3</b> The Mixed GEV Class of Models</a></li>
@@ -268,9 +302,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter1" class="section level1">
+<div id="chapter1" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<div id="background" class="section level2">
+<div id="background" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Background</h2>
 <p>Discrete choice models can be used to analyze and predict a decision maker’s
 choice of one alternative from a finite set of mutually exclusive and
@@ -331,21 +365,21 @@ precision. Finally, disaggregate models, if properly specified, will obtain
 un-biased parameter estimates, while aggregate model estimates are known to
 produce biased (i.e. incorrect) parameter estimates.</p>
 </div>
-<div id="use-of-disaggregate-discrete-choice-models" class="section level2">
+<div id="use-of-disaggregate-discrete-choice-models" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Use of Disaggregate Discrete Choice Models</h2>
 <p>The behavioral nature of disaggregate models, and the associated advantages of
 such models over aggregate models, has led to the widespread use of disaggregate
 discrete choice methods in travel demand modeling. A few of these application
 contexts below with references to recent work in these areas are: travel mode
-choice (reviewed in detail later), destination choice <span class="citation">(C. Bhat, Govindarajan, and Pulugurta <a href="#ref-bhat1998disaggregate" role="doc-biblioref">1998</a>; Train <a href="#ref-train1998recreation" role="doc-biblioref">1998</a>)</span>, route choice <span class="citation">(Yai, Iwakura, and Morichi <a href="#ref-yai1997multinomial" role="doc-biblioref">1997</a>; Cascetta et al. <a href="#ref-cascetta2002model" role="doc-biblioref">2002</a>; Erhardt et al. <a href="#ref-erhardt2003modeling" role="doc-biblioref">2003</a>; Gliebe and Koppelman <a href="#ref-gliebe2002model" role="doc-biblioref">2002</a>)</span>, air travel choices
-<span class="citation">(Proussaloglou and Koppelman <a href="#ref-proussaloglou1999choice" role="doc-biblioref">1999</a>)</span>, activity analysis <span class="citation">(Wen and Koppelman <a href="#ref-wen1999integrated" role="doc-biblioref">1999</a>)</span> and auto ownership,
-brand and model choice <span class="citation">(Train and others <a href="#ref-train1994dimensions" role="doc-biblioref">1994</a>; C. R. Bhat and Pulugurta <a href="#ref-bhat1998comparison" role="doc-biblioref">1998</a>)</span>. Choice
+choice (reviewed in detail later), destination choice <span class="citation">(<a href="references.html#ref-bhat1998disaggregate" role="doc-biblioref">C. Bhat, Govindarajan, and Pulugurta 1998</a>; <a href="references.html#ref-train1998recreation" role="doc-biblioref">K. E. Train 1998</a>)</span>, route choice <span class="citation">(<a href="references.html#ref-yai1997multinomial" role="doc-biblioref">Yai, Iwakura, and Morichi 1997</a>; <a href="references.html#ref-cascetta2002model" role="doc-biblioref">Cascetta et al. 2002</a>; <a href="references.html#ref-erhardt2003modeling" role="doc-biblioref">Erhardt et al. 2003</a>; <a href="references.html#ref-gliebe2002model" role="doc-biblioref">Gliebe and Koppelman 2002</a>)</span>, air travel choices
+<span class="citation">(<a href="references.html#ref-proussaloglou1999choice" role="doc-biblioref">Proussaloglou and Koppelman 1999</a>)</span>, activity analysis <span class="citation">(<a href="references.html#ref-wen1999integrated" role="doc-biblioref">Wen and Koppelman 1999</a>)</span> and auto ownership,
+brand and model choice <span class="citation">(<a href="references.html#ref-train1994dimensions" role="doc-biblioref">K. Train and others 1994</a>; <a href="references.html#ref-bhat1998comparison" role="doc-biblioref">C. R. Bhat and Pulugurta 1998</a>)</span>. Choice
 models have also been applied in several other fields such as purchase incidence
-and brand choice in marketing <span class="citation">(Kalyanam and Putler <a href="#ref-kalyanam1997incorporating" role="doc-biblioref">1997</a>; Bucklin, Gupta, and Han <a href="#ref-bucklin1995brand" role="doc-biblioref">1995</a>)</span>,
-housing type and location choice in geography <span class="citation">(Waddell <a href="#ref-waddell1993exogenous" role="doc-biblioref">1993</a>; Evers <a href="#ref-evers1990residential" role="doc-biblioref">1990</a>; William Sermons and Koppelman <a href="#ref-william1998factor" role="doc-biblioref">1998</a>)</span>, choice of intercity air carrier <span class="citation">(Proussaloglou and Koppelman <a href="#ref-proussaloglou1999choice" role="doc-biblioref">1999</a>)</span>
-and investment choices of finance firms <span class="citation">(Corres, Hajivassiliou, and Ioannides <a href="#ref-corres1993empirical" role="doc-biblioref">1993</a>)</span>.</p>
+and brand choice in marketing <span class="citation">(<a href="references.html#ref-kalyanam1997incorporating" role="doc-biblioref">Kalyanam and Putler 1997</a>; <a href="references.html#ref-bucklin1995brand" role="doc-biblioref">Bucklin, Gupta, and Han 1995</a>)</span>,
+housing type and location choice in geography <span class="citation">(<a href="references.html#ref-waddell1993exogenous" role="doc-biblioref">Waddell 1993</a>; <a href="references.html#ref-evers1990residential" role="doc-biblioref">Evers 1990</a>; <a href="references.html#ref-william1998factor" role="doc-biblioref">William Sermons and Koppelman 1998</a>)</span>, choice of intercity air carrier <span class="citation">(<a href="references.html#ref-proussaloglou1999choice" role="doc-biblioref">Proussaloglou and Koppelman 1999</a>)</span>
+and investment choices of finance firms <span class="citation">(<a href="references.html#ref-corres1993empirical" role="doc-biblioref">Corres, Hajivassiliou, and Ioannides 1993</a>)</span>.</p>
 </div>
-<div id="application-context-in-current-course" class="section level2">
+<div id="application-context-in-current-course" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Application Context in Current Course</h2>
 <p>In this self-instructing course, we focus on the travel mode choice decision.
 Within the travel demand modeling field, mode choice is arguably the single most
@@ -368,11 +402,11 @@ to focus the course on important concepts and issues in discrete choice modeling
 without being distracted by the mechanics and presentation complexity associated
 with larger choice sets.</p>
 </div>
-<div id="urban-and-intercity-travel-mode-choice-modeling" class="section level2">
+<div id="urban-and-intercity-travel-mode-choice-modeling" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Urban and Intercity Travel Mode Choice Modeling</h2>
 <p>The mode choice decision has been examined both in the context of urban travel
 as well as intercity travel.</p>
-<div id="urban-travel-mode-choice-modeling" class="section level3">
+<div id="urban-travel-mode-choice-modeling" class="section level3" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> Urban Travel Mode Choice Modeling</h3>
 <p>Many metropolitan areas are plagued by a continuing increase in traffic
 congestion resulting in motorist frustration, longer travel times, lost
@@ -387,18 +421,18 @@ high-occupancy vehicle modes.</p>
 trip. All major metropolitan planning organizations estimate home-based work
 travel mode choice models as part of their transportation planning process.
 Most of these models include only motorized modes, though increasingly
-non-motorized modes (walk and bike) are being included <span class="citation">(Lawton <a href="#ref-lawton1989travel" role="doc-biblioref">1989</a>; Purvis <a href="#ref-purvis1997disaggregate" role="doc-biblioref">1997</a>)</span>.</p>
+non-motorized modes (walk and bike) are being included <span class="citation">(<a href="references.html#ref-lawton1989travel" role="doc-biblioref">Lawton 1989</a>; <a href="references.html#ref-purvis1997disaggregate" role="doc-biblioref">Purvis 1997</a>)</span>.</p>
 <p>The modeling of home-based non-work trips and non-home-based trips has received
 less attention in the urban travel mode choice literature. However, the
 increasing number of these trips and their contribution to traffic congestion
 has recently led to more extensive development of models for these trip purposes
-in some metropolitan regions <span class="citation">(for example, Iglesias <a href="#ref-iglesias1997estimation" role="doc-biblioref">1997</a>; Marshall and Ballard <a href="#ref-marshall1998new" role="doc-biblioref">1998</a>)</span>.</p>
+in some metropolitan regions <span class="citation">(for example, <a href="references.html#ref-iglesias1997estimation" role="doc-biblioref">Iglesias 1997</a>; <a href="references.html#ref-marshall1998new" role="doc-biblioref">Marshall and Ballard 1998</a>)</span>.</p>
 <p>In this course, we discuss model-building and specification issues for
 home-based work and home-based shop/other trips within an urban context, though
 the same concepts can be immediately extended to other trip purposes and
 locales.</p>
 </div>
-<div id="intercity-mode-choice-models" class="section level3">
+<div id="intercity-mode-choice-models" class="section level3" number="1.4.2">
 <h3><span class="header-section-number">1.4.2</span> Intercity Mode Choice Models</h3>
 <p>Increasing congestion on intercity highways and at intercity air terminals has
 raised serious concerns about the adverse impacts of such congestion on regional
@@ -416,17 +450,17 @@ diverted to the new (or improved) service.</p>
 <p>Intercity travel mode choice models are usually segmented by purpose (business
 versus pleasure), day of travel (weekday versus weekend), party size (traveling
 individually versus group travel), etc. The travel modes in such models
-typically include car, rail, air, and bus modes <span class="citation">(Koppelman and Wen <a href="#ref-koppelman1998nested" role="doc-biblioref">1998</a>; C. R. Bhat <a href="#ref-bhat1998analysis" role="doc-biblioref">1998</a>; and Marwick <a href="#ref-marwick1993florida" role="doc-biblioref">1993</a>)</span>.</p>
+typically include car, rail, air, and bus modes <span class="citation">(<a href="references.html#ref-koppelman1998nested" role="doc-biblioref">Koppelman and Wen 1998</a>; <a href="references.html#ref-bhat1998analysis" role="doc-biblioref">C. R. Bhat 1998</a>; and <a href="references.html#ref-marwick1993florida" role="doc-biblioref">Marwick 1993</a>)</span>.</p>
 <p>This manual examines issues of urban model choice; however, the vast majority of
 approaches and specifications can and have been used in intercity mode choice
 modeling.</p>
 </div>
 </div>
-<div id="description-of-the-course" class="section level2">
+<div id="description-of-the-course" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Description of the Course</h2>
 <p>This self-instructing course (SIC) is designed for readers who have some
 familiarity with transportation planning methods and background in travel model
-estimation. It updates and extends the previous SIC Manual <span class="citation">(Horowitz, Koppelman, and Lerman <a href="#ref-horowitz1986self" role="doc-biblioref">1986</a>)</span>
+estimation. It updates and extends the previous SIC Manual <span class="citation">(<a href="references.html#ref-horowitz1986self" role="doc-biblioref">Horowitz, Koppelman, and Lerman 1986</a>)</span>
 in a number of important ways. First, it is more rigorous in the
 mathematical details reflecting increased awareness and application of discrete
 choice models over the past decade. The course is intended to enhance the
@@ -448,7 +482,7 @@ analysis. Fourth, this SIC includes detailed coverage of the nested logit model
 which is being used more commonly in many metropolitan planning organizations
 today.</p>
 </div>
-<div id="organization-of-the-course-structure" class="section level2">
+<div id="organization-of-the-course-structure" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> Organization of the Course Structure</h2>
 <p>This course manual is divided into twelve chapters or modules. <a href="chapter1.html#chapter1">CHAPTER 1</a>, this
 chapter, provides an introduction to the course. [CHAPTER 2][Elements of the Choice Decision Process]
@@ -519,81 +553,6 @@ models. It does not provide the detailed mathematical formulations or the
 estimation techniques for these advanced models. Appropriate references are
 provided for readers interested in this information.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-bhat1998disaggregate">
-<p>Bhat, Chandra, Ajay Govindarajan, and Vamsi Pulugurta. 1998. “Disaggregate Attraction-End Choice Modeling: Formulation and Empirical Analysis.” <em>Transportation Research Record</em> 1645 (1): 60–68.</p>
-</div>
-<div id="ref-bhat1998analysis">
-<p>Bhat, Chandra R. 1998. “Analysis of Travel Mode and Departure Time Choice for Urban Shopping Trips.” <em>Transportation Research Part B: Methodological</em> 32 (6): 361–71.</p>
-</div>
-<div id="ref-bhat1998comparison">
-<p>Bhat, Chandra R, and Vamsi Pulugurta. 1998. “A Comparison of Two Alternative Behavioral Choice Mechanisms for Household Auto Ownership Decisions.” <em>Transportation Research Part B: Methodological</em> 32 (1): 61–75.</p>
-</div>
-<div id="ref-bucklin1995brand">
-<p>Bucklin, Randolph E, Sunil Gupta, and Sangman Han. 1995. “A Brand’s Eye View of Response Segmentation in Consumer Brand Choice Behavior.” <em>Journal of Marketing Research</em> 32 (1): 66–74.</p>
-</div>
-<div id="ref-cascetta2002model">
-<p>Cascetta, Ennio, Francesco Russo, Francesco A Viola, and Antonino Vitetta. 2002. “A Model of Route Perception in Urban Road Networks.” <em>Transportation Research Part B: Methodological</em> 36 (7): 577–92.</p>
-</div>
-<div id="ref-corres1993empirical">
-<p>Corres, S, VA Hajivassiliou, and YM Ioannides. 1993. “An Empirical Analysis of the Dynamics of Qualitative Decisions of Firms.” In <em>Technical Report</em>. Department of Economics, Virginia Polytechnic Institute; State University ….</p>
-</div>
-<div id="ref-erhardt2003modeling">
-<p>Erhardt, Gregory D, Frank S Koppelman, Joel Freedman, William A Davidson, and Andrew Mullins. 2003. “Modeling the Choice to Use Toll and High-Occupancy Vehicle Facilities.” <em>Transportation Research Record</em> 1854 (1): 135–43.</p>
-</div>
-<div id="ref-evers1990residential">
-<p>Evers, Gerard HM. 1990. “The Residential Location and Workplace Choice: A Nested Multi-Nomial Logit Model.” In <em>Spatial Choices and Processes</em>, 313–29. Elsevier.</p>
-</div>
-<div id="ref-gliebe2002model">
-<p>Gliebe, John P, and Frank S Koppelman. 2002. “A Model of Joint Activity Participation Between Household Members.” <em>Transportation</em> 29 (1): 49–72.</p>
-</div>
-<div id="ref-horowitz1986self">
-<p>Horowitz, Joel L, Frank S Koppelman, and Steven R Lerman. 1986. “A Self-Instructing Course in Disaggregate Mode Choice Modeling. Final Report.”</p>
-</div>
-<div id="ref-iglesias1997estimation">
-<p>Iglesias, M. 1997. “Estimation of Home-Based Social/Recreational Mode Choice Models.” technical report HBSRMC.</p>
-</div>
-<div id="ref-kalyanam1997incorporating">
-<p>Kalyanam, Kirthi, and Daniel S Putler. 1997. “Incorporating Demographic Variables in Brand Choice Models: An Indivisible Alternatives Framework.” <em>Marketing Science</em> 16 (2): 166–81.</p>
-</div>
-<div id="ref-koppelman1998nested">
-<p>Koppelman, Frank S, and Chieh-Hua Wen. 1998. “Nested Logit Models Which Are You Using?” <em>Transportation Research Record</em> 1645 (1): 1–7.</p>
-</div>
-<div id="ref-lawton1989travel">
-<p>Lawton, T Keith. 1989. “Travel Forecasting Methodology Report: Westside Light Rail Project.”</p>
-</div>
-<div id="ref-marshall1998new">
-<p>Marshall, NL, and KQ Ballard. 1998. “New Distribution and Mode Choice Models for the Chicago Region.” In <em>Annual Trb Meeting, Washington, Dc, January</em>.</p>
-</div>
-<div id="ref-marwick1993florida">
-<p>Marwick, P. 1993. “Florida High Speed and Intercity Rail Market and Ridership Study: Final Report.” KPMG in association with ICF Kaiser Engineers, Inc., Midwest System Sciences ….</p>
-</div>
-<div id="ref-proussaloglou1999choice">
-<p>Proussaloglou, Kimon, and Frank S Koppelman. 1999. “The Choice of Air Carrier, Flight, and Fare Class.” <em>Journal of Air Transport Management</em> 5 (4): 193–201.</p>
-</div>
-<div id="ref-purvis1997disaggregate">
-<p>Purvis, CL. 1997. “Disaggregate Estimation and Validation of a Home-Based Work Mode Choice Model.” technical report HBWMC.</p>
-</div>
-<div id="ref-train1998recreation">
-<p>Train, Kenneth E. 1998. “Recreation Demand Models with Taste Differences over People.” <em>Land Economics</em>, 230–39.</p>
-</div>
-<div id="ref-train1994dimensions">
-<p>Train, Kenneth, and others. 1994. <em>Transportation Research Part A: Policy and Practice</em> 28 (4): 365–68.</p>
-</div>
-<div id="ref-waddell1993exogenous">
-<p>Waddell, Paul. 1993. “Exogenous Workplace Choice in Residential Location Models: Is the Assumption Valid?” <em>Geographical Analysis</em> 25 (1): 65–82.</p>
-</div>
-<div id="ref-wen1999integrated">
-<p>Wen, Chieh-Hua, and Frank S Koppelman. 1999. “Integrated Model System of Stop Generation and Tour Formation for Analysis of Activity and Travel Patterns.” <em>Transportation Research Record</em> 1676 (1): 136–44.</p>
-</div>
-<div id="ref-william1998factor">
-<p>William Sermons, M, and Frank S Koppelman. 1998. “Factor Analytic Approach to Incorporating Systematic Taste Variation into Models of Residential Location Choice.” <em>Transportation Research Record</em> 1617 (1): 194–202.</p>
-</div>
-<div id="ref-yai1997multinomial">
-<p>Yai, Tetsuo, Seiji Iwakura, and Shigeru Morichi. 1997. “Multinomial Probit with Structured Covariance for Route Choice Behavior.” <em>Transportation Research Part B: Methodological</em> 31 (3): 195–207.</p>
 </div>
 </div>
             </section>
