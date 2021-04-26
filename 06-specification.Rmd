@@ -1064,4 +1064,4 @@ specifications).
 [^fixedseg]: If one or more segments is defined so that one or more of the variables is fixed for all members of the segment, the parameters for that
 segment, $K_{s}$, will be fewer than K. For example, if none of the members of the low income group owned cars in income segmentation, it would not be possible to estimate parameters for the effect of auto ownership in that segment.
 
-[^extensivedis]: For a more extensive discussion see Chapter 7, Section 7.5, in (@benakivalerman, 1985).
+[^extensivedis]: For a more extensive discussion see Chapter 7, Section 7.5, in [@benakivalerman1985].
