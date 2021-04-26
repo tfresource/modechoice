@@ -3,17 +3,21 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Model Specification Refinement: San Francisco Bay Area Work Mode Choice {#specifcation-chapter}
-```{r setup, message=FALSE, warning=FALSE}
+# Model Specification Refinement: San Francisco Bay Area Work Mode Choice {#specification-chapter}
+```{r setup, include = FALSE, cache = FALSE}
 library(mlogit)
 library(tidyverse)
 library(modelsummary)
 library(haven)
 library(knitr)
 library(kableExtra)
+
+knitr::opts_chunk$set(cache = TRUE)
+theme_set(theme_bw())
 ```
 
-```{r loaddata, echo = F}
+```{r loaddata}
+# work trips data frame constructed in chapter 5
 sf_mlogit <- read_rds("data/worktrips.rds")
 ```
 
