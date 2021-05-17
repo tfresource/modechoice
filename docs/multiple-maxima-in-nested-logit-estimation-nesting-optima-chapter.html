@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 San Francisco Bay Area Shop / Other Mode Choice | A Self-Instructing Course in Mode Choice Modeling</title>
+  <title>Chapter 10 Multiple Maxima in Nested Logit Estimation (#nesting-optima-chapter) | A Self-Instructing Course in Mode Choice Modeling</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 San Francisco Bay Area Shop / Other Mode Choice | A Self-Instructing Course in Mode Choice Modeling" />
+  <meta property="og:title" content="Chapter 10 Multiple Maxima in Nested Logit Estimation (#nesting-optima-chapter) | A Self-Instructing Course in Mode Choice Modeling" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 San Francisco Bay Area Shop / Other Mode Choice | A Self-Instructing Course in Mode Choice Modeling" />
+  <meta name="twitter:title" content="Chapter 10 Multiple Maxima in Nested Logit Estimation (#nesting-optima-chapter) | A Self-Instructing Course in Mode Choice Modeling" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="specification-chapter.html"/>
-<link rel="next" href="nestedlogit-chapter.html"/>
+<link rel="prev" href="nesting-selection-chapter.html"/>
+<link rel="next" href="aggregate-forecasting-assessment-and-application.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -332,57 +332,17 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="other-purpose-chapter" class="section level1" number="7">
-<h1><span class="header-section-number">Chapter 7</span> San Francisco Bay Area Shop / Other Mode Choice</h1>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="other-purpose-chapter.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-## ✓ tibble  3.1.1     ✓ dplyr   1.0.5
-## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="other-purpose-chapter.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb66-2"><a href="other-purpose-chapter.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlogit)</span></code></pre></div>
-<pre><code>## Loading required package: dfidx</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dfidx&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:stats&#39;:
-## 
-##     filter</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="other-purpose-chapter.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span></code></pre></div>
-<p><a href="other-purpose-chapter.html#other-purpose-chapter">Chapter 7</a></p>
-<div id="introduction-2" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Introduction</h2>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="other-purpose-chapter.html#cb71-1" aria-hidden="true" tabindex="-1"></a>sf_shopother_raw <span class="ot">&lt;-</span> <span class="fu">read_spss</span>(<span class="st">&quot;data-raw/Shopping Trips/SPSS/MTC Shopping v2.SAV&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb71-2"><a href="other-purpose-chapter.html#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ALTNAME =</span> <span class="fu">factor</span>(ALTID, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Transit&quot;</span>, <span class="st">&quot;Share 2&quot;</span>, <span class="st">&quot;Share 3+&quot;</span>,<span class="st">&quot;Drive alone and Share 2/3+&quot;</span>,</span>
-<span id="cb71-3"><a href="other-purpose-chapter.html#cb71-3" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;Share 2/3+&quot;</span>,<span class="st">&quot;Bike&quot;</span>, <span class="st">&quot;Walk&quot;</span>, <span class="st">&quot;Drive alone&quot;</span>)))</span>
-<span id="cb71-4"><a href="other-purpose-chapter.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sf_shopother_raw) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">names</span>(sf_shopother_raw))</span>
-<span id="cb71-5"><a href="other-purpose-chapter.html#cb71-5" aria-hidden="true" tabindex="-1"></a>sf_shopother <span class="ot">&lt;-</span> <span class="fu">dfidx</span>(sf_shopother_raw, <span class="at">idx =</span> <span class="fu">c</span>(<span class="st">&quot;casenum&quot;</span>, <span class="st">&quot;altname&quot;</span>))</span>
-<span id="cb71-6"><a href="other-purpose-chapter.html#cb71-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-7"><a href="other-purpose-chapter.html#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="co"># write to data/ folder for future use</span></span>
-<span id="cb71-8"><a href="other-purpose-chapter.html#cb71-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(sf_shopother, <span class="st">&quot;data/shopother.rds&quot;</span>)</span></code></pre></div>
-<p>#add labels to alternative names</p>
-</div>
-<div id="specification-for-shopother-mode-choice-model" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Specification for Shop/Other Mode Choice Model</h2>
-</div>
-<div id="initial-model-specification" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Initial Model Specification</h2>
-</div>
-<div id="exploring-alternative-specifications" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Exploring Alternative Specifications</h2>
+<div id="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Multiple Maxima in Nested Logit Estimation (#nesting-optima-chapter)</h1>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="specification-chapter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="nestedlogit-chapter.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="nesting-selection-chapter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aggregate-forecasting-assessment-and-application.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

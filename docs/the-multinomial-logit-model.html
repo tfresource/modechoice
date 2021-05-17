@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 The Multinomial Logit Model | A Self-Instructing Course in Mode Choice Modeling</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 The Multinomial Logit Model | A Self-Instructing Course in Mode Choice Modeling" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-04-26" />
+<meta name="date" content="2021-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="utility-based-choice-theory.html"/>
 <link rel="next" href="estimation-chapter.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -119,6 +121,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -173,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-related-to-the-characteristics-of-the-decision-maker"><i class="fa fa-check"></i><b>3.4.3</b> Utility Related to the Characteristics of the Decision Maker</a></li>
 <li class="chapter" data-level="3.4.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-defined-by-interactions-between-alternative-attributes-and-decision-maker-characteristics"><i class="fa fa-check"></i><b>3.4.4</b> Utility Defined by Interactions between Alternative Attributes and Decision Maker Characteristics</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#specification-of-the-additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
+<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a>
 <ul>
@@ -182,9 +207,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-sigmoid-or-s-shape-of-multinomial-logit-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> The Sigmoid or S shape of Multinomial Logit Probabilities</a></li>
 <li class="chapter" data-level="4.1.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-equivalent-differences-property"><i class="fa fa-check"></i><b>4.1.2</b> The Equivalent Differences Property</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
+<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#IIA-section"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-red-busblue-bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
+<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-prediction-with-multinomial-logit-model"><i class="fa fa-check"></i><b>4.3</b> Example: Prediction with Multinomial Logit Model</a></li>
 <li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a>
@@ -231,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="specification-chapter.html"><a href="specification-chapter.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement: San Francisco Bay Area Work Mode Choice</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.1" data-path="specification-chapter.html"><a href="specification-chapter.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
 <li class="chapter" data-level="6.2" data-path="specification-chapter.html"><a href="specification-chapter.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="specification-chapter.html"><a href="specification-chapter.html#refinement-of-specification-for-alternative-specific-income-effects"><i class="fa fa-check"></i><b>6.2.1</b> Refinement of Specification for Alternative Specific Income Effects</a></li>
@@ -250,28 +275,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.1" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#introduction-2"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.2" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#specification-for-shopother-mode-choice-model"><i class="fa fa-check"></i><b>7.2</b> Specification for Shop/Other Mode Choice Model</a></li>
 <li class="chapter" data-level="7.3" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#initial-model-specification"><i class="fa fa-check"></i><b>7.3</b> Initial Model Specification</a></li>
 <li class="chapter" data-level="7.4" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#exploring-alternative-specifications"><i class="fa fa-check"></i><b>7.4</b> Exploring Alternative Specifications</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
+<li class="chapter" data-level="8" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="nested-logit-model.html"><a href="nested-logit-model.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
-<li class="chapter" data-level="8.2" data-path="nested-logit-model.html"><a href="nested-logit-model.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a></li>
-<li class="chapter" data-level="8.3" data-path="nested-logit-model.html"><a href="nested-logit-model.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#logsum-param"><i class="fa fa-check"></i><b>8.2.1</b> Interpretation of the Logsum Parameter</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#disaggregate-direct-and-cross-elasticities"><i class="fa fa-check"></i><b>8.2.2</b> Disaggregate Direct and Cross-Elasticities</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.4" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#testing-NL-structures"><i class="fa fa-check"></i><b>8.4</b> Statistical Testing of Nested Logit Structures</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.1" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#introduction-3"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
 <li class="chapter" data-level="9.2" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-work-trips"><i class="fa fa-check"></i><b>9.2</b> Nested Models for Work Trips</a></li>
 <li class="chapter" data-level="9.3" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-shop-other-trips"><i class="fa fa-check"></i><b>9.3</b> Nested Models for Shop / Other Trips</a></li>
 <li class="chapter" data-level="9.4" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#practical-issues-and-implications"><i class="fa fa-check"></i><b>9.4</b> Practical Issues and Implications</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation.html"><a href="multiple-maxima-in-nested-logit-estimation.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation</a></li>
+<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><a href="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation (#nesting-optima-chapter)</a></li>
 <li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="chapter1.html"><a href="chapter1.html#background"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
+<li class="chapter" data-level="11.1" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#background-1"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
 <li class="chapter" data-level="11.2" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-forecasting"><i class="fa fa-check"></i><b>11.2</b> Aggregate Forecasting</a></li>
 <li class="chapter" data-level="11.3" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-assessment-of-travel-mode-choice-models"><i class="fa fa-check"></i><b>11.3</b> Aggregate Assessment of Travel Mode Choice Models</a></li>
 </ul></li>
@@ -280,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-gev-class-of-models"><i class="fa fa-check"></i><b>12.1</b> The GEV Class of Models</a></li>
 <li class="chapter" data-level="12.2" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mmnl-class-of-models"><i class="fa fa-check"></i><b>12.2</b> The MMNL Class of Models</a></li>
 <li class="chapter" data-level="12.3" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mixed-gev-class-of-models"><i class="fa fa-check"></i><b>12.3</b> The Mixed GEV Class of Models</a></li>
-<li class="chapter" data-level="12.4" data-path="specification-chapter.html"><a href="specification-chapter.html#summary"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
+<li class="chapter" data-level="12.4" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#summary-1"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -307,49 +337,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="the-multinomial-logit-model.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-## ✓ tibble  3.1.0     ✓ dplyr   1.0.5
+## ✓ tibble  3.1.1     ✓ dplyr   1.0.5
 ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
 ## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;forcats&#39; was built under R version 4.0.2</code></pre>
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="the-multinomial-logit-model.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="the-multinomial-logit-model.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;kableExtra&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:dplyr&#39;:
 ## 
 ##     group_rows</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="the-multinomial-logit-model.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Create a tibble object that evaluates the named expressions passed</span></span>
-<span id="cb17-2"><a href="the-multinomial-logit-model.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; in as utility equation.</span></span>
-<span id="cb17-3"><a href="the-multinomial-logit-model.html#cb17-3" aria-hidden="true" tabindex="-1"></a>utility_table <span class="ot">&lt;-</span> <span class="cf">function</span>(expressions){</span>
-<span id="cb17-4"><a href="the-multinomial-logit-model.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  top <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb17-5"><a href="the-multinomial-logit-model.html#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Alternative =</span> <span class="fu">names</span>(expressions),</span>
-<span id="cb17-6"><a href="the-multinomial-logit-model.html#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Expression =</span> expressions </span>
-<span id="cb17-7"><a href="the-multinomial-logit-model.html#cb17-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb17-8"><a href="the-multinomial-logit-model.html#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb17-9"><a href="the-multinomial-logit-model.html#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb17-10"><a href="the-multinomial-logit-model.html#cb17-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">Value =</span> <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> Expression)),</span>
-<span id="cb17-11"><a href="the-multinomial-logit-model.html#cb17-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">Exponent =</span> <span class="fu">exp</span>(Value) </span>
-<span id="cb17-12"><a href="the-multinomial-logit-model.html#cb17-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb17-13"><a href="the-multinomial-logit-model.html#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb17-14"><a href="the-multinomial-logit-model.html#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>( <span class="at">Probability =</span> Exponent <span class="sc">/</span> <span class="fu">sum</span>(Exponent) )</span>
-<span id="cb17-15"><a href="the-multinomial-logit-model.html#cb17-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-16"><a href="the-multinomial-logit-model.html#cb17-16" aria-hidden="true" tabindex="-1"></a>  bottom <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb17-17"><a href="the-multinomial-logit-model.html#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Alternative =</span> <span class="st">&quot;Total&quot;</span>,</span>
-<span id="cb17-18"><a href="the-multinomial-logit-model.html#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Expression =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb17-19"><a href="the-multinomial-logit-model.html#cb17-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="cn">NA</span>,</span>
-<span id="cb17-20"><a href="the-multinomial-logit-model.html#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">Exponent =</span> <span class="fu">sum</span>(top<span class="sc">$</span>Exponent),</span>
-<span id="cb17-21"><a href="the-multinomial-logit-model.html#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Probability =</span> <span class="fu">sum</span>(top<span class="sc">$</span>Probability)</span>
-<span id="cb17-22"><a href="the-multinomial-logit-model.html#cb17-22" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb17-23"><a href="the-multinomial-logit-model.html#cb17-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-24"><a href="the-multinomial-logit-model.html#cb17-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(top, bottom)</span>
-<span id="cb17-25"><a href="the-multinomial-logit-model.html#cb17-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="the-multinomial-logit-model.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Create a tibble object that evaluates the named expressions passed</span></span>
+<span id="cb11-2"><a href="the-multinomial-logit-model.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; in as utility equation.</span></span>
+<span id="cb11-3"><a href="the-multinomial-logit-model.html#cb11-3" aria-hidden="true" tabindex="-1"></a>utility_table <span class="ot">&lt;-</span> <span class="cf">function</span>(expressions){</span>
+<span id="cb11-4"><a href="the-multinomial-logit-model.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  top <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb11-5"><a href="the-multinomial-logit-model.html#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Alternative =</span> <span class="fu">names</span>(expressions),</span>
+<span id="cb11-6"><a href="the-multinomial-logit-model.html#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Expression =</span> expressions </span>
+<span id="cb11-7"><a href="the-multinomial-logit-model.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="the-multinomial-logit-model.html#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="the-multinomial-logit-model.html#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb11-10"><a href="the-multinomial-logit-model.html#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">Value =</span> <span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> Expression)),</span>
+<span id="cb11-11"><a href="the-multinomial-logit-model.html#cb11-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">Exponent =</span> <span class="fu">exp</span>(Value) </span>
+<span id="cb11-12"><a href="the-multinomial-logit-model.html#cb11-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-13"><a href="the-multinomial-logit-model.html#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-14"><a href="the-multinomial-logit-model.html#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>( <span class="at">Probability =</span> Exponent <span class="sc">/</span> <span class="fu">sum</span>(Exponent) )</span>
+<span id="cb11-15"><a href="the-multinomial-logit-model.html#cb11-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-16"><a href="the-multinomial-logit-model.html#cb11-16" aria-hidden="true" tabindex="-1"></a>  bottom <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb11-17"><a href="the-multinomial-logit-model.html#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Alternative =</span> <span class="st">&quot;Total&quot;</span>,</span>
+<span id="cb11-18"><a href="the-multinomial-logit-model.html#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Expression =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb11-19"><a href="the-multinomial-logit-model.html#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Value =</span> <span class="cn">NA</span>,</span>
+<span id="cb11-20"><a href="the-multinomial-logit-model.html#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">Exponent =</span> <span class="fu">sum</span>(top<span class="sc">$</span>Exponent),</span>
+<span id="cb11-21"><a href="the-multinomial-logit-model.html#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Probability =</span> <span class="fu">sum</span>(top<span class="sc">$</span>Probability)</span>
+<span id="cb11-22"><a href="the-multinomial-logit-model.html#cb11-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-23"><a href="the-multinomial-logit-model.html#cb11-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-24"><a href="the-multinomial-logit-model.html#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(top, bottom)</span>
+<span id="cb11-25"><a href="the-multinomial-logit-model.html#cb11-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <div id="overview-description-and-functional-form" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Overview Description and Functional Form</h2>
 <p>The mathematical form of a discrete choice model is determined by the
@@ -371,32 +395,32 @@ has computational advantages in a context where maximization is important,
 closely approximates the normal distribution (see Figure <a href="the-multinomial-logit-model.html#fig:gumbelpdf">4.1</a>
 and Figure <a href="the-multinomial-logit-model.html#fig:gumbelcdf">4.2</a>) and
 produces a closed-form<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> probabilistic choice model.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="the-multinomial-logit-model.html#cb18-1" aria-hidden="true" tabindex="-1"></a>pdf <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb18-2"><a href="the-multinomial-logit-model.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>),</span>
-<span id="cb18-3"><a href="the-multinomial-logit-model.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Normal =</span> <span class="fu">dnorm</span>(x, <span class="at">sd =</span> <span class="fu">sqrt</span>(pi<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">6</span>)),</span>
-<span id="cb18-4"><a href="the-multinomial-logit-model.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Gumbel =</span> <span class="fu">exp</span>(<span class="sc">-</span>x) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>x))</span>
-<span id="cb18-5"><a href="the-multinomial-logit-model.html#cb18-5" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb18-6"><a href="the-multinomial-logit-model.html#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="the-multinomial-logit-model.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdf <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;Distribution&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Probability&quot;</span>, <span class="sc">-</span>x),</span>
-<span id="cb18-8"><a href="the-multinomial-logit-model.html#cb18-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> Probability, <span class="at">color =</span> Distribution)) <span class="sc">+</span></span>
-<span id="cb18-9"><a href="the-multinomial-logit-model.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb18-10"><a href="the-multinomial-logit-model.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="the-multinomial-logit-model.html#cb12-1" aria-hidden="true" tabindex="-1"></a>pdf <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb12-2"><a href="the-multinomial-logit-model.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>),</span>
+<span id="cb12-3"><a href="the-multinomial-logit-model.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Normal =</span> <span class="fu">dnorm</span>(x, <span class="at">sd =</span> <span class="fu">sqrt</span>(pi<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">6</span>)),</span>
+<span id="cb12-4"><a href="the-multinomial-logit-model.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Gumbel =</span> <span class="fu">exp</span>(<span class="sc">-</span>x) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>x))</span>
+<span id="cb12-5"><a href="the-multinomial-logit-model.html#cb12-5" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb12-6"><a href="the-multinomial-logit-model.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="the-multinomial-logit-model.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pdf <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;Distribution&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Probability&quot;</span>, <span class="sc">-</span>x),</span>
+<span id="cb12-8"><a href="the-multinomial-logit-model.html#cb12-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> Probability, <span class="at">color =</span> Distribution)) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="the-multinomial-logit-model.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb12-10"><a href="the-multinomial-logit-model.html#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <div class="figure"><span id="fig:gumbelpdf"></span>
 <img src="04-mnl_files/figure-html/gumbelpdf-1.png" alt="Probability density function for normal and Gumbel distributions." width="672" />
 <p class="caption">
 Figure 4.1: Probability density function for normal and Gumbel distributions.
 </p>
 </div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="the-multinomial-logit-model.html#cb19-1" aria-hidden="true" tabindex="-1"></a>cdf <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb19-2"><a href="the-multinomial-logit-model.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>),</span>
-<span id="cb19-3"><a href="the-multinomial-logit-model.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Normal =</span> <span class="fu">pnorm</span>(x, <span class="at">sd =</span> <span class="fu">sqrt</span>(pi<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">6</span>)),</span>
-<span id="cb19-4"><a href="the-multinomial-logit-model.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Gumbel =</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>x))</span>
-<span id="cb19-5"><a href="the-multinomial-logit-model.html#cb19-5" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb19-6"><a href="the-multinomial-logit-model.html#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="the-multinomial-logit-model.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cdf <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;Distribution&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Probability&quot;</span>, <span class="sc">-</span>x),</span>
-<span id="cb19-8"><a href="the-multinomial-logit-model.html#cb19-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> Probability, <span class="at">color =</span> Distribution)) <span class="sc">+</span></span>
-<span id="cb19-9"><a href="the-multinomial-logit-model.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb19-10"><a href="the-multinomial-logit-model.html#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="the-multinomial-logit-model.html#cb13-1" aria-hidden="true" tabindex="-1"></a>cdf <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb13-2"><a href="the-multinomial-logit-model.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>),</span>
+<span id="cb13-3"><a href="the-multinomial-logit-model.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Normal =</span> <span class="fu">pnorm</span>(x, <span class="at">sd =</span> <span class="fu">sqrt</span>(pi<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">6</span>)),</span>
+<span id="cb13-4"><a href="the-multinomial-logit-model.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Gumbel =</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>x))</span>
+<span id="cb13-5"><a href="the-multinomial-logit-model.html#cb13-5" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb13-6"><a href="the-multinomial-logit-model.html#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="the-multinomial-logit-model.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cdf <span class="sc">%&gt;%</span> <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;Distribution&quot;</span>, <span class="at">value =</span> <span class="st">&quot;Probability&quot;</span>, <span class="sc">-</span>x),</span>
+<span id="cb13-8"><a href="the-multinomial-logit-model.html#cb13-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> Probability, <span class="at">color =</span> Distribution)) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="the-multinomial-logit-model.html#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb13-10"><a href="the-multinomial-logit-model.html#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <div class="figure"><span id="fig:gumbelcdf"></span>
 <img src="04-mnl_files/figure-html/gumbelcdf-1.png" alt="Cumulative density function for normal and Gumbel distributions." width="672" />
 <p class="caption">
@@ -430,7 +454,7 @@ functions:</p>
 <p>The second and third assumptions state the location and variance of the
 distribution just as <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> indicate the location and variance of
 the normal distribution. We will return to the discussion of the independence
-between/among alternatives in <a href="nested-logit-model.html#nested-logit-model">CHAPTER 8</a>.</p>
+between/among alternatives in <a href="#nested-logit-model">CHAPTER 8</a>.</p>
 <p>The three assumptions, taken together, lead to the mathematical structure known
 as the Multinomial Logit Model (MNL), which gives the choice probabilities of
 each alternative as a function of the systematic portion of the utility of all
@@ -448,12 +472,12 @@ alternative ‘<em>i</em>’ (<em>i = 1,2,.., J</em>) from a set of <em>J</em> a
 <p>The exponential function is described in Figure <a href="the-multinomial-logit-model.html#fig:viwithexpVi">4.3</a> which shows the relationship
 between <span class="math inline">\(\exp(V_i)\)</span> and <span class="math inline">\(V_i\)</span>. Note that <span class="math inline">\(\exp(V_i)\)</span> is always positive and
 increases monotonically with <span class="math inline">\(V_i\)</span>.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="the-multinomial-logit-model.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>( <span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">1</span>), <span class="at">y =</span> <span class="fu">exp</span>(x)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="the-multinomial-logit-model.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> </span>
-<span id="cb20-3"><a href="the-multinomial-logit-model.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb20-4"><a href="the-multinomial-logit-model.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">bquote</span>(V[i])) <span class="sc">+</span> </span>
-<span id="cb20-5"><a href="the-multinomial-logit-model.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">bquote</span>(<span class="fu">exp</span>(V[i]))) <span class="sc">+</span></span>
-<span id="cb20-6"><a href="the-multinomial-logit-model.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="the-multinomial-logit-model.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>( <span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">1</span>), <span class="at">y =</span> <span class="fu">exp</span>(x)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="the-multinomial-logit-model.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="the-multinomial-logit-model.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb14-4"><a href="the-multinomial-logit-model.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">bquote</span>(V[i])) <span class="sc">+</span> </span>
+<span id="cb14-5"><a href="the-multinomial-logit-model.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">bquote</span>(<span class="fu">exp</span>(V[i]))) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="the-multinomial-logit-model.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <div class="figure"><span id="fig:viwithexpVi"></span>
 <img src="04-mnl_files/figure-html/viwithexpVi-1.png" alt="Relationship Between $V_i$ and $\exp(V_i)$" width="672" />
 <p class="caption">
@@ -500,19 +524,19 @@ the other alternatives. This is illustrated in Table <a href="the-multinomial-lo
 probability of DA as a function of its own utility (with the utilities of other
 alternatives held constant) and in Table <a href="#tab:drloneforshrridetransit"><strong>??</strong></a>
 as a function of the utility of other alternatives with its own utility fixed.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="the-multinomial-logit-model.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb21-2"><a href="the-multinomial-logit-model.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">case =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb21-3"><a href="the-multinomial-logit-model.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vda =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.0</span>, <span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">0.0</span>, <span class="fl">1.5</span>, <span class="fl">3.0</span>),</span>
-<span id="cb21-4"><a href="the-multinomial-logit-model.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vsr =</span> <span class="sc">-</span><span class="fl">1.5</span>,</span>
-<span id="cb21-5"><a href="the-multinomial-logit-model.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vtr =</span> <span class="sc">-</span><span class="fl">0.5</span></span>
-<span id="cb21-6"><a href="the-multinomial-logit-model.html#cb21-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-7"><a href="the-multinomial-logit-model.html#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb21-8"><a href="the-multinomial-logit-model.html#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> <span class="fu">exp</span>(vda) <span class="sc">/</span> (<span class="fu">exp</span>(vda) <span class="sc">+</span> <span class="fu">exp</span>(vsr) <span class="sc">+</span> <span class="fu">exp</span>(vtr))</span>
-<span id="cb21-9"><a href="the-multinomial-logit-model.html#cb21-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb21-10"><a href="the-multinomial-logit-model.html#cb21-10" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(  </span>
-<span id="cb21-11"><a href="the-multinomial-logit-model.html#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)&quot;</span>, </span>
-<span id="cb21-12"><a href="the-multinomial-logit-model.html#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;$Case$&quot;</span>, <span class="st">&quot;$V_{DA}$&quot;</span>, <span class="st">&quot;$V_{SR}$&quot;</span>, <span class="st">&quot;$V_{TR}$&quot;</span>, <span class="st">&quot;$Pr(DA)$&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-13"><a href="the-multinomial-logit-model.html#cb21-13" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="the-multinomial-logit-model.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb15-2"><a href="the-multinomial-logit-model.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">case =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb15-3"><a href="the-multinomial-logit-model.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vda =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.0</span>, <span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">0.0</span>, <span class="fl">1.5</span>, <span class="fl">3.0</span>),</span>
+<span id="cb15-4"><a href="the-multinomial-logit-model.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vsr =</span> <span class="sc">-</span><span class="fl">1.5</span>,</span>
+<span id="cb15-5"><a href="the-multinomial-logit-model.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vtr =</span> <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb15-6"><a href="the-multinomial-logit-model.html#cb15-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="the-multinomial-logit-model.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-8"><a href="the-multinomial-logit-model.html#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> <span class="fu">exp</span>(vda) <span class="sc">/</span> (<span class="fu">exp</span>(vda) <span class="sc">+</span> <span class="fu">exp</span>(vsr) <span class="sc">+</span> <span class="fu">exp</span>(vtr))</span>
+<span id="cb15-9"><a href="the-multinomial-logit-model.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-10"><a href="the-multinomial-logit-model.html#cb15-10" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(  </span>
+<span id="cb15-11"><a href="the-multinomial-logit-model.html#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)&quot;</span>, </span>
+<span id="cb15-12"><a href="the-multinomial-logit-model.html#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;$Case$&quot;</span>, <span class="st">&quot;$V_{DA}$&quot;</span>, <span class="st">&quot;$V_{SR}$&quot;</span>, <span class="st">&quot;$V_{TR}$&quot;</span>, <span class="st">&quot;$Pr(DA)$&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-13"><a href="the-multinomial-logit-model.html#cb15-13" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:dralonefordralone">Table 4.1: </span>Probability Values for Drive Alone as a Function of Drive Alone Utility (Shared Ride and Transit Utilities held constant)
@@ -624,19 +648,19 @@ as a function of the utility of other alternatives with its own utility fixed.</
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="the-multinomial-logit-model.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb22-2"><a href="the-multinomial-logit-model.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">case =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">11</span>,</span>
-<span id="cb22-3"><a href="the-multinomial-logit-model.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vda =</span> <span class="fl">0.0</span>,</span>
-<span id="cb22-4"><a href="the-multinomial-logit-model.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vsr =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
-<span id="cb22-5"><a href="the-multinomial-logit-model.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vtr =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
-<span id="cb22-6"><a href="the-multinomial-logit-model.html#cb22-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-7"><a href="the-multinomial-logit-model.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb22-8"><a href="the-multinomial-logit-model.html#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> <span class="fu">exp</span>(vda) <span class="sc">/</span> (<span class="fu">exp</span>(vda) <span class="sc">+</span> <span class="fu">exp</span>(vsr) <span class="sc">+</span> <span class="fu">exp</span>(vtr))</span>
-<span id="cb22-9"><a href="the-multinomial-logit-model.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb22-10"><a href="the-multinomial-logit-model.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(</span>
-<span id="cb22-11"><a href="the-multinomial-logit-model.html#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties&quot;</span>, </span>
-<span id="cb22-12"><a href="the-multinomial-logit-model.html#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;$Case$&quot;</span>, <span class="st">&quot;$V_{DA}$&quot;</span>, <span class="st">&quot;$V_{SR}$&quot;</span>, <span class="st">&quot;$V_{TR}$&quot;</span>, <span class="st">&quot;$Pr(DA)$&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-13"><a href="the-multinomial-logit-model.html#cb22-13" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="the-multinomial-logit-model.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb16-2"><a href="the-multinomial-logit-model.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">case =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">11</span>,</span>
+<span id="cb16-3"><a href="the-multinomial-logit-model.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vda =</span> <span class="fl">0.0</span>,</span>
+<span id="cb16-4"><a href="the-multinomial-logit-model.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vsr =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb16-5"><a href="the-multinomial-logit-model.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vtr =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">1.5</span>, <span class="sc">-</span><span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">0.5</span>)</span>
+<span id="cb16-6"><a href="the-multinomial-logit-model.html#cb16-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="the-multinomial-logit-model.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-8"><a href="the-multinomial-logit-model.html#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> <span class="fu">exp</span>(vda) <span class="sc">/</span> (<span class="fu">exp</span>(vda) <span class="sc">+</span> <span class="fu">exp</span>(vsr) <span class="sc">+</span> <span class="fu">exp</span>(vtr))</span>
+<span id="cb16-9"><a href="the-multinomial-logit-model.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-10"><a href="the-multinomial-logit-model.html#cb16-10" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(</span>
+<span id="cb16-11"><a href="the-multinomial-logit-model.html#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties&quot;</span>, </span>
+<span id="cb16-12"><a href="the-multinomial-logit-model.html#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;$Case$&quot;</span>, <span class="st">&quot;$V_{DA}$&quot;</span>, <span class="st">&quot;$V_{SR}$&quot;</span>, <span class="st">&quot;$V_{TR}$&quot;</span>, <span class="st">&quot;$Pr(DA)$&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-13"><a href="the-multinomial-logit-model.html#cb16-13" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:draloneforshrridetransit">Table 4.2: </span>Probability Values for Drive Alone as a Function of Shared Ride and Transit Utilties
@@ -791,29 +815,29 @@ is equivalent to the combined utility of the other alternatives. When this is
 true, a small increase in the utility of one alternative can ‘tip the balance’
 and induce a large increase in the probability of the alternative being chosen
 (Train, 1993).</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="the-multinomial-logit-model.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Function to compute mnl probabilities</span></span>
-<span id="cb23-2"><a href="the-multinomial-logit-model.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param vi utility of target alternative</span></span>
-<span id="cb23-3"><a href="the-multinomial-logit-model.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param ... utilities of other alternatives</span></span>
-<span id="cb23-4"><a href="the-multinomial-logit-model.html#cb23-4" aria-hidden="true" tabindex="-1"></a>mnl_prob <span class="ot">&lt;-</span> <span class="cf">function</span>(vi, ...){</span>
-<span id="cb23-5"><a href="the-multinomial-logit-model.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  vj <span class="ot">&lt;-</span> <span class="fu">c</span>(...)</span>
-<span id="cb23-6"><a href="the-multinomial-logit-model.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(vi) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(vj))</span>
-<span id="cb23-7"><a href="the-multinomial-logit-model.html#cb23-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="the-multinomial-logit-model.html#cb24-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb24-2"><a href="the-multinomial-logit-model.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_da =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.01</span>),</span>
-<span id="cb24-3"><a href="the-multinomial-logit-model.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_tr =</span> <span class="dv">0</span>, <span class="at">v_walk =</span> <span class="sc">-</span><span class="fl">0.5</span></span>
-<span id="cb24-4"><a href="the-multinomial-logit-model.html#cb24-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-5"><a href="the-multinomial-logit-model.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb24-6"><a href="the-multinomial-logit-model.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb24-7"><a href="the-multinomial-logit-model.html#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">drive   =</span> <span class="fu">mnl_prob</span>(v_da,   v_da, v_tr, v_walk),</span>
-<span id="cb24-8"><a href="the-multinomial-logit-model.html#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">transit =</span> <span class="fu">mnl_prob</span>(v_tr,   v_da, v_tr, v_walk),</span>
-<span id="cb24-9"><a href="the-multinomial-logit-model.html#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">walk    =</span> <span class="fu">mnl_prob</span>(v_walk, v_da, v_tr, v_walk)</span>
-<span id="cb24-10"><a href="the-multinomial-logit-model.html#cb24-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb24-11"><a href="the-multinomial-logit-model.html#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="the-multinomial-logit-model.html#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(u <span class="sc">%&gt;%</span> <span class="fu">gather</span>(Mode, Probability, drive, transit, walk), </span>
-<span id="cb24-13"><a href="the-multinomial-logit-model.html#cb24-13" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> v_da, <span class="at">y =</span> Probability, <span class="at">color =</span> Mode)) <span class="sc">+</span> </span>
-<span id="cb24-14"><a href="the-multinomial-logit-model.html#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb24-15"><a href="the-multinomial-logit-model.html#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Utility of Drive&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb24-16"><a href="the-multinomial-logit-model.html#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="the-multinomial-logit-model.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Function to compute mnl probabilities</span></span>
+<span id="cb17-2"><a href="the-multinomial-logit-model.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param vi utility of target alternative</span></span>
+<span id="cb17-3"><a href="the-multinomial-logit-model.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param ... utilities of other alternatives</span></span>
+<span id="cb17-4"><a href="the-multinomial-logit-model.html#cb17-4" aria-hidden="true" tabindex="-1"></a>mnl_prob <span class="ot">&lt;-</span> <span class="cf">function</span>(vi, ...){</span>
+<span id="cb17-5"><a href="the-multinomial-logit-model.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  vj <span class="ot">&lt;-</span> <span class="fu">c</span>(...)</span>
+<span id="cb17-6"><a href="the-multinomial-logit-model.html#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(vi) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(vj))</span>
+<span id="cb17-7"><a href="the-multinomial-logit-model.html#cb17-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="the-multinomial-logit-model.html#cb18-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb18-2"><a href="the-multinomial-logit-model.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_da =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">by =</span> <span class="fl">0.01</span>),</span>
+<span id="cb18-3"><a href="the-multinomial-logit-model.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">v_tr =</span> <span class="dv">0</span>, <span class="at">v_walk =</span> <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb18-4"><a href="the-multinomial-logit-model.html#cb18-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-5"><a href="the-multinomial-logit-model.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="the-multinomial-logit-model.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-7"><a href="the-multinomial-logit-model.html#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">drive   =</span> <span class="fu">mnl_prob</span>(v_da,   v_da, v_tr, v_walk),</span>
+<span id="cb18-8"><a href="the-multinomial-logit-model.html#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">transit =</span> <span class="fu">mnl_prob</span>(v_tr,   v_da, v_tr, v_walk),</span>
+<span id="cb18-9"><a href="the-multinomial-logit-model.html#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">walk    =</span> <span class="fu">mnl_prob</span>(v_walk, v_da, v_tr, v_walk)</span>
+<span id="cb18-10"><a href="the-multinomial-logit-model.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-11"><a href="the-multinomial-logit-model.html#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="the-multinomial-logit-model.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(u <span class="sc">%&gt;%</span> <span class="fu">gather</span>(Mode, Probability, drive, transit, walk), </span>
+<span id="cb18-13"><a href="the-multinomial-logit-model.html#cb18-13" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> v_da, <span class="at">y =</span> Probability, <span class="at">color =</span> Mode)) <span class="sc">+</span> </span>
+<span id="cb18-14"><a href="the-multinomial-logit-model.html#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb18-15"><a href="the-multinomial-logit-model.html#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Utility of Drive&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb18-16"><a href="the-multinomial-logit-model.html#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <div class="figure"><span id="fig:choiceprob"></span>
 <img src="04-mnl_files/figure-html/choiceprob-1.png" alt="Probability of choosing alternatives while holding other utilities constant, $V_{transit} = 0, V_{walk} = -0.5$" width="672" />
 <p class="caption">
@@ -1224,14 +1248,14 @@ correspond to the TRansit reference and Drive Alone reference examples,
 respectively, for an individual from a household with $50,000 annual income and
 facing travel times of 30, 35 and 50 minutes for Drive Alone, Shared Ride and
 TRansit, respectively.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="the-multinomial-logit-model.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
-<span id="cb25-2"><a href="the-multinomial-logit-model.html#cb25-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot;1.1 + 0.008 * 50 - 0.02 * 30&quot;</span>,</span>
-<span id="cb25-3"><a href="the-multinomial-logit-model.html#cb25-3" aria-hidden="true" tabindex="-1"></a>   <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;0.8 + 0.006 * 50 - 0.02 * 35&quot;</span>,</span>
-<span id="cb25-4"><a href="the-multinomial-logit-model.html#cb25-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;0.0 + 0.000 * 50 - 0.02 * 50&quot;</span>)</span>
-<span id="cb25-5"><a href="the-multinomial-logit-model.html#cb25-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-6"><a href="the-multinomial-logit-model.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;Utility and Probability calculation with TRansit as Base Alternative&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-7"><a href="the-multinomial-logit-model.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb25-8"><a href="the-multinomial-logit-model.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="the-multinomial-logit-model.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
+<span id="cb19-2"><a href="the-multinomial-logit-model.html#cb19-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot;1.1 + 0.008 * 50 - 0.02 * 30&quot;</span>,</span>
+<span id="cb19-3"><a href="the-multinomial-logit-model.html#cb19-3" aria-hidden="true" tabindex="-1"></a>   <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;0.8 + 0.006 * 50 - 0.02 * 35&quot;</span>,</span>
+<span id="cb19-4"><a href="the-multinomial-logit-model.html#cb19-4" aria-hidden="true" tabindex="-1"></a>   <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;0.0 + 0.000 * 50 - 0.02 * 50&quot;</span>)</span>
+<span id="cb19-5"><a href="the-multinomial-logit-model.html#cb19-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-6"><a href="the-multinomial-logit-model.html#cb19-6" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;Utility and Probability calculation with TRansit as Base Alternative&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-7"><a href="the-multinomial-logit-model.html#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-8"><a href="the-multinomial-logit-model.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:transit-base">Table 4.5: </span>Utility and Probability calculation with TRansit as Base Alternative
@@ -1337,14 +1361,14 @@ NA
 </tbody>
 </table>
 <p>where the sum of the exponent variable equals 4.319.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="the-multinomial-logit-model.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
-<span id="cb26-2"><a href="the-multinomial-logit-model.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>( <span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot;0.0 + 0.000 * 50 - 0.02 * 30&quot;</span>,</span>
-<span id="cb26-3"><a href="the-multinomial-logit-model.html#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.3 - 0.002 * 50 - 0.02 * 35&quot;</span>,</span>
-<span id="cb26-4"><a href="the-multinomial-logit-model.html#cb26-4" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1.1 - 0.008 * 50 - 0.02 * 50&quot;</span>)</span>
-<span id="cb26-5"><a href="the-multinomial-logit-model.html#cb26-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb26-6"><a href="the-multinomial-logit-model.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;Utility and Probability calculation with TRansit as Base Alternative&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-7"><a href="the-multinomial-logit-model.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb26-8"><a href="the-multinomial-logit-model.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="the-multinomial-logit-model.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
+<span id="cb20-2"><a href="the-multinomial-logit-model.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>( <span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot;0.0 + 0.000 * 50 - 0.02 * 30&quot;</span>,</span>
+<span id="cb20-3"><a href="the-multinomial-logit-model.html#cb20-3" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.3 - 0.002 * 50 - 0.02 * 35&quot;</span>,</span>
+<span id="cb20-4"><a href="the-multinomial-logit-model.html#cb20-4" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1.1 - 0.008 * 50 - 0.02 * 50&quot;</span>)</span>
+<span id="cb20-5"><a href="the-multinomial-logit-model.html#cb20-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="the-multinomial-logit-model.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;Utility and Probability calculation with TRansit as Base Alternative&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-7"><a href="the-multinomial-logit-model.html#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb20-8"><a href="the-multinomial-logit-model.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span><span class="ot">=</span><span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:da-base">Table 4.6: </span>Utility and Probability calculation with TRansit as Base Alternative
@@ -1454,17 +1478,17 @@ NA
 shows that the differences in the alternative specific constants and income
 parameters between alternatives are the same for the TRansit base case and the
 Drive Alone base case.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="the-multinomial-logit-model.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb27-2"><a href="the-multinomial-logit-model.html#cb27-2" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Alternative&quot;</span><span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span>, <span class="st">&quot;Shared Ride&quot;</span>, <span class="st">&quot;Transit&quot;</span>),</span>
-<span id="cb27-3"><a href="the-multinomial-logit-model.html#cb27-3" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Constant&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;1.1&quot;</span>,<span class="st">&quot;0.8&quot;</span>,<span class="st">&quot;0.0&quot;</span>),</span>
-<span id="cb27-4"><a href="the-multinomial-logit-model.html#cb27-4" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Income&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;0.008&quot;</span>, <span class="st">&quot;0.006&quot;</span>, <span class="st">&quot;0.000&quot;</span>),</span>
-<span id="cb27-5"><a href="the-multinomial-logit-model.html#cb27-5" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Constant &quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;-1.1&quot;</span>,<span class="st">&quot;-1.1&quot;</span>,<span class="st">&quot;-1.1&quot;</span>),</span>
-<span id="cb27-6"><a href="the-multinomial-logit-model.html#cb27-6" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Income &quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;-0.008&quot;</span>, <span class="st">&quot;-0.008&quot;</span>, <span class="st">&quot;-0.008&quot;</span>),</span>
-<span id="cb27-7"><a href="the-multinomial-logit-model.html#cb27-7" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Constant  &quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;0.0&quot;</span>,<span class="st">&quot;-0.3&quot;</span>,<span class="st">&quot;-1.1&quot;</span>),</span>
-<span id="cb27-8"><a href="the-multinomial-logit-model.html#cb27-8" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Income  &quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;0.000&quot;</span>, <span class="st">&quot;-0.002&quot;</span>, <span class="st">&quot;-0.008&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb27-9"><a href="the-multinomial-logit-model.html#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;Changes in Alternative Specific Constants and Income Parameters&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-10"><a href="the-multinomial-logit-model.html#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb27-11"><a href="the-multinomial-logit-model.html#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;TRansit as Base Alternative&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Change in Parameters&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Drive Alone as Base Alternative&quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="the-multinomial-logit-model.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb21-2"><a href="the-multinomial-logit-model.html#cb21-2" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Alternative&quot;</span><span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span>, <span class="st">&quot;Shared Ride&quot;</span>, <span class="st">&quot;Transit&quot;</span>),</span>
+<span id="cb21-3"><a href="the-multinomial-logit-model.html#cb21-3" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Constant&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;1.1&quot;</span>,<span class="st">&quot;0.8&quot;</span>,<span class="st">&quot;0.0&quot;</span>),</span>
+<span id="cb21-4"><a href="the-multinomial-logit-model.html#cb21-4" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Income&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;0.008&quot;</span>, <span class="st">&quot;0.006&quot;</span>, <span class="st">&quot;0.000&quot;</span>),</span>
+<span id="cb21-5"><a href="the-multinomial-logit-model.html#cb21-5" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Constant &quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;-1.1&quot;</span>,<span class="st">&quot;-1.1&quot;</span>,<span class="st">&quot;-1.1&quot;</span>),</span>
+<span id="cb21-6"><a href="the-multinomial-logit-model.html#cb21-6" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Income &quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;-0.008&quot;</span>, <span class="st">&quot;-0.008&quot;</span>, <span class="st">&quot;-0.008&quot;</span>),</span>
+<span id="cb21-7"><a href="the-multinomial-logit-model.html#cb21-7" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Constant  &quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;0.0&quot;</span>,<span class="st">&quot;-0.3&quot;</span>,<span class="st">&quot;-1.1&quot;</span>),</span>
+<span id="cb21-8"><a href="the-multinomial-logit-model.html#cb21-8" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Income  &quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;0.000&quot;</span>, <span class="st">&quot;-0.002&quot;</span>, <span class="st">&quot;-0.008&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-9"><a href="the-multinomial-logit-model.html#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;Changes in Alternative Specific Constants and Income Parameters&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-10"><a href="the-multinomial-logit-model.html#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-11"><a href="the-multinomial-logit-model.html#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;TRansit as Base Alternative&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Change in Parameters&quot;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot;Drive Alone as Base Alternative&quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:compareutilities">Table 4.7: </span>Changes in Alternative Specific Constants and Income Parameters
@@ -1588,7 +1612,7 @@ Transit
 </div>
 </div>
 </div>
-<div id="independence-of-irrelevant-alternatives-property" class="section level2" number="4.2">
+<div id="IIA-section" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Independence of Irrelevant Alternatives Property</h2>
 <p>One of the most widely discussed aspects of the multinomial logit model is its
 independence from irrelevant alternatives (IIA) property. The IIA property
@@ -1652,7 +1676,7 @@ relationships among groups of alternatives. That is, other alternatives may not
 be irrelevant to the ratio of probabilities between a pair of alternatives. In
 some cases, this will result in erroneous predictions of choice probabilities.
 An extreme example of this problem is the classic “red bus/blue bus paradox.”</p>
-<div id="the-red-busblue-bus-paradox" class="section level3" number="4.2.1">
+<div id="bus-paradox" class="section level3" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> The Red Bus/Blue Bus Paradox</h3>
 <p>Consider the case of a commuter who has a choice of going to work by auto or
 taking a blue bus. Assume that the attributes of the auto and the blue bus are
@@ -1862,14 +1886,14 @@ utility equation, we assume travel time and travel cost values as follows:</p>
 </tbody>
 </table>
 <p>The utilities and probabilities are calculated as shown in Table <a href="the-multinomial-logit-model.html#tab:utimecost">4.9</a>.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="the-multinomial-logit-model.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
-<span id="cb28-2"><a href="the-multinomial-logit-model.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.045*25-0.004*175&quot;</span>,</span>
-<span id="cb28-3"><a href="the-multinomial-logit-model.html#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1.865-0.045*28-0.004*75&quot;</span>,</span>
-<span id="cb28-4"><a href="the-multinomial-logit-model.html#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.650-0.045*55-0.004*125&quot;</span>)</span>
-<span id="cb28-5"><a href="the-multinomial-logit-model.html#cb28-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb28-6"><a href="the-multinomial-logit-model.html#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;MNL Probabilities for Time and Cost Model&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-7"><a href="the-multinomial-logit-model.html#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb28-8"><a href="the-multinomial-logit-model.html#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="the-multinomial-logit-model.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
+<span id="cb22-2"><a href="the-multinomial-logit-model.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.045*25-0.004*175&quot;</span>,</span>
+<span id="cb22-3"><a href="the-multinomial-logit-model.html#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1.865-0.045*28-0.004*75&quot;</span>,</span>
+<span id="cb22-4"><a href="the-multinomial-logit-model.html#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.650-0.045*55-0.004*125&quot;</span>)</span>
+<span id="cb22-5"><a href="the-multinomial-logit-model.html#cb22-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="the-multinomial-logit-model.html#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;MNL Probabilities for Time and Cost Model&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-7"><a href="the-multinomial-logit-model.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb22-8"><a href="the-multinomial-logit-model.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:utimecost">Table 4.9: </span>MNL Probabilities for Time and Cost Model
@@ -2019,14 +2043,14 @@ negative parameter for out of vehicle time than for total time; say -0.031 and
 </table>
 <p>the new systematic utilities and choice probabilities are as computed in Table
 <a href="the-multinomial-logit-model.html#tab:uivtovt">4.10</a>:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="the-multinomial-logit-model.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
-<span id="cb29-2"><a href="the-multinomial-logit-model.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.031*21-0.062*4-0.004*175&quot;</span>,</span>
-<span id="cb29-3"><a href="the-multinomial-logit-model.html#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1.90-0.031*23-0.062*5-0.004*75&quot;</span>,</span>
-<span id="cb29-4"><a href="the-multinomial-logit-model.html#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.80-0.031*25-0.062*30-0.004*125&quot;</span>)</span>
-<span id="cb29-5"><a href="the-multinomial-logit-model.html#cb29-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb29-6"><a href="the-multinomial-logit-model.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;MNL Probabilities for Time and Cost Model&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-7"><a href="the-multinomial-logit-model.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb29-8"><a href="the-multinomial-logit-model.html#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="the-multinomial-logit-model.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
+<span id="cb23-2"><a href="the-multinomial-logit-model.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.031*21-0.062*4-0.004*175&quot;</span>,</span>
+<span id="cb23-3"><a href="the-multinomial-logit-model.html#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1.90-0.031*23-0.062*5-0.004*75&quot;</span>,</span>
+<span id="cb23-4"><a href="the-multinomial-logit-model.html#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.80-0.031*25-0.062*30-0.004*125&quot;</span>)</span>
+<span id="cb23-5"><a href="the-multinomial-logit-model.html#cb23-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="the-multinomial-logit-model.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;MNL Probabilities for Time and Cost Model&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-7"><a href="the-multinomial-logit-model.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb23-8"><a href="the-multinomial-logit-model.html#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:uivtovt">Table 4.10: </span>MNL Probabilities for Time and Cost Model
@@ -2150,14 +2174,14 @@ substantially from the preceding example as it no longer reflects the average
 effect of excluding income from the transit utility specification. The
 calculation of utilities and probabilities for this model for a person from a
 household with $50,000 annual income is shown in <a href="the-multinomial-logit-model.html#tab:uivtovtcost">4.11</a>.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="the-multinomial-logit-model.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
-<span id="cb30-2"><a href="the-multinomial-logit-model.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot; -0.031*21-0.062*4-0.004*175&quot;</span>,</span>
-<span id="cb30-3"><a href="the-multinomial-logit-model.html#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1.90-0.031*23-0.062*5-0.004*75&quot;</span>,</span>
-<span id="cb30-4"><a href="the-multinomial-logit-model.html#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.50-0.031*25-0.062*30-0.004*125-0.0087*50&quot;</span>)</span>
-<span id="cb30-5"><a href="the-multinomial-logit-model.html#cb30-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb30-6"><a href="the-multinomial-logit-model.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;MNL Probabilities for In and Out of Vehicle Time, Cost and Income Model&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb30-7"><a href="the-multinomial-logit-model.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb30-8"><a href="the-multinomial-logit-model.html#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="the-multinomial-logit-model.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
+<span id="cb24-2"><a href="the-multinomial-logit-model.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot; -0.031*21-0.062*4-0.004*175&quot;</span>,</span>
+<span id="cb24-3"><a href="the-multinomial-logit-model.html#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;-1.90-0.031*23-0.062*5-0.004*75&quot;</span>,</span>
+<span id="cb24-4"><a href="the-multinomial-logit-model.html#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.50-0.031*25-0.062*30-0.004*125-0.0087*50&quot;</span>)</span>
+<span id="cb24-5"><a href="the-multinomial-logit-model.html#cb24-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="the-multinomial-logit-model.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;MNL Probabilities for In and Out of Vehicle Time, Cost and Income Model&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-7"><a href="the-multinomial-logit-model.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb24-8"><a href="the-multinomial-logit-model.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:uivtovtcost">Table 4.11: </span>MNL Probabilities for In and Out of Vehicle Time, Cost and Income Model
@@ -2276,14 +2300,14 @@ factor in the choice of a travel mode as the income of the traveler increases.
 The revised utility functions and calculations are shown in Table <a href="the-multinomial-logit-model.html#tab:uinteraction">4.12</a>
 using the values for the modal attributes and income as used in preceding
 example.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="the-multinomial-logit-model.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
-<span id="cb31-2"><a href="the-multinomial-logit-model.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot; -0.031*21-0.062*4-0.153*(175/50) &quot;</span>,</span>
-<span id="cb31-3"><a href="the-multinomial-logit-model.html#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot; -1.90-0.031*23-0.062*5-0.153*(75/50)   &quot;</span>,</span>
-<span id="cb31-4"><a href="the-multinomial-logit-model.html#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.45-0.031*25-0.062*30-0.153*(125/50)&quot;</span>)</span>
-<span id="cb31-5"><a href="the-multinomial-logit-model.html#cb31-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb31-6"><a href="the-multinomial-logit-model.html#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;MNL Probabilities for In and Out of Vehicle Time, Cost/Income Model&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-7"><a href="the-multinomial-logit-model.html#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb31-8"><a href="the-multinomial-logit-model.html#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="the-multinomial-logit-model.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">utility_table</span>(</span>
+<span id="cb25-2"><a href="the-multinomial-logit-model.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Drive Alone&quot;</span> <span class="ot">=</span> <span class="st">&quot; -0.031*21-0.062*4-0.153*(175/50) &quot;</span>,</span>
+<span id="cb25-3"><a href="the-multinomial-logit-model.html#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Shared Ride&quot;</span> <span class="ot">=</span> <span class="st">&quot; -1.90-0.031*23-0.062*5-0.153*(75/50)   &quot;</span>,</span>
+<span id="cb25-4"><a href="the-multinomial-logit-model.html#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Transit&quot;</span> <span class="ot">=</span> <span class="st">&quot;-0.45-0.031*25-0.062*30-0.153*(125/50)&quot;</span>)</span>
+<span id="cb25-5"><a href="the-multinomial-logit-model.html#cb25-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-6"><a href="the-multinomial-logit-model.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;MNL Probabilities for In and Out of Vehicle Time, Cost/Income Model&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-7"><a href="the-multinomial-logit-model.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb25-8"><a href="the-multinomial-logit-model.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_above</span>(<span class="fu">c</span>(<span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&quot;Utility&quot;</span><span class="ot">=</span> <span class="dv">2</span>, <span class="st">&quot; &quot;</span> <span class="ot">=</span> <span class="dv">2</span>), <span class="at">align =</span> <span class="st">&quot;center&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:uinteraction">Table 4.12: </span>MNL Probabilities for In and Out of Vehicle Time, Cost/Income Model
@@ -2846,46 +2870,46 @@ likelihood estimate of <span class="math inline">\(\beta\)</span>.</p>
 observations. Consequently, the maximum likelihood estimates for the parameters
 cannot be found graphically. Specialized software packages are available for
 this purpose.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="the-multinomial-logit-model.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate probabilities for example individuals</span></span>
-<span id="cb32-2"><a href="the-multinomial-logit-model.html#cb32-2" aria-hidden="true" tabindex="-1"></a>demo_ps <span class="ot">&lt;-</span> <span class="cf">function</span>(beta){</span>
-<span id="cb32-3"><a href="the-multinomial-logit-model.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  v1a <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">30</span></span>
-<span id="cb32-4"><a href="the-multinomial-logit-model.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  v1t <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">50</span> </span>
-<span id="cb32-5"><a href="the-multinomial-logit-model.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  p1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(v1a) <span class="sc">/</span> (<span class="fu">exp</span>(v1t) <span class="sc">+</span> <span class="fu">exp</span>(v1a)) </span>
-<span id="cb32-6"><a href="the-multinomial-logit-model.html#cb32-6" aria-hidden="true" tabindex="-1"></a>  v2a <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">20</span></span>
-<span id="cb32-7"><a href="the-multinomial-logit-model.html#cb32-7" aria-hidden="true" tabindex="-1"></a>  v2t <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">10</span></span>
-<span id="cb32-8"><a href="the-multinomial-logit-model.html#cb32-8" aria-hidden="true" tabindex="-1"></a>  p2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(v2a) <span class="sc">/</span> (<span class="fu">exp</span>(v2t) <span class="sc">+</span> <span class="fu">exp</span>(v2a)) </span>
-<span id="cb32-9"><a href="the-multinomial-logit-model.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  v3a <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">40</span></span>
-<span id="cb32-10"><a href="the-multinomial-logit-model.html#cb32-10" aria-hidden="true" tabindex="-1"></a>  v3t <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">30</span></span>
-<span id="cb32-11"><a href="the-multinomial-logit-model.html#cb32-11" aria-hidden="true" tabindex="-1"></a>  p3 <span class="ot">&lt;-</span> <span class="fu">exp</span>(v3t) <span class="sc">/</span> (<span class="fu">exp</span>(v3t) <span class="sc">+</span> <span class="fu">exp</span>(v3a)) </span>
-<span id="cb32-12"><a href="the-multinomial-logit-model.html#cb32-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb32-13"><a href="the-multinomial-logit-model.html#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(p1, p2, p3)</span>
-<span id="cb32-14"><a href="the-multinomial-logit-model.html#cb32-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-15"><a href="the-multinomial-logit-model.html#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-16"><a href="the-multinomial-logit-model.html#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate likelihood function</span></span>
-<span id="cb32-17"><a href="the-multinomial-logit-model.html#cb32-17" aria-hidden="true" tabindex="-1"></a>demo_likelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(beta) {</span>
-<span id="cb32-18"><a href="the-multinomial-logit-model.html#cb32-18" aria-hidden="true" tabindex="-1"></a>  ps <span class="ot">&lt;-</span> <span class="fu">demo_ps</span>(beta)</span>
-<span id="cb32-19"><a href="the-multinomial-logit-model.html#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prod</span>(ps)</span>
-<span id="cb32-20"><a href="the-multinomial-logit-model.html#cb32-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-21"><a href="the-multinomial-logit-model.html#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="the-multinomial-logit-model.html#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate log-likelihood</span></span>
-<span id="cb32-23"><a href="the-multinomial-logit-model.html#cb32-23" aria-hidden="true" tabindex="-1"></a>demo_loglikelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(beta) {</span>
-<span id="cb32-24"><a href="the-multinomial-logit-model.html#cb32-24" aria-hidden="true" tabindex="-1"></a>  ps <span class="ot">&lt;-</span> <span class="fu">demo_ps</span>(beta)</span>
-<span id="cb32-25"><a href="the-multinomial-logit-model.html#cb32-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">log</span>(ps))</span>
-<span id="cb32-26"><a href="the-multinomial-logit-model.html#cb32-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-27"><a href="the-multinomial-logit-model.html#cb32-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-28"><a href="the-multinomial-logit-model.html#cb32-28" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb32-29"><a href="the-multinomial-logit-model.html#cb32-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">beta =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.2</span>, <span class="dv">0</span>, <span class="at">by =</span> <span class="fl">0.001</span>)</span>
-<span id="cb32-30"><a href="the-multinomial-logit-model.html#cb32-30" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-31"><a href="the-multinomial-logit-model.html#cb32-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb32-32"><a href="the-multinomial-logit-model.html#cb32-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb32-33"><a href="the-multinomial-logit-model.html#cb32-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">Likelihood =</span> <span class="fu">demo_likelihood</span>(beta),</span>
-<span id="cb32-34"><a href="the-multinomial-logit-model.html#cb32-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Log Likelihood</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">demo_loglikelihood</span>(beta)</span>
-<span id="cb32-35"><a href="the-multinomial-logit-model.html#cb32-35" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-36"><a href="the-multinomial-logit-model.html#cb32-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(likelihood, value, <span class="sc">-</span>beta) <span class="sc">%&gt;%</span></span>
-<span id="cb32-37"><a href="the-multinomial-logit-model.html#cb32-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> beta, <span class="at">y =</span> value)) <span class="sc">+</span> </span>
-<span id="cb32-38"><a href="the-multinomial-logit-model.html#cb32-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb32-39"><a href="the-multinomial-logit-model.html#cb32-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(beta)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Likelihood Function Value&quot;</span>) <span class="sc">+</span></span>
-<span id="cb32-40"><a href="the-multinomial-logit-model.html#cb32-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(likelihood <span class="sc">~</span> ., <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)  <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="the-multinomial-logit-model.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate probabilities for example individuals</span></span>
+<span id="cb26-2"><a href="the-multinomial-logit-model.html#cb26-2" aria-hidden="true" tabindex="-1"></a>demo_ps <span class="ot">&lt;-</span> <span class="cf">function</span>(beta){</span>
+<span id="cb26-3"><a href="the-multinomial-logit-model.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  v1a <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">30</span></span>
+<span id="cb26-4"><a href="the-multinomial-logit-model.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  v1t <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">50</span> </span>
+<span id="cb26-5"><a href="the-multinomial-logit-model.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  p1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(v1a) <span class="sc">/</span> (<span class="fu">exp</span>(v1t) <span class="sc">+</span> <span class="fu">exp</span>(v1a)) </span>
+<span id="cb26-6"><a href="the-multinomial-logit-model.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  v2a <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">20</span></span>
+<span id="cb26-7"><a href="the-multinomial-logit-model.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  v2t <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb26-8"><a href="the-multinomial-logit-model.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  p2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(v2a) <span class="sc">/</span> (<span class="fu">exp</span>(v2t) <span class="sc">+</span> <span class="fu">exp</span>(v2a)) </span>
+<span id="cb26-9"><a href="the-multinomial-logit-model.html#cb26-9" aria-hidden="true" tabindex="-1"></a>  v3a <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">40</span></span>
+<span id="cb26-10"><a href="the-multinomial-logit-model.html#cb26-10" aria-hidden="true" tabindex="-1"></a>  v3t <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="dv">30</span></span>
+<span id="cb26-11"><a href="the-multinomial-logit-model.html#cb26-11" aria-hidden="true" tabindex="-1"></a>  p3 <span class="ot">&lt;-</span> <span class="fu">exp</span>(v3t) <span class="sc">/</span> (<span class="fu">exp</span>(v3t) <span class="sc">+</span> <span class="fu">exp</span>(v3a)) </span>
+<span id="cb26-12"><a href="the-multinomial-logit-model.html#cb26-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-13"><a href="the-multinomial-logit-model.html#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(p1, p2, p3)</span>
+<span id="cb26-14"><a href="the-multinomial-logit-model.html#cb26-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-15"><a href="the-multinomial-logit-model.html#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="the-multinomial-logit-model.html#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate likelihood function</span></span>
+<span id="cb26-17"><a href="the-multinomial-logit-model.html#cb26-17" aria-hidden="true" tabindex="-1"></a>demo_likelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(beta) {</span>
+<span id="cb26-18"><a href="the-multinomial-logit-model.html#cb26-18" aria-hidden="true" tabindex="-1"></a>  ps <span class="ot">&lt;-</span> <span class="fu">demo_ps</span>(beta)</span>
+<span id="cb26-19"><a href="the-multinomial-logit-model.html#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prod</span>(ps)</span>
+<span id="cb26-20"><a href="the-multinomial-logit-model.html#cb26-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-21"><a href="the-multinomial-logit-model.html#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-22"><a href="the-multinomial-logit-model.html#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate log-likelihood</span></span>
+<span id="cb26-23"><a href="the-multinomial-logit-model.html#cb26-23" aria-hidden="true" tabindex="-1"></a>demo_loglikelihood <span class="ot">&lt;-</span> <span class="cf">function</span>(beta) {</span>
+<span id="cb26-24"><a href="the-multinomial-logit-model.html#cb26-24" aria-hidden="true" tabindex="-1"></a>  ps <span class="ot">&lt;-</span> <span class="fu">demo_ps</span>(beta)</span>
+<span id="cb26-25"><a href="the-multinomial-logit-model.html#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(<span class="fu">log</span>(ps))</span>
+<span id="cb26-26"><a href="the-multinomial-logit-model.html#cb26-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-27"><a href="the-multinomial-logit-model.html#cb26-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-28"><a href="the-multinomial-logit-model.html#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb26-29"><a href="the-multinomial-logit-model.html#cb26-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">beta =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.2</span>, <span class="dv">0</span>, <span class="at">by =</span> <span class="fl">0.001</span>)</span>
+<span id="cb26-30"><a href="the-multinomial-logit-model.html#cb26-30" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-31"><a href="the-multinomial-logit-model.html#cb26-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb26-32"><a href="the-multinomial-logit-model.html#cb26-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb26-33"><a href="the-multinomial-logit-model.html#cb26-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">Likelihood =</span> <span class="fu">demo_likelihood</span>(beta),</span>
+<span id="cb26-34"><a href="the-multinomial-logit-model.html#cb26-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Log Likelihood</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">demo_loglikelihood</span>(beta)</span>
+<span id="cb26-35"><a href="the-multinomial-logit-model.html#cb26-35" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-36"><a href="the-multinomial-logit-model.html#cb26-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(likelihood, value, <span class="sc">-</span>beta) <span class="sc">%&gt;%</span></span>
+<span id="cb26-37"><a href="the-multinomial-logit-model.html#cb26-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> beta, <span class="at">y =</span> value)) <span class="sc">+</span> </span>
+<span id="cb26-38"><a href="the-multinomial-logit-model.html#cb26-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb26-39"><a href="the-multinomial-logit-model.html#cb26-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(beta)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Likelihood Function Value&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-40"><a href="the-multinomial-logit-model.html#cb26-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(likelihood <span class="sc">~</span> ., <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)  <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
 <div class="figure"><span id="fig:demo-likelihood"></span>
 <img src="04-mnl_files/figure-html/demo-likelihood-1.png" alt="Likelihood and log-likelihood as a function of a parameter value." width="672" />
 <p class="caption">
@@ -2964,6 +2988,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

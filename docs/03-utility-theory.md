@@ -249,7 +249,7 @@ V(X_{TR},S_{i})=\gamma_{1}\times TT_{TR}+\gamma_{2}\times TT_{TR}\times Fem+\gam
 
 In this example, $\gamma_1$ represents the utility value of one minute of travel time to men and $\gamma_2$ represents the additional utility value of one minute of travel time to women.  Thus, the total utility value of one minute of travel time to women is $\gamma_1+\gamma_2$.  In this case, $\gamma_1$, is expected to be negative indicating that increased travel time reduces the utility of an alternative.  $\gamma_2$ may be negative or positive, indicating that women are more or less sensitive to increases in travel time.
 
-## Specification of the Additive Error Term
+## Specification of the Additive Error Term {#additive-error-term}
 
 As described in section 3.3, the utility of each alternative is represented by a deterministic component,  which is represented in the utility function by observed and measured variables, and an additive error term, $\epsilon_i$ which represents those components of the utility function which are not included in the model.  In the three alternative examples used above, the total utility of each alternative can be represented by:
 

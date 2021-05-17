@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Data Assembly and Estimation of Simple Multinomial Logit Models | A Self-Instructing Course in Mode Choice Modeling</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Data Assembly and Estimation of Simple Multinomial Logit Models | A Self-Instructing Course in Mode Choice Modeling" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-04-26" />
+<meta name="date" content="2021-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="the-multinomial-logit-model.html"/>
 <link rel="next" href="specification-chapter.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -119,6 +121,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -173,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-related-to-the-characteristics-of-the-decision-maker"><i class="fa fa-check"></i><b>3.4.3</b> Utility Related to the Characteristics of the Decision Maker</a></li>
 <li class="chapter" data-level="3.4.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-defined-by-interactions-between-alternative-attributes-and-decision-maker-characteristics"><i class="fa fa-check"></i><b>3.4.4</b> Utility Defined by Interactions between Alternative Attributes and Decision Maker Characteristics</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#specification-of-the-additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
+<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a>
 <ul>
@@ -182,9 +207,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-sigmoid-or-s-shape-of-multinomial-logit-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> The Sigmoid or S shape of Multinomial Logit Probabilities</a></li>
 <li class="chapter" data-level="4.1.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-equivalent-differences-property"><i class="fa fa-check"></i><b>4.1.2</b> The Equivalent Differences Property</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
+<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#IIA-section"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-red-busblue-bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
+<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-prediction-with-multinomial-logit-model"><i class="fa fa-check"></i><b>4.3</b> Example: Prediction with Multinomial Logit Model</a></li>
 <li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a>
@@ -231,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="specification-chapter.html"><a href="specification-chapter.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement: San Francisco Bay Area Work Mode Choice</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.1" data-path="specification-chapter.html"><a href="specification-chapter.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
 <li class="chapter" data-level="6.2" data-path="specification-chapter.html"><a href="specification-chapter.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="specification-chapter.html"><a href="specification-chapter.html#refinement-of-specification-for-alternative-specific-income-effects"><i class="fa fa-check"></i><b>6.2.1</b> Refinement of Specification for Alternative Specific Income Effects</a></li>
@@ -250,28 +275,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.1" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#introduction-2"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.2" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#specification-for-shopother-mode-choice-model"><i class="fa fa-check"></i><b>7.2</b> Specification for Shop/Other Mode Choice Model</a></li>
 <li class="chapter" data-level="7.3" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#initial-model-specification"><i class="fa fa-check"></i><b>7.3</b> Initial Model Specification</a></li>
 <li class="chapter" data-level="7.4" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#exploring-alternative-specifications"><i class="fa fa-check"></i><b>7.4</b> Exploring Alternative Specifications</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
+<li class="chapter" data-level="8" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="nested-logit-model.html"><a href="nested-logit-model.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
-<li class="chapter" data-level="8.2" data-path="nested-logit-model.html"><a href="nested-logit-model.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a></li>
-<li class="chapter" data-level="8.3" data-path="nested-logit-model.html"><a href="nested-logit-model.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#logsum-param"><i class="fa fa-check"></i><b>8.2.1</b> Interpretation of the Logsum Parameter</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#disaggregate-direct-and-cross-elasticities"><i class="fa fa-check"></i><b>8.2.2</b> Disaggregate Direct and Cross-Elasticities</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.4" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#testing-NL-structures"><i class="fa fa-check"></i><b>8.4</b> Statistical Testing of Nested Logit Structures</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.1" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#introduction-3"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
 <li class="chapter" data-level="9.2" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-work-trips"><i class="fa fa-check"></i><b>9.2</b> Nested Models for Work Trips</a></li>
 <li class="chapter" data-level="9.3" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-shop-other-trips"><i class="fa fa-check"></i><b>9.3</b> Nested Models for Shop / Other Trips</a></li>
 <li class="chapter" data-level="9.4" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#practical-issues-and-implications"><i class="fa fa-check"></i><b>9.4</b> Practical Issues and Implications</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation.html"><a href="multiple-maxima-in-nested-logit-estimation.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation</a></li>
+<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><a href="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation (#nesting-optima-chapter)</a></li>
 <li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="chapter1.html"><a href="chapter1.html#background"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
+<li class="chapter" data-level="11.1" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#background-1"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
 <li class="chapter" data-level="11.2" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-forecasting"><i class="fa fa-check"></i><b>11.2</b> Aggregate Forecasting</a></li>
 <li class="chapter" data-level="11.3" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-assessment-of-travel-mode-choice-models"><i class="fa fa-check"></i><b>11.3</b> Aggregate Assessment of Travel Mode Choice Models</a></li>
 </ul></li>
@@ -280,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-gev-class-of-models"><i class="fa fa-check"></i><b>12.1</b> The GEV Class of Models</a></li>
 <li class="chapter" data-level="12.2" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mmnl-class-of-models"><i class="fa fa-check"></i><b>12.2</b> The MMNL Class of Models</a></li>
 <li class="chapter" data-level="12.3" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mixed-gev-class-of-models"><i class="fa fa-check"></i><b>12.3</b> The Mixed GEV Class of Models</a></li>
-<li class="chapter" data-level="12.4" data-path="specification-chapter.html"><a href="specification-chapter.html#summary"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
+<li class="chapter" data-level="12.4" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#summary-1"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -304,17 +334,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="estimation-chapter" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Data Assembly and Estimation of Simple Multinomial Logit Models</h1>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="estimation-chapter.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># packages used in this chapter</span></span>
-<span id="cb33-2"><a href="estimation-chapter.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># general data munging</span></span>
-<span id="cb33-3"><a href="estimation-chapter.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven) <span class="co"># read spss data into R</span></span>
-<span id="cb33-4"><a href="estimation-chapter.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlogit) <span class="co"># multinomial logit estimation</span></span>
-<span id="cb33-5"><a href="estimation-chapter.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary) <span class="co"># pretty tables</span></span>
-<span id="cb33-6"><a href="estimation-chapter.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)   <span class="co"># pretty tables</span></span>
-<span id="cb33-7"><a href="estimation-chapter.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled) <span class="co"># point labels</span></span>
-<span id="cb33-8"><a href="estimation-chapter.html#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-9"><a href="estimation-chapter.html#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co"># helping with book creation</span></span>
-<span id="cb33-10"><a href="estimation-chapter.html#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb33-11"><a href="estimation-chapter.html#cb33-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="estimation-chapter.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># packages used in this chapter</span></span>
+<span id="cb27-2"><a href="estimation-chapter.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># general data munging</span></span>
+<span id="cb27-3"><a href="estimation-chapter.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven) <span class="co"># read spss data into R</span></span>
+<span id="cb27-4"><a href="estimation-chapter.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlogit) <span class="co"># multinomial logit estimation</span></span>
+<span id="cb27-5"><a href="estimation-chapter.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary) <span class="co"># pretty tables</span></span>
+<span id="cb27-6"><a href="estimation-chapter.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)   <span class="co"># pretty tables</span></span>
+<span id="cb27-7"><a href="estimation-chapter.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled) <span class="co"># point labels</span></span>
+<span id="cb27-8"><a href="estimation-chapter.html#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="estimation-chapter.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># helping with book creation</span></span>
+<span id="cb27-10"><a href="estimation-chapter.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb27-11"><a href="estimation-chapter.html#cb27-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div id="estimation-intro" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Introduction</h2>
 <p>This chapter describes the estimation of basic specifications for the multinomial logit (MNL) model including the collection and organization of data required for model estimation. The chapter is organized as follows: Section <a href="estimation-chapter.html#estimation-data">5.2</a> presents an overview of the data required to estimate mode choice models.
@@ -349,7 +379,8 @@ software packages for estimation of MNL and NL models. Section <a href="estimati
 </ul>
 <p>Mode (Alternative) Related Variables:</p>
 <ul>
-<li>Total travel time,</li>
+<li>Total travel time,<br />
+</li>
 <li>In-vehicle travel time,</li>
 <li>Out-of-vehicle travel time,</li>
 <li>Walk time,</li>
@@ -386,7 +417,7 @@ software packages for estimation of MNL and NL models. Section <a href="estimati
 <p>The use of stratified random sampling does not present any new problems in estimation as long as the stratification variable(s) is (are) exogenous to the choice process. However, in some situations, one may want to use the discrete choice of interest (the dependent or endogenous variable) as the stratification variable. For example, if the bus mode is rarely chosen for urban or intercity travel, a random sampling procedure or even an exogenously stratified sample might not provide sufficient observations of bus riders to understand the factors that affect the choice of the bus mode. In this case, bus riders can be intentionally over sampled by interviewing them at bus stops or on board the buses. Such choice based sampling may also be motivated by cost considerations. Special techniques are required to estimate model parameters using choice based sampling methods.</p>
 <p>A further problem is that it may be difficult to obtain a random sample as it may not be possible to get an up to date and complete list of potential respondents from which to select a sample. This is the primary reason for using “deterministic rules” of sampling. In systematic sampling, sample units are drawn by deterministic rather than random rules. For example, rather than drawing a random sample of 5 percent all households in a region from a published directory, a systematic sampling plan may pick out every 20th household in the directory. As long as there is no inherent bias in setting up the deterministic rule, the systematic sampling plan is essentially equivalent to random sampling, and the choice of one over the other may be a matter of operational convenience.</p>
 <p>In addition to the sampling approaches discussed above, combinations of the approaches can also be used. For example, enriched sampling uses a combination of household or workplace sampling with choice based sampling to increase the number of transit users in the study data. As with choice based sampling, special estimation techniques are required to offset the biases associated with this sampling approach.</p>
-<p>Another issue in survey sampling is the sample size to be used. The size of the sample required to adequately represent the population is a function of the level of statistical accuracy and confidence desired from the survey. The precision of parameter estimates and the statistical validity of estimation results improve with sample size. However, the cost of the survey also increases with sample size and in many cases it is necessary to restrict the sample size to ensure that the cost of the survey remains within budgetary constraints. The decision about sample size requires a careful evaluation of the need for adequate data to satisfy study objectives <em>vis-à-vis</em> budgetary constraints. Interested readers are referred to <span class="citation"><a href="references.html#ref-benakivalerman1985" role="doc-biblioref">M. Ben-Akiva and Lerman</a> (<a href="references.html#ref-benakivalerman1985" role="doc-biblioref">1985</a>)</span> or <span class="citation"><a href="references.html#ref-borschsupan1987" role="doc-biblioref">Börsch-Supan</a> (<a href="references.html#ref-borschsupan1987" role="doc-biblioref">1987</a>)</span> for a more comprehensive discussion of sampling methods and sample size issues.</p>
+<p>Another issue in survey sampling is the sample size to be used. The size of the sample required to adequately represent the population is a function of the level of statistical accuracy and confidence desired from the survey. The precision of parameter estimates and the statistical validity of estimation results improve with sample size. However, the cost of the survey also increases with sample size and in many cases it is necessary to restrict the sample size to ensure that the cost of the survey remains within budgetary constraints. The decision about sample size requires a careful evaluation of the need for adequate data to satisfy study objectives <em>vis-à-vis</em> budgetary constraints. Interested readers are referred to <span class="citation"><a href="#ref-benakivalerman1985" role="doc-biblioref">M. Ben-Akiva and Lerman</a> (<a href="#ref-benakivalerman1985" role="doc-biblioref">1985</a>)</span> or <span class="citation"><a href="#ref-borschsupan1987" role="doc-biblioref">Börsch-Supan</a> (<a href="#ref-borschsupan1987" role="doc-biblioref">1987</a>)</span> for a more comprehensive discussion of sampling methods and sample size issues.</p>
 </div>
 </div>
 <div id="estimation-collection-methods" class="section level2" number="5.4">
@@ -396,22 +427,22 @@ software packages for estimation of MNL and NL models. Section <a href="estimati
 </div>
 <div id="estimation-data-structure" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Data Structure for Estimation</h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="estimation-chapter.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in raw SPSS file</span></span>
-<span id="cb34-2"><a href="estimation-chapter.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb34-3"><a href="estimation-chapter.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We received the work mode choice dataset from Laurie Garrow, who had converted</span></span>
-<span id="cb34-4"><a href="estimation-chapter.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the file into a labeled SPSS data object. This code reads the file into R</span></span>
-<span id="cb34-5"><a href="estimation-chapter.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># using the haven::read_spss function, and then creates a new alternative column</span></span>
-<span id="cb34-6"><a href="estimation-chapter.html#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co"># as the label of the alternative number</span></span>
-<span id="cb34-7"><a href="estimation-chapter.html#cb34-7" aria-hidden="true" tabindex="-1"></a>sf_work_mode <span class="ot">&lt;-</span> <span class="fu">read_spss</span>(<span class="st">&quot;data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.sav&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-8"><a href="estimation-chapter.html#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">altname =</span> <span class="fu">as_factor</span>(altnum, <span class="at">levels =</span> <span class="st">&quot;labels&quot;</span>))</span>
-<span id="cb34-9"><a href="estimation-chapter.html#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-10"><a href="estimation-chapter.html#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert into mlogit dfidx data frame</span></span>
-<span id="cb34-11"><a href="estimation-chapter.html#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co"># mlogit requires instructions on which rows are the alternative, and which rows</span></span>
-<span id="cb34-12"><a href="estimation-chapter.html#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co"># are the cases. This dataset is in IDCase-ALT format</span></span>
-<span id="cb34-13"><a href="estimation-chapter.html#cb34-13" aria-hidden="true" tabindex="-1"></a>sf_mlogit <span class="ot">&lt;-</span> <span class="fu">dfidx</span>(sf_work_mode, <span class="at">idx =</span> <span class="fu">c</span>(<span class="st">&quot;case&quot;</span>, <span class="st">&quot;altname&quot;</span>))</span>
-<span id="cb34-14"><a href="estimation-chapter.html#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-15"><a href="estimation-chapter.html#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co"># write to data/ folder for future use</span></span>
-<span id="cb34-16"><a href="estimation-chapter.html#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(sf_mlogit, <span class="st">&quot;data/worktrips.rds&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="estimation-chapter.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in raw SPSS file</span></span>
+<span id="cb28-2"><a href="estimation-chapter.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb28-3"><a href="estimation-chapter.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We received the work mode choice dataset from Laurie Garrow, who had converted</span></span>
+<span id="cb28-4"><a href="estimation-chapter.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the file into a labeled SPSS data object. This code reads the file into R</span></span>
+<span id="cb28-5"><a href="estimation-chapter.html#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># using the haven::read_spss function, and then creates a new alternative column</span></span>
+<span id="cb28-6"><a href="estimation-chapter.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># as the label of the alternative number</span></span>
+<span id="cb28-7"><a href="estimation-chapter.html#cb28-7" aria-hidden="true" tabindex="-1"></a>sf_work_mode <span class="ot">&lt;-</span> <span class="fu">read_spss</span>(<span class="st">&quot;data-raw/Work Trips/SPSS/SF MTC Work MC Data NewVars.sav&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-8"><a href="estimation-chapter.html#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">altname =</span> <span class="fu">as_factor</span>(altnum, <span class="at">levels =</span> <span class="st">&quot;labels&quot;</span>))</span>
+<span id="cb28-9"><a href="estimation-chapter.html#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="estimation-chapter.html#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert into mlogit dfidx data frame</span></span>
+<span id="cb28-11"><a href="estimation-chapter.html#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># mlogit requires instructions on which rows are the alternative, and which rows</span></span>
+<span id="cb28-12"><a href="estimation-chapter.html#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co"># are the cases. This dataset is in IDCase-ALT format</span></span>
+<span id="cb28-13"><a href="estimation-chapter.html#cb28-13" aria-hidden="true" tabindex="-1"></a>sf_mlogit <span class="ot">&lt;-</span> <span class="fu">dfidx</span>(sf_work_mode, <span class="at">idx =</span> <span class="fu">c</span>(<span class="st">&quot;case&quot;</span>, <span class="st">&quot;altname&quot;</span>))</span>
+<span id="cb28-14"><a href="estimation-chapter.html#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="estimation-chapter.html#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co"># write to data/ folder for future use</span></span>
+<span id="cb28-16"><a href="estimation-chapter.html#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(sf_mlogit, <span class="st">&quot;data/worktrips.rds&quot;</span>)</span></code></pre></div>
 <p>The data collected from the various sources described in the previous sections
 must be assembled into a single data set to support model estimation. This can
 be accomplished using a variety of spreadsheet, data base, statistical software
@@ -448,13 +479,13 @@ Either of the two data formats may be used to represent the information required
 for model estimation. The choice is based on the programming decisions of the
 software developer taking into account data storage and computational
 implications of each choice.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="estimation-chapter.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#trip-alt</span></span>
-<span id="cb35-2"><a href="estimation-chapter.html#cb35-2" aria-hidden="true" tabindex="-1"></a>trip_alt <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
-<span id="cb35-3"><a href="estimation-chapter.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(case <span class="sc">&lt;=</span> <span class="dv">4</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb35-4"><a href="estimation-chapter.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, <span class="at">Alternative =</span> altname, chosen, <span class="at">IVTT =</span> ivtt, <span class="at">Income =</span> hhinc) </span>
-<span id="cb35-5"><a href="estimation-chapter.html#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="estimation-chapter.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(trip_alt, <span class="at">caption=</span> <span class="st">&quot;Data Layout Type II: Trip-Alternative Format&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb35-7"><a href="estimation-chapter.html#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="estimation-chapter.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#trip-alt</span></span>
+<span id="cb29-2"><a href="estimation-chapter.html#cb29-2" aria-hidden="true" tabindex="-1"></a>trip_alt <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="estimation-chapter.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(case <span class="sc">&lt;=</span> <span class="dv">4</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="estimation-chapter.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, <span class="at">Alternative =</span> altname, chosen, <span class="at">IVTT =</span> ivtt, <span class="at">Income =</span> hhinc) </span>
+<span id="cb29-5"><a href="estimation-chapter.html#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="estimation-chapter.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(trip_alt, <span class="at">caption=</span> <span class="st">&quot;Data Layout Type II: Trip-Alternative Format&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-7"><a href="estimation-chapter.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:trip-alt">Table 5.1: </span>Data Layout Type II: Trip-Alternative Format
@@ -844,16 +875,16 @@ Transit
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="estimation-chapter.html#cb36-1" aria-hidden="true" tabindex="-1"></a>trip_format <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="estimation-chapter.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(case <span class="sc">&lt;=</span> <span class="dv">4</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb36-3"><a href="estimation-chapter.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, chosen, ivtt, <span class="at">Income =</span> hhinc, altname, altnum) <span class="sc">%&gt;%</span></span>
-<span id="cb36-4"><a href="estimation-chapter.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
-<span id="cb36-5"><a href="estimation-chapter.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> altname[<span class="fu">which</span>(chosen <span class="sc">==</span> <span class="dv">1</span>)], <span class="at">altname =</span> <span class="fu">str_c</span>(altname, <span class="st">&quot; - Travel Time&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb36-6"><a href="estimation-chapter.html#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>altnum) <span class="sc">%&gt;%</span></span>
-<span id="cb36-7"><a href="estimation-chapter.html#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altname, ivtt, <span class="at">fill =</span> <span class="dv">0</span>)</span>
-<span id="cb36-8"><a href="estimation-chapter.html#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-9"><a href="estimation-chapter.html#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">head</span>(trip_format), <span class="at">caption=</span> <span class="st">&quot;Data Layout Type I: Trip Format&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-10"><a href="estimation-chapter.html#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="estimation-chapter.html#cb30-1" aria-hidden="true" tabindex="-1"></a>trip_format <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="estimation-chapter.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(case <span class="sc">&lt;=</span> <span class="dv">4</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="estimation-chapter.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, chosen, ivtt, <span class="at">Income =</span> hhinc, altname, altnum) <span class="sc">%&gt;%</span></span>
+<span id="cb30-4"><a href="estimation-chapter.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
+<span id="cb30-5"><a href="estimation-chapter.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> altname[<span class="fu">which</span>(chosen <span class="sc">==</span> <span class="dv">1</span>)], <span class="at">altname =</span> <span class="fu">str_c</span>(altname, <span class="st">&quot; - Travel Time&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-6"><a href="estimation-chapter.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>altnum) <span class="sc">%&gt;%</span></span>
+<span id="cb30-7"><a href="estimation-chapter.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altname, ivtt, <span class="at">fill =</span> <span class="dv">0</span>)</span>
+<span id="cb30-8"><a href="estimation-chapter.html#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="estimation-chapter.html#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">head</span>(trip_format), <span class="at">caption=</span> <span class="st">&quot;Data Layout Type I: Trip Format&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-10"><a href="estimation-chapter.html#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:trip">Table 5.2: </span>Data Layout Type I: Trip Format
@@ -1016,52 +1047,52 @@ Transit
 <p>There are six work mode choice alternatives in the region: drive alone, shared-ride with 2 people, shared ride with 3 or more people, transit, bike, and walk.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> The drive alone mode is available for a trip only if the trip-maker’s household has a vehicle available and if the trip-maker has a driver’s license. The shared-ride modes (with 2 people and with 3 or more people) are available for all trips. Transit availability is determined based on the residence and work zones of individuals. The bike mode is deemed available if the one-way home-to-work distance is less than 12 miles, while the walk mode is considered to be available if the one-way home to work distance is less than 4 miles (the distance thresholds to determine bike and walk availability are determined based on the maximum one-way distance of bike and walk-users, respectively).</p>
 <p>Level of service data were generated by the Metropolitan Transportation Commission for each zone pair and for each mode. These data were appended to the home-based work trips based on the origin and destination of each trip. The data includes traveler, trip related area and mode related variables for each trip including in-vehicle travel time, out-of-vehicle travel time, travel cost, travel distance, and a mode availability indicator.</p>
 <p>Table <a href="estimation-chapter.html#tab:statsJtoWork">5.3</a> provides information about the availability and usage of each alternative and the average values of in-vehicle time, out-of-vehicle time and travel cost in the sample. Drive alone is available to most work commuters in the Bay Area and is the most frequently chosen alternative. The shared-ride modes are available for all trips (by construction) and together account for the next largest share of chosen alternatives. The combined total of drive alone and shared ride trips represent close to 85% of all work trips. Transit trips constitute roughly 10% of work trips, a substantially greater share than in most metropolitan regions in the U.S. The fraction of trips using non-motorized modes (walk and bike) constitutes a small but not insignificant portion of total trips.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="estimation-chapter.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculations =======================================</span></span>
-<span id="cb37-2"><a href="estimation-chapter.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate IVTT</span></span>
-<span id="cb37-3"><a href="estimation-chapter.html#cb37-3" aria-hidden="true" tabindex="-1"></a>sf_wm_ivtt <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
-<span id="cb37-4"><a href="estimation-chapter.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, altnum, chosen, ivtt, hhinc) <span class="sc">%&gt;%</span></span>
-<span id="cb37-5"><a href="estimation-chapter.html#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
-<span id="cb37-6"><a href="estimation-chapter.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> <span class="fu">max</span>(chosen <span class="sc">*</span> altnum) ) <span class="sc">%&gt;%</span></span>
-<span id="cb37-7"><a href="estimation-chapter.html#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altnum, ivtt, <span class="at">fill =</span> <span class="dv">0</span>)</span>
-<span id="cb37-8"><a href="estimation-chapter.html#cb37-8" aria-hidden="true" tabindex="-1"></a>ivtt_raw <span class="ot">&lt;-</span> <span class="fu">apply</span>(sf_wm_ivtt,<span class="dv">2</span>,<span class="cf">function</span>(x) <span class="fu">mean</span>(x[x<span class="sc">&gt;</span><span class="dv">0</span>]))</span>
-<span id="cb37-9"><a href="estimation-chapter.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate OVTT</span></span>
-<span id="cb37-10"><a href="estimation-chapter.html#cb37-10" aria-hidden="true" tabindex="-1"></a>sf_wm_ovtt <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
-<span id="cb37-11"><a href="estimation-chapter.html#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, altnum, chosen, ovtt, hhinc) <span class="sc">%&gt;%</span></span>
-<span id="cb37-12"><a href="estimation-chapter.html#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
-<span id="cb37-13"><a href="estimation-chapter.html#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> <span class="fu">max</span>(chosen <span class="sc">*</span> altnum) ) <span class="sc">%&gt;%</span></span>
-<span id="cb37-14"><a href="estimation-chapter.html#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altnum, ovtt, <span class="at">fill =</span> <span class="dv">0</span>)</span>
-<span id="cb37-15"><a href="estimation-chapter.html#cb37-15" aria-hidden="true" tabindex="-1"></a>ovtt_raw <span class="ot">&lt;-</span> <span class="fu">apply</span>(sf_wm_ovtt,<span class="dv">2</span>,<span class="cf">function</span>(x) <span class="fu">mean</span>(x[x<span class="sc">&gt;</span><span class="dv">0</span>]))</span>
-<span id="cb37-16"><a href="estimation-chapter.html#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate OVTT for walk (using TVTT)</span></span>
-<span id="cb37-17"><a href="estimation-chapter.html#cb37-17" aria-hidden="true" tabindex="-1"></a>sf_wm_tvtt <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
-<span id="cb37-18"><a href="estimation-chapter.html#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, altnum, chosen, tvtt, hhinc) <span class="sc">%&gt;%</span></span>
-<span id="cb37-19"><a href="estimation-chapter.html#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
-<span id="cb37-20"><a href="estimation-chapter.html#cb37-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> <span class="fu">max</span>(chosen <span class="sc">*</span> altnum) ) <span class="sc">%&gt;%</span></span>
-<span id="cb37-21"><a href="estimation-chapter.html#cb37-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altnum, tvtt, <span class="at">fill =</span> <span class="dv">0</span>)</span>
-<span id="cb37-22"><a href="estimation-chapter.html#cb37-22" aria-hidden="true" tabindex="-1"></a>tvtt_raw <span class="ot">&lt;-</span> <span class="fu">apply</span>(sf_wm_tvtt,<span class="dv">2</span>,<span class="cf">function</span>(x) <span class="fu">mean</span>(x[x<span class="sc">&gt;</span><span class="dv">0</span>]))</span>
-<span id="cb37-23"><a href="estimation-chapter.html#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate market share</span></span>
-<span id="cb37-24"><a href="estimation-chapter.html#cb37-24" aria-hidden="true" tabindex="-1"></a>Base_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> cost <span class="sc">+</span> tvtt <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit)</span>
-<span id="cb37-25"><a href="estimation-chapter.html#cb37-25" aria-hidden="true" tabindex="-1"></a>mrktshr_raw <span class="ot">&lt;-</span> Base_model<span class="sc">$</span>freq <span class="sc">/</span> <span class="fu">nrow</span>(sf_wm_tvtt)</span>
-<span id="cb37-26"><a href="estimation-chapter.html#cb37-26" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate COST</span></span>
-<span id="cb37-27"><a href="estimation-chapter.html#cb37-27" aria-hidden="true" tabindex="-1"></a>sf_wm_cost <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
-<span id="cb37-28"><a href="estimation-chapter.html#cb37-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, altnum, chosen, cost, hhinc) <span class="sc">%&gt;%</span></span>
-<span id="cb37-29"><a href="estimation-chapter.html#cb37-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
-<span id="cb37-30"><a href="estimation-chapter.html#cb37-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> <span class="fu">max</span>(chosen <span class="sc">*</span> altnum) ) <span class="sc">%&gt;%</span></span>
-<span id="cb37-31"><a href="estimation-chapter.html#cb37-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altnum, cost, <span class="at">fill =</span> <span class="dv">0</span>)</span>
-<span id="cb37-32"><a href="estimation-chapter.html#cb37-32" aria-hidden="true" tabindex="-1"></a>cost_raw <span class="ot">&lt;-</span> <span class="fu">apply</span>(sf_wm_cost,<span class="dv">2</span>,<span class="cf">function</span>(x) <span class="fu">mean</span>(x[x<span class="sc">&gt;</span><span class="dv">0</span>]))</span>
-<span id="cb37-33"><a href="estimation-chapter.html#cb37-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-34"><a href="estimation-chapter.html#cb37-34" aria-hidden="true" tabindex="-1"></a><span class="co">#create the table ==================================</span></span>
-<span id="cb37-35"><a href="estimation-chapter.html#cb37-35" aria-hidden="true" tabindex="-1"></a>statsJtoWork <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb37-36"><a href="estimation-chapter.html#cb37-36" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Mode&quot;</span><span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;1. Drive Alone&quot;</span>,<span class="st">&quot;2. Shared Ride (2)&quot;</span>,<span class="st">&quot;3. Shared Ride (3+)&quot;</span>, <span class="st">&quot;4. Transit&quot;</span>, <span class="st">&quot;5. Bike&quot;</span>, <span class="st">&quot;6. Walk&quot;</span>),</span>
-<span id="cb37-37"><a href="estimation-chapter.html#cb37-37" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Fraction of Sample with Mode Available (%)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">94.6</span>,<span class="fl">100.0</span>,<span class="fl">100.0</span>,<span class="fl">79.6</span>,<span class="fl">34.6</span>,<span class="fl">29.4</span>),</span>
-<span id="cb37-38"><a href="estimation-chapter.html#cb37-38" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Market Share (%)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(mrktshr_raw) <span class="sc">*</span> <span class="dv">100</span>,</span>
-<span id="cb37-39"><a href="estimation-chapter.html#cb37-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Average IVTT (minutes)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(ivtt_raw[ <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]), </span>
-<span id="cb37-40"><a href="estimation-chapter.html#cb37-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Average OVTT (minutes)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(ovtt_raw[<span class="fu">c</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">9</span>)],  tvtt_raw[<span class="fu">c</span>(<span class="dv">10</span>)]),</span>
-<span id="cb37-41"><a href="estimation-chapter.html#cb37-41" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Average Cost (1990 cents)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(cost_raw[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]))</span>
-<span id="cb37-42"><a href="estimation-chapter.html#cb37-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-43"><a href="estimation-chapter.html#cb37-43" aria-hidden="true" tabindex="-1"></a><span class="co">#display the table =================================</span></span>
-<span id="cb37-44"><a href="estimation-chapter.html#cb37-44" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(statsJtoWork, <span class="at">digits =</span> <span class="dv">1</span>,</span>
-<span id="cb37-45"><a href="estimation-chapter.html#cb37-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Sample Statistics for Bay Area Journey-to-Work Modal Data&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-46"><a href="estimation-chapter.html#cb37-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="estimation-chapter.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculations =======================================</span></span>
+<span id="cb31-2"><a href="estimation-chapter.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate IVTT</span></span>
+<span id="cb31-3"><a href="estimation-chapter.html#cb31-3" aria-hidden="true" tabindex="-1"></a>sf_wm_ivtt <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="estimation-chapter.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, altnum, chosen, ivtt, hhinc) <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="estimation-chapter.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
+<span id="cb31-6"><a href="estimation-chapter.html#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> <span class="fu">max</span>(chosen <span class="sc">*</span> altnum) ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-7"><a href="estimation-chapter.html#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altnum, ivtt, <span class="at">fill =</span> <span class="dv">0</span>)</span>
+<span id="cb31-8"><a href="estimation-chapter.html#cb31-8" aria-hidden="true" tabindex="-1"></a>ivtt_raw <span class="ot">&lt;-</span> <span class="fu">apply</span>(sf_wm_ivtt,<span class="dv">2</span>,<span class="cf">function</span>(x) <span class="fu">mean</span>(x[x<span class="sc">&gt;</span><span class="dv">0</span>]))</span>
+<span id="cb31-9"><a href="estimation-chapter.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate OVTT</span></span>
+<span id="cb31-10"><a href="estimation-chapter.html#cb31-10" aria-hidden="true" tabindex="-1"></a>sf_wm_ovtt <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
+<span id="cb31-11"><a href="estimation-chapter.html#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, altnum, chosen, ovtt, hhinc) <span class="sc">%&gt;%</span></span>
+<span id="cb31-12"><a href="estimation-chapter.html#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
+<span id="cb31-13"><a href="estimation-chapter.html#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> <span class="fu">max</span>(chosen <span class="sc">*</span> altnum) ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-14"><a href="estimation-chapter.html#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altnum, ovtt, <span class="at">fill =</span> <span class="dv">0</span>)</span>
+<span id="cb31-15"><a href="estimation-chapter.html#cb31-15" aria-hidden="true" tabindex="-1"></a>ovtt_raw <span class="ot">&lt;-</span> <span class="fu">apply</span>(sf_wm_ovtt,<span class="dv">2</span>,<span class="cf">function</span>(x) <span class="fu">mean</span>(x[x<span class="sc">&gt;</span><span class="dv">0</span>]))</span>
+<span id="cb31-16"><a href="estimation-chapter.html#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate OVTT for walk (using TVTT)</span></span>
+<span id="cb31-17"><a href="estimation-chapter.html#cb31-17" aria-hidden="true" tabindex="-1"></a>sf_wm_tvtt <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
+<span id="cb31-18"><a href="estimation-chapter.html#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, altnum, chosen, tvtt, hhinc) <span class="sc">%&gt;%</span></span>
+<span id="cb31-19"><a href="estimation-chapter.html#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
+<span id="cb31-20"><a href="estimation-chapter.html#cb31-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> <span class="fu">max</span>(chosen <span class="sc">*</span> altnum) ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-21"><a href="estimation-chapter.html#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altnum, tvtt, <span class="at">fill =</span> <span class="dv">0</span>)</span>
+<span id="cb31-22"><a href="estimation-chapter.html#cb31-22" aria-hidden="true" tabindex="-1"></a>tvtt_raw <span class="ot">&lt;-</span> <span class="fu">apply</span>(sf_wm_tvtt,<span class="dv">2</span>,<span class="cf">function</span>(x) <span class="fu">mean</span>(x[x<span class="sc">&gt;</span><span class="dv">0</span>]))</span>
+<span id="cb31-23"><a href="estimation-chapter.html#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate market share</span></span>
+<span id="cb31-24"><a href="estimation-chapter.html#cb31-24" aria-hidden="true" tabindex="-1"></a>Base_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> cost <span class="sc">+</span> tvtt <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit)</span>
+<span id="cb31-25"><a href="estimation-chapter.html#cb31-25" aria-hidden="true" tabindex="-1"></a>mrktshr_raw <span class="ot">&lt;-</span> Base_model<span class="sc">$</span>freq <span class="sc">/</span> <span class="fu">nrow</span>(sf_wm_tvtt)</span>
+<span id="cb31-26"><a href="estimation-chapter.html#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate COST</span></span>
+<span id="cb31-27"><a href="estimation-chapter.html#cb31-27" aria-hidden="true" tabindex="-1"></a>sf_wm_cost <span class="ot">&lt;-</span> sf_work_mode  <span class="sc">%&gt;%</span></span>
+<span id="cb31-28"><a href="estimation-chapter.html#cb31-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hhid, perid, altnum, chosen, cost, hhinc) <span class="sc">%&gt;%</span></span>
+<span id="cb31-29"><a href="estimation-chapter.html#cb31-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hhid, perid) <span class="sc">%&gt;%</span></span>
+<span id="cb31-30"><a href="estimation-chapter.html#cb31-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">chosen =</span> <span class="fu">max</span>(chosen <span class="sc">*</span> altnum) ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-31"><a href="estimation-chapter.html#cb31-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(altnum, cost, <span class="at">fill =</span> <span class="dv">0</span>)</span>
+<span id="cb31-32"><a href="estimation-chapter.html#cb31-32" aria-hidden="true" tabindex="-1"></a>cost_raw <span class="ot">&lt;-</span> <span class="fu">apply</span>(sf_wm_cost,<span class="dv">2</span>,<span class="cf">function</span>(x) <span class="fu">mean</span>(x[x<span class="sc">&gt;</span><span class="dv">0</span>]))</span>
+<span id="cb31-33"><a href="estimation-chapter.html#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-34"><a href="estimation-chapter.html#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="co">#create the table ==================================</span></span>
+<span id="cb31-35"><a href="estimation-chapter.html#cb31-35" aria-hidden="true" tabindex="-1"></a>statsJtoWork <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb31-36"><a href="estimation-chapter.html#cb31-36" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Mode&quot;</span><span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;1. Drive Alone&quot;</span>,<span class="st">&quot;2. Shared Ride (2)&quot;</span>,<span class="st">&quot;3. Shared Ride (3+)&quot;</span>, <span class="st">&quot;4. Transit&quot;</span>, <span class="st">&quot;5. Bike&quot;</span>, <span class="st">&quot;6. Walk&quot;</span>),</span>
+<span id="cb31-37"><a href="estimation-chapter.html#cb31-37" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Fraction of Sample with Mode Available (%)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">94.6</span>,<span class="fl">100.0</span>,<span class="fl">100.0</span>,<span class="fl">79.6</span>,<span class="fl">34.6</span>,<span class="fl">29.4</span>),</span>
+<span id="cb31-38"><a href="estimation-chapter.html#cb31-38" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Market Share (%)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(mrktshr_raw) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb31-39"><a href="estimation-chapter.html#cb31-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Average IVTT (minutes)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(ivtt_raw[ <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]), </span>
+<span id="cb31-40"><a href="estimation-chapter.html#cb31-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Average OVTT (minutes)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(ovtt_raw[<span class="fu">c</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">9</span>)],  tvtt_raw[<span class="fu">c</span>(<span class="dv">10</span>)]),</span>
+<span id="cb31-41"><a href="estimation-chapter.html#cb31-41" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Average Cost (1990 cents)&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(cost_raw[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]))</span>
+<span id="cb31-42"><a href="estimation-chapter.html#cb31-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-43"><a href="estimation-chapter.html#cb31-43" aria-hidden="true" tabindex="-1"></a><span class="co">#display the table =================================</span></span>
+<span id="cb31-44"><a href="estimation-chapter.html#cb31-44" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(statsJtoWork, <span class="at">digits =</span> <span class="dv">1</span>,</span>
+<span id="cb31-45"><a href="estimation-chapter.html#cb31-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Sample Statistics for Bay Area Journey-to-Work Modal Data&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-46"><a href="estimation-chapter.html#cb31-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:statsJtoWork">Table 5.3: </span>Sample Statistics for Bay Area Journey-to-Work Modal Data
@@ -1278,25 +1309,25 @@ the following estimation results:</p>
 <p>The value for the log-likelihood at zero and constants can be obtained for either software by estimating models without (zero) and with (constants) alternative specific constants<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> and no other variables. Further, the log-likelihood at zero can be calculated directly as</p>
 <p>$ _t ln(1/NAlt_t)$</p>
 <p>In the next three sections, we review the estimation results for the base model using informal judgment-based tests (section 5.7.1), goodness-of-fit measures (section 5.7.2), and statistical tests (section 5.7.3). These elements, taken together, provide a basis to evaluate each model and to compare models with different specifications.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="estimation-chapter.html#cb38-1" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> ivtt <span class="sc">+</span> cost, <span class="at">data =</span> sf_mlogit)</span>
-<span id="cb38-2"><a href="estimation-chapter.html#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="estimation-chapter.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate a model with constants only by constraining a single generic variable</span></span>
-<span id="cb38-4"><a href="estimation-chapter.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to be zero</span></span>
-<span id="cb38-5"><a href="estimation-chapter.html#cb38-5" aria-hidden="true" tabindex="-1"></a>market_shares <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> ivtt, <span class="at">data =</span> sf_mlogit, <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;ivtt&quot;</span> <span class="ot">=</span> <span class="dv">0</span>))</span>
-<span id="cb38-6"><a href="estimation-chapter.html#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="estimation-chapter.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate a null model by constraining ALL the parameters to be zero. </span></span>
-<span id="cb38-8"><a href="estimation-chapter.html#cb38-8" aria-hidden="true" tabindex="-1"></a>fixed_coefs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="fu">names</span>(<span class="fu">coef</span>(market_shares)), <span class="st">&quot;ivtt&quot;</span>))</span>
-<span id="cb38-9"><a href="estimation-chapter.html#cb38-9" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> ivtt, <span class="at">data =</span> sf_mlogit, <span class="at">start =</span> fixed_coefs, <span class="at">iterlim =</span> <span class="dv">0</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="estimation-chapter.html#cb39-1" aria-hidden="true" tabindex="-1"></a>basic_estimation <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb39-2"><a href="estimation-chapter.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Null Model&quot;</span> <span class="ot">=</span> null_model,</span>
-<span id="cb39-3"><a href="estimation-chapter.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Market Shares&quot;</span> <span class="ot">=</span> market_shares,</span>
-<span id="cb39-4"><a href="estimation-chapter.html#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model&quot;</span> <span class="ot">=</span> base</span>
-<span id="cb39-5"><a href="estimation-chapter.html#cb39-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-6"><a href="estimation-chapter.html#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="estimation-chapter.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
-<span id="cb39-8"><a href="estimation-chapter.html#cb39-8" aria-hidden="true" tabindex="-1"></a>  basic_estimation, </span>
-<span id="cb39-9"><a href="estimation-chapter.html#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Estimation Results for Zero Coefficient, Constants Only, and Base Models&quot;</span></span>
-<span id="cb39-10"><a href="estimation-chapter.html#cb39-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="estimation-chapter.html#cb32-1" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> ivtt <span class="sc">+</span> cost, <span class="at">data =</span> sf_mlogit)</span>
+<span id="cb32-2"><a href="estimation-chapter.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="estimation-chapter.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate a model with constants only by constraining a single generic variable</span></span>
+<span id="cb32-4"><a href="estimation-chapter.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># to be zero</span></span>
+<span id="cb32-5"><a href="estimation-chapter.html#cb32-5" aria-hidden="true" tabindex="-1"></a>market_shares <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> ivtt, <span class="at">data =</span> sf_mlogit, <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;ivtt&quot;</span> <span class="ot">=</span> <span class="dv">0</span>))</span>
+<span id="cb32-6"><a href="estimation-chapter.html#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="estimation-chapter.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate a null model by constraining ALL the parameters to be zero. </span></span>
+<span id="cb32-8"><a href="estimation-chapter.html#cb32-8" aria-hidden="true" tabindex="-1"></a>fixed_coefs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="fu">names</span>(<span class="fu">coef</span>(market_shares)), <span class="st">&quot;ivtt&quot;</span>))</span>
+<span id="cb32-9"><a href="estimation-chapter.html#cb32-9" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> ivtt, <span class="at">data =</span> sf_mlogit, <span class="at">start =</span> fixed_coefs, <span class="at">iterlim =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="estimation-chapter.html#cb33-1" aria-hidden="true" tabindex="-1"></a>basic_estimation <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb33-2"><a href="estimation-chapter.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Null Model&quot;</span> <span class="ot">=</span> null_model,</span>
+<span id="cb33-3"><a href="estimation-chapter.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Market Shares&quot;</span> <span class="ot">=</span> market_shares,</span>
+<span id="cb33-4"><a href="estimation-chapter.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model&quot;</span> <span class="ot">=</span> base</span>
+<span id="cb33-5"><a href="estimation-chapter.html#cb33-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-6"><a href="estimation-chapter.html#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="estimation-chapter.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb33-8"><a href="estimation-chapter.html#cb33-8" aria-hidden="true" tabindex="-1"></a>  basic_estimation, </span>
+<span id="cb33-9"><a href="estimation-chapter.html#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Estimation Results for Zero Coefficient, Constants Only, and Base Models&quot;</span></span>
+<span id="cb33-10"><a href="estimation-chapter.html#cb33-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:basic-estimation-table">Table 5.4: </span>Estimation Results for Zero Coefficient, Constants Only, and Base Models
@@ -1678,11 +1709,11 @@ Figure 5.1: Relationship between Different Log-likelihood Measures
 <span class="math inline">\(S_{k}\)</span> is the standard error of the estimate.</p>
 <p>Sufficiently large absolute values of the <em>t-statistic</em> lead to the rejection of the null hypothesis that the parameter is equal to the hypothesized value. When the hypothesized value, <span class="math inline">\(\beta_{k}^{*}\)</span>, is zero, the t-statistic becomes the ratio of the estimated parameter to the standard error. The default estimation output from most software packages includes the t-statistic for the test of the hypothesis that the true value is zero. The rejection of this null hypothesis implies that the corresponding variable has a significant impact on the modal utilities and suggests that the variable should be retained in the model. Low absolute values of the t-statistic imply that the variable does not contribute significantly to the explanatory power of the model and can be considered for exclusion. If it is concluded that the hypothesis is not rejected, the equality constraint can be incorporated in the model by creating a new variable <span class="math inline">\(X_{kl} = X_{k} + X_{l}\)</span> .</p>
 <p>The selection of a critical value for the t-statistic test is a matter of judgment and depends on the level of confidence with which the analyst wants to test his/her hypotheses. The critical t-values for different levels of confidence for samples sizes larger than 150 (which is the norm in mode choice analysis) are shown in Table 5-3. It should be apparent that the critical t-value increases with the desired level of confidence. Thus, one can conclude that a particular variable has no influence on choice (or equivalently that the true parameter associated with the variable is zero) can be rejected at the 90% level of confidence if the absolute value of the t-statistic is greater than 1.645 and at the 95% level of confidence if the t-statistic is greater than 1.960.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="estimation-chapter.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">confid =</span> <span class="fu">c</span>(.<span class="dv">9</span>, .<span class="dv">95</span>, .<span class="dv">99</span>, .<span class="dv">995</span>, .<span class="dv">999</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="estimation-chapter.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tval=</span><span class="fu">qnorm</span>((<span class="dv">1</span><span class="sc">-</span>confid)<span class="sc">/</span><span class="dv">2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb40-3"><a href="estimation-chapter.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;Critical t-Values for Selected Confidence Levels and Large Samples&quot;</span>,</span>
-<span id="cb40-4"><a href="estimation-chapter.html#cb40-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Confidence Level&quot;</span>, <span class="st">&quot;Critical t-value (two-tailed test)&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb40-5"><a href="estimation-chapter.html#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="estimation-chapter.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">confid =</span> <span class="fu">c</span>(.<span class="dv">9</span>, .<span class="dv">95</span>, .<span class="dv">99</span>, .<span class="dv">995</span>, .<span class="dv">999</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="estimation-chapter.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tval=</span><span class="fu">qnorm</span>((<span class="dv">1</span><span class="sc">-</span>confid)<span class="sc">/</span><span class="dv">2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="estimation-chapter.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">&quot;Critical t-Values for Selected Confidence Levels and Large Samples&quot;</span>,</span>
+<span id="cb34-4"><a href="estimation-chapter.html#cb34-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Confidence Level&quot;</span>, <span class="st">&quot;Critical t-value (two-tailed test)&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href="estimation-chapter.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:confidencelevels">Table 5.5: </span>Critical t-Values for Selected Confidence Levels and Large Samples
@@ -1740,37 +1771,37 @@ Critical t-value (two-tailed test)
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="estimation-chapter.html#cb41-1" aria-hidden="true" tabindex="-1"></a>these_colors <span class="ot">&lt;-</span> wesanderson<span class="sc">::</span><span class="fu">wes_palette</span>(<span class="st">&quot;Zissou1&quot;</span>)</span>
-<span id="cb41-2"><a href="estimation-chapter.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="dv">4</span>))) <span class="sc">+</span></span>
-<span id="cb41-3"><a href="estimation-chapter.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot the pdf</span></span>
-<span id="cb41-4"><a href="estimation-chapter.html#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
-<span id="cb41-5"><a href="estimation-chapter.html#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>),</span>
-<span id="cb41-6"><a href="estimation-chapter.html#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
-<span id="cb41-7"><a href="estimation-chapter.html#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="st">&quot;grey75&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;grey90&quot;</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb41-8"><a href="estimation-chapter.html#cb41-8" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Shade above 2</span></span>
-<span id="cb41-9"><a href="estimation-chapter.html#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
-<span id="cb41-10"><a href="estimation-chapter.html#cb41-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="fl">1.645</span>, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>), <span class="cn">NA</span>),</span>
-<span id="cb41-11"><a href="estimation-chapter.html#cb41-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
-<span id="cb41-12"><a href="estimation-chapter.html#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">fill =</span> these_colors[<span class="dv">4</span>], <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb41-13"><a href="estimation-chapter.html#cb41-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shade above 1.645</span></span>
-<span id="cb41-14"><a href="estimation-chapter.html#cb41-14" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_function</span>(</span>
-<span id="cb41-15"><a href="estimation-chapter.html#cb41-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">2</span>, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>), <span class="cn">NA</span>),</span>
-<span id="cb41-16"><a href="estimation-chapter.html#cb41-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
-<span id="cb41-17"><a href="estimation-chapter.html#cb41-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">fill =</span> these_colors[<span class="dv">5</span>], <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb41-18"><a href="estimation-chapter.html#cb41-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shade below -1.645</span></span>
-<span id="cb41-19"><a href="estimation-chapter.html#cb41-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
-<span id="cb41-20"><a href="estimation-chapter.html#cb41-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">1.645</span>, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>), <span class="cn">NA</span>),</span>
-<span id="cb41-21"><a href="estimation-chapter.html#cb41-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
-<span id="cb41-22"><a href="estimation-chapter.html#cb41-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">fill =</span> these_colors[<span class="dv">4</span>], <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb41-23"><a href="estimation-chapter.html#cb41-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shade below -2</span></span>
-<span id="cb41-24"><a href="estimation-chapter.html#cb41-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
-<span id="cb41-25"><a href="estimation-chapter.html#cb41-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">2</span>, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>), <span class="cn">NA</span>),</span>
-<span id="cb41-26"><a href="estimation-chapter.html#cb41-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
-<span id="cb41-27"><a href="estimation-chapter.html#cb41-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">fill =</span> these_colors[<span class="dv">5</span>], <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb41-28"><a href="estimation-chapter.html#cb41-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;The&quot;</span>, <span class="fu">italic</span>(t),</span>
-<span id="cb41-29"><a href="estimation-chapter.html#cb41-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot; distribution with a 90% and 95% confidence interval&quot;</span>))) <span class="sc">+</span></span>
-<span id="cb41-30"><a href="estimation-chapter.html#cb41-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">italic</span>(t)))  <span class="sc">+</span> </span>
-<span id="cb41-31"><a href="estimation-chapter.html#cb41-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="estimation-chapter.html#cb35-1" aria-hidden="true" tabindex="-1"></a>these_colors <span class="ot">&lt;-</span> wesanderson<span class="sc">::</span><span class="fu">wes_palette</span>(<span class="st">&quot;Zissou1&quot;</span>)</span>
+<span id="cb35-2"><a href="estimation-chapter.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="dv">4</span>))) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="estimation-chapter.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot the pdf</span></span>
+<span id="cb35-4"><a href="estimation-chapter.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb35-5"><a href="estimation-chapter.html#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>),</span>
+<span id="cb35-6"><a href="estimation-chapter.html#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
+<span id="cb35-7"><a href="estimation-chapter.html#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="st">&quot;grey75&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;grey90&quot;</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="estimation-chapter.html#cb35-8" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Shade above 2</span></span>
+<span id="cb35-9"><a href="estimation-chapter.html#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb35-10"><a href="estimation-chapter.html#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="fl">1.645</span>, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>), <span class="cn">NA</span>),</span>
+<span id="cb35-11"><a href="estimation-chapter.html#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
+<span id="cb35-12"><a href="estimation-chapter.html#cb35-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">fill =</span> these_colors[<span class="dv">4</span>], <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-13"><a href="estimation-chapter.html#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shade above 1.645</span></span>
+<span id="cb35-14"><a href="estimation-chapter.html#cb35-14" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_function</span>(</span>
+<span id="cb35-15"><a href="estimation-chapter.html#cb35-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">2</span>, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>), <span class="cn">NA</span>),</span>
+<span id="cb35-16"><a href="estimation-chapter.html#cb35-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
+<span id="cb35-17"><a href="estimation-chapter.html#cb35-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">fill =</span> these_colors[<span class="dv">5</span>], <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-18"><a href="estimation-chapter.html#cb35-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shade below -1.645</span></span>
+<span id="cb35-19"><a href="estimation-chapter.html#cb35-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb35-20"><a href="estimation-chapter.html#cb35-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fl">1.645</span>, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>), <span class="cn">NA</span>),</span>
+<span id="cb35-21"><a href="estimation-chapter.html#cb35-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
+<span id="cb35-22"><a href="estimation-chapter.html#cb35-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">fill =</span> these_colors[<span class="dv">4</span>], <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-23"><a href="estimation-chapter.html#cb35-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Shade below -2</span></span>
+<span id="cb35-24"><a href="estimation-chapter.html#cb35-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb35-25"><a href="estimation-chapter.html#cb35-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&lt;=</span> <span class="sc">-</span><span class="dv">2</span>, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">29</span>), <span class="cn">NA</span>),</span>
+<span id="cb35-26"><a href="estimation-chapter.html#cb35-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(x),</span>
+<span id="cb35-27"><a href="estimation-chapter.html#cb35-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">fill =</span> these_colors[<span class="dv">5</span>], <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-28"><a href="estimation-chapter.html#cb35-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;The&quot;</span>, <span class="fu">italic</span>(t),</span>
+<span id="cb35-29"><a href="estimation-chapter.html#cb35-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot; distribution with a 90% and 95% confidence interval&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb35-30"><a href="estimation-chapter.html#cb35-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">italic</span>(t)))  <span class="sc">+</span> </span>
+<span id="cb35-31"><a href="estimation-chapter.html#cb35-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="05-mnl-estimation_files/figure-html/tdistribution-1.png" width="672" /></p>
 <p>We illustrate the use of the t-test by reviewing the t-statistics for each parameter in the initial model specification (Table 5-2). Both the travel cost and travel time parameters have large absolute t-statistic values (20.6 and 16.6, respectively) which lead us to reject the hypothesis that these variables have no effect on modal utilities at a confidence level higher than 99.9%. Thus, these variables should be retained in the model. All of the other t-statistics, except for Income-Shared Ride 2, Income-Shared Ride 3+ and the walk constant are greater than 1.960 (95% confidence) supporting the inclusion of the corresponding variables. The t-statistics on the shared ride specific income variables are even less than 1.645 in absolute value (90% confidence), suggesting that the effect of income on the utilities of the shared ride modes may not differentiate them from the reference (drive alone) mode. Consequently, the analyst should consider removing these income variables from the utility function specifications for the shared ride modes. The case is particularly compelling for removal of the income shared ride 3+ variable since the t-statistic is very low and the parameter has a counter-intuitive sign. Another alternative would be to combine the two shared ride income parameters suggesting that income has differential effect between drive alone and shared ride but not between shared ride 2 and shared ride 3+ (when this is done, the combined variable obtains a small negative parameter which is not statistically different from zero). This variable could be deleted or retained according to the judgment of the analyst as described in Section 6.2.1.</p>
 <p>An alternative approach is to report the t-statistic to two or three decimal places and calculate the probability that a t-statistic value of that magnitude or higher would occur due to random variation in sampling as shown in Table 5-4. This is reported as the significance level, which is the complement of the level of confidence. The significance of each parameter can be read directly from the table. Parameters with significance greater than 0.05 (lower in magnitude but more significant), provide a stronger basis for rejecting the hypothesis that the true parameter is zero and that the corresponding variable can be excluded from the model. On the other hand, significance levels of 0.163 (for Income-SR2), 0.888 (for Income-SR3+) and 0.287 (for ASC-Walk) provide little evidence about whether the corresponding variable should or should not be included in the model.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></p>
@@ -1977,28 +2008,28 @@ $\displaystyle t-statistic = \frac{\hat{\beta}_{cost}-(VOT)\hat\beta_{time}}{\sq
 <span class="math inline">\(LL_{U}\)</span> is the log-likelihood of the unrestricted model.</p>
 <p>This test-statistic is chi-squared distributed. Example chi-squared distributions are shown in Figure 5.4. As with the test for individual parameters, the critical value for determining if the statistic is “sufficiently large” to reject the null hypothesis depends on the level of confidence desired by the model developer. It is also influenced by the number of restrictions<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a> between the models. Table 5-5 shows the chi-squared values for selected confidence levels and for different numbers of restrictions.</p>
 <p>Figure 5.5 illustrates the 90% and 95% confidence thresholds on the chi-squared distribution for five degrees of freedom. The critical chi-square values increase with the desired confidence level and the number of restrictions.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="estimation-chapter.html#cb42-1" aria-hidden="true" tabindex="-1"></a>these_colors <span class="ot">=</span> wesanderson<span class="sc">::</span><span class="fu">wes_palette</span>(<span class="st">&quot;Darjeeling1&quot;</span>)</span>
-<span id="cb42-2"><a href="estimation-chapter.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb42-3"><a href="estimation-chapter.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="fl">0.01</span>),</span>
-<span id="cb42-4"><a href="estimation-chapter.html#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dchisq</span>(x, <span class="dv">5</span>),</span>
-<span id="cb42-5"><a href="estimation-chapter.html#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">10</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dchisq</span>(x, <span class="dv">10</span>),</span>
-<span id="cb42-6"><a href="estimation-chapter.html#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">15</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dchisq</span>(x, <span class="dv">15</span>),</span>
-<span id="cb42-7"><a href="estimation-chapter.html#cb42-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-8"><a href="estimation-chapter.html#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;Degrees of Freedom&quot;</span>, <span class="st">&quot;Chi-Squared&quot;</span>, <span class="sc">-</span>x) <span class="sc">%&gt;%</span></span>
-<span id="cb42-9"><a href="estimation-chapter.html#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="st">`</span><span class="at">Chi-Squared</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Degrees of Freedom</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb42-10"><a href="estimation-chapter.html#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb42-11"><a href="estimation-chapter.html#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> these_colors) <span class="sc">+</span> </span>
-<span id="cb42-12"><a href="estimation-chapter.html#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="estimation-chapter.html#cb36-1" aria-hidden="true" tabindex="-1"></a>these_colors <span class="ot">=</span> wesanderson<span class="sc">::</span><span class="fu">wes_palette</span>(<span class="st">&quot;Darjeeling1&quot;</span>)</span>
+<span id="cb36-2"><a href="estimation-chapter.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb36-3"><a href="estimation-chapter.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="fl">0.01</span>),</span>
+<span id="cb36-4"><a href="estimation-chapter.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">5</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dchisq</span>(x, <span class="dv">5</span>),</span>
+<span id="cb36-5"><a href="estimation-chapter.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">10</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dchisq</span>(x, <span class="dv">10</span>),</span>
+<span id="cb36-6"><a href="estimation-chapter.html#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">15</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">dchisq</span>(x, <span class="dv">15</span>),</span>
+<span id="cb36-7"><a href="estimation-chapter.html#cb36-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-8"><a href="estimation-chapter.html#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;Degrees of Freedom&quot;</span>, <span class="st">&quot;Chi-Squared&quot;</span>, <span class="sc">-</span>x) <span class="sc">%&gt;%</span></span>
+<span id="cb36-9"><a href="estimation-chapter.html#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="st">`</span><span class="at">Chi-Squared</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Degrees of Freedom</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb36-10"><a href="estimation-chapter.html#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb36-11"><a href="estimation-chapter.html#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> these_colors) <span class="sc">+</span> </span>
+<span id="cb36-12"><a href="estimation-chapter.html#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <div class="figure"><span id="fig:chisqdistrib51015"></span>
 <img src="05-mnl-estimation_files/figure-html/chisqdistrib51015-1.png" alt="Chi-Squared Distribution for 5, 10, and 15 Degrees of Freedom" width="672" />
 <p class="caption">
 Figure 5.2: Chi-Squared Distribution for 5, 10, and 15 Degrees of Freedom
 </p>
 </div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="estimation-chapter.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)), <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
-<span id="cb43-2"><a href="estimation-chapter.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dchisq, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb43-3"><a href="estimation-chapter.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">x =</span> <span class="st">&quot;Test Values&quot;</span>, <span class="at">y =</span> <span class="st">&quot;PDF&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb43-4"><a href="estimation-chapter.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="estimation-chapter.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)), <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="estimation-chapter.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dchisq, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="estimation-chapter.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">x =</span> <span class="st">&quot;Test Values&quot;</span>, <span class="at">y =</span> <span class="st">&quot;PDF&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb37-4"><a href="estimation-chapter.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <div class="figure"><span id="fig:chisq-critdiagram"></span>
 <img src="05-mnl-estimation_files/figure-html/chisq-critdiagram-1.png" alt="Chi-Squared Distribution for 5 Degrees of Freedom Showing 90% and 95% confidence Thresholds" width="672" />
 <p class="caption">
@@ -2313,23 +2344,23 @@ P-value
 <p>The second is that income has no effect on the travel mode choice; that is</p>
 <p><span class="math inline">\(H_{0,D} : \beta_{Income-SR2} = \beta_{Income-SR3+} = \beta_{Income-Transit} = \beta_{Income-Bike} = \beta_{Income-Walk} = 0\)</span></p>
 <p>The restricted models that reflect each of these hypotheses and the corresponding unrestricted model are reported in Table 5-7 along with their log-likelihood values.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="estimation-chapter.html#cb44-1" aria-hidden="true" tabindex="-1"></a>sf_mlogit_basemodels <span class="ot">&lt;-</span> sf_mlogit</span>
-<span id="cb44-2"><a href="estimation-chapter.html#cb44-2" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb44-3"><a href="estimation-chapter.html#cb44-3" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span>  tvtt <span class="sc">+</span> cost<span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_basemodels)</span>
-<span id="cb44-4"><a href="estimation-chapter.html#cb44-4" aria-hidden="true" tabindex="-1"></a>incomebase_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_basemodels)</span>
-<span id="cb44-5"><a href="estimation-chapter.html#cb44-5" aria-hidden="true" tabindex="-1"></a>timecostbase_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> tvtt <span class="sc">+</span> cost, <span class="at">data =</span> sf_mlogit_basemodels)</span>
-<span id="cb44-6"><a href="estimation-chapter.html#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="estimation-chapter.html#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-8"><a href="estimation-chapter.html#cb44-8" aria-hidden="true" tabindex="-1"></a>base_estimation <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb44-9"><a href="estimation-chapter.html#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model&quot;</span> <span class="ot">=</span> base_model,</span>
-<span id="cb44-10"><a href="estimation-chapter.html#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model without Time and Cost Variables&quot;</span> <span class="ot">=</span> incomebase_model,</span>
-<span id="cb44-11"><a href="estimation-chapter.html#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model without Income Variables&quot;</span> <span class="ot">=</span> timecostbase_model</span>
-<span id="cb44-12"><a href="estimation-chapter.html#cb44-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb44-13"><a href="estimation-chapter.html#cb44-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-14"><a href="estimation-chapter.html#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
-<span id="cb44-15"><a href="estimation-chapter.html#cb44-15" aria-hidden="true" tabindex="-1"></a>  base_estimation, <span class="at">fmt =</span> <span class="st">&quot;%.4f&quot;</span>,</span>
-<span id="cb44-16"><a href="estimation-chapter.html#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Estimation Results for Base Model and its Restricted Versions&quot;</span></span>
-<span id="cb44-17"><a href="estimation-chapter.html#cb44-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="estimation-chapter.html#cb38-1" aria-hidden="true" tabindex="-1"></a>sf_mlogit_basemodels <span class="ot">&lt;-</span> sf_mlogit</span>
+<span id="cb38-2"><a href="estimation-chapter.html#cb38-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb38-3"><a href="estimation-chapter.html#cb38-3" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span>  tvtt <span class="sc">+</span> cost<span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_basemodels)</span>
+<span id="cb38-4"><a href="estimation-chapter.html#cb38-4" aria-hidden="true" tabindex="-1"></a>incomebase_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_basemodels)</span>
+<span id="cb38-5"><a href="estimation-chapter.html#cb38-5" aria-hidden="true" tabindex="-1"></a>timecostbase_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> tvtt <span class="sc">+</span> cost, <span class="at">data =</span> sf_mlogit_basemodels)</span>
+<span id="cb38-6"><a href="estimation-chapter.html#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="estimation-chapter.html#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="estimation-chapter.html#cb38-8" aria-hidden="true" tabindex="-1"></a>base_estimation <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb38-9"><a href="estimation-chapter.html#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model&quot;</span> <span class="ot">=</span> base_model,</span>
+<span id="cb38-10"><a href="estimation-chapter.html#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model without Time and Cost Variables&quot;</span> <span class="ot">=</span> incomebase_model,</span>
+<span id="cb38-11"><a href="estimation-chapter.html#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model without Income Variables&quot;</span> <span class="ot">=</span> timecostbase_model</span>
+<span id="cb38-12"><a href="estimation-chapter.html#cb38-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-13"><a href="estimation-chapter.html#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="estimation-chapter.html#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb38-15"><a href="estimation-chapter.html#cb38-15" aria-hidden="true" tabindex="-1"></a>  base_estimation, <span class="at">fmt =</span> <span class="st">&quot;%.4f&quot;</span>,</span>
+<span id="cb38-16"><a href="estimation-chapter.html#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Estimation Results for Base Model and its Restricted Versions&quot;</span></span>
+<span id="cb38-17"><a href="estimation-chapter.html#cb38-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 (#tab:base_models table 5-7)Estimation Results for Base Model and its Restricted Versions
@@ -2743,8 +2774,8 @@ rho20
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="estimation-chapter.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This code recreates table 5-7 in the text with the correct coefficients and log likelihood</span></span>
-<span id="cb45-2"><a href="estimation-chapter.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co">#However, the output does not have the correct rho-square values, and is missing a number of separate statistics</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="estimation-chapter.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This code recreates table 5-7 in the text with the correct coefficients and log likelihood</span></span>
+<span id="cb39-2"><a href="estimation-chapter.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">#However, the output does not have the correct rho-square values, and is missing a number of separate statistics</span></span></code></pre></div>
 <p>The statistical test of the hypothesis that time and cost have no effect has a chi-square value of</p>
 <p><span class="math display" id="eq:ChisqTimeCostZero">\[\begin{equation}
 \chi^2 = -2(-4123.6-(-3626.2))=994.8
@@ -2756,19 +2787,19 @@ rho20
 \tag{5.17}
 \end{equation}\]</span></p>
 <p>with five degrees of freedom (five income parameters are constrained to zero). The critical <span class="math inline">\(\chi^2\)</span> with five degrees of freedom at 99.9% confidence level (or 0.001 level of significance) is 20.51. Thus, both null hypotheses can be rejected at very high levels; that is, neither time and cost nor the income variables should be excluded from the model. The log-likelihood ratio tests for both the above hypotheses are summarized in Table 5-8.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="estimation-chapter.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb46-2"><a href="estimation-chapter.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Hypothesis =</span> <span class="fu">c</span>(<span class="st">&quot;$H_{0c}$&quot;</span>,<span class="st">&quot;$H_{0d}$&quot;</span>),</span>
-<span id="cb46-3"><a href="estimation-chapter.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">LL_U =</span> <span class="fu">rep</span>(base_model<span class="sc">$</span>logLik, <span class="dv">2</span>),</span>
-<span id="cb46-4"><a href="estimation-chapter.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">LL_R =</span> <span class="fu">c</span>(incomebase_model<span class="sc">$</span>logLik, timecostbase_model<span class="sc">$</span>logLik)</span>
-<span id="cb46-5"><a href="estimation-chapter.html#cb46-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-6"><a href="estimation-chapter.html#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb46-7"><a href="estimation-chapter.html#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">test_stat =</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> (LL_R <span class="sc">-</span> LL_U),</span>
-<span id="cb46-8"><a href="estimation-chapter.html#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">df =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>),</span>
-<span id="cb46-9"><a href="estimation-chapter.html#cb46-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Crtical Chi-Squared at 99.9% Conf.&quot;</span> <span class="ot">=</span> <span class="fu">qchisq</span>(<span class="fl">0.999</span>, df),</span>
-<span id="cb46-10"><a href="estimation-chapter.html#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;P-value&quot;</span> <span class="ot">=</span> <span class="fu">pchisq</span>(test_stat, df, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb46-11"><a href="estimation-chapter.html#cb46-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb46-12"><a href="estimation-chapter.html#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">align =</span> <span class="st">&#39;c&#39;</span>, <span class="at">caption =</span> <span class="st">&quot;Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-13"><a href="estimation-chapter.html#cb46-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="estimation-chapter.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb40-2"><a href="estimation-chapter.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Hypothesis =</span> <span class="fu">c</span>(<span class="st">&quot;$H_{0c}$&quot;</span>,<span class="st">&quot;$H_{0d}$&quot;</span>),</span>
+<span id="cb40-3"><a href="estimation-chapter.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">LL_U =</span> <span class="fu">rep</span>(base_model<span class="sc">$</span>logLik, <span class="dv">2</span>),</span>
+<span id="cb40-4"><a href="estimation-chapter.html#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">LL_R =</span> <span class="fu">c</span>(incomebase_model<span class="sc">$</span>logLik, timecostbase_model<span class="sc">$</span>logLik)</span>
+<span id="cb40-5"><a href="estimation-chapter.html#cb40-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-6"><a href="estimation-chapter.html#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb40-7"><a href="estimation-chapter.html#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">test_stat =</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> (LL_R <span class="sc">-</span> LL_U),</span>
+<span id="cb40-8"><a href="estimation-chapter.html#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">df =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb40-9"><a href="estimation-chapter.html#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Crtical Chi-Squared at 99.9% Conf.&quot;</span> <span class="ot">=</span> <span class="fu">qchisq</span>(<span class="fl">0.999</span>, df),</span>
+<span id="cb40-10"><a href="estimation-chapter.html#cb40-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;P-value&quot;</span> <span class="ot">=</span> <span class="fu">pchisq</span>(test_stat, df, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb40-11"><a href="estimation-chapter.html#cb40-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb40-12"><a href="estimation-chapter.html#cb40-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">align =</span> <span class="st">&#39;c&#39;</span>, <span class="at">caption =</span> <span class="st">&quot;Likelihood Ratio Test for Hypothesis $H_{0,c}$ and $H_{0,d}$&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-13"><a href="estimation-chapter.html#cb40-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:table5-8">Table 5.8: </span>Likelihood Ratio Test for Hypothesis <span class="math inline">\(H_{0,c}\)</span> and <span class="math inline">\(H_{0,d}\)</span>
@@ -2850,7 +2881,7 @@ P-value
 </div>
 <div id="non-nested-hypothesis-tests" class="section level4" number="5.7.3.4">
 <h4><span class="header-section-number">5.7.3.4</span> Non-nested Hypothesis Tests</h4>
-<p>The likelihood ratio test can only be applied to compare models which differ due to the application of restrictions to one of the models. Such cases are referred to as nested hypothesis tests. However, there are important cases when the rival models do not have this type of restricted – unrestricted relationship. For example, we might like to compare the base model to an alternative specification in which the variable cost divided by income is used to replace cost. This reflects the expectation that the importance of cost diminishes with increasing income. This analysis can be performed by using the non-nested hypothesis test proposed by (<span class="citation"><a href="references.html#ref-horowitz1986" role="doc-biblioref">J. L. Horowitz and Lerman</a> (<a href="references.html#ref-horowitz1986" role="doc-biblioref">1986</a>)</span>, 1982). The non-nested hypothesis test uses the adjusted likelihood ratio index, <span class="math inline">\(\overline{\rho}^2\)</span>, to test the hypothesis that the model with the lower <span class="math inline">\(\overline{\rho}^2\)</span> value is the true model.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> In this test, the null hypothesis that the model with the lower value is the true model is rejected at the significance level determined by the following equation:<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></p>
+<p>The likelihood ratio test can only be applied to compare models which differ due to the application of restrictions to one of the models. Such cases are referred to as nested hypothesis tests. However, there are important cases when the rival models do not have this type of restricted – unrestricted relationship. For example, we might like to compare the base model to an alternative specification in which the variable cost divided by income is used to replace cost. This reflects the expectation that the importance of cost diminishes with increasing income. This analysis can be performed by using the non-nested hypothesis test proposed by (<span class="citation"><a href="#ref-horowitz1986" role="doc-biblioref">J. L. Horowitz and Lerman</a> (<a href="#ref-horowitz1986" role="doc-biblioref">1986</a>)</span>, 1982). The non-nested hypothesis test uses the adjusted likelihood ratio index, <span class="math inline">\(\overline{\rho}^2\)</span>, to test the hypothesis that the model with the lower <span class="math inline">\(\overline{\rho}^2\)</span> value is the true model.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a> In this test, the null hypothesis that the model with the lower value is the true model is rejected at the significance level determined by the following equation:<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></p>
 <p><span class="math display" id="eq:significancelevel">\[\begin{equation}
 Significance Level = \Phi \left[-{(2(\overline{\rho}^2_H-\overline{\rho}^2_L) \times LL(0) + (K_H - K_L))}^{1/2}\right]
 \tag{5.18}
@@ -2875,30 +2906,30 @@ Significance Level = \Phi \left[-{(2(\overline{\rho}^2_H-\overline{\rho}^2_L) \t
 \tag{5.20}
 \end{align*}\]</span></p>
 <p>The above result implies that the null hypotheses that the models with cost by income variable or cost by ln(income) are true are rejected at a significance level greater than 0.001. However, the significance of rejection is much lower for the cost by ln(income) model and many analysts would adopt that specification on the grounds that it is conceptually more appropriate. This specification suggests that the value of money declines with income but the rate of decline diminishes at higher levels of income.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="estimation-chapter.html#cb47-1" aria-hidden="true" tabindex="-1"></a>sf_mlogit_costinc <span class="ot">&lt;-</span> sf_mlogit <span class="sc">%&gt;%</span></span>
-<span id="cb47-2"><a href="estimation-chapter.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb47-3"><a href="estimation-chapter.html#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">costbyinc =</span> cost <span class="sc">/</span> hhinc,</span>
-<span id="cb47-4"><a href="estimation-chapter.html#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">costbylninc =</span> cost <span class="sc">/</span> <span class="fu">log</span>(hhinc)</span>
-<span id="cb47-5"><a href="estimation-chapter.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb47-6"><a href="estimation-chapter.html#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-7"><a href="estimation-chapter.html#cb47-7" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span>  tvtt <span class="sc">+</span> cost <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_costinc)</span>
-<span id="cb47-8"><a href="estimation-chapter.html#cb47-8" aria-hidden="true" tabindex="-1"></a>income_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> tvtt <span class="sc">+</span> costbyinc <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_costinc)</span>
-<span id="cb47-9"><a href="estimation-chapter.html#cb47-9" aria-hidden="true" tabindex="-1"></a>lnincome_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> tvtt <span class="sc">+</span> costbylninc <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_costinc)</span>
-<span id="cb47-10"><a href="estimation-chapter.html#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-11"><a href="estimation-chapter.html#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-12"><a href="estimation-chapter.html#cb47-12" aria-hidden="true" tabindex="-1"></a>income_estimation <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb47-13"><a href="estimation-chapter.html#cb47-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model&quot;</span> <span class="ot">=</span> base_model,</span>
-<span id="cb47-14"><a href="estimation-chapter.html#cb47-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model With Cost By Cost/Income&quot;</span> <span class="ot">=</span> income_model,</span>
-<span id="cb47-15"><a href="estimation-chapter.html#cb47-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model With Cost By ln(Income)&quot;</span> <span class="ot">=</span> lnincome_model</span>
-<span id="cb47-16"><a href="estimation-chapter.html#cb47-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb47-17"><a href="estimation-chapter.html#cb47-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-18"><a href="estimation-chapter.html#cb47-18" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> modelsummary<span class="sc">::</span>gof_map</span>
-<span id="cb47-19"><a href="estimation-chapter.html#cb47-19" aria-hidden="true" tabindex="-1"></a>gm<span class="sc">$</span>omit <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb47-20"><a href="estimation-chapter.html#cb47-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-21"><a href="estimation-chapter.html#cb47-21" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
-<span id="cb47-22"><a href="estimation-chapter.html#cb47-22" aria-hidden="true" tabindex="-1"></a>  income_estimation,</span>
-<span id="cb47-23"><a href="estimation-chapter.html#cb47-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Models with Cost vs. Cost/Income and Cost/Ln(Income)&quot;</span></span>
-<span id="cb47-24"><a href="estimation-chapter.html#cb47-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="estimation-chapter.html#cb41-1" aria-hidden="true" tabindex="-1"></a>sf_mlogit_costinc <span class="ot">&lt;-</span> sf_mlogit <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="estimation-chapter.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb41-3"><a href="estimation-chapter.html#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">costbyinc =</span> cost <span class="sc">/</span> hhinc,</span>
+<span id="cb41-4"><a href="estimation-chapter.html#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">costbylninc =</span> cost <span class="sc">/</span> <span class="fu">log</span>(hhinc)</span>
+<span id="cb41-5"><a href="estimation-chapter.html#cb41-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-6"><a href="estimation-chapter.html#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="estimation-chapter.html#cb41-7" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span>  tvtt <span class="sc">+</span> cost <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_costinc)</span>
+<span id="cb41-8"><a href="estimation-chapter.html#cb41-8" aria-hidden="true" tabindex="-1"></a>income_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> tvtt <span class="sc">+</span> costbyinc <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_costinc)</span>
+<span id="cb41-9"><a href="estimation-chapter.html#cb41-9" aria-hidden="true" tabindex="-1"></a>lnincome_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> tvtt <span class="sc">+</span> costbylninc <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit_costinc)</span>
+<span id="cb41-10"><a href="estimation-chapter.html#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="estimation-chapter.html#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="estimation-chapter.html#cb41-12" aria-hidden="true" tabindex="-1"></a>income_estimation <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb41-13"><a href="estimation-chapter.html#cb41-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model&quot;</span> <span class="ot">=</span> base_model,</span>
+<span id="cb41-14"><a href="estimation-chapter.html#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model With Cost By Cost/Income&quot;</span> <span class="ot">=</span> income_model,</span>
+<span id="cb41-15"><a href="estimation-chapter.html#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model With Cost By ln(Income)&quot;</span> <span class="ot">=</span> lnincome_model</span>
+<span id="cb41-16"><a href="estimation-chapter.html#cb41-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-17"><a href="estimation-chapter.html#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="estimation-chapter.html#cb41-18" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> modelsummary<span class="sc">::</span>gof_map</span>
+<span id="cb41-19"><a href="estimation-chapter.html#cb41-19" aria-hidden="true" tabindex="-1"></a>gm<span class="sc">$</span>omit <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb41-20"><a href="estimation-chapter.html#cb41-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-21"><a href="estimation-chapter.html#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb41-22"><a href="estimation-chapter.html#cb41-22" aria-hidden="true" tabindex="-1"></a>  income_estimation,</span>
+<span id="cb41-23"><a href="estimation-chapter.html#cb41-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Models with Cost vs. Cost/Income and Cost/Ln(Income)&quot;</span></span>
+<span id="cb41-24"><a href="estimation-chapter.html#cb41-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 (#tab:cost_models)Models with Cost vs. Cost/Income and Cost/Ln(Income)
@@ -3419,14 +3450,14 @@ VofT = \frac{0.6 \times \frac{\beta_{TVT}}{\beta_{Cost}}}{Income($1000/year)}{$/
 VofT = \frac{0.6 \times \frac{\beta_{TVT}}{\beta_{Cost}}}{ln[Income($1000/year)]}{$/hour}
 \end{equation}\]</span></p>
 <p>The value of time implied by each of these formulations is illustrated in Table 5-10 and Figure 5.6 by showing the values of time for different income levels. In each case, the values of travel time appear to be quite low. This will be addressed in model specification refinement (Section 6.2.6).</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="estimation-chapter.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb48-2"><a href="estimation-chapter.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">AnnualIncome =</span> <span class="fu">c</span>(<span class="dv">25000</span>, <span class="dv">50000</span>, <span class="dv">75000</span>, <span class="dv">100000</span>, <span class="dv">125000</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb48-3"><a href="estimation-chapter.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">HourlyWage=</span> AnnualIncome<span class="sc">/</span><span class="dv">2000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb48-4"><a href="estimation-chapter.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">linear =</span> <span class="fu">c</span>(<span class="fl">6.26</span>, <span class="fl">6.26</span>, <span class="fl">6.26</span>, <span class="fl">6.26</span>, <span class="fl">6.26</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb48-5"><a href="estimation-chapter.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CostIncome =</span> <span class="fu">c</span>(<span class="fl">4.53</span>, <span class="fl">9.07</span>, <span class="fl">13.60</span>, <span class="fl">18.13</span>, <span class="fl">21.94</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb48-6"><a href="estimation-chapter.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CostLn =</span> <span class="fu">c</span>(<span class="fl">5.18</span>, <span class="fl">6.29</span>, <span class="fl">6.95</span>, <span class="fl">7.41</span>, <span class="fl">7.72</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb48-7"><a href="estimation-chapter.html#cb48-7" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>( <span class="at">caption =</span> <span class="st">&quot;Value of Time vs. Income&quot;</span>,</span>
-<span id="cb48-8"><a href="estimation-chapter.html#cb48-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Annual Income&quot;</span>, <span class="st">&quot;Hourly Wage&quot;</span>, <span class="st">&quot;Linear&quot;</span>, <span class="st">&quot;Cost/Income&quot;</span>, <span class="st">&quot;Cost/LN(Inc.)&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="estimation-chapter.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb42-2"><a href="estimation-chapter.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">AnnualIncome =</span> <span class="fu">c</span>(<span class="dv">25000</span>, <span class="dv">50000</span>, <span class="dv">75000</span>, <span class="dv">100000</span>, <span class="dv">125000</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="estimation-chapter.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">HourlyWage=</span> AnnualIncome<span class="sc">/</span><span class="dv">2000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-4"><a href="estimation-chapter.html#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">linear =</span> <span class="fu">c</span>(<span class="fl">6.26</span>, <span class="fl">6.26</span>, <span class="fl">6.26</span>, <span class="fl">6.26</span>, <span class="fl">6.26</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-5"><a href="estimation-chapter.html#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CostIncome =</span> <span class="fu">c</span>(<span class="fl">4.53</span>, <span class="fl">9.07</span>, <span class="fl">13.60</span>, <span class="fl">18.13</span>, <span class="fl">21.94</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-6"><a href="estimation-chapter.html#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CostLn =</span> <span class="fu">c</span>(<span class="fl">5.18</span>, <span class="fl">6.29</span>, <span class="fl">6.95</span>, <span class="fl">7.41</span>, <span class="fl">7.72</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-7"><a href="estimation-chapter.html#cb42-7" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>( <span class="at">caption =</span> <span class="st">&quot;Value of Time vs. Income&quot;</span>,</span>
+<span id="cb42-8"><a href="estimation-chapter.html#cb42-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Annual Income&quot;</span>, <span class="st">&quot;Hourly Wage&quot;</span>, <span class="st">&quot;Linear&quot;</span>, <span class="st">&quot;Cost/Income&quot;</span>, <span class="st">&quot;Cost/LN(Inc.)&quot;</span>))</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:valueoftimevsincome">Table 5.9: </span>Value of Time vs. Income
@@ -3575,25 +3606,25 @@ VofT = \frac{\partial{V_{it}}}{\partial{Time_{it}}} \Huge/ \normalsize \frac{\pa
 \tag{5.31}
 \end{equation}\]</span></p>
 <p>which can be reported in a table for selected values of time or plotted in a graph of Value of Time as a function of TVT or Cost, as appropriate (see below). Models using each of these formulations are estimated and reported, along with the Base Model in Table 5-11. The goodness of fit is substantially improved by using ln(time), which is generally expected, but is worse when using ln(cost), for which there is no conceptual basis.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="estimation-chapter.html#cb49-1" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span>  tvtt <span class="sc">+</span> cost <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit)</span>
-<span id="cb49-2"><a href="estimation-chapter.html#cb49-2" aria-hidden="true" tabindex="-1"></a>lntravaltime_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> cost <span class="sc">+</span> <span class="fu">log</span>(tvtt) <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit)</span>
-<span id="cb49-3"><a href="estimation-chapter.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># lots of variables have zero cost, and log(0) = -Inf. To keep this model estimable, we can</span></span>
-<span id="cb49-4"><a href="estimation-chapter.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add 0.01 dollars to all alternatives, because log function is monotonically increasing.</span></span>
-<span id="cb49-5"><a href="estimation-chapter.html#cb49-5" aria-hidden="true" tabindex="-1"></a>lntravelcost_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> tvtt <span class="sc">+</span> <span class="fu">I</span>(<span class="fu">log</span>(cost <span class="sc">+</span> <span class="fl">0.01</span>)) <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit)</span>
-<span id="cb49-6"><a href="estimation-chapter.html#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-7"><a href="estimation-chapter.html#cb49-7" aria-hidden="true" tabindex="-1"></a>transformations_estimation <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb49-8"><a href="estimation-chapter.html#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model&quot;</span> <span class="ot">=</span> base_model,</span>
-<span id="cb49-9"><a href="estimation-chapter.html#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model With Log of Travel Time&quot;</span> <span class="ot">=</span> lntravaltime_model,</span>
-<span id="cb49-10"><a href="estimation-chapter.html#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model With Log of Travel Cost&quot;</span> <span class="ot">=</span> lntravelcost_model</span>
-<span id="cb49-11"><a href="estimation-chapter.html#cb49-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb49-12"><a href="estimation-chapter.html#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-13"><a href="estimation-chapter.html#cb49-13" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> modelsummary<span class="sc">::</span>gof_map</span>
-<span id="cb49-14"><a href="estimation-chapter.html#cb49-14" aria-hidden="true" tabindex="-1"></a>gm<span class="sc">$</span>omit <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb49-15"><a href="estimation-chapter.html#cb49-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-16"><a href="estimation-chapter.html#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
-<span id="cb49-17"><a href="estimation-chapter.html#cb49-17" aria-hidden="true" tabindex="-1"></a>  transformations_estimation,<span class="at">fmt =</span> <span class="st">&quot;%.4f&quot;</span>,</span>
-<span id="cb49-18"><a href="estimation-chapter.html#cb49-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Base Model and Log Transformations&quot;</span></span>
-<span id="cb49-19"><a href="estimation-chapter.html#cb49-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="estimation-chapter.html#cb43-1" aria-hidden="true" tabindex="-1"></a>base_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span>  tvtt <span class="sc">+</span> cost <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit)</span>
+<span id="cb43-2"><a href="estimation-chapter.html#cb43-2" aria-hidden="true" tabindex="-1"></a>lntravaltime_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> cost <span class="sc">+</span> <span class="fu">log</span>(tvtt) <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit)</span>
+<span id="cb43-3"><a href="estimation-chapter.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># lots of variables have zero cost, and log(0) = -Inf. To keep this model estimable, we can</span></span>
+<span id="cb43-4"><a href="estimation-chapter.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add 0.01 dollars to all alternatives, because log function is monotonically increasing.</span></span>
+<span id="cb43-5"><a href="estimation-chapter.html#cb43-5" aria-hidden="true" tabindex="-1"></a>lntravelcost_model <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(chosen <span class="sc">~</span> tvtt <span class="sc">+</span> <span class="fu">I</span>(<span class="fu">log</span>(cost <span class="sc">+</span> <span class="fl">0.01</span>)) <span class="sc">|</span> hhinc, <span class="at">data =</span> sf_mlogit)</span>
+<span id="cb43-6"><a href="estimation-chapter.html#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="estimation-chapter.html#cb43-7" aria-hidden="true" tabindex="-1"></a>transformations_estimation <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb43-8"><a href="estimation-chapter.html#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Base Model&quot;</span> <span class="ot">=</span> base_model,</span>
+<span id="cb43-9"><a href="estimation-chapter.html#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model With Log of Travel Time&quot;</span> <span class="ot">=</span> lntravaltime_model,</span>
+<span id="cb43-10"><a href="estimation-chapter.html#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model With Log of Travel Cost&quot;</span> <span class="ot">=</span> lntravelcost_model</span>
+<span id="cb43-11"><a href="estimation-chapter.html#cb43-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-12"><a href="estimation-chapter.html#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="estimation-chapter.html#cb43-13" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> modelsummary<span class="sc">::</span>gof_map</span>
+<span id="cb43-14"><a href="estimation-chapter.html#cb43-14" aria-hidden="true" tabindex="-1"></a>gm<span class="sc">$</span>omit <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb43-15"><a href="estimation-chapter.html#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-16"><a href="estimation-chapter.html#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb43-17"><a href="estimation-chapter.html#cb43-17" aria-hidden="true" tabindex="-1"></a>  transformations_estimation,<span class="at">fmt =</span> <span class="st">&quot;%.4f&quot;</span>,</span>
+<span id="cb43-18"><a href="estimation-chapter.html#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Base Model and Log Transformations&quot;</span></span>
+<span id="cb43-19"><a href="estimation-chapter.html#cb43-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:Table5-11">Table 5.10: </span>Base Model and Log Transformations
@@ -4064,20 +4095,20 @@ rho20
 </tbody>
 </table>
 <p>The implications for value of time of these different formulations are shown in Table 5-12 and Table 5-13 Value of Time for Log of Cost Model and also in Figure 5.7 and Figure 5.8.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="estimation-chapter.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in a log of time model, the value of time is a function of the trip time.</span></span>
-<span id="cb50-2"><a href="estimation-chapter.html#cb50-2" aria-hidden="true" tabindex="-1"></a>ln_vot <span class="ot">&lt;-</span> <span class="cf">function</span>(model, ttime){</span>
-<span id="cb50-3"><a href="estimation-chapter.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  ValueCentsMin <span class="ot">=</span> <span class="fu">coef</span>(model)[<span class="st">&quot;log(tvtt)&quot;</span>] <span class="sc">/</span> (<span class="fu">coef</span>(model)[<span class="st">&quot;cost&quot;</span>] <span class="sc">*</span> ttime)</span>
-<span id="cb50-4"><a href="estimation-chapter.html#cb50-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb50-5"><a href="estimation-chapter.html#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-6"><a href="estimation-chapter.html#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb50-7"><a href="estimation-chapter.html#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">triptime =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>),</span>
-<span id="cb50-8"><a href="estimation-chapter.html#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">vot =</span> <span class="fu">ln_vot</span>(lntravaltime_model, triptime)</span>
-<span id="cb50-9"><a href="estimation-chapter.html#cb50-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb50-10"><a href="estimation-chapter.html#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vot_dhr =</span> vot <span class="sc">*</span> <span class="fl">0.6</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb50-11"><a href="estimation-chapter.html#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">2</span>, </span>
-<span id="cb50-12"><a href="estimation-chapter.html#cb50-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">&quot;Value of Time for Log of Time Model&quot;</span>, </span>
-<span id="cb50-13"><a href="estimation-chapter.html#cb50-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Trip Time (min)&quot;</span>, <span class="st">&quot;Value of Time (cents/min)&quot;</span>, <span class="st">&quot;Value of Time ($/hr)&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb50-14"><a href="estimation-chapter.html#cb50-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="estimation-chapter.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in a log of time model, the value of time is a function of the trip time.</span></span>
+<span id="cb44-2"><a href="estimation-chapter.html#cb44-2" aria-hidden="true" tabindex="-1"></a>ln_vot <span class="ot">&lt;-</span> <span class="cf">function</span>(model, ttime){</span>
+<span id="cb44-3"><a href="estimation-chapter.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  ValueCentsMin <span class="ot">=</span> <span class="fu">coef</span>(model)[<span class="st">&quot;log(tvtt)&quot;</span>] <span class="sc">/</span> (<span class="fu">coef</span>(model)[<span class="st">&quot;cost&quot;</span>] <span class="sc">*</span> ttime)</span>
+<span id="cb44-4"><a href="estimation-chapter.html#cb44-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-5"><a href="estimation-chapter.html#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="estimation-chapter.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb44-7"><a href="estimation-chapter.html#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">triptime =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>),</span>
+<span id="cb44-8"><a href="estimation-chapter.html#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">vot =</span> <span class="fu">ln_vot</span>(lntravaltime_model, triptime)</span>
+<span id="cb44-9"><a href="estimation-chapter.html#cb44-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-10"><a href="estimation-chapter.html#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vot_dhr =</span> vot <span class="sc">*</span> <span class="fl">0.6</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-11"><a href="estimation-chapter.html#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">2</span>, </span>
+<span id="cb44-12"><a href="estimation-chapter.html#cb44-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">&quot;Value of Time for Log of Time Model&quot;</span>, </span>
+<span id="cb44-13"><a href="estimation-chapter.html#cb44-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Trip Time (min)&quot;</span>, <span class="st">&quot;Value of Time (cents/min)&quot;</span>, <span class="st">&quot;Value of Time ($/hr)&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb44-14"><a href="estimation-chapter.html#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>()</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:table5-12">Table 5.11: </span>Value of Time for Log of Time Model
@@ -4164,15 +4195,15 @@ Value of Time ($/hr)
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="estimation-chapter.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb51-2"><a href="estimation-chapter.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">triptime =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">120</span>, <span class="at">by =</span> <span class="dv">1</span>),</span>
-<span id="cb51-3"><a href="estimation-chapter.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vot =</span> <span class="fl">0.6</span> <span class="sc">*</span> <span class="fu">ln_vot</span>(lntravaltime_model, triptime)</span>
-<span id="cb51-4"><a href="estimation-chapter.html#cb51-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb51-5"><a href="estimation-chapter.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> vot, <span class="at">x =</span> triptime)) <span class="sc">+</span></span>
-<span id="cb51-6"><a href="estimation-chapter.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb51-7"><a href="estimation-chapter.html#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span><span class="fu">dollar_format</span>())<span class="sc">+</span></span>
-<span id="cb51-8"><a href="estimation-chapter.html#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">x=</span> <span class="st">&quot;Time of Trip (min)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Value of Time ($/hr)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb51-9"><a href="estimation-chapter.html#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="estimation-chapter.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb45-2"><a href="estimation-chapter.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">triptime =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">120</span>, <span class="at">by =</span> <span class="dv">1</span>),</span>
+<span id="cb45-3"><a href="estimation-chapter.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vot =</span> <span class="fl">0.6</span> <span class="sc">*</span> <span class="fu">ln_vot</span>(lntravaltime_model, triptime)</span>
+<span id="cb45-4"><a href="estimation-chapter.html#cb45-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-5"><a href="estimation-chapter.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> vot, <span class="at">x =</span> triptime)) <span class="sc">+</span></span>
+<span id="cb45-6"><a href="estimation-chapter.html#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb45-7"><a href="estimation-chapter.html#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span>scales<span class="sc">::</span><span class="fu">dollar_format</span>())<span class="sc">+</span></span>
+<span id="cb45-8"><a href="estimation-chapter.html#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">x=</span> <span class="st">&quot;Time of Trip (min)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Value of Time ($/hr)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb45-9"><a href="estimation-chapter.html#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <div class="figure"><span id="fig:figure5-7"></span>
 <img src="05-mnl-estimation_files/figure-html/figure5-7-1.png" alt="Value of time for log of time model as a function of trip time." width="672" />
 <p class="caption">
@@ -4241,6 +4272,18 @@ $17.09
 </div>
 </div>
 </div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-benakivalerman1985" class="csl-entry">
+Ben-Akiva, M., and S. R. Lerman. 1985. <em>Discrete Choice Analysis: Theory and Application to Travel Demand</em>. Cambridge: The MIT Press.
+</div>
+<div id="ref-borschsupan1987" class="csl-entry">
+Börsch-Supan, A. 1987. <em>Econometric Analysis of Discrete Choice</em>. 296th ed. Springer-Verlag, Berlin, Germany: Lecture Notes in Economics; Mathematical Systems.
+</div>
+<div id="ref-horowitz1986" class="csl-entry">
+J. L. Horowitz, F. S. Koppelman, and S. R. Lerman. 1986. <em>A Self-Instructing Course in Disaggregate Mode Choice Modeling</em>. Final Report. Washington, D.C.: University Research; Training Program.
+</div>
+</div>
 <div class="footnotes">
 <hr />
 <ol start="13">
@@ -4296,6 +4339,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

@@ -11,33 +11,9 @@ library(tidyverse)
 
 ```
 ## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-## ✓ tibble  3.1.0     ✓ dplyr   1.0.5
+## ✓ tibble  3.1.1     ✓ dplyr   1.0.5
 ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
 ## ✓ readr   1.4.0     ✓ forcats 0.5.1
-```
-
-```
-## Warning: package 'ggplot2' was built under R version 4.0.2
-```
-
-```
-## Warning: package 'tibble' was built under R version 4.0.2
-```
-
-```
-## Warning: package 'tidyr' was built under R version 4.0.2
-```
-
-```
-## Warning: package 'readr' was built under R version 4.0.2
-```
-
-```
-## Warning: package 'dplyr' was built under R version 4.0.2
-```
-
-```
-## Warning: package 'forcats' was built under R version 4.0.2
 ```
 
 ```
@@ -1012,7 +988,7 @@ tibble(
 </table>
 
 
-## Independence of Irrelevant Alternatives Property
+## Independence of Irrelevant Alternatives Property {#IIA-section}
 
 One of the most widely discussed aspects of the multinomial logit model is its
 independence from irrelevant alternatives (IIA) property.  The IIA property
@@ -1089,7 +1065,7 @@ be irrelevant to the ratio of probabilities between a pair of alternatives. In
 some cases, this will result in erroneous predictions of choice probabilities.
 An extreme example of this problem is the classic “red bus/blue bus paradox.”
 
-### The Red Bus/Blue Bus Paradox
+### The Red Bus/Blue Bus Paradox {#bus-paradox}
 
 Consider the case of a commuter who has a choice of going to work by auto or
 taking a blue bus.  Assume that the attributes of the auto and the blue bus are
