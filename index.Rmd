@@ -35,8 +35,8 @@ the text and exposed to the viewer. In this way, the book serves not only as a
 primer on choice modeling, but on how to estimate and interpret choice modelers
 in R. This conversion project was undertaken by members of the AEP50(5)
 subcommittee on Travel Forecasting Resources on behalf of the transportation
-modeling community. The committee was aided in this conversion by the following
-students at Brigham Young University:
+modeling community. The committee was aided in the initial conversion by the graduate
+students at Brigham Young University.
 
 Cover Photo: King's Cross Station, London by [Michał Parzuchowski](https://unsplash.com/@mparzuchowski) 
 on [Unsplash](https://unsplash.com/collections/8484088/)
