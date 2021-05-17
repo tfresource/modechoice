@@ -199,8 +199,6 @@ fig:Threetypestwolevelnests
 fig:Threelevelfouralternatives
 eq:twolevelNLmodels
 eq:threelevelNLmodels
-eq:SRGRP
-eq:PTGRP
 eq:eighteen
 eq:eight19
 eq:twenty
