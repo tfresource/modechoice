@@ -30,7 +30,13 @@ Alternatives in a common nest exhibit a higher degree of similarity and competit
 
 ## Formulation of Nested Logit Model
 
-The derivation of the nested logit model is based on the assumption that some of the alternatives share common components in their random error terms.  That is, the random term of the nested alternatives can be decomposed into a portion associated with each alternative and a portion associated with groups of alternatives.  For example, consider an urban mode choice where a traveler has four modes (drive alone, shared ride, commuter rail and bus) available for making an intercity trip.  The utility equations for these alternatives are:
+The derivation of the nested logit model is based on the assumption that some of
+the alternatives share common components in their random error terms.  That is,
+the random term of the nested alternatives can be decomposed into a portion
+associated with each alternative and a portion associated with groups of
+alternatives.  For example, consider an urban mode choice where a traveler has
+four modes (drive alone, shared ride, commuter rail and bus) available for
+making an intercity trip.  The utility equations for these alternatives are:
 
 \usepackage{amsmath}
 \begin{align}
@@ -41,8 +47,20 @@ U_{LTR} &= V_{PT} + V_{LTR} + \epsilon_{SR} + \epsilon_{LTR}
 (\#eq:eightone)
 \end{align}
 
-The utility terms for bus and light rail each include a distinct observed component, $V_{Bus}$  and  $V_{LTR}$, and a common observed component, $V_{PT}$ , for public transit (PT); they also include distinct random components, $\varepsilon_{Bus}$ and $\varepsilon_{LTR}$ , and a common random component, $\varepsilon_{PT}$ .  The common error component creates a covariance between the total errors for bus, $\varepsilon_{PT} + \varepsilon_{Bus}$ , and Light Rail, $\varepsilon_{PT} + \varepsilon_{LTR}$ .  This covariance violates the assumption underlying the MNL model representing an increased similarity between pairs of nested alternatives (bus and Light Rail, in this case) and leads to greater cross-elasticity between these alternatives.  
-  The total error for each of the four alternatives is assumed to be distributed Gumbel with scale parameter equal to one, as in the MNL model.  The variance of these distributions is: 
+The utility terms for bus and light rail each include a distinct observed
+component, $V_{Bus}$  and  $V_{LTR}$, and a common observed component, $V_{PT}$,
+for public transit (PT); they also include distinct random components,
+$\varepsilon_{Bus}$ and $\varepsilon_{LTR}$ , and a common random component,
+$\varepsilon_{PT}$ .  The common error component creates a covariance between
+the total errors for bus, $\varepsilon_{PT} + \varepsilon_{Bus}$ , and Light
+Rail, $\varepsilon_{PT} + \varepsilon_{LTR}$ .  This covariance violates the
+assumption underlying the MNL model representing an increased similarity between
+pairs of nested alternatives (bus and Light Rail, in this case) and leads to
+greater cross-elasticity between these alternatives.
+
+The total error for each of the four alternatives is assumed to be distributed
+Gumbel with scale parameter equal to one, as in the MNL model.  The variance of
+these distributions is:
   
 
 \begin{equation}
@@ -58,8 +76,23 @@ V_{AR}(\epsilon_{Bus}) = V_{AR} (\epsilon_{LTR}) = \pi^2/(6 \mu_{PT}^2) = (\pi^2
 (\#eq:eightthree)
 \end{equation}
 
-where	$\mu_{PT}$  is bounded by one and positive infinity ($\theta_{PT}$  is bounded by zero and one) to ensure that the conditional variance for bus, $Var(\varepsilon_{Bus})$ ,  is less than the total variance for bus, $Var(\varepsilon_{PT}+\varepsilon_{Bus})$ , and similarly for Light Rail.  This is required to ensure that the variance for the common public transit error component, $\varepsilon_{PT}$ , is non-negative. These assumptions are adequate to derive a nested logit model using utility maximization principles.  The choice structure implied by these equations is depicted by the nesting structure in Figure \@ref(fig:Twoleveltwoalternatives), in which bus and light rail are more similar to each other than they are to drive alone and shared ride. 
-  It is convenient to interpret this structure as if there are two levels of choice even though the derivation of the model makes no assumptions about the structure of the choice process .  The figure depicts an upper level (marginal) choice among drive alone, shared ride, and public transit and a lower level (conditional) choice between bus and light rail, given that public transit is chosen.
+where	$\mu_{PT}$  is bounded by one and positive infinity ($\theta_{PT}$  is
+bounded by zero and one) to ensure that the conditional variance for bus,
+$Var(\varepsilon_{Bus})$ ,  is less than the total variance for bus,
+$Var(\varepsilon_{PT}+\varepsilon_{Bus})$ , and similarly for Light Rail.  This
+is required to ensure that the variance for the common public transit error
+component, $\varepsilon_{PT}$ , is non-negative. These assumptions are adequate
+to derive a nested logit model using utility maximization principles.  The
+choice structure implied by these equations is depicted by the nesting structure
+in Figure \@ref(fig:Twoleveltwoalternatives), in which bus and light rail are
+more similar to each other than they are to drive alone and shared ride.
+
+It is convenient to interpret this structure as if there are two levels of
+choice even though the derivation of the model makes no assumptions about the
+structure of the choice process .  The figure depicts an upper level (marginal)
+choice among drive alone, shared ride, and public transit and a lower level
+(conditional) choice between bus and light rail, given that public transit is
+chosen.
 
 ```{r Twoleveltwoalternatives, fig.cap="Two-Level Nest Structure with Two Alternatives in Lower Nest", echo = FALSE}
 knitr::include_graphics("img/Twoleveltwoalternatives.PNG")
@@ -135,7 +168,30 @@ The logsum parameter, $\theta$ , (sometimes called the “dissimilarity paramete
 
 The differences between the nested logit model and the multinomial logit model can be illustrated by comparison of the elasticities of each alternative to changes in the value of a variable associated with it (direct elasticity) or with another alternative (cross elasticity) as reported in Table 8-2.  The MNL direct- and cross-elasticity equations are the same for all alternatives.  This is a manifestation of the IIA property of the MNL model.  
 
-However, the elasticity expressions for the NL model are differentiated between cases in which the alternative being considered is or is not in the same nest as the alternative which is changed.  Both models produce identical direct- and cross-elasticities when the attribute that is changed is for one of the non-nested alternatives.  However, the elasticity equations for changes in the attributes of nested alternatives are different.  These differences are attributable to the value of $\theta$  in the elasticity equations.  When $\theta$  is equal to one, its maximum value, the expression, $\frac{1-\theta}{\theta}$ , in the elasticity formulae in Table \@ref(tab:nested-elasticity) becomes zero and the direct and cross-elasticity expressions for the nested alternatives collapse to the corresponding equations for the alternatives not in the nest.  As the scale parameter, $\theta$ , decreases from one to zero, this expression increases and the direct- and cross-elasticities within the nest become larger (possibly, much larger) than the direct- and cross-elasticities between the nests.  That is, the sensitivity of a nested alternative to changes in its attributes or to changes in the attributes of other nested alternatives becomes much greater than the corresponding changes for non-nested alternatives.  Although the same comparison appears to exist between nested alternatives and similar alternatives in the MNL model, this can only be evaluated by taking account of differences in the $\beta$  parameters between the MNL and NL models.
+However, the elasticity expressions for the NL model are differentiated between
+cases in which the alternative being considered is or is not in the same nest as
+the alternative which is changed.  Both models produce identical direct- and
+cross-elasticities when the attribute that is changed is for one of the
+non-nested alternatives.  However, the elasticity equations for changes in the
+attributes of nested alternatives are different.  These differences are
+attributable to the value of $\theta$  in the elasticity equations.  When
+$\theta$  is equal to one, its maximum value, the expression,
+$\frac{1-\theta}{\theta}$ , in the elasticity formulae in Table
+\@ref(tab:nested-elasticity) becomes zero and the direct and cross-elasticity
+expressions for the nested alternatives collapse to the corresponding equations
+for the alternatives not in the nest.  
+
+As the scale parameter, $\theta$ ,
+decreases from one to zero, this expression increases and the direct- and
+cross-elasticities within the nest become larger (possibly, much larger) than
+the direct- and cross-elasticities between the nests.  That is, the sensitivity
+of a nested alternative to changes in its attributes or to changes in the
+attributes of other nested alternatives becomes much greater than the
+corresponding changes for non-nested alternatives.  Although the same comparison
+appears to exist between nested alternatives and similar alternatives in the MNL
+model, this can only be evaluated by taking account of differences in the
+$\beta$  parameters between the MNL and NL models.
+
 	
 ```{r nested-elasticity, echo = FALSE}
 string22 <- "$(1-P_j)\\beta_{LOS}{LOS}_j$"
@@ -180,8 +236,24 @@ The assumptions underlying the model described in the preceding section (correla
 knitr::include_graphics("img/Threetypestwolevelnests.PNG")
 ```
 
-Some of these nesting structures are likely to be behaviorally unreasonable; for example, it doesn’t seem reasonable to include bus and car in the same nest. The selection of a preferred nesting structure requires a combination of judgment (about reasonable nesting structures) and statistical hypothesis testing; specifically, testing the hypothesis that the MNL or a simpler NL model is the true model.  
-	Further, sub-groups of alternatives within any group may themselves be more similar to each other than to other alternatives in the larger group.  Representation of these differences in similarity can result in multiple levels of nesting, hierarchically identifying increasingly similar alternatives at each level (Borsch-Supan, 1987).  For example, in the four alternative case, the case of three alternatives in a lower nest might represent alternatives that include group riding (shared ride, bus and light rail).  If we believe that the bus and light rail alternatives are more similar than either alternative is to shared ride, utility equations with the following common error terms will show an intermediate level of error correlation among all group travel modes, and an additional level of error correlation between commuter rail and bus.
+Some of these nesting structures are likely to be behaviorally unreasonable; for
+example, it doesn’t seem reasonable to include bus and car in the same nest. The
+selection of a preferred nesting structure requires a combination of judgment
+(about reasonable nesting structures) and statistical hypothesis testing;
+specifically, testing the hypothesis that the MNL or a simpler NL model is the
+true model.
+
+Further, sub-groups of alternatives within any group may themselves be more
+similar to each other than to other alternatives in the larger group.
+Representation of these differences in similarity can result in multiple levels
+of nesting, hierarchically identifying increasingly similar alternatives at each
+level (Borsch-Supan, 1987).  For example, in the four alternative case, the case
+of three alternatives in a lower nest might represent alternatives that include
+group riding (shared ride, bus and light rail).  If we believe that the bus and
+light rail alternatives are more similar than either alternative is to shared
+ride, utility equations with the following common error terms will show an
+intermediate level of error correlation among all group travel modes, and an
+additional level of error correlation between commuter rail and bus.
 
 \begin{equation}
 \begin{split}
@@ -198,8 +270,14 @@ In this case, the group travel modes (shared ride, commuter rail and bus) will b
 knitr::include_graphics("img/Threelevelfouralternatives.PNG")
 ```
 
-Twelve three-level nested structures are possible with four alternatives; these are combinations of two alternatives at the lowest level, one alternative at the intermediate level and one alternative at the upper level. 
-The probability equations for the two-level nested logit model can be extended readily to the three-level case as illustrated below.  The probabilities for each nested alternative in the lowest level, commuter rail or bus, conditional on choice of public transit (PT) are given by: 
+Twelve three-level nested structures are possible with four alternatives; these
+are combinations of two alternatives at the lowest level, one alternative at the
+intermediate level and one alternative at the upper level.
+
+The probability equations for the two-level nested logit model can be extended
+readily to the three-level case as illustrated below.  The probabilities for
+each nested alternative in the lowest level, commuter rail or bus, conditional
+on choice of public transit (PT) are given by:
 
 \begin{equation}
 Pr(Bus \mid PT) = \frac {\exp(\frac{V_{Bus}}{\theta_{PT}})} {\exp(\frac{V_{Bus}}{\theta_{PT}}) + \exp{\frac{V_{LTR}}{\theta_{PT}}}}
@@ -211,9 +289,10 @@ Pr(LTR \mid PT) = \frac {\exp(\frac{V_{LTR}}{\theta_{PT}})} {\exp(\frac{V_{Bus}}
 (\#eq:threelevelNLmodels)
 \end{equation}
 
-where $\theta_{PT}$ is the logsum paratmeter at the lowest (i.e. public transit) nest level.
+where $\theta_{PT}$ is the logsum parameter at the lowest (i.e. public transit) nest level.
 
-The probabilities for each alternative in the second level nest, shared ride and public transit, conditional on the choice of group travel (GRP) modes are:
+The probabilities for each alternative in the second level nest, shared ride and
+public transit, conditional on the choice of group travel (GRP) modes are:
 
 $\Gamma_{PT}$ is the "logsum" of the exponents of the nested utilites for the lower nest level:
 
@@ -231,7 +310,9 @@ Pr(GRP) = \frac{exp(V_{GRP} + \theta_{GRP} \Gamma_{GRP})} {exp(V_{DA}) + exp(V_{
 (\#eq:eight19)
 \end{align}
 
-where $\theta_{GRP}$ is the logsum parameter for the intermediate level (*i.e.*, for the common carrier modes), and $\Gamma_{GRP}$ is the logsum of the exponents of the nested utilities for the intermediate nest:
+where $\theta_{GRP}$ is the logsum parameter for the intermediate level (*i.e.*,
+for the common carrier modes), and $\Gamma_{GRP}$ is the logsum of the exponents
+of the nested utilities for the intermediate nest:
 
 \begin{equation}
 \Gamma_{GRP} = log({exp \frac{V_{SR}}{\theta_{GRP}}+ exp \frac{V_{PT} + \theta_{PT} \Gamma_{PT}}{\theta_{GRP}}})
@@ -248,7 +329,12 @@ Pr(LTR) = Pr(LTR|PT) \times Pr(PT|GRP) \times Pr(GRP) \\
 (\#eq:eighttopone)
 \end{align}
 
-The value of the logsum parameters decrease as we go down the tree.  This follows from the requirement that the error variance at each level of the tree must be lower than at the next higher level since the total variance for each alternative is fixed and the variance at each level of the tree must be positive (non-negative).  The total variance for each alternative, $Var(\varepsilon^*_{Mode})$ , is given by:  
+The value of the logsum parameters decrease as we go down the tree.  This
+follows from the requirement that the error variance at each level of the tree
+must be lower than at the next higher level since the total variance for each
+alternative is fixed and the variance at each level of the tree must be positive
+(non-negative).  The total variance for each alternative,
+$Var(\varepsilon^*_{Mode})$ , is given by:
 
 \begin{equation}
 Var(\varepsilon^*_{DA})=\frac{\pi^2}{6}
@@ -341,35 +427,64 @@ tibble(
 
 ## Statistical Testing of Nested Logit Structures {#testing-NL-structures}
 
-Adopting a nested logit model implies rejection of the MNL .  We can use standard statistical tests of the hypothesis that the MNL model is the true model since the nested logit model is a generalization of the MNL model.  In the case of multiple nests, the hypothesis that the MNL is the true model is equivalent to the hypothesis that all the logsum parameters are equal to one.  We can use the likelihood ratio statistic with degrees of freedom equal to the number of logsum parameters (the number of restrictions between the NL and the MNL) to test this hypothesis.  We reject the null hypothesis that the MNL model is the correct model if the calculated value is greater than the test or critical value for the distribution as:
+Adopting a nested logit model implies rejection of the MNL .  We can use
+standard statistical tests of the hypothesis that the MNL model is the true
+model since the nested logit model is a generalization of the MNL model.  In the
+case of multiple nests, the hypothesis that the MNL is the true model is
+equivalent to the hypothesis that all the logsum parameters are equal to one.
+We can use the likelihood ratio statistic with degrees of freedom equal to the
+number of logsum parameters (the number of restrictions between the NL and the
+MNL) to test this hypothesis.  We reject the null hypothesis that the MNL model
+is the correct model if the calculated value is greater than the test or
+critical value for the distribution as:
 
 \begin{equation}
 $\displaystyle -2 \times [l^{MNL} - l^{NL}]\ge \chi^{2}_{n}$
-where n is the number of restrictions (nests) between the MNL and NL models.
 (\#eq:log-likelihoodtestMNLmodel)
 \end{equation}
 
-In the case of a simple NL model with a single nest, we can use the t-statistic to test the hypothesis that the logsum parameter is equal to one.  Even in a more complex NL model, we can test each logsum term to determine if a portion of the nesting structure can be eliminated.  For each case in which the hypothesis that the logsum parameter is equal to one is not rejected, the corresponding branch of the tree can be eliminated and the alternatives can go directly to the next level.  The t-statistics must be evaluated for the appropriate null hypothesis.  For nests directly under the root of the tree, the null hypothesis is $H_0: \mu_k = 1$ ; for other nests, the null hypothesis is that the parameter for that nest is equal to the parameter for the next higher nest in the tree.  That is, for a top level nest,
+where $n$ is the number of restrictions (nests) between the MNL and NL models.
+
+In the case of a simple NL model with a single nest, we can use the t-statistic
+to test the hypothesis that the logsum parameter is equal to one.  Even in a
+more complex NL model, we can test each logsum term to determine if a portion of
+the nesting structure can be eliminated.  For each case in which the hypothesis
+that the logsum parameter is equal to one is not rejected, the corresponding
+branch of the tree can be eliminated and the alternatives can go directly to the
+next level.  The t-statistics must be evaluated for the appropriate null
+hypothesis.  For nests directly under the root of the tree, the null hypothesis
+is $H_0: \mu_k = 1$ ; for other nests, the null hypothesis is that the parameter
+for that nest is equal to the parameter for the next higher nest in the tree.
+That is, for a top level nest,
 
 \begin{equation}
 $\displaystyle t-statistic = \frac{\hat\theta - 1}{S_{k}}$
-where $\hat\theta$ is the estimate of the logsum parameter for nest {k},
-      1            is the hypothesized value against which the logsum parameter is being tested;
-      $S_{k}$        is the standard error of the parameter estimate.
 (\#eq:toplevelnest)
 \end{equation}
+
+where $\hat\theta$ is the estimate of the logsum parameter for nest {k},
+1 is the hypothesized value against which the logsum parameter is being tested;
+and $S_{k}$ is the standard error of the parameter estimate.
 
 For other nests, 
 
 \begin{equation}
 $\displaystyle t-statistic = \frac{\hat\theta_{k \subset j} - \hat\theta_{j}}{\sqrt {S^{2}_{k\subset j} + S^{2}_{j}-2S_{k\subset j,j}}}$
-where $\hat\theta_{k\subset j}$ is the estimate of the logsum parameter for nest k that is included under nest j,
-      $\hat\theta_{j}$          is the estimate of the logsum parameter for nest j,
-      $S^{2}_{k\subset j}$      is the error variance of the logsum parameter for nest k that is included under nest j,
-      $S^{2}_{j}$               is the error variance of the logsum parameter for nest j, and
-      $S_{k\subset j,j}$        is the error covariance of the two logsum parameters.
 (\#eq:toplevelnest)
 \end{equation}
 
-It is important to note that these are not necessarily the test values that will be reported by all computer programs, many of which apply the test for the null hypothesis that the logsum is equal to zero or one only.  If the test against zero is reported , the user must obtain or calculate the standard errors of estimate for the relevant parameters and calculate the t-statistic(s) as defined above.
-	The likelihood ratio test can also be used to test the significance of more complex nested models or between models with different nesting structures as long as the nesting structure of one model can be obtained as a restriction of the other.  To choose between two nested logit models where neither model is a restricted version of the other, we use the non-nested hypothesis test discussed in [CHAPTER 5](#chapter5) [section 5.7.3.2](#section5-7-3-2).
+where $\hat\theta_{k\subset j}$ is the estimate of the logsum parameter for nest
+$k$ that is included under nest $j$, $\hat\theta_{j}$ is the estimate of
+the logsum parameter for nest $j$, $S^{2}_{k\subset j}$ is the error variance
+of the logsum parameter for nest $k$ that is included under nest $j$, $S^{2}_{j}$
+is the error variance of the logsum parameter for nest $j$, and $S_{k\subset j,j}$
+is the error covariance of the two logsum parameters.
+
+It is important to note that these are not necessarily the test values that will
+be reported by all computer programs, many of which apply the test for the null
+hypothesis that the logsum is equal to zero or one only.  If the test against
+zero is reported , the user must obtain or calculate the standard errors of
+estimate for the relevant parameters and calculate the t-statistic(s) as defined
+above.
+
+The likelihood ratio test can also be used to test the significance of more complex nested models or between models with different nesting structures as long as the nesting structure of one model can be obtained as a restriction of the other.  To choose between two nested logit models where neither model is a restricted version of the other, we use the non-nested hypothesis test discussed in [CHAPTER 5](#chapter5) [section 5.7.3.2](#section5-7-3-2).
