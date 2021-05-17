@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 San Francisco Bay Area Shop / Other Mode Choice | A Self-Instructing Course in Mode Choice Modeling</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 San Francisco Bay Area Shop / Other Mode Choice | A Self-Instructing Course in Mode Choice Modeling" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-04-26" />
+<meta name="date" content="2021-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,8 +31,8 @@
   
   
 <link rel="prev" href="specification-chapter.html"/>
-<link rel="next" href="nested-logit-model.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<link rel="next" href="nestedlogit-chapter.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -119,6 +121,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -173,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-related-to-the-characteristics-of-the-decision-maker"><i class="fa fa-check"></i><b>3.4.3</b> Utility Related to the Characteristics of the Decision Maker</a></li>
 <li class="chapter" data-level="3.4.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-defined-by-interactions-between-alternative-attributes-and-decision-maker-characteristics"><i class="fa fa-check"></i><b>3.4.4</b> Utility Defined by Interactions between Alternative Attributes and Decision Maker Characteristics</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#specification-of-the-additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
+<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a>
 <ul>
@@ -182,9 +207,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-sigmoid-or-s-shape-of-multinomial-logit-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> The Sigmoid or S shape of Multinomial Logit Probabilities</a></li>
 <li class="chapter" data-level="4.1.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-equivalent-differences-property"><i class="fa fa-check"></i><b>4.1.2</b> The Equivalent Differences Property</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
+<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#IIA-section"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-red-busblue-bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
+<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-prediction-with-multinomial-logit-model"><i class="fa fa-check"></i><b>4.3</b> Example: Prediction with Multinomial Logit Model</a></li>
 <li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a>
@@ -231,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="specification-chapter.html"><a href="specification-chapter.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement: San Francisco Bay Area Work Mode Choice</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.1" data-path="specification-chapter.html"><a href="specification-chapter.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
 <li class="chapter" data-level="6.2" data-path="specification-chapter.html"><a href="specification-chapter.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="specification-chapter.html"><a href="specification-chapter.html#refinement-of-specification-for-alternative-specific-income-effects"><i class="fa fa-check"></i><b>6.2.1</b> Refinement of Specification for Alternative Specific Income Effects</a></li>
@@ -250,28 +275,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.1" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#introduction-2"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.2" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#specification-for-shopother-mode-choice-model"><i class="fa fa-check"></i><b>7.2</b> Specification for Shop/Other Mode Choice Model</a></li>
 <li class="chapter" data-level="7.3" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#initial-model-specification"><i class="fa fa-check"></i><b>7.3</b> Initial Model Specification</a></li>
 <li class="chapter" data-level="7.4" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#exploring-alternative-specifications"><i class="fa fa-check"></i><b>7.4</b> Exploring Alternative Specifications</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
+<li class="chapter" data-level="8" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="nested-logit-model.html"><a href="nested-logit-model.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
-<li class="chapter" data-level="8.2" data-path="nested-logit-model.html"><a href="nested-logit-model.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a></li>
-<li class="chapter" data-level="8.3" data-path="nested-logit-model.html"><a href="nested-logit-model.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#logsum-param"><i class="fa fa-check"></i><b>8.2.1</b> Interpretation of the Logsum Parameter</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#disaggregate-direct-and-cross-elasticities"><i class="fa fa-check"></i><b>8.2.2</b> Disaggregate Direct and Cross-Elasticities</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.4" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#testing-NL-structures"><i class="fa fa-check"></i><b>8.4</b> Statistical Testing of Nested Logit Structures</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.1" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#introduction-3"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
 <li class="chapter" data-level="9.2" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-work-trips"><i class="fa fa-check"></i><b>9.2</b> Nested Models for Work Trips</a></li>
 <li class="chapter" data-level="9.3" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-shop-other-trips"><i class="fa fa-check"></i><b>9.3</b> Nested Models for Shop / Other Trips</a></li>
 <li class="chapter" data-level="9.4" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#practical-issues-and-implications"><i class="fa fa-check"></i><b>9.4</b> Practical Issues and Implications</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation.html"><a href="multiple-maxima-in-nested-logit-estimation.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation</a></li>
+<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><a href="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation (#nesting-optima-chapter)</a></li>
 <li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="chapter1.html"><a href="chapter1.html#background"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
+<li class="chapter" data-level="11.1" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#background-1"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
 <li class="chapter" data-level="11.2" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-forecasting"><i class="fa fa-check"></i><b>11.2</b> Aggregate Forecasting</a></li>
 <li class="chapter" data-level="11.3" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-assessment-of-travel-mode-choice-models"><i class="fa fa-check"></i><b>11.3</b> Aggregate Assessment of Travel Mode Choice Models</a></li>
 </ul></li>
@@ -280,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-gev-class-of-models"><i class="fa fa-check"></i><b>12.1</b> The GEV Class of Models</a></li>
 <li class="chapter" data-level="12.2" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mmnl-class-of-models"><i class="fa fa-check"></i><b>12.2</b> The MMNL Class of Models</a></li>
 <li class="chapter" data-level="12.3" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mixed-gev-class-of-models"><i class="fa fa-check"></i><b>12.3</b> The Mixed GEV Class of Models</a></li>
-<li class="chapter" data-level="12.4" data-path="specification-chapter.html"><a href="specification-chapter.html#summary"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
+<li class="chapter" data-level="12.4" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#summary-1"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -304,222 +334,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="other-purpose-chapter" class="section level1" number="7">
 <h1><span class="header-section-number">Chapter 7</span> San Francisco Bay Area Shop / Other Mode Choice</h1>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="other-purpose-chapter.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="other-purpose-chapter.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-## ✓ tibble  3.1.0     ✓ dplyr   1.0.5
+## ✓ tibble  3.1.1     ✓ dplyr   1.0.5
 ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
 ## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.0.2</code></pre>
-<pre><code>## Warning: package &#39;forcats&#39; was built under R version 4.0.2</code></pre>
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="other-purpose-chapter.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span></code></pre></div>
-<pre><code>## Warning: package &#39;haven&#39; was built under R version 4.0.2</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="other-purpose-chapter.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlogit)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="other-purpose-chapter.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb66-2"><a href="other-purpose-chapter.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlogit)</span></code></pre></div>
 <pre><code>## Loading required package: dfidx</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dfidx&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:stats&#39;:
 ## 
 ##     filter</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="other-purpose-chapter.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="other-purpose-chapter.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span></code></pre></div>
 <p><a href="other-purpose-chapter.html#other-purpose-chapter">Chapter 7</a></p>
-<div id="introduction" class="section level2" number="7.1">
+<div id="introduction-2" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Introduction</h2>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="other-purpose-chapter.html#cb85-1" aria-hidden="true" tabindex="-1"></a>sf_nonwork_raw <span class="ot">&lt;-</span> <span class="fu">read_spss</span>()</span>
-<span id="cb85-2"><a href="other-purpose-chapter.html#cb85-2" aria-hidden="true" tabindex="-1"></a>sf_nonwork <span class="ot">&lt;-</span> <span class="fu">dfidx</span>()</span>
-<span id="cb85-3"><a href="other-purpose-chapter.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(<span class="st">&quot;data/sf_nonwork.rds&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="other-purpose-chapter.html#cb86-1" aria-hidden="true" tabindex="-1"></a>myshape <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/some_shapefile.shp&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="other-purpose-chapter.html#cb87-1" aria-hidden="true" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb87-2"><a href="other-purpose-chapter.html#cb87-2" aria-hidden="true" tabindex="-1"></a>models[[<span class="st">&#39;Bivariate&#39;</span>]] <span class="ot">&lt;-</span> <span class="fu">lm</span>(Girth <span class="sc">~</span> Height, <span class="at">data =</span> trees)</span>
-<span id="cb87-3"><a href="other-purpose-chapter.html#cb87-3" aria-hidden="true" tabindex="-1"></a>models[[<span class="st">&#39;Multivariate&#39;</span>]] <span class="ot">&lt;-</span> <span class="fu">lm</span>(Girth <span class="sc">~</span> Height <span class="sc">+</span> Volume, <span class="at">data =</span> trees)</span></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="other-purpose-chapter.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(models, <span class="at">title =</span> <span class="st">&quot;Model Comparison&quot;</span>)</span></code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:model-comparison">Table 7.1: </span>Model Comparison
-</caption>
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:center;">
-Bivariate
-</th>
-<th style="text-align:center;">
-Multivariate
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:center;">
--6.188
-</td>
-<td style="text-align:center;">
-10.816
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-(5.960)
-</td>
-<td style="text-align:center;">
-(1.973)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Height
-</td>
-<td style="text-align:center;">
-0.256
-</td>
-<td style="text-align:center;">
--0.045
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-</td>
-<td style="text-align:center;">
-(0.078)
-</td>
-<td style="text-align:center;">
-(0.028)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Volume
-</td>
-<td style="text-align:center;">
-</td>
-<td style="text-align:center;">
-0.195
-</td>
-</tr>
-<tr>
-<td style="text-align:left;box-shadow: 0px 1px">
-</td>
-<td style="text-align:center;box-shadow: 0px 1px">
-</td>
-<td style="text-align:center;box-shadow: 0px 1px">
-(0.011)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Num.Obs.
-</td>
-<td style="text-align:center;">
-31
-</td>
-<td style="text-align:center;">
-31
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R2
-</td>
-<td style="text-align:center;">
-0.270
-</td>
-<td style="text-align:center;">
-0.941
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-R2 Adj.
-</td>
-<td style="text-align:center;">
-0.244
-</td>
-<td style="text-align:center;">
-0.937
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-AIC
-</td>
-<td style="text-align:center;">
-154.1
-</td>
-<td style="text-align:center;">
-78.2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-BIC
-</td>
-<td style="text-align:center;">
-158.4
-</td>
-<td style="text-align:center;">
-84.0
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Log.Lik.
-</td>
-<td style="text-align:center;">
--74.061
-</td>
-<td style="text-align:center;">
--35.116
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-F
-</td>
-<td style="text-align:center;">
-10.707
-</td>
-<td style="text-align:center;">
-222.471
-</td>
-</tr>
-</tbody>
-</table>
-<p>Table <a href="other-purpose-chapter.html#tab:model-comparison">7.1</a> shows the estimated models. Figure <a href="other-purpose-chapter.html#fig:group-mean-plot">7.1</a>
-shows the grouped mean for three groups.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="other-purpose-chapter.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate some sample data, then compute mean and standard deviation</span></span>
-<span id="cb89-2"><a href="other-purpose-chapter.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in each group</span></span>
-<span id="cb89-3"><a href="other-purpose-chapter.html#cb89-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb89-4"><a href="other-purpose-chapter.html#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gp =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">each =</span> <span class="dv">10</span>)),</span>
-<span id="cb89-5"><a href="other-purpose-chapter.html#cb89-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="dv">30</span>)</span>
-<span id="cb89-6"><a href="other-purpose-chapter.html#cb89-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb89-7"><a href="other-purpose-chapter.html#cb89-7" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">split</span>(df, df<span class="sc">$</span>gp), <span class="cf">function</span>(d) {</span>
-<span id="cb89-8"><a href="other-purpose-chapter.html#cb89-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">mean =</span> <span class="fu">mean</span>(d<span class="sc">$</span>y), <span class="at">sd =</span> <span class="fu">sd</span>(d<span class="sc">$</span>y), <span class="at">gp =</span> d<span class="sc">$</span>gp)</span>
-<span id="cb89-9"><a href="other-purpose-chapter.html#cb89-9" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="other-purpose-chapter.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The summary data frame ds is used to plot larger red points on top</span></span>
-<span id="cb90-2"><a href="other-purpose-chapter.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of the raw data. Note that we don&#39;t need to supply `data` or `mapping`</span></span>
-<span id="cb90-3"><a href="other-purpose-chapter.html#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="co"># in each layer because the defaults from ggplot() are used.</span></span>
-<span id="cb90-4"><a href="other-purpose-chapter.html#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(gp, y)) <span class="sc">+</span></span>
-<span id="cb90-5"><a href="other-purpose-chapter.html#cb90-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb90-6"><a href="other-purpose-chapter.html#cb90-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> ds, <span class="fu">aes</span>(<span class="at">y =</span> mean), <span class="at">colour =</span> <span class="st">&#39;red&#39;</span>, <span class="at">size =</span> <span class="dv">3</span>) </span></code></pre></div>
-<div class="figure"><span id="fig:group-mean-plot"></span>
-<img src="07-shopother_files/figure-html/group-mean-plot-1.png" alt="Grouped means." width="672" />
-<p class="caption">
-Figure 7.1: Grouped means.
-</p>
-</div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="other-purpose-chapter.html#cb71-1" aria-hidden="true" tabindex="-1"></a>sf_shopother_raw <span class="ot">&lt;-</span> <span class="fu">read_spss</span>(<span class="st">&quot;data-raw/Shopping Trips/SPSS/MTC Shopping v2.SAV&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="other-purpose-chapter.html#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ALTNAME =</span> <span class="fu">factor</span>(ALTID, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Transit&quot;</span>, <span class="st">&quot;Share 2&quot;</span>, <span class="st">&quot;Share 3+&quot;</span>,<span class="st">&quot;Drive alone and Share 2/3+&quot;</span>,</span>
+<span id="cb71-3"><a href="other-purpose-chapter.html#cb71-3" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;Share 2/3+&quot;</span>,<span class="st">&quot;Bike&quot;</span>, <span class="st">&quot;Walk&quot;</span>, <span class="st">&quot;Drive alone&quot;</span>)))</span>
+<span id="cb71-4"><a href="other-purpose-chapter.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sf_shopother_raw) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">names</span>(sf_shopother_raw))</span>
+<span id="cb71-5"><a href="other-purpose-chapter.html#cb71-5" aria-hidden="true" tabindex="-1"></a>sf_shopother <span class="ot">&lt;-</span> <span class="fu">dfidx</span>(sf_shopother_raw, <span class="at">idx =</span> <span class="fu">c</span>(<span class="st">&quot;casenum&quot;</span>, <span class="st">&quot;altname&quot;</span>))</span>
+<span id="cb71-6"><a href="other-purpose-chapter.html#cb71-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-7"><a href="other-purpose-chapter.html#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="co"># write to data/ folder for future use</span></span>
+<span id="cb71-8"><a href="other-purpose-chapter.html#cb71-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(sf_shopother, <span class="st">&quot;data/shopother.rds&quot;</span>)</span></code></pre></div>
+<p>#add labels to alternative names</p>
 </div>
 <div id="specification-for-shopother-mode-choice-model" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Specification for Shop/Other Mode Choice Model</h2>
@@ -538,7 +382,7 @@ Figure 7.1: Grouped means.
         </div>
       </div>
 <a href="specification-chapter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="nested-logit-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="nestedlogit-chapter.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -561,6 +405,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

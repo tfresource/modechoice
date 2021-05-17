@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Selecting a Preferred Nesting Structure | A Self-Instructing Course in Mode Choice Modeling</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Selecting a Preferred Nesting Structure | A Self-Instructing Course in Mode Choice Modeling" />
   <meta property="og:type" content="book" />
@@ -23,16 +23,16 @@
 
 
 
-<meta name="date" content="2021-04-26" />
+<meta name="date" content="2021-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="nested-logit-model.html"/>
-<link rel="next" href="multiple-maxima-in-nested-logit-estimation.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<link rel="prev" href="nestedlogit-chapter.html"/>
+<link rel="next" href="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -119,6 +121,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -173,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-related-to-the-characteristics-of-the-decision-maker"><i class="fa fa-check"></i><b>3.4.3</b> Utility Related to the Characteristics of the Decision Maker</a></li>
 <li class="chapter" data-level="3.4.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-defined-by-interactions-between-alternative-attributes-and-decision-maker-characteristics"><i class="fa fa-check"></i><b>3.4.4</b> Utility Defined by Interactions between Alternative Attributes and Decision Maker Characteristics</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#specification-of-the-additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
+<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a>
 <ul>
@@ -182,9 +207,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-sigmoid-or-s-shape-of-multinomial-logit-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> The Sigmoid or S shape of Multinomial Logit Probabilities</a></li>
 <li class="chapter" data-level="4.1.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-equivalent-differences-property"><i class="fa fa-check"></i><b>4.1.2</b> The Equivalent Differences Property</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
+<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#IIA-section"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-red-busblue-bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
+<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-prediction-with-multinomial-logit-model"><i class="fa fa-check"></i><b>4.3</b> Example: Prediction with Multinomial Logit Model</a></li>
 <li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a>
@@ -231,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="specification-chapter.html"><a href="specification-chapter.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement: San Francisco Bay Area Work Mode Choice</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.1" data-path="specification-chapter.html"><a href="specification-chapter.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
 <li class="chapter" data-level="6.2" data-path="specification-chapter.html"><a href="specification-chapter.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="specification-chapter.html"><a href="specification-chapter.html#refinement-of-specification-for-alternative-specific-income-effects"><i class="fa fa-check"></i><b>6.2.1</b> Refinement of Specification for Alternative Specific Income Effects</a></li>
@@ -250,28 +275,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.1" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#introduction-2"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.2" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#specification-for-shopother-mode-choice-model"><i class="fa fa-check"></i><b>7.2</b> Specification for Shop/Other Mode Choice Model</a></li>
 <li class="chapter" data-level="7.3" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#initial-model-specification"><i class="fa fa-check"></i><b>7.3</b> Initial Model Specification</a></li>
 <li class="chapter" data-level="7.4" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#exploring-alternative-specifications"><i class="fa fa-check"></i><b>7.4</b> Exploring Alternative Specifications</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
+<li class="chapter" data-level="8" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="nested-logit-model.html"><a href="nested-logit-model.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
-<li class="chapter" data-level="8.2" data-path="nested-logit-model.html"><a href="nested-logit-model.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a></li>
-<li class="chapter" data-level="8.3" data-path="nested-logit-model.html"><a href="nested-logit-model.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#logsum-param"><i class="fa fa-check"></i><b>8.2.1</b> Interpretation of the Logsum Parameter</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#disaggregate-direct-and-cross-elasticities"><i class="fa fa-check"></i><b>8.2.2</b> Disaggregate Direct and Cross-Elasticities</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.4" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#testing-NL-structures"><i class="fa fa-check"></i><b>8.4</b> Statistical Testing of Nested Logit Structures</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.1" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#introduction-3"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
 <li class="chapter" data-level="9.2" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-work-trips"><i class="fa fa-check"></i><b>9.2</b> Nested Models for Work Trips</a></li>
 <li class="chapter" data-level="9.3" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-shop-other-trips"><i class="fa fa-check"></i><b>9.3</b> Nested Models for Shop / Other Trips</a></li>
 <li class="chapter" data-level="9.4" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#practical-issues-and-implications"><i class="fa fa-check"></i><b>9.4</b> Practical Issues and Implications</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation.html"><a href="multiple-maxima-in-nested-logit-estimation.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation</a></li>
+<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><a href="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation (#nesting-optima-chapter)</a></li>
 <li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="chapter1.html"><a href="chapter1.html#background"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
+<li class="chapter" data-level="11.1" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#background-1"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
 <li class="chapter" data-level="11.2" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-forecasting"><i class="fa fa-check"></i><b>11.2</b> Aggregate Forecasting</a></li>
 <li class="chapter" data-level="11.3" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-assessment-of-travel-mode-choice-models"><i class="fa fa-check"></i><b>11.3</b> Aggregate Assessment of Travel Mode Choice Models</a></li>
 </ul></li>
@@ -280,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-gev-class-of-models"><i class="fa fa-check"></i><b>12.1</b> The GEV Class of Models</a></li>
 <li class="chapter" data-level="12.2" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mmnl-class-of-models"><i class="fa fa-check"></i><b>12.2</b> The MMNL Class of Models</a></li>
 <li class="chapter" data-level="12.3" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mixed-gev-class-of-models"><i class="fa fa-check"></i><b>12.3</b> The Mixed GEV Class of Models</a></li>
-<li class="chapter" data-level="12.4" data-path="specification-chapter.html"><a href="specification-chapter.html#summary"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
+<li class="chapter" data-level="12.4" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#summary-1"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -304,17 +334,2802 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="nesting-selection-chapter" class="section level1" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Selecting a Preferred Nesting Structure</h1>
-<div id="introduction" class="section level2" number="9.1">
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="nesting-selection-chapter.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mlogit)</span></code></pre></div>
+<pre><code>## Loading required package: dfidx</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dfidx&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="nesting-selection-chapter.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+## ✓ tibble  3.1.1     ✓ dplyr   1.0.5
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks dfidx::filter(), stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="nesting-selection-chapter.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb95-2"><a href="nesting-selection-chapter.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb95-3"><a href="nesting-selection-chapter.html#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb95-4"><a href="nesting-selection-chapter.html#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;kableExtra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     group_rows</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="nesting-selection-chapter.html#cb98-1" aria-hidden="true" tabindex="-1"></a>sf_work <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&quot;data/worktrips.rds&quot;</span>)</span></code></pre></div>
+<div id="introduction-3" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> Introduction</h2>
+<p>This chapter re-examines the San Francisco mode choice models estimated in <a href="specification-chapter.html#specification-chapter">CHAPTER 6</a> and <a href="other-purpose-chapter.html#other-purpose-chapter">CHAPTER 7</a> and evaluates whether the MNL models should be replaced by nested logit models. The final, un-segmented, specifications, Model 17W for work trips and Model 14 S/O for shop/other trips, are taken as the base specifications for estimating nested logit models . Nested models for work trips are examined first, followed by shop/other trips. The chapter concludes with consideration of the policy implications of adopting alternative nesting structures.<br />
+Although the number of possible nests for six alternatives is large, the nature of the alternatives allows certain nests to be rejected as implausible. For example, it is unreasonable to suppose that Bike and Transit have substantial unobserved characteristics that lead to correlation in the error terms of their utility functions. For this reason, this chapter considers four plausible nests which are combined in different ways. For Work trips , these are:
+• Motorized (M) alternatives, comprised of Drive Alone, Shared Ride 2, Shared Ride 3+, and Transit;
+• Private automobile (P) alternatives, including Drive Alone, Shared Ride 2 and Shared Ride 3+ alternatives;
+• Shared ride (S) alternatives; and
+• Non-Motorized (NM) alternatives comprised of Bike and Walk.</p>
+<p>Given these four nests or groupings of alternatives and recognizing that Motorized includes both Automobile and Transit alternatives and that Automobile includes Drive Alone and the Shared Ride alternatives, fifteen nest structures as described below. We begin with four single nest models (and, based on the results of these estimations, we explore a selection of more complex structures.</p>
+<div class="figure"><span id="fig:SNModelsparallelfig"></span>
+<img src="img/Single_nest_models.png" alt="Single Nest Models" width="334" />
+<p class="caption">
+Figure 9.1: Single Nest Models
+</p>
+</div>
 </div>
 <div id="nested-models-for-work-trips" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> Nested Models for Work Trips</h2>
+<p>The estimation of nested logit models for work trips begins with consideration
+of the four single nest models mentioned above and illustrated in Figure 9.1.
+Each of these models obtains improved goodness-of-fit relative to the MNL model
+(see Table <a href="#tab:singlenest-work"><strong>??</strong></a>). Three of the four models; Models 18W, 20W, 21W; result in
+acceptable logsum parameters and two of these models (Models 18W and 20W)
+significantly reject the MNL model at close to the 0.05 level (see the
+chi-square test and significance in the Table
+<a href="#tab:singlenest-lrt"><strong>??</strong></a>. However, the model with the private automobile nest
+(Model 19W) is rejected because the logsum parameter is greater than one and the
+model with the non-motorized nest (Model 21W) cannot reject the MNL model at any
+reasonable level.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="nesting-selection-chapter.html#cb99-1" aria-hidden="true" tabindex="-1"></a>work_formula <span class="ot">&lt;-</span> chosen <span class="sc">~</span> <span class="fu">I</span>(cost <span class="sc">/</span> hhinc) <span class="sc">+</span> mot_tvtt <span class="sc">+</span> nm_tvtt <span class="sc">+</span> movtbyds <span class="sc">|</span>  </span>
+<span id="cb99-2"><a href="nesting-selection-chapter.html#cb99-2" aria-hidden="true" tabindex="-1"></a>                 hhinc <span class="sc">+</span> vehbywrk <span class="sc">+</span> <span class="fu">I</span>(wkccbd<span class="sc">+</span>wknccbd) <span class="sc">+</span> wkempden</span>
+<span id="cb99-3"><a href="nesting-selection-chapter.html#cb99-3" aria-hidden="true" tabindex="-1"></a>m17w <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work)</span>
+<span id="cb99-4"><a href="nesting-selection-chapter.html#cb99-4" aria-hidden="true" tabindex="-1"></a>m18w <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work, </span>
+<span id="cb99-5"><a href="nesting-selection-chapter.html#cb99-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>, <span class="st">&#39;Share ride 2&#39;</span>, </span>
+<span id="cb99-6"><a href="nesting-selection-chapter.html#cb99-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&#39;Share ride 3+&#39;</span>, <span class="st">&#39;Transit&#39;</span>),  </span>
+<span id="cb99-7"><a href="nesting-selection-chapter.html#cb99-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">other =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)),</span>
+<span id="cb99-8"><a href="nesting-selection-chapter.html#cb99-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:other&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb99-9"><a href="nesting-selection-chapter.html#cb99-9" aria-hidden="true" tabindex="-1"></a>m19w <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work, </span>
+<span id="cb99-10"><a href="nesting-selection-chapter.html#cb99-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">privateauto =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>, <span class="st">&#39;Share ride 2&#39;</span>, </span>
+<span id="cb99-11"><a href="nesting-selection-chapter.html#cb99-11" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&#39;Share ride 3+&#39;</span>),  </span>
+<span id="cb99-12"><a href="nesting-selection-chapter.html#cb99-12" aria-hidden="true" tabindex="-1"></a>                            <span class="at">other =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>, <span class="st">&quot;Transit&quot;</span>)),</span>
+<span id="cb99-13"><a href="nesting-selection-chapter.html#cb99-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:other&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb99-14"><a href="nesting-selection-chapter.html#cb99-14" aria-hidden="true" tabindex="-1"></a>m20w <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work,</span>
+<span id="cb99-15"><a href="nesting-selection-chapter.html#cb99-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>( <span class="at">shared_ride =</span> <span class="fu">c</span>(<span class="st">&#39;Share ride 2&#39;</span>, <span class="st">&#39;Share ride 3+&#39;</span>),  </span>
+<span id="cb99-16"><a href="nesting-selection-chapter.html#cb99-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">other =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>,  <span class="st">&#39;Bike&#39;</span>,<span class="st">&#39;Transit&#39;</span>,  <span class="st">&#39;Walk&#39;</span>)),</span>
+<span id="cb99-17"><a href="nesting-selection-chapter.html#cb99-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:other&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb99-18"><a href="nesting-selection-chapter.html#cb99-18" aria-hidden="true" tabindex="-1"></a>m21w <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work,</span>
+<span id="cb99-19"><a href="nesting-selection-chapter.html#cb99-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">non_motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>),  </span>
+<span id="cb99-20"><a href="nesting-selection-chapter.html#cb99-20" aria-hidden="true" tabindex="-1"></a>                            <span class="at">other =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>,<span class="st">&#39;Share ride 2&#39;</span>, <span class="st">&#39;Share ride 3+&#39;</span>, <span class="st">&#39;Transit&#39;</span>)),</span>
+<span id="cb99-21"><a href="nesting-selection-chapter.html#cb99-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:other&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="nesting-selection-chapter.html#cb100-1" aria-hidden="true" tabindex="-1"></a>this_map <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb100-2"><a href="nesting-selection-chapter.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;I(cost/hhinc)&quot;</span> <span class="ot">=</span> <span class="st">&quot;Travel Cost by Income&quot;</span> ,</span>
+<span id="cb100-3"><a href="nesting-selection-chapter.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;mot_tvtt&quot;</span> <span class="ot">=</span> <span class="st">&quot;Motorized Modes Travel Time&quot;</span>,</span>
+<span id="cb100-4"><a href="nesting-selection-chapter.html#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;nm_tvtt&quot;</span> <span class="ot">=</span> <span class="st">&quot;Non-Motorized Modes Travel Time&quot;</span>,</span>
+<span id="cb100-5"><a href="nesting-selection-chapter.html#cb100-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;movtbyds&quot;</span> <span class="ot">=</span> <span class="st">&quot;Motorized OVT by Distance&quot;</span>,</span>
+<span id="cb100-6"><a href="nesting-selection-chapter.html#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;hhinc:Share ride 2&quot;, </span></span>
+<span id="cb100-7"><a href="nesting-selection-chapter.html#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;hhinc:Share ride 3++&quot;, </span></span>
+<span id="cb100-8"><a href="nesting-selection-chapter.html#cb100-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;hhinc:Transit&quot;, </span></span>
+<span id="cb100-9"><a href="nesting-selection-chapter.html#cb100-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;hhinc:Bike&quot;, </span></span>
+<span id="cb100-10"><a href="nesting-selection-chapter.html#cb100-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;hhinc:Walk&quot;, </span></span>
+<span id="cb100-11"><a href="nesting-selection-chapter.html#cb100-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;vehbywrk:Share ride 2&quot;, </span></span>
+<span id="cb100-12"><a href="nesting-selection-chapter.html#cb100-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;vehbywrk:Share ride 3++&quot;, </span></span>
+<span id="cb100-13"><a href="nesting-selection-chapter.html#cb100-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;vehbywrk:Transit&quot;, </span></span>
+<span id="cb100-14"><a href="nesting-selection-chapter.html#cb100-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;vehbywrk:Bike&quot;, </span></span>
+<span id="cb100-15"><a href="nesting-selection-chapter.html#cb100-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;vehbywrk:Walk&quot;, </span></span>
+<span id="cb100-16"><a href="nesting-selection-chapter.html#cb100-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wknccbd:Share ride 2&quot;, </span></span>
+<span id="cb100-17"><a href="nesting-selection-chapter.html#cb100-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wknccbd:Share ride 3++&quot;, </span></span>
+<span id="cb100-18"><a href="nesting-selection-chapter.html#cb100-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wknccbd:Transit&quot;, </span></span>
+<span id="cb100-19"><a href="nesting-selection-chapter.html#cb100-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wknccbd:Bike&quot;, </span></span>
+<span id="cb100-20"><a href="nesting-selection-chapter.html#cb100-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wknccbd:Walk&quot;, </span></span>
+<span id="cb100-21"><a href="nesting-selection-chapter.html#cb100-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wkempden:Share ride 2&quot;, </span></span>
+<span id="cb100-22"><a href="nesting-selection-chapter.html#cb100-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wkempden:Share ride 3++&quot;, </span></span>
+<span id="cb100-23"><a href="nesting-selection-chapter.html#cb100-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wkempden:Transit&quot;, </span></span>
+<span id="cb100-24"><a href="nesting-selection-chapter.html#cb100-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wkempden:Bike&quot;, </span></span>
+<span id="cb100-25"><a href="nesting-selection-chapter.html#cb100-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;wkempden:Walk&quot;,</span></span>
+<span id="cb100-26"><a href="nesting-selection-chapter.html#cb100-26" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;(Intercept):Share ride 2&quot;</span>   <span class="ot">=</span> <span class="st">&quot;Constants Shared ride 2&quot;</span>,</span>
+<span id="cb100-27"><a href="nesting-selection-chapter.html#cb100-27" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;(Intercept):Share ride 3++&quot;</span> <span class="ot">=</span> <span class="st">&quot;Constant: Shared ride 3+&quot;</span>, </span>
+<span id="cb100-28"><a href="nesting-selection-chapter.html#cb100-28" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;(Intercept):Transit&quot;</span>        <span class="ot">=</span> <span class="st">&quot;Constant: Transit&quot;</span>, </span>
+<span id="cb100-29"><a href="nesting-selection-chapter.html#cb100-29" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;(Intercept):Bike&quot;</span>           <span class="ot">=</span> <span class="st">&quot;Constant: Bike&quot;</span>, </span>
+<span id="cb100-30"><a href="nesting-selection-chapter.html#cb100-30" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;(Intercept):Walk&quot;</span>           <span class="ot">=</span> <span class="st">&quot;Constant: Walk&quot;</span>,</span>
+<span id="cb100-31"><a href="nesting-selection-chapter.html#cb100-31" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;iv:motorized&quot;</span> <span class="ot">=</span> <span class="st">&quot;Motorized Nesting Coefficient&quot;</span>,</span>
+<span id="cb100-32"><a href="nesting-selection-chapter.html#cb100-32" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;iv:privateauto&quot;</span> <span class="ot">=</span> <span class="st">&quot;Private Auto Nesting Coefficient&quot;</span>,</span>
+<span id="cb100-33"><a href="nesting-selection-chapter.html#cb100-33" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;iv:shared_ride&quot;</span> <span class="ot">=</span> <span class="st">&quot;Shared Ride Nesting Coefficient&quot;</span>,</span>
+<span id="cb100-34"><a href="nesting-selection-chapter.html#cb100-34" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;iv:non_motorized&quot;</span> <span class="ot">=</span> <span class="st">&quot;Non-Motorized Nesting Coefficient&quot;</span></span>
+<span id="cb100-35"><a href="nesting-selection-chapter.html#cb100-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb100-36"><a href="nesting-selection-chapter.html#cb100-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-37"><a href="nesting-selection-chapter.html#cb100-37" aria-hidden="true" tabindex="-1"></a>single_nest <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb100-38"><a href="nesting-selection-chapter.html#cb100-38" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 17W&quot;</span> <span class="ot">=</span> m17w,</span>
+<span id="cb100-39"><a href="nesting-selection-chapter.html#cb100-39" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 18W&quot;</span> <span class="ot">=</span> m18w,</span>
+<span id="cb100-40"><a href="nesting-selection-chapter.html#cb100-40" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 19W&quot;</span> <span class="ot">=</span> m19w,</span>
+<span id="cb100-41"><a href="nesting-selection-chapter.html#cb100-41" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 20W&quot;</span> <span class="ot">=</span> m20w,</span>
+<span id="cb100-42"><a href="nesting-selection-chapter.html#cb100-42" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 21W&quot;</span> <span class="ot">=</span> m21w</span>
+<span id="cb100-43"><a href="nesting-selection-chapter.html#cb100-43" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb100-44"><a href="nesting-selection-chapter.html#cb100-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-45"><a href="nesting-selection-chapter.html#cb100-45" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(single_nest,</span>
+<span id="cb100-46"><a href="nesting-selection-chapter.html#cb100-46" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="st">&quot;%.4f&quot;</span>, <span class="at">coef_map =</span> this_map, <span class="at">statistic =</span> <span class="st">&quot;statistic&quot;</span>, <span class="at">statistic_vertical =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Warning in sanity_ellipsis(vcov, ...): The `statistic_vertical` argument
+## is deprecated and will be ignored. To display uncertainty estimates next to
+## your coefficients, use a `glue` string in the `estimate` argument. See `?
+## modelsummary`</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Model 17W
+</th>
+<th style="text-align:center;">
+Model 18W
+</th>
+<th style="text-align:center;">
+Model 19W
+</th>
+<th style="text-align:center;">
+Model 20W
+</th>
+<th style="text-align:center;">
+Model 21W
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Travel Cost by Income
+</td>
+<td style="text-align:center;">
+-0.0528
+</td>
+<td style="text-align:center;">
+-0.0395
+</td>
+<td style="text-align:center;">
+-0.0593
+</td>
+<td style="text-align:center;">
+-0.0519
+</td>
+<td style="text-align:center;">
+-0.0523
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-4.9053)
+</td>
+<td style="text-align:center;">
+(-4.2108)
+</td>
+<td style="text-align:center;">
+(-5.7704)
+</td>
+<td style="text-align:center;">
+(-6.3229)
+</td>
+<td style="text-align:center;">
+(-6.1333)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Motorized Modes Travel Time
+</td>
+<td style="text-align:center;">
+-0.0202
+</td>
+<td style="text-align:center;">
+-0.0147
+</td>
+<td style="text-align:center;">
+-0.0201
+</td>
+<td style="text-align:center;">
+-0.0199
+</td>
+<td style="text-align:center;">
+-0.0199
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-5.2937)
+</td>
+<td style="text-align:center;">
+(-3.8350)
+</td>
+<td style="text-align:center;">
+(-5.1626)
+</td>
+<td style="text-align:center;">
+(-5.3383)
+</td>
+<td style="text-align:center;">
+(-5.2238)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Non-Motorized Modes Travel Time
+</td>
+<td style="text-align:center;">
+-0.0455
+</td>
+<td style="text-align:center;">
+-0.0463
+</td>
+<td style="text-align:center;">
+-0.0462
+</td>
+<td style="text-align:center;">
+-0.0454
+</td>
+<td style="text-align:center;">
+-0.0454
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-7.8846)
+</td>
+<td style="text-align:center;">
+(-7.8793)
+</td>
+<td style="text-align:center;">
+(-7.8626)
+</td>
+<td style="text-align:center;">
+(-7.7239)
+</td>
+<td style="text-align:center;">
+(-7.9588)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Motorized OVT by Distance
+</td>
+<td style="text-align:center;">
+-0.1326
+</td>
+<td style="text-align:center;">
+-0.1121
+</td>
+<td style="text-align:center;">
+-0.1358
+</td>
+<td style="text-align:center;">
+-0.1333
+</td>
+<td style="text-align:center;">
+-0.1348
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-6.7530)
+</td>
+<td style="text-align:center;">
+(-6.1534)
+</td>
+<td style="text-align:center;">
+(-8.1074)
+</td>
+<td style="text-align:center;">
+(-8.0397)
+</td>
+<td style="text-align:center;">
+(-8.1464)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constants Shared ride 2
+</td>
+<td style="text-align:center;">
+-1.6976
+</td>
+<td style="text-align:center;">
+-1.2544
+</td>
+<td style="text-align:center;">
+-2.3621
+</td>
+<td style="text-align:center;">
+-1.6378
+</td>
+<td style="text-align:center;">
+-1.6979
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-11.9649)
+</td>
+<td style="text-align:center;">
+(-5.1759)
+</td>
+<td style="text-align:center;">
+(-10.6522)
+</td>
+<td style="text-align:center;">
+(-13.1040)
+</td>
+<td style="text-align:center;">
+(-12.6106)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constant: Shared ride 3+
+</td>
+<td style="text-align:center;">
+-3.7733
+</td>
+<td style="text-align:center;">
+-2.7579
+</td>
+<td style="text-align:center;">
+-5.4127
+</td>
+<td style="text-align:center;">
+-2.2766
+</td>
+<td style="text-align:center;">
+-3.7731
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-16.0157)
+</td>
+<td style="text-align:center;">
+(-5.1891)
+</td>
+<td style="text-align:center;">
+(-10.6748)
+</td>
+<td style="text-align:center;">
+(-8.8225)
+</td>
+<td style="text-align:center;">
+(-15.8012)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constant: Transit
+</td>
+<td style="text-align:center;">
+-0.6930
+</td>
+<td style="text-align:center;">
+-0.4163
+</td>
+<td style="text-align:center;">
+-0.8374
+</td>
+<td style="text-align:center;">
+-0.7012
+</td>
+<td style="text-align:center;">
+-0.6896
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-2.7770)
+</td>
+<td style="text-align:center;">
+(-1.9336)
+</td>
+<td style="text-align:center;">
+(-3.4063)
+</td>
+<td style="text-align:center;">
+(-2.9420)
+</td>
+<td style="text-align:center;">
+(-2.8847)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constant: Bike
+</td>
+<td style="text-align:center;">
+-1.6233
+</td>
+<td style="text-align:center;">
+-1.3842
+</td>
+<td style="text-align:center;">
+-1.7911
+</td>
+<td style="text-align:center;">
+-1.6214
+</td>
+<td style="text-align:center;">
+-1.4406
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-3.7840)
+</td>
+<td style="text-align:center;">
+(-3.4839)
+</td>
+<td style="text-align:center;">
+(-4.6187)
+</td>
+<td style="text-align:center;">
+(-4.2150)
+</td>
+<td style="text-align:center;">
+(-4.0044)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constant: Walk
+</td>
+<td style="text-align:center;">
+0.0751
+</td>
+<td style="text-align:center;">
+0.3337
+</td>
+<td style="text-align:center;">
+-0.0882
+</td>
+<td style="text-align:center;">
+0.0737
+</td>
+<td style="text-align:center;">
+0.0861
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.2151)
+</td>
+<td style="text-align:center;">
+(0.8824)
+</td>
+<td style="text-align:center;">
+(-0.2441)
+</td>
+<td style="text-align:center;">
+(0.2071)
+</td>
+<td style="text-align:center;">
+(0.2501)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Motorized Nesting Coefficient
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.7269
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(5.4832)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Private Auto Nesting Coefficient
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.4788
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(13.4001)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Shared Ride Nesting Coefficient
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.2994
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(3.0847)
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Non-Motorized Nesting Coefficient
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.7673
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(4.1552)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+5029
+</td>
+<td style="text-align:center;">
+5029
+</td>
+<td style="text-align:center;">
+5029
+</td>
+<td style="text-align:center;">
+5029
+</td>
+<td style="text-align:center;">
+5029
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+6941.6
+</td>
+<td style="text-align:center;">
+6942.0
+</td>
+<td style="text-align:center;">
+6929.1
+</td>
+<td style="text-align:center;">
+6940.4
+</td>
+<td style="text-align:center;">
+6944.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+-3441.782
+</td>
+<td style="text-align:center;">
+-3439.980
+</td>
+<td style="text-align:center;">
+-3433.532
+</td>
+<td style="text-align:center;">
+-3439.198
+</td>
+<td style="text-align:center;">
+-3441.156
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rho2
+</td>
+<td style="text-align:center;">
+0.2914
+</td>
+<td style="text-align:center;">
+0.2918
+</td>
+<td style="text-align:center;">
+0.2931
+</td>
+<td style="text-align:center;">
+0.2919
+</td>
+<td style="text-align:center;">
+0.2915
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rho20
+</td>
+<td style="text-align:center;">
+0.6180
+</td>
+<td style="text-align:center;">
+0.6182
+</td>
+<td style="text-align:center;">
+0.6190
+</td>
+<td style="text-align:center;">
+0.6183
+</td>
+<td style="text-align:center;">
+0.6181
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="nesting-selection-chapter.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb102-2"><a href="nesting-selection-chapter.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="fu">names</span>(single_nest),</span>
+<span id="cb102-3"><a href="nesting-selection-chapter.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> single_nest,</span>
+<span id="cb102-4"><a href="nesting-selection-chapter.html#cb102-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb102-5"><a href="nesting-selection-chapter.html#cb102-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb102-6"><a href="nesting-selection-chapter.html#cb102-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">loglik =</span> <span class="fu">map_dbl</span>(model, logLik),</span>
+<span id="cb102-7"><a href="nesting-selection-chapter.html#cb102-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lrtest =</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> (loglik[<span class="dv">1</span>] <span class="sc">-</span> loglik) ,</span>
+<span id="cb102-8"><a href="nesting-selection-chapter.html#cb102-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="fu">pchisq</span>(lrtest, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb102-9"><a href="nesting-selection-chapter.html#cb102-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb102-10"><a href="nesting-selection-chapter.html#cb102-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>model) <span class="sc">%&gt;%</span></span>
+<span id="cb102-11"><a href="nesting-selection-chapter.html#cb102-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Model&quot;</span>, <span class="st">&quot;Log Likelihood&quot;</span>, <span class="st">&quot;LR Test&quot;</span>, <span class="st">&quot;p-value&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>()</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+Log Likelihood
+</th>
+<th style="text-align:right;">
+LR Test
+</th>
+<th style="text-align:right;">
+p-value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Model 17W
+</td>
+<td style="text-align:right;">
+-3441.782
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 18W
+</td>
+<td style="text-align:right;">
+-3439.980
+</td>
+<td style="text-align:right;">
+3.603876
+</td>
+<td style="text-align:right;">
+0.0576450
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 19W
+</td>
+<td style="text-align:right;">
+-3433.532
+</td>
+<td style="text-align:right;">
+16.500446
+</td>
+<td style="text-align:right;">
+0.0000486
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 20W
+</td>
+<td style="text-align:right;">
+-3439.198
+</td>
+<td style="text-align:right;">
+5.168401
+</td>
+<td style="text-align:right;">
+0.0230014
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 21W
+</td>
+<td style="text-align:right;">
+-3441.156
+</td>
+<td style="text-align:right;">
+1.251722
+</td>
+<td style="text-align:right;">
+0.2632239
+</td>
+</tr>
+</tbody>
+</table>
+<p>Next we consider three models with the non-motorized nest in parallel with each of the three other nests (Figure 9.2). In each case, the new models in Table 9-2; Models 22W, 23W and 24W; have better goodness of fit than the corresponding single nest models. Model 23W is rejected because the nest parameter for private automobile is greater than one, as before. Models 22W and 23W both reject the single non-motorized nest (Model 21W) at close to the 0.05 level; however, neither rejects the corresponding Motorized and Shared Ride models (Models 18W and 20W, respectively). In such cases, the analyst can decide to include the non-motorized nest or not, for other than statistical reasons.</p>
+<div class="figure"><span id="fig:NMparallelfig"></span>
+<img src="img/NMnestinParallel.PNG" alt="Non-Motorized Nest in Parallel with Motorized, Private Automobile and Shared Ride Nests" width="282" />
+<p class="caption">
+Figure 9.2: Non-Motorized Nest in Parallel with Motorized, Private Automobile and Shared Ride Nests
+</p>
+</div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="nesting-selection-chapter.html#cb103-1" aria-hidden="true" tabindex="-1"></a>m22w <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work,</span>
+<span id="cb103-2"><a href="nesting-selection-chapter.html#cb103-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>, <span class="st">&#39;Share ride 2&#39;</span>, </span>
+<span id="cb103-3"><a href="nesting-selection-chapter.html#cb103-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&#39;Share ride 3+&#39;</span>, <span class="st">&#39;Transit&#39;</span>),  </span>
+<span id="cb103-4"><a href="nesting-selection-chapter.html#cb103-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">non_motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)))</span>
+<span id="cb103-5"><a href="nesting-selection-chapter.html#cb103-5" aria-hidden="true" tabindex="-1"></a>m23w <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work,</span>
+<span id="cb103-6"><a href="nesting-selection-chapter.html#cb103-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">auto =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>, <span class="st">&#39;Share ride 2&#39;</span>, <span class="st">&#39;Share ride 3+&#39;</span>),  </span>
+<span id="cb103-7"><a href="nesting-selection-chapter.html#cb103-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">transit =</span> <span class="fu">c</span>(<span class="st">&quot;Transit&quot;</span>), <span class="at">non_motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)),</span>
+<span id="cb103-8"><a href="nesting-selection-chapter.html#cb103-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:transit&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb103-9"><a href="nesting-selection-chapter.html#cb103-9" aria-hidden="true" tabindex="-1"></a>m24w <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work,</span>
+<span id="cb103-10"><a href="nesting-selection-chapter.html#cb103-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">shared =</span> <span class="fu">c</span>(<span class="st">&#39;Share ride 2&#39;</span>, <span class="st">&#39;Share ride 3+&#39;</span>),  </span>
+<span id="cb103-11"><a href="nesting-selection-chapter.html#cb103-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">other =</span> <span class="fu">c</span>(<span class="st">&quot;Drive alone&quot;</span>, <span class="st">&quot;Transit&quot;</span>), <span class="at">non_motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)),</span>
+<span id="cb103-12"><a href="nesting-selection-chapter.html#cb103-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:other&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb103-13"><a href="nesting-selection-chapter.html#cb103-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-14"><a href="nesting-selection-chapter.html#cb103-14" aria-hidden="true" tabindex="-1"></a>parallel_nest <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb103-15"><a href="nesting-selection-chapter.html#cb103-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 17W&quot;</span> <span class="ot">=</span> m17w,</span>
+<span id="cb103-16"><a href="nesting-selection-chapter.html#cb103-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 22W&quot;</span> <span class="ot">=</span> m22w,</span>
+<span id="cb103-17"><a href="nesting-selection-chapter.html#cb103-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 23W&quot;</span> <span class="ot">=</span> m23w,</span>
+<span id="cb103-18"><a href="nesting-selection-chapter.html#cb103-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 24W&quot;</span> <span class="ot">=</span> m24w</span>
+<span id="cb103-19"><a href="nesting-selection-chapter.html#cb103-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="nesting-selection-chapter.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(parallel_nest,</span>
+<span id="cb104-2"><a href="nesting-selection-chapter.html#cb104-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="st">&quot;%.4f&quot;</span>, <span class="at">coef_map =</span> this_map, <span class="at">statistic =</span> <span class="st">&quot;statistic&quot;</span>, <span class="at">statistic_vertical =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Warning in sanity_ellipsis(vcov, ...): The `statistic_vertical` argument
+## is deprecated and will be ignored. To display uncertainty estimates next to
+## your coefficients, use a `glue` string in the `estimate` argument. See `?
+## modelsummary`</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Model 17W
+</th>
+<th style="text-align:center;">
+Model 22W
+</th>
+<th style="text-align:center;">
+Model 23W
+</th>
+<th style="text-align:center;">
+Model 24W
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Travel Cost by Income
+</td>
+<td style="text-align:center;">
+-0.0528
+</td>
+<td style="text-align:center;">
+-0.0394
+</td>
+<td style="text-align:center;">
+-0.0585
+</td>
+<td style="text-align:center;">
+-0.0516
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-4.9053)
+</td>
+<td style="text-align:center;">
+(-4.2195)
+</td>
+<td style="text-align:center;">
+(-5.6989)
+</td>
+<td style="text-align:center;">
+(-6.2406)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Motorized Modes Travel Time
+</td>
+<td style="text-align:center;">
+-0.0202
+</td>
+<td style="text-align:center;">
+-0.0146
+</td>
+<td style="text-align:center;">
+-0.0198
+</td>
+<td style="text-align:center;">
+-0.0195
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-5.2937)
+</td>
+<td style="text-align:center;">
+(-3.8326)
+</td>
+<td style="text-align:center;">
+(-5.0862)
+</td>
+<td style="text-align:center;">
+(-5.2275)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Non-Motorized Modes Travel Time
+</td>
+<td style="text-align:center;">
+-0.0455
+</td>
+<td style="text-align:center;">
+-0.0463
+</td>
+<td style="text-align:center;">
+-0.0460
+</td>
+<td style="text-align:center;">
+-0.0446
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-7.8846)
+</td>
+<td style="text-align:center;">
+(-8.1136)
+</td>
+<td style="text-align:center;">
+(-8.0568)
+</td>
+<td style="text-align:center;">
+(-7.8563)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Motorized OVT by Distance
+</td>
+<td style="text-align:center;">
+-0.1326
+</td>
+<td style="text-align:center;">
+-0.1138
+</td>
+<td style="text-align:center;">
+-0.1384
+</td>
+<td style="text-align:center;">
+-0.1344
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-6.7530)
+</td>
+<td style="text-align:center;">
+(-6.2360)
+</td>
+<td style="text-align:center;">
+(-8.2700)
+</td>
+<td style="text-align:center;">
+(-8.1193)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constants Shared ride 2
+</td>
+<td style="text-align:center;">
+-1.6976
+</td>
+<td style="text-align:center;">
+-1.2583
+</td>
+<td style="text-align:center;">
+-2.3612
+</td>
+<td style="text-align:center;">
+-1.6373
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-11.9649)
+</td>
+<td style="text-align:center;">
+(-5.2194)
+</td>
+<td style="text-align:center;">
+(-10.6454)
+</td>
+<td style="text-align:center;">
+(-13.0660)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constant: Shared ride 3+
+</td>
+<td style="text-align:center;">
+-3.7733
+</td>
+<td style="text-align:center;">
+-2.7657
+</td>
+<td style="text-align:center;">
+-5.4110
+</td>
+<td style="text-align:center;">
+-2.3204
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-16.0157)
+</td>
+<td style="text-align:center;">
+(-5.2323)
+</td>
+<td style="text-align:center;">
+(-10.6689)
+</td>
+<td style="text-align:center;">
+(-8.1172)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constant: Transit
+</td>
+<td style="text-align:center;">
+-0.6930
+</td>
+<td style="text-align:center;">
+-0.4151
+</td>
+<td style="text-align:center;">
+-0.8323
+</td>
+<td style="text-align:center;">
+-0.7057
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-2.7770)
+</td>
+<td style="text-align:center;">
+(-1.9268)
+</td>
+<td style="text-align:center;">
+(-3.3868)
+</td>
+<td style="text-align:center;">
+(-2.9593)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constant: Bike
+</td>
+<td style="text-align:center;">
+-1.6233
+</td>
+<td style="text-align:center;">
+-1.2033
+</td>
+<td style="text-align:center;">
+-1.6157
+</td>
+<td style="text-align:center;">
+-1.4757
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-3.7840)
+</td>
+<td style="text-align:center;">
+(-3.2425)
+</td>
+<td style="text-align:center;">
+(-4.4488)
+</td>
+<td style="text-align:center;">
+(-4.1092)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constant: Walk
+</td>
+<td style="text-align:center;">
+0.0751
+</td>
+<td style="text-align:center;">
+0.3451
+</td>
+<td style="text-align:center;">
+-0.0812
+</td>
+<td style="text-align:center;">
+0.0657
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.2151)
+</td>
+<td style="text-align:center;">
+(0.9398)
+</td>
+<td style="text-align:center;">
+(-0.2320)
+</td>
+<td style="text-align:center;">
+(0.1910)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Motorized Nesting Coefficient
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.7289
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(5.5350)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Non-Motorized Nesting Coefficient
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.7698
+</td>
+<td style="text-align:center;">
+0.7652
+</td>
+<td style="text-align:center;">
+0.7579
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(4.2012)
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(4.1873)
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(4.1389)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+5029
+</td>
+<td style="text-align:center;">
+5029
+</td>
+<td style="text-align:center;">
+5029
+</td>
+<td style="text-align:center;">
+5029
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+6941.6
+</td>
+<td style="text-align:center;">
+6940.7
+</td>
+<td style="text-align:center;">
+6929.8
+</td>
+<td style="text-align:center;">
+6941.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+-3441.782
+</td>
+<td style="text-align:center;">
+-3439.343
+</td>
+<td style="text-align:center;">
+-3432.889
+</td>
+<td style="text-align:center;">
+-3438.531
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rho2
+</td>
+<td style="text-align:center;">
+0.2914
+</td>
+<td style="text-align:center;">
+0.2919
+</td>
+<td style="text-align:center;">
+0.2932
+</td>
+<td style="text-align:center;">
+0.2921
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rho20
+</td>
+<td style="text-align:center;">
+0.6180
+</td>
+<td style="text-align:center;">
+0.6183
+</td>
+<td style="text-align:center;">
+0.6190
+</td>
+<td style="text-align:center;">
+0.6184
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="nesting-selection-chapter.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb106-2"><a href="nesting-selection-chapter.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="fu">names</span>(parallel_nest),</span>
+<span id="cb106-3"><a href="nesting-selection-chapter.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> parallel_nest,</span>
+<span id="cb106-4"><a href="nesting-selection-chapter.html#cb106-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb106-5"><a href="nesting-selection-chapter.html#cb106-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb106-6"><a href="nesting-selection-chapter.html#cb106-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">loglik =</span> <span class="fu">map_dbl</span>(model, logLik),</span>
+<span id="cb106-7"><a href="nesting-selection-chapter.html#cb106-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lrtest =</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> (loglik[<span class="dv">1</span>] <span class="sc">-</span> loglik) ,</span>
+<span id="cb106-8"><a href="nesting-selection-chapter.html#cb106-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.value =</span> <span class="fu">pchisq</span>(lrtest, <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb106-9"><a href="nesting-selection-chapter.html#cb106-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb106-10"><a href="nesting-selection-chapter.html#cb106-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>model) <span class="sc">%&gt;%</span></span>
+<span id="cb106-11"><a href="nesting-selection-chapter.html#cb106-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Model&quot;</span>, <span class="st">&quot;Log Likelihood&quot;</span>, <span class="st">&quot;LR Test&quot;</span>, <span class="st">&quot;p-value&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>()</span></code></pre></div>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+Log Likelihood
+</th>
+<th style="text-align:right;">
+LR Test
+</th>
+<th style="text-align:right;">
+p-value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Model 17W
+</td>
+<td style="text-align:right;">
+-3441.782
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 22W
+</td>
+<td style="text-align:right;">
+-3439.343
+</td>
+<td style="text-align:right;">
+4.878942
+</td>
+<td style="text-align:right;">
+0.0271863
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 23W
+</td>
+<td style="text-align:right;">
+-3432.889
+</td>
+<td style="text-align:right;">
+17.785788
+</td>
+<td style="text-align:right;">
+0.0000247
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 24W
+</td>
+<td style="text-align:right;">
+-3438.531
+</td>
+<td style="text-align:right;">
+6.502062
+</td>
+<td style="text-align:right;">
+0.0107749
+</td>
+</tr>
+</tbody>
+</table>
+<p>Another option is to consider ‘hierarchical’ two nest models with Motorized and Private Automobile, Motorized and Shared Ride or Private Automobile and Shared Ride as illustrated in Figure 9.3. Of the three models reported in Table 9-3, only Model 26W, Motorized and Shared Ride, produces an acceptable result. Model 27W is rejected because the private automobile nest coefficient is greater than one, as before. Model 25W is also rejected, despite the fact that the automobile nest parameter is less than one because it is greater than the logsum parameter for the motorized nest which is above it (see <a href="nestedlogit-chapter.html#testing-NL-structures">Section 8.4</a>). Model 26W, however, represents an attractive model achieving the best goodness-of-fit of any of the models considered, with acceptable logsum parameters. Further, it rejects the MNL model (Model 17W), the Motorized (Model 18W) and the Shared Ride (Model 20W) nest models at roughly the 0.03, 0.07 and 0.06 levels, respectively.</p>
+<p>Table 9-4 presents four additional nested model structures for work trips. The first two models extend the nesting structures previously estimated. Model 28W adds the non-motorized nest to Model 26W (see Figure 9.4) with further improved goodness-of-fit, but cannot reject Model 26W at any reasonable level of significance. Model 29W which includes the Motorized, Private Automobile and Shared Ride Nests (see Figure 9.3) is infeasible as it obtains a logsum for the automobile nest that is greater than for the motorized nest, as before. However, Model 29W presents a structure that represents our expectation of the relationship among the motorized modes. Thus, we estimate Model 30W which is identical to Model 29W except that it constrains the automobile nest parameter to 0.75 times the value of the motorized nest parameter. While Model 30W results in a poorer goodness-of-fit than any of the other models including the simple MNL model; it is worth considering because it reflects increased substitution as we move from the Motorized Nest to the Private Automobile Nest to the Shared Ride Nest, as expected. The data does not support this structure (relative to the MNL) but if the analyst or policy makers are convinced it is correct, the use of the relational constraint can produce a model consistent with these assumptions.</p>
+<div class="figure"><span id="fig:complexnestsfig"></span>
+<img src="img/ComplexNests.PNG" alt="Complex Nested Models" width="361" />
+<p class="caption">
+Figure 9.3: Complex Nested Models
+</p>
+</div>
+<p>The final model, Model 31W, extends Model 30W by adding the Non-Motorized nest to the structure. It therefore has the same issues regarding the constrained nest parameters, but it offers the advantage of including the substitution effects associated with all four nests previously selected. Again, the decision on the acceptance of this model may be based primarily on the judgment of analysts and policy makers.</p>
+<p>Based on these results, Models 26W, 28W, 30W and 31W are all potential candidates for a final model. Model 26W is not rejected by any other model and is the simplest structure of this group. Model 28W is slightly better than Model 26W but enough to statistically reject it. Models 30W and 31W have a poorer goodness of fit than Model 26W and 28W, respectively but they incorporate the private automobile intermediate nest. The decision about which of these models to use is largely a matter of judgment. It is possible that other models might also be considered.
+We further examine Model 26W, because of its simplicity, to demonstrate the differences in direct-elasticity and cross-elasticity between the MNL (17W) model and pairs of alternatives in different parts of the NL tree associated with 26W.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="nesting-selection-chapter.html#cb107-1" aria-hidden="true" tabindex="-1"></a>parallel_nest <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb107-2"><a href="nesting-selection-chapter.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#&quot;Model 17W&quot; = m17w,</span></span>
+<span id="cb107-3"><a href="nesting-selection-chapter.html#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#&quot;Model 26W&quot; = m26w</span></span>
+<span id="cb107-4"><a href="nesting-selection-chapter.html#cb107-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>The structure of the nested logit model (26W) in Figure 9.3 is reproduced here so that each nest can be readily identified. The following table reports the elasticities for the MNL Model 17W and the NL Model 26W.</p>
+<div class="figure"><span id="fig:MSRfig"></span>
+<img src="img/MSRnest.PNG" alt="Motorized-Shared Ride Nest (Model 26W)" width="184" />
+<p class="caption">
+Figure 9.4: Motorized-Shared Ride Nest (Model 26W)
+</p>
+</div>
+<p>It is apparent from the above table that reduction in the magnitude of the utility parameter for the NL model results in a lower direct and cross elasticity for alternatives that are in neither of the nests depicted in Figure 9.5 than they would have in the corresponding MNL model while alternatives in the lowest and intermediate nests have increased elasticity. The magnitude in of the elasticity increases as alternatives or pairs of alternatives are in lower nests in the tree. Possibly, a better way to think about this is that adoption of the MNL model results in some type of averaged elasticities rather than the distinct elasticities for alternatives in a properly formed NL model.</p>
 </div>
 <div id="nested-models-for-shop-other-trips" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> Nested Models for Shop / Other Trips</h2>
+<p>The exploration of nested logit models for shop/other trips follows the same approach as used with work trips, beginning with the consideration of four single nest models depicted in Figure 9.4. For these trips, all four of the single nest structures produce valid models (Table 9-6). Further, Models 15 S/O, 16 S/O and 17 S/O strongly reject the MNL model; however, the non-motorized nest (Model 18 S/O) does not reject the MNL model at any reasonable level of significance.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="nesting-selection-chapter.html#cb108-1" aria-hidden="true" tabindex="-1"></a>sf_shopother <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">&quot;data/shopother.rds&quot;</span>)</span>
+<span id="cb108-2"><a href="nesting-selection-chapter.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&quot;Transit&quot;, &quot;Share 2&quot;, &quot;Share 3+&quot;,&quot;Drive alone and Share 2/3+&quot;, &quot;Share 2/3+&quot;,&quot;Bike&quot;, &quot;Walk&quot;, &quot;Drive alone&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="nesting-selection-chapter.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This table has the right idea, though I&#39;m not sure what I can do to fix it or make it more accurate. I also don&#39;t know why it isn&#39;t showing the other constants...</span></span>
+<span id="cb109-2"><a href="nesting-selection-chapter.html#cb109-2" aria-hidden="true" tabindex="-1"></a>SO_formula <span class="ot">&lt;-</span> chosen <span class="sc">~</span> totcost <span class="sc">+</span> tvtt  <span class="sc">+</span> <span class="fu">I</span>(totcost<span class="sc">/</span><span class="fu">log</span>(income)) <span class="sc">+</span> ovttdist <span class="sc">|</span>  </span>
+<span id="cb109-3"><a href="nesting-selection-chapter.html#cb109-3" aria-hidden="true" tabindex="-1"></a>                 income <span class="sc">+</span> veh_wkr <span class="sc">+</span> ave_dens</span>
+<span id="cb109-4"><a href="nesting-selection-chapter.html#cb109-4" aria-hidden="true" tabindex="-1"></a>m14SO <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(SO_formula, <span class="at">data =</span> sf_shopother)</span>
+<span id="cb109-5"><a href="nesting-selection-chapter.html#cb109-5" aria-hidden="true" tabindex="-1"></a>m15SO <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(SO_formula, <span class="at">data =</span> sf_shopother,</span>
+<span id="cb109-6"><a href="nesting-selection-chapter.html#cb109-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>, <span class="st">&#39;Drive alone and Share 2/3+&#39;</span>, <span class="st">&#39;Share 2/3+&#39;</span>,<span class="st">&#39;Transit&#39;</span>,</span>
+<span id="cb109-7"><a href="nesting-selection-chapter.html#cb109-7" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&#39;Share 2&#39;</span>,<span class="st">&#39;Share 3+&#39;</span>),  </span>
+<span id="cb109-8"><a href="nesting-selection-chapter.html#cb109-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">non_motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)),</span>
+<span id="cb109-9"><a href="nesting-selection-chapter.html#cb109-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:non_motorized&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb109-10"><a href="nesting-selection-chapter.html#cb109-10" aria-hidden="true" tabindex="-1"></a>m16SO <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(SO_formula, <span class="at">data =</span> sf_shopother,</span>
+<span id="cb109-11"><a href="nesting-selection-chapter.html#cb109-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">private_auto =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>, <span class="st">&#39;Drive alone and Share 2/3+&#39;</span>, <span class="st">&#39;Share 2/3+&#39;</span>,</span>
+<span id="cb109-12"><a href="nesting-selection-chapter.html#cb109-12" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&#39;Share 2&#39;</span>,<span class="st">&#39;Share 3+&#39;</span>), </span>
+<span id="cb109-13"><a href="nesting-selection-chapter.html#cb109-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">other =</span> <span class="fu">c</span>(<span class="st">&#39;Transit&#39;</span>, <span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)),</span>
+<span id="cb109-14"><a href="nesting-selection-chapter.html#cb109-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:other&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb109-15"><a href="nesting-selection-chapter.html#cb109-15" aria-hidden="true" tabindex="-1"></a>m17SO <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(SO_formula, <span class="at">data =</span> sf_shopother,</span>
+<span id="cb109-16"><a href="nesting-selection-chapter.html#cb109-16" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">shared =</span> <span class="fu">c</span>(<span class="st">&#39;Share 2/3+&#39;</span>,<span class="st">&#39;Transit&#39;</span>,</span>
+<span id="cb109-17"><a href="nesting-selection-chapter.html#cb109-17" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&#39;Share 2&#39;</span>,<span class="st">&#39;Share 3+&#39;</span>),  </span>
+<span id="cb109-18"><a href="nesting-selection-chapter.html#cb109-18" aria-hidden="true" tabindex="-1"></a>                            <span class="at">other =</span> <span class="fu">c</span>(<span class="st">&quot;Drive alone&quot;</span>, <span class="st">&quot;Transit&quot;</span>,<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>,<span class="st">&#39;Drive alone and Share 2/3+&#39;</span>)),</span>
+<span id="cb109-19"><a href="nesting-selection-chapter.html#cb109-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:other&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb109-20"><a href="nesting-selection-chapter.html#cb109-20" aria-hidden="true" tabindex="-1"></a>m18SO <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(SO_formula, <span class="at">data =</span> sf_shopother,</span>
+<span id="cb109-21"><a href="nesting-selection-chapter.html#cb109-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">other =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>, <span class="st">&#39;Drive alone and Share 2/3+&#39;</span>, <span class="st">&#39;Share 2/3+&#39;</span>,<span class="st">&#39;Transit&#39;</span>,</span>
+<span id="cb109-22"><a href="nesting-selection-chapter.html#cb109-22" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&#39;Share 2&#39;</span>,<span class="st">&#39;Share 3+&#39;</span>), </span>
+<span id="cb109-23"><a href="nesting-selection-chapter.html#cb109-23" aria-hidden="true" tabindex="-1"></a>                            <span class="at">non_motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)),</span>
+<span id="cb109-24"><a href="nesting-selection-chapter.html#cb109-24" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:other&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb109-25"><a href="nesting-selection-chapter.html#cb109-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-26"><a href="nesting-selection-chapter.html#cb109-26" aria-hidden="true" tabindex="-1"></a>parallel_nests <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb109-27"><a href="nesting-selection-chapter.html#cb109-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 14SO&quot;</span> <span class="ot">=</span> m14SO,</span>
+<span id="cb109-28"><a href="nesting-selection-chapter.html#cb109-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 15SO&quot;</span> <span class="ot">=</span> m15SO,</span>
+<span id="cb109-29"><a href="nesting-selection-chapter.html#cb109-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 16SO&quot;</span> <span class="ot">=</span> m16SO,</span>
+<span id="cb109-30"><a href="nesting-selection-chapter.html#cb109-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 17SO&quot;</span> <span class="ot">=</span> m17SO,</span>
+<span id="cb109-31"><a href="nesting-selection-chapter.html#cb109-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 18SO&quot;</span> <span class="ot">=</span> m18SO</span>
+<span id="cb109-32"><a href="nesting-selection-chapter.html#cb109-32" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb109-33"><a href="nesting-selection-chapter.html#cb109-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-34"><a href="nesting-selection-chapter.html#cb109-34" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(parallel_nests,</span>
+<span id="cb109-35"><a href="nesting-selection-chapter.html#cb109-35" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt =</span> <span class="st">&quot;%.4f&quot;</span>, <span class="at">coef_map =</span> this_map, <span class="at">statistic =</span> <span class="st">&quot;statistic&quot;</span>, <span class="at">statistic_vertical =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Warning in sanity_ellipsis(vcov, ...): The `statistic_vertical` argument
+## is deprecated and will be ignored. To display uncertainty estimates next to
+## your coefficients, use a `glue` string in the `estimate` argument. See `?
+## modelsummary`</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Model 14SO
+</th>
+<th style="text-align:center;">
+Model 15SO
+</th>
+<th style="text-align:center;">
+Model 16SO
+</th>
+<th style="text-align:center;">
+Model 17SO
+</th>
+<th style="text-align:center;">
+Model 18SO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Constant: Bike
+</td>
+<td style="text-align:center;">
+-7.7607
+</td>
+<td style="text-align:center;">
+-7.0614
+</td>
+<td style="text-align:center;">
+-7.0490
+</td>
+<td style="text-align:center;">
+-7.4427
+</td>
+<td style="text-align:center;">
+-6.6157
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-9.6801)
+</td>
+<td style="text-align:center;">
+(-5.0223)
+</td>
+<td style="text-align:center;">
+(-7.7275)
+</td>
+<td style="text-align:center;">
+(-7.6222)
+</td>
+<td style="text-align:center;">
+(-8.2790)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Constant: Walk
+</td>
+<td style="text-align:center;">
+-3.5504
+</td>
+<td style="text-align:center;">
+-2.7343
+</td>
+<td style="text-align:center;">
+-2.9676
+</td>
+<td style="text-align:center;">
+-3.1170
+</td>
+<td style="text-align:center;">
+-3.6332
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(-5.3377)
+</td>
+<td style="text-align:center;">
+(-2.0550)
+</td>
+<td style="text-align:center;">
+(-3.9906)
+</td>
+<td style="text-align:center;">
+(-3.6214)
+</td>
+<td style="text-align:center;">
+(-5.7231)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Motorized Nesting Coefficient
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+2.7352
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(3.6668)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Non-Motorized Nesting Coefficient
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.5724
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(4.4713)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+3157
+</td>
+<td style="text-align:center;">
+3157
+</td>
+<td style="text-align:center;">
+3157
+</td>
+<td style="text-align:center;">
+3157
+</td>
+<td style="text-align:center;">
+3157
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+9581.8
+</td>
+<td style="text-align:center;">
+9570.9
+</td>
+<td style="text-align:center;">
+9567.4
+</td>
+<td style="text-align:center;">
+9576.5
+</td>
+<td style="text-align:center;">
+9581.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+-4758.915
+</td>
+<td style="text-align:center;">
+-4751.453
+</td>
+<td style="text-align:center;">
+-4749.720
+</td>
+<td style="text-align:center;">
+-4754.236
+</td>
+<td style="text-align:center;">
+-4756.626
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rho2
+</td>
+<td style="text-align:center;">
+0.0668
+</td>
+<td style="text-align:center;">
+0.0683
+</td>
+<td style="text-align:center;">
+0.0686
+</td>
+<td style="text-align:center;">
+0.0677
+</td>
+<td style="text-align:center;">
+0.0673
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rho20
+</td>
+<td style="text-align:center;">
+0.2751
+</td>
+<td style="text-align:center;">
+0.2762
+</td>
+<td style="text-align:center;">
+0.2765
+</td>
+<td style="text-align:center;">
+0.2758
+</td>
+<td style="text-align:center;">
+0.2754
+</td>
+</tr>
+</tbody>
+</table>
+<p>Despite the marginal significance of the non-motorized nest, the possible two parallel nest models including non-motorized and one other nest, were estimated and are reported in Table 9-7. All three specifications result in valid models with improved goodness-of-fit over the MNL and the single nest NM model (Model 18 S/O) but Models 19 S/O, 20 S/O and 21 S/O do not reject the corresponding Motorized (Model 15 S/O), Private Automobile (Model 16 S/O) and Shared Ride (Model 17 S/O) nest models, which are restricted forms of these models, at a high level of confidence.<br />
+It is important to note that a variety of different initial parameters were required to find the solution for Model 20 S/O reported here. The selection of different starting values for the model parameters, especially the nest parameter(s) may lead to convergence at different values in or out of the acceptable range as discussed in <a href="#nesting-optima-chapter">CHAPTER 10</a>.</p>
+<p>As in the case of work trips, hierarchical two-nest models, depicted in Figure 9.2, are considered next, Table 9-8. Model 22 S/O obtains a satisfactory parameter for the automobile logsum but the motorized logsum is not significantly different from one and the model does not reject the single nest Private Automobile structure (Model 16 S/O). However, Models 23 S/O (with shared ride under the motorized nest) and 24 S/O (with shared ride under the automobile nest) provide excellent results. The similarity interpretation of these nests is reasonable and both models strongly reject the MNL model and the constrained single nest models reported in Table 9-7.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="nesting-selection-chapter.html#cb111-1" aria-hidden="true" tabindex="-1"></a>m22SO <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work,</span>
+<span id="cb111-2"><a href="nesting-selection-chapter.html#cb111-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>, <span class="st">&#39;Share ride 2&#39;</span>, </span>
+<span id="cb111-3"><a href="nesting-selection-chapter.html#cb111-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">&#39;Share ride 3+&#39;</span>, <span class="st">&#39;Transit&#39;</span>),  </span>
+<span id="cb111-4"><a href="nesting-selection-chapter.html#cb111-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">non_motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)))</span>
+<span id="cb111-5"><a href="nesting-selection-chapter.html#cb111-5" aria-hidden="true" tabindex="-1"></a>m23SO <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work,</span>
+<span id="cb111-6"><a href="nesting-selection-chapter.html#cb111-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">auto =</span> <span class="fu">c</span>(<span class="st">&#39;Drive alone&#39;</span>, <span class="st">&#39;Share ride 2&#39;</span>, <span class="st">&#39;Share ride 3+&#39;</span>),  </span>
+<span id="cb111-7"><a href="nesting-selection-chapter.html#cb111-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">transit =</span> <span class="fu">c</span>(<span class="st">&quot;Transit&quot;</span>), <span class="at">non_motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)),</span>
+<span id="cb111-8"><a href="nesting-selection-chapter.html#cb111-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:transit&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb111-9"><a href="nesting-selection-chapter.html#cb111-9" aria-hidden="true" tabindex="-1"></a>m24SO <span class="ot">&lt;-</span> <span class="fu">mlogit</span>(work_formula, <span class="at">data =</span> sf_work,</span>
+<span id="cb111-10"><a href="nesting-selection-chapter.html#cb111-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">nests =</span> <span class="fu">list</span>(<span class="at">shared =</span> <span class="fu">c</span>(<span class="st">&#39;Share ride 2&#39;</span>, <span class="st">&#39;Share ride 3+&#39;</span>),  </span>
+<span id="cb111-11"><a href="nesting-selection-chapter.html#cb111-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">other =</span> <span class="fu">c</span>(<span class="st">&quot;Drive alone&quot;</span>, <span class="st">&quot;Transit&quot;</span>), <span class="at">non_motorized =</span> <span class="fu">c</span>(<span class="st">&#39;Bike&#39;</span>, <span class="st">&#39;Walk&#39;</span>)),</span>
+<span id="cb111-12"><a href="nesting-selection-chapter.html#cb111-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">constPar =</span> <span class="fu">c</span>(<span class="st">&quot;iv:other&quot;</span> <span class="ot">=</span> <span class="dv">1</span>))</span>
+<span id="cb111-13"><a href="nesting-selection-chapter.html#cb111-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-14"><a href="nesting-selection-chapter.html#cb111-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-15"><a href="nesting-selection-chapter.html#cb111-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-16"><a href="nesting-selection-chapter.html#cb111-16" aria-hidden="true" tabindex="-1"></a>parallel_nest <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb111-17"><a href="nesting-selection-chapter.html#cb111-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">#&quot;Model 14SO&quot; = m14SO,</span></span>
+<span id="cb111-18"><a href="nesting-selection-chapter.html#cb111-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 22SO&quot;</span> <span class="ot">=</span> m22SO,</span>
+<span id="cb111-19"><a href="nesting-selection-chapter.html#cb111-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 23SO&quot;</span> <span class="ot">=</span> m23SO,</span>
+<span id="cb111-20"><a href="nesting-selection-chapter.html#cb111-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Model 24SO&quot;</span> <span class="ot">=</span> m24SO</span>
+<span id="cb111-21"><a href="nesting-selection-chapter.html#cb111-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb111-22"><a href="nesting-selection-chapter.html#cb111-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-23"><a href="nesting-selection-chapter.html#cb111-23" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(parallel_nest)</span></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Model 22SO
+</th>
+<th style="text-align:center;">
+Model 23SO
+</th>
+<th style="text-align:center;">
+Model 24SO
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept) × Share ride 2
+</td>
+<td style="text-align:center;">
+-1.258
+</td>
+<td style="text-align:center;">
+-2.361
+</td>
+<td style="text-align:center;">
+-1.637
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.241)
+</td>
+<td style="text-align:center;">
+(0.222)
+</td>
+<td style="text-align:center;">
+(0.125)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(Intercept) × Share ride 3++
+</td>
+<td style="text-align:center;">
+-2.766
+</td>
+<td style="text-align:center;">
+-5.411
+</td>
+<td style="text-align:center;">
+-2.320
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.529)
+</td>
+<td style="text-align:center;">
+(0.507)
+</td>
+<td style="text-align:center;">
+(0.286)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(Intercept) × Transit
+</td>
+<td style="text-align:center;">
+-0.415
+</td>
+<td style="text-align:center;">
+-0.832
+</td>
+<td style="text-align:center;">
+-0.706
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.215)
+</td>
+<td style="text-align:center;">
+(0.246)
+</td>
+<td style="text-align:center;">
+(0.238)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(Intercept) × Bike
+</td>
+<td style="text-align:center;">
+-1.203
+</td>
+<td style="text-align:center;">
+-1.616
+</td>
+<td style="text-align:center;">
+-1.476
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.371)
+</td>
+<td style="text-align:center;">
+(0.363)
+</td>
+<td style="text-align:center;">
+(0.359)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+(Intercept) × Walk
+</td>
+<td style="text-align:center;">
+0.345
+</td>
+<td style="text-align:center;">
+-0.081
+</td>
+<td style="text-align:center;">
+0.066
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.367)
+</td>
+<td style="text-align:center;">
+(0.350)
+</td>
+<td style="text-align:center;">
+(0.344)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+I(cost/hhinc)
+</td>
+<td style="text-align:center;">
+-0.039
+</td>
+<td style="text-align:center;">
+-0.059
+</td>
+<td style="text-align:center;">
+-0.052
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.009)
+</td>
+<td style="text-align:center;">
+(0.010)
+</td>
+<td style="text-align:center;">
+(0.008)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mot_tvtt
+</td>
+<td style="text-align:center;">
+-0.015
+</td>
+<td style="text-align:center;">
+-0.020
+</td>
+<td style="text-align:center;">
+-0.020
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.004)
+</td>
+<td style="text-align:center;">
+(0.004)
+</td>
+<td style="text-align:center;">
+(0.004)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+nm_tvtt
+</td>
+<td style="text-align:center;">
+-0.046
+</td>
+<td style="text-align:center;">
+-0.046
+</td>
+<td style="text-align:center;">
+-0.045
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.006)
+</td>
+<td style="text-align:center;">
+(0.006)
+</td>
+<td style="text-align:center;">
+(0.006)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+movtbyds
+</td>
+<td style="text-align:center;">
+-0.114
+</td>
+<td style="text-align:center;">
+-0.138
+</td>
+<td style="text-align:center;">
+-0.134
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.018)
+</td>
+<td style="text-align:center;">
+(0.017)
+</td>
+<td style="text-align:center;">
+(0.017)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hhinc × Share ride 2
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+<td style="text-align:center;">
+-0.002
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+<td style="text-align:center;">
+(0.002)
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hhinc × Share ride 3++
+</td>
+<td style="text-align:center;">
+0.002
+</td>
+<td style="text-align:center;">
+0.001
+</td>
+<td style="text-align:center;">
+0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.002)
+</td>
+<td style="text-align:center;">
+(0.003)
+</td>
+<td style="text-align:center;">
+(0.002)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hhinc × Transit
+</td>
+<td style="text-align:center;">
+-0.004
+</td>
+<td style="text-align:center;">
+-0.005
+</td>
+<td style="text-align:center;">
+-0.005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.002)
+</td>
+<td style="text-align:center;">
+(0.002)
+</td>
+<td style="text-align:center;">
+(0.002)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hhinc × Bike
+</td>
+<td style="text-align:center;">
+-0.010
+</td>
+<td style="text-align:center;">
+-0.008
+</td>
+<td style="text-align:center;">
+-0.009
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.004)
+</td>
+<td style="text-align:center;">
+(0.004)
+</td>
+<td style="text-align:center;">
+(0.004)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hhinc × Walk
+</td>
+<td style="text-align:center;">
+-0.006
+</td>
+<td style="text-align:center;">
+-0.005
+</td>
+<td style="text-align:center;">
+-0.006
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.003)
+</td>
+<td style="text-align:center;">
+(0.003)
+</td>
+<td style="text-align:center;">
+(0.003)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vehbywrk × Share ride 2
+</td>
+<td style="text-align:center;">
+-0.271
+</td>
+<td style="text-align:center;">
+-0.605
+</td>
+<td style="text-align:center;">
+-0.341
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.071)
+</td>
+<td style="text-align:center;">
+(0.115)
+</td>
+<td style="text-align:center;">
+(0.060)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vehbywrk × Share ride 3++
+</td>
+<td style="text-align:center;">
+-0.107
+</td>
+<td style="text-align:center;">
+-0.257
+</td>
+<td style="text-align:center;">
+-0.278
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.082)
+</td>
+<td style="text-align:center;">
+(0.164)
+</td>
+<td style="text-align:center;">
+(0.070)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vehbywrk × Transit
+</td>
+<td style="text-align:center;">
+-0.705
+</td>
+<td style="text-align:center;">
+-0.862
+</td>
+<td style="text-align:center;">
+-0.948
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.145)
+</td>
+<td style="text-align:center;">
+(0.110)
+</td>
+<td style="text-align:center;">
+(0.104)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vehbywrk × Bike
+</td>
+<td style="text-align:center;">
+-0.736
+</td>
+<td style="text-align:center;">
+-0.599
+</td>
+<td style="text-align:center;">
+-0.699
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.197)
+</td>
+<td style="text-align:center;">
+(0.197)
+</td>
+<td style="text-align:center;">
+(0.195)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vehbywrk × Walk
+</td>
+<td style="text-align:center;">
+-0.764
+</td>
+<td style="text-align:center;">
+-0.612
+</td>
+<td style="text-align:center;">
+-0.713
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.139)
+</td>
+<td style="text-align:center;">
+(0.141)
+</td>
+<td style="text-align:center;">
+(0.139)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+I(wkccbd + wknccbd) × Share ride 2
+</td>
+<td style="text-align:center;">
+0.183
+</td>
+<td style="text-align:center;">
+0.388
+</td>
+<td style="text-align:center;">
+0.388
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.097)
+</td>
+<td style="text-align:center;">
+(0.181)
+</td>
+<td style="text-align:center;">
+(0.113)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+I(wkccbd + wknccbd) × Share ride 3++
+</td>
+<td style="text-align:center;">
+0.800
+</td>
+<td style="text-align:center;">
+1.641
+</td>
+<td style="text-align:center;">
+0.626
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.203)
+</td>
+<td style="text-align:center;">
+(0.317)
+</td>
+<td style="text-align:center;">
+(0.142)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+I(wkccbd + wknccbd) × Transit
+</td>
+<td style="text-align:center;">
+0.920
+</td>
+<td style="text-align:center;">
+1.364
+</td>
+<td style="text-align:center;">
+1.324
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.220)
+</td>
+<td style="text-align:center;">
+(0.185)
+</td>
+<td style="text-align:center;">
+(0.179)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+I(wkccbd + wknccbd) × Bike
+</td>
+<td style="text-align:center;">
+0.403
+</td>
+<td style="text-align:center;">
+0.443
+</td>
+<td style="text-align:center;">
+0.443
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.328)
+</td>
+<td style="text-align:center;">
+(0.333)
+</td>
+<td style="text-align:center;">
+(0.329)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+I(wkccbd + wknccbd) × Walk
+</td>
+<td style="text-align:center;">
+0.107
+</td>
+<td style="text-align:center;">
+0.117
+</td>
+<td style="text-align:center;">
+0.105
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.235)
+</td>
+<td style="text-align:center;">
+(0.240)
+</td>
+<td style="text-align:center;">
+(0.238)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wkempden × Share ride 2
+</td>
+<td style="text-align:center;">
+0.001
+</td>
+<td style="text-align:center;">
+0.003
+</td>
+<td style="text-align:center;">
+0.002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.000)
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+<td style="text-align:center;">
+(0.000)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wkempden × Share ride 3++
+</td>
+<td style="text-align:center;">
+0.002
+</td>
+<td style="text-align:center;">
+0.004
+</td>
+<td style="text-align:center;">
+0.002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.000)
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+<td style="text-align:center;">
+(0.000)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wkempden × Transit
+</td>
+<td style="text-align:center;">
+0.002
+</td>
+<td style="text-align:center;">
+0.004
+</td>
+<td style="text-align:center;">
+0.003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.000)
+</td>
+<td style="text-align:center;">
+(0.000)
+</td>
+<td style="text-align:center;">
+(0.000)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wkempden × Bike
+</td>
+<td style="text-align:center;">
+0.002
+</td>
+<td style="text-align:center;">
+0.003
+</td>
+<td style="text-align:center;">
+0.002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+wkempden × Walk
+</td>
+<td style="text-align:center;">
+0.002
+</td>
+<td style="text-align:center;">
+0.003
+</td>
+<td style="text-align:center;">
+0.003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+<td style="text-align:center;">
+(0.001)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+iv × motorized
+</td>
+<td style="text-align:center;">
+0.729
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.132)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+iv × non_motorized
+</td>
+<td style="text-align:center;">
+0.770
+</td>
+<td style="text-align:center;">
+0.765
+</td>
+<td style="text-align:center;">
+0.758
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.183)
+</td>
+<td style="text-align:center;">
+(0.183)
+</td>
+<td style="text-align:center;">
+(0.183)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+iv × auto
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.479
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+(0.110)
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+iv × shared
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.320
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.112)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+5029
+</td>
+<td style="text-align:center;">
+5029
+</td>
+<td style="text-align:center;">
+5029
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+6940.7
+</td>
+<td style="text-align:center;">
+6929.8
+</td>
+<td style="text-align:center;">
+6941.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+-3439.343
+</td>
+<td style="text-align:center;">
+-3432.889
+</td>
+<td style="text-align:center;">
+-3438.531
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rho2
+</td>
+<td style="text-align:center;">
+0.292
+</td>
+<td style="text-align:center;">
+0.293
+</td>
+<td style="text-align:center;">
+0.292
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+rho20
+</td>
+<td style="text-align:center;">
+0.618
+</td>
+<td style="text-align:center;">
+0.619
+</td>
+<td style="text-align:center;">
+0.618
+</td>
+</tr>
+</tbody>
+</table>
+<p>Unlike the case of the home-based work models, the home-based shop/other data set supports complex nested models which combine the hierarchical and parallel nests to capture the different substitutability between several groups of alternatives. Models 25 S/O and 26 S/O improve goodness-of-fit over both the best hierarchical (Model 24 S/O) and parallel (Model 20 S/O) two-nest models. These more complex models can reject all of the single nest models at the .05 level or higher, but cannot reject the best two-nest models at a high level of confidence. Even so, they may still be preferred for their potentially more realistic representation of trade-offs between pairs of alternatives. The same rationale could be applied between the two models, as Model 26 S/O cannot reject 25 S/O, either, but allows for greater substitutability between the non-motorized modes (for which the statistical evidence is moderately significant). The nesting coefficient for the motorized nest is not particularly significant in either model, but it can be retained given the reasonableness of its value.</p>
 </div>
 <div id="practical-issues-and-implications" class="section level2" number="9.4">
 <h2><span class="header-section-number">9.4</span> Practical Issues and Implications</h2>
+<p>A large number of nested logit structures can be proposed for any context in which the number of alternatives is not very small. As seen, even in the case of four alternatives, there are 25 possible nest structures and this number increases to 235 for five alternatives and beyond 2000 for six or more alternatives. Since searching across this many nest structures is generally infeasible, it is the responsibility of the analyst to propose a subset of these structures for primary consideration or, alternatively, to eliminate a subset of such structures from consideration. At the same time, it is desirable for the analyst to remain open to other possible structures that may be suggested by others who have familiarity with the behavior under study.
+It is not uncommon for some or all of the proposed structures to be infeasible due to obtaining an estimated logsum or nesting parameter that is greater than one or greater than the parameter in a higher level nest. It is a matter of judgment whether to eliminate the proposed structure based on the estimation results or to constrain selected nest parameters to fixed values or to relative values that ensure that the structure is consistent with utility maximization. This ‘imposition’ of a fixed value or other constraints on nest parameters requires careful judgment, discussion with other modeling and policy analysts and open reporting so that potential users of the model are aware of the basis for the proposed model.
+An important part of the decision process is the differential interpretation associated with any nested logit model relative to the multinomial logit model or other nested logit models. The central element of such interpretation is the way in which a change in any of the characteristics of an alternative affects the probability of that alternative and each other alternative being chosen. This is the essential element of competition/substitution between pairs of alternatives and may dramatically influence the predicted impact of selected policy changes.</p>
 
 </div>
 </div>
@@ -323,8 +3138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="nested-logit-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="multiple-maxima-in-nested-logit-estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="nestedlogit-chapter.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -347,6 +3162,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

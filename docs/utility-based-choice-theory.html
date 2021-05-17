@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Utility-based Choice Theory | A Self-Instructing Course in Mode Choice Modeling</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Utility-based Choice Theory | A Self-Instructing Course in Mode Choice Modeling" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2021-04-26" />
+<meta name="date" content="2021-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
 <link rel="prev" href="elements-of-the-choice-decision-process.html"/>
 <link rel="next" href="the-multinomial-logit-model.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -119,6 +121,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -173,7 +198,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.3" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-related-to-the-characteristics-of-the-decision-maker"><i class="fa fa-check"></i><b>3.4.3</b> Utility Related to the Characteristics of the Decision Maker</a></li>
 <li class="chapter" data-level="3.4.4" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#utility-defined-by-interactions-between-alternative-attributes-and-decision-maker-characteristics"><i class="fa fa-check"></i><b>3.4.4</b> Utility Defined by Interactions between Alternative Attributes and Decision Maker Characteristics</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#specification-of-the-additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
+<li class="chapter" data-level="3.5" data-path="utility-based-choice-theory.html"><a href="utility-based-choice-theory.html#additive-error-term"><i class="fa fa-check"></i><b>3.5</b> Specification of the Additive Error Term</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html"><i class="fa fa-check"></i><b>4</b> The Multinomial Logit Model</a>
 <ul>
@@ -182,9 +207,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-sigmoid-or-s-shape-of-multinomial-logit-probabilities"><i class="fa fa-check"></i><b>4.1.1</b> The Sigmoid or S shape of Multinomial Logit Probabilities</a></li>
 <li class="chapter" data-level="4.1.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-equivalent-differences-property"><i class="fa fa-check"></i><b>4.1.2</b> The Equivalent Differences Property</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#independence-of-irrelevant-alternatives-property"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
+<li class="chapter" data-level="4.2" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#IIA-section"><i class="fa fa-check"></i><b>4.2</b> Independence of Irrelevant Alternatives Property</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#the-red-busblue-bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
+<li class="chapter" data-level="4.2.1" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#bus-paradox"><i class="fa fa-check"></i><b>4.2.1</b> The Red Bus/Blue Bus Paradox</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#example-prediction-with-multinomial-logit-model"><i class="fa fa-check"></i><b>4.3</b> Example: Prediction with Multinomial Logit Model</a></li>
 <li class="chapter" data-level="4.4" data-path="the-multinomial-logit-model.html"><a href="the-multinomial-logit-model.html#measures-of-response-to-changes-in-attributes-of-alternatives"><i class="fa fa-check"></i><b>4.4</b> Measures of Response to Changes in Attributes of Alternatives</a>
@@ -231,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="specification-chapter.html"><a href="specification-chapter.html"><i class="fa fa-check"></i><b>6</b> Model Specification Refinement: San Francisco Bay Area Work Mode Choice</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.1" data-path="specification-chapter.html"><a href="specification-chapter.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
 <li class="chapter" data-level="6.2" data-path="specification-chapter.html"><a href="specification-chapter.html#alternative-specifications"><i class="fa fa-check"></i><b>6.2</b> Alternative Specifications</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="specification-chapter.html"><a href="specification-chapter.html#refinement-of-specification-for-alternative-specific-income-effects"><i class="fa fa-check"></i><b>6.2.1</b> Refinement of Specification for Alternative Specific Income Effects</a></li>
@@ -250,28 +275,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html"><i class="fa fa-check"></i><b>7</b> San Francisco Bay Area Shop / Other Mode Choice</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.1" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#introduction-2"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.2" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#specification-for-shopother-mode-choice-model"><i class="fa fa-check"></i><b>7.2</b> Specification for Shop/Other Mode Choice Model</a></li>
 <li class="chapter" data-level="7.3" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#initial-model-specification"><i class="fa fa-check"></i><b>7.3</b> Initial Model Specification</a></li>
 <li class="chapter" data-level="7.4" data-path="other-purpose-chapter.html"><a href="other-purpose-chapter.html#exploring-alternative-specifications"><i class="fa fa-check"></i><b>7.4</b> Exploring Alternative Specifications</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="nested-logit-model.html"><a href="nested-logit-model.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
+<li class="chapter" data-level="8" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html"><i class="fa fa-check"></i><b>8</b> Nested Logit Model</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="nested-logit-model.html"><a href="nested-logit-model.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
-<li class="chapter" data-level="8.2" data-path="nested-logit-model.html"><a href="nested-logit-model.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a></li>
-<li class="chapter" data-level="8.3" data-path="nested-logit-model.html"><a href="nested-logit-model.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#formulation-of-nested-logit-model"><i class="fa fa-check"></i><b>8.2</b> Formulation of Nested Logit Model</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#logsum-param"><i class="fa fa-check"></i><b>8.2.1</b> Interpretation of the Logsum Parameter</a></li>
+<li class="chapter" data-level="8.2.2" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#disaggregate-direct-and-cross-elasticities"><i class="fa fa-check"></i><b>8.2.2</b> Disaggregate Direct and Cross-Elasticities</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#nesting-structures"><i class="fa fa-check"></i><b>8.3</b> Nesting Structures</a></li>
+<li class="chapter" data-level="8.4" data-path="nestedlogit-chapter.html"><a href="nestedlogit-chapter.html#testing-NL-structures"><i class="fa fa-check"></i><b>8.4</b> Statistical Testing of Nested Logit Structures</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html"><i class="fa fa-check"></i><b>9</b> Selecting a Preferred Nesting Structure</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="elements-of-the-choice-decision-process.html"><a href="elements-of-the-choice-decision-process.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.1" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#introduction-3"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
 <li class="chapter" data-level="9.2" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-work-trips"><i class="fa fa-check"></i><b>9.2</b> Nested Models for Work Trips</a></li>
 <li class="chapter" data-level="9.3" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#nested-models-for-shop-other-trips"><i class="fa fa-check"></i><b>9.3</b> Nested Models for Shop / Other Trips</a></li>
 <li class="chapter" data-level="9.4" data-path="nesting-selection-chapter.html"><a href="nesting-selection-chapter.html#practical-issues-and-implications"><i class="fa fa-check"></i><b>9.4</b> Practical Issues and Implications</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation.html"><a href="multiple-maxima-in-nested-logit-estimation.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation</a></li>
+<li class="chapter" data-level="10" data-path="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><a href="multiple-maxima-in-nested-logit-estimation-nesting-optima-chapter.html"><i class="fa fa-check"></i><b>10</b> Multiple Maxima in Nested Logit Estimation (#nesting-optima-chapter)</a></li>
 <li class="chapter" data-level="11" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html"><i class="fa fa-check"></i><b>11</b> Aggregate Forecasting Assessment, and Application</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="chapter1.html"><a href="chapter1.html#background"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
+<li class="chapter" data-level="11.1" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#background-1"><i class="fa fa-check"></i><b>11.1</b> Background</a></li>
 <li class="chapter" data-level="11.2" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-forecasting"><i class="fa fa-check"></i><b>11.2</b> Aggregate Forecasting</a></li>
 <li class="chapter" data-level="11.3" data-path="aggregate-forecasting-assessment-and-application.html"><a href="aggregate-forecasting-assessment-and-application.html#aggregate-assessment-of-travel-mode-choice-models"><i class="fa fa-check"></i><b>11.3</b> Aggregate Assessment of Travel Mode Choice Models</a></li>
 </ul></li>
@@ -280,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-gev-class-of-models"><i class="fa fa-check"></i><b>12.1</b> The GEV Class of Models</a></li>
 <li class="chapter" data-level="12.2" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mmnl-class-of-models"><i class="fa fa-check"></i><b>12.2</b> The MMNL Class of Models</a></li>
 <li class="chapter" data-level="12.3" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#the-mixed-gev-class-of-models"><i class="fa fa-check"></i><b>12.3</b> The Mixed GEV Class of Models</a></li>
-<li class="chapter" data-level="12.4" data-path="specification-chapter.html"><a href="specification-chapter.html#summary"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
+<li class="chapter" data-level="12.4" data-path="recent-advances-in-discrete-choice-modeling.html"><a href="recent-advances-in-discrete-choice-modeling.html#summary-1"><i class="fa fa-check"></i><b>12.4</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -508,7 +538,7 @@ V(X_{TR},S_{i})=\gamma_{1}\times TT_{TR}+\gamma_{2}\times TT_{TR}\times Fem+\gam
 <p>In this example, <span class="math inline">\(\gamma_1\)</span> represents the utility value of one minute of travel time to men and <span class="math inline">\(\gamma_2\)</span> represents the additional utility value of one minute of travel time to women. Thus, the total utility value of one minute of travel time to women is <span class="math inline">\(\gamma_1+\gamma_2\)</span>. In this case, <span class="math inline">\(\gamma_1\)</span>, is expected to be negative indicating that increased travel time reduces the utility of an alternative. <span class="math inline">\(\gamma_2\)</span> may be negative or positive, indicating that women are more or less sensitive to increases in travel time.</p>
 </div>
 </div>
-<div id="specification-of-the-additive-error-term" class="section level2" number="3.5">
+<div id="additive-error-term" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Specification of the Additive Error Term</h2>
 <p>As described in section 3.3, the utility of each alternative is represented by a deterministic component, which is represented in the utility function by observed and measured variables, and an additive error term, <span class="math inline">\(\epsilon_i\)</span> which represents those components of the utility function which are not included in the model. In the three alternative examples used above, the total utility of each alternative can be represented by:</p>
 <p><span class="math display" id="eq:threenineteen">\[\begin{equation}
@@ -561,6 +591,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
