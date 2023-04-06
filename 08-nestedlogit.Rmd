@@ -42,8 +42,8 @@ making an intercity trip.  The utility equations for these alternatives are:
 \begin{align}
 U_{DA} &= V_{DA} + \epsilon_{DA} \\
 U_{SR} &= V_{SR} + \epsilon_{SR} \\
-U_{Bus} &= V_{PT} + V_{Bus} + \epsilon_{SR} + \epsilon_{Bus} \\
-U_{LTR} &= V_{PT} + V_{LTR} + \epsilon_{SR} + \epsilon_{LTR}
+U_{Bus} &= V_{PT} + V_{Bus} + \epsilon_{PT} + \epsilon_{Bus} \\
+U_{LTR} &= V_{PT} + V_{LTR} + \epsilon_{PT} + \epsilon_{LTR}
 (\#eq:eightone)
 \end{align}
 
