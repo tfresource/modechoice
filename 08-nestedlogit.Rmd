@@ -118,12 +118,12 @@ Pr(DA) = \frac{exp(V_{DA})} {exp(V_{DA}) + exp(V_{SR}) + exp(V_{PT} + \theta_{PT
 \end{equation}\
 
 \begin{equation}
-Pr(DA) = \frac{exp(V_{SR})} {exp(V_{DA}) + exp(V_{SR}) + exp(V_{PT} + \theta_{PT} \Gamma_{PT})}
+Pr(SR) = \frac{exp(V_{SR})} {exp(V_{DA}) + exp(V_{SR}) + exp(V_{PT} + \theta_{PT} \Gamma_{PT})}
 (\#eq:egihtseven)
 \end{equation}
 
 \begin{equation}
-Pr(DA) = \frac{exp(V_{PT} + \theta_{PT} \Gamma_{PT})} {exp(V_{DA}) + exp(V_{SR}) + exp(V_{PT} + \theta_{PT} \Gamma_{PT})}
+Pr(PT) = \frac{exp(V_{PT} + \theta_{PT} \Gamma_{PT})} {exp(V_{DA}) + exp(V_{SR}) + exp(V_{PT} + \theta_{PT} \Gamma_{PT})}
 (\#eq:eighteight)
 \end{equation}
 
